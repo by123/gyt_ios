@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  MainViewController.h
 //  gyt
 //
 //  Created by by.huang on 16/4/13.
@@ -7,9 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface ViewController : UIViewController
-
+#import "BaseViewController.h"
+@interface MainViewController : BaseViewController
 
 @end
-
