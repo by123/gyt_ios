@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "MainViewController.h"
+#import "kLinePage.h"
 
 @interface AppDelegate ()
 
@@ -46,7 +46,7 @@
 {
     UINavigationController *controller;
 
-    MainViewController *mainViewController= [[MainViewController alloc]init];
+    kLinePage *mainViewController= [[kLinePage alloc]init];
     controller= [[UINavigationController alloc]initWithRootViewController:mainViewController];
     _window.rootViewController = controller;
     [_window makeKeyAndVisible];

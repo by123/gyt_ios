@@ -7,7 +7,8 @@
 //
 
 #import "BaseViewController.h"
-#import "TSLinesView.h"
-@interface kLinePage : BaseViewController<>
+#import "KMapPointView.h"
+#import "KMapView.h"
+@interface kLinePage : BaseViewController<KMapViewDataSource,TSLinesViewDelegate>
 
 @end
