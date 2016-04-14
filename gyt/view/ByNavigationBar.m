@@ -29,7 +29,14 @@
     _leftBtn.frame = CGRectMake(0, StatuBar_HEIGHT, NavigationBar_HEIGHT, NavigationBar_HEIGHT);
     [_leftBtn setContentEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     [_leftBtn addTarget:self action:@selector(OnLeftCallBack) forControlEvents:UIControlEventTouchUpInside];
-    [_leftBtn setImage:[UIImage imageNamed:@"ic_back"] forState:UIControlStateNormal];
+    [_leftBtn setImage:[UIImage imageNamed:@"ic_left_menu"] forState:UIControlStateNormal];
+    
+    _rightBtn = [[UIButton alloc]init];
+    UIImage *rightImage = [UIImage imageNamed:@"ic_right_menu"];
+    _rightBtn.frame = CGRectMake(SCREEN_WIDTH - rightImage.size.width - 10, StatuBar_HEIGHT, NavigationBar_HEIGHT, NavigationBar_HEIGHT);
+    [_rightBtn setContentEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    [_rightBtn addTarget:self action:@selector(OnRightCallBack) forControlEvents:UIControlEventTouchUpInside];
+    [_rightBtn setImage:rightImage forState:UIControlStateNormal];
     
     _titleLabel = [[UILabel alloc]init];
     _titleLabel.textColor = [UIColor whiteColor];
@@ -44,6 +51,7 @@
     
     
     [self addSubview:_leftBtn];
+    [self addSubview:_rightBtn];
     [self addSubview:_titleLabel];
     [self addSubview:_titleClickBtn];
 }
@@ -81,6 +89,14 @@
     if(self.delegate)
     {
         [self.delegate OnLeftClickCallback];
+    }
+}
+
+-(void)OnRightCallBack
+{
+    if(self.delegate)
+    {
+        [self.delegate OnRightCallBack];
     }
 }
 

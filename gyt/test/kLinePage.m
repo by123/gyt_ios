@@ -67,7 +67,6 @@
 //需要绘制的点
 - (KMapPointView *)kMapView:(KMapView*)kMapView kMapPointViewAtIndex:(NSInteger)index{
     
-    
     CGFloat start = [_array3[index] floatValue];
     CGFloat end = start + [_array1[index] floatValue];
     CGFloat max = start + [_array2[index] floatValue];

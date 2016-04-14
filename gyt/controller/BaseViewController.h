@@ -15,10 +15,6 @@
 
 @property (strong, nonatomic) ByNavigationBar *navBar;
 
-@property (strong,nonatomic) UIButton *leftBtn;
-
-@property (strong,nonatomic) UILabel *titleLabel;
-
 -(void)showNavigationBar;
 
 

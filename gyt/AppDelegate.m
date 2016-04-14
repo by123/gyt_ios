@@ -7,8 +7,11 @@
 //
 
 #import "AppDelegate.h"
-#import "kLinePage.h"
-
+#import "SlideNavigationController.h"
+#import "LeftMenuViewContriller.h"
+#import "RightMenuViewController.h"
+#import "MainViewController.h"
+#import "ProductModel.h"
 @interface AppDelegate ()
 
 @end
@@ -18,13 +21,30 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    
     _window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     _window.backgroundColor = BACKGROUND_COLOR;
     
-    [self launchViewController];
+    MainViewController *mainViewController =[[MainViewController alloc]init];
     
+    SlideNavigationController *controller = [[SlideNavigationController alloc]initWithRootViewController:mainViewController];
+   
+    LeftMenuViewContriller *leftMenu = [[LeftMenuViewContriller alloc]init];
+    leftMenu.view.backgroundColor = SUB_COLOR;
+    
+    RightMenuViewController *rightMenu = [[RightMenuViewController alloc]init];
+    rightMenu.view.backgroundColor = SUB_COLOR;
+    
+    controller.leftMenu = leftMenu;
+    controller.righMenu = rightMenu;
+    
+    _window.rootViewController = controller;
+    [_window makeKeyAndVisible];
+
     return YES;
 }
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
 }
@@ -42,15 +62,15 @@
 }
 
 
--(void)launchViewController
-{
-    UINavigationController *controller;
-
-    kLinePage *mainViewController= [[kLinePage alloc]init];
-    controller= [[UINavigationController alloc]initWithRootViewController:mainViewController];
-    _window.rootViewController = controller;
-    [_window makeKeyAndVisible];
-}
+//-(void)launchViewController
+//{
+//    UINavigationController *controller;
+//
+//    MainViewController *mainViewController= [[MainViewController alloc]init];
+//    controller= [[UINavigationController alloc]initWithRootViewController:mainViewController];
+//    _window.rootViewController = controller;
+//    [_window makeKeyAndVisible];
+//}
 
 
 

@@ -232,12 +232,15 @@ description:__VA_ARGS__];                             \
 #define RGB(r,g,b) RGBA(r,g,b,1.0f)
 
 //背景色
-#define BACKGROUND_COLOR [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0]
+#define BACKGROUND_COLOR [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:1.0]
 
-//2d90ff
-#define MAIN_COLOR  [UIColor colorWithRed:30/255.0 green:144/255.0 blue:255.0/255.0 alpha:1.0]
+//主色
+#define MAIN_COLOR  [UIColor colorWithRed:34/255.0 green:34/255.0 blue:34/255.0 alpha:1.0]
 
-#define LINE_COLOR  [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.2]
+//辅色
+#define SUB_COLOR  [UIColor colorWithRed:50/255.0 green:50/255.0 blue:50/255.0 alpha:1.0]
+
+#define LINE_COLOR  [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.2]
 
 #define WarnColor   [UIColor colorWithRed:0xFF/255.0 green:0x54/255.0 blue:0x54/255.0 alpha:1.0]
 

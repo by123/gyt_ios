@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+#pragma mark 本地存储
+#define UserDefault_Updown @"updown"
+#define UserDefault_Inventory @"inventory"
+
+
 #pragma mark 网络请求相关
 #define Root_Url @"http://120.25.196.33/est/"
 

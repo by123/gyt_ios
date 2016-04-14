@@ -1,5 +1,5 @@
 //
-//  MainViewController.h
+//  rightMenuViewController.h
 //  gyt
 //
 //  Created by by.huang on 16/4/14.
@@ -8,6 +8,7 @@
 
 #import "BaseViewController.h"
 #import "SlideNavigationController.h"
-@interface MainViewController : BaseViewController<SlideNavigationControllerDelegate,ByNavigationBarDelegate,UITableViewDelegate,UITableViewDataSource>
+
+@interface RightMenuViewController : BaseViewController<SlideNavigationControllerDelegate>
 
 @end
