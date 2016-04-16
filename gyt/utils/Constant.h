@@ -12,6 +12,9 @@
 #define UserDefault_Updown @"updown"
 #define UserDefault_Inventory @"inventory"
 
+#pragma mark 广播
+#define Notify_Menu_Title @"menu_title"
+
 
 #pragma mark 网络请求相关
 #define Root_Url @"http://120.25.196.33/est/"

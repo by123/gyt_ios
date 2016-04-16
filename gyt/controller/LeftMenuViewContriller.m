@@ -8,6 +8,7 @@
 
 #import "LeftMenuViewContriller.h"
 #import "LeftMenuCell.h"
+#import "MenuModel.h"
 #define Menu_Width SCREEN_WIDTH - 60
 
 
@@ -23,17 +24,20 @@
 
 @property (strong, nonatomic) UICollectionView *part4CollectView;
 
-@property (strong, nonatomic) NSArray *datas1;
+@property (strong, nonatomic) NSMutableArray *datas1;
 
-@property (strong, nonatomic) NSArray *datas2;
+@property (strong, nonatomic) NSMutableArray *datas2;
 
-@property (strong, nonatomic) NSArray *datas3;
+@property (strong, nonatomic) NSMutableArray *datas3;
 
-@property (strong, nonatomic) NSArray *datas4;
+@property (strong, nonatomic) NSMutableArray *datas4;
 
 @end
 
 @implementation LeftMenuViewContriller
+{
+    MenuModel *lastSelectModel;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -134,10 +138,12 @@
 
 -(void)initData
 {
-    _datas1 = @[@"浏览记录列表",@"预警合约列表",@"自选合约列表"];
-    _datas2 = @[@"主力合约",@"郑州商品交易所",@"大连商品交易所",@"上海期货交易所",@"中国金融期货交易所",@"夜市",@"上海黄金交易所"];
-    _datas3 = @[@"外盘纵然",@"纽约NYMEX",@"纽约COMEX",@"纽约ICE",@"芝加哥CBOT",@"伦敦LME",@"伦敦ICE",@"欧美期指",@"外汇期货",@"CME",@"香港HKEx",@"新加坡SGX",@"东京TOCOM",@"马来西亚BMD",@"商品指数",@"全球股票指数",@"外汇与美金"];
-    _datas4 = @[@"上证A股",@"深证A股",@"中小板块",@"创业板块",@"指数基金",@"其他LOF基金",@"封闭式基金",@"黄金ETF",@"国债ETF"];
+    _datas1 = [MenuModel buildModel1];
+    _datas2 = [MenuModel buildModel2];
+    _datas3 = [MenuModel buildModel3];
+    _datas4 = [MenuModel buildModel4];
+    lastSelectModel = ((MenuModel *)[_datas2 objectAtIndex:0]);
+    lastSelectModel.isSelected = YES;
 
 }
 
@@ -176,7 +182,37 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-  
+    if(lastSelectModel)
+    {
+        lastSelectModel.isSelected = NO;
+    }
+    MenuModel *model;
+    if(!IS_NS_COLLECTION_EMPTY(_datas1) && collectionView == _part1CollectView)
+    {
+        model = [_datas1 objectAtIndex:indexPath.row];
+    }
+    else if(!IS_NS_COLLECTION_EMPTY(_datas2) && collectionView == _part2CollectView)
+    {
+         model = [_datas2 objectAtIndex:indexPath.row];
+    }
+    else if(!IS_NS_COLLECTION_EMPTY(_datas3) && collectionView == _part3CollectView)
+    {
+         model = [_datas3 objectAtIndex:indexPath.row];
+    }
+    else if(!IS_NS_COLLECTION_EMPTY(_datas4) && collectionView == _part4CollectView)
+    {
+         model = [_datas4 objectAtIndex:indexPath.row];
+    }
+    model.isSelected = YES;
+    [_part1CollectView reloadData];
+    [_part2CollectView reloadData];
+    [_part3CollectView reloadData];
+    [_part4CollectView reloadData];
+
+    [[NSNotificationCenter defaultCenter]postNotificationName:Notify_Menu_Title object:model];
+    lastSelectModel = model;
+    [[SlideNavigationController sharedInstance]leftMenuSelected:nil];
+
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -186,19 +222,23 @@
     
     if(!IS_NS_COLLECTION_EMPTY(_datas1) && collectionView == _part1CollectView)
     {
-        [cell setData:[_datas1 objectAtIndex:indexPath.row]];
+        MenuModel *model = [_datas1 objectAtIndex:indexPath.row];
+        [cell setData:model];
     }
     else if(!IS_NS_COLLECTION_EMPTY(_datas2) && collectionView == _part2CollectView)
     {
-        [cell setData:[_datas2 objectAtIndex:indexPath.row]];
+        MenuModel *model = [_datas2 objectAtIndex:indexPath.row];
+        [cell setData:model];
     }
     else if(!IS_NS_COLLECTION_EMPTY(_datas3) && collectionView == _part3CollectView)
     {
-        [cell setData:[_datas3 objectAtIndex:indexPath.row]];
+        MenuModel *model = [_datas3 objectAtIndex:indexPath.row];
+        [cell setData:model];
     }
     else if(!IS_NS_COLLECTION_EMPTY(_datas4) && collectionView == _part4CollectView)
     {
-        [cell setData:[_datas4 objectAtIndex:indexPath.row]];
+        MenuModel *model = [_datas4 objectAtIndex:indexPath.row];
+        [cell setData:model];
     }
     return cell;
 }

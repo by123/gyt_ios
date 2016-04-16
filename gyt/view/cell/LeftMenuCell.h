@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "MenuModel.h"
 @interface LeftMenuCell : UICollectionViewCell
 
--(void)setData : (NSString *)text;
+-(void)setData : (MenuModel *)model;
 
 + (NSString *)identify;
 

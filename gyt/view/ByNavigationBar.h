@@ -12,7 +12,7 @@
 
 @optional -(void)OnLeftClickCallback;
 
-@optional -(void)OnRightCallBack;
+@optional -(void)OnRightClickCallBack : (NSInteger) position;
 
 @optional -(void)OnTitleClick;
 
@@ -20,19 +20,40 @@
 
 @interface ByNavigationBar : UIView
 
-@property (strong,nonatomic) UILabel *titleLabel;
+@property (strong, nonatomic) UILabel *titleLabel;
 
-@property (strong,nonatomic) UIButton *leftBtn;
+@property (strong, nonatomic) UIButton *leftBtn;
 
-@property (strong,nonatomic) UIButton *rightBtn;
+@property (strong, nonatomic) UIButton *rightBtn;
 
 @property (strong, nonatomic) UIButton *titleClickBtn;
 
-@property (strong,nonatomic) id delegate;
+@property (strong, nonatomic) UILabel *leftMainLabel;
+
+@property (strong, nonatomic) UILabel *leftSubLabel;
+
+@property (strong, nonatomic) UIButton *rightBtn1;
+
+@property (strong, nonatomic) UIButton *rightBtn2;
+
+@property (strong, nonatomic) UIButton *rightBtn3;
+
+@property (strong, nonatomic) id delegate;
 
 -(void)setTitle : (NSString *)title;
 
 -(void)setTitleClick : (BOOL)isClick;
 
+-(void)setLeftImage : (UIImage *)image;
+
+-(void)setLeftMainTitle : (NSString *)mainTitle;
+
+-(void)setLeftSubTitle : (NSString *)subTitle;
+
+-(void)setRightBtn1Image : (UIImage *)image;
+
+-(void)setRightBtn2Image : (UIImage *)image;
+
+-(void)setRightBtn3Image : (UIImage *)image;
 
 @end

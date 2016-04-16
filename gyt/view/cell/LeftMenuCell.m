@@ -8,7 +8,7 @@
 
 #import "LeftMenuCell.h"
 
-#define Cell_Height 32
+#define kCellHeight 32
 
 @interface LeftMenuCell()
 
@@ -36,18 +36,30 @@
     _button.layer.borderWidth = 0.5;
     _button.layer.masksToBounds = YES;
     _button.layer.cornerRadius = 2;
+    _button.userInteractionEnabled = NO;
     _button.titleLabel.font = [UIFont systemFontOfSize:14.0f];
-    _button.frame = CGRectMake(0, 0, (SCREEN_WIDTH-90)/2, Cell_Height);
+    _button.frame = CGRectMake(0, 0, (SCREEN_WIDTH-90)/2, kCellHeight);
     [self addSubview:_button];
 }
 
--(void)setData : (NSString *)text
+-(void)setData : (MenuModel *)model
 {
-    [_button setTitle:text forState:UIControlStateNormal];
-    [_button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    if(iPhone5 && text.length >= 9)
+    [_button setTitle:model.title forState:UIControlStateNormal];
+    if(iPhone5 && model.title.length >= 9)
     {
         _button.titleLabel.font = [UIFont systemFontOfSize:12.0f];
+    }
+    else
+    {
+        _button.titleLabel.font = [UIFont systemFontOfSize:14.0f];
+    }
+    if(model.isSelected)
+    {
+        [_button setTitleColor:SELECT_COLOR forState:UIControlStateNormal];
+    }
+    else
+    {
+        [_button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
 }
 
@@ -55,6 +67,8 @@
 {
     return @"LeftMenuCell";
 }
+
+
 
 
 @end

@@ -10,6 +10,8 @@
 #import "LeftMenuViewContriller.h"
 #import "MainTableCell.h"
 #import "ProductModel.h"
+#import "MenuModel.h"
+#import "DetailViewController.h"
 #define Item_Height 40
 
 @interface MainViewController ()
@@ -57,6 +59,14 @@
     _datas = [[NSMutableArray alloc]init];
     [self testData];
     [self initView];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateView:) name:Notify_Menu_Title object:nil];
+}
+
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:Notify_Menu_Title object:nil];
 }
 
 
@@ -96,6 +106,7 @@
 {
     [self showNavigationBar];
     self.navBar.delegate = self;
+    [self.navBar setTitle:@"主力合约"];
 }
 
 -(void)initHeaderView
@@ -169,6 +180,14 @@
 }
 
 
+#pragma mark 更新布局
+-(void)updateView : (NSNotification *)notification
+{
+    MenuModel *model = notification.object;
+    [self.navBar setTitle:model.title];
+
+}
+
 #pragma mark 列表处理
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -201,13 +220,22 @@
     return cell;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(!IS_NS_COLLECTION_EMPTY(_datas))
+    {
+        ProductModel *model = [_datas objectAtIndex:indexPath.row];
+        [DetailViewController show:self model:model];
+    }
+}
+
 #pragma mark 点击回调事件
 -(void)OnLeftClickCallback
 {
     [[SlideNavigationController sharedInstance]leftMenuSelected:nil];
 }
 
--(void)OnRightCallBack
+-(void)OnRightClickCallBack : (NSInteger)position
 {
     [[SlideNavigationController sharedInstance]righttMenuSelected:nil];
 }
