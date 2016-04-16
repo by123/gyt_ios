@@ -9,6 +9,6 @@
 #import "BaseViewController.h"
 #import "SlideNavigationController.h"
 
-@interface LeftMenuViewContriller : BaseViewController<SlideNavigationControllerDelegate>
+@interface LeftMenuViewContriller : BaseViewController<SlideNavigationControllerDelegate,UICollectionViewDataSource,UICollectionViewDelegate>
 
 @end

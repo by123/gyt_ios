@@ -33,6 +33,7 @@
 		CF4A6D931CBE40C600B36C93 /* kLinePage.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D921CBE40C600B36C93 /* kLinePage.m */; };
 		CFC15B8E1CBF94A90077FA19 /* MainTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15B8D1CBF94A90077FA19 /* MainTableCell.m */; };
 		CFC15B911CBFA6830077FA19 /* ProductModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15B901CBFA6830077FA19 /* ProductModel.m */; };
+		CFC15B941CC11B770077FA19 /* LeftMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15B931CC11B770077FA19 /* LeftMenuCell.m */; };
 		CFDFFA941CBF742500401CB3 /* SlideNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDFFA931CBF742500401CB3 /* SlideNavigationController.m */; };
 		CFDFFA971CBF759800401CB3 /* LeftMenuViewContriller.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDFFA961CBF759800401CB3 /* LeftMenuViewContriller.m */; };
 		CFDFFA9A1CBF77AB00401CB3 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDFFA991CBF77AB00401CB3 /* MainViewController.m */; };
@@ -92,6 +93,8 @@
 		CFC15B8D1CBF94A90077FA19 /* MainTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableCell.m; sourceTree = "<group>"; };
 		CFC15B8F1CBFA6830077FA19 /* ProductModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductModel.h; sourceTree = "<group>"; };
 		CFC15B901CBFA6830077FA19 /* ProductModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductModel.m; sourceTree = "<group>"; };
+		CFC15B921CC11B770077FA19 /* LeftMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftMenuCell.h; sourceTree = "<group>"; };
+		CFC15B931CC11B770077FA19 /* LeftMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftMenuCell.m; sourceTree = "<group>"; };
 		CFDFFA921CBF742500401CB3 /* SlideNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideNavigationController.h; sourceTree = "<group>"; };
 		CFDFFA931CBF742500401CB3 /* SlideNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideNavigationController.m; sourceTree = "<group>"; };
 		CFDFFA951CBF759800401CB3 /* LeftMenuViewContriller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftMenuViewContriller.h; sourceTree = "<group>"; };
@@ -234,6 +237,8 @@
 			children = (
 				CFC15B8C1CBF94A90077FA19 /* MainTableCell.h */,
 				CFC15B8D1CBF94A90077FA19 /* MainTableCell.m */,
+				CFC15B921CC11B770077FA19 /* LeftMenuCell.h */,
+				CFC15B931CC11B770077FA19 /* LeftMenuCell.m */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -417,6 +422,7 @@
 				CF4A6D1B1CBE25AA00B36C93 /* AppDelegate.m in Sources */,
 				CFC15B8E1CBF94A90077FA19 /* MainTableCell.m in Sources */,
 				CF4A6D181CBE25AA00B36C93 /* main.m in Sources */,
+				CFC15B941CC11B770077FA19 /* LeftMenuCell.m in Sources */,
 				CFDFFA941CBF742500401CB3 /* SlideNavigationController.m in Sources */,
 				CF4A6D931CBE40C600B36C93 /* kLinePage.m in Sources */,
 				CF4A6D5B1CBE28DD00B36C93 /* ColorUtil.m in Sources */,
