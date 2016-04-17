@@ -8,14 +8,22 @@
 
 #import "DetailViewController.h"
 #import "SlideNavigationController.h"
+#import "HandicapView.h"
 
 @interface DetailViewController ()
 
 @property (strong, nonatomic) ProductModel *model;
 
+@property (strong, nonatomic) UIView *bodyView;
+
+@property (strong, nonatomic) HandicapView *handicapView;
+
 @end
 
 @implementation DetailViewController
+{
+    NSInteger currentPosition;
+}
 
 +(void)show : (BaseViewController *)controller
       model : (ProductModel *) model
@@ -35,6 +43,7 @@
 {
     self.view.backgroundColor = BACKGROUND_COLOR;
     [self initNavigationBar];
+    [self initBodyView];
     [self initBottomView];
 }
 
@@ -48,9 +57,17 @@
     [self.navBar setLeftSubTitle:_model.name];
     [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_drawline"]];
     [self.navBar setRightBtn2Image:[UIImage imageNamed:@"ic_lightning"]];
+    [self.navBar setRightBtn3Image:nil];
+    currentPosition = 2;
 
 }
 
+-(void)initBodyView
+{
+    _bodyView = [[UIView alloc]init];
+    _bodyView.frame =CGRectMake(0, NavigationBar_HEIGHT + StatuBar_HEIGHT, SCREEN_WIDTH, kContentHeight);
+    [self.view addSubview:_bodyView];
+}
 
 -(void)initBottomView
 {
@@ -67,6 +84,55 @@
 }
 
 
+#pragma mark 初始化新闻模块
+-(void)addNewsView
+{
+    [self clearAllView];
+}
+
+
+#pragma mark 添加盘口模块
+-(void)addHandicapView
+{
+    [self clearAllView];
+    _handicapView = [[HandicapView alloc]init];
+    _handicapView.frame = CGRectMake(0, 0, SCREEN_WIDTH, kContentHeight + kTopHeight);
+    [_bodyView addSubview:_handicapView];
+}
+
+
+#pragma mark 添加分时图模块
+-(void)addTimelineView
+{
+    [self clearAllView];
+}
+
+#pragma mark 添加k线图模块
+-(void)addKlineView
+{
+    [self clearAllView];
+
+}
+
+#pragma mark 添加下单模块
+-(void)addBuyView
+{
+    [self clearAllView];
+
+}
+
+
+
+#pragma mark 清除上次绘制布局
+-(void)clearAllView
+{
+    if(_bodyView)
+    {
+        [_bodyView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    }
+}
+
+
 #pragma mark 点击事件回调
 -(void)OnLeftClickCallback
 {
@@ -75,14 +141,55 @@
 
 -(void)OnRightClickCallBack : (NSInteger) position
 {
-    switch (position) {
-        case 0:
-            [[SlideNavigationController sharedInstance]righttMenuSelected:nil];
-            break;
-            
-        default:
-            break;
+    if(position == 0)
+    {
+        [[SlideNavigationController sharedInstance]righttMenuSelected:nil];
     }
+    else if(currentPosition == 0)
+    {
+        
+    }
+    else if(currentPosition == 1)
+    {
+        if(position == 1)
+        {
+            //下单
+        }
+    }
+    else if(currentPosition == 2)
+    {
+        if(position == 1)
+        {
+            //画线
+        }
+        else if(position == 2)
+        {
+            //下单
+        }
+    }
+    else if(currentPosition == 3)
+    {
+        if(position == 1)
+        {
+            //选时间
+        }
+        else if(position == 2)
+        {
+            //画线
+        }
+        else if(position == 3)
+        {
+            //下单
+        }
+    }
+    else if(currentPosition == 4)
+    {
+        if(position == 1)
+        {
+            //刷新
+        }
+    }
+ 
 }
 
 -(void)OnSelectPosition:(NSInteger)position
@@ -90,22 +197,54 @@
     switch (position) {
         case 0:
             [self.navBar setLeftMainTitle:@"新闻"];
+            [self addNewsView];
             break;
         case 1:
             [self.navBar setLeftMainTitle:@"详细报价"];
+            [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_lightning"]];
+            [self.navBar setRightBtn2Image:nil];
+            [self.navBar setRightBtn3Image:nil];
+            [self.navBar.leftMainLabel setHidden:NO];
+            [self.navBar.leftSubLabel setHidden:NO];
+            [self.navBar.titleLabel setHidden:YES];
+            [self addHandicapView];
             break;
         case 2:
             [self.navBar setLeftMainTitle:@"分时图"];
+            [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_drawline"]];
+            [self.navBar setRightBtn2Image:[UIImage imageNamed:@"ic_lightning"]];
+            [self.navBar setRightBtn3Image:nil];
+            [self.navBar.leftMainLabel setHidden:NO];
+            [self.navBar.leftSubLabel setHidden:NO];
+            [self.navBar.titleLabel setHidden:YES];
+            [self addTimelineView];
             break;
         case 3:
             [self.navBar setLeftMainTitle:@"k线图"];
+            [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_clock"]];
+            [self.navBar setRightBtn2Image:[UIImage imageNamed:@"ic_drawline"]];
+            [self.navBar setRightBtn3Image:[UIImage imageNamed:@"ic_lightning"]];
+            [self.navBar.leftMainLabel setHidden:NO];
+            [self.navBar.leftSubLabel setHidden:NO];
+            [self.navBar.titleLabel setHidden:YES];
+            [self addKlineView];
             break;
         case 4:
             [self.navBar setLeftMainTitle:@"下单"];
+            [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_refresh"]];
+            [self.navBar setRightBtn2Image:nil];
+            [self.navBar setRightBtn3Image:nil];
+            [self.navBar.leftMainLabel setHidden:YES];
+            [self.navBar.leftSubLabel setHidden:YES];
+            [self.navBar.titleLabel setHidden:NO];
+            [self.navBar setTitle:@"账户名"];
+            [self addBuyView];
             break;
         default:
             break;
     }
+    currentPosition = position;
+
 }
 
 

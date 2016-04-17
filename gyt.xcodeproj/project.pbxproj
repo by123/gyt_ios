@@ -37,6 +37,7 @@
 		CFC15B9A1CC20F070077FA19 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15B991CC20F070077FA19 /* DetailViewController.m */; };
 		CFC15B9D1CC2249B0077FA19 /* BottomTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15B9C1CC2249B0077FA19 /* BottomTabView.m */; };
 		CFC15BA01CC22BE10077FA19 /* BottomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15B9F1CC22BE10077FA19 /* BottomModel.m */; };
+		CFC15BA71CC234C30077FA19 /* HandicapView.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15BA61CC234C30077FA19 /* HandicapView.m */; };
 		CFDFFA941CBF742500401CB3 /* SlideNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDFFA931CBF742500401CB3 /* SlideNavigationController.m */; };
 		CFDFFA971CBF759800401CB3 /* LeftMenuViewContriller.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDFFA961CBF759800401CB3 /* LeftMenuViewContriller.m */; };
 		CFDFFA9A1CBF77AB00401CB3 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDFFA991CBF77AB00401CB3 /* MainViewController.m */; };
@@ -105,6 +106,8 @@
 		CFC15B9C1CC2249B0077FA19 /* BottomTabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BottomTabView.m; sourceTree = "<group>"; };
 		CFC15B9E1CC22BE10077FA19 /* BottomModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BottomModel.h; sourceTree = "<group>"; };
 		CFC15B9F1CC22BE10077FA19 /* BottomModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BottomModel.m; sourceTree = "<group>"; };
+		CFC15BA51CC234C30077FA19 /* HandicapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HandicapView.h; sourceTree = "<group>"; };
+		CFC15BA61CC234C30077FA19 /* HandicapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HandicapView.m; sourceTree = "<group>"; };
 		CFDFFA921CBF742500401CB3 /* SlideNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideNavigationController.h; sourceTree = "<group>"; };
 		CFDFFA931CBF742500401CB3 /* SlideNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideNavigationController.m; sourceTree = "<group>"; };
 		CFDFFA951CBF759800401CB3 /* LeftMenuViewContriller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftMenuViewContriller.h; sourceTree = "<group>"; };
@@ -232,6 +235,7 @@
 		CF4A6D561CBE28DD00B36C93 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				CFC15BA41CC234B00077FA19 /* detail */,
 				CF4A6D7A1CBE2EA200B36C93 /* ByNavigationBar.h */,
 				CF4A6D7B1CBE2EA200B36C93 /* ByNavigationBar.m */,
 				CFC15B9B1CC2249B0077FA19 /* BottomTabView.h */,
@@ -321,6 +325,15 @@
 				CFDFFA991CBF77AB00401CB3 /* MainViewController.m */,
 			);
 			name = main;
+			sourceTree = "<group>";
+		};
+		CFC15BA41CC234B00077FA19 /* detail */ = {
+			isa = PBXGroup;
+			children = (
+				CFC15BA51CC234C30077FA19 /* HandicapView.h */,
+				CFC15BA61CC234C30077FA19 /* HandicapView.m */,
+			);
+			name = detail;
 			sourceTree = "<group>";
 		};
 		D4AF553BC76F6924E98CCF9D /* Pods */ = {
@@ -454,6 +467,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF4A6D591CBE28DD00B36C93 /* Account.m in Sources */,
+				CFC15BA71CC234C30077FA19 /* HandicapView.m in Sources */,
 				CFDFFA971CBF759800401CB3 /* LeftMenuViewContriller.m in Sources */,
 				CF4A6D8B1CBE3F9E00B36C93 /* BaseLinesView.m in Sources */,
 				CF4A6D701CBE2A0800B36C93 /* UILabel+ContentSize.m in Sources */,
