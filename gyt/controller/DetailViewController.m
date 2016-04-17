@@ -111,7 +111,6 @@
 -(void)addKlineView
 {
     [self clearAllView];
-
 }
 
 #pragma mark 添加下单模块

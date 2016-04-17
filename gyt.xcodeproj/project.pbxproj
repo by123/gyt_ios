@@ -38,6 +38,10 @@
 		CFC15B9D1CC2249B0077FA19 /* BottomTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15B9C1CC2249B0077FA19 /* BottomTabView.m */; };
 		CFC15BA01CC22BE10077FA19 /* BottomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15B9F1CC22BE10077FA19 /* BottomModel.m */; };
 		CFC15BA71CC234C30077FA19 /* HandicapView.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15BA61CC234C30077FA19 /* HandicapView.m */; };
+		CFC15BAA1CC35F700077FA19 /* HandicapCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15BA91CC35F700077FA19 /* HandicapCell.m */; };
+		CFC15BAD1CC361A80077FA19 /* HandicapModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15BAC1CC361A80077FA19 /* HandicapModel.m */; };
+		CFC15BB01CC365650077FA19 /* HandicapBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15BAF1CC365650077FA19 /* HandicapBaseModel.m */; };
+		CFC15BB31CC37C730077FA19 /* HandicapDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15BB21CC37C730077FA19 /* HandicapDetailModel.m */; };
 		CFDFFA941CBF742500401CB3 /* SlideNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDFFA931CBF742500401CB3 /* SlideNavigationController.m */; };
 		CFDFFA971CBF759800401CB3 /* LeftMenuViewContriller.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDFFA961CBF759800401CB3 /* LeftMenuViewContriller.m */; };
 		CFDFFA9A1CBF77AB00401CB3 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDFFA991CBF77AB00401CB3 /* MainViewController.m */; };
@@ -108,6 +112,14 @@
 		CFC15B9F1CC22BE10077FA19 /* BottomModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BottomModel.m; sourceTree = "<group>"; };
 		CFC15BA51CC234C30077FA19 /* HandicapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HandicapView.h; sourceTree = "<group>"; };
 		CFC15BA61CC234C30077FA19 /* HandicapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HandicapView.m; sourceTree = "<group>"; };
+		CFC15BA81CC35F700077FA19 /* HandicapCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HandicapCell.h; sourceTree = "<group>"; };
+		CFC15BA91CC35F700077FA19 /* HandicapCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HandicapCell.m; sourceTree = "<group>"; };
+		CFC15BAB1CC361A80077FA19 /* HandicapModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HandicapModel.h; sourceTree = "<group>"; };
+		CFC15BAC1CC361A80077FA19 /* HandicapModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HandicapModel.m; sourceTree = "<group>"; };
+		CFC15BAE1CC365650077FA19 /* HandicapBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HandicapBaseModel.h; sourceTree = "<group>"; };
+		CFC15BAF1CC365650077FA19 /* HandicapBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HandicapBaseModel.m; sourceTree = "<group>"; };
+		CFC15BB11CC37C730077FA19 /* HandicapDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HandicapDetailModel.h; sourceTree = "<group>"; };
+		CFC15BB21CC37C730077FA19 /* HandicapDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HandicapDetailModel.m; sourceTree = "<group>"; };
 		CFDFFA921CBF742500401CB3 /* SlideNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideNavigationController.h; sourceTree = "<group>"; };
 		CFDFFA931CBF742500401CB3 /* SlideNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideNavigationController.m; sourceTree = "<group>"; };
 		CFDFFA951CBF759800401CB3 /* LeftMenuViewContriller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftMenuViewContriller.h; sourceTree = "<group>"; };
@@ -209,6 +221,12 @@
 				CFC15B961CC205390077FA19 /* MenuModel.m */,
 				CFC15B9E1CC22BE10077FA19 /* BottomModel.h */,
 				CFC15B9F1CC22BE10077FA19 /* BottomModel.m */,
+				CFC15BAB1CC361A80077FA19 /* HandicapModel.h */,
+				CFC15BAC1CC361A80077FA19 /* HandicapModel.m */,
+				CFC15BAE1CC365650077FA19 /* HandicapBaseModel.h */,
+				CFC15BAF1CC365650077FA19 /* HandicapBaseModel.m */,
+				CFC15BB11CC37C730077FA19 /* HandicapDetailModel.h */,
+				CFC15BB21CC37C730077FA19 /* HandicapDetailModel.m */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -253,6 +271,8 @@
 				CFC15B8D1CBF94A90077FA19 /* MainTableCell.m */,
 				CFC15B921CC11B770077FA19 /* LeftMenuCell.h */,
 				CFC15B931CC11B770077FA19 /* LeftMenuCell.m */,
+				CFC15BA81CC35F700077FA19 /* HandicapCell.h */,
+				CFC15BA91CC35F700077FA19 /* HandicapCell.m */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -467,12 +487,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF4A6D591CBE28DD00B36C93 /* Account.m in Sources */,
+				CFC15BAA1CC35F700077FA19 /* HandicapCell.m in Sources */,
 				CFC15BA71CC234C30077FA19 /* HandicapView.m in Sources */,
 				CFDFFA971CBF759800401CB3 /* LeftMenuViewContriller.m in Sources */,
 				CF4A6D8B1CBE3F9E00B36C93 /* BaseLinesView.m in Sources */,
 				CF4A6D701CBE2A0800B36C93 /* UILabel+ContentSize.m in Sources */,
 				CF4A6D8C1CBE3F9E00B36C93 /* HistogramView.m in Sources */,
 				CFDFFA9D1CBF78DD00401CB3 /* RightMenuViewController.m in Sources */,
+				CFC15BB31CC37C730077FA19 /* HandicapDetailModel.m in Sources */,
 				CF4A6D1B1CBE25AA00B36C93 /* AppDelegate.m in Sources */,
 				CFC15B8E1CBF94A90077FA19 /* MainTableCell.m in Sources */,
 				CF4A6D181CBE25AA00B36C93 /* main.m in Sources */,
@@ -483,6 +505,7 @@
 				CFC15B971CC205390077FA19 /* MenuModel.m in Sources */,
 				CF4A6D8E1CBE3F9E00B36C93 /* KMapView.m in Sources */,
 				CFDFFA9A1CBF77AB00401CB3 /* MainViewController.m in Sources */,
+				CFC15BB01CC365650077FA19 /* HandicapBaseModel.m in Sources */,
 				CF4A6D7F1CBE2EAB00B36C93 /* BaseViewController.m in Sources */,
 				CF4A6D5A1CBE28DD00B36C93 /* AppUtil.m in Sources */,
 				CF4A6D8F1CBE3F9E00B36C93 /* TSLinesView.m in Sources */,
@@ -491,6 +514,7 @@
 				CF4A6D7C1CBE2EA200B36C93 /* ByNavigationBar.m in Sources */,
 				CF4A6D5C1CBE28DD00B36C93 /* DialogHelper.m in Sources */,
 				CF4A6D6F1CBE2A0800B36C93 /* IDSExtendedLabel.m in Sources */,
+				CFC15BAD1CC361A80077FA19 /* HandicapModel.m in Sources */,
 				CF4A6D711CBE2A0800B36C93 /* UIView+Frame.m in Sources */,
 				CF4A6D5D1CBE28DD00B36C93 /* IDSAlertSheet.m in Sources */,
 				CFC15BA01CC22BE10077FA19 /* BottomModel.m in Sources */,

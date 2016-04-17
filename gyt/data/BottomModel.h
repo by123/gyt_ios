@@ -10,7 +10,7 @@
 
 @interface BottomModel : NSObject
 
-@property (strong, nonatomic) NSString *title;
+@property (copy, nonatomic) NSString *title;
 
 @property (strong, nonatomic) UIImage *image;
 
