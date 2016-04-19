@@ -26,7 +26,7 @@
 
 -(void)initView
 {
-    self.backgroundColor = LINE_COLOR;
+    self.backgroundColor = MAIN_COLOR;
     self.frame = CGRectMake(0, 0, SCREEN_WIDTH, kBottomHeight);
     if(!IS_NS_COLLECTION_EMPTY(_datas))
     {

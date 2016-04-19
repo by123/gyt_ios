@@ -247,6 +247,9 @@ description:__VA_ARGS__];                             \
 //选中色
 #define SELECT_COLOR [UIColor colorWithRed:255/255.0 green:99/255.0 blue:71/255.0 alpha:1.0]
 
+//文字色
+#define TEXT_COLOR [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.8]
+
 //清除背景色
 #define CLEARCOLOR [UIColor clearColor]
 

@@ -9,6 +9,7 @@
 #import "DetailViewController.h"
 #import "SlideNavigationController.h"
 #import "HandicapView.h"
+#import "DealView.h"
 
 @interface DetailViewController ()
 
@@ -17,6 +18,8 @@
 @property (strong, nonatomic) UIView *bodyView;
 
 @property (strong, nonatomic) HandicapView *handicapView;
+
+@property (strong, nonatomic) DealView *dealView;
 
 @end
 
@@ -117,6 +120,9 @@
 -(void)addBuyView
 {
     [self clearAllView];
+    _dealView = [[DealView alloc]init];
+    _dealView.frame = CGRectMake(0, 0, SCREEN_WIDTH, kContentHeight + kTopHeight);
+    [_bodyView addSubview:_dealView];
 
 }
 
