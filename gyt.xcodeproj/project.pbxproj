@@ -42,6 +42,11 @@
 		CFC15BAD1CC361A80077FA19 /* HandicapModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15BAC1CC361A80077FA19 /* HandicapModel.m */; };
 		CFC15BB01CC365650077FA19 /* HandicapBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15BAF1CC365650077FA19 /* HandicapBaseModel.m */; };
 		CFC15BB31CC37C730077FA19 /* HandicapDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15BB21CC37C730077FA19 /* HandicapDetailModel.m */; };
+		CFC15BC61CC4B8160077FA19 /* DealView.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15BC51CC4B8160077FA19 /* DealView.m */; };
+		CFC15BC91CC4C7340077FA19 /* InsetTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15BC81CC4C7340077FA19 /* InsetTextField.m */; };
+		CFC15BCC1CC5D15D0077FA19 /* ByTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15BCB1CC5D15D0077FA19 /* ByTabView.m */; };
+		CFC15BCF1CC604DB0077FA19 /* ByDynamicTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15BCE1CC604DB0077FA19 /* ByDynamicTableView.m */; };
+		CFC15BD21CC607900077FA19 /* DynamicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15BD11CC607900077FA19 /* DynamicCell.m */; };
 		CFDFFA941CBF742500401CB3 /* SlideNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDFFA931CBF742500401CB3 /* SlideNavigationController.m */; };
 		CFDFFA971CBF759800401CB3 /* LeftMenuViewContriller.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDFFA961CBF759800401CB3 /* LeftMenuViewContriller.m */; };
 		CFDFFA9A1CBF77AB00401CB3 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDFFA991CBF77AB00401CB3 /* MainViewController.m */; };
@@ -120,6 +125,16 @@
 		CFC15BAF1CC365650077FA19 /* HandicapBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HandicapBaseModel.m; sourceTree = "<group>"; };
 		CFC15BB11CC37C730077FA19 /* HandicapDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HandicapDetailModel.h; sourceTree = "<group>"; };
 		CFC15BB21CC37C730077FA19 /* HandicapDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HandicapDetailModel.m; sourceTree = "<group>"; };
+		CFC15BC41CC4B8160077FA19 /* DealView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealView.h; sourceTree = "<group>"; };
+		CFC15BC51CC4B8160077FA19 /* DealView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealView.m; sourceTree = "<group>"; };
+		CFC15BC71CC4C7340077FA19 /* InsetTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InsetTextField.h; sourceTree = "<group>"; };
+		CFC15BC81CC4C7340077FA19 /* InsetTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InsetTextField.m; sourceTree = "<group>"; };
+		CFC15BCA1CC5D15D0077FA19 /* ByTabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ByTabView.h; sourceTree = "<group>"; };
+		CFC15BCB1CC5D15D0077FA19 /* ByTabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ByTabView.m; sourceTree = "<group>"; };
+		CFC15BCD1CC604DB0077FA19 /* ByDynamicTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ByDynamicTableView.h; sourceTree = "<group>"; };
+		CFC15BCE1CC604DB0077FA19 /* ByDynamicTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ByDynamicTableView.m; sourceTree = "<group>"; };
+		CFC15BD01CC607900077FA19 /* DynamicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicCell.h; sourceTree = "<group>"; };
+		CFC15BD11CC607900077FA19 /* DynamicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DynamicCell.m; sourceTree = "<group>"; };
 		CFDFFA921CBF742500401CB3 /* SlideNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideNavigationController.h; sourceTree = "<group>"; };
 		CFDFFA931CBF742500401CB3 /* SlideNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideNavigationController.m; sourceTree = "<group>"; };
 		CFDFFA951CBF759800401CB3 /* LeftMenuViewContriller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftMenuViewContriller.h; sourceTree = "<group>"; };
@@ -253,11 +268,17 @@
 		CF4A6D561CBE28DD00B36C93 /* view */ = {
 			isa = PBXGroup;
 			children = (
-				CFC15BA41CC234B00077FA19 /* detail */,
 				CF4A6D7A1CBE2EA200B36C93 /* ByNavigationBar.h */,
 				CF4A6D7B1CBE2EA200B36C93 /* ByNavigationBar.m */,
+				CFC15BCA1CC5D15D0077FA19 /* ByTabView.h */,
+				CFC15BCB1CC5D15D0077FA19 /* ByTabView.m */,
+				CFC15BCD1CC604DB0077FA19 /* ByDynamicTableView.h */,
+				CFC15BCE1CC604DB0077FA19 /* ByDynamicTableView.m */,
 				CFC15B9B1CC2249B0077FA19 /* BottomTabView.h */,
 				CFC15B9C1CC2249B0077FA19 /* BottomTabView.m */,
+				CFC15BC71CC4C7340077FA19 /* InsetTextField.h */,
+				CFC15BC81CC4C7340077FA19 /* InsetTextField.m */,
+				CFC15BA41CC234B00077FA19 /* detail */,
 				CF4A6D571CBE28DD00B36C93 /* cell */,
 				CF4A6D581CBE28DD00B36C93 /* extra */,
 			);
@@ -273,6 +294,8 @@
 				CFC15B931CC11B770077FA19 /* LeftMenuCell.m */,
 				CFC15BA81CC35F700077FA19 /* HandicapCell.h */,
 				CFC15BA91CC35F700077FA19 /* HandicapCell.m */,
+				CFC15BD01CC607900077FA19 /* DynamicCell.h */,
+				CFC15BD11CC607900077FA19 /* DynamicCell.m */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -352,6 +375,8 @@
 			children = (
 				CFC15BA51CC234C30077FA19 /* HandicapView.h */,
 				CFC15BA61CC234C30077FA19 /* HandicapView.m */,
+				CFC15BC41CC4B8160077FA19 /* DealView.h */,
+				CFC15BC51CC4B8160077FA19 /* DealView.m */,
 			);
 			name = detail;
 			sourceTree = "<group>";
@@ -493,15 +518,19 @@
 				CF4A6D8B1CBE3F9E00B36C93 /* BaseLinesView.m in Sources */,
 				CF4A6D701CBE2A0800B36C93 /* UILabel+ContentSize.m in Sources */,
 				CF4A6D8C1CBE3F9E00B36C93 /* HistogramView.m in Sources */,
+				CFC15BCC1CC5D15D0077FA19 /* ByTabView.m in Sources */,
 				CFDFFA9D1CBF78DD00401CB3 /* RightMenuViewController.m in Sources */,
 				CFC15BB31CC37C730077FA19 /* HandicapDetailModel.m in Sources */,
 				CF4A6D1B1CBE25AA00B36C93 /* AppDelegate.m in Sources */,
 				CFC15B8E1CBF94A90077FA19 /* MainTableCell.m in Sources */,
 				CF4A6D181CBE25AA00B36C93 /* main.m in Sources */,
 				CFC15B941CC11B770077FA19 /* LeftMenuCell.m in Sources */,
+				CFC15BC91CC4C7340077FA19 /* InsetTextField.m in Sources */,
 				CFDFFA941CBF742500401CB3 /* SlideNavigationController.m in Sources */,
+				CFC15BC61CC4B8160077FA19 /* DealView.m in Sources */,
 				CF4A6D931CBE40C600B36C93 /* kLinePage.m in Sources */,
 				CF4A6D5B1CBE28DD00B36C93 /* ColorUtil.m in Sources */,
+				CFC15BCF1CC604DB0077FA19 /* ByDynamicTableView.m in Sources */,
 				CFC15B971CC205390077FA19 /* MenuModel.m in Sources */,
 				CF4A6D8E1CBE3F9E00B36C93 /* KMapView.m in Sources */,
 				CFDFFA9A1CBF77AB00401CB3 /* MainViewController.m in Sources */,
@@ -511,6 +540,7 @@
 				CF4A6D8F1CBE3F9E00B36C93 /* TSLinesView.m in Sources */,
 				CFC15B911CBFA6830077FA19 /* ProductModel.m in Sources */,
 				CF4A6D741CBE2BCD00B36C93 /* ResponseModel.m in Sources */,
+				CFC15BD21CC607900077FA19 /* DynamicCell.m in Sources */,
 				CF4A6D7C1CBE2EA200B36C93 /* ByNavigationBar.m in Sources */,
 				CF4A6D5C1CBE28DD00B36C93 /* DialogHelper.m in Sources */,
 				CF4A6D6F1CBE2A0800B36C93 /* IDSExtendedLabel.m in Sources */,
