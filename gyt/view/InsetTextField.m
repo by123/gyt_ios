@@ -27,6 +27,7 @@
 
 -(void)initView
 {
+    self.delegate = self;
     self.textColor = TEXT_COLOR;
     self.font = [UIFont systemFontOfSize:14.0f];
     self.layer.borderColor = [[UIColor blackColor] CGColor];
@@ -62,4 +63,20 @@
     }
     return CGRectMake(5, bounds.origin.y, bounds.size.width-5, bounds.size.height);
 }
+
+#pragma mark 文本编辑框事件处理
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    self.layer.borderColor = [SELECT_COLOR CGColor];
+}
+
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    self.layer.borderColor = [[UIColor blackColor] CGColor];
+}
+
+
+
+
+
 @end

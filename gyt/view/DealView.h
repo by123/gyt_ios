@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "ByTabView.h"
 
-@interface DealView : UIView<UITextFieldDelegate,ByTabViewDelegate>
+@interface DealView : UIView<ByTabViewDelegate>
 
 @end

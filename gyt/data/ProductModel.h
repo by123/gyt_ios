@@ -20,6 +20,9 @@ typedef NS_ENUM(NSInteger, UpdownType) {
 
 @interface ProductModel : NSObject
 
+//产品id
+@property (assign, nonatomic) int pid;
+
 //名称
 @property (copy, nonatomic) NSString *name;
 

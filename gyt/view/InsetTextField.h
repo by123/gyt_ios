@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface InsetTextField : UITextField
+@interface InsetTextField : UITextField<UITextFieldDelegate>
 
 @property (assign, nonatomic) BOOL hasTitle;
 

@@ -74,6 +74,7 @@
     return self;
 }
 
+#pragma mark 初始化
 -(void)initView
 {
     self.backgroundColor = LINE_COLOR;
@@ -124,7 +125,6 @@
     _textField = [[InsetTextField alloc]initWithFrame:CGRectMake(10, view.height+5, SCREEN_WIDTH/2-20, 30)];
     _textField.hasTitle = NO;
     _textField.text = @"橡胶1607";
-    _textField.delegate = self;
     [self addSubview:_textField];
     
     UIView *priceView = [[UIView alloc]init];
@@ -204,7 +204,6 @@
     _handTextField.hasTitle = YES;
     [_handTextField setInsetTitle:@"手数：" font:[UIFont systemFontOfSize:14.0f]];
     _handTextField.text = @"1";
-    _handTextField.delegate = self;
     _handTextField.keyboardType = UIKeyboardTypeNumberPad;
     [self addSubview:_handTextField];
     
@@ -213,7 +212,6 @@
     _priceTextField.hasTitle = YES;
     [_priceTextField setInsetTitle:@"价格：" font:[UIFont systemFontOfSize:14.0f]];
     _priceTextField.text = @"1989";
-    _priceTextField.delegate = self;
     _priceTextField.keyboardType = UIKeyboardTypeNumberPad;
     [self addSubview:_priceTextField];
     
@@ -240,8 +238,6 @@
 }
 
 
-
-
 -(void)initBottomView
 {
     NSArray *array = @[@"持仓",@"挂单",@"委托",@"成交"];
@@ -253,6 +249,7 @@
     
     [self initHoldData];
 }
+
 
 
 #pragma mark 持仓数据
@@ -320,8 +317,8 @@
     NSMutableArray *datas = [[NSMutableArray alloc]init];
     NSMutableArray *temp = [[NSMutableArray alloc]init];
     [temp addObject:@"郑麦1605"];
-    [temp addObject:@"1"];
-    [temp addObject:@"全平"];
+    [temp addObject:@"全成"];
+    [temp addObject:@"买开"];
     [temp addObject:@"5040"];
     [temp addObject:@"5"];
     [temp addObject:@"5"];
@@ -387,15 +384,6 @@
     }
 }
 
-
-#pragma mark 文本编辑框事件处理
--(void)textFieldDidBeginEditing:(UITextField *)textField
-{
-    
-}
-
-
-
 #pragma mark 点击事件处理
 -(void)OnClick : (id)sender
 {
@@ -444,5 +432,7 @@
     [button setTitleColor:[ColorUtil colorWithHexString:@"#262626"] forState:UIControlStateNormal];
     button.backgroundColor = [ColorUtil colorWithHexString:@"#aaaaaa"];
 }
+
+               
 
 @end

@@ -12,6 +12,7 @@
 #import "RightMenuViewController.h"
 #import "MainViewController.h"
 #import "ProductModel.h"
+#import "ContractDB.h"
 @interface AppDelegate ()
 
 @end
@@ -42,6 +43,8 @@
     _window.rootViewController = controller;
     [_window makeKeyAndVisible];
 
+
+    [self initDB];
     return YES;
 }
 
@@ -62,6 +65,11 @@
 }
 
 
+-(void)initDB
+{
+    [[ContractDB sharedContractDB] createDB];
+
+}
 //-(void)launchViewController
 //{
 //    UINavigationController *controller;

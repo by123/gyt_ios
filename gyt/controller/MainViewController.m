@@ -12,6 +12,7 @@
 #import "ProductModel.h"
 #import "MenuModel.h"
 #import "DetailViewController.h"
+#import "ContractDB.h"
 #define Item_Height 40
 
 @interface MainViewController ()
@@ -33,6 +34,7 @@
     for(int i =0 ; i < 100 ;i ++)
     {
         ProductModel *model = [[ProductModel alloc]init];
+        model.pid = i;
         model.name = [NSString stringWithFormat:@"%@%d",@"橡胶",1600+i];
         model.recentPrice = 2000 + arc4random() % 10000;
         float temp = arc4random() % 100;
@@ -62,6 +64,7 @@
     [self initView];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateView:) name:Notify_Menu_Title object:nil];
+    
 }
 
 
