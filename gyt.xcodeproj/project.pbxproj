@@ -676,7 +676,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				GCC_PREFIX_HEADER = /Users/by.huang/Desktop/by/gyt/gyt/Common.pch;
+				GCC_PREFIX_HEADER = /Users/by.huang/Desktop/by/gyt_ios/gyt/Common.pch;
 				INFOPLIST_FILE = gyt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -692,7 +692,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				GCC_PREFIX_HEADER = /Users/by.huang/Desktop/by/gyt/gyt/Common.pch;
+				GCC_PREFIX_HEADER = /Users/by.huang/Desktop/by/gyt_ios/gyt/Common.pch;
 				INFOPLIST_FILE = gyt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
