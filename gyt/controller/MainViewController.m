@@ -192,6 +192,11 @@
         _datas = [[ContractDB sharedContractDB] queryAll:DBHistoryContractTable];
         [_tableView reloadData];
     }
+    else if([model.title isEqualToString:@"自选合约列表"])
+    {
+        _datas = [[ContractDB sharedContractDB] queryAll:DBMyContractTable];
+        [_tableView reloadData];
+    }
     else
     {
         [self testData];

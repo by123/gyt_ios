@@ -20,6 +20,7 @@
 #define Item_Inventory @"inventory"
 #define Item_DailyInventory @"daily"
 #define Item_DealInventory @"deal"
+#define Item_MyContract @"mycontract"
 
 @interface ContractDB()
 
@@ -58,7 +59,7 @@ SINGLETON_IMPLEMENTION(ContractDB);
 {
     BOOL res;
     if ([_db open]) {
-        NSString *sqlCreateTable =  [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS '%@' ('%@' INTEGER PRIMARY KEY AUTOINCREMENT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT)" ,
+        NSString *sqlCreateTable =  [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS '%@' ('%@' INTEGER PRIMARY KEY AUTOINCREMENT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT)" ,
              tableName,
              Item_ID,
              Item_ProductID,
@@ -68,7 +69,8 @@ SINGLETON_IMPLEMENTION(ContractDB);
              Item_UpdownPercent,
              Item_Inventory,
              Item_DailyInventory,
-             Item_DealInventory];
+             Item_DealInventory,
+             Item_MyContract];
         res = [_db executeUpdate:sqlCreateTable];
     }
     if(res)
@@ -102,7 +104,7 @@ SINGLETON_IMPLEMENTION(ContractDB);
     if([_db open])
     {
         [_db beginTransaction];
-        res = [_db executeUpdate:[NSString stringWithFormat:@"INSERT INTO %@ VALUES (?,?,?,?,?,?,?,?,?)",tableName],
+        res = [_db executeUpdate:[NSString stringWithFormat:@"INSERT INTO %@ VALUES (?,?,?,?,?,?,?,?,?,?)",tableName],
                NULL,
                [NSString stringWithFormat:@"%d",model.pid],
                [NSString stringWithFormat:@"%@",model.name],
@@ -111,7 +113,9 @@ SINGLETON_IMPLEMENTION(ContractDB);
                [NSString stringWithFormat:@"%f",model.updownPercent],
                model.inventory,
                model.dailyInventory,
-               model.dealInventory];
+               model.dealInventory,
+               [NSString stringWithFormat:@"%d",model.isMyContract]
+               ];
         [_db commit];
         [_db close];
     }
@@ -135,7 +139,7 @@ SINGLETON_IMPLEMENTION(ContractDB);
     if([_db open])
     {
         [_db beginTransaction];
-        res = [_db executeUpdate:[NSString stringWithFormat:@"UPDATE %@ SET %@ = ? ,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ? WHERE %@ = ?",tableName,
+        res = [_db executeUpdate:[NSString stringWithFormat:@"UPDATE %@ SET %@ = ? ,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ? WHERE %@ = ?",tableName,
                                   Item_Name,
                                   Item_RecentPrice,
                                   Item_UpdownPrice,
@@ -143,15 +147,18 @@ SINGLETON_IMPLEMENTION(ContractDB);
                                   Item_Inventory,
                                   Item_DailyInventory,
                                   Item_DealInventory,
-                                  Item_ProductID],
+                                  Item_MyContract,
+                                  Item_ProductID
+                                  ],
                [NSString stringWithFormat:@"%@",model.name],
                [NSString stringWithFormat:@"%f",model.recentPrice],
                [NSString stringWithFormat:@"%f",model.updownPrice],
                [NSString stringWithFormat:@"%f",model.updownPercent],
                model.inventory,
                model.dailyInventory,
-               model.dealInventory];
-        
+               model.dealInventory,
+               [NSString stringWithFormat:@"%d",model.isMyContract],
+               [NSString stringWithFormat:@"%d",model.pid]];        
         [_db commit];
         [_db close];
     }
@@ -205,6 +212,7 @@ SINGLETON_IMPLEMENTION(ContractDB);
             model.inventory = [s stringForColumn:Item_Inventory];
             model.dailyInventory = [s stringForColumn:Item_DailyInventory];
             model.dealInventory = [s stringForColumn:Item_DealInventory];
+            model.isMyContract = [s boolForColumn:Item_MyContract];
             [array addObject:model];
         }
         [_db close];
@@ -232,6 +240,7 @@ SINGLETON_IMPLEMENTION(ContractDB);
                 model.inventory = [s stringForColumn:Item_Inventory];
                 model.dailyInventory = [s stringForColumn:Item_DailyInventory];
                 model.dealInventory = [s stringForColumn:Item_DealInventory];
+                model.isMyContract = [s boolForColumn:Item_MyContract];
                 break;
             }
         }

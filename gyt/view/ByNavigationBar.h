@@ -38,6 +38,8 @@
 
 @property (strong, nonatomic) UIButton *rightBtn3;
 
+@property (strong, nonatomic) UIButton *rightBtn4;
+
 @property (strong, nonatomic) id delegate;
 
 -(void)setTitle : (NSString *)title;
@@ -55,5 +57,8 @@
 -(void)setRightBtn2Image : (UIImage *)image;
 
 -(void)setRightBtn3Image : (UIImage *)image;
+
+-(void)setRightBtn4Image : (UIImage *)image;
+
 
 @end

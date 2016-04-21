@@ -78,6 +78,12 @@
     [_rightBtn3 setContentEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     [_rightBtn3 addTarget:self action:@selector(OnRightCallBack:) forControlEvents:UIControlEventTouchUpInside];
     
+    _rightBtn4 = [[UIButton alloc]init];
+    _rightBtn4.tag = 3;
+    _rightBtn4.frame = CGRectMake(SCREEN_WIDTH - rightImage.size.width * 5 - 50, StatuBar_HEIGHT, NavigationBar_HEIGHT, NavigationBar_HEIGHT);
+    [_rightBtn4 setContentEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    [_rightBtn4 addTarget:self action:@selector(OnRightCallBack:) forControlEvents:UIControlEventTouchUpInside];
+    
     
     [self addSubview:_leftBtn];
     [self addSubview:_rightBtn];
@@ -88,6 +94,8 @@
     [self addSubview:_rightBtn1];
     [self addSubview:_rightBtn2];
     [self addSubview:_rightBtn3];
+    [self addSubview:_rightBtn4];
+
 
 }
 
@@ -140,6 +148,13 @@
 {
     [_rightBtn3 setImage:image forState:UIControlStateNormal];
 }
+
+#pragma mark 设置右边倒数第五个按钮图片
+-(void)setRightBtn4Image : (UIImage *)image
+{
+    [_rightBtn4 setImage:image forState:UIControlStateNormal];
+}
+
 
 
 #pragma mark 点击处理

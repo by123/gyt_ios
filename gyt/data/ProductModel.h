@@ -47,4 +47,7 @@ typedef NS_ENUM(NSInteger, UpdownType) {
 //成交量
 @property (copy, nonatomic) NSString *dealInventory;
 
+//是否加入自选合约
+@property (assign, nonatomic) BOOL isMyContract;
+
 @end

@@ -10,6 +10,8 @@
 #import "SlideNavigationController.h"
 #import "HandicapView.h"
 #import "DealView.h"
+#import "ContractDB.h"
+#import "DialogHelper.h"
 
 @interface DetailViewController ()
 
@@ -32,7 +34,15 @@
       model : (ProductModel *) model
 {
     DetailViewController *targetController = [[DetailViewController alloc]init];
-    targetController.model = model;
+    ProductModel *temp = [[ContractDB sharedContractDB] queryItem:DBMyContractTable pid:model.pid];
+    if(temp)
+    {
+        targetController.model = temp;
+    }
+    else
+    {
+        targetController.model = model;
+    }
     [controller.navigationController pushViewController:targetController animated:YES];
 }
 
@@ -160,6 +170,11 @@
         {
             //下单
         }
+        else if(position == 2)
+        {
+            //加入自选合约
+            [self addContract];
+        }
     }
     else if(currentPosition == 2)
     {
@@ -170,6 +185,11 @@
         else if(position == 2)
         {
             //下单
+        }
+        else if(position == 3)
+        {
+            //加入自选合约
+            [self addContract];
         }
     }
     else if(currentPosition == 3)
@@ -186,6 +206,11 @@
         {
             //下单
         }
+        else if(position == 4)
+        {
+            //加入自选合约
+            [self addContract];
+        }
     }
     else if(currentPosition == 4)
     {
@@ -193,8 +218,36 @@
         {
             //刷新
         }
+        else if(position == 2)
+        {
+            //加入自选合约
+            [self addContract];
+        }
     }
  
+}
+
+#pragma mark 加入自选合约
+-(void)addContract
+{
+    if(_model.isMyContract)
+    {
+        _model.isMyContract = NO;
+        [DialogHelper showWarnTips:[NSString stringWithFormat:@"%@已取消自选合约",_model.name]];
+        [[ContractDB sharedContractDB] deleteItem:DBMyContractTable pid:_model.pid];
+
+    }
+    else
+    {
+        _model.isMyContract = YES;
+        [DialogHelper showSuccessTips:[NSString stringWithFormat:@"%@已加入自选合约",_model.name]];
+        [[ContractDB sharedContractDB] insertItem:DBMyContractTable model:_model];
+
+    }
+    [[ContractDB sharedContractDB] updateItem:DBHistoryContractTable pid:_model.pid model:_model];
+    [[ContractDB sharedContractDB] updateItem:DBWarnContractTable pid:_model.pid model:_model];
+
+    [self OnSelectPosition:currentPosition];
 }
 
 -(void)OnSelectPosition:(NSInteger)position
@@ -202,13 +255,33 @@
     switch (position) {
         case 0:
             [self.navBar setLeftMainTitle:@"新闻"];
+            if(_model.isMyContract)
+            {
+                [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_collect_press"]];
+            }
+            else
+            {
+                [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_collect_normal"]];
+            }
+            [self.navBar setRightBtn2Image:nil];
+            [self.navBar setRightBtn3Image:nil];
+            [self.navBar setRightBtn4Image:nil];
             [self addNewsView];
             break;
         case 1:
             [self.navBar setLeftMainTitle:@"详细报价"];
             [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_lightning"]];
-            [self.navBar setRightBtn2Image:nil];
+            if(_model.isMyContract)
+            {
+                [self.navBar setRightBtn2Image:[UIImage imageNamed:@"ic_collect_press"]];
+            }
+            else
+            {
+                [self.navBar setRightBtn2Image:[UIImage imageNamed:@"ic_collect_normal"]];
+            }
             [self.navBar setRightBtn3Image:nil];
+            [self.navBar setRightBtn3Image:nil];
+            [self.navBar setRightBtn4Image:nil];
             [self.navBar.leftMainLabel setHidden:NO];
             [self.navBar.leftSubLabel setHidden:NO];
             [self.navBar.titleLabel setHidden:YES];
@@ -218,7 +291,15 @@
             [self.navBar setLeftMainTitle:@"分时图"];
             [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_drawline"]];
             [self.navBar setRightBtn2Image:[UIImage imageNamed:@"ic_lightning"]];
-            [self.navBar setRightBtn3Image:nil];
+            if(_model.isMyContract)
+            {
+                [self.navBar setRightBtn3Image:[UIImage imageNamed:@"ic_collect_press"]];
+            }
+            else
+            {
+                [self.navBar setRightBtn3Image:[UIImage imageNamed:@"ic_collect_normal"]];
+            }
+            [self.navBar setRightBtn4Image:nil];
             [self.navBar.leftMainLabel setHidden:NO];
             [self.navBar.leftSubLabel setHidden:NO];
             [self.navBar.titleLabel setHidden:YES];
@@ -229,6 +310,14 @@
             [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_clock"]];
             [self.navBar setRightBtn2Image:[UIImage imageNamed:@"ic_drawline"]];
             [self.navBar setRightBtn3Image:[UIImage imageNamed:@"ic_lightning"]];
+            if(_model.isMyContract)
+            {
+                [self.navBar setRightBtn4Image:[UIImage imageNamed:@"ic_collect_press"]];
+            }
+            else
+            {
+                [self.navBar setRightBtn4Image:[UIImage imageNamed:@"ic_collect_normal"]];
+            }
             [self.navBar.leftMainLabel setHidden:NO];
             [self.navBar.leftSubLabel setHidden:NO];
             [self.navBar.titleLabel setHidden:YES];
@@ -237,8 +326,16 @@
         case 4:
             [self.navBar setLeftMainTitle:@"下单"];
             [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_refresh"]];
-            [self.navBar setRightBtn2Image:nil];
+            if(_model.isMyContract)
+            {
+                [self.navBar setRightBtn2Image:[UIImage imageNamed:@"ic_collect_press"]];
+            }
+            else
+            {
+                [self.navBar setRightBtn2Image:[UIImage imageNamed:@"ic_collect_normal"]];
+            }
             [self.navBar setRightBtn3Image:nil];
+            [self.navBar setRightBtn4Image:nil];
             [self.navBar.leftMainLabel setHidden:YES];
             [self.navBar.leftSubLabel setHidden:YES];
             [self.navBar.titleLabel setHidden:NO];
