@@ -9,13 +9,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "gyt/utils/ContractDB.m"
-            timestampString = "482935158.669147"
+            filePath = "gyt/controller/DetailViewController.m"
+            timestampString = "482936403.329864"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "139"
-            endingLineNumber = "139"
-            landmarkName = "-updateItem:pid:model:"
+            startingLineNumber = "202"
+            endingLineNumber = "202"
+            landmarkName = "-OnRightClickCallBack:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "gyt/controller/DetailViewController.m"
+            timestampString = "482936451.143222"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "159"
+            endingLineNumber = "159"
+            landmarkName = "-OnRightClickCallBack:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

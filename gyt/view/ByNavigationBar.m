@@ -79,7 +79,7 @@
     [_rightBtn3 addTarget:self action:@selector(OnRightCallBack:) forControlEvents:UIControlEventTouchUpInside];
     
     _rightBtn4 = [[UIButton alloc]init];
-    _rightBtn4.tag = 3;
+    _rightBtn4.tag = 4;
     _rightBtn4.frame = CGRectMake(SCREEN_WIDTH - rightImage.size.width * 5 - 50, StatuBar_HEIGHT, NavigationBar_HEIGHT, NavigationBar_HEIGHT);
     [_rightBtn4 setContentEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     [_rightBtn4 addTarget:self action:@selector(OnRightCallBack:) forControlEvents:UIControlEventTouchUpInside];

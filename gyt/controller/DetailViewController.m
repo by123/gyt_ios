@@ -162,7 +162,11 @@
     }
     else if(currentPosition == 0)
     {
-        
+        if(position == 1)
+        {
+            //加入自选合约
+            [self addContract];
+        }
     }
     else if(currentPosition == 1)
     {
