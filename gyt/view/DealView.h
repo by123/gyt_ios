@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "ByTabView.h"
+#import "ProductModel.h"
+@interface DealView : UIView<ByTabViewDelegate,UIAlertViewDelegate>
 
-@interface DealView : UIView<ByTabViewDelegate>
-
+-(instancetype)initWithData : (CGRect)frame
+              model : (ProductModel *)model;
 @end

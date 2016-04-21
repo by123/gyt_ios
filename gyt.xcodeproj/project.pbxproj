@@ -49,6 +49,10 @@
 		CFC15BD21CC607900077FA19 /* DynamicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15BD11CC607900077FA19 /* DynamicCell.m */; };
 		CFC15BE21CC74F760077FA19 /* ContractDB.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15BE11CC74F760077FA19 /* ContractDB.m */; };
 		CFC15BE41CC769DF0077FA19 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CFC15BE31CC769DF0077FA19 /* libsqlite3.tbd */; };
+		CFDD2DD61CC8AEE100E81E3F /* DealHoldModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DD51CC8AEE100E81E3F /* DealHoldModel.m */; };
+		CFDD2DD91CC8BEC600E81E3F /* DealHoldingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DD81CC8BEC600E81E3F /* DealHoldingModel.m */; };
+		CFDD2DDC1CC8C01000E81E3F /* DealHoldByModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DDB1CC8C01000E81E3F /* DealHoldByModel.m */; };
+		CFDD2DDF1CC8C08E00E81E3F /* DealProfitModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DDE1CC8C08E00E81E3F /* DealProfitModel.m */; };
 		CFDFFA941CBF742500401CB3 /* SlideNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDFFA931CBF742500401CB3 /* SlideNavigationController.m */; };
 		CFDFFA971CBF759800401CB3 /* LeftMenuViewContriller.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDFFA961CBF759800401CB3 /* LeftMenuViewContriller.m */; };
 		CFDFFA9A1CBF77AB00401CB3 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDFFA991CBF77AB00401CB3 /* MainViewController.m */; };
@@ -140,6 +144,14 @@
 		CFC15BE01CC74F760077FA19 /* ContractDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContractDB.h; sourceTree = "<group>"; };
 		CFC15BE11CC74F760077FA19 /* ContractDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContractDB.m; sourceTree = "<group>"; };
 		CFC15BE31CC769DF0077FA19 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		CFDD2DD41CC8AEE100E81E3F /* DealHoldModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealHoldModel.h; sourceTree = "<group>"; };
+		CFDD2DD51CC8AEE100E81E3F /* DealHoldModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealHoldModel.m; sourceTree = "<group>"; };
+		CFDD2DD71CC8BEC600E81E3F /* DealHoldingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealHoldingModel.h; sourceTree = "<group>"; };
+		CFDD2DD81CC8BEC600E81E3F /* DealHoldingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealHoldingModel.m; sourceTree = "<group>"; };
+		CFDD2DDA1CC8C01000E81E3F /* DealHoldByModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealHoldByModel.h; sourceTree = "<group>"; };
+		CFDD2DDB1CC8C01000E81E3F /* DealHoldByModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealHoldByModel.m; sourceTree = "<group>"; };
+		CFDD2DDD1CC8C08E00E81E3F /* DealProfitModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealProfitModel.h; sourceTree = "<group>"; };
+		CFDD2DDE1CC8C08E00E81E3F /* DealProfitModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealProfitModel.m; sourceTree = "<group>"; };
 		CFDFFA921CBF742500401CB3 /* SlideNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideNavigationController.h; sourceTree = "<group>"; };
 		CFDFFA931CBF742500401CB3 /* SlideNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideNavigationController.m; sourceTree = "<group>"; };
 		CFDFFA951CBF759800401CB3 /* LeftMenuViewContriller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftMenuViewContriller.h; sourceTree = "<group>"; };
@@ -235,6 +247,7 @@
 		CF4A6D481CBE28DD00B36C93 /* data */ = {
 			isa = PBXGroup;
 			children = (
+				CFDD2DD31CC8AEBD00E81E3F /* detail */,
 				CF4A6D721CBE2BCD00B36C93 /* ResponseModel.h */,
 				CF4A6D731CBE2BCD00B36C93 /* ResponseModel.m */,
 				CFC15B8F1CBFA6830077FA19 /* ProductModel.h */,
@@ -390,6 +403,21 @@
 			name = detail;
 			sourceTree = "<group>";
 		};
+		CFDD2DD31CC8AEBD00E81E3F /* detail */ = {
+			isa = PBXGroup;
+			children = (
+				CFDD2DD41CC8AEE100E81E3F /* DealHoldModel.h */,
+				CFDD2DD51CC8AEE100E81E3F /* DealHoldModel.m */,
+				CFDD2DD71CC8BEC600E81E3F /* DealHoldingModel.h */,
+				CFDD2DD81CC8BEC600E81E3F /* DealHoldingModel.m */,
+				CFDD2DDA1CC8C01000E81E3F /* DealHoldByModel.h */,
+				CFDD2DDB1CC8C01000E81E3F /* DealHoldByModel.m */,
+				CFDD2DDD1CC8C08E00E81E3F /* DealProfitModel.h */,
+				CFDD2DDE1CC8C08E00E81E3F /* DealProfitModel.m */,
+			);
+			name = detail;
+			sourceTree = "<group>";
+		};
 		D4AF553BC76F6924E98CCF9D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -541,10 +569,12 @@
 				CF4A6D5B1CBE28DD00B36C93 /* ColorUtil.m in Sources */,
 				CFC15BCF1CC604DB0077FA19 /* ByDynamicTableView.m in Sources */,
 				CFC15B971CC205390077FA19 /* MenuModel.m in Sources */,
+				CFDD2DD91CC8BEC600E81E3F /* DealHoldingModel.m in Sources */,
 				CF4A6D8E1CBE3F9E00B36C93 /* KMapView.m in Sources */,
 				CFDFFA9A1CBF77AB00401CB3 /* MainViewController.m in Sources */,
 				CFC15BB01CC365650077FA19 /* HandicapBaseModel.m in Sources */,
 				CF4A6D7F1CBE2EAB00B36C93 /* BaseViewController.m in Sources */,
+				CFDD2DDC1CC8C01000E81E3F /* DealHoldByModel.m in Sources */,
 				CF4A6D5A1CBE28DD00B36C93 /* AppUtil.m in Sources */,
 				CF4A6D8F1CBE3F9E00B36C93 /* TSLinesView.m in Sources */,
 				CFC15B911CBFA6830077FA19 /* ProductModel.m in Sources */,
@@ -553,7 +583,9 @@
 				CFC15BE21CC74F760077FA19 /* ContractDB.m in Sources */,
 				CF4A6D7C1CBE2EA200B36C93 /* ByNavigationBar.m in Sources */,
 				CF4A6D5C1CBE28DD00B36C93 /* DialogHelper.m in Sources */,
+				CFDD2DDF1CC8C08E00E81E3F /* DealProfitModel.m in Sources */,
 				CF4A6D6F1CBE2A0800B36C93 /* IDSExtendedLabel.m in Sources */,
+				CFDD2DD61CC8AEE100E81E3F /* DealHoldModel.m in Sources */,
 				CFC15BAD1CC361A80077FA19 /* HandicapModel.m in Sources */,
 				CF4A6D711CBE2A0800B36C93 /* UIView+Frame.m in Sources */,
 				CF4A6D5D1CBE28DD00B36C93 /* IDSAlertSheet.m in Sources */,

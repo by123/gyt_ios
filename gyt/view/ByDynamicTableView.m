@@ -31,11 +31,13 @@
 -(instancetype)initWithData : (CGRect)rect
                       array : (NSMutableArray *)array
                    maxWidth : (int) maxWidth
+                       type : (DealType)type
 {
     if(self == [super initWithFrame:rect])
     {
         self.datas = array;
         self.maxWidth = maxWidth;
+        self.type = type;
         [self initView];
     }
     return self;
@@ -100,11 +102,6 @@
         label.textAlignment = NSTextAlignmentCenter;
         [titleView addSubview:label];
         currentWidth += width;
-        
-//        UIView *lineView = [[UIView alloc]init];
-//        lineView.backgroundColor = LINE_COLOR;
-//        lineView.frame = CGRectMake(0, 30- 0.5, _maxWidth, 0.5);
-//        [titleView addSubview:lineView];
     }
 }
 
@@ -129,7 +126,23 @@
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     if(!IS_NS_COLLECTION_EMPTY(_datas))
     {
-        [cell setData:[_datas objectAtIndex:indexPath.row] maxWidth:_maxWidth];
+        switch (_type) {
+            case Hold:
+                [cell setHoldData:[_datas objectAtIndex:indexPath.row] maxWidth:_maxWidth];
+                break;
+            case Holding:
+                [cell setHoldingData:[_datas objectAtIndex:indexPath.row] maxWidth:_maxWidth];
+                break;
+            case HoldBy:
+                [cell setHoldByData:[_datas objectAtIndex:indexPath.row] maxWidth:_maxWidth];
+                break;
+            case Profit:
+                [cell setProfitData:[_datas objectAtIndex:indexPath.row] maxWidth:_maxWidth];
+                break;
+                
+            default:
+                break;
+        }
     }
     [cell setBackgroundColor:[UIColor clearColor]];
     return cell;
@@ -152,5 +165,12 @@
         [scrollView setContentOffset:CGPointMake(_maxWidth, scrollView.contentOffset.y)];
     }
 }
+
+-(void)reloadData : (NSMutableArray *)array
+{
+    _datas = array;
+    [_tableView reloadData];
+}
+
 
 @end

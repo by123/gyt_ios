@@ -10,6 +10,11 @@
 #import "InsetTextField.h"
 #import "ByTabView.h"
 #import "ByDynamicTableView.h"
+#import "DialogHelper.h"
+#import "DealHoldModel.h"
+#import "DealHoldingModel.h"
+#import "DealHoldByModel.h"
+#import "DealProfitModel.h"
 
 @interface DealView()
 
@@ -61,14 +66,23 @@
 //持仓，挂单，委托，成交
 @property (strong, nonatomic) ByDynamicTableView *dynamicView;
 
+//数据
+@property (strong, nonatomic) ProductModel *model;
+
 @end
 
 @implementation DealView
+{
+    NSMutableArray *holdDatas;
+}
 
--(instancetype)initWithFrame:(CGRect)frame
+-(instancetype)initWithData : (CGRect)frame
+              model : (ProductModel *)model
 {
     if(self == [super initWithFrame:frame])
     {
+        _model = model;
+        holdDatas = [[NSMutableArray alloc]init];
         [self initView];
     }
     return self;
@@ -124,7 +138,7 @@
     
     _textField = [[InsetTextField alloc]initWithFrame:CGRectMake(10, view.height+5, SCREEN_WIDTH/2-20, 30)];
     _textField.hasTitle = NO;
-    _textField.text = @"橡胶1607";
+    _textField.text = _model.name;
     [self addSubview:_textField];
     
     UIView *priceView = [[UIView alloc]init];
@@ -136,14 +150,14 @@
     
     _buyPriceLabel = [[UILabel alloc]init];
     _buyPriceLabel.textColor = TEXT_COLOR;
-    _buyPriceLabel.text = @"买价:4792";
+    _buyPriceLabel.text = [NSString stringWithFormat:@"买价:%.f",_model.recentPrice];
     _buyPriceLabel.font = [UIFont systemFontOfSize:13.0f];
     _buyPriceLabel.frame = CGRectMake(5, 0, SCREEN_WIDTH/4, 30);
     [priceView addSubview:_buyPriceLabel];
     
     _sellPriceLabel = [[UILabel alloc]init];
     _sellPriceLabel.textColor = TEXT_COLOR;
-    _sellPriceLabel.text = @"卖价:4794";
+    _sellPriceLabel.text = [NSString stringWithFormat:@"卖价:%.f",_model.recentPrice + 1];
     _sellPriceLabel.font = [UIFont systemFontOfSize:13.0f];
     _sellPriceLabel.frame = CGRectMake(5 + SCREEN_WIDTH/4, 0, SCREEN_WIDTH/4, 30);
     [priceView addSubview:_sellPriceLabel];
@@ -156,6 +170,7 @@
     _buyItem.frame = CGRectMake(10, view.height + 40, (SCREEN_WIDTH -20)/2, 30);
     _buyItem.backgroundColor = SELECT_COLOR;
     [_buyItem addTarget:self action:@selector(OnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [_buyItem setSelected:YES];
     [self addSubview:_buyItem];
     
     //卖出
@@ -175,6 +190,8 @@
     _openPositionItem.backgroundColor = SELECT_COLOR;
     [_openPositionItem addTarget:self action:@selector(OnClick:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_openPositionItem];
+    [_openPositionItem setSelected:YES];
+
     
     //平仓
     _closePositionItem = [[UIButton alloc]init];
@@ -260,22 +277,9 @@
         [_dynamicView removeFromSuperview];
     }
     
-    NSMutableArray *datas = [[NSMutableArray alloc]init];
-    NSMutableArray *temp = [[NSMutableArray alloc]init];
-    [temp addObject:@"郑麦1605"];
-    [temp addObject:@"多"];
-    [temp addObject:@"10"];
-    [temp addObject:@"10"];
-    [temp addObject:@"2726.00"];
-    [temp addObject:@"1200"];
-    
-    for(int i= 0 ;i < 20 ; i++)
-    {
-        [datas addObject:temp];
-    }
     NSArray *titleArray = @[@"名称",@"多空",@"手数",@"可用",@"开仓均价",@"逐笔浮盈"];
     NSArray *widthArray = @[@"2",@"1",@"1",@"1",@"2",@"2"];
-    _dynamicView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH, SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:datas maxWidth:SCREEN_WIDTH];
+    _dynamicView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH, SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:holdDatas maxWidth:SCREEN_WIDTH type:Hold];
     [_dynamicView setHeaders:widthArray headers:titleArray];
     [self addSubview:_dynamicView];
 }
@@ -288,20 +292,20 @@
         [_dynamicView removeFromSuperview];
     }
     NSMutableArray *datas = [[NSMutableArray alloc]init];
-    NSMutableArray *temp = [[NSMutableArray alloc]init];
-    [temp addObject:@"郑麦1605"];
-    [temp addObject:@"全平"];
-    [temp addObject:@"2020"];
-    [temp addObject:@"10"];
-    [temp addObject:@"10"];
-    
+    DealHoldingModel *model = [[DealHoldingModel alloc]init];
+    model.name  = @"郑麦1605";
+    model.kaiping = @"全平";
+    model.price = @"2020";
+    model.handby = @"10";
+    model.hand = @"10";
+
     for(int i= 0 ;i < 20 ; i++)
     {
-        [datas addObject:temp];
+        [datas addObject:model];
     }
     NSArray *titleArray = @[@"名称",@"开平",@"委托价",@"委托量",@"挂单量"];
     NSArray *widthArray = @[@"2",@"1",@"2",@"1",@"1"];
-    _dynamicView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH, SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:datas maxWidth:SCREEN_WIDTH];
+    _dynamicView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH, SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:datas maxWidth:SCREEN_WIDTH type:Holding];
     [_dynamicView setHeaders:widthArray headers:titleArray];
     [self addSubview:_dynamicView];
 
@@ -315,24 +319,24 @@
         [_dynamicView removeFromSuperview];
     }
     NSMutableArray *datas = [[NSMutableArray alloc]init];
-    NSMutableArray *temp = [[NSMutableArray alloc]init];
-    [temp addObject:@"郑麦1605"];
-    [temp addObject:@"全成"];
-    [temp addObject:@"买开"];
-    [temp addObject:@"5040"];
-    [temp addObject:@"5"];
-    [temp addObject:@"5"];
-    [temp addObject:@"0"];
-    [temp addObject:@"20:12"];
+    DealHoldByModel *model = [[DealHoldByModel alloc]init];
+    model.name = @"郑麦1605";
+    model.statu = @"全成";
+    model.kaiping = @"买开";
+    model.price = @"5040";
+    model.handby = @"5";
+    model.handDeal = @"5";
+    model.handCancel = @"0";
+    model.time = @"20:12";
 
     for(int i= 0 ;i < 20 ; i++)
     {
-        [datas addObject:temp];
+        [datas addObject:model];
     }
     NSArray *titleArray = @[@"名称",@"状态",@"开平",@"委托价",@"委托量",@"已成交",@"已撤单",@"委托时间"];
     NSArray *widthArray = @[@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1"];
     
-    _dynamicView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH, SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:datas maxWidth:SCREEN_WIDTH * 1.5];
+    _dynamicView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH, SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:datas maxWidth:SCREEN_WIDTH * 1.5 type:HoldBy];
     [_dynamicView setHeaders:widthArray headers:titleArray];
     [self addSubview:_dynamicView];
 }
@@ -345,20 +349,20 @@
         [_dynamicView removeFromSuperview];
     }
     NSMutableArray *datas = [[NSMutableArray alloc]init];
-    NSMutableArray *temp = [[NSMutableArray alloc]init];
-    [temp addObject:@"郑麦1605"];
-    [temp addObject:@"全平"];
-    [temp addObject:@"5040"];
-    [temp addObject:@"5"];
-    [temp addObject:@"19:28"];
+    DealProfitModel *model = [[DealProfitModel alloc]init];
+    model.name = @"郑麦1605";
+    model.kaiping = @"全平";
+    model.price = @"全平";
+    model.hand = @"5";
+    model.time = @"19:28";
     
     for(int i= 0 ;i < 20 ; i++)
     {
-        [datas addObject:temp];
+        [datas addObject:model];
     }
     NSArray *titleArray = @[@"名称",@"开平",@"成交价",@"成交量",@"成交时间"];
     NSArray *widthArray = @[@"1",@"1",@"1",@"1",@"1"];
-    _dynamicView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH, SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:datas maxWidth:SCREEN_WIDTH];
+    _dynamicView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH, SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:datas maxWidth:SCREEN_WIDTH type:Profit];
     [_dynamicView setHeaders:widthArray headers:titleArray];
     [self addSubview:_dynamicView];
 }
@@ -390,12 +394,16 @@
     UIView *view = sender;
     if(view == _buyItem)
     {
+        [_buyItem setSelected:YES];
+        [_sellItem setSelected:NO];
         [self changeNormalStatu:_sellItem];
         [self changeSelectStatu:_buyItem];
         _orderButton.backgroundColor = [ColorUtil colorWithHexString:@"#c34648"];
     }
     else if(view == _sellItem)
     {
+        [_buyItem setSelected:NO];
+        [_sellItem setSelected:YES];
         [self changeNormalStatu:_buyItem];
         [self changeSelectStatu:_sellItem];
         _orderButton.backgroundColor = [ColorUtil colorWithHexString:@"#449d61"];
@@ -403,21 +411,86 @@
     }
     else if(view == _openPositionItem)
     {
+        [_openPositionItem setSelected:YES];
+        [_closePositionItem setSelected:NO];
+        [_closeDailyPositionItem setSelected:NO];
         [self changeSelectStatu:_openPositionItem];
         [self changeNormalStatu:_closePositionItem];
         [self changeNormalStatu:_closeDailyPositionItem];
     }
     else if(view == _closePositionItem)
     {
+        [_openPositionItem setSelected:NO];
+        [_closePositionItem setSelected:YES];
+        [_closeDailyPositionItem setSelected:NO];
         [self changeNormalStatu:_openPositionItem];
         [self changeSelectStatu:_closePositionItem];
         [self changeNormalStatu:_closeDailyPositionItem];
     }
     else if(view == _closeDailyPositionItem)
     {
+        [_openPositionItem setSelected:NO];
+        [_closePositionItem setSelected:NO];
+        [_closeDailyPositionItem setSelected:YES];
         [self changeNormalStatu:_openPositionItem];
         [self changeNormalStatu:_closePositionItem];
         [self changeSelectStatu:_closeDailyPositionItem];
+    }
+    else if(view == _orderButton)
+    {
+        NSString *statu;
+        if([_buyItem isSelected])
+        {
+            statu = @"买";
+        }
+        else
+        {
+            statu = @"卖";
+        }
+        
+        if([_openPositionItem isSelected])
+        {
+            statu = [statu stringByAppendingString:@"开"];
+        }
+        else if([_closePositionItem isSelected])
+        {
+            statu = [statu stringByAppendingString:@"平"];
+        }
+        else
+        {
+            [DialogHelper showWarnTips:@"平今选项只限于上海交易所"];
+            return;
+        }
+        NSString *message = [NSString stringWithFormat:@"%@，%.f，%@，%@手",_model.name,_model.recentPrice,statu,_handTextField.text];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认下单吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        [alert show];
+    }
+}
+
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 1)
+    {
+        NSLog(@"买入成功");
+        NSString *statu;
+        if([_buyItem isSelected])
+        {
+            statu = @"多";
+        }
+        else
+        {
+            statu = @"空";
+        }
+        DealHoldModel *model = [[DealHoldModel alloc]init];
+        model.name = _model.name;
+        model.buySell = statu;
+        model.hand = _handTextField.text;
+        model.canuse = _handTextField.text;
+        model.averagePrice = [NSString stringWithFormat:@"%.f", _model.recentPrice];
+        model.profit = @"5400";
+        [holdDatas addObject:model];
+        [_dynamicView reloadData :holdDatas];
     }
 }
 
@@ -433,6 +506,12 @@
     button.backgroundColor = [ColorUtil colorWithHexString:@"#aaaaaa"];
 }
 
-               
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [_textField endEditing:YES];
+    [_handTextField endEditing:YES];
+    [_priceTextField endEditing:YES];
+
+}
 
 @end

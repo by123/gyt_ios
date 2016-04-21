@@ -61,8 +61,8 @@
     [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_drawline"]];
     [self.navBar setRightBtn2Image:[UIImage imageNamed:@"ic_lightning"]];
     [self.navBar setRightBtn3Image:nil];
-    currentPosition = 2;
-
+    currentPosition = 4;
+    [self OnSelectPosition:currentPosition];
 }
 
 -(void)initBodyView
@@ -70,6 +70,7 @@
     _bodyView = [[UIView alloc]init];
     _bodyView.frame =CGRectMake(0, NavigationBar_HEIGHT + StatuBar_HEIGHT, SCREEN_WIDTH, kContentHeight);
     [self.view addSubview:_bodyView];
+    [self addBuyView];
 }
 
 -(void)initBottomView
@@ -120,8 +121,7 @@
 -(void)addBuyView
 {
     [self clearAllView];
-    _dealView = [[DealView alloc]init];
-    _dealView.frame = CGRectMake(0, 0, SCREEN_WIDTH, kContentHeight + kTopHeight);
+    _dealView = [[DealView alloc]initWithData:CGRectMake(0, 0, SCREEN_WIDTH, kContentHeight + kTopHeight) model:_model];
     [_bodyView addSubview:_dealView];
 
 }

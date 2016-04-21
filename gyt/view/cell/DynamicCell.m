@@ -39,8 +39,8 @@
     return self;
 }
 
--(void)setData : (NSMutableArray *)array
-        maxWidth : (int)maxWidth
+-(void)setHoldData : (DealHoldModel *)model
+          maxWidth : (int)maxWidth
 {
     if(!IS_NS_COLLECTION_EMPTY(_widths))
     {
@@ -51,7 +51,146 @@
             label.textColor= TEXT_COLOR;
             label.font = [UIFont systemFontOfSize:13.0f];
             int width =  [[_widths objectAtIndex:i] intValue] * maxWidth / count;
-            label.text = [array objectAtIndex:i];
+            switch (i) {
+                case 0:
+                    label.text = model.name;
+                    break;
+                case 1:
+                    label.text = model.buySell;
+                    if([model.buySell isEqualToString:@"多"])
+                    {
+                        label.textColor= [UIColor redColor];
+                    }
+                    else
+                    {
+                        label.textColor= [UIColor greenColor];
+                    }
+                    break;
+                case 2:
+                    label.text = model.hand;
+                    break;
+                case 3:
+                    label.text = model.canuse;
+                    break;
+                case 4:
+                    label.text = model.averagePrice;
+                    break;
+                case 5:
+                    label.text = model.profit;
+                    if([model.profit integerValue] > 0)
+                    {
+                        label.textColor= [UIColor redColor];
+                    }
+                    else
+                    {
+                        label.textColor= [UIColor greenColor];
+                    }
+                    break;
+                    
+                default:
+                    break;
+            }
+            label.frame = CGRectMake(currentWidth, 0, width, 30);
+            label.textAlignment = NSTextAlignmentCenter;
+            [self.contentView addSubview:label];
+            [_labels addObject:label];
+            currentWidth += width;
+            
+            UIView *lineView = [[UIView alloc]init];
+            lineView.backgroundColor = LINE_COLOR;
+            lineView.frame = CGRectMake(0, 30- 0.5, maxWidth, 0.5);
+            [self.contentView addSubview:lineView];
+        }
+    }
+
+}
+
+-(void)setHoldingData : (DealHoldingModel *)model
+             maxWidth : (int)maxWidth
+{
+    if(!IS_NS_COLLECTION_EMPTY(_widths))
+    {
+        int currentWidth =0;
+        for(int i = 0 ; i < _widths.count ; i ++)
+        {
+            UILabel *label = [[UILabel alloc]init];
+            label.textColor= TEXT_COLOR;
+            label.font = [UIFont systemFontOfSize:13.0f];
+            int width =  [[_widths objectAtIndex:i] intValue] * maxWidth / count;
+            switch (i) {
+                case 0:
+                    label.text = model.name;
+                    break;
+                case 1:
+                    label.text = model.kaiping;
+                    break;
+                case 2:
+                    label.text = model.price;
+                    break;
+                case 3:
+                    label.text = model.handby;
+                    break;
+                case 4:
+                    label.text = model.hand;
+                    break;
+                default:
+                    break;
+            }
+            label.frame = CGRectMake(currentWidth, 0, width, 30);
+            label.textAlignment = NSTextAlignmentCenter;
+            [self.contentView addSubview:label];
+            [_labels addObject:label];
+            currentWidth += width;
+            
+            UIView *lineView = [[UIView alloc]init];
+            lineView.backgroundColor = LINE_COLOR;
+            lineView.frame = CGRectMake(0, 30- 0.5, maxWidth, 0.5);
+            [self.contentView addSubview:lineView];
+        }
+    }
+
+}
+
+-(void)setHoldByData : (DealHoldByModel *)model
+            maxWidth : (int)maxWidth
+{
+    if(!IS_NS_COLLECTION_EMPTY(_widths))
+    {
+        int currentWidth =0;
+        for(int i = 0 ; i < _widths.count ; i ++)
+        {
+            UILabel *label = [[UILabel alloc]init];
+            label.textColor= TEXT_COLOR;
+            label.font = [UIFont systemFontOfSize:13.0f];
+            int width =  [[_widths objectAtIndex:i] intValue] * maxWidth / count;
+            switch (i) {
+                case 0:
+                    label.text = model.name;
+                    break;
+                case 1:
+                    label.text = model.statu;
+                    break;
+                case 2:
+                    label.text = model.kaiping;
+                    break;
+                case 3:
+                    label.text = model.price;
+                    break;
+                case 4:
+                    label.text = model.handby;
+                    break;
+                case 5:
+                    label.text = model.handDeal;
+                    break;
+                case 6:
+                    label.text = model.handCancel;
+                    break;
+                case 7:
+                    label.text = model.time;
+                    break;
+                default:
+                    break;
+            }
             label.frame = CGRectMake(currentWidth, 0, width, 30);
             label.textAlignment = NSTextAlignmentCenter;
             [self.contentView addSubview:label];
@@ -66,6 +205,50 @@
     }
 }
 
+-(void)setProfitData : (DealProfitModel *)model
+            maxWidth : (int)maxWidth
+{
+    if(!IS_NS_COLLECTION_EMPTY(_widths))
+    {
+        int currentWidth =0;
+        for(int i = 0 ; i < _widths.count ; i ++)
+        {
+            UILabel *label = [[UILabel alloc]init];
+            label.textColor= TEXT_COLOR;
+            label.font = [UIFont systemFontOfSize:13.0f];
+            int width =  [[_widths objectAtIndex:i] intValue] * maxWidth / count;
+            switch (i) {
+                case 0:
+                    label.text = model.name;
+                    break;
+                case 1:
+                    label.text = model.kaiping;
+                    break;
+                case 2:
+                    label.text = model.price;
+                    break;
+                case 3:
+                    label.text = model.hand;
+                    break;
+                case 4:
+                    label.text = model.time;
+                    break;
+                default:
+                    break;
+            }
+            label.frame = CGRectMake(currentWidth, 0, width, 30);
+            label.textAlignment = NSTextAlignmentCenter;
+            [self.contentView addSubview:label];
+            [_labels addObject:label];
+            currentWidth += width;
+            
+            UIView *lineView = [[UIView alloc]init];
+            lineView.backgroundColor = LINE_COLOR;
+            lineView.frame = CGRectMake(0, 30- 0.5, maxWidth, 0.5);
+            [self.contentView addSubview:lineView];
+        }
+    }
+}
 
 +(NSString *)identify
 {

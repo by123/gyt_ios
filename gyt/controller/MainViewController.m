@@ -31,6 +31,7 @@
 
 -(void)testData
 {
+    [_datas removeAllObjects];
     for(int i =0 ; i < 100 ;i ++)
     {
         ProductModel *model = [[ProductModel alloc]init];
@@ -40,10 +41,6 @@
         float temp = arc4random() % 100;
         model.updownPrice = temp - 50;
         model.updownPercent = model.updownPrice / 15;
-        if(model.updownPrice > 0)
-        {
-            model.isUp = YES;
-        }
         
         float temp2 = arc4random() %100;
         model.inventory = [NSString stringWithFormat:@"%.f",temp2 * 100];
@@ -189,6 +186,17 @@
 {
     MenuModel *model = notification.object;
     [self.navBar setTitle:model.title];
+    
+    if([model.title isEqualToString:@"浏览记录列表"])
+    {
+        _datas = [[ContractDB sharedContractDB] queryAll:DBHistoryContractTable];
+        [_tableView reloadData];
+    }
+    else
+    {
+        [self testData];
+        [_tableView reloadData];
+    }
 
 }
 
@@ -229,6 +237,7 @@
     if(!IS_NS_COLLECTION_EMPTY(_datas))
     {
         ProductModel *model = [_datas objectAtIndex:indexPath.row];
+        [[ContractDB sharedContractDB] insertItem:DBHistoryContractTable model:model];
         [DetailViewController show:self model:model];
     }
 }

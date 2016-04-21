@@ -35,7 +35,7 @@
             UIButton *button = [self build:[_datas objectAtIndex:i]];
             button.frame = CGRectMake(i * SCREEN_WIDTH/5, 0, SCREEN_WIDTH/5, kBottomHeight);
             button.tag = i;
-            if(i == 2)
+            if(i == 4)
             {
                 [button setBackgroundColor:SELECT_COLOR];
                 lastClickedButton= button;

@@ -78,6 +78,10 @@
         updown : (UpdownType) updownType
      inventore : (InventoryType) inventoryType
 {
+    if(model.updownPrice > 0)
+    {
+        model.isUp = YES;
+    }
     _nameLabel.text = model.name;
     if([model.inventory isEqualToString:@"0"])
     {

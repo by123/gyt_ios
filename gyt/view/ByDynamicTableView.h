@@ -10,14 +10,31 @@
 
 @interface ByDynamicTableView : UIView<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
 
+typedef NS_ENUM(NSInteger, DealType) {
+    //持仓
+    Hold,
+    //挂单
+    Holding,
+    //委托
+    HoldBy,
+    //成交
+    Profit
+};
+
+
 //是否需要扩展长度
 @property (assign, nonatomic) int maxWidth;
 
+@property (assign, nonatomic) DealType type;
+
 -(instancetype)initWithData : (CGRect)rect
                       array : (NSMutableArray *)array
-                     maxWidth : (int) maxWidth;
+                     maxWidth : (int) maxWidth
+                       type : (DealType)type;
 
 -(void)setHeaders : (NSArray *)widths
           headers : (NSArray *)headers;
+
+-(void)reloadData : (NSMutableArray *)array;
 
 @end
