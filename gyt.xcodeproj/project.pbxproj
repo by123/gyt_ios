@@ -53,6 +53,10 @@
 		CFDD2DDC1CC8C01000E81E3F /* DealHoldByModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DDB1CC8C01000E81E3F /* DealHoldByModel.m */; };
 		CFDD2DDF1CC8C08E00E81E3F /* DealProfitModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DDE1CC8C08E00E81E3F /* DealProfitModel.m */; };
 		CFDD2DE11CC9CF2300E81E3F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFDD2DE01CC9CF2300E81E3F /* Assets.xcassets */; };
+		CFDD2DE41CCA0D8200E81E3F /* RightMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DE31CCA0D8200E81E3F /* RightMenuCell.m */; };
+		CFDD2DE71CCA0DAE00E81E3F /* RightMenuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DE61CCA0DAE00E81E3F /* RightMenuModel.m */; };
+		CFDD2DEB1CCA19C900E81E3F /* MyContractViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DEA1CCA19C900E81E3F /* MyContractViewController.m */; };
+		CFDD2DEE1CCA208900E81E3F /* MyContractCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DED1CCA208900E81E3F /* MyContractCell.m */; };
 		CFDFFA941CBF742500401CB3 /* SlideNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDFFA931CBF742500401CB3 /* SlideNavigationController.m */; };
 		CFDFFA971CBF759800401CB3 /* LeftMenuViewContriller.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDFFA961CBF759800401CB3 /* LeftMenuViewContriller.m */; };
 		CFDFFA9A1CBF77AB00401CB3 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDFFA991CBF77AB00401CB3 /* MainViewController.m */; };
@@ -152,6 +156,14 @@
 		CFDD2DDD1CC8C08E00E81E3F /* DealProfitModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealProfitModel.h; sourceTree = "<group>"; };
 		CFDD2DDE1CC8C08E00E81E3F /* DealProfitModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealProfitModel.m; sourceTree = "<group>"; };
 		CFDD2DE01CC9CF2300E81E3F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CFDD2DE21CCA0D8200E81E3F /* RightMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RightMenuCell.h; sourceTree = "<group>"; };
+		CFDD2DE31CCA0D8200E81E3F /* RightMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RightMenuCell.m; sourceTree = "<group>"; };
+		CFDD2DE51CCA0DAE00E81E3F /* RightMenuModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RightMenuModel.h; sourceTree = "<group>"; };
+		CFDD2DE61CCA0DAE00E81E3F /* RightMenuModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RightMenuModel.m; sourceTree = "<group>"; };
+		CFDD2DE91CCA19C900E81E3F /* MyContractViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyContractViewController.h; sourceTree = "<group>"; };
+		CFDD2DEA1CCA19C900E81E3F /* MyContractViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyContractViewController.m; sourceTree = "<group>"; };
+		CFDD2DEC1CCA208900E81E3F /* MyContractCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyContractCell.h; sourceTree = "<group>"; };
+		CFDD2DED1CCA208900E81E3F /* MyContractCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyContractCell.m; sourceTree = "<group>"; };
 		CFDFFA921CBF742500401CB3 /* SlideNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideNavigationController.h; sourceTree = "<group>"; };
 		CFDFFA931CBF742500401CB3 /* SlideNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideNavigationController.m; sourceTree = "<group>"; };
 		CFDFFA951CBF759800401CB3 /* LeftMenuViewContriller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftMenuViewContriller.h; sourceTree = "<group>"; };
@@ -235,6 +247,7 @@
 		CF4A6D471CBE28DD00B36C93 /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				CFDD2DE81CCA197A00E81E3F /* menu */,
 				CFC15BA31CC234270077FA19 /* main */,
 				CFC15BA21CC234160077FA19 /* menu */,
 				CFC15BA11CC234010077FA19 /* detail */,
@@ -250,6 +263,8 @@
 				CFDD2DD31CC8AEBD00E81E3F /* detail */,
 				CF4A6D721CBE2BCD00B36C93 /* ResponseModel.h */,
 				CF4A6D731CBE2BCD00B36C93 /* ResponseModel.m */,
+				CFDD2DE51CCA0DAE00E81E3F /* RightMenuModel.h */,
+				CFDD2DE61CCA0DAE00E81E3F /* RightMenuModel.m */,
 				CFC15B8F1CBFA6830077FA19 /* ProductModel.h */,
 				CFC15B901CBFA6830077FA19 /* ProductModel.m */,
 				CFC15B951CC205390077FA19 /* MenuModel.h */,
@@ -318,6 +333,10 @@
 				CFC15BA91CC35F700077FA19 /* HandicapCell.m */,
 				CFC15BD01CC607900077FA19 /* DynamicCell.h */,
 				CFC15BD11CC607900077FA19 /* DynamicCell.m */,
+				CFDD2DE21CCA0D8200E81E3F /* RightMenuCell.h */,
+				CFDD2DE31CCA0D8200E81E3F /* RightMenuCell.m */,
+				CFDD2DEC1CCA208900E81E3F /* MyContractCell.h */,
+				CFDD2DED1CCA208900E81E3F /* MyContractCell.m */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -416,6 +435,15 @@
 				CFDD2DDE1CC8C08E00E81E3F /* DealProfitModel.m */,
 			);
 			name = detail;
+			sourceTree = "<group>";
+		};
+		CFDD2DE81CCA197A00E81E3F /* menu */ = {
+			isa = PBXGroup;
+			children = (
+				CFDD2DE91CCA19C900E81E3F /* MyContractViewController.h */,
+				CFDD2DEA1CCA19C900E81E3F /* MyContractViewController.m */,
+			);
+			name = menu;
 			sourceTree = "<group>";
 		};
 		D4AF553BC76F6924E98CCF9D /* Pods */ = {
@@ -548,6 +576,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFDD2DEE1CCA208900E81E3F /* MyContractCell.m in Sources */,
 				CF4A6D591CBE28DD00B36C93 /* Account.m in Sources */,
 				CFC15BAA1CC35F700077FA19 /* HandicapCell.m in Sources */,
 				CFC15BA71CC234C30077FA19 /* HandicapView.m in Sources */,
@@ -555,6 +584,7 @@
 				CF4A6D8B1CBE3F9E00B36C93 /* BaseLinesView.m in Sources */,
 				CF4A6D701CBE2A0800B36C93 /* UILabel+ContentSize.m in Sources */,
 				CF4A6D8C1CBE3F9E00B36C93 /* HistogramView.m in Sources */,
+				CFDD2DE71CCA0DAE00E81E3F /* RightMenuModel.m in Sources */,
 				CFC15BCC1CC5D15D0077FA19 /* ByTabView.m in Sources */,
 				CFDFFA9D1CBF78DD00401CB3 /* RightMenuViewController.m in Sources */,
 				CFC15BB31CC37C730077FA19 /* HandicapDetailModel.m in Sources */,
@@ -571,6 +601,7 @@
 				CFC15B971CC205390077FA19 /* MenuModel.m in Sources */,
 				CFDD2DD91CC8BEC600E81E3F /* DealHoldingModel.m in Sources */,
 				CF4A6D8E1CBE3F9E00B36C93 /* KMapView.m in Sources */,
+				CFDD2DEB1CCA19C900E81E3F /* MyContractViewController.m in Sources */,
 				CFDFFA9A1CBF77AB00401CB3 /* MainViewController.m in Sources */,
 				CFC15BB01CC365650077FA19 /* HandicapBaseModel.m in Sources */,
 				CF4A6D7F1CBE2EAB00B36C93 /* BaseViewController.m in Sources */,
@@ -587,6 +618,7 @@
 				CF4A6D6F1CBE2A0800B36C93 /* IDSExtendedLabel.m in Sources */,
 				CFDD2DD61CC8AEE100E81E3F /* DealHoldModel.m in Sources */,
 				CFC15BAD1CC361A80077FA19 /* HandicapModel.m in Sources */,
+				CFDD2DE41CCA0D8200E81E3F /* RightMenuCell.m in Sources */,
 				CF4A6D711CBE2A0800B36C93 /* UIView+Frame.m in Sources */,
 				CF4A6D5D1CBE28DD00B36C93 /* IDSAlertSheet.m in Sources */,
 				CFC15BA01CC22BE10077FA19 /* BottomModel.m in Sources */,

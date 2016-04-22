@@ -9,6 +9,8 @@
 #import "BaseViewController.h"
 #import "SlideNavigationController.h"
 
-@interface RightMenuViewController : BaseViewController<SlideNavigationControllerDelegate>
+@interface RightMenuViewController : BaseViewController<SlideNavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource>
+
+@property (strong ,nonatomic) SlideNavigationController *controller;
 
 @end

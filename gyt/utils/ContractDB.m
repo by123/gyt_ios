@@ -87,8 +87,14 @@ SINGLETON_IMPLEMENTION(ContractDB);
 #pragma mark 删除表
 -(BOOL)deleteTable : (NSString *)tableName
 {
-    NSString *sql = [NSString stringWithFormat:@"DROP TABLE %@", tableName];
-   return [_db executeUpdate:sql];
+    BOOL res;
+    if([_db open])
+    {
+        NSString *sql = [NSString stringWithFormat:@"DROP TABLE %@", tableName];
+        res = [_db executeUpdate:sql];
+        [_db close];
+    }
+    return res;
 }
 
 #pragma mark 插入一条数据

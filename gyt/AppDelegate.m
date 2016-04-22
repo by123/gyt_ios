@@ -36,6 +36,7 @@
     
     RightMenuViewController *rightMenu = [[RightMenuViewController alloc]init];
     rightMenu.view.backgroundColor = SUB_COLOR;
+    rightMenu.controller = controller;
     
     controller.leftMenu = leftMenu;
     controller.righMenu = rightMenu;
