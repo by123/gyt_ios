@@ -11,7 +11,6 @@
 		CF4A6D181CBE25AA00B36C93 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D171CBE25AA00B36C93 /* main.m */; };
 		CF4A6D1B1CBE25AA00B36C93 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D1A1CBE25AA00B36C93 /* AppDelegate.m */; };
 		CF4A6D211CBE25AA00B36C93 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF4A6D1F1CBE25AA00B36C93 /* Main.storyboard */; };
-		CF4A6D261CBE25AA00B36C93 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF4A6D251CBE25AA00B36C93 /* Assets.xcassets */; };
 		CF4A6D291CBE25AA00B36C93 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF4A6D271CBE25AA00B36C93 /* LaunchScreen.storyboard */; };
 		CF4A6D591CBE28DD00B36C93 /* Account.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D4B1CBE28DD00B36C93 /* Account.m */; };
 		CF4A6D5A1CBE28DD00B36C93 /* AppUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D4D1CBE28DD00B36C93 /* AppUtil.m */; };
@@ -53,6 +52,7 @@
 		CFDD2DD91CC8BEC600E81E3F /* DealHoldingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DD81CC8BEC600E81E3F /* DealHoldingModel.m */; };
 		CFDD2DDC1CC8C01000E81E3F /* DealHoldByModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DDB1CC8C01000E81E3F /* DealHoldByModel.m */; };
 		CFDD2DDF1CC8C08E00E81E3F /* DealProfitModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DDE1CC8C08E00E81E3F /* DealProfitModel.m */; };
+		CFDD2DE11CC9CF2300E81E3F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFDD2DE01CC9CF2300E81E3F /* Assets.xcassets */; };
 		CFDFFA941CBF742500401CB3 /* SlideNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDFFA931CBF742500401CB3 /* SlideNavigationController.m */; };
 		CFDFFA971CBF759800401CB3 /* LeftMenuViewContriller.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDFFA961CBF759800401CB3 /* LeftMenuViewContriller.m */; };
 		CFDFFA9A1CBF77AB00401CB3 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDFFA991CBF77AB00401CB3 /* MainViewController.m */; };
@@ -67,7 +67,6 @@
 		CF4A6D191CBE25AA00B36C93 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CF4A6D1A1CBE25AA00B36C93 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		CF4A6D201CBE25AA00B36C93 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		CF4A6D251CBE25AA00B36C93 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CF4A6D281CBE25AA00B36C93 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CF4A6D2A1CBE25AA00B36C93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CF4A6D4A1CBE28DD00B36C93 /* Account.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Account.h; sourceTree = "<group>"; };
@@ -152,6 +151,7 @@
 		CFDD2DDB1CC8C01000E81E3F /* DealHoldByModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealHoldByModel.m; sourceTree = "<group>"; };
 		CFDD2DDD1CC8C08E00E81E3F /* DealProfitModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealProfitModel.h; sourceTree = "<group>"; };
 		CFDD2DDE1CC8C08E00E81E3F /* DealProfitModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealProfitModel.m; sourceTree = "<group>"; };
+		CFDD2DE01CC9CF2300E81E3F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CFDFFA921CBF742500401CB3 /* SlideNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideNavigationController.h; sourceTree = "<group>"; };
 		CFDFFA931CBF742500401CB3 /* SlideNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideNavigationController.m; sourceTree = "<group>"; };
 		CFDFFA951CBF759800401CB3 /* LeftMenuViewContriller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftMenuViewContriller.h; sourceTree = "<group>"; };
@@ -222,9 +222,9 @@
 		CF4A6D161CBE25AA00B36C93 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CFDD2DE01CC9CF2300E81E3F /* Assets.xcassets */,
 				CF4A6D5E1CBE293400B36C93 /* Common.pch */,
 				CF4A6D1F1CBE25AA00B36C93 /* Main.storyboard */,
-				CF4A6D251CBE25AA00B36C93 /* Assets.xcassets */,
 				CF4A6D271CBE25AA00B36C93 /* LaunchScreen.storyboard */,
 				CF4A6D2A1CBE25AA00B36C93 /* Info.plist */,
 				CF4A6D171CBE25AA00B36C93 /* main.m */,
@@ -488,7 +488,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF4A6D291CBE25AA00B36C93 /* LaunchScreen.storyboard in Resources */,
-				CF4A6D261CBE25AA00B36C93 /* Assets.xcassets in Resources */,
+				CFDD2DE11CC9CF2300E81E3F /* Assets.xcassets in Resources */,
 				CF4A6D211CBE25AA00B36C93 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

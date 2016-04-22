@@ -197,6 +197,11 @@
         _datas = [[ContractDB sharedContractDB] queryAll:DBMyContractTable];
         [_tableView reloadData];
     }
+    else if([model.title isEqualToString:@"预警合约列表"])
+    {
+        _datas = [[ContractDB sharedContractDB] queryAll:DBWarnContractTable];
+        [_tableView reloadData];
+    }
     else
     {
         [self testData];

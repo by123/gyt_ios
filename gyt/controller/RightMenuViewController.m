@@ -10,6 +10,8 @@
 
 @interface RightMenuViewController ()
 
+@property (strong, nonatomic) UITableView *tableView;
+
 @end
 
 @implementation RightMenuViewController
@@ -34,6 +36,7 @@
 -(void)initView
 {
     [self initNavigationBar];
+    [self initMenu];
 }
 
 -(void)initNavigationBar
@@ -44,6 +47,19 @@
     UILabel *titleLabel = self.navBar.titleLabel;
     titleLabel.text = @"主菜单";
     float height = titleLabel.contentSize.height;
-    titleLabel.frame = CGRectMake(90, StatuBar_HEIGHT + (NavigationBar_HEIGHT - height)/2, SCREEN_WIDTH - 60-60, height);}
+    titleLabel.frame = CGRectMake(90, StatuBar_HEIGHT + (NavigationBar_HEIGHT - height)/2, SCREEN_WIDTH - 60-60, height);
+}
+
+
+-(void)initMenu
+{
+    _tableView = [[UITableView alloc]init];
+    _tableView.showsVerticalScrollIndicator = NO;
+    _tableView.showsHorizontalScrollIndicator = NO;
+    _tableView.frame = Default_Frame;
+    _tableView.backgroundColor = [UIColor blueColor];
+    [self.view addSubview:_tableView];
+}
+
 
 @end
