@@ -57,6 +57,8 @@
 		CFDD2DE71CCA0DAE00E81E3F /* RightMenuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DE61CCA0DAE00E81E3F /* RightMenuModel.m */; };
 		CFDD2DEB1CCA19C900E81E3F /* MyContractViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DEA1CCA19C900E81E3F /* MyContractViewController.m */; };
 		CFDD2DEE1CCA208900E81E3F /* MyContractCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DED1CCA208900E81E3F /* MyContractCell.m */; };
+		CFDD2DF11CCB47E000E81E3F /* WarnContractViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DF01CCB47E000E81E3F /* WarnContractViewController.m */; };
+		CFDD2DF81CCDE8D000E81E3F /* WarnDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DF71CCDE8D000E81E3F /* WarnDialog.m */; };
 		CFDFFA941CBF742500401CB3 /* SlideNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDFFA931CBF742500401CB3 /* SlideNavigationController.m */; };
 		CFDFFA971CBF759800401CB3 /* LeftMenuViewContriller.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDFFA961CBF759800401CB3 /* LeftMenuViewContriller.m */; };
 		CFDFFA9A1CBF77AB00401CB3 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDFFA991CBF77AB00401CB3 /* MainViewController.m */; };
@@ -164,6 +166,10 @@
 		CFDD2DEA1CCA19C900E81E3F /* MyContractViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyContractViewController.m; sourceTree = "<group>"; };
 		CFDD2DEC1CCA208900E81E3F /* MyContractCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyContractCell.h; sourceTree = "<group>"; };
 		CFDD2DED1CCA208900E81E3F /* MyContractCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyContractCell.m; sourceTree = "<group>"; };
+		CFDD2DEF1CCB47E000E81E3F /* WarnContractViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WarnContractViewController.h; sourceTree = "<group>"; };
+		CFDD2DF01CCB47E000E81E3F /* WarnContractViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarnContractViewController.m; sourceTree = "<group>"; };
+		CFDD2DF61CCDE8D000E81E3F /* WarnDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WarnDialog.h; sourceTree = "<group>"; };
+		CFDD2DF71CCDE8D000E81E3F /* WarnDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarnDialog.m; sourceTree = "<group>"; };
 		CFDFFA921CBF742500401CB3 /* SlideNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideNavigationController.h; sourceTree = "<group>"; };
 		CFDFFA931CBF742500401CB3 /* SlideNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideNavigationController.m; sourceTree = "<group>"; };
 		CFDFFA951CBF759800401CB3 /* LeftMenuViewContriller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftMenuViewContriller.h; sourceTree = "<group>"; };
@@ -247,7 +253,6 @@
 		CF4A6D471CBE28DD00B36C93 /* controller */ = {
 			isa = PBXGroup;
 			children = (
-				CFDD2DE81CCA197A00E81E3F /* menu */,
 				CFC15BA31CC234270077FA19 /* main */,
 				CFC15BA21CC234160077FA19 /* menu */,
 				CFC15BA11CC234010077FA19 /* detail */,
@@ -315,6 +320,7 @@
 				CFC15B9C1CC2249B0077FA19 /* BottomTabView.m */,
 				CFC15BC71CC4C7340077FA19 /* InsetTextField.h */,
 				CFC15BC81CC4C7340077FA19 /* InsetTextField.m */,
+				CFDD2DF51CCDE8AC00E81E3F /* dialog */,
 				CFC15BA41CC234B00077FA19 /* detail */,
 				CF4A6D571CBE28DD00B36C93 /* cell */,
 				CF4A6D581CBE28DD00B36C93 /* extra */,
@@ -392,6 +398,7 @@
 		CFC15BA21CC234160077FA19 /* menu */ = {
 			isa = PBXGroup;
 			children = (
+				CFDD2DE81CCA197A00E81E3F /* rightmenu */,
 				CFDFFA9B1CBF78DD00401CB3 /* RightMenuViewController.h */,
 				CFDFFA9C1CBF78DD00401CB3 /* RightMenuViewController.m */,
 				CFDFFA951CBF759800401CB3 /* LeftMenuViewContriller.h */,
@@ -437,13 +444,24 @@
 			name = detail;
 			sourceTree = "<group>";
 		};
-		CFDD2DE81CCA197A00E81E3F /* menu */ = {
+		CFDD2DE81CCA197A00E81E3F /* rightmenu */ = {
 			isa = PBXGroup;
 			children = (
 				CFDD2DE91CCA19C900E81E3F /* MyContractViewController.h */,
 				CFDD2DEA1CCA19C900E81E3F /* MyContractViewController.m */,
+				CFDD2DEF1CCB47E000E81E3F /* WarnContractViewController.h */,
+				CFDD2DF01CCB47E000E81E3F /* WarnContractViewController.m */,
 			);
-			name = menu;
+			name = rightmenu;
+			sourceTree = "<group>";
+		};
+		CFDD2DF51CCDE8AC00E81E3F /* dialog */ = {
+			isa = PBXGroup;
+			children = (
+				CFDD2DF61CCDE8D000E81E3F /* WarnDialog.h */,
+				CFDD2DF71CCDE8D000E81E3F /* WarnDialog.m */,
+			);
+			name = dialog;
 			sourceTree = "<group>";
 		};
 		D4AF553BC76F6924E98CCF9D /* Pods */ = {
@@ -576,6 +594,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFDD2DF11CCB47E000E81E3F /* WarnContractViewController.m in Sources */,
 				CFDD2DEE1CCA208900E81E3F /* MyContractCell.m in Sources */,
 				CF4A6D591CBE28DD00B36C93 /* Account.m in Sources */,
 				CFC15BAA1CC35F700077FA19 /* HandicapCell.m in Sources */,
@@ -583,6 +602,7 @@
 				CFDFFA971CBF759800401CB3 /* LeftMenuViewContriller.m in Sources */,
 				CF4A6D8B1CBE3F9E00B36C93 /* BaseLinesView.m in Sources */,
 				CF4A6D701CBE2A0800B36C93 /* UILabel+ContentSize.m in Sources */,
+				CFDD2DF81CCDE8D000E81E3F /* WarnDialog.m in Sources */,
 				CF4A6D8C1CBE3F9E00B36C93 /* HistogramView.m in Sources */,
 				CFDD2DE71CCA0DAE00E81E3F /* RightMenuModel.m in Sources */,
 				CFC15BCC1CC5D15D0077FA19 /* ByTabView.m in Sources */,

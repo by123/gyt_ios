@@ -50,4 +50,10 @@ typedef NS_ENUM(NSInteger, UpdownType) {
 //是否加入自选合约
 @property (assign, nonatomic) BOOL isMyContract;
 
+//是否被选中状态
+@property (assign , nonatomic) BOOL isSelect;
+
+//是否是删除布局
+@property (assign , nonatomic) BOOL isDelete;
+
 @end

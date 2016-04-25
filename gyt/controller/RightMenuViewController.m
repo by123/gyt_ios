@@ -11,6 +11,7 @@
 #import "RightMenuModel.h"
 #import "SlideNavigationController.h"
 #import "MyContractViewController.h"
+#import "WarnContractViewController.h"
 
 @interface RightMenuViewController ()
 
@@ -112,7 +113,7 @@
             [MyContractViewController show:self.controller];
             break;
         case 1:
-            
+            [WarnContractViewController show:self.controller]; 
             break;
         case 2:
             

@@ -250,6 +250,49 @@
     }
 }
 
+
+-(void)setWarnData : (ProductModel *)model
+          maxWidth : (int)maxWidth
+{
+    if(!IS_NS_COLLECTION_EMPTY(_widths))
+    {
+        int currentWidth =0;
+        for(int i = 0 ; i < _widths.count ; i ++)
+        {
+            UILabel *label = [[UILabel alloc]init];
+            label.textColor= TEXT_COLOR;
+            label.font = [UIFont systemFontOfSize:13.0f];
+            int width =  [[_widths objectAtIndex:i] intValue] * maxWidth / count;
+            switch (i) {
+                case 0:
+                    label.text = model.name;
+                    break;
+                case 1:
+                    label.text = @"123";
+                    break;
+                case 2:
+                    label.text = @"111";
+                    break;
+                case 3:
+                    label.text = [NSString stringWithFormat:@"%.f",model.recentPrice];
+                    break;
+                default:
+                    break;
+            }
+            label.frame = CGRectMake(currentWidth, 0, width, 30);
+            label.textAlignment = NSTextAlignmentCenter;
+            [self.contentView addSubview:label];
+            [_labels addObject:label];
+            currentWidth += width;
+            
+            UIView *lineView = [[UIView alloc]init];
+            lineView.backgroundColor = LINE_COLOR;
+            lineView.frame = CGRectMake(0, 30- 0.5, maxWidth, 0.5);
+            [self.contentView addSubview:lineView];
+        }
+    }
+}
+
 +(NSString *)identify
 {
     return @"DynamicCell";

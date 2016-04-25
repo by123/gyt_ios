@@ -18,7 +18,9 @@ typedef NS_ENUM(NSInteger, DealType) {
     //委托
     HoldBy,
     //成交
-    Profit
+    Profit,
+    //价格预警
+    Warn
 };
 
 

@@ -12,6 +12,7 @@
 #import "DealView.h"
 #import "ContractDB.h"
 #import "DialogHelper.h"
+#import "WarnDialog.h"
 
 @interface DetailViewController ()
 
@@ -162,11 +163,7 @@
     }
     else if(currentPosition == 0)
     {
-        if(position == 1)
-        {
-            //加入自选合约
-            [self addContract];
-        }
+        
     }
     else if(currentPosition == 1)
     {
@@ -179,21 +176,27 @@
             //加入自选合约
             [self addContract];
         }
+        else if(position == 3)
+        {
+            //加入预警合约
+            [self addWarnContract];
+        }
     }
     else if(currentPosition == 2)
     {
         if(position == 1)
         {
-            //画线
+            //闪电下单
         }
         else if(position == 2)
         {
-            //下单
+            //加入自选合约
+            [self addContract];
         }
         else if(position == 3)
         {
-            //加入自选合约
-            [self addContract];
+            //加入预警合约
+            [self addWarnContract];
         }
     }
     else if(currentPosition == 3)
@@ -204,16 +207,17 @@
         }
         else if(position == 2)
         {
-            //画线
+            //下单
         }
         else if(position == 3)
         {
-            //下单
+            //加入自选合约
+            [self addContract];
         }
         else if(position == 4)
         {
-            //加入自选合约
-            [self addContract];
+            //加入预警合约
+            [self addWarnContract];
         }
     }
     else if(currentPosition == 4)
@@ -221,11 +225,6 @@
         if(position == 1)
         {
             //刷新
-        }
-        else if(position == 2)
-        {
-            //加入自选合约
-            [self addContract];
         }
     }
  
@@ -254,19 +253,19 @@
     [self OnSelectPosition:currentPosition];
 }
 
+#pragma mark 加入预警合约
+-(void)addWarnContract
+{
+    WarnDialog *dialog = [[WarnDialog alloc]initWithData:_model];
+    [self.view addSubview:dialog];
+}
+
 -(void)OnSelectPosition:(NSInteger)position
 {
     switch (position) {
         case 0:
-            [self.navBar setLeftMainTitle:@"新闻"];
-            if(_model.isMyContract)
-            {
-                [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_collect_press"]];
-            }
-            else
-            {
-                [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_collect_normal"]];
-            }
+            [self.navBar setTitle:@"新闻"];
+            [self.navBar setRightBtn1Image:nil];
             [self.navBar setRightBtn2Image:nil];
             [self.navBar setRightBtn3Image:nil];
             [self.navBar setRightBtn4Image:nil];
@@ -283,8 +282,7 @@
             {
                 [self.navBar setRightBtn2Image:[UIImage imageNamed:@"ic_collect_normal"]];
             }
-            [self.navBar setRightBtn3Image:nil];
-            [self.navBar setRightBtn3Image:nil];
+            [self.navBar setRightBtn3Image:[UIImage imageNamed:@"ic_warn"]];
             [self.navBar setRightBtn4Image:nil];
             [self.navBar.leftMainLabel setHidden:NO];
             [self.navBar.leftSubLabel setHidden:NO];
@@ -293,16 +291,17 @@
             break;
         case 2:
             [self.navBar setLeftMainTitle:@"分时图"];
-            [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_drawline"]];
-            [self.navBar setRightBtn2Image:[UIImage imageNamed:@"ic_lightning"]];
+            [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_lightning"]];
             if(_model.isMyContract)
             {
-                [self.navBar setRightBtn3Image:[UIImage imageNamed:@"ic_collect_press"]];
+                [self.navBar setRightBtn2Image:[UIImage imageNamed:@"ic_collect_press"]];
             }
             else
             {
-                [self.navBar setRightBtn3Image:[UIImage imageNamed:@"ic_collect_normal"]];
+                [self.navBar setRightBtn2Image:[UIImage imageNamed:@"ic_collect_normal"]];
             }
+            [self.navBar setRightBtn3Image:[UIImage imageNamed:@"ic_warn"]];
+
             [self.navBar setRightBtn4Image:nil];
             [self.navBar.leftMainLabel setHidden:NO];
             [self.navBar.leftSubLabel setHidden:NO];
@@ -312,16 +311,16 @@
         case 3:
             [self.navBar setLeftMainTitle:@"k线图"];
             [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_clock"]];
-            [self.navBar setRightBtn2Image:[UIImage imageNamed:@"ic_drawline"]];
-            [self.navBar setRightBtn3Image:[UIImage imageNamed:@"ic_lightning"]];
+            [self.navBar setRightBtn2Image:[UIImage imageNamed:@"ic_lightning"]];
             if(_model.isMyContract)
             {
-                [self.navBar setRightBtn4Image:[UIImage imageNamed:@"ic_collect_press"]];
+                [self.navBar setRightBtn3Image:[UIImage imageNamed:@"ic_collect_press"]];
             }
             else
             {
-                [self.navBar setRightBtn4Image:[UIImage imageNamed:@"ic_collect_normal"]];
+                [self.navBar setRightBtn3Image:[UIImage imageNamed:@"ic_collect_normal"]];
             }
+            [self.navBar setRightBtn4Image:[UIImage imageNamed:@"ic_warn"]];
             [self.navBar.leftMainLabel setHidden:NO];
             [self.navBar.leftSubLabel setHidden:NO];
             [self.navBar.titleLabel setHidden:YES];
@@ -330,14 +329,7 @@
         case 4:
             [self.navBar setLeftMainTitle:@"下单"];
             [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_refresh"]];
-            if(_model.isMyContract)
-            {
-                [self.navBar setRightBtn2Image:[UIImage imageNamed:@"ic_collect_press"]];
-            }
-            else
-            {
-                [self.navBar setRightBtn2Image:[UIImage imageNamed:@"ic_collect_normal"]];
-            }
+            [self.navBar setRightBtn2Image:nil];
             [self.navBar setRightBtn3Image:nil];
             [self.navBar setRightBtn4Image:nil];
             [self.navBar.leftMainLabel setHidden:YES];
