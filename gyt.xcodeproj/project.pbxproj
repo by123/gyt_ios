@@ -83,6 +83,7 @@
 		CFDD2EAC1CCF4DE100E81E3F /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2E941CCF4DE100E81E3F /* UIScrollView+MJRefresh.m */; };
 		CFDD2EAD1CCF4DE100E81E3F /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2E961CCF4DE100E81E3F /* UIView+MJExtension.m */; };
 		CFDD2EAE1CCF4DE100E81E3F /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2E981CCF4DE100E81E3F /* README.md */; };
+		CFDD2EBA1CCF97F400E81E3F /* SplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2EB91CCF97F400E81E3F /* SplashViewController.m */; };
 		CFDFFA941CBF742500401CB3 /* SlideNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDFFA931CBF742500401CB3 /* SlideNavigationController.m */; };
 		CFDFFA971CBF759800401CB3 /* LeftMenuViewContriller.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDFFA961CBF759800401CB3 /* LeftMenuViewContriller.m */; };
 		CFDFFA9A1CBF77AB00401CB3 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDFFA991CBF77AB00401CB3 /* MainViewController.m */; };
@@ -240,6 +241,8 @@
 		CFDD2E951CCF4DE100E81E3F /* UIView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MJExtension.h"; sourceTree = "<group>"; };
 		CFDD2E961CCF4DE100E81E3F /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
 		CFDD2E981CCF4DE100E81E3F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		CFDD2EB81CCF97F400E81E3F /* SplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplashViewController.h; sourceTree = "<group>"; };
+		CFDD2EB91CCF97F400E81E3F /* SplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashViewController.m; sourceTree = "<group>"; };
 		CFDFFA921CBF742500401CB3 /* SlideNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideNavigationController.h; sourceTree = "<group>"; };
 		CFDFFA931CBF742500401CB3 /* SlideNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideNavigationController.m; sourceTree = "<group>"; };
 		CFDFFA951CBF759800401CB3 /* LeftMenuViewContriller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftMenuViewContriller.h; sourceTree = "<group>"; };
@@ -329,6 +332,8 @@
 				CFC15BA11CC234010077FA19 /* detail */,
 				CF4A6D7D1CBE2EAB00B36C93 /* BaseViewController.h */,
 				CF4A6D7E1CBE2EAB00B36C93 /* BaseViewController.m */,
+				CFDD2EB81CCF97F400E81E3F /* SplashViewController.h */,
+				CFDD2EB91CCF97F400E81E3F /* SplashViewController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -822,6 +827,7 @@
 				CFDFFA9A1CBF77AB00401CB3 /* MainViewController.m in Sources */,
 				CFC15BB01CC365650077FA19 /* HandicapBaseModel.m in Sources */,
 				CFDD2EA51CCF4DE100E81E3F /* MJRefreshBackStateFooter.m in Sources */,
+				CFDD2EBA1CCF97F400E81E3F /* SplashViewController.m in Sources */,
 				CF4A6D7F1CBE2EAB00B36C93 /* BaseViewController.m in Sources */,
 				CFDD2EAB1CCF4DE100E81E3F /* UIScrollView+MJExtension.m in Sources */,
 				CFDD2DDC1CC8C01000E81E3F /* DealHoldByModel.m in Sources */,

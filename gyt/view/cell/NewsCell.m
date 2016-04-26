@@ -57,6 +57,11 @@
     _timeLabel.textColor = TEXT_COLOR;
     [self.contentView addSubview:_timeLabel];
     
+    UIView *lineView = [[UIView alloc]init];
+    lineView.backgroundColor = LINE_COLOR;
+    lineView.frame = CGRectMake(0, Item_Height - 0.5, SCREEN_WIDTH, 0.5);
+    [self.contentView addSubview:lineView];
+    
 }
 
 -(void)setData : (NewsModel *)model

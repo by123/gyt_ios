@@ -43,7 +43,7 @@
     _tableView.dataSource = self;
     _tableView.showsVerticalScrollIndicator = NO;
     _tableView.showsHorizontalScrollIndicator = NO;
-//    [_tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    [_tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     _tableView.frame = self.bounds;
     _tableView.backgroundColor = [UIColor clearColor];
     [self addSubview:_tableView];

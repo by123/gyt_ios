@@ -247,9 +247,7 @@
     if(!IS_NS_COLLECTION_EMPTY(_datas))
     {
         ProductModel *model = [_datas objectAtIndex:indexPath.row];
-//        [[ContractDB sharedContractDB] insertItem:DBHistoryContractTable model:model];
-        [[ContractDB sharedContractDB] insertItem:DBWarnContractTable model:model];
-
+        [[ContractDB sharedContractDB] insertItem:DBHistoryContractTable model:model];
         [DetailViewController show:self model:model];
     }
 }

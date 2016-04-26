@@ -13,6 +13,10 @@
 #import "MainViewController.h"
 #import "ProductModel.h"
 #import "ContractDB.h"
+#import "SplashViewController.h"
+
+#define First_Launch @"first_launch"
+
 @interface AppDelegate ()
 
 @end
@@ -27,21 +31,35 @@
     _window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     _window.backgroundColor = BACKGROUND_COLOR;
     
-    MainViewController *mainViewController =[[MainViewController alloc]init];
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    BOOL firstLaunch = [userDefault boolForKey:First_Launch];
     
-    SlideNavigationController *controller = [[SlideNavigationController alloc]initWithRootViewController:mainViewController];
-   
-    LeftMenuViewContriller *leftMenu = [[LeftMenuViewContriller alloc]init];
-    leftMenu.view.backgroundColor = SUB_COLOR;
+    if(firstLaunch)
+    {
+        MainViewController *mainViewController =[[MainViewController alloc]init];
+        
+        SlideNavigationController *controller = [[SlideNavigationController alloc]initWithRootViewController:mainViewController];
+        
+        LeftMenuViewContriller *leftMenu = [[LeftMenuViewContriller alloc]init];
+        leftMenu.view.backgroundColor = SUB_COLOR;
+        
+        RightMenuViewController *rightMenu = [[RightMenuViewController alloc]init];
+        rightMenu.view.backgroundColor = SUB_COLOR;
+        rightMenu.controller = controller;
+        
+        controller.leftMenu = leftMenu;
+        controller.righMenu = rightMenu;
+        _window.rootViewController = controller;
+    }
+    else
+    {
+        [userDefault setBool:YES forKey:First_Launch];
+        
+        SplashViewController *splashViewController = [[SplashViewController alloc]init];
+        UINavigationController *controller = [[UINavigationController alloc]initWithRootViewController:splashViewController];
+        _window.rootViewController = controller;
+    }
     
-    RightMenuViewController *rightMenu = [[RightMenuViewController alloc]init];
-    rightMenu.view.backgroundColor = SUB_COLOR;
-    rightMenu.controller = controller;
-    
-    controller.leftMenu = leftMenu;
-    controller.righMenu = rightMenu;
-    
-    _window.rootViewController = controller;
     [_window makeKeyAndVisible];
 
 
