@@ -13,12 +13,15 @@
 #import "ContractDB.h"
 #import "DialogHelper.h"
 #import "WarnDialog.h"
+#import "NewsView.h"
 
 @interface DetailViewController ()
 
 @property (strong, nonatomic) ProductModel *model;
 
 @property (strong, nonatomic) UIView *bodyView;
+
+@property (strong, nonatomic) NewsView *newsView;
 
 @property (strong, nonatomic) HandicapView *handicapView;
 
@@ -103,6 +106,8 @@
 -(void)addNewsView
 {
     [self clearAllView];
+    _newsView = [[NewsView alloc]initWithData:CGRectMake(0, 0, SCREEN_WIDTH, kContentHeight + kTopHeight) model:_model];
+    [_bodyView addSubview:_newsView];
 }
 
 

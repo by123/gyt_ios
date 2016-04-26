@@ -24,7 +24,7 @@
 
 +(NSMutableArray *)buildModel3
 {
-    NSArray *titles = @[@"外盘纵然",@"纽约NYMEX",@"纽约COMEX",@"纽约ICE",@"芝加哥CBOT",@"伦敦LME",@"伦敦ICE",@"欧美期指",@"外汇期货",@"CME",@"香港HKEx",@"新加坡SGX",@"东京TOCOM",@"马来西亚BMD",@"商品指数",@"全球股票指数",@"外汇与美金"];
+    NSArray *titles = @[@"外盘纵览",@"纽约NYMEX",@"纽约COMEX",@"纽约ICE",@"芝加哥CBOT",@"伦敦LME",@"伦敦ICE",@"欧美期指",@"外汇期货",@"CME",@"香港HKEx",@"新加坡SGX",@"东京TOCOM",@"马来西亚BMD",@"商品指数",@"全球股票指数",@"外汇与美金"];
     return [self bulid:titles];
  
 }
