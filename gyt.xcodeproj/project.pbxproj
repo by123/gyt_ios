@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8109A9450AE28C984801318D /* libPods-gyt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 234300D9AA14CCAB18F37D31 /* libPods-gyt.a */; };
+		CF48C6341CD0DBF800BF4EF9 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF48C6331CD0DBF800BF4EF9 /* SearchViewController.m */; };
 		CF4A6D181CBE25AA00B36C93 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D171CBE25AA00B36C93 /* main.m */; };
 		CF4A6D1B1CBE25AA00B36C93 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D1A1CBE25AA00B36C93 /* AppDelegate.m */; };
 		CF4A6D211CBE25AA00B36C93 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF4A6D1F1CBE25AA00B36C93 /* Main.storyboard */; };
@@ -93,6 +94,8 @@
 /* Begin PBXFileReference section */
 		0649C12BFD5FDC358AE11BA4 /* Pods-gyt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gyt.release.xcconfig"; path = "Pods/Target Support Files/Pods-gyt/Pods-gyt.release.xcconfig"; sourceTree = "<group>"; };
 		234300D9AA14CCAB18F37D31 /* libPods-gyt.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-gyt.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF48C6321CD0DBF800BF4EF9 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		CF48C6331CD0DBF800BF4EF9 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		CF4A6D131CBE25AA00B36C93 /* gyt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gyt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF4A6D171CBE25AA00B36C93 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CF4A6D191CBE25AA00B36C93 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -494,6 +497,8 @@
 				CFDFFA931CBF742500401CB3 /* SlideNavigationController.m */,
 				CFDFFA981CBF77AB00401CB3 /* MainViewController.h */,
 				CFDFFA991CBF77AB00401CB3 /* MainViewController.m */,
+				CF48C6321CD0DBF800BF4EF9 /* SearchViewController.h */,
+				CF48C6331CD0DBF800BF4EF9 /* SearchViewController.m */,
 			);
 			name = main;
 			sourceTree = "<group>";
@@ -819,6 +824,7 @@
 				CFC15B971CC205390077FA19 /* MenuModel.m in Sources */,
 				CFDD2EA11CCF4DE100E81E3F /* MJRefreshAutoNormalFooter.m in Sources */,
 				CFDD2E9F1CCF4DE100E81E3F /* MJRefreshHeader.m in Sources */,
+				CF48C6341CD0DBF800BF4EF9 /* SearchViewController.m in Sources */,
 				CFDD2E0D1CCF3C1A00E81E3F /* NewsView.m in Sources */,
 				CFDD2DD91CC8BEC600E81E3F /* DealHoldingModel.m in Sources */,
 				CF4A6D8E1CBE3F9E00B36C93 /* KMapView.m in Sources */,

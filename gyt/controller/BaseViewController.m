@@ -21,6 +21,10 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
+-(UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
 
 -(void)showNavigationBar
 {

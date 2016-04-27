@@ -13,6 +13,7 @@
 #import "MenuModel.h"
 #import "DetailViewController.h"
 #import "ContractDB.h"
+#import "SearchViewController.h"
 #define Item_Height 40
 
 @interface MainViewController ()
@@ -108,6 +109,7 @@
     [self showNavigationBar];
     self.navBar.delegate = self;
     [self.navBar setTitle:@"主力合约"];
+    [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_search"]];
 }
 
 -(void)initHeaderView
@@ -260,8 +262,14 @@
 
 -(void)OnRightClickCallBack : (NSInteger)position
 {
+    if(position == 1)
+    {
+        [SearchViewController show:self];
+        return;
+    }
     [[SlideNavigationController sharedInstance]righttMenuSelected:nil];
 }
+
 
 -(void)OnClick : (id)sender
 {

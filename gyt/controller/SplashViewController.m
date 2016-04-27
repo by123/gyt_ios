@@ -11,6 +11,7 @@
 #import "SlideNavigationController.h"
 #import "RightMenuViewController.h"
 #import "LeftMenuViewContriller.h"
+#import "AppDelegate.h"
 
 @interface SplashViewController ()
 
@@ -100,22 +101,21 @@
 
 -(void)goMainViewController
 {
-    MainViewController *mainViewController =[[MainViewController alloc]init];
+//    MainViewController *mainViewController =[[MainViewController alloc]init];
+//    
+//    SlideNavigationController *controller = [[SlideNavigationController alloc]initWithRootViewController:mainViewController];
+//    
+//    LeftMenuViewContriller *leftMenu = [[LeftMenuViewContriller alloc]init];
+//    leftMenu.view.backgroundColor = SUB_COLOR;
+//    
+//    RightMenuViewController *rightMenu = [[RightMenuViewController alloc]init];
+//    rightMenu.view.backgroundColor = SUB_COLOR;
+//    rightMenu.controller = controller;
+//    
+//    controller.leftMenu = leftMenu;
+//    controller.righMenu = rightMenu;
     
-    SlideNavigationController *controller = [[SlideNavigationController alloc]initWithRootViewController:mainViewController];
-    
-    LeftMenuViewContriller *leftMenu = [[LeftMenuViewContriller alloc]init];
-    leftMenu.view.backgroundColor = SUB_COLOR;
-    
-    RightMenuViewController *rightMenu = [[RightMenuViewController alloc]init];
-    rightMenu.view.backgroundColor = SUB_COLOR;
-    rightMenu.controller = controller;
-    
-    controller.leftMenu = leftMenu;
-    controller.righMenu = rightMenu;
-    
-    
-    [self presentViewController:controller animated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
