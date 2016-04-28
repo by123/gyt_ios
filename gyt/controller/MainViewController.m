@@ -232,6 +232,8 @@
 {
     MainTableCell *cell = [[MainTableCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[MainTableCell identify]];
     [cell setBackgroundColor:[UIColor clearColor]];
+    cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.frame];
+    cell.selectedBackgroundView.backgroundColor = SELECT_COLOR;
     if(!IS_NS_COLLECTION_EMPTY(_datas))
     {
         ProductModel *model = [_datas objectAtIndex:indexPath.row];

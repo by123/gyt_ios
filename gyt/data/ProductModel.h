@@ -56,4 +56,10 @@ typedef NS_ENUM(NSInteger, UpdownType) {
 //是否是删除布局
 @property (assign , nonatomic) BOOL isDelete;
 
+//交易所id
+@property (assign , nonatomic) long eid;
+
+//交易所名称
+@property (copy, nonatomic) NSString *exchangeName;
+
 @end

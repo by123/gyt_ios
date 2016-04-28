@@ -8,7 +8,7 @@
 
 #import "BaseViewController.h"
 
-@interface SearchViewController : BaseViewController
+@interface SearchViewController : BaseViewController<UITableViewDelegate,UITableViewDataSource>
 
 +(void)show : (BaseViewController *)controller;
 

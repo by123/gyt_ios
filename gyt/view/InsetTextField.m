@@ -12,6 +12,8 @@
 
 @property (strong, nonatomic) UILabel *titleLabel;
 
+@property (strong, nonatomic) UIImageView *insetImageView;
+
 @end
 
 @implementation InsetTextField
@@ -38,6 +40,10 @@
     _titleLabel = [[UILabel alloc]init];
     _titleLabel.textColor = TEXT_COLOR;
     [self addSubview:_titleLabel];
+    
+    _insetImageView = [[UIImageView alloc]init];
+    _insetImageView.hidden = YES;
+    [self addSubview:_insetImageView];
 }
 
 -(void)setInsetTitle: (NSString *)title
@@ -47,6 +53,15 @@
     _titleLabel.font = font;
     _titleLabel.frame = CGRectMake(5, 0, _titleLabel.contentSize.width, self.bounds.size.height);
 }
+
+-(void)setInsetImage : (UIImage *)image
+{
+    _insetImageView.hidden = NO;
+    _insetImageView.image = image;
+    _insetImageView.frame = CGRectMake(self.bounds.size.width - (self.bounds.size.height-20) - 10, 10, self.bounds.size.height - 20 , self.bounds.size.height-20);
+
+}
+
 
 - (CGRect)textRectForBounds:(CGRect)bounds {
     if(_hasTitle)

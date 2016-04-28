@@ -21,22 +21,11 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
--(UIStatusBarStyle)preferredStatusBarStyle
-{
-    return UIStatusBarStyleLightContent;
-}
-
 -(void)showNavigationBar
 {
     _navBar = [[ByNavigationBar alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, StatuBar_HEIGHT +NavigationBar_HEIGHT)];
     _navBar.delegate = self;
     [self.view addSubview:_navBar];
-    
 }
 
-
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
 @end

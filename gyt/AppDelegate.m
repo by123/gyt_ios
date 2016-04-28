@@ -27,15 +27,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     _window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     _window.backgroundColor = BACKGROUND_COLOR;
     
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     BOOL firstLaunch = [userDefault boolForKey:First_Launch];
-    
-    //debug
-    firstLaunch = NO;
     
     MainViewController *mainViewController =[[MainViewController alloc]init];
     SlideNavigationController *controller = [[SlideNavigationController alloc]initWithRootViewController:mainViewController];
@@ -78,6 +76,8 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
 }
+
+
 
 
 -(void)initDB

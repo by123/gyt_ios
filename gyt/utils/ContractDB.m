@@ -44,6 +44,7 @@ SINGLETON_IMPLEMENTION(ContractDB);
     [self createTable : DBMyContractTable];
     [self createTable : DBHistoryContractTable];
     [self createTable : DBWarnContractTable];
+    [self createTable : DBSearchContractTable];
     return YES;
 }
 

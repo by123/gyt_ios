@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8109A9450AE28C984801318D /* libPods-gyt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 234300D9AA14CCAB18F37D31 /* libPods-gyt.a */; };
 		CF48C6341CD0DBF800BF4EF9 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF48C6331CD0DBF800BF4EF9 /* SearchViewController.m */; };
+		CF48C6431CD22C8B00BF4EF9 /* SearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF48C6421CD22C8B00BF4EF9 /* SearchCell.m */; };
 		CF4A6D181CBE25AA00B36C93 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D171CBE25AA00B36C93 /* main.m */; };
 		CF4A6D1B1CBE25AA00B36C93 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D1A1CBE25AA00B36C93 /* AppDelegate.m */; };
 		CF4A6D211CBE25AA00B36C93 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF4A6D1F1CBE25AA00B36C93 /* Main.storyboard */; };
@@ -96,6 +97,8 @@
 		234300D9AA14CCAB18F37D31 /* libPods-gyt.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-gyt.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF48C6321CD0DBF800BF4EF9 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		CF48C6331CD0DBF800BF4EF9 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		CF48C6411CD22C8B00BF4EF9 /* SearchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchCell.h; sourceTree = "<group>"; };
+		CF48C6421CD22C8B00BF4EF9 /* SearchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchCell.m; sourceTree = "<group>"; };
 		CF4A6D131CBE25AA00B36C93 /* gyt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gyt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF4A6D171CBE25AA00B36C93 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CF4A6D191CBE25AA00B36C93 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -426,6 +429,8 @@
 				CFDD2DED1CCA208900E81E3F /* MyContractCell.m */,
 				CFDD2E111CCF44AD00E81E3F /* NewsCell.h */,
 				CFDD2E121CCF44AD00E81E3F /* NewsCell.m */,
+				CF48C6411CD22C8B00BF4EF9 /* SearchCell.h */,
+				CF48C6421CD22C8B00BF4EF9 /* SearchCell.m */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -852,6 +857,7 @@
 				CFDD2DDF1CC8C08E00E81E3F /* DealProfitModel.m in Sources */,
 				CFDD2EA61CCF4DE100E81E3F /* MJRefreshGifHeader.m in Sources */,
 				CF4A6D6F1CBE2A0800B36C93 /* IDSExtendedLabel.m in Sources */,
+				CF48C6431CD22C8B00BF4EF9 /* SearchCell.m in Sources */,
 				CFDD2DD61CC8AEE100E81E3F /* DealHoldModel.m in Sources */,
 				CFC15BAD1CC361A80077FA19 /* HandicapModel.m in Sources */,
 				CFDD2DE41CCA0D8200E81E3F /* RightMenuCell.m in Sources */,

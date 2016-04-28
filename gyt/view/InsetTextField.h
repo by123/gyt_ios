@@ -15,4 +15,6 @@
 -(void)setInsetTitle : (NSString *)title
            font : (UIFont *)font;
 
+-(void)setInsetImage : (UIImage *)image;
+
 @end

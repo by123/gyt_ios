@@ -26,7 +26,7 @@
     if(self == [super initWithStyle:style reuseIdentifier:reuseIdentifier])
     {
         _labels = [[NSMutableArray alloc]init];
-        self.widths = widths;
+        _widths = widths;
         if(!IS_NS_COLLECTION_EMPTY(_widths))
         {
             for(NSString *temp in _widths)

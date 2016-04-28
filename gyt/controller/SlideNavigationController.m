@@ -62,12 +62,6 @@ static SlideNavigationController *singletonInstance;
 	[self setup];
 }
 
--(UIStatusBarStyle)preferredStatusBarStyle
-{
-    return UIStatusBarStyleLightContent;
-}
-
-
 - (id)initWithRootViewController:(UIViewController *)rootViewController
 {
 	if (self = [super initWithRootViewController:rootViewController])
