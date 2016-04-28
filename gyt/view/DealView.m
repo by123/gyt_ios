@@ -34,7 +34,7 @@
 @property (strong, nonatomic) UILabel *sellPriceLabel;
 
 //自选合约
-@property (strong, nonatomic) InsetTextField *textField;
+@property (strong, nonatomic) InsetTextField *nameTextField;
 
 //买入按钮
 @property (strong, nonatomic) UIButton *buyItem;
@@ -136,10 +136,10 @@
     [view addSubview:_userPercentLabel];
     
     
-    _textField = [[InsetTextField alloc]initWithFrame:CGRectMake(10, view.height+5, SCREEN_WIDTH/2-20, 30)];
-    _textField.hasTitle = NO;
-    _textField.text = _model.name;
-    [self addSubview:_textField];
+    _nameTextField = [[InsetTextField alloc]initWithFrame:CGRectMake(10, view.height+5, SCREEN_WIDTH/2-20, 30)];
+    _nameTextField.hasTitle = NO;
+    _nameTextField.text = _model.name;
+    [self addSubview:_nameTextField];
     
     UIView *priceView = [[UIView alloc]init];
     priceView.backgroundColor = [ColorUtil colorWithHexString:@"#262626"];;
@@ -370,6 +370,7 @@
 #pragma mark tabview选择
 -(void)OnSelect:(NSInteger)position
 {
+    [self hideKeyboard];
     switch (position) {
         case 0:
             [self initHoldData];
@@ -465,6 +466,8 @@
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认下单吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
         [alert show];
     }
+    
+    [self hideKeyboard];
 }
 
 
@@ -508,10 +511,14 @@
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [_textField endEditing:YES];
-    [_handTextField endEditing:YES];
-    [_priceTextField endEditing:YES];
+    [self hideKeyboard];
+}
 
+-(void)hideKeyboard
+{
+    [_nameTextField resignFirstResponder];
+    [_handTextField resignFirstResponder];
+    [_priceTextField resignFirstResponder];
 }
 
 @end
