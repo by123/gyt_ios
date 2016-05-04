@@ -23,7 +23,9 @@
 
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier widths :(NSArray *)widths
 {
-    if(self == [super initWithStyle:style reuseIdentifier:reuseIdentifier])
+    
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if(self)
     {
         _labels = [[NSMutableArray alloc]init];
         _widths = widths;
@@ -35,8 +37,10 @@
                 count +=tempInt;
             }
         }
+
+        return self;
     }
-    return self;
+    return nil;
 }
 
 -(void)setHoldData : (DealHoldModel *)model

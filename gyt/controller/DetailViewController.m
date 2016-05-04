@@ -14,6 +14,8 @@
 #import "DialogHelper.h"
 #import "WarnDialog.h"
 #import "NewsView.h"
+#import "CandleView.h"
+
 
 @interface DetailViewController ()
 
@@ -26,6 +28,8 @@
 @property (strong, nonatomic) HandicapView *handicapView;
 
 @property (strong, nonatomic) DealView *dealView;
+
+@property (strong, nonatomic) CandleView *candleView;
 
 @end
 
@@ -47,7 +51,9 @@
     {
         targetController.model = model;
     }
-    [controller.navigationController pushViewController:targetController animated:YES];
+    [controller presentViewController:targetController animated:YES completion:nil];
+
+//    [controller.navigationController pushViewController:targetController animated:YES];
 }
 
 - (void)viewDidLoad {
@@ -125,12 +131,17 @@
 -(void)addTimelineView
 {
     [self clearAllView];
+    _candleView = [[CandleView alloc]initWithType:CGRectMake(0, 0, SCREEN_WIDTH, kContentHeight + kTopHeight) type:TimeLine];
+    [_bodyView addSubview:_candleView];
 }
 
 #pragma mark 添加k线图模块
 -(void)addKlineView
 {
     [self clearAllView];
+    _candleView = [[CandleView alloc]initWithType:CGRectMake(0, 0, SCREEN_WIDTH, kContentHeight + kTopHeight) type:KLine];
+    [_bodyView addSubview:_candleView];
+    
 }
 
 #pragma mark 添加下单模块
@@ -157,7 +168,7 @@
 #pragma mark 点击事件回调
 -(void)OnLeftClickCallback
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)OnRightClickCallBack : (NSInteger) position

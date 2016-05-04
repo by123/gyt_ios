@@ -79,13 +79,15 @@
 -(instancetype)initWithData : (CGRect)frame
               model : (ProductModel *)model
 {
-    if(self == [super initWithFrame:frame])
+    self = [super initWithFrame:frame];
+    if(self)
     {
         _model = model;
         holdDatas = [[NSMutableArray alloc]init];
         [self initView];
+        return self;
     }
-    return self;
+    return nil;
 }
 
 #pragma mark 初始化

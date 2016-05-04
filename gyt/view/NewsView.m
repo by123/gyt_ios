@@ -27,12 +27,14 @@
 -(instancetype)initWithData : (CGRect)frame
                       model : (ProductModel *)model
 {
-    if(self == [super initWithFrame:frame])
+    self = [super initWithFrame:frame];
+    if(self)
     {
         _datas = [[NSMutableArray alloc]init];
         [self initView];
+        return self;
     }
-    return self;
+    return nil;
 }
 
 -(void)initView

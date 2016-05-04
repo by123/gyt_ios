@@ -14,6 +14,7 @@
 #import "DetailViewController.h"
 #import "ContractDB.h"
 #import "SearchViewController.h"
+#import "CandleViewController.h"
 #define Item_Height 40
 
 @interface MainViewController ()

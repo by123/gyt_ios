@@ -14,6 +14,7 @@
 #import "ProductModel.h"
 #import "ContractDB.h"
 #import "SplashViewController.h"
+#import "CandleViewController.h"
 
 #define First_Launch @"first_launch"
 
@@ -27,6 +28,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+//    [self test];
+//    return YES;
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     _window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];

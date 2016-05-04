@@ -40,12 +40,14 @@
 
 -(instancetype)initWithData : (ProductModel *)model;
 {
-    if(self == [super init])
+    self = [super init];
+    if(self)
     {
         self.model = model;
         [self initView];
+        return self;
     }
-    return self;
+    return nil;
 }
 
 -(void)initView

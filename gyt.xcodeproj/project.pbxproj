@@ -25,12 +25,22 @@
 		CF4A6D741CBE2BCD00B36C93 /* ResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D731CBE2BCD00B36C93 /* ResponseModel.m */; };
 		CF4A6D7C1CBE2EA200B36C93 /* ByNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D7B1CBE2EA200B36C93 /* ByNavigationBar.m */; };
 		CF4A6D7F1CBE2EAB00B36C93 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D7E1CBE2EAB00B36C93 /* BaseViewController.m */; };
-		CF4A6D8B1CBE3F9E00B36C93 /* BaseLinesView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D821CBE3F9E00B36C93 /* BaseLinesView.m */; };
-		CF4A6D8C1CBE3F9E00B36C93 /* HistogramView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D841CBE3F9E00B36C93 /* HistogramView.m */; };
-		CF4A6D8D1CBE3F9E00B36C93 /* KMapPointView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D861CBE3F9E00B36C93 /* KMapPointView.m */; };
-		CF4A6D8E1CBE3F9E00B36C93 /* KMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D881CBE3F9E00B36C93 /* KMapView.m */; };
-		CF4A6D8F1CBE3F9E00B36C93 /* TSLinesView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D8A1CBE3F9E00B36C93 /* TSLinesView.m */; };
-		CF4A6D931CBE40C600B36C93 /* kLinePage.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D921CBE40C600B36C93 /* kLinePage.m */; };
+		CFA3B8E81CD9AAB70063AE3E /* CandleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA3B8D31CD9AAB70063AE3E /* CandleView.m */; };
+		CFA3B8E91CD9AAB70063AE3E /* indicators.json in Resources */ = {isa = PBXBuildFile; fileRef = CFA3B8D41CD9AAB70063AE3E /* indicators.json */; };
+		CFA3B8EA1CD9AAB70063AE3E /* AreaChartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA3B8D71CD9AAB70063AE3E /* AreaChartModel.m */; };
+		CFA3B8EB1CD9AAB70063AE3E /* CandleChartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA3B8D91CD9AAB70063AE3E /* CandleChartModel.m */; };
+		CFA3B8EC1CD9AAB70063AE3E /* ChartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA3B8DB1CD9AAB70063AE3E /* ChartModel.m */; };
+		CFA3B8ED1CD9AAB70063AE3E /* ColumnChartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA3B8DD1CD9AAB70063AE3E /* ColumnChartModel.m */; };
+		CFA3B8EE1CD9AAB70063AE3E /* LineChartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA3B8DF1CD9AAB70063AE3E /* LineChartModel.m */; };
+		CFA3B8EF1CD9AAB70063AE3E /* securities.json in Resources */ = {isa = PBXBuildFile; fileRef = CFA3B8E01CD9AAB70063AE3E /* securities.json */; };
+		CFA3B8F01CD9AAB70063AE3E /* Chart.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA3B8E31CD9AAB70063AE3E /* Chart.m */; };
+		CFA3B8F11CD9AAB70063AE3E /* Section.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA3B8E51CD9AAB70063AE3E /* Section.m */; };
+		CFA3B8F21CD9AAB70063AE3E /* YAxis.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA3B8E71CD9AAB70063AE3E /* YAxis.m */; };
+		CFA3B8FA1CD9AB050063AE3E /* CacheHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA3B8F51CD9AB050063AE3E /* CacheHelper.m */; };
+		CFA3B8FB1CD9AB050063AE3E /* EncryptHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA3B8F71CD9AB050063AE3E /* EncryptHelper.m */; };
+		CFA3B8FC1CD9AB050063AE3E /* ResourceHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA3B8F91CD9AB050063AE3E /* ResourceHelper.m */; };
+		CFA3B9011CD9D68C0063AE3E /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CFA3B9001CD9D68C0063AE3E /* libz.tbd */; };
+		CFA3B9081CD9E7790063AE3E /* CandleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA3B9071CD9E7790063AE3E /* CandleViewController.m */; };
 		CFC15B8E1CBF94A90077FA19 /* MainTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15B8D1CBF94A90077FA19 /* MainTableCell.m */; };
 		CFC15B911CBFA6830077FA19 /* ProductModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15B901CBFA6830077FA19 /* ProductModel.m */; };
 		CFC15B941CC11B770077FA19 /* LeftMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15B931CC11B770077FA19 /* LeftMenuCell.m */; };
@@ -131,18 +141,35 @@
 		CF4A6D7B1CBE2EA200B36C93 /* ByNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ByNavigationBar.m; sourceTree = "<group>"; };
 		CF4A6D7D1CBE2EAB00B36C93 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		CF4A6D7E1CBE2EAB00B36C93 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
-		CF4A6D811CBE3F9E00B36C93 /* BaseLinesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseLinesView.h; sourceTree = "<group>"; };
-		CF4A6D821CBE3F9E00B36C93 /* BaseLinesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseLinesView.m; sourceTree = "<group>"; };
-		CF4A6D831CBE3F9E00B36C93 /* HistogramView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistogramView.h; sourceTree = "<group>"; };
-		CF4A6D841CBE3F9E00B36C93 /* HistogramView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistogramView.m; sourceTree = "<group>"; };
-		CF4A6D851CBE3F9E00B36C93 /* KMapPointView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMapPointView.h; sourceTree = "<group>"; };
-		CF4A6D861CBE3F9E00B36C93 /* KMapPointView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMapPointView.m; sourceTree = "<group>"; };
-		CF4A6D871CBE3F9E00B36C93 /* KMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMapView.h; sourceTree = "<group>"; };
-		CF4A6D881CBE3F9E00B36C93 /* KMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMapView.m; sourceTree = "<group>"; };
-		CF4A6D891CBE3F9E00B36C93 /* TSLinesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSLinesView.h; sourceTree = "<group>"; };
-		CF4A6D8A1CBE3F9E00B36C93 /* TSLinesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSLinesView.m; sourceTree = "<group>"; };
-		CF4A6D911CBE40C600B36C93 /* kLinePage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kLinePage.h; sourceTree = "<group>"; };
-		CF4A6D921CBE40C600B36C93 /* kLinePage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = kLinePage.m; sourceTree = "<group>"; };
+		CFA3B8D21CD9AAB70063AE3E /* CandleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CandleView.h; sourceTree = "<group>"; };
+		CFA3B8D31CD9AAB70063AE3E /* CandleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CandleView.m; sourceTree = "<group>"; };
+		CFA3B8D41CD9AAB70063AE3E /* indicators.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = indicators.json; sourceTree = "<group>"; };
+		CFA3B8D61CD9AAB70063AE3E /* AreaChartModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AreaChartModel.h; sourceTree = "<group>"; };
+		CFA3B8D71CD9AAB70063AE3E /* AreaChartModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AreaChartModel.m; sourceTree = "<group>"; };
+		CFA3B8D81CD9AAB70063AE3E /* CandleChartModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CandleChartModel.h; sourceTree = "<group>"; };
+		CFA3B8D91CD9AAB70063AE3E /* CandleChartModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CandleChartModel.m; sourceTree = "<group>"; };
+		CFA3B8DA1CD9AAB70063AE3E /* ChartModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartModel.h; sourceTree = "<group>"; };
+		CFA3B8DB1CD9AAB70063AE3E /* ChartModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartModel.m; sourceTree = "<group>"; };
+		CFA3B8DC1CD9AAB70063AE3E /* ColumnChartModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColumnChartModel.h; sourceTree = "<group>"; };
+		CFA3B8DD1CD9AAB70063AE3E /* ColumnChartModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColumnChartModel.m; sourceTree = "<group>"; };
+		CFA3B8DE1CD9AAB70063AE3E /* LineChartModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineChartModel.h; sourceTree = "<group>"; };
+		CFA3B8DF1CD9AAB70063AE3E /* LineChartModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineChartModel.m; sourceTree = "<group>"; };
+		CFA3B8E01CD9AAB70063AE3E /* securities.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = securities.json; sourceTree = "<group>"; };
+		CFA3B8E21CD9AAB70063AE3E /* Chart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chart.h; sourceTree = "<group>"; };
+		CFA3B8E31CD9AAB70063AE3E /* Chart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chart.m; sourceTree = "<group>"; };
+		CFA3B8E41CD9AAB70063AE3E /* Section.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Section.h; sourceTree = "<group>"; };
+		CFA3B8E51CD9AAB70063AE3E /* Section.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Section.m; sourceTree = "<group>"; };
+		CFA3B8E61CD9AAB70063AE3E /* YAxis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YAxis.h; sourceTree = "<group>"; };
+		CFA3B8E71CD9AAB70063AE3E /* YAxis.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YAxis.m; sourceTree = "<group>"; };
+		CFA3B8F41CD9AB050063AE3E /* CacheHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CacheHelper.h; sourceTree = "<group>"; };
+		CFA3B8F51CD9AB050063AE3E /* CacheHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CacheHelper.m; sourceTree = "<group>"; };
+		CFA3B8F61CD9AB050063AE3E /* EncryptHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncryptHelper.h; sourceTree = "<group>"; };
+		CFA3B8F71CD9AB050063AE3E /* EncryptHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncryptHelper.m; sourceTree = "<group>"; };
+		CFA3B8F81CD9AB050063AE3E /* ResourceHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceHelper.h; sourceTree = "<group>"; };
+		CFA3B8F91CD9AB050063AE3E /* ResourceHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourceHelper.m; sourceTree = "<group>"; };
+		CFA3B9001CD9D68C0063AE3E /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		CFA3B9061CD9E7790063AE3E /* CandleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CandleViewController.h; sourceTree = "<group>"; };
+		CFA3B9071CD9E7790063AE3E /* CandleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CandleViewController.m; sourceTree = "<group>"; };
 		CFC15B8C1CBF94A90077FA19 /* MainTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTableCell.h; sourceTree = "<group>"; };
 		CFC15B8D1CBF94A90077FA19 /* MainTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableCell.m; sourceTree = "<group>"; };
 		CFC15B8F1CBFA6830077FA19 /* ProductModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductModel.h; sourceTree = "<group>"; };
@@ -265,6 +292,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFA3B9011CD9D68C0063AE3E /* libz.tbd in Frameworks */,
 				CFC15BE41CC769DF0077FA19 /* libsqlite3.tbd in Frameworks */,
 				8109A9450AE28C984801318D /* libPods-gyt.a in Frameworks */,
 			);
@@ -276,6 +304,7 @@
 		AA72E72FA1DE389ACFDB9755 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CFA3B9001CD9D68C0063AE3E /* libz.tbd */,
 				CFC15BE31CC769DF0077FA19 /* libsqlite3.tbd */,
 				234300D9AA14CCAB18F37D31 /* libPods-gyt.a */,
 			);
@@ -303,8 +332,7 @@
 		CF4A6D151CBE25AA00B36C93 /* gyt */ = {
 			isa = PBXGroup;
 			children = (
-				CF4A6D901CBE408600B36C93 /* test */,
-				CF4A6D801CBE3F9E00B36C93 /* chart */,
+				CFA3B8D11CD9AAB70063AE3E /* chart */,
 				CF4A6D471CBE28DD00B36C93 /* controller */,
 				CF4A6D481CBE28DD00B36C93 /* data */,
 				CF4A6D491CBE28DD00B36C93 /* utils */,
@@ -448,30 +476,63 @@
 			path = extra;
 			sourceTree = "<group>";
 		};
-		CF4A6D801CBE3F9E00B36C93 /* chart */ = {
+		CFA3B8D11CD9AAB70063AE3E /* chart */ = {
 			isa = PBXGroup;
 			children = (
-				CF4A6D811CBE3F9E00B36C93 /* BaseLinesView.h */,
-				CF4A6D821CBE3F9E00B36C93 /* BaseLinesView.m */,
-				CF4A6D831CBE3F9E00B36C93 /* HistogramView.h */,
-				CF4A6D841CBE3F9E00B36C93 /* HistogramView.m */,
-				CF4A6D851CBE3F9E00B36C93 /* KMapPointView.h */,
-				CF4A6D861CBE3F9E00B36C93 /* KMapPointView.m */,
-				CF4A6D871CBE3F9E00B36C93 /* KMapView.h */,
-				CF4A6D881CBE3F9E00B36C93 /* KMapView.m */,
-				CF4A6D891CBE3F9E00B36C93 /* TSLinesView.h */,
-				CF4A6D8A1CBE3F9E00B36C93 /* TSLinesView.m */,
+				CFA3B9061CD9E7790063AE3E /* CandleViewController.h */,
+				CFA3B9071CD9E7790063AE3E /* CandleViewController.m */,
+				CFA3B8F31CD9AB050063AE3E /* helper */,
+				CFA3B8D21CD9AAB70063AE3E /* CandleView.h */,
+				CFA3B8D31CD9AAB70063AE3E /* CandleView.m */,
+				CFA3B8D41CD9AAB70063AE3E /* indicators.json */,
+				CFA3B8E01CD9AAB70063AE3E /* securities.json */,
+				CFA3B8D51CD9AAB70063AE3E /* model */,
+				CFA3B8E11CD9AAB70063AE3E /* view */,
 			);
 			path = chart;
 			sourceTree = "<group>";
 		};
-		CF4A6D901CBE408600B36C93 /* test */ = {
+		CFA3B8D51CD9AAB70063AE3E /* model */ = {
 			isa = PBXGroup;
 			children = (
-				CF4A6D911CBE40C600B36C93 /* kLinePage.h */,
-				CF4A6D921CBE40C600B36C93 /* kLinePage.m */,
+				CFA3B8D61CD9AAB70063AE3E /* AreaChartModel.h */,
+				CFA3B8D71CD9AAB70063AE3E /* AreaChartModel.m */,
+				CFA3B8D81CD9AAB70063AE3E /* CandleChartModel.h */,
+				CFA3B8D91CD9AAB70063AE3E /* CandleChartModel.m */,
+				CFA3B8DA1CD9AAB70063AE3E /* ChartModel.h */,
+				CFA3B8DB1CD9AAB70063AE3E /* ChartModel.m */,
+				CFA3B8DC1CD9AAB70063AE3E /* ColumnChartModel.h */,
+				CFA3B8DD1CD9AAB70063AE3E /* ColumnChartModel.m */,
+				CFA3B8DE1CD9AAB70063AE3E /* LineChartModel.h */,
+				CFA3B8DF1CD9AAB70063AE3E /* LineChartModel.m */,
 			);
-			path = test;
+			path = model;
+			sourceTree = "<group>";
+		};
+		CFA3B8E11CD9AAB70063AE3E /* view */ = {
+			isa = PBXGroup;
+			children = (
+				CFA3B8E21CD9AAB70063AE3E /* Chart.h */,
+				CFA3B8E31CD9AAB70063AE3E /* Chart.m */,
+				CFA3B8E41CD9AAB70063AE3E /* Section.h */,
+				CFA3B8E51CD9AAB70063AE3E /* Section.m */,
+				CFA3B8E61CD9AAB70063AE3E /* YAxis.h */,
+				CFA3B8E71CD9AAB70063AE3E /* YAxis.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		CFA3B8F31CD9AB050063AE3E /* helper */ = {
+			isa = PBXGroup;
+			children = (
+				CFA3B8F41CD9AB050063AE3E /* CacheHelper.h */,
+				CFA3B8F51CD9AB050063AE3E /* CacheHelper.m */,
+				CFA3B8F61CD9AB050063AE3E /* EncryptHelper.h */,
+				CFA3B8F71CD9AB050063AE3E /* EncryptHelper.m */,
+				CFA3B8F81CD9AB050063AE3E /* ResourceHelper.h */,
+				CFA3B8F91CD9AB050063AE3E /* ResourceHelper.m */,
+			);
+			path = helper;
 			sourceTree = "<group>";
 		};
 		CFC15BA11CC234010077FA19 /* detail */ = {
@@ -731,9 +792,11 @@
 			files = (
 				CF4A6D291CBE25AA00B36C93 /* LaunchScreen.storyboard in Resources */,
 				CFDD2DE11CC9CF2300E81E3F /* Assets.xcassets in Resources */,
+				CFA3B8EF1CD9AAB70063AE3E /* securities.json in Resources */,
 				CFDD2E9A1CCF4DE100E81E3F /* LICENSE in Resources */,
 				CFDD2EA91CCF4DE100E81E3F /* MJRefresh.bundle in Resources */,
 				CF4A6D211CBE25AA00B36C93 /* Main.storyboard in Resources */,
+				CFA3B8E91CD9AAB70063AE3E /* indicators.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -792,6 +855,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFA3B8E81CD9AAB70063AE3E /* CandleView.m in Sources */,
 				CFDD2DF11CCB47E000E81E3F /* WarnContractViewController.m in Sources */,
 				CFDD2DEE1CCA208900E81E3F /* MyContractCell.m in Sources */,
 				CFDD2E131CCF44AD00E81E3F /* NewsCell.m in Sources */,
@@ -801,26 +865,27 @@
 				CFC15BA71CC234C30077FA19 /* HandicapView.m in Sources */,
 				CFDD2EA01CCF4DE100E81E3F /* MJRefreshAutoGifFooter.m in Sources */,
 				CFDFFA971CBF759800401CB3 /* LeftMenuViewContriller.m in Sources */,
-				CF4A6D8B1CBE3F9E00B36C93 /* BaseLinesView.m in Sources */,
 				CFDD2EA71CCF4DE100E81E3F /* MJRefreshNormalHeader.m in Sources */,
 				CF4A6D701CBE2A0800B36C93 /* UILabel+ContentSize.m in Sources */,
 				CFDD2DF81CCDE8D000E81E3F /* WarnDialog.m in Sources */,
 				CFDD2E9B1CCF4DE100E81E3F /* MJRefreshAutoFooter.m in Sources */,
-				CF4A6D8C1CBE3F9E00B36C93 /* HistogramView.m in Sources */,
 				CFDD2DE71CCA0DAE00E81E3F /* RightMenuModel.m in Sources */,
 				CFC15BCC1CC5D15D0077FA19 /* ByTabView.m in Sources */,
 				CFDD2EA21CCF4DE100E81E3F /* MJRefreshAutoStateFooter.m in Sources */,
+				CFA3B8F11CD9AAB70063AE3E /* Section.m in Sources */,
 				CFDD2E9C1CCF4DE100E81E3F /* MJRefreshBackFooter.m in Sources */,
 				CFDFFA9D1CBF78DD00401CB3 /* RightMenuViewController.m in Sources */,
 				CFC15BB31CC37C730077FA19 /* HandicapDetailModel.m in Sources */,
 				CF4A6D1B1CBE25AA00B36C93 /* AppDelegate.m in Sources */,
 				CFC15B8E1CBF94A90077FA19 /* MainTableCell.m in Sources */,
 				CF4A6D181CBE25AA00B36C93 /* main.m in Sources */,
+				CFA3B8F21CD9AAB70063AE3E /* YAxis.m in Sources */,
 				CFC15B941CC11B770077FA19 /* LeftMenuCell.m in Sources */,
 				CFC15BC91CC4C7340077FA19 /* InsetTextField.m in Sources */,
 				CFDFFA941CBF742500401CB3 /* SlideNavigationController.m in Sources */,
 				CFC15BC61CC4B8160077FA19 /* DealView.m in Sources */,
-				CF4A6D931CBE40C600B36C93 /* kLinePage.m in Sources */,
+				CFA3B8F01CD9AAB70063AE3E /* Chart.m in Sources */,
+				CFA3B8FB1CD9AB050063AE3E /* EncryptHelper.m in Sources */,
 				CF4A6D5B1CBE28DD00B36C93 /* ColorUtil.m in Sources */,
 				CFDD2E101CCF42D400E81E3F /* NewsModel.m in Sources */,
 				CFDD2EAD1CCF4DE100E81E3F /* UIView+MJExtension.m in Sources */,
@@ -829,28 +894,31 @@
 				CFC15B971CC205390077FA19 /* MenuModel.m in Sources */,
 				CFDD2EA11CCF4DE100E81E3F /* MJRefreshAutoNormalFooter.m in Sources */,
 				CFDD2E9F1CCF4DE100E81E3F /* MJRefreshHeader.m in Sources */,
+				CFA3B9081CD9E7790063AE3E /* CandleViewController.m in Sources */,
 				CF48C6341CD0DBF800BF4EF9 /* SearchViewController.m in Sources */,
 				CFDD2E0D1CCF3C1A00E81E3F /* NewsView.m in Sources */,
 				CFDD2DD91CC8BEC600E81E3F /* DealHoldingModel.m in Sources */,
-				CF4A6D8E1CBE3F9E00B36C93 /* KMapView.m in Sources */,
 				CFDD2EA41CCF4DE100E81E3F /* MJRefreshBackNormalFooter.m in Sources */,
 				CFDD2DEB1CCA19C900E81E3F /* MyContractViewController.m in Sources */,
 				CFDFFA9A1CBF77AB00401CB3 /* MainViewController.m in Sources */,
 				CFC15BB01CC365650077FA19 /* HandicapBaseModel.m in Sources */,
 				CFDD2EA51CCF4DE100E81E3F /* MJRefreshBackStateFooter.m in Sources */,
+				CFA3B8ED1CD9AAB70063AE3E /* ColumnChartModel.m in Sources */,
 				CFDD2EBA1CCF97F400E81E3F /* SplashViewController.m in Sources */,
 				CF4A6D7F1CBE2EAB00B36C93 /* BaseViewController.m in Sources */,
 				CFDD2EAB1CCF4DE100E81E3F /* UIScrollView+MJExtension.m in Sources */,
 				CFDD2DDC1CC8C01000E81E3F /* DealHoldByModel.m in Sources */,
 				CF4A6D5A1CBE28DD00B36C93 /* AppUtil.m in Sources */,
-				CF4A6D8F1CBE3F9E00B36C93 /* TSLinesView.m in Sources */,
 				CFC15B911CBFA6830077FA19 /* ProductModel.m in Sources */,
 				CF4A6D741CBE2BCD00B36C93 /* ResponseModel.m in Sources */,
+				CFA3B8FC1CD9AB050063AE3E /* ResourceHelper.m in Sources */,
 				CFDD2EA81CCF4DE100E81E3F /* MJRefreshStateHeader.m in Sources */,
 				CFC15BD21CC607900077FA19 /* DynamicCell.m in Sources */,
 				CFC15BE21CC74F760077FA19 /* ContractDB.m in Sources */,
+				CFA3B8EB1CD9AAB70063AE3E /* CandleChartModel.m in Sources */,
 				CF4A6D7C1CBE2EA200B36C93 /* ByNavigationBar.m in Sources */,
 				CFDD2EAA1CCF4DE100E81E3F /* MJRefreshConst.m in Sources */,
+				CFA3B8FA1CD9AB050063AE3E /* CacheHelper.m in Sources */,
 				CFDD2EA31CCF4DE100E81E3F /* MJRefreshBackGifFooter.m in Sources */,
 				CFDD2EAE1CCF4DE100E81E3F /* README.md in Sources */,
 				CF4A6D5C1CBE28DD00B36C93 /* DialogHelper.m in Sources */,
@@ -859,14 +927,16 @@
 				CF4A6D6F1CBE2A0800B36C93 /* IDSExtendedLabel.m in Sources */,
 				CF48C6431CD22C8B00BF4EF9 /* SearchCell.m in Sources */,
 				CFDD2DD61CC8AEE100E81E3F /* DealHoldModel.m in Sources */,
+				CFA3B8EA1CD9AAB70063AE3E /* AreaChartModel.m in Sources */,
 				CFC15BAD1CC361A80077FA19 /* HandicapModel.m in Sources */,
+				CFA3B8EC1CD9AAB70063AE3E /* ChartModel.m in Sources */,
 				CFDD2DE41CCA0D8200E81E3F /* RightMenuCell.m in Sources */,
 				CFDD2E9E1CCF4DE100E81E3F /* MJRefreshFooter.m in Sources */,
 				CF4A6D711CBE2A0800B36C93 /* UIView+Frame.m in Sources */,
 				CF4A6D5D1CBE28DD00B36C93 /* IDSAlertSheet.m in Sources */,
 				CFC15BA01CC22BE10077FA19 /* BottomModel.m in Sources */,
 				CFC15B9D1CC2249B0077FA19 /* BottomTabView.m in Sources */,
-				CF4A6D8D1CBE3F9E00B36C93 /* KMapPointView.m in Sources */,
+				CFA3B8EE1CD9AAB70063AE3E /* LineChartModel.m in Sources */,
 				CFC15B9A1CC20F070077FA19 /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

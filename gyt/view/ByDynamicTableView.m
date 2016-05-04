@@ -33,14 +33,16 @@
                    maxWidth : (int) maxWidth
                        type : (DealType)type
 {
-    if(self == [super initWithFrame:rect])
+    self = [super initWithFrame:rect];
+    if(self)
     {
         self.datas = array;
         self.maxWidth = maxWidth;
         self.type = type;
         [self initView];
+        return self;
     }
-    return self;
+    return nil;
 }
 
 -(void)setHeaders : (NSArray *)widths

@@ -27,13 +27,15 @@
 -(instancetype)initWithTitles : (CGRect)rect
                          array: (NSArray *)array
 {
-    if(self == [super initWithFrame:rect])
+    self = [super initWithFrame:rect];
+    if(self)
     {
         _buttonArrays = [[NSMutableArray alloc]init];
         self.array = array;
         [self initView];
+        return self;
     }
-    return self;
+    return nil;
 }
 
 -(void)initView

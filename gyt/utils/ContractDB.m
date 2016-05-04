@@ -58,7 +58,7 @@ SINGLETON_IMPLEMENTION(ContractDB);
 #pragma mark 创建表
 -(BOOL)createTable : (NSString *)tableName
 {
-    BOOL res;
+    BOOL res = NO;
     if ([_db open]) {
         NSString *sqlCreateTable =  [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS '%@' ('%@' INTEGER PRIMARY KEY AUTOINCREMENT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT)" ,
              tableName,
@@ -88,7 +88,7 @@ SINGLETON_IMPLEMENTION(ContractDB);
 #pragma mark 删除表
 -(BOOL)deleteTable : (NSString *)tableName
 {
-    BOOL res;
+    BOOL res = NO;
     if([_db open])
     {
         NSString *sql = [NSString stringWithFormat:@"DROP TABLE %@", tableName];
@@ -102,7 +102,7 @@ SINGLETON_IMPLEMENTION(ContractDB);
 -(BOOL)insertItem : (NSString *)tableName
             model : (ProductModel *)model
 {
-    BOOL res;
+    BOOL res = NO;
     if([self queryItem:tableName pid:model.pid] != nil)
     {
         NSLog(@"数据库已有数据！");
@@ -142,7 +142,7 @@ SINGLETON_IMPLEMENTION(ContractDB);
               pid : (int)pid
             model : (ProductModel *)model
 {
-    BOOL res;
+    BOOL res = NO;
     if([_db open])
     {
         [_db beginTransaction];
@@ -185,7 +185,7 @@ SINGLETON_IMPLEMENTION(ContractDB);
 -(BOOL)deleteItem : (NSString *)tableName
               pid : (int)pid
 {
-    BOOL res;
+    BOOL res = NO;
     if([_db open])
     {
         res = [_db executeUpdate:[NSString stringWithFormat:@"DELETE FROM %@ WHERE %@ = ?",tableName,Item_ProductID],[NSString stringWithFormat:@"%d",pid]];
