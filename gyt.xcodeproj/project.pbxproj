@@ -40,7 +40,7 @@
 		CFA3B8FB1CD9AB050063AE3E /* EncryptHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA3B8F71CD9AB050063AE3E /* EncryptHelper.m */; };
 		CFA3B8FC1CD9AB050063AE3E /* ResourceHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA3B8F91CD9AB050063AE3E /* ResourceHelper.m */; };
 		CFA3B9011CD9D68C0063AE3E /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CFA3B9001CD9D68C0063AE3E /* libz.tbd */; };
-		CFA3B9081CD9E7790063AE3E /* CandleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA3B9071CD9E7790063AE3E /* CandleViewController.m */; };
+		CFA3B90B1CDAF0A90063AE3E /* Slide.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA3B90A1CDAF0A90063AE3E /* Slide.m */; };
 		CFC15B8E1CBF94A90077FA19 /* MainTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15B8D1CBF94A90077FA19 /* MainTableCell.m */; };
 		CFC15B911CBFA6830077FA19 /* ProductModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15B901CBFA6830077FA19 /* ProductModel.m */; };
 		CFC15B941CC11B770077FA19 /* LeftMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15B931CC11B770077FA19 /* LeftMenuCell.m */; };
@@ -168,8 +168,8 @@
 		CFA3B8F81CD9AB050063AE3E /* ResourceHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceHelper.h; sourceTree = "<group>"; };
 		CFA3B8F91CD9AB050063AE3E /* ResourceHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourceHelper.m; sourceTree = "<group>"; };
 		CFA3B9001CD9D68C0063AE3E /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		CFA3B9061CD9E7790063AE3E /* CandleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CandleViewController.h; sourceTree = "<group>"; };
-		CFA3B9071CD9E7790063AE3E /* CandleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CandleViewController.m; sourceTree = "<group>"; };
+		CFA3B9091CDAF0A90063AE3E /* Slide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Slide.h; sourceTree = "<group>"; };
+		CFA3B90A1CDAF0A90063AE3E /* Slide.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Slide.m; sourceTree = "<group>"; };
 		CFC15B8C1CBF94A90077FA19 /* MainTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTableCell.h; sourceTree = "<group>"; };
 		CFC15B8D1CBF94A90077FA19 /* MainTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableCell.m; sourceTree = "<group>"; };
 		CFC15B8F1CBFA6830077FA19 /* ProductModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductModel.h; sourceTree = "<group>"; };
@@ -479,8 +479,6 @@
 		CFA3B8D11CD9AAB70063AE3E /* chart */ = {
 			isa = PBXGroup;
 			children = (
-				CFA3B9061CD9E7790063AE3E /* CandleViewController.h */,
-				CFA3B9071CD9E7790063AE3E /* CandleViewController.m */,
 				CFA3B8F31CD9AB050063AE3E /* helper */,
 				CFA3B8D21CD9AAB70063AE3E /* CandleView.h */,
 				CFA3B8D31CD9AAB70063AE3E /* CandleView.m */,
@@ -518,6 +516,8 @@
 				CFA3B8E51CD9AAB70063AE3E /* Section.m */,
 				CFA3B8E61CD9AAB70063AE3E /* YAxis.h */,
 				CFA3B8E71CD9AAB70063AE3E /* YAxis.m */,
+				CFA3B9091CDAF0A90063AE3E /* Slide.h */,
+				CFA3B90A1CDAF0A90063AE3E /* Slide.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -894,7 +894,6 @@
 				CFC15B971CC205390077FA19 /* MenuModel.m in Sources */,
 				CFDD2EA11CCF4DE100E81E3F /* MJRefreshAutoNormalFooter.m in Sources */,
 				CFDD2E9F1CCF4DE100E81E3F /* MJRefreshHeader.m in Sources */,
-				CFA3B9081CD9E7790063AE3E /* CandleViewController.m in Sources */,
 				CF48C6341CD0DBF800BF4EF9 /* SearchViewController.m in Sources */,
 				CFDD2E0D1CCF3C1A00E81E3F /* NewsView.m in Sources */,
 				CFDD2DD91CC8BEC600E81E3F /* DealHoldingModel.m in Sources */,
@@ -918,6 +917,7 @@
 				CFA3B8EB1CD9AAB70063AE3E /* CandleChartModel.m in Sources */,
 				CF4A6D7C1CBE2EA200B36C93 /* ByNavigationBar.m in Sources */,
 				CFDD2EAA1CCF4DE100E81E3F /* MJRefreshConst.m in Sources */,
+				CFA3B90B1CDAF0A90063AE3E /* Slide.m in Sources */,
 				CFA3B8FA1CD9AB050063AE3E /* CacheHelper.m in Sources */,
 				CFDD2EA31CCF4DE100E81E3F /* MJRefreshBackGifFooter.m in Sources */,
 				CFDD2EAE1CCF4DE100E81E3F /* README.md in Sources */,

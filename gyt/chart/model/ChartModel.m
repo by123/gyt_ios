@@ -16,7 +16,7 @@
 }
 -(void)setLabel:(Chart *)chart label:(NSMutableArray *)label forSerie:(NSMutableDictionary *) serie{
 }
--(void)drawTips:(Chart *)chart serie:(NSMutableDictionary *)serie{
+-(void)drawTips:(Chart *)chart serie:(NSMutableDictionary *)serie block:(ReturnTextBlock)block{
 }
 
 @end

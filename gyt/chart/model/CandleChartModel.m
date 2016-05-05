@@ -275,7 +275,7 @@
 
 }
 
--(void)drawTips:(Chart *)chart serie:(NSMutableDictionary *)serie{
+-(void)drawTips:(Chart *)chart serie:(NSMutableDictionary *)serie block:(ReturnTextBlock)block{
 	CGContextRef context = UIGraphicsGetCurrentContext();
 	CGContextSetShouldAntialias(context, NO);
 	CGContextSetLineWidth(context, 1.0f);
@@ -319,6 +319,10 @@
            
                 [category[chart.selectedIndex] drawAtPoint:CGPointMake(x + 2, y + 1)  withAttributes:md];
 				CGContextSetShouldAntialias(context, NO);
+                if(block)
+                {
+                    block(category[chart.selectedIndex]);
+                }
 			}
 		}
 	}

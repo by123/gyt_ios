@@ -7,8 +7,15 @@
 //
 
 #import "Chart.h"
+#import "Slide.h"
 
 #define MIN_INTERVAL  3
+
+@interface Chart()
+
+@property (strong, nonatomic) Slide *slide;
+
+@end
 
 @implementation Chart
 
@@ -264,6 +271,12 @@
                 text = [@" " stringByAppendingString:text];
                 [text drawAtPoint:CGPointMake(sec.frame.origin.x+sec.paddingLeft+2+w,sec.frame.origin.y+2) withAttributes:md];
                 w += [text sizeWithAttributes:md].width;
+                
+                NSLog(@"这是什么->%@",text);
+                if(_slide)
+                {
+                    [_slide setData:text];
+                }
 			}
 		}
 	}
@@ -284,9 +297,12 @@
 
     NSEnumerator *enumerator = [self.models keyEnumerator];
     id key;
+    __weak Slide *slide = _slide;
     while ((key = [enumerator nextObject])){
         ChartModel *m = self.models[key];
-        [m drawTips:self serie:serie];
+        [m drawTips:self serie:serie block:^(NSString *time) {
+            [slide setTime:time];
+        }];
     }
 }
 
@@ -680,6 +696,10 @@
 
         //init models
         [self initModels];
+        
+        _slide = [[Slide alloc]init];
+        _slide.frame = CGRectMake(0,  40, SCREEN_WIDTH/4,SCREEN_HEIGHT/2);
+        [self addSubview:_slide];
     }
     return self;
 }
@@ -723,7 +743,6 @@
 
 #pragma mark -
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    NSLog(@"began");
 
 	NSArray *ts = [touches allObjects];
 	self.touchFlag = 0;
@@ -740,11 +759,12 @@
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
-    NSLog(@"move");
 	NSArray *ts = [touches allObjects];
 	if([ts count]==1){
 		UITouch* touch = ts[0];
 		int i = [self getIndexOfSection:[touch locationInView:self]];
+        [self handleSlide:[touch locationInView:self]];
+        
 		if(i!=-1){
 			Section *sec = self.sections[i];
 			if([touch locationInView:self].x > sec.paddingLeft)
@@ -873,7 +893,6 @@
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
-    NSLog(@"end");
 
 	NSArray *ts = [touches allObjects];
 	UITouch* touch = [[event allTouches] anyObject];
@@ -894,4 +913,33 @@
 	self.touchFlag = 0;
 }
 
+
+-(void)handleSlide : (CGPoint)point
+{
+    
+    if(point.x < SCREEN_WIDTH /4)
+    {
+        if(_slide.x == 0)
+        {
+            _slide.frame = CGRectMake(SCREEN_WIDTH,40, SCREEN_WIDTH/4,SCREEN_HEIGHT/2);
+
+            [UIView animateWithDuration:0.3f animations:^{
+                _slide.frame = CGRectMake(SCREEN_WIDTH * 3/4,40, SCREEN_WIDTH/4,SCREEN_HEIGHT/2);
+            }];
+        }
+    }
+    else if(point.x > SCREEN_WIDTH * 3 / 4)
+    {
+        if(_slide.x == SCREEN_WIDTH *3 /4)
+        {
+            _slide.frame = CGRectMake(-40,40, SCREEN_WIDTH/4,SCREEN_HEIGHT/2);
+            
+            [UIView animateWithDuration:0.3f animations:^{
+                _slide.frame = CGRectMake(0,40, SCREEN_WIDTH/4,SCREEN_HEIGHT/2);
+
+            }];
+        }
+    }
+        
+}
 @end

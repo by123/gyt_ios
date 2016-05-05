@@ -278,7 +278,7 @@
         if([line isEqualToString:@""]){
             continue;
         }
-        NSArray   *arr = [line componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@","]];
+        NSArray *arr = [line componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@","]];
         [category addObject:arr[0]];
 
         NSMutableArray *item =[[NSMutableArray alloc] init];

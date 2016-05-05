@@ -14,7 +14,7 @@
 #import "ProductModel.h"
 #import "ContractDB.h"
 #import "SplashViewController.h"
-#import "CandleViewController.h"
+//#import "CandleViewController.h"
 
 #define First_Launch @"first_launch"
 
