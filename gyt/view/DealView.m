@@ -27,6 +27,9 @@
 //使用率
 @property (strong, nonatomic) UILabel *userPercentLabel;
 
+//最新价
+@property (strong, nonatomic) UILabel *currentPriceLabel;
+
 //买价
 @property (strong, nonatomic) UILabel *buyPriceLabel;
 
@@ -42,23 +45,14 @@
 //卖出按钮
 @property (strong, nonatomic) UIButton *sellItem;
 
-//开仓按钮
-@property (strong, nonatomic) UIButton *openPositionItem;
-
 //平仓按钮
-@property (strong, nonatomic) UIButton *closePositionItem;
-
-//平今按钮（只有上海交易所）
-@property (strong, nonatomic) UIButton *closeDailyPositionItem;
+@property (strong, nonatomic) UIButton *closeItem;
 
 //手数
 @property (strong, nonatomic) InsetTextField *handTextField;
 
 //价格
 @property (strong, nonatomic) InsetTextField *priceTextField;
-
-//下单
-@property (strong, nonatomic) UIButton *orderButton;
 
 //持仓，挂单，委托，成交 标题
 @property (strong, nonatomic) ByTabView *tabView;
@@ -137,89 +131,14 @@
     _userPercentLabel.frame = CGRectMake(SCREEN_WIDTH * 2/3 + 5, 0, SCREEN_WIDTH/3-5, 25);
     [view addSubview:_userPercentLabel];
     
-    
-    _nameTextField = [[InsetTextField alloc]initWithFrame:CGRectMake(10, view.height+5, SCREEN_WIDTH/2-20, 30)];
+    //名称
+    _nameTextField = [[InsetTextField alloc]initWithFrame:CGRectMake(10, view.height+5, SCREEN_WIDTH/2+10, 30)];
     _nameTextField.hasTitle = NO;
     _nameTextField.text = _model.name;
     [self addSubview:_nameTextField];
     
-    UIView *priceView = [[UIView alloc]init];
-    priceView.backgroundColor = [ColorUtil colorWithHexString:@"#262626"];;
-    priceView.frame = CGRectMake(SCREEN_WIDTH/2, view.height + 5, SCREEN_WIDTH/2, 30);
-    priceView.layer.cornerRadius = 2;
-    priceView.layer.masksToBounds = YES;
-    [self addSubview:priceView];
-    
-    _buyPriceLabel = [[UILabel alloc]init];
-    _buyPriceLabel.textColor = TEXT_COLOR;
-    _buyPriceLabel.text = [NSString stringWithFormat:@"买价:%.f",_model.recentPrice];
-    _buyPriceLabel.font = [UIFont systemFontOfSize:13.0f];
-    _buyPriceLabel.frame = CGRectMake(5, 0, SCREEN_WIDTH/4, 30);
-    [priceView addSubview:_buyPriceLabel];
-    
-    _sellPriceLabel = [[UILabel alloc]init];
-    _sellPriceLabel.textColor = TEXT_COLOR;
-    _sellPriceLabel.text = [NSString stringWithFormat:@"卖价:%.f",_model.recentPrice + 1];
-    _sellPriceLabel.font = [UIFont systemFontOfSize:13.0f];
-    _sellPriceLabel.frame = CGRectMake(5 + SCREEN_WIDTH/4, 0, SCREEN_WIDTH/4, 30);
-    [priceView addSubview:_sellPriceLabel];
-    
-    
-    //买入
-    _buyItem = [[UIButton alloc]init];
-    [_buyItem setTitle:@"买入" forState:UIControlStateNormal];
-    [_buyItem setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    _buyItem.frame = CGRectMake(10, view.height + 40, (SCREEN_WIDTH -20)/2, 30);
-    _buyItem.backgroundColor = SELECT_COLOR;
-    [_buyItem addTarget:self action:@selector(OnClick:) forControlEvents:UIControlEventTouchUpInside];
-    [_buyItem setSelected:YES];
-    [self addSubview:_buyItem];
-    
-    //卖出
-    _sellItem = [[UIButton alloc]init];
-    [_sellItem setTitle:@"卖出" forState:UIControlStateNormal];
-    [_sellItem setTitleColor:[ColorUtil colorWithHexString:@"#262626"] forState:UIControlStateNormal];
-    _sellItem.frame = CGRectMake(10 + (SCREEN_WIDTH-20)/2, view.height + 40,  (SCREEN_WIDTH -20)/2, 30);
-    _sellItem.backgroundColor = [ColorUtil colorWithHexString:@"#aaaaaa"];
-    [_sellItem addTarget:self action:@selector(OnClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:_sellItem];
-    
-    //开仓
-    _openPositionItem= [[UIButton alloc]init];
-    [_openPositionItem setTitle:@"开仓" forState:UIControlStateNormal];
-    [_openPositionItem setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    _openPositionItem.frame = CGRectMake(10, view.height + 40 + 35, (SCREEN_WIDTH -20)/3, 30);
-    _openPositionItem.backgroundColor = SELECT_COLOR;
-    [_openPositionItem addTarget:self action:@selector(OnClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:_openPositionItem];
-    [_openPositionItem setSelected:YES];
-
-    
-    //平仓
-    _closePositionItem = [[UIButton alloc]init];
-    [_closePositionItem setTitle:@"平仓" forState:UIControlStateNormal];
-    [_closePositionItem setTitleColor:[ColorUtil colorWithHexString:@"#262626"] forState:UIControlStateNormal];
-    _closePositionItem.frame = CGRectMake(10 + (SCREEN_WIDTH - 20 ) /3, view.height + 40 + 35, (SCREEN_WIDTH - 20 ) /3 , 30);
-    _closePositionItem.backgroundColor = [ColorUtil colorWithHexString:@"#aaaaaa"];
-    [_closePositionItem addTarget:self action:@selector(OnClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:_closePositionItem];
-
-    //平今
-    _closeDailyPositionItem = [[UIButton alloc]init];
-    [_closeDailyPositionItem setTitle:@"平今" forState:UIControlStateNormal];
-    [_closeDailyPositionItem setTitleColor:[ColorUtil colorWithHexString:@"#262626"] forState:UIControlStateNormal];
-    _closeDailyPositionItem.frame = CGRectMake(10 + (SCREEN_WIDTH - 20 ) *2/3, view.height + 40 + 35, (SCREEN_WIDTH - 20 ) /3, 30);
-    _closeDailyPositionItem.backgroundColor = [ColorUtil colorWithHexString:@"#aaaaaa"];
-    [_closeDailyPositionItem addTarget:self action:@selector(OnClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:_closeDailyPositionItem];
-    
-   
-    [self addLineView:CGRectMake(10 + (SCREEN_WIDTH -20)/2, view.height + 40, 0.5, 30)];
-    [self addLineView:CGRectMake(10 + (SCREEN_WIDTH - 20)/3, view.height + 40 + 35, 0.5, 30)];
-    [self addLineView:CGRectMake(10 + (SCREEN_WIDTH - 20)*2/3, view.height + 40 + 35, 0.5, 30)];
-    
     //手数
-    _handTextField = [[InsetTextField alloc]initWithFrame:CGRectMake(10, _closeDailyPositionItem.y + _closeDailyPositionItem.height + 5, (SCREEN_WIDTH-30)/2, 30)];
+    _handTextField = [[InsetTextField alloc]initWithFrame:CGRectMake(10,  _nameTextField.y + _nameTextField.height +5, _nameTextField.width/2 -15, 30)];
     _handTextField.hasTitle = YES;
     [_handTextField setInsetTitle:@"手数：" font:[UIFont systemFontOfSize:14.0f]];
     _handTextField.text = @"1";
@@ -227,23 +146,88 @@
     [self addSubview:_handTextField];
     
     //价格
-    _priceTextField = [[InsetTextField alloc]initWithFrame:CGRectMake(20 +(SCREEN_WIDTH-30)/2 , _closeDailyPositionItem.y + _closeDailyPositionItem.height + 5, (SCREEN_WIDTH-30)/2, 30)];
+    _priceTextField = [[InsetTextField alloc]initWithFrame:CGRectMake(10 + _handTextField.width + 5 , _nameTextField.y + _nameTextField.height +5, _nameTextField.width/2 +10, 30)];
     _priceTextField.hasTitle = YES;
     [_priceTextField setInsetTitle:@"价格：" font:[UIFont systemFontOfSize:14.0f]];
     _priceTextField.text = @"1989";
     _priceTextField.keyboardType = UIKeyboardTypeNumberPad;
     [self addSubview:_priceTextField];
     
-    //下单
-    _orderButton = [[UIButton alloc]init];
-    [_orderButton setTitle:@"下单" forState:UIControlStateNormal];
-    [_orderButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    _orderButton.backgroundColor = [ColorUtil colorWithHexString:@"#c34648"];
-    _orderButton.layer.masksToBounds = YES;
-    _orderButton.layer.cornerRadius = 4;
-    _orderButton.frame = CGRectMake(10, _priceTextField.y + _priceTextField.height + 10, SCREEN_WIDTH-20, 40);
-    [_orderButton addTarget: self action:@selector(OnClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:_orderButton];
+    
+    UIView *priceView = [[UIView alloc]init];
+    priceView.backgroundColor = [ColorUtil colorWithHexString:@"#262626"];;
+    priceView.frame = CGRectMake(_priceTextField.x + _priceTextField.width + 5, view.height + 5, SCREEN_WIDTH - 25 - _nameTextField.width, 65);
+    priceView.layer.cornerRadius = 4;
+    priceView.layer.masksToBounds = YES;
+    [self addSubview:priceView];
+    
+    _currentPriceLabel = [[UILabel alloc]init];
+    _currentPriceLabel.textColor = TEXT_COLOR;
+    _currentPriceLabel.text = [NSString stringWithFormat:@"新:%.f 12323",_model.recentPrice];
+    _currentPriceLabel.font = [UIFont systemFontOfSize:13.0f];
+    _currentPriceLabel.frame = CGRectMake(5, 2.5, SCREEN_WIDTH/4, 20);
+    [priceView addSubview:_currentPriceLabel];
+    
+    _buyPriceLabel = [[UILabel alloc]init];
+    _buyPriceLabel.textColor = TEXT_COLOR;
+    _buyPriceLabel.text = [NSString stringWithFormat:@"买:%.f  200",_model.recentPrice];
+    _buyPriceLabel.font = [UIFont systemFontOfSize:13.0f];
+    _buyPriceLabel.frame = CGRectMake(5, 22.5, SCREEN_WIDTH/4, 20);
+    [priceView addSubview:_buyPriceLabel];
+    
+    _sellPriceLabel = [[UILabel alloc]init];
+    _sellPriceLabel.textColor = TEXT_COLOR;
+    _sellPriceLabel.text = [NSString stringWithFormat:@"卖:%.f  100",_model.recentPrice+1];
+    _sellPriceLabel.font = [UIFont systemFontOfSize:13.0f];
+    _sellPriceLabel.frame = CGRectMake(5, 42.5, SCREEN_WIDTH/4, 20);
+    [priceView addSubview:_sellPriceLabel];
+
+    
+    
+    _buyItem = [[UIButton alloc]init];
+    _buyItem.frame = CGRectMake(10, _handTextField.y + _handTextField.height + 10, (SCREEN_WIDTH - 40)/3, 60);
+    _buyItem.layer.masksToBounds = YES;
+    _buyItem.layer.cornerRadius = 4;
+    [_buyItem setTitle:@"1588\n————\n买多" forState:UIControlStateNormal];
+    [_buyItem setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    _buyItem.titleLabel.font = [UIFont systemFontOfSize:14.0f];
+    _buyItem.titleLabel.numberOfLines = 0;
+    _buyItem.titleLabel.textAlignment = NSTextAlignmentCenter;
+    _buyItem.titleLabel.lineBreakMode = NSLineBreakByCharWrapping;
+    _buyItem.backgroundColor = [ColorUtil colorWithHexString:@"#CD5555"];
+    [_buyItem addTarget:self action:@selector(OnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:_buyItem];
+    
+    _sellItem = [[UIButton alloc]init];
+    _sellItem.frame = CGRectMake(10 * 2 + (SCREEN_WIDTH - 40)/3, _handTextField.y + _handTextField.height + 10, (SCREEN_WIDTH - 40)/3, 60);
+    _sellItem.layer.masksToBounds = YES;
+    _sellItem.layer.cornerRadius = 4;
+    [_sellItem setTitle:@"1438\n————\n卖空" forState:UIControlStateNormal];
+    [_sellItem setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    _sellItem.titleLabel.font = [UIFont systemFontOfSize:14.0f];
+    _sellItem.titleLabel.numberOfLines = 0;
+    _sellItem.titleLabel.textAlignment = NSTextAlignmentCenter;
+    _sellItem.titleLabel.lineBreakMode = NSLineBreakByCharWrapping;
+    _sellItem.backgroundColor = [ColorUtil colorWithHexString:@"#2E8B57"];
+    [_sellItem addTarget:self action:@selector(OnClick:) forControlEvents:UIControlEventTouchUpInside];
+
+    [self addSubview:_sellItem];
+    
+    _closeItem = [[UIButton alloc]init];
+    _closeItem.frame = CGRectMake(10 * 3 + (SCREEN_WIDTH - 40) * 2/3, _handTextField.y + _handTextField.height + 10, (SCREEN_WIDTH - 40)/3, 60);
+    _closeItem.layer.masksToBounds = YES;
+    _closeItem.layer.cornerRadius = 4;
+    [_closeItem setTitle:@"无仓位\n————\n平仓" forState:UIControlStateNormal];
+    [_closeItem setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    _closeItem.titleLabel.font = [UIFont systemFontOfSize:14.0f];
+    _closeItem.titleLabel.numberOfLines = 0;
+    _closeItem.titleLabel.textAlignment = NSTextAlignmentCenter;
+    _closeItem.titleLabel.lineBreakMode = NSLineBreakByCharWrapping;
+    _closeItem.backgroundColor = TEXT_COLOR;
+    [_closeItem addTarget:self action:@selector(OnClick:) forControlEvents:UIControlEventTouchUpInside];
+
+    [self addSubview:_closeItem];
+    
     
 }
 
@@ -260,7 +244,7 @@
 -(void)initBottomView
 {
     NSArray *array = @[@"持仓",@"挂单",@"委托",@"成交"];
-    CGRect rect = CGRectMake(0, _orderButton.y + _orderButton.height+10, SCREEN_WIDTH, 40);
+    CGRect rect = CGRectMake(0, _sellItem.y + _sellItem.height+10, SCREEN_WIDTH, 40);
     _tabView = [[ByTabView alloc]initWithTitles:rect array:array];
     _tabView.backgroundColor = [ColorUtil colorWithHexString:@"#262626"];
     _tabView.delegate = self;
@@ -397,74 +381,20 @@
     UIView *view = sender;
     if(view == _buyItem)
     {
-        [_buyItem setSelected:YES];
-        [_sellItem setSelected:NO];
-        [self changeNormalStatu:_sellItem];
-        [self changeSelectStatu:_buyItem];
-        _orderButton.backgroundColor = [ColorUtil colorWithHexString:@"#c34648"];
+        NSString *message = [NSString stringWithFormat:@"%@，%.f，买，%@手",_model.name,_model.recentPrice,_handTextField.text];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认下单吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        
+        [alert show];
     }
     else if(view == _sellItem)
     {
-        [_buyItem setSelected:NO];
-        [_sellItem setSelected:YES];
-        [self changeNormalStatu:_buyItem];
-        [self changeSelectStatu:_sellItem];
-        _orderButton.backgroundColor = [ColorUtil colorWithHexString:@"#449d61"];
-
+        NSString *message = [NSString stringWithFormat:@"%@，%.f，卖，%@手",_model.name,_model.recentPrice,_handTextField.text];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认下单吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        [alert show];
     }
-    else if(view == _openPositionItem)
+    else if(view == _closeItem)
     {
-        [_openPositionItem setSelected:YES];
-        [_closePositionItem setSelected:NO];
-        [_closeDailyPositionItem setSelected:NO];
-        [self changeSelectStatu:_openPositionItem];
-        [self changeNormalStatu:_closePositionItem];
-        [self changeNormalStatu:_closeDailyPositionItem];
-    }
-    else if(view == _closePositionItem)
-    {
-        [_openPositionItem setSelected:NO];
-        [_closePositionItem setSelected:YES];
-        [_closeDailyPositionItem setSelected:NO];
-        [self changeNormalStatu:_openPositionItem];
-        [self changeSelectStatu:_closePositionItem];
-        [self changeNormalStatu:_closeDailyPositionItem];
-    }
-    else if(view == _closeDailyPositionItem)
-    {
-        [_openPositionItem setSelected:NO];
-        [_closePositionItem setSelected:NO];
-        [_closeDailyPositionItem setSelected:YES];
-        [self changeNormalStatu:_openPositionItem];
-        [self changeNormalStatu:_closePositionItem];
-        [self changeSelectStatu:_closeDailyPositionItem];
-    }
-    else if(view == _orderButton)
-    {
-        NSString *statu;
-        if([_buyItem isSelected])
-        {
-            statu = @"买";
-        }
-        else
-        {
-            statu = @"卖";
-        }
-        
-        if([_openPositionItem isSelected])
-        {
-            statu = [statu stringByAppendingString:@"开"];
-        }
-        else if([_closePositionItem isSelected])
-        {
-            statu = [statu stringByAppendingString:@"平"];
-        }
-        else
-        {
-            [DialogHelper showWarnTips:@"平今选项只限于上海交易所"];
-            return;
-        }
-        NSString *message = [NSString stringWithFormat:@"%@，%.f，%@，%@手",_model.name,_model.recentPrice,statu,_handTextField.text];
+        NSString *message = [NSString stringWithFormat:@"%@，%.f，买，%@手",_model.name,_model.recentPrice,_handTextField.text];
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认下单吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
         [alert show];
     }
@@ -477,19 +407,9 @@
 {
     if(buttonIndex == 1)
     {
-        NSLog(@"买入成功");
-        NSString *statu;
-        if([_buyItem isSelected])
-        {
-            statu = @"多";
-        }
-        else
-        {
-            statu = @"空";
-        }
         DealHoldModel *model = [[DealHoldModel alloc]init];
         model.name = _model.name;
-        model.buySell = statu;
+        model.buySell = @"买";
         model.hand = _handTextField.text;
         model.canuse = _handTextField.text;
         model.averagePrice = [NSString stringWithFormat:@"%.f", _model.recentPrice];
@@ -499,17 +419,6 @@
     }
 }
 
--(void)changeSelectStatu : (UIButton *)button
-{
-    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    button.backgroundColor = SELECT_COLOR;
-}
-
--(void)changeNormalStatu : (UIButton *)button
-{
-    [button setTitleColor:[ColorUtil colorWithHexString:@"#262626"] forState:UIControlStateNormal];
-    button.backgroundColor = [ColorUtil colorWithHexString:@"#aaaaaa"];
-}
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {

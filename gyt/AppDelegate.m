@@ -28,8 +28,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-//    [self test];
-//    return YES;
+    
+//    NSString *url = @"http://192.168.1.110:8080";
+//    NSString *content = @"{\"rpcname\":\"login\", \"rpcparams\" : {\"sessionId\":\"ceshi\",\"strUserName\":\"ceshi\",\"strPassword\":\"ceshi\",\"strIpAddress\":\"ceshi\",\"strMACAdress\":\"64-00-6A-89-6B-76\",\"clientID\": 3}}";
+//    [self postRequestWithURL:url content:content];
+    
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     _window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
@@ -97,6 +100,37 @@
 //    _window.rootViewController = controller;
 //    [_window makeKeyAndVisible];
 //}
+
+//    login(sessionId: #s, strUserName: #s, strPassword: #s, strIpAddress: #s, strMACAdress: #s, clientID: #i) => (response:CMobileLoginResponsePtr)
+
+
+-(void )postRequestWithURL:(NSString *)url content:(NSString *)text
+{
+    NSMutableURLRequest *request =
+    [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:@"application/x-www-form-urlencoded"
+   forHTTPHeaderField:@"Contsetent-Type"];
+    [request setHTTPBody:[text dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
+//    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+    
+    NSOperation *operation =[manager HTTPRequestOperationWithRequest:request
+                                          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                              // 成功后的处理
+                                              NSString *text = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
+                                              NSLog(@"返回结果->%@",text);
+                                              
+                                          }
+                                          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                              // 失败后的处理
+                                              NSLog(@"123");
+                                          }];
+        
+    [manager.operationQueue addOperation:operation];
+}
 
 
 

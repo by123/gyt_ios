@@ -45,6 +45,7 @@
     
     _insetImageView = [[UIImageView alloc]init];
     _insetImageView.hidden = YES;
+    _insetImageView.userInteractionEnabled = YES;
     [self addSubview:_insetImageView];
 }
 
@@ -61,7 +62,16 @@
     _insetImageView.hidden = NO;
     _insetImageView.image = image;
     _insetImageView.frame = CGRectMake(self.bounds.size.width - (self.bounds.size.height-20) - 10, 10, self.bounds.size.height - 20 , self.bounds.size.height-20);
+    if(_block)
+    {
+        UITapGestureRecognizer *recongnizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(OnRightImageClicked:)];
+        [_insetImageView addGestureRecognizer:recongnizer];
+    }
+}
 
+-(void)OnRightImageClicked : (id)sender
+{
+    _block(self);
 }
 
 

@@ -8,9 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface InsetTextField : UITextField<UITextFieldDelegate>
 
+typedef void (^InsetTextFieldBlock)(InsetTextField *insetTextField);
+
 @property (assign, nonatomic) BOOL hasTitle;
+
+@property (strong, nonatomic) InsetTextFieldBlock block;
+
 
 -(void)setInsetTitle : (NSString *)title
            font : (UIFont *)font;

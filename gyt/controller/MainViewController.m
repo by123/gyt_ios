@@ -14,6 +14,7 @@
 #import "DetailViewController.h"
 #import "ContractDB.h"
 #import "SearchViewController.h"
+#import "LoginViewController.h"
 #define Item_Height 40
 
 @interface MainViewController ()
@@ -250,9 +251,12 @@
 {
     if(!IS_NS_COLLECTION_EMPTY(_datas))
     {
-        ProductModel *model = [_datas objectAtIndex:indexPath.row];
-        [[ContractDB sharedContractDB] insertItem:DBHistoryContractTable model:model];
-        [DetailViewController show:self model:model];
+//        ProductModel *model = [_datas objectAtIndex:indexPath.row];
+//        [[ContractDB sharedContractDB] insertItem:DBHistoryContractTable model:model];
+//        [DetailViewController show:self model:model];
+        
+        [LoginViewController show:self];
+        
     }
 }
 

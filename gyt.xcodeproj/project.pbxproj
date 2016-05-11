@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		8109A9450AE28C984801318D /* libPods-gyt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 234300D9AA14CCAB18F37D31 /* libPods-gyt.a */; };
+		CF2A51051CE31A1D00F0EF3D /* CheckUpdateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2A51021CE31A1D00F0EF3D /* CheckUpdateUtil.m */; };
+		CF2A51061CE31A1D00F0EF3D /* UpdateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2A51041CE31A1D00F0EF3D /* UpdateModel.m */; };
+		CF2A510B1CE31B2F00F0EF3D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2A510A1CE31B2F00F0EF3D /* LoginViewController.m */; };
 		CF48C6341CD0DBF800BF4EF9 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF48C6331CD0DBF800BF4EF9 /* SearchViewController.m */; };
 		CF48C6431CD22C8B00BF4EF9 /* SearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF48C6421CD22C8B00BF4EF9 /* SearchCell.m */; };
 		CF4A6D181CBE25AA00B36C93 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D171CBE25AA00B36C93 /* main.m */; };
@@ -105,6 +108,12 @@
 /* Begin PBXFileReference section */
 		0649C12BFD5FDC358AE11BA4 /* Pods-gyt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gyt.release.xcconfig"; path = "Pods/Target Support Files/Pods-gyt/Pods-gyt.release.xcconfig"; sourceTree = "<group>"; };
 		234300D9AA14CCAB18F37D31 /* libPods-gyt.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-gyt.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF2A51011CE31A1D00F0EF3D /* CheckUpdateUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckUpdateUtil.h; sourceTree = "<group>"; };
+		CF2A51021CE31A1D00F0EF3D /* CheckUpdateUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckUpdateUtil.m; sourceTree = "<group>"; };
+		CF2A51031CE31A1D00F0EF3D /* UpdateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateModel.h; sourceTree = "<group>"; };
+		CF2A51041CE31A1D00F0EF3D /* UpdateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateModel.m; sourceTree = "<group>"; };
+		CF2A51091CE31B2F00F0EF3D /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		CF2A510A1CE31B2F00F0EF3D /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		CF48C6321CD0DBF800BF4EF9 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		CF48C6331CD0DBF800BF4EF9 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		CF48C6411CD22C8B00BF4EF9 /* SearchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchCell.h; sourceTree = "<group>"; };
@@ -311,6 +320,35 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		CF2A51001CE31A1000F0EF3D /* update */ = {
+			isa = PBXGroup;
+			children = (
+				CF2A51011CE31A1D00F0EF3D /* CheckUpdateUtil.h */,
+				CF2A51021CE31A1D00F0EF3D /* CheckUpdateUtil.m */,
+				CF2A51031CE31A1D00F0EF3D /* UpdateModel.h */,
+				CF2A51041CE31A1D00F0EF3D /* UpdateModel.m */,
+			);
+			name = update;
+			sourceTree = "<group>";
+		};
+		CF2A51071CE31A7000F0EF3D /* commen */ = {
+			isa = PBXGroup;
+			children = (
+				CF4A6D7D1CBE2EAB00B36C93 /* BaseViewController.h */,
+				CF4A6D7E1CBE2EAB00B36C93 /* BaseViewController.m */,
+			);
+			name = commen;
+			sourceTree = "<group>";
+		};
+		CF2A51081CE31AA100F0EF3D /* login */ = {
+			isa = PBXGroup;
+			children = (
+				CF2A51091CE31B2F00F0EF3D /* LoginViewController.h */,
+				CF2A510A1CE31B2F00F0EF3D /* LoginViewController.m */,
+			);
+			name = login;
+			sourceTree = "<group>";
+		};
 		CF4A6D0A1CBE25AA00B36C93 = {
 			isa = PBXGroup;
 			children = (
@@ -361,11 +399,11 @@
 		CF4A6D471CBE28DD00B36C93 /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				CF2A51081CE31AA100F0EF3D /* login */,
+				CF2A51071CE31A7000F0EF3D /* commen */,
 				CFC15BA31CC234270077FA19 /* main */,
 				CFC15BA21CC234160077FA19 /* menu */,
 				CFC15BA11CC234010077FA19 /* detail */,
-				CF4A6D7D1CBE2EAB00B36C93 /* BaseViewController.h */,
-				CF4A6D7E1CBE2EAB00B36C93 /* BaseViewController.m */,
 				CFDD2EB81CCF97F400E81E3F /* SplashViewController.h */,
 				CFDD2EB91CCF97F400E81E3F /* SplashViewController.m */,
 			);
@@ -401,6 +439,7 @@
 		CF4A6D491CBE28DD00B36C93 /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				CF2A51001CE31A1000F0EF3D /* update */,
 				CF4A6D4A1CBE28DD00B36C93 /* Account.h */,
 				CF4A6D4B1CBE28DD00B36C93 /* Account.m */,
 				CF4A6D4C1CBE28DD00B36C93 /* AppUtil.h */,
@@ -764,6 +803,7 @@
 				TargetAttributes = {
 					CF4A6D121CBE25AA00B36C93 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = AB86U4DT8H;
 					};
 				};
 			};
@@ -875,9 +915,11 @@
 				CFA3B8F11CD9AAB70063AE3E /* Section.m in Sources */,
 				CFDD2E9C1CCF4DE100E81E3F /* MJRefreshBackFooter.m in Sources */,
 				CFDFFA9D1CBF78DD00401CB3 /* RightMenuViewController.m in Sources */,
+				CF2A510B1CE31B2F00F0EF3D /* LoginViewController.m in Sources */,
 				CFC15BB31CC37C730077FA19 /* HandicapDetailModel.m in Sources */,
 				CF4A6D1B1CBE25AA00B36C93 /* AppDelegate.m in Sources */,
 				CFC15B8E1CBF94A90077FA19 /* MainTableCell.m in Sources */,
+				CF2A51051CE31A1D00F0EF3D /* CheckUpdateUtil.m in Sources */,
 				CF4A6D181CBE25AA00B36C93 /* main.m in Sources */,
 				CFA3B8F21CD9AAB70063AE3E /* YAxis.m in Sources */,
 				CFC15B941CC11B770077FA19 /* LeftMenuCell.m in Sources */,
@@ -900,6 +942,7 @@
 				CFDD2EA41CCF4DE100E81E3F /* MJRefreshBackNormalFooter.m in Sources */,
 				CFDD2DEB1CCA19C900E81E3F /* MyContractViewController.m in Sources */,
 				CFDFFA9A1CBF77AB00401CB3 /* MainViewController.m in Sources */,
+				CF2A51061CE31A1D00F0EF3D /* UpdateModel.m in Sources */,
 				CFC15BB01CC365650077FA19 /* HandicapBaseModel.m in Sources */,
 				CFDD2EA51CCF4DE100E81E3F /* MJRefreshBackStateFooter.m in Sources */,
 				CFA3B8ED1CD9AAB70063AE3E /* ColumnChartModel.m in Sources */,
@@ -1053,12 +1096,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREFIX_HEADER = /Users/by.huang/Desktop/by/gyt_ios/gyt/Common.pch;
 				INFOPLIST_FILE = gyt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.by.ios.gyt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1069,12 +1115,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREFIX_HEADER = /Users/by.huang/Desktop/by/gyt_ios/gyt/Common.pch;
 				INFOPLIST_FILE = gyt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.by.ios.gyt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
