@@ -9,6 +9,8 @@
 #import "LoginViewController.h"
 #import "InsetTextField.h"
 #import "DialogHelper.h"
+#import "JSONUtil.h"
+#import "LoginModel.h"
 
 @interface LoginViewController ()
 
@@ -76,7 +78,7 @@
     
     _nameTextField = [[InsetTextField alloc]initWithFrame:CGRectMake(20, 70, SCREEN_WIDTH-40, 40)];
     _nameTextField.hasTitle = YES;
-    _nameTextField.text = @"admin";
+    _nameTextField.text = @"800026042";
     [_nameTextField setInsetTitle:@"资金账号" font:[UIFont systemFontOfSize:14.0f]];
     _nameTextField.block = ^(InsetTextField *insetTextField) {
         insetTextField.text = @"";
@@ -86,7 +88,7 @@
     
     _passwordTextField = [[InsetTextField alloc]initWithFrame:CGRectMake(20, 120, SCREEN_WIDTH-40, 40)];
     _passwordTextField.hasTitle = YES;
-    _passwordTextField.text = @"admin";
+    _passwordTextField.text = @"123456";
     [_passwordTextField setInsetTitle:@"登录密码" font:[UIFont systemFontOfSize:14.0f]];
     __weak LoginViewController *weakSelf = self;
     _passwordTextField.block = ^(InsetTextField *insetTextField){
@@ -142,18 +144,52 @@
     
     [self hideKeyboard];
 
-    //请求登录
-    if([name isEqualToString:@"admin"] && [password isEqualToString:@"admin"])
-    {
-        [DialogHelper showSuccessTips:@"登录成功"];
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }
-    else
-    {
-        [DialogHelper showTips:@"账户名或者密码错误"];
-    }
+    
+    LoginModel *model = [[LoginModel alloc]init];
+    model.sessionId = @"ceshi";
+    model.strUserName = _nameTextField.text;
+    model.strPassword = _passwordTextField.text;
+    model.strIpAddress = @"ceshi";
+    model.strMACAdress = @"64-00-6A-89-6B-76";
+    model.clientID = 3;
+    
+    NSString *jsonStr = [JSONUtil parse:@"login" params:[JSONUtil parseStr:model]];
+    NSLog(@"%@",jsonStr);
+    [self requestLogin:jsonStr];
+    
 }
 
+
+#pragma mark 请求登录
+-(void)requestLogin : (NSString *)jsonStr
+{
+    __weak MBProgressHUD *hua = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    NSMutableURLRequest *request =
+    [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:Root_Url]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:@"application/x-www-form-urlencoded"
+   forHTTPHeaderField:@"Contsetent-Type"];
+    [request setHTTPBody:[jsonStr dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
+    //    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+    
+    NSOperation *operation =[manager HTTPRequestOperationWithRequest:request
+     success:^(AFHTTPRequestOperation *operation, id responseObject) {
+         // 成功后的处理
+         NSString *text = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
+         [DialogHelper showSuccessTips:[NSString stringWithFormat:@"登录成功->%@",text]];
+         [hua setHidden:YES];
+     }
+     failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+         NSLog(@"123");
+         [DialogHelper showTips:@"登录失败!"];
+         [hua setHidden:YES];
+     }];
+    [manager.operationQueue addOperation:operation];
+
+}
 
 #pragma mark 隐藏键盘
 -(void)hideKeyboard
@@ -176,5 +212,6 @@
 {
     [self hideKeyboard];
 }
+
 
 @end

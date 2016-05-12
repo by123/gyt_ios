@@ -1,0 +1,33 @@
+//
+//  JSONUtil.m
+//  gyt
+//
+//  Created by by.huang on 16/5/12.
+//  Copyright © 2016年 by.huang. All rights reserved.
+//
+
+#import "JSONUtil.h"
+#import "BaseRequestModel.h"
+
+@implementation JSONUtil
+
+
++(NSString *)parse : (NSString *)name
+        params: (NSMutableDictionary *)params
+{    
+    BaseRequestModel *model = [[BaseRequestModel alloc]init];
+    model.rpcname = name;
+    model.rpcparams = params;
+    
+    NSMutableDictionary *dict = model.mj_keyValues;
+    
+    return dict.mj_JSONString;
+}
+
++(NSMutableDictionary *)parseStr : (NSObject *)model
+{
+    NSMutableDictionary *dict = model.mj_keyValues;
+    return dict;
+}
+
+@end
