@@ -188,6 +188,7 @@
 		    continue;
 		}
 		plotWidth = (sec.frame.size.width-sec.paddingLeft)/(self.rangeTo-self.rangeFrom);
+        plotHeight = (sec.frame.size.height - sec.paddingTop) / (self.rangeTo - self.rangeFrom);
 		for(int sIndex=0;sIndex<sec.series.count;sIndex++){
 			NSMutableDictionary *serie = sec.series[sIndex];
 
@@ -200,10 +201,12 @@
 					if([serie isKindOfClass:[NSArray class]]){
                         NSArray *se = (NSArray *)serie;
 						for(int i=0;i<[se count];i++){
-							[self drawSerie:se[i]];
+#pragma mark RSI,KDJ图
+//							[self drawSerie:se[i]];
 						}
 					}else{
-						[self drawSerie:serie];
+#pragma mark WR,VR图
+//						[self drawSerie:serie];
 					}
 					break;
 				}
@@ -211,9 +214,11 @@
 				if([serie isKindOfClass:[NSArray class]]){
                     NSArray *se = (NSArray *)serie;
 					for(int i=0;i<[se count];i++){
-						[self drawSerie:se[i]];
+#pragma mark WR,VR图
+//						[self drawSerie:se[i]];
 					}
 				}else{
+#pragma makr vol,k线
 					[self drawSerie:serie];
 				}
 			}
@@ -916,7 +921,6 @@
 
 -(void)handleSlide : (CGPoint)point
 {
-    
     if(point.x < SCREEN_WIDTH /4)
     {
         if(_slide.x == 0)

@@ -12,6 +12,7 @@
 #import "SlideNavigationController.h"
 #import "MyContractViewController.h"
 #import "WarnContractViewController.h"
+#import "LoginViewController.h"
 
 @interface RightMenuViewController ()
 
@@ -123,6 +124,9 @@
             break;
         case 4:
             
+            break;
+        case 5:
+            [LoginViewController show:self.controller];
             break;
             
         default:

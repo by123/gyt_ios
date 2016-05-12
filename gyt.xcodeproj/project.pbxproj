@@ -106,6 +106,9 @@
 		CFF183821CE45B2B00E991C4 /* JSONUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF183811CE45B2B00E991C4 /* JSONUtil.m */; };
 		CFF183861CE45E1400E991C4 /* BaseRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF183851CE45E1400E991C4 /* BaseRequestModel.m */; };
 		CFF183891CE460A500E991C4 /* LoginModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF183881CE460A500E991C4 /* LoginModel.m */; };
+		CFF1838C1CE472CE00E991C4 /* UserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF1838B1CE472CE00E991C4 /* UserInfoModel.m */; };
+		CFF183901CE4789000E991C4 /* UserInfoDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF1838F1CE4789000E991C4 /* UserInfoDataModel.m */; };
+		CFF183931CE4BCFA00E991C4 /* HttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF183921CE4BCFA00E991C4 /* HttpRequest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -302,6 +305,12 @@
 		CFF183851CE45E1400E991C4 /* BaseRequestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseRequestModel.m; sourceTree = "<group>"; };
 		CFF183871CE460A500E991C4 /* LoginModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginModel.h; sourceTree = "<group>"; };
 		CFF183881CE460A500E991C4 /* LoginModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginModel.m; sourceTree = "<group>"; };
+		CFF1838A1CE472CE00E991C4 /* UserInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserInfoModel.h; path = ../utils/UserInfoModel.h; sourceTree = "<group>"; };
+		CFF1838B1CE472CE00E991C4 /* UserInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserInfoModel.m; path = ../utils/UserInfoModel.m; sourceTree = "<group>"; };
+		CFF1838E1CE4789000E991C4 /* UserInfoDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoDataModel.h; sourceTree = "<group>"; };
+		CFF1838F1CE4789000E991C4 /* UserInfoDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoDataModel.m; sourceTree = "<group>"; };
+		CFF183911CE4BCFA00E991C4 /* HttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpRequest.h; sourceTree = "<group>"; };
+		CFF183921CE4BCFA00E991C4 /* HttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpRequest.m; sourceTree = "<group>"; };
 		E4E69CC7BA857424957CA231 /* Pods-gyt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gyt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-gyt/Pods-gyt.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -422,6 +431,7 @@
 		CF4A6D481CBE28DD00B36C93 /* data */ = {
 			isa = PBXGroup;
 			children = (
+				CFF1838D1CE4787A00E991C4 /* user */,
 				CFF183831CE45DFA00E991C4 /* base */,
 				CFDD2DD31CC8AEBD00E81E3F /* detail */,
 				CF4A6D721CBE2BCD00B36C93 /* ResponseModel.h */,
@@ -468,6 +478,8 @@
 				CFC15BE11CC74F760077FA19 /* ContractDB.m */,
 				CFF183801CE45B2B00E991C4 /* JSONUtil.h */,
 				CFF183811CE45B2B00E991C4 /* JSONUtil.m */,
+				CFF183911CE4BCFA00E991C4 /* HttpRequest.h */,
+				CFF183921CE4BCFA00E991C4 /* HttpRequest.m */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -783,6 +795,17 @@
 			name = base;
 			sourceTree = "<group>";
 		};
+		CFF1838D1CE4787A00E991C4 /* user */ = {
+			isa = PBXGroup;
+			children = (
+				CFF1838A1CE472CE00E991C4 /* UserInfoModel.h */,
+				CFF1838B1CE472CE00E991C4 /* UserInfoModel.m */,
+				CFF1838E1CE4789000E991C4 /* UserInfoDataModel.h */,
+				CFF1838F1CE4789000E991C4 /* UserInfoDataModel.m */,
+			);
+			name = user;
+			sourceTree = "<group>";
+		};
 		D4AF553BC76F6924E98CCF9D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -974,6 +997,7 @@
 				CFDD2EBA1CCF97F400E81E3F /* SplashViewController.m in Sources */,
 				CF4A6D7F1CBE2EAB00B36C93 /* BaseViewController.m in Sources */,
 				CFDD2EAB1CCF4DE100E81E3F /* UIScrollView+MJExtension.m in Sources */,
+				CFF1838C1CE472CE00E991C4 /* UserInfoModel.m in Sources */,
 				CFDD2DDC1CC8C01000E81E3F /* DealHoldByModel.m in Sources */,
 				CF4A6D5A1CBE28DD00B36C93 /* AppUtil.m in Sources */,
 				CFC15B911CBFA6830077FA19 /* ProductModel.m in Sources */,
@@ -994,12 +1018,14 @@
 				CFDD2DDF1CC8C08E00E81E3F /* DealProfitModel.m in Sources */,
 				CFDD2EA61CCF4DE100E81E3F /* MJRefreshGifHeader.m in Sources */,
 				CF4A6D6F1CBE2A0800B36C93 /* IDSExtendedLabel.m in Sources */,
+				CFF183931CE4BCFA00E991C4 /* HttpRequest.m in Sources */,
 				CF48C6431CD22C8B00BF4EF9 /* SearchCell.m in Sources */,
 				CFDD2DD61CC8AEE100E81E3F /* DealHoldModel.m in Sources */,
 				CFA3B8EA1CD9AAB70063AE3E /* AreaChartModel.m in Sources */,
 				CFC15BAD1CC361A80077FA19 /* HandicapModel.m in Sources */,
 				CFA3B8EC1CD9AAB70063AE3E /* ChartModel.m in Sources */,
 				CFDD2DE41CCA0D8200E81E3F /* RightMenuCell.m in Sources */,
+				CFF183901CE4789000E991C4 /* UserInfoDataModel.m in Sources */,
 				CFDD2E9E1CCF4DE100E81E3F /* MJRefreshFooter.m in Sources */,
 				CF4A6D711CBE2A0800B36C93 /* UIView+Frame.m in Sources */,
 				CF4A6D5D1CBE28DD00B36C93 /* IDSAlertSheet.m in Sources */,

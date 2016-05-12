@@ -15,6 +15,10 @@
 #import "ContractDB.h"
 #import "SearchViewController.h"
 #import "LoginViewController.h"
+#import "JSONUtil.h"
+#import "UserInfoDataModel.h"
+#import "UserInfoModel.h"
+#import "DialogHelper.h"
 #define Item_Height 40
 
 @interface MainViewController ()
@@ -64,6 +68,14 @@
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateView:) name:Notify_Menu_Title object:nil];
     
+    if([[Account sharedAccount] isLogin])
+    {
+        [self getUserInfo];
+    }
+    else
+    {
+        [LoginViewController show:self];
+    }
 }
 
 
@@ -251,12 +263,10 @@
 {
     if(!IS_NS_COLLECTION_EMPTY(_datas))
     {
-//        ProductModel *model = [_datas objectAtIndex:indexPath.row];
-//        [[ContractDB sharedContractDB] insertItem:DBHistoryContractTable model:model];
-//        [DetailViewController show:self model:model];
-        
-        [LoginViewController show:self];
-        
+            ProductModel *model = [_datas objectAtIndex:indexPath.row];
+            [[ContractDB sharedContractDB] insertItem:DBHistoryContractTable model:model];
+            [DetailViewController show:self model:model];
+
     }
 }
 
@@ -335,4 +345,43 @@
     [_tableView reloadData];
 }
 
+
+#pragma mark 获取用户资料
+-(void)getUserInfo
+{
+    UserInfoModel *data = [[UserInfoModel alloc]init];
+    data.m_strAccountID = [[Account sharedAccount] getUid];;
+    data.m_nAccountType = @"";
+    data.m_strPassword = @"";
+    data.m_nStatus = @"";
+    data.m_bAllowTrade = NO;
+    data.m_bSimAccount = NO;
+    data.m_bSubAccount = YES;
+    data.m_strName = @"";
+    data.m_strUserID = @"";
+    data.m_strBrokerID = @"";
+    
+    
+    UserInfoDataModel *model = [[UserInfoDataModel alloc]init];
+    model.sessionId = [[Account sharedAccount] getSessionId];
+    model.accountInfo = [JSONUtil parseStr:data];
+
+    
+    NSMutableDictionary *dic = [JSONUtil parseStr:model];
+    NSString *jsonStr = [JSONUtil parse:Request_UserInfo params:dic];
+    
+    [self requestUserInfo : jsonStr];
+}
+
+#pragma mark 请求用户资料
+-(void)requestUserInfo : (NSString *)jsonStr
+{
+    
+    [[HttpRequest sharedHttpRequest] post:jsonStr view:self.view success:^(id responseObject) {
+        
+    } fail:^(NSError *error) {
+        
+    }];
+    
+}
 @end

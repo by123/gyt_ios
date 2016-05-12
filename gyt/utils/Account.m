@@ -14,48 +14,46 @@
 SINGLETON_IMPLEMENTION(Account);
 
 
-- (void)savaAccount:(Account *)account
+- (void)saveAccount : (NSString *)uid
+          sessionid : (NSString *)sessionId
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setValue:account.uid forKey:UID];
-    [userDefaults setValue:account.token forKey:TOKEN];
+    [userDefaults setValue:uid forKey:UID];
+    [userDefaults setValue:sessionId forKey:SESSIONID];
 
 }
 
-- (void)saveTel:(NSString *)tel
+- (void)saveSessionid : (NSString *)sessionId
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setValue:tel forKey:TEL];
+    [userDefaults setValue:sessionId forKey:SESSIONID];
     
 }
+
+
 
 - (BOOL)isLogin
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *uid = [userDefaults objectForKey:UID];
-    NSString *token = [userDefaults objectForKey:TOKEN];
-    return (!IS_NS_STRING_EMPTY(uid) && !IS_NS_STRING_EMPTY(token));
+    NSString *sessionId= [userDefaults objectForKey:SESSIONID];
+    if(!IS_NS_STRING_EMPTY(uid) && !IS_NS_STRING_EMPTY(sessionId))
+    {
+        return YES;
+    }
+    return NO;
 }
 
 - (NSString *)getUid
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *uid = [userDefaults objectForKey:UID];
-    return uid;
+    return [userDefaults objectForKey:UID];
+
 }
 
--(NSString *)getToken
+- (NSString *)getSessionId
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *token = [userDefaults objectForKey:TOKEN];
-    return token;
+    return [userDefaults objectForKey:SESSIONID];
 }
-
--(NSString *)getTel
-{
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *tel = [userDefaults objectForKey:TEL];
-    return tel;
-}
-
 @end

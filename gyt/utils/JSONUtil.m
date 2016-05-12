@@ -21,6 +21,7 @@
     
     NSMutableDictionary *dict = model.mj_keyValues;
     
+    NSLog(@"组装json数据->%@",dict.mj_JSONString);
     return dict.mj_JSONString;
 }
 

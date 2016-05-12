@@ -18,6 +18,8 @@
     [datas addObject:[RightMenuModel build:@"系统设置" image:@"ic_setting"]];
     [datas addObject:[RightMenuModel build:@"关于" image:@"ic_about"]];
     [datas addObject:[RightMenuModel build:@"退出帐号" image:@"ic_logout"]];
+    [datas addObject:[RightMenuModel build:@"登录" image:@"ic_about"]];
+
     return datas;
 }
 

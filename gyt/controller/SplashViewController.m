@@ -101,21 +101,9 @@
 
 -(void)goMainViewController
 {
-//    MainViewController *mainViewController =[[MainViewController alloc]init];
-//    
-//    SlideNavigationController *controller = [[SlideNavigationController alloc]initWithRootViewController:mainViewController];
-//    
-//    LeftMenuViewContriller *leftMenu = [[LeftMenuViewContriller alloc]init];
-//    leftMenu.view.backgroundColor = SUB_COLOR;
-//    
-//    RightMenuViewController *rightMenu = [[RightMenuViewController alloc]init];
-//    rightMenu.view.backgroundColor = SUB_COLOR;
-//    rightMenu.controller = controller;
-//    
-//    controller.leftMenu = leftMenu;
-//    controller.righMenu = rightMenu;
+    MainViewController *mainViewController =[[MainViewController alloc]init];
+    [self.navigationController pushViewController:mainViewController animated:YES];
     
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

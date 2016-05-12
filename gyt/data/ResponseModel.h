@@ -34,16 +34,8 @@
 
 @interface ResponseModel : NSObject
 
-@property (assign, nonatomic) int code;
+@property (strong, nonatomic) id error;
 
-@property (strong, nonatomic) id data;
-
-@property (copy, nonatomic) NSString *msg;
-
-@property (copy, nonatomic) NSString *token;
-
-@property (copy, nonatomic) NSString *uid;
-
-@property (copy, nonatomic) NSString *status;
+@property (strong, nonatomic) id response;
 
 @end

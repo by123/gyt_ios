@@ -10,31 +10,23 @@
 
 #define ACCOUNT_INFO_PATH [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"account_info.data"]
 
-#define TOKEN @"hh_token"
-#define UID @"hh_uid"
-#define TEL @"hh_tel"
+#define UID @"gyt_uid"
+#define SESSIONID @"gyt_sessionid"
 
 @interface Account : NSObject
 
-@property (copy , nonatomic) NSString *uid;
-
-@property (copy , nonatomic) NSString *token;
-
-@property (copy , nonatomic) NSString *tel;
-
-
 SINGLETON_DECLARATION(Account);
 
-- (void)savaAccount:(Account *)account;
+- (void)saveAccount : (NSString *)uid
+          sessionid : (NSString *)sessionId;
 
-- (void)saveTel:(NSString *)tel;
+- (void)saveSessionid : (NSString *)sessionId;
 
 - (BOOL)isLogin;
 
 - (NSString *)getUid;
 
-- (NSString *)getToken;
+- (NSString *)getSessionId;
 
-- (NSString *)getTel;
 
 @end

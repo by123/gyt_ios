@@ -56,6 +56,7 @@
         float close = [[data[i] objectAtIndex:1] floatValue];
 
         float ix  = sec.frame.origin.x+sec.paddingLeft+(i-chart.rangeFrom)*chart.plotWidth;
+        float iy  = sec.frame.origin.y+ sec.paddingTop + (120) *chart.plotHeight;
         float iNx = sec.frame.origin.x+sec.paddingLeft+(i+1-chart.rangeFrom)*chart.plotWidth;
         float iyo = [chart getLocalY:open withSection:section withAxis:yAxis];
         float iyc = [chart getLocalY:close withSection:section withAxis:yAxis];
@@ -66,6 +67,12 @@
             CGContextSetStrokeColorWithColor(context, [[UIColor alloc] initWithRed:0.2 green:0.2 blue:0.2 alpha:1.0].CGColor);
             CGContextMoveToPoint(context, ix+chart.plotWidth/2, sec.frame.origin.y+sec.paddingTop);
             CGContextAddLineToPoint(context,ix+chart.plotWidth/2,sec.frame.size.height+sec.frame.origin.y);
+            CGContextStrokePath(context);
+            
+            
+            CGContextSetStrokeColorWithColor(context, [[UIColor alloc] initWithRed:0.2 green:0.2 blue:0.2 alpha:1.0].CGColor);
+            CGContextMoveToPoint(context, sec.paddingLeft + sec.frame.origin.x,iy+chart.plotHeight/2);
+            CGContextAddLineToPoint(context,sec.frame.size.width + sec.frame.origin.x,iy+chart.plotHeight/2);
             CGContextStrokePath(context);
         }
 

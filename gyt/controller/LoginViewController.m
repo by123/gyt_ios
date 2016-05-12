@@ -153,8 +153,10 @@
     model.strMACAdress = @"64-00-6A-89-6B-76";
     model.clientID = 3;
     
-    NSString *jsonStr = [JSONUtil parse:@"login" params:[JSONUtil parseStr:model]];
-    NSLog(@"%@",jsonStr);
+    [[Account sharedAccount] saveAccount:model.strUserName sessionid:model.sessionId];
+    
+    NSString *jsonStr = [JSONUtil parse:Request_Login params:[JSONUtil parseStr:model]];
+//    NSLog(@"%@",jsonStr);
     [self requestLogin:jsonStr];
     
 }
@@ -163,31 +165,29 @@
 #pragma mark 请求登录
 -(void)requestLogin : (NSString *)jsonStr
 {
-    __weak MBProgressHUD *hua = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    NSMutableURLRequest *request =
-    [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:Root_Url]];
-    [request setHTTPMethod:@"POST"];
-    [request setValue:@"application/x-www-form-urlencoded"
-   forHTTPHeaderField:@"Contsetent-Type"];
-    [request setHTTPBody:[jsonStr dataUsingEncoding:NSUTF8StringEncoding]];
     
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
-    //    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+    [[HttpRequest sharedHttpRequest] post:jsonStr view:self.view success:^(id responseObject) {
+        
+        NSString *text = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSLog(@"返回结果->%@",text);
+        ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
+        int code = [[model.response objectForKey:@"success"] integerValue];
+        if(code == 1)
+        {
+            NSString *sessionId = [model.response objectForKey:@"sessionId"];
+            [[Account sharedAccount]saveSessionid:sessionId];
+            [DialogHelper showSuccessTips:[NSString stringWithFormat:@"登录成功->%@",text]];
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+        else
+        {
+            [DialogHelper showTips:@"登录失败!"];
+        }
+        
+    } fail:^(NSError *error) {
+        [DialogHelper showTips:@"登录失败!"];
+    }];
     
-    NSOperation *operation =[manager HTTPRequestOperationWithRequest:request
-     success:^(AFHTTPRequestOperation *operation, id responseObject) {
-         // 成功后的处理
-         NSString *text = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
-         [DialogHelper showSuccessTips:[NSString stringWithFormat:@"登录成功->%@",text]];
-         [hua setHidden:YES];
-     }
-     failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-         NSLog(@"123");
-         [DialogHelper showTips:@"登录失败!"];
-         [hua setHidden:YES];
-     }];
-    [manager.operationQueue addOperation:operation];
 
 }
 

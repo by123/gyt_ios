@@ -35,31 +35,53 @@
     
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     BOOL firstLaunch = [userDefault boolForKey:First_Launch];
-    
-    MainViewController *mainViewController =[[MainViewController alloc]init];
-    SlideNavigationController *controller = [[SlideNavigationController alloc]initWithRootViewController:mainViewController];
-    
-    LeftMenuViewContriller *leftMenu = [[LeftMenuViewContriller alloc]init];
-    leftMenu.view.backgroundColor = SUB_COLOR;
-    
-    RightMenuViewController *rightMenu = [[RightMenuViewController alloc]init];
-    rightMenu.view.backgroundColor = SUB_COLOR;
-    rightMenu.controller = controller;
-    
-    controller.leftMenu = leftMenu;
-    controller.righMenu = rightMenu;
-    _window.rootViewController = controller;
-    [_window makeKeyAndVisible];
 
     if(!firstLaunch)
     {
         [userDefault setBool:YES forKey:First_Launch];
         SplashViewController *splashViewController = [[SplashViewController alloc]init];
-        [controller presentViewController:splashViewController animated:NO completion:nil];
+        SlideNavigationController *controller = [[SlideNavigationController alloc]initWithRootViewController:splashViewController];
+        
+        LeftMenuViewContriller *leftMenu = [[LeftMenuViewContriller alloc]init];
+        leftMenu.view.backgroundColor = SUB_COLOR;
+        
+        RightMenuViewController *rightMenu = [[RightMenuViewController alloc]init];
+        rightMenu.view.backgroundColor = SUB_COLOR;
+        rightMenu.controller = controller;
+        
+        controller.leftMenu = leftMenu;
+        controller.righMenu = rightMenu;
+        
+        _window.rootViewController = controller;
+        [_window makeKeyAndVisible];
+    }
+    
+    else
+    {
+        MainViewController *mainViewController =[[MainViewController alloc]init];
+        SlideNavigationController *controller = [[SlideNavigationController alloc]initWithRootViewController:mainViewController];
+        
+        LeftMenuViewContriller *leftMenu = [[LeftMenuViewContriller alloc]init];
+        leftMenu.view.backgroundColor = SUB_COLOR;
+        
+        RightMenuViewController *rightMenu = [[RightMenuViewController alloc]init];
+        rightMenu.view.backgroundColor = SUB_COLOR;
+        rightMenu.controller = controller;
+        
+        controller.leftMenu = leftMenu;
+        controller.righMenu = rightMenu;
+        _window.rootViewController = controller;
+        [_window makeKeyAndVisible];
     }
 
     [self initDB];
     return YES;
+}
+
+- (const char *)UnicodeToISO88591:(NSString *)src
+{
+    NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingISOLatin1);
+    return [src cStringUsingEncoding:enc];
 }
 
 

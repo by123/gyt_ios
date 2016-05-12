@@ -23,6 +23,7 @@
 	bool  isSectionInitialized;
 	float borderWidth;
 	float plotWidth;
+    float plotHeight;
 	float plotPadding;
 	float plotCount;
 	float paddingLeft;
@@ -48,6 +49,7 @@
 @property (nonatomic)        bool  isInitialized;
 @property (nonatomic)        bool  isSectionInitialized;
 @property (nonatomic)        float borderWidth;
+@property (nonatomic)        float plotHeight;
 @property (nonatomic)        float plotWidth;
 @property (nonatomic)        float plotPadding;
 @property (nonatomic)        float plotCount;

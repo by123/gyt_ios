@@ -16,6 +16,9 @@
 #import "ResponseModel.h"
 #import "UIView+Frame.h"
 #import "Singleton.h"
+#import "Account.h"
+#import "ResponseModel.h"
+#import "HttpRequest.h"
 
 
 //-------------------获取设备大小-------------------------
