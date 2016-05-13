@@ -8,8 +8,6 @@
 
 #import "WarnDialog.h"
 #import "InsetTextField.h"
-#import "AppUtil.h"
-#import "DialogHelper.h"
 #import "ContractDB.h"
 
 #define DialogWidth  SCREEN_WIDTH - 30

@@ -8,7 +8,6 @@
 //
 
 #import "AppUtil.h"
-#import "DialogHelper.h"
 #import <CommonCrypto/CommonDigest.h>
 
 @implementation AppUtil

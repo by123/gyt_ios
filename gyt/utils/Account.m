@@ -23,6 +23,14 @@ SINGLETON_IMPLEMENTION(Account);
 
 }
 
+
+- (void)saveUid : (NSString *)uid
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setValue:uid forKey:UID];
+}
+
+
 - (void)saveSessionid : (NSString *)sessionId
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];

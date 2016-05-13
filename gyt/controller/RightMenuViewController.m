@@ -13,6 +13,7 @@
 #import "MyContractViewController.h"
 #import "WarnContractViewController.h"
 #import "LoginViewController.h"
+#import "LoginModel.h"
 
 @interface RightMenuViewController ()
 
@@ -123,10 +124,7 @@
             
             break;
         case 4:
-            
-            break;
-        case 5:
-            [LoginViewController show:self.controller];
+            [self logout];
             break;
             
         default:
@@ -134,4 +132,29 @@
     }
 }
 
+
+
+#pragma mark 登出
+-(void)logout
+{
+    LoginModel *model = [[LoginModel alloc]init];
+    model.strUserName = [[Account sharedAccount]getUid];
+    model.sessionId = [[Account sharedAccount]getSessionId];
+    
+    [JSONUtil parse:Request_Logout params:[JSONUtil parseStr:model]];
+
+    NSMutableDictionary *dic = [JSONUtil parseStr:model];
+    NSString *jsonStr = dic.mj_JSONString;
+    [self requestLogout:jsonStr];
+}
+
+
+-(void)requestLogout : (NSString *)jsonStr
+{
+    [[HttpRequest sharedHttpRequest]post:jsonStr view:self.controller.view success:^(id responseObject) {
+        
+        
+    } fail:^(NSError *error) {
+    }];
+}
 @end

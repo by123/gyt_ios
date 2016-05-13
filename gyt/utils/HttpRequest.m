@@ -7,7 +7,6 @@
 //
 
 #import "HttpRequest.h"
-#import "DialogHelper.h"
 @implementation HttpRequest
 
 SINGLETON_IMPLEMENTION(HttpRequest);

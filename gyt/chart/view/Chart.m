@@ -202,11 +202,11 @@
                         NSArray *se = (NSArray *)serie;
 						for(int i=0;i<[se count];i++){
 #pragma mark RSI,KDJ图
-//							[self drawSerie:se[i]];
+							[self drawSerie:se[i]];
 						}
 					}else{
 #pragma mark WR,VR图
-//						[self drawSerie:serie];
+						[self drawSerie:serie];
 					}
 					break;
 				}
@@ -215,10 +215,10 @@
                     NSArray *se = (NSArray *)serie;
 					for(int i=0;i<[se count];i++){
 #pragma mark WR,VR图
-//						[self drawSerie:se[i]];
+						[self drawSerie:se[i]];
 					}
 				}else{
-#pragma makr vol,k线
+#pragma mark vol,k线
 					[self drawSerie:serie];
 				}
 			}
@@ -277,7 +277,6 @@
                 [text drawAtPoint:CGPointMake(sec.frame.origin.x+sec.paddingLeft+2+w,sec.frame.origin.y+2) withAttributes:md];
                 w += [text sizeWithAttributes:md].width;
                 
-                NSLog(@"这是什么->%@",text);
                 if(_slide)
                 {
                     [_slide setData:text];
@@ -296,7 +295,12 @@
 
 #pragma mark 画k线走势和滑动的基线
 -(void)drawSerie:(NSMutableDictionary *)serie{
-    NSString   *type  = serie[@"type"];
+    NSString *type  = serie[@"type"];
+//    if([type isEqualToString:@"candle"] || [type isEqualToString:@"column"])
+//    {
+//        return;
+//    }
+    NSLog(@"%@",type);
     ChartModel *model = [self getModel:type];
     [model drawSerie:self serie:serie];
 

@@ -11,7 +11,6 @@
 #import "HandicapView.h"
 #import "DealView.h"
 #import "ContractDB.h"
-#import "DialogHelper.h"
 #import "WarnDialog.h"
 #import "NewsView.h"
 #import "CandleView.h"

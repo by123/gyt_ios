@@ -14,6 +14,7 @@
 
 #pragma mark 广播
 #define Notify_Menu_Title @"menu_title"
+#define Notify_Update_UserInfo @"update_userinfo"
 
 #pragma mark 网络请求相关
 #define Root_Url @"http://192.168.1.106:8080"
@@ -21,6 +22,7 @@
 
 //请求小区列表
 #define Request_Login @"login"
+#define Request_Logout @"logout"
 #define Request_UserInfo @"queryAccountBaseInfo"
 #define Info_Net_Error @"网络异常，点击刷新"
 

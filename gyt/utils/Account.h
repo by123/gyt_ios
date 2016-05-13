@@ -20,6 +20,8 @@ SINGLETON_DECLARATION(Account);
 - (void)saveAccount : (NSString *)uid
           sessionid : (NSString *)sessionId;
 
+- (void)saveUid : (NSString *)uid;
+
 - (void)saveSessionid : (NSString *)sessionId;
 
 - (BOOL)isLogin;

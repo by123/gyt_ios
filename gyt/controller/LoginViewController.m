@@ -8,8 +8,6 @@
 
 #import "LoginViewController.h"
 #import "InsetTextField.h"
-#import "DialogHelper.h"
-#import "JSONUtil.h"
 #import "LoginModel.h"
 
 @interface LoginViewController ()
@@ -78,7 +76,7 @@
     
     _nameTextField = [[InsetTextField alloc]initWithFrame:CGRectMake(20, 70, SCREEN_WIDTH-40, 40)];
     _nameTextField.hasTitle = YES;
-    _nameTextField.text = @"800026042";
+    _nameTextField.text = @"800025294";
     [_nameTextField setInsetTitle:@"资金账号" font:[UIFont systemFontOfSize:14.0f]];
     _nameTextField.block = ^(InsetTextField *insetTextField) {
         insetTextField.text = @"";
@@ -153,7 +151,7 @@
     model.strMACAdress = @"64-00-6A-89-6B-76";
     model.clientID = 3;
     
-    [[Account sharedAccount] saveAccount:model.strUserName sessionid:model.sessionId];
+    [[Account sharedAccount] saveUid:model.strUserName];
     
     NSString *jsonStr = [JSONUtil parse:Request_Login params:[JSONUtil parseStr:model]];
 //    NSLog(@"%@",jsonStr);
@@ -177,6 +175,7 @@
             NSString *sessionId = [model.response objectForKey:@"sessionId"];
             [[Account sharedAccount]saveSessionid:sessionId];
             [DialogHelper showSuccessTips:[NSString stringWithFormat:@"登录成功->%@",text]];
+            [[NSNotificationCenter defaultCenter] postNotificationName:Notify_Update_UserInfo object:nil];
             [self dismissViewControllerAnimated:YES completion:nil];
         }
         else

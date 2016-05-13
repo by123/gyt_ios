@@ -15,10 +15,8 @@
 #import "ContractDB.h"
 #import "SearchViewController.h"
 #import "LoginViewController.h"
-#import "JSONUtil.h"
 #import "UserInfoDataModel.h"
 #import "UserInfoModel.h"
-#import "DialogHelper.h"
 #define Item_Height 40
 
 @interface MainViewController ()
@@ -66,22 +64,15 @@
     [self testData];
     [self initView];
     
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getUserInfo) name:Notify_Update_UserInfo object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateView:) name:Notify_Menu_Title object:nil];
-    
-    if([[Account sharedAccount] isLogin])
-    {
-        [self getUserInfo];
-    }
-    else
-    {
-        [LoginViewController show:self];
-    }
 }
 
 
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter]removeObserver:self name:Notify_Menu_Title object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:Notify_Update_UserInfo object:nil];
 }
 
 
@@ -114,6 +105,11 @@
     [self.view addSubview:_tableView];
 
     [self initHeaderView];
+    
+    if([[Account sharedAccount]isLogin])
+    {
+        [self getUserInfo];
+    }
 }
 
 
@@ -263,9 +259,16 @@
 {
     if(!IS_NS_COLLECTION_EMPTY(_datas))
     {
+        if([[Account sharedAccount]isLogin])
+        {
             ProductModel *model = [_datas objectAtIndex:indexPath.row];
             [[ContractDB sharedContractDB] insertItem:DBHistoryContractTable model:model];
             [DetailViewController show:self model:model];
+        }
+        else
+        {
+            [LoginViewController show:self];
+        }
 
     }
 }
@@ -377,11 +380,13 @@
 -(void)requestUserInfo : (NSString *)jsonStr
 {
     
-    [[HttpRequest sharedHttpRequest] post:jsonStr view:self.view success:^(id responseObject) {
-        
-    } fail:^(NSError *error) {
-        
-    }];
+//    [[HttpRequest sharedHttpRequest] post:jsonStr view:self.view success:^(id responseObject) {
+//        
+//    } fail:^(NSError *error) {
+//        
+//    }];
     
 }
+
+
 @end

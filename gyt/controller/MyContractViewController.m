@@ -10,7 +10,6 @@
 #import "ProductModel.h"
 #import "ContractDB.h"
 #import "MyContractCell.h"
-#import "DialogHelper.h"
 
 @interface MyContractViewController()
 
