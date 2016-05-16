@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import "InsetTextField.h"
 #import "LoginModel.h"
+#import "LoginResponseModel.h"
 
 @interface LoginViewController ()
 
@@ -168,7 +169,7 @@
         
         NSString *text = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
         NSLog(@"返回结果->%@",text);
-        ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
+        LoginResponseModel *model = [LoginResponseModel mj_objectWithKeyValues:responseObject];
         int code = [[model.response objectForKey:@"success"] integerValue];
         if(code == 1)
         {

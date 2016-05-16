@@ -13,6 +13,8 @@
 +(NSMutableArray *)getDatas
 {
     NSMutableArray *datas = [[NSMutableArray alloc]init];
+    [datas addObject:[RightMenuModel build:@"我的资金" image:@"ic_money"]];
+    [datas addObject:[RightMenuModel build:@"出入金管理" image:@"ic_money"]];
     [datas addObject:[RightMenuModel build:@"自选合约管理" image:@"ic_mycontract"]];
     [datas addObject:[RightMenuModel build:@"价格预警管理" image:@"ic_warncontract"]];
     [datas addObject:[RightMenuModel build:@"系统设置" image:@"ic_setting"]];

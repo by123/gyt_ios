@@ -43,10 +43,10 @@
         SlideNavigationController *controller = [[SlideNavigationController alloc]initWithRootViewController:splashViewController];
         
         LeftMenuViewContriller *leftMenu = [[LeftMenuViewContriller alloc]init];
-        leftMenu.view.backgroundColor = SUB_COLOR;
+        leftMenu.view.backgroundColor = BACKGROUND_COLOR;
         
         RightMenuViewController *rightMenu = [[RightMenuViewController alloc]init];
-        rightMenu.view.backgroundColor = SUB_COLOR;
+        rightMenu.view.backgroundColor = BACKGROUND_COLOR;
         rightMenu.controller = controller;
         
         controller.leftMenu = leftMenu;
@@ -62,10 +62,10 @@
         SlideNavigationController *controller = [[SlideNavigationController alloc]initWithRootViewController:mainViewController];
         
         LeftMenuViewContriller *leftMenu = [[LeftMenuViewContriller alloc]init];
-        leftMenu.view.backgroundColor = SUB_COLOR;
+        leftMenu.view.backgroundColor = BACKGROUND_COLOR;
         
         RightMenuViewController *rightMenu = [[RightMenuViewController alloc]init];
-        rightMenu.view.backgroundColor = SUB_COLOR;
+        rightMenu.view.backgroundColor = BACKGROUND_COLOR;
         rightMenu.controller = controller;
         
         controller.leftMenu = leftMenu;

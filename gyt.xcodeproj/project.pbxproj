@@ -25,7 +25,7 @@
 		CF4A6D6F1CBE2A0800B36C93 /* IDSExtendedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D6A1CBE2A0800B36C93 /* IDSExtendedLabel.m */; };
 		CF4A6D701CBE2A0800B36C93 /* UILabel+ContentSize.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D6C1CBE2A0800B36C93 /* UILabel+ContentSize.m */; };
 		CF4A6D711CBE2A0800B36C93 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D6E1CBE2A0800B36C93 /* UIView+Frame.m */; };
-		CF4A6D741CBE2BCD00B36C93 /* ResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D731CBE2BCD00B36C93 /* ResponseModel.m */; };
+		CF4A6D741CBE2BCD00B36C93 /* LoginResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D731CBE2BCD00B36C93 /* LoginResponseModel.m */; };
 		CF4A6D7C1CBE2EA200B36C93 /* ByNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D7B1CBE2EA200B36C93 /* ByNavigationBar.m */; };
 		CF4A6D7F1CBE2EAB00B36C93 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D7E1CBE2EAB00B36C93 /* BaseViewController.m */; };
 		CFA3B8E81CD9AAB70063AE3E /* CandleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA3B8D31CD9AAB70063AE3E /* CandleView.m */; };
@@ -109,6 +109,19 @@
 		CFF1838C1CE472CE00E991C4 /* UserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF1838B1CE472CE00E991C4 /* UserInfoModel.m */; };
 		CFF183901CE4789000E991C4 /* UserInfoDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF1838F1CE4789000E991C4 /* UserInfoDataModel.m */; };
 		CFF183931CE4BCFA00E991C4 /* HttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF183921CE4BCFA00E991C4 /* HttpRequest.m */; };
+		CFF183991CE5AB9D00E991C4 /* BaseRespondModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF183981CE5AB9D00E991C4 /* BaseRespondModel.m */; };
+		CFF1839E1CE5B11900E991C4 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFF1839D1CE5B11900E991C4 /* Security.framework */; };
+		CFF183AE1CE5E89B00E991C4 /* MoneyDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF183AD1CE5E89B00E991C4 /* MoneyDetailViewController.m */; };
+		CFF183B11CE6D07A00E991C4 /* MoneyDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF183B01CE6D07A00E991C4 /* MoneyDetailCell.m */; };
+		CFF183B41CE6D13500E991C4 /* MoneyDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF183B31CE6D13500E991C4 /* MoneyDetailModel.m */; };
+		CFF183B81CE6D67A00E991C4 /* TitleContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF183B71CE6D67A00E991C4 /* TitleContentModel.m */; };
+		CFF183BB1CE6DD5700E991C4 /* AddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF183BA1CE6DD5700E991C4 /* AddViewController.m */; };
+		CFF183BE1CE7116200E991C4 /* ReduceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF183BD1CE7116200E991C4 /* ReduceViewController.m */; };
+		CFF183C11CE718D200E991C4 /* AccessGoldModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF183C01CE718D200E991C4 /* AccessGoldModel.m */; };
+		CFF183C71CE726C000E991C4 /* ReduceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF183C61CE726C000E991C4 /* ReduceCell.m */; };
+		CFF183CA1CE99D0A00E991C4 /* MoneyManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF183C91CE99D0A00E991C4 /* MoneyManageViewController.m */; };
+		CFF183CD1CE9B26B00E991C4 /* MoneyManageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF183CC1CE9B26B00E991C4 /* MoneyManageCell.m */; };
+		CFF183D21CE9D6CA00E991C4 /* MoneyManageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF183D11CE9D6CA00E991C4 /* MoneyManageDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -150,8 +163,8 @@
 		CF4A6D6C1CBE2A0800B36C93 /* UILabel+ContentSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+ContentSize.m"; sourceTree = "<group>"; };
 		CF4A6D6D1CBE2A0800B36C93 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
 		CF4A6D6E1CBE2A0800B36C93 /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
-		CF4A6D721CBE2BCD00B36C93 /* ResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResponseModel.h; sourceTree = "<group>"; };
-		CF4A6D731CBE2BCD00B36C93 /* ResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResponseModel.m; sourceTree = "<group>"; };
+		CF4A6D721CBE2BCD00B36C93 /* LoginResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginResponseModel.h; sourceTree = "<group>"; };
+		CF4A6D731CBE2BCD00B36C93 /* LoginResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginResponseModel.m; sourceTree = "<group>"; };
 		CF4A6D7A1CBE2EA200B36C93 /* ByNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ByNavigationBar.h; sourceTree = "<group>"; };
 		CF4A6D7B1CBE2EA200B36C93 /* ByNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ByNavigationBar.m; sourceTree = "<group>"; };
 		CF4A6D7D1CBE2EAB00B36C93 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
@@ -311,6 +324,31 @@
 		CFF1838F1CE4789000E991C4 /* UserInfoDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoDataModel.m; sourceTree = "<group>"; };
 		CFF183911CE4BCFA00E991C4 /* HttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpRequest.h; sourceTree = "<group>"; };
 		CFF183921CE4BCFA00E991C4 /* HttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpRequest.m; sourceTree = "<group>"; };
+		CFF183971CE5AB9D00E991C4 /* BaseRespondModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseRespondModel.h; sourceTree = "<group>"; };
+		CFF183981CE5AB9D00E991C4 /* BaseRespondModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseRespondModel.m; sourceTree = "<group>"; };
+		CFF1839D1CE5B11900E991C4 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		CFF183AC1CE5E89B00E991C4 /* MoneyDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoneyDetailViewController.h; sourceTree = "<group>"; };
+		CFF183AD1CE5E89B00E991C4 /* MoneyDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoneyDetailViewController.m; sourceTree = "<group>"; };
+		CFF183AF1CE6D07A00E991C4 /* MoneyDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoneyDetailCell.h; sourceTree = "<group>"; };
+		CFF183B01CE6D07A00E991C4 /* MoneyDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoneyDetailCell.m; sourceTree = "<group>"; };
+		CFF183B21CE6D13500E991C4 /* MoneyDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoneyDetailModel.h; sourceTree = "<group>"; };
+		CFF183B31CE6D13500E991C4 /* MoneyDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoneyDetailModel.m; sourceTree = "<group>"; };
+		CFF183B61CE6D67A00E991C4 /* TitleContentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleContentModel.h; sourceTree = "<group>"; };
+		CFF183B71CE6D67A00E991C4 /* TitleContentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleContentModel.m; sourceTree = "<group>"; };
+		CFF183B91CE6DD5700E991C4 /* AddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddViewController.h; sourceTree = "<group>"; };
+		CFF183BA1CE6DD5700E991C4 /* AddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddViewController.m; sourceTree = "<group>"; };
+		CFF183BC1CE7116200E991C4 /* ReduceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReduceViewController.h; sourceTree = "<group>"; };
+		CFF183BD1CE7116200E991C4 /* ReduceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReduceViewController.m; sourceTree = "<group>"; };
+		CFF183BF1CE718D200E991C4 /* AccessGoldModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccessGoldModel.h; sourceTree = "<group>"; };
+		CFF183C01CE718D200E991C4 /* AccessGoldModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccessGoldModel.m; sourceTree = "<group>"; };
+		CFF183C51CE726C000E991C4 /* ReduceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReduceCell.h; sourceTree = "<group>"; };
+		CFF183C61CE726C000E991C4 /* ReduceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReduceCell.m; sourceTree = "<group>"; };
+		CFF183C81CE99D0A00E991C4 /* MoneyManageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoneyManageViewController.h; sourceTree = "<group>"; };
+		CFF183C91CE99D0A00E991C4 /* MoneyManageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoneyManageViewController.m; sourceTree = "<group>"; };
+		CFF183CB1CE9B26B00E991C4 /* MoneyManageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoneyManageCell.h; sourceTree = "<group>"; };
+		CFF183CC1CE9B26B00E991C4 /* MoneyManageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoneyManageCell.m; sourceTree = "<group>"; };
+		CFF183D01CE9D6CA00E991C4 /* MoneyManageDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoneyManageDetailViewController.h; sourceTree = "<group>"; };
+		CFF183D11CE9D6CA00E991C4 /* MoneyManageDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoneyManageDetailViewController.m; sourceTree = "<group>"; };
 		E4E69CC7BA857424957CA231 /* Pods-gyt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gyt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-gyt/Pods-gyt.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -319,6 +357,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFF1839E1CE5B11900E991C4 /* Security.framework in Frameworks */,
 				CFA3B9011CD9D68C0063AE3E /* libz.tbd in Frameworks */,
 				CFC15BE41CC769DF0077FA19 /* libsqlite3.tbd in Frameworks */,
 				8109A9450AE28C984801318D /* libPods-gyt.a in Frameworks */,
@@ -331,6 +370,7 @@
 		AA72E72FA1DE389ACFDB9755 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CFF1839D1CE5B11900E991C4 /* Security.framework */,
 				CFA3B9001CD9D68C0063AE3E /* libz.tbd */,
 				CFC15BE31CC769DF0077FA19 /* libsqlite3.tbd */,
 				234300D9AA14CCAB18F37D31 /* libPods-gyt.a */,
@@ -431,11 +471,12 @@
 		CF4A6D481CBE28DD00B36C93 /* data */ = {
 			isa = PBXGroup;
 			children = (
+				CFF183B51CE6D66B00E991C4 /* money */,
 				CFF1838D1CE4787A00E991C4 /* user */,
 				CFF183831CE45DFA00E991C4 /* base */,
 				CFDD2DD31CC8AEBD00E81E3F /* detail */,
-				CF4A6D721CBE2BCD00B36C93 /* ResponseModel.h */,
-				CF4A6D731CBE2BCD00B36C93 /* ResponseModel.m */,
+				CF4A6D721CBE2BCD00B36C93 /* LoginResponseModel.h */,
+				CF4A6D731CBE2BCD00B36C93 /* LoginResponseModel.m */,
 				CFDD2DE51CCA0DAE00E81E3F /* RightMenuModel.h */,
 				CFDD2DE61CCA0DAE00E81E3F /* RightMenuModel.m */,
 				CFC15B8F1CBFA6830077FA19 /* ProductModel.h */,
@@ -524,6 +565,12 @@
 				CFDD2E121CCF44AD00E81E3F /* NewsCell.m */,
 				CF48C6411CD22C8B00BF4EF9 /* SearchCell.h */,
 				CF48C6421CD22C8B00BF4EF9 /* SearchCell.m */,
+				CFF183AF1CE6D07A00E991C4 /* MoneyDetailCell.h */,
+				CFF183B01CE6D07A00E991C4 /* MoneyDetailCell.m */,
+				CFF183C51CE726C000E991C4 /* ReduceCell.h */,
+				CFF183C61CE726C000E991C4 /* ReduceCell.m */,
+				CFF183CB1CE9B26B00E991C4 /* MoneyManageCell.h */,
+				CFF183CC1CE9B26B00E991C4 /* MoneyManageCell.m */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -665,6 +712,8 @@
 		CFDD2DE81CCA197A00E81E3F /* rightmenu */ = {
 			isa = PBXGroup;
 			children = (
+				CFF183CF1CE9D61900E991C4 /* accessgold */,
+				CFF183CE1CE9D60900E991C4 /* manage */,
 				CFDD2DE91CCA19C900E81E3F /* MyContractViewController.h */,
 				CFDD2DEA1CCA19C900E81E3F /* MyContractViewController.m */,
 				CFDD2DEF1CCB47E000E81E3F /* WarnContractViewController.h */,
@@ -789,8 +838,12 @@
 		CFF183831CE45DFA00E991C4 /* base */ = {
 			isa = PBXGroup;
 			children = (
+				CFF183B61CE6D67A00E991C4 /* TitleContentModel.h */,
+				CFF183B71CE6D67A00E991C4 /* TitleContentModel.m */,
 				CFF183841CE45E1400E991C4 /* BaseRequestModel.h */,
 				CFF183851CE45E1400E991C4 /* BaseRequestModel.m */,
+				CFF183971CE5AB9D00E991C4 /* BaseRespondModel.h */,
+				CFF183981CE5AB9D00E991C4 /* BaseRespondModel.m */,
 			);
 			name = base;
 			sourceTree = "<group>";
@@ -804,6 +857,41 @@
 				CFF1838F1CE4789000E991C4 /* UserInfoDataModel.m */,
 			);
 			name = user;
+			sourceTree = "<group>";
+		};
+		CFF183B51CE6D66B00E991C4 /* money */ = {
+			isa = PBXGroup;
+			children = (
+				CFF183B21CE6D13500E991C4 /* MoneyDetailModel.h */,
+				CFF183B31CE6D13500E991C4 /* MoneyDetailModel.m */,
+				CFF183BF1CE718D200E991C4 /* AccessGoldModel.h */,
+				CFF183C01CE718D200E991C4 /* AccessGoldModel.m */,
+			);
+			name = money;
+			sourceTree = "<group>";
+		};
+		CFF183CE1CE9D60900E991C4 /* manage */ = {
+			isa = PBXGroup;
+			children = (
+				CFF183C81CE99D0A00E991C4 /* MoneyManageViewController.h */,
+				CFF183C91CE99D0A00E991C4 /* MoneyManageViewController.m */,
+				CFF183D01CE9D6CA00E991C4 /* MoneyManageDetailViewController.h */,
+				CFF183D11CE9D6CA00E991C4 /* MoneyManageDetailViewController.m */,
+			);
+			name = manage;
+			sourceTree = "<group>";
+		};
+		CFF183CF1CE9D61900E991C4 /* accessgold */ = {
+			isa = PBXGroup;
+			children = (
+				CFF183AC1CE5E89B00E991C4 /* MoneyDetailViewController.h */,
+				CFF183AD1CE5E89B00E991C4 /* MoneyDetailViewController.m */,
+				CFF183B91CE6DD5700E991C4 /* AddViewController.h */,
+				CFF183BA1CE6DD5700E991C4 /* AddViewController.m */,
+				CFF183BC1CE7116200E991C4 /* ReduceViewController.h */,
+				CFF183BD1CE7116200E991C4 /* ReduceViewController.m */,
+			);
+			name = accessgold;
 			sourceTree = "<group>";
 		};
 		D4AF553BC76F6924E98CCF9D /* Pods */ = {
@@ -942,6 +1030,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CFA3B8E81CD9AAB70063AE3E /* CandleView.m in Sources */,
+				CFF183BB1CE6DD5700E991C4 /* AddViewController.m in Sources */,
 				CFDD2DF11CCB47E000E81E3F /* WarnContractViewController.m in Sources */,
 				CFDD2DEE1CCA208900E81E3F /* MyContractCell.m in Sources */,
 				CFDD2E131CCF44AD00E81E3F /* NewsCell.m in Sources */,
@@ -971,16 +1060,22 @@
 				CFA3B8F21CD9AAB70063AE3E /* YAxis.m in Sources */,
 				CFC15B941CC11B770077FA19 /* LeftMenuCell.m in Sources */,
 				CFC15BC91CC4C7340077FA19 /* InsetTextField.m in Sources */,
+				CFF183B11CE6D07A00E991C4 /* MoneyDetailCell.m in Sources */,
 				CFDFFA941CBF742500401CB3 /* SlideNavigationController.m in Sources */,
+				CFF183B41CE6D13500E991C4 /* MoneyDetailModel.m in Sources */,
 				CFC15BC61CC4B8160077FA19 /* DealView.m in Sources */,
 				CFA3B8F01CD9AAB70063AE3E /* Chart.m in Sources */,
 				CFA3B8FB1CD9AB050063AE3E /* EncryptHelper.m in Sources */,
+				CFF183D21CE9D6CA00E991C4 /* MoneyManageDetailViewController.m in Sources */,
+				CFF183C11CE718D200E991C4 /* AccessGoldModel.m in Sources */,
 				CF4A6D5B1CBE28DD00B36C93 /* ColorUtil.m in Sources */,
 				CFDD2E101CCF42D400E81E3F /* NewsModel.m in Sources */,
 				CFDD2EAD1CCF4DE100E81E3F /* UIView+MJExtension.m in Sources */,
 				CFC15BCF1CC604DB0077FA19 /* ByDynamicTableView.m in Sources */,
 				CFDD2EAC1CCF4DE100E81E3F /* UIScrollView+MJRefresh.m in Sources */,
+				CFF183991CE5AB9D00E991C4 /* BaseRespondModel.m in Sources */,
 				CFC15B971CC205390077FA19 /* MenuModel.m in Sources */,
+				CFF183BE1CE7116200E991C4 /* ReduceViewController.m in Sources */,
 				CFDD2EA11CCF4DE100E81E3F /* MJRefreshAutoNormalFooter.m in Sources */,
 				CFDD2E9F1CCF4DE100E81E3F /* MJRefreshHeader.m in Sources */,
 				CFF183861CE45E1400E991C4 /* BaseRequestModel.m in Sources */,
@@ -992,6 +1087,7 @@
 				CFDFFA9A1CBF77AB00401CB3 /* MainViewController.m in Sources */,
 				CF2A51061CE31A1D00F0EF3D /* UpdateModel.m in Sources */,
 				CFC15BB01CC365650077FA19 /* HandicapBaseModel.m in Sources */,
+				CFF183AE1CE5E89B00E991C4 /* MoneyDetailViewController.m in Sources */,
 				CFDD2EA51CCF4DE100E81E3F /* MJRefreshBackStateFooter.m in Sources */,
 				CFA3B8ED1CD9AAB70063AE3E /* ColumnChartModel.m in Sources */,
 				CFDD2EBA1CCF97F400E81E3F /* SplashViewController.m in Sources */,
@@ -1001,20 +1097,23 @@
 				CFDD2DDC1CC8C01000E81E3F /* DealHoldByModel.m in Sources */,
 				CF4A6D5A1CBE28DD00B36C93 /* AppUtil.m in Sources */,
 				CFC15B911CBFA6830077FA19 /* ProductModel.m in Sources */,
-				CF4A6D741CBE2BCD00B36C93 /* ResponseModel.m in Sources */,
+				CF4A6D741CBE2BCD00B36C93 /* LoginResponseModel.m in Sources */,
 				CFA3B8FC1CD9AB050063AE3E /* ResourceHelper.m in Sources */,
 				CFDD2EA81CCF4DE100E81E3F /* MJRefreshStateHeader.m in Sources */,
 				CFC15BD21CC607900077FA19 /* DynamicCell.m in Sources */,
 				CFC15BE21CC74F760077FA19 /* ContractDB.m in Sources */,
 				CFA3B8EB1CD9AAB70063AE3E /* CandleChartModel.m in Sources */,
 				CF4A6D7C1CBE2EA200B36C93 /* ByNavigationBar.m in Sources */,
+				CFF183C71CE726C000E991C4 /* ReduceCell.m in Sources */,
 				CFDD2EAA1CCF4DE100E81E3F /* MJRefreshConst.m in Sources */,
 				CFF183891CE460A500E991C4 /* LoginModel.m in Sources */,
 				CFA3B90B1CDAF0A90063AE3E /* Slide.m in Sources */,
 				CFA3B8FA1CD9AB050063AE3E /* CacheHelper.m in Sources */,
 				CFDD2EA31CCF4DE100E81E3F /* MJRefreshBackGifFooter.m in Sources */,
 				CFDD2EAE1CCF4DE100E81E3F /* README.md in Sources */,
+				CFF183CD1CE9B26B00E991C4 /* MoneyManageCell.m in Sources */,
 				CF4A6D5C1CBE28DD00B36C93 /* DialogHelper.m in Sources */,
+				CFF183CA1CE99D0A00E991C4 /* MoneyManageViewController.m in Sources */,
 				CFDD2DDF1CC8C08E00E81E3F /* DealProfitModel.m in Sources */,
 				CFDD2EA61CCF4DE100E81E3F /* MJRefreshGifHeader.m in Sources */,
 				CF4A6D6F1CBE2A0800B36C93 /* IDSExtendedLabel.m in Sources */,
@@ -1023,6 +1122,7 @@
 				CFDD2DD61CC8AEE100E81E3F /* DealHoldModel.m in Sources */,
 				CFA3B8EA1CD9AAB70063AE3E /* AreaChartModel.m in Sources */,
 				CFC15BAD1CC361A80077FA19 /* HandicapModel.m in Sources */,
+				CFF183B81CE6D67A00E991C4 /* TitleContentModel.m in Sources */,
 				CFA3B8EC1CD9AAB70063AE3E /* ChartModel.m in Sources */,
 				CFDD2DE41CCA0D8200E81E3F /* RightMenuCell.m in Sources */,
 				CFF183901CE4789000E991C4 /* UserInfoDataModel.m in Sources */,

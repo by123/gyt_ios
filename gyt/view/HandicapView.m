@@ -73,7 +73,7 @@
 {
     _handicapTableView = [[UITableView alloc]init];
     _handicapTableView.frame = CGRectMake(0, kTopHeight, SCREEN_WIDTH, kContentHeight);
-    _handicapTableView.backgroundColor = SUB_COLOR;
+    _handicapTableView.backgroundColor = BACKGROUND_COLOR;
     _handicapTableView.scrollEnabled = NO;
     _handicapTableView.delegate = self;
     _handicapTableView.dataSource = self;

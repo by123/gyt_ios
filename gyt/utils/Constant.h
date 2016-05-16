@@ -20,10 +20,17 @@
 #define Root_Url @"http://192.168.1.106:8080"
 
 
-//请求小区列表
+//请求登录
 #define Request_Login @"login"
+//请求登出
 #define Request_Logout @"logout"
+//查询账号信息
 #define Request_UserInfo @"queryAccountBaseInfo"
+//提交出入金申请
+#define Request_CashApplyInfo @"commitCashApplyInfo"
+
+
+
 #define Info_Net_Error @"网络异常，点击刷新"
 
 

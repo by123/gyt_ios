@@ -29,7 +29,6 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = SUB_COLOR;
     _datas = [[ContractDB sharedContractDB] queryAll:DBWarnContractTable];
     [self initView];
 }

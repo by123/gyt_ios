@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 com.brotherhood. All rights reserved.
 //
 
-#import "ResponseModel.h"
+#import "LoginResponseModel.h"
 
-@implementation ResponseModel
+@implementation LoginResponseModel
 
 
 @end

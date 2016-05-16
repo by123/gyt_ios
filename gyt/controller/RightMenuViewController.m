@@ -14,6 +14,8 @@
 #import "WarnContractViewController.h"
 #import "LoginViewController.h"
 #import "LoginModel.h"
+#import "MoneyDetailViewController.h"
+#import "MoneyManageViewController.h"
 
 @interface RightMenuViewController ()
 
@@ -112,18 +114,24 @@
     NSInteger position = indexPath.row;
     switch (position) {
         case 0:
-            [MyContractViewController show:self.controller];
+            [MoneyDetailViewController show:self.controller];
             break;
         case 1:
-            [WarnContractViewController show:self.controller]; 
+            [MoneyManageViewController show:self.controller];
             break;
         case 2:
-            
+            [MyContractViewController show:self.controller];
             break;
         case 3:
-            
+            [WarnContractViewController show:self.controller]; 
             break;
         case 4:
+            
+            break;
+        case 5:
+            
+            break;
+        case 6:
             [self logout];
             break;
             

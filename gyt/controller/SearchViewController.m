@@ -64,7 +64,7 @@
 
 -(void)initBody
 {
-    self.view.backgroundColor = SUB_COLOR;
+    self.view.backgroundColor = BACKGROUND_COLOR;
     
     UIView *searchView = [[UIView alloc]init];
     searchView.frame = CGRectMake(0, NavigationBar_HEIGHT + StatuBar_HEIGHT, SCREEN_WIDTH,SearchBar_Height);

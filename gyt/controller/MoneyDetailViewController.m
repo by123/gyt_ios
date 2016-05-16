@@ -1,0 +1,179 @@
+//
+//  MoneyDetailViewController.m
+//  gyt
+//
+//  Created by by.huang on 16/5/13.
+//  Copyright © 2016年 by.huang. All rights reserved.
+//
+
+#import "MoneyDetailViewController.h"
+#import "InsetTextField.h"
+#import "ByTabView.h"
+#import "MoneyDetailModel.h"
+#import "MoneyDetailCell.h"
+#import "AddViewController.h"
+#import "ReduceViewController.h"
+
+
+#define Button_Height 50
+#define Item_Height 30
+
+@interface MoneyDetailViewController ()
+
+//银转期（入金）
+@property (strong, nonatomic) UIButton *increseMoney;
+
+//期转银（出金）
+@property (strong, nonatomic) UIButton *decreseMoney;
+
+//金额
+@property (strong, nonatomic) InsetTextField *moneyTextField;
+
+//个人信息
+@property (strong, nonatomic) UITableView *tableView;
+
+//数据
+@property (strong, nonatomic) NSMutableArray *datas;
+
+@end
+
+@implementation MoneyDetailViewController
+
+
++(void)show : (SlideNavigationController *)controller
+{
+    MoneyDetailViewController *targetController = [[MoneyDetailViewController alloc]init];
+    [controller pushViewController:targetController animated:YES];
+   
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.view.backgroundColor = BACKGROUND_COLOR;
+    _datas = [MoneyDetailModel getData];
+    [self initView];
+}
+
+-(void)initView
+{
+    [self initNavigationBar];
+    [self initBody];
+    [self initBottomView];
+}
+
+-(void)initNavigationBar
+{
+    [self showNavigationBar];
+    self.navBar.delegate = self;
+    [ self.navBar.rightBtn setHidden:YES];
+    [self.navBar setTitle:@"我的资金"];
+    [self.navBar setLeftImage:[UIImage imageNamed:@"ic_back"]];
+}
+
+
+-(void)initBody
+{
+    UIView *rootView = [[UIView alloc]initWithFrame:Default_Frame];
+    [self.view addSubview:rootView];
+    
+    _tableView = [[UITableView alloc]init];
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _tableView.showsVerticalScrollIndicator = NO;
+    _tableView.showsHorizontalScrollIndicator = NO;
+    _tableView.backgroundColor = [ColorUtil colorWithHexString:@"#333333"];
+    _tableView.frame = CGRectMake(0,0, SCREEN_WIDTH, rootView.height - Button_Height);
+    [rootView addSubview:_tableView];
+}
+
+
+-(void)initBottomView
+{
+    _increseMoney = [[UIButton alloc]init];
+    [_increseMoney setTitleColor:TEXT_COLOR forState:UIControlStateNormal];
+    [_increseMoney setTitle:@"银行转期货" forState:UIControlStateNormal];
+    _increseMoney.titleLabel.font = [UIFont systemFontOfSize:14.0f];
+    _increseMoney.frame = CGRectMake(0, SCREEN_HEIGHT-Button_Height, SCREEN_WIDTH/2, Button_Height);
+    [_increseMoney setBackgroundImage:[AppUtil imageWithColor:BACKGROUND_COLOR] forState:UIControlStateNormal];
+    [_increseMoney setBackgroundImage:[AppUtil imageWithColor:SELECT_COLOR] forState:UIControlStateHighlighted];
+    [_increseMoney addTarget:self action:@selector(OnBankToFuture) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_increseMoney];
+    
+    
+    _decreseMoney = [[UIButton alloc]init];
+    [_decreseMoney setTitleColor:TEXT_COLOR forState:UIControlStateNormal];
+    [_decreseMoney setTitle:@"期货转银行" forState:UIControlStateNormal];
+    _decreseMoney.titleLabel.font = [UIFont systemFontOfSize:14.0f];
+    _decreseMoney.frame = CGRectMake(SCREEN_WIDTH/2, SCREEN_HEIGHT - Button_Height, SCREEN_WIDTH/2, Button_Height);
+    [_decreseMoney setBackgroundImage:[AppUtil imageWithColor:BACKGROUND_COLOR] forState:UIControlStateNormal];
+    [_decreseMoney setBackgroundImage:[AppUtil imageWithColor:SELECT_COLOR] forState:UIControlStateHighlighted];
+    [_decreseMoney addTarget:self action:@selector(OnFutureToBank) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_decreseMoney];
+    
+    UIView *startLineView = [[UIView alloc]init];
+    startLineView.backgroundColor = [UIColor blackColor];
+    startLineView.frame = CGRectMake(0, SCREEN_HEIGHT - Button_Height+ 0.5, SCREEN_WIDTH, 0.5);
+    [self.view addSubview:startLineView];
+    
+    UIView *lineView = [[UIView alloc]init];
+    lineView.backgroundColor = [UIColor blackColor];
+    lineView.frame = CGRectMake(SCREEN_WIDTH/2, SCREEN_HEIGHT - Button_Height + 10, 0.5, 30);
+    [self.view addSubview:lineView];
+}
+
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if(IS_NS_COLLECTION_EMPTY(_datas))
+    {
+        return 0;
+    }
+    return [_datas count];
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return Item_Height;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MoneyDetailCell *cell = [[MoneyDetailCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[MoneyDetailCell identify]];
+    cell.backgroundColor = [UIColor clearColor];
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    if(!IS_NS_COLLECTION_EMPTY(_datas))
+    {
+        [cell setData:[_datas objectAtIndex:indexPath.row]];
+    }
+    return cell;
+}
+
+
+-(void)OnLeftClickCallback
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+#pragma mark 银行转期货
+-(void)OnBankToFuture
+{
+    [AddViewController show:self];
+}
+
+
+#pragma mark 期货转银行
+-(void)OnFutureToBank
+{
+    [ReduceViewController show:self];
+}
+
+
+
+@end

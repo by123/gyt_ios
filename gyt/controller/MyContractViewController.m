@@ -30,7 +30,7 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = SUB_COLOR;
+    self.view.backgroundColor = BACKGROUND_COLOR;
     _datas = [[ContractDB sharedContractDB] queryAll:DBMyContractTable];
     [self initView];
 }

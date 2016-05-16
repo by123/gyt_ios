@@ -55,7 +55,7 @@
     
     
     UIView *rootView = [[UIView alloc]init];
-    rootView.backgroundColor = SUB_COLOR;
+    rootView.backgroundColor = BACKGROUND_COLOR;
     rootView.frame = CGRectMake(15, NavigationBar_HEIGHT + StatuBar_HEIGHT+20,DialogWidth, DialogHeight);
     rootView.layer.masksToBounds = YES;
     rootView.layer.cornerRadius = 4;
@@ -111,7 +111,7 @@
     [rootView addSubview:_confirmBtn];
     
     UIView *lineView = [[UIView alloc]init];
-    lineView.backgroundColor = SUB_COLOR;
+    lineView.backgroundColor = BACKGROUND_COLOR;
     lineView.frame = CGRectMake((SCREEN_WIDTH - 30)/2, DialogHeight - 40, 0.5, 40);
     [rootView addSubview:lineView];
     

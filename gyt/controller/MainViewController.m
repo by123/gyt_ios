@@ -380,11 +380,13 @@
 -(void)requestUserInfo : (NSString *)jsonStr
 {
     
-//    [[HttpRequest sharedHttpRequest] post:jsonStr view:self.view success:^(id responseObject) {
-//        
-//    } fail:^(NSError *error) {
-//        
-//    }];
+    return;
+    [[HttpRequest sharedHttpRequest] post:jsonStr view:self.view success:^(id responseObject) {
+        BaseRespondModel *model = [BaseRespondModel mj_objectWithKeyValues:responseObject];
+        
+    } fail:^(NSError *error) {
+        
+    }];
     
 }
 

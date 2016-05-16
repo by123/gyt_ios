@@ -7,7 +7,6 @@
 //
 
 #import "JSONUtil.h"
-#import "BaseRequestModel.h"
 
 @implementation JSONUtil
 
