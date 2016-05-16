@@ -18,4 +18,15 @@
     model.content = content;
     return model;
 }
+
++(TitleContentModel *)buildData : (NSString *)title
+                        content : (NSString *)content
+                         canList: (Boolean) canList
+{
+    TitleContentModel *model = [[TitleContentModel alloc]init];
+    model.title = title;
+    model.content = content;
+    model.canList = canList;
+    return model;
+}
 @end

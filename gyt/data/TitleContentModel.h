@@ -14,7 +14,14 @@
 
 @property (copy, nonatomic) NSString *content;
 
+//是否可下拉
+@property (assign, nonatomic) Boolean canList;
+
 +(TitleContentModel *)buildData : (NSString *)title
                  content : (NSString *)content;
+
++(TitleContentModel *)buildData : (NSString *)title
+                        content : (NSString *)content
+                         canList: (Boolean) canList;
 
 @end

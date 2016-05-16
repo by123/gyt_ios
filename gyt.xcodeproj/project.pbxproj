@@ -122,6 +122,7 @@
 		CFF183CA1CE99D0A00E991C4 /* MoneyManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF183C91CE99D0A00E991C4 /* MoneyManageViewController.m */; };
 		CFF183CD1CE9B26B00E991C4 /* MoneyManageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF183CC1CE9B26B00E991C4 /* MoneyManageCell.m */; };
 		CFF183D21CE9D6CA00E991C4 /* MoneyManageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF183D11CE9D6CA00E991C4 /* MoneyManageDetailViewController.m */; };
+		CFF183D91CE9F0A200E991C4 /* Request.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF183D81CE9F0A200E991C4 /* Request.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -349,6 +350,8 @@
 		CFF183CC1CE9B26B00E991C4 /* MoneyManageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoneyManageCell.m; sourceTree = "<group>"; };
 		CFF183D01CE9D6CA00E991C4 /* MoneyManageDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoneyManageDetailViewController.h; sourceTree = "<group>"; };
 		CFF183D11CE9D6CA00E991C4 /* MoneyManageDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoneyManageDetailViewController.m; sourceTree = "<group>"; };
+		CFF183D71CE9F0A200E991C4 /* Request.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Request.h; sourceTree = "<group>"; };
+		CFF183D81CE9F0A200E991C4 /* Request.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Request.m; sourceTree = "<group>"; };
 		E4E69CC7BA857424957CA231 /* Pods-gyt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gyt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-gyt/Pods-gyt.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -428,6 +431,7 @@
 		CF4A6D151CBE25AA00B36C93 /* gyt */ = {
 			isa = PBXGroup;
 			children = (
+				CFF183D61CE9F09100E991C4 /* request */,
 				CFA3B8D11CD9AAB70063AE3E /* chart */,
 				CF4A6D471CBE28DD00B36C93 /* controller */,
 				CF4A6D481CBE28DD00B36C93 /* data */,
@@ -894,6 +898,15 @@
 			name = accessgold;
 			sourceTree = "<group>";
 		};
+		CFF183D61CE9F09100E991C4 /* request */ = {
+			isa = PBXGroup;
+			children = (
+				CFF183D71CE9F0A200E991C4 /* Request.h */,
+				CFF183D81CE9F0A200E991C4 /* Request.m */,
+			);
+			name = request;
+			sourceTree = "<group>";
+		};
 		D4AF553BC76F6924E98CCF9D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1070,6 +1083,7 @@
 				CFF183C11CE718D200E991C4 /* AccessGoldModel.m in Sources */,
 				CF4A6D5B1CBE28DD00B36C93 /* ColorUtil.m in Sources */,
 				CFDD2E101CCF42D400E81E3F /* NewsModel.m in Sources */,
+				CFF183D91CE9F0A200E991C4 /* Request.m in Sources */,
 				CFDD2EAD1CCF4DE100E81E3F /* UIView+MJExtension.m in Sources */,
 				CFC15BCF1CC604DB0077FA19 /* ByDynamicTableView.m in Sources */,
 				CFDD2EAC1CCF4DE100E81E3F /* UIScrollView+MJRefresh.m in Sources */,

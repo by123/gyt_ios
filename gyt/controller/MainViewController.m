@@ -379,8 +379,6 @@
 #pragma mark 请求用户资料
 -(void)requestUserInfo : (NSString *)jsonStr
 {
-    
-    return;
     [[HttpRequest sharedHttpRequest] post:jsonStr view:self.view success:^(id responseObject) {
         BaseRespondModel *model = [BaseRespondModel mj_objectWithKeyValues:responseObject];
         

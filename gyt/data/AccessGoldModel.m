@@ -13,12 +13,12 @@
 +(NSMutableArray *)getData
 {
     NSMutableArray *datas = [[NSMutableArray alloc]init];
-    [datas addObject:[TitleContentModel buildData:@"账户编号" content:@""]];
-    [datas addObject:[TitleContentModel buildData:@"客户名称" content:@""]];
-    [datas addObject:[TitleContentModel buildData:@"申请类型" content:@""]];
+//    [datas addObject:[TitleContentModel buildData:@"账户编号" content:@""]];
+//    [datas addObject:[TitleContentModel buildData:@"客户名称" content:@""]];
+//    [datas addObject:[TitleContentModel buildData:@"申请类型" content:@""]];
     [datas addObject:[TitleContentModel buildData:@"币种" content:@""]];
     [datas addObject:[TitleContentModel buildData:@"金额" content:@""]];
-    [datas addObject:[TitleContentModel buildData:@"支付方式" content:@""]];
+//    [datas addObject:[TitleContentModel buildData:@"支付方式" content:@""]];
     [datas addObject:[TitleContentModel buildData:@"收款姓名" content:@""]];
     [datas addObject:[TitleContentModel buildData:@"提交机构" content:@""]];
     [datas addObject:[TitleContentModel buildData:@"提交备注" content:@""]];

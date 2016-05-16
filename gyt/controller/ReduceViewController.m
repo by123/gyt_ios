@@ -10,7 +10,7 @@
 #import "AccessGoldModel.h"
 #import "ReduceCell.h"
 
-#define Item_Height 40
+#define Item_Height 50
 
 @interface ReduceViewController ()
 
