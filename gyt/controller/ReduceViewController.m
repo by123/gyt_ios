@@ -100,7 +100,7 @@
     [cell setBackgroundColor:[UIColor clearColor]];
     if(!IS_NS_COLLECTION_EMPTY(_datas))
     {
-        [cell setData:[_datas objectAtIndex:indexPath.row]];
+        [cell setData:[_datas objectAtIndex:indexPath.row] rootView:self.view];
     }
     return cell;
 }

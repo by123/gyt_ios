@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "TitleContentModel.h"
+#import "ByListDialog.h"
 
-@interface ReduceCell : UITableViewCell
+@interface ReduceCell : UITableViewCell<ListDialogDelegate>
 
--(void)setData : (TitleContentModel *)model;
+-(void)setData : (TitleContentModel *)model
+    rootView : (UIView *)rootView;
 
 +(NSString *)identify;
 

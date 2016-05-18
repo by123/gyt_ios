@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Request : NSObject
+@interface QueryRequest : NSObject
 
 typedef NS_ENUM(NSInteger, RequestType) {
     XT_121_START = 121 * 100,
@@ -26,7 +26,7 @@ typedef NS_ENUM(NSInteger, RequestType) {
     XT_CInstrumentFee,
     XT_CQueryDataReq,
     XT_CQueryHistoryDataReq,
-    XT_CAccountDetail,
+    XT_CAccountDetail,//
     XT_CFundFlow,
     XT_COrderDetail,
     XT_CDealDetail,
@@ -69,8 +69,13 @@ typedef NS_ENUM(NSInteger, RequestType) {
 };
 
 
-//+(void)requestAcountInfo : ()
-//{
-//    
-//}
+#pragma mark 组装基本json字符串
++(NSString *)buildRequestJson : (NSString *)account
+                      structId: (int)structId;
+
+#pragma mark 请求用户基本信息
++(void)requestAcountInfo : (UIView *)view
+                 success : (SuccessCallback)success
+                    fail : (FailCallback)fail;
+
 @end

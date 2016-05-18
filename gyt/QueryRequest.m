@@ -1,0 +1,49 @@
+//
+//  Request.m
+//  gyt
+//
+//  Created by by.huang on 16/5/16.
+//  Copyright © 2016年 by.huang. All rights reserved.
+//
+
+#import "QueryRequest.h"
+#import "QueryRequestModel.h"
+
+@implementation QueryRequest
+
+
++(NSString *)buildRequestJson : (NSString *)account
+                      structId: (int)structId
+{
+
+    QueryRequestModel *model = [[QueryRequestModel alloc]init];
+    model.account = account;
+    model.structId = structId;
+    
+    NSMutableDictionary *dict = model.mj_keyValues;
+    
+    return dict.mj_JSONString;
+}
+
+
++(void)requestAcountInfo : (UIView *)view
+                 success : (SuccessCallback)success
+                    fail : (FailCallback)fail
+{
+    
+    QueryRequestModel *model = [[QueryRequestModel alloc]init];
+    model.structId = XT_CAccountDetail;
+    model.account = [[Account sharedAccount] getAccountInfo];
+
+    NSString *result = [JSONUtil parse:@"queryData" params:[JSONUtil parseStr:model]];
+    
+    NSLog(@"%@",result);
+
+    [[HttpRequest sharedHttpRequest]post:result view:view success:^(id responseObject) {
+        success(responseObject);
+    } fail:^(NSError *error) {
+        fail(error);
+    }];
+}
+
+@end

@@ -12,6 +12,7 @@
 
 #define UID @"gyt_uid"
 #define SESSIONID @"gyt_sessionid"
+#define ACCOUNTINFO @"gyt_accountinfo"
 
 @interface Account : NSObject
 
@@ -24,11 +25,15 @@ SINGLETON_DECLARATION(Account);
 
 - (void)saveSessionid : (NSString *)sessionId;
 
+-(void)saveAccountInfo : (NSString *)accountInfo;
+
 - (BOOL)isLogin;
 
 - (NSString *)getUid;
 
 - (NSString *)getSessionId;
+
+- (NSString *)getAccountInfo;
 
 
 @end

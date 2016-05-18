@@ -13,6 +13,7 @@
 #import "MoneyDetailCell.h"
 #import "AddViewController.h"
 #import "ReduceViewController.h"
+#import "QueryRequest.h"
 
 
 #define Button_Height 50
@@ -59,6 +60,7 @@
     [self initNavigationBar];
     [self initBody];
     [self initBottomView];
+    [self requestAccountInfo];
 }
 
 -(void)initNavigationBar
@@ -175,5 +177,14 @@
 }
 
 
+
+-(void)requestAccountInfo
+{
+    [QueryRequest requestAcountInfo:self.view success:^(id responseObject) {
+        
+    } fail:^(NSError *error) {
+        
+    }];
+}
 
 @end

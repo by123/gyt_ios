@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8109A9450AE28C984801318D /* libPods-gyt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 234300D9AA14CCAB18F37D31 /* libPods-gyt.a */; };
+		CF247A851CEB22E1000F1442 /* ByListDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = CF247A841CEB22E1000F1442 /* ByListDialog.m */; };
 		CF2A51051CE31A1D00F0EF3D /* CheckUpdateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2A51021CE31A1D00F0EF3D /* CheckUpdateUtil.m */; };
 		CF2A51061CE31A1D00F0EF3D /* UpdateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2A51041CE31A1D00F0EF3D /* UpdateModel.m */; };
 		CF2A510B1CE31B2F00F0EF3D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2A510A1CE31B2F00F0EF3D /* LoginViewController.m */; };
@@ -28,6 +29,8 @@
 		CF4A6D741CBE2BCD00B36C93 /* LoginResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D731CBE2BCD00B36C93 /* LoginResponseModel.m */; };
 		CF4A6D7C1CBE2EA200B36C93 /* ByNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D7B1CBE2EA200B36C93 /* ByNavigationBar.m */; };
 		CF4A6D7F1CBE2EAB00B36C93 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D7E1CBE2EAB00B36C93 /* BaseViewController.m */; };
+		CF60E1871CEABF45001EF40D /* QueryRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF60E1861CEABF45001EF40D /* QueryRequestModel.m */; };
+		CF60E18A1CEAC983001EF40D /* UserRespondModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF60E1891CEAC983001EF40D /* UserRespondModel.m */; };
 		CFA3B8E81CD9AAB70063AE3E /* CandleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA3B8D31CD9AAB70063AE3E /* CandleView.m */; };
 		CFA3B8E91CD9AAB70063AE3E /* indicators.json in Resources */ = {isa = PBXBuildFile; fileRef = CFA3B8D41CD9AAB70063AE3E /* indicators.json */; };
 		CFA3B8EA1CD9AAB70063AE3E /* AreaChartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA3B8D71CD9AAB70063AE3E /* AreaChartModel.m */; };
@@ -122,12 +125,14 @@
 		CFF183CA1CE99D0A00E991C4 /* MoneyManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF183C91CE99D0A00E991C4 /* MoneyManageViewController.m */; };
 		CFF183CD1CE9B26B00E991C4 /* MoneyManageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF183CC1CE9B26B00E991C4 /* MoneyManageCell.m */; };
 		CFF183D21CE9D6CA00E991C4 /* MoneyManageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF183D11CE9D6CA00E991C4 /* MoneyManageDetailViewController.m */; };
-		CFF183D91CE9F0A200E991C4 /* Request.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF183D81CE9F0A200E991C4 /* Request.m */; };
+		CFF183D91CE9F0A200E991C4 /* QueryRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF183D81CE9F0A200E991C4 /* QueryRequest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0649C12BFD5FDC358AE11BA4 /* Pods-gyt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gyt.release.xcconfig"; path = "Pods/Target Support Files/Pods-gyt/Pods-gyt.release.xcconfig"; sourceTree = "<group>"; };
 		234300D9AA14CCAB18F37D31 /* libPods-gyt.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-gyt.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF247A831CEB22E1000F1442 /* ByListDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ByListDialog.h; sourceTree = "<group>"; };
+		CF247A841CEB22E1000F1442 /* ByListDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ByListDialog.m; sourceTree = "<group>"; };
 		CF2A51011CE31A1D00F0EF3D /* CheckUpdateUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckUpdateUtil.h; sourceTree = "<group>"; };
 		CF2A51021CE31A1D00F0EF3D /* CheckUpdateUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckUpdateUtil.m; sourceTree = "<group>"; };
 		CF2A51031CE31A1D00F0EF3D /* UpdateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateModel.h; sourceTree = "<group>"; };
@@ -170,6 +175,10 @@
 		CF4A6D7B1CBE2EA200B36C93 /* ByNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ByNavigationBar.m; sourceTree = "<group>"; };
 		CF4A6D7D1CBE2EAB00B36C93 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		CF4A6D7E1CBE2EAB00B36C93 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		CF60E1851CEABF45001EF40D /* QueryRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryRequestModel.h; sourceTree = "<group>"; };
+		CF60E1861CEABF45001EF40D /* QueryRequestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryRequestModel.m; sourceTree = "<group>"; };
+		CF60E1881CEAC983001EF40D /* UserRespondModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserRespondModel.h; sourceTree = "<group>"; };
+		CF60E1891CEAC983001EF40D /* UserRespondModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserRespondModel.m; sourceTree = "<group>"; };
 		CFA3B8D21CD9AAB70063AE3E /* CandleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CandleView.h; sourceTree = "<group>"; };
 		CFA3B8D31CD9AAB70063AE3E /* CandleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CandleView.m; sourceTree = "<group>"; };
 		CFA3B8D41CD9AAB70063AE3E /* indicators.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = indicators.json; sourceTree = "<group>"; };
@@ -350,8 +359,8 @@
 		CFF183CC1CE9B26B00E991C4 /* MoneyManageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoneyManageCell.m; sourceTree = "<group>"; };
 		CFF183D01CE9D6CA00E991C4 /* MoneyManageDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoneyManageDetailViewController.h; sourceTree = "<group>"; };
 		CFF183D11CE9D6CA00E991C4 /* MoneyManageDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoneyManageDetailViewController.m; sourceTree = "<group>"; };
-		CFF183D71CE9F0A200E991C4 /* Request.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Request.h; sourceTree = "<group>"; };
-		CFF183D81CE9F0A200E991C4 /* Request.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Request.m; sourceTree = "<group>"; };
+		CFF183D71CE9F0A200E991C4 /* QueryRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryRequest.h; sourceTree = "<group>"; };
+		CFF183D81CE9F0A200E991C4 /* QueryRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryRequest.m; sourceTree = "<group>"; };
 		E4E69CC7BA857424957CA231 /* Pods-gyt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gyt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-gyt/Pods-gyt.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -536,6 +545,8 @@
 				CF4A6D7B1CBE2EA200B36C93 /* ByNavigationBar.m */,
 				CFC15BCA1CC5D15D0077FA19 /* ByTabView.h */,
 				CFC15BCB1CC5D15D0077FA19 /* ByTabView.m */,
+				CF247A831CEB22E1000F1442 /* ByListDialog.h */,
+				CF247A841CEB22E1000F1442 /* ByListDialog.m */,
 				CFC15BCD1CC604DB0077FA19 /* ByDynamicTableView.h */,
 				CFC15BCE1CC604DB0077FA19 /* ByDynamicTableView.m */,
 				CFC15B9B1CC2249B0077FA19 /* BottomTabView.h */,
@@ -859,6 +870,8 @@
 				CFF1838B1CE472CE00E991C4 /* UserInfoModel.m */,
 				CFF1838E1CE4789000E991C4 /* UserInfoDataModel.h */,
 				CFF1838F1CE4789000E991C4 /* UserInfoDataModel.m */,
+				CF60E1881CEAC983001EF40D /* UserRespondModel.h */,
+				CF60E1891CEAC983001EF40D /* UserRespondModel.m */,
 			);
 			name = user;
 			sourceTree = "<group>";
@@ -901,8 +914,10 @@
 		CFF183D61CE9F09100E991C4 /* request */ = {
 			isa = PBXGroup;
 			children = (
-				CFF183D71CE9F0A200E991C4 /* Request.h */,
-				CFF183D81CE9F0A200E991C4 /* Request.m */,
+				CFF183D71CE9F0A200E991C4 /* QueryRequest.h */,
+				CFF183D81CE9F0A200E991C4 /* QueryRequest.m */,
+				CF60E1851CEABF45001EF40D /* QueryRequestModel.h */,
+				CF60E1861CEABF45001EF40D /* QueryRequestModel.m */,
 			);
 			name = request;
 			sourceTree = "<group>";
@@ -1064,6 +1079,7 @@
 				CFA3B8F11CD9AAB70063AE3E /* Section.m in Sources */,
 				CFDD2E9C1CCF4DE100E81E3F /* MJRefreshBackFooter.m in Sources */,
 				CFDFFA9D1CBF78DD00401CB3 /* RightMenuViewController.m in Sources */,
+				CF60E1871CEABF45001EF40D /* QueryRequestModel.m in Sources */,
 				CF2A510B1CE31B2F00F0EF3D /* LoginViewController.m in Sources */,
 				CFC15BB31CC37C730077FA19 /* HandicapDetailModel.m in Sources */,
 				CF4A6D1B1CBE25AA00B36C93 /* AppDelegate.m in Sources */,
@@ -1083,7 +1099,7 @@
 				CFF183C11CE718D200E991C4 /* AccessGoldModel.m in Sources */,
 				CF4A6D5B1CBE28DD00B36C93 /* ColorUtil.m in Sources */,
 				CFDD2E101CCF42D400E81E3F /* NewsModel.m in Sources */,
-				CFF183D91CE9F0A200E991C4 /* Request.m in Sources */,
+				CFF183D91CE9F0A200E991C4 /* QueryRequest.m in Sources */,
 				CFDD2EAD1CCF4DE100E81E3F /* UIView+MJExtension.m in Sources */,
 				CFC15BCF1CC604DB0077FA19 /* ByDynamicTableView.m in Sources */,
 				CFDD2EAC1CCF4DE100E81E3F /* UIScrollView+MJRefresh.m in Sources */,
@@ -1091,6 +1107,7 @@
 				CFC15B971CC205390077FA19 /* MenuModel.m in Sources */,
 				CFF183BE1CE7116200E991C4 /* ReduceViewController.m in Sources */,
 				CFDD2EA11CCF4DE100E81E3F /* MJRefreshAutoNormalFooter.m in Sources */,
+				CF247A851CEB22E1000F1442 /* ByListDialog.m in Sources */,
 				CFDD2E9F1CCF4DE100E81E3F /* MJRefreshHeader.m in Sources */,
 				CFF183861CE45E1400E991C4 /* BaseRequestModel.m in Sources */,
 				CF48C6341CD0DBF800BF4EF9 /* SearchViewController.m in Sources */,
@@ -1100,6 +1117,7 @@
 				CFDD2DEB1CCA19C900E81E3F /* MyContractViewController.m in Sources */,
 				CFDFFA9A1CBF77AB00401CB3 /* MainViewController.m in Sources */,
 				CF2A51061CE31A1D00F0EF3D /* UpdateModel.m in Sources */,
+				CF60E18A1CEAC983001EF40D /* UserRespondModel.m in Sources */,
 				CFC15BB01CC365650077FA19 /* HandicapBaseModel.m in Sources */,
 				CFF183AE1CE5E89B00E991C4 /* MoneyDetailViewController.m in Sources */,
 				CFDD2EA51CCF4DE100E81E3F /* MJRefreshBackStateFooter.m in Sources */,

@@ -78,12 +78,6 @@
     return YES;
 }
 
-- (const char *)UnicodeToISO88591:(NSString *)src
-{
-    NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingISOLatin1);
-    return [src cStringUsingEncoding:enc];
-}
-
 
 - (void)applicationWillResignActive:(UIApplication *)application {
 }

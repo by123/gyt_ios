@@ -155,6 +155,8 @@
     [[Account sharedAccount] saveUid:model.strUserName];
     
     NSString *jsonStr = [JSONUtil parse:Request_Login params:[JSONUtil parseStr:model]];
+    [[Account sharedAccount] saveAccountInfo:[JSONUtil parseStr:model].mj_JSONString];
+
 //    NSLog(@"%@",jsonStr);
     [self requestLogin:jsonStr];
     

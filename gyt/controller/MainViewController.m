@@ -17,6 +17,7 @@
 #import "LoginViewController.h"
 #import "UserInfoDataModel.h"
 #import "UserInfoModel.h"
+#import "UserRespondModel.h"
 #define Item_Height 40
 
 @interface MainViewController ()
@@ -67,6 +68,8 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getUserInfo) name:Notify_Update_UserInfo object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateView:) name:Notify_Menu_Title object:nil];
 }
+
+
 
 
 -(void)dealloc
@@ -379,9 +382,10 @@
 #pragma mark 请求用户资料
 -(void)requestUserInfo : (NSString *)jsonStr
 {
+    return;
     [[HttpRequest sharedHttpRequest] post:jsonStr view:self.view success:^(id responseObject) {
         BaseRespondModel *model = [BaseRespondModel mj_objectWithKeyValues:responseObject];
-        
+        UserRespondModel *respondModel = [UserRespondModel mj_objectWithKeyValues:model.resp];
     } fail:^(NSError *error) {
         
     }];

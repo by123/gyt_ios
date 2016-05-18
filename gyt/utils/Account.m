@@ -38,6 +38,11 @@ SINGLETON_IMPLEMENTION(Account);
     
 }
 
+-(void)saveAccountInfo:(NSString *)accountInfo
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setValue:accountInfo forKey:ACCOUNTINFO];
+}
 
 
 - (BOOL)isLogin
@@ -63,5 +68,11 @@ SINGLETON_IMPLEMENTION(Account);
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     return [userDefaults objectForKey:SESSIONID];
+}
+
+-(NSString *)getAccountInfo
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    return [userDefaults objectForKey:ACCOUNTINFO];
 }
 @end
