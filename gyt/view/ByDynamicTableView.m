@@ -23,6 +23,7 @@
 
 @property (strong, nonatomic) UIScrollView *scrollView;
 
+@property (strong, nonatomic) UIView *backGroudView;
 
 @end
 
@@ -56,6 +57,9 @@
 
 -(void)initView
 {
+    _backGroudView = [[UIView alloc]init];
+    _backGroudView.backgroundColor = SELECT_COLOR;
+    
     _scrollView = [[UIScrollView alloc]init];
     _scrollView.frame =self.bounds;
     _scrollView.delegate = self;
@@ -126,7 +130,7 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DynamicCell *cell  = [[DynamicCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[DynamicCell identify] widths:_widthDatas];
-    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    [cell setSelectedBackgroundView:_backGroudView];
     if(!IS_NS_COLLECTION_EMPTY(_datas))
     {
         switch (_type) {
@@ -161,50 +165,39 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
-    ProductModel *model = [_datas objectAtIndex:indexPath.row];
-    
-
-    if(!model.isSelect)
+    if(_delegate)
     {
-        NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
-        
-        ProductModel *addModel = [[ProductModel alloc]init];
-        addModel.isDelete = YES;
-        addModel.isSelect = YES;
-        [_datas insertObject:addModel atIndex:indexPath.row + 1];
-        
-        [indexPaths addObject:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
-        
-        [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
-        model.isSelect = YES;
+        [_delegate OnItemSelected:self position:indexPath.row];
     }
-    else
-    {
-        if(!model.isDelete)
-        {
-            [_datas removeObjectAtIndex:indexPath.row+1];
-            
-            NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
-            [indexPaths addObject:[NSIndexPath indexPathForRow:indexPath.row+1
-                                                     inSection:0]];
-            
-            [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
-            
-            model.isSelect = NO;
-        }
-    }
-
-   
-//    if(isSelect)
+//    ProductModel *model = [_datas objectAtIndex:indexPath.row];
+//    if(!model.isSelect)
 //    {
-//        [_datas removeObject:[_datas objectAtIndex:indexPath.row]];
-//        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+//        NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
+//        
+//        ProductModel *addModel = [[ProductModel alloc]init];
+//        addModel.isDelete = YES;
+//        addModel.isSelect = YES;
+//        [_datas insertObject:addModel atIndex:indexPath.row + 1];
+//        
+//        [indexPaths addObject:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
+//        
+//        [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+//        model.isSelect = YES;
 //    }
 //    else
 //    {
-//        [_datas addObject:[_datas objectAtIndex:indexPath.row]];
-//        [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+//        if(!model.isDelete)
+//        {
+//            [_datas removeObjectAtIndex:indexPath.row+1];
+//            
+//            NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
+//            [indexPaths addObject:[NSIndexPath indexPathForRow:indexPath.row+1
+//                                                     inSection:0]];
+//            
+//            [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+//            
+//            model.isSelect = NO;
+//        }
 //    }
 
 }

@@ -10,6 +10,8 @@
 #import "InsetTextField.h"
 #import "LoginModel.h"
 #import "LoginResponseModel.h"
+#import "IPMacUtil.h"
+#import "UUID.h"
 
 @interface LoginViewController ()
 
@@ -67,7 +69,7 @@
     
     _companyTextField = [[InsetTextField alloc]initWithFrame: CGRectMake(20, 20, SCREEN_WIDTH-40, 40)];
     _companyTextField.hasTitle = YES;
-    [_companyTextField setInsetTitle:@"开户公司" font:[UIFont systemFontOfSize:14.0f]];
+    [_companyTextField setInsetTitle:@"开户公司：" font:[UIFont systemFontOfSize:14.0f]];
     _companyTextField.block = ^(InsetTextField *insetTextField) {
         [DialogHelper showTips:@"开发中"];
     };
@@ -77,8 +79,8 @@
     
     _nameTextField = [[InsetTextField alloc]initWithFrame:CGRectMake(20, 70, SCREEN_WIDTH-40, 40)];
     _nameTextField.hasTitle = YES;
-    _nameTextField.text = @"800025294";
-    [_nameTextField setInsetTitle:@"资金账号" font:[UIFont systemFontOfSize:14.0f]];
+    _nameTextField.text = @"800001080";
+    [_nameTextField setInsetTitle:@"资金账号：" font:[UIFont systemFontOfSize:14.0f]];
     _nameTextField.block = ^(InsetTextField *insetTextField) {
         insetTextField.text = @"";
     };
@@ -88,7 +90,7 @@
     _passwordTextField = [[InsetTextField alloc]initWithFrame:CGRectMake(20, 120, SCREEN_WIDTH-40, 40)];
     _passwordTextField.hasTitle = YES;
     _passwordTextField.text = @"123456";
-    [_passwordTextField setInsetTitle:@"登录密码" font:[UIFont systemFontOfSize:14.0f]];
+    [_passwordTextField setInsetTitle:@"登录密码：" font:[UIFont systemFontOfSize:14.0f]];
     __weak LoginViewController *weakSelf = self;
     _passwordTextField.block = ^(InsetTextField *insetTextField){
         if(weakSelf.isSavePsw)
@@ -119,8 +121,6 @@
     [_loginBtn addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
     [rootView addSubview:_loginBtn];
     
-    
-    
 }
 
 
@@ -145,19 +145,16 @@
 
     
     LoginModel *model = [[LoginModel alloc]init];
-    model.sessionId = @"ceshi";
+    model.sessionId = @"";
     model.strUserName = _nameTextField.text;
     model.strPassword = _passwordTextField.text;
-    model.strIpAddress = @"ceshi";
-    model.strMACAdress = @"64-00-6A-89-6B-76";
-    model.clientID = 3;
+    model.strIpAddress = [IPMacUtil getIPAddress];
+    model.strMACAdress = [UUID getUUID];;
+    model.clientID = ClientID_Mobile_TRADE;
     
     [[Account sharedAccount] saveUid:model.strUserName];
     
-    NSString *jsonStr = [JSONUtil parse:Request_Login params:[JSONUtil parseStr:model]];
-    [[Account sharedAccount] saveAccountInfo:[JSONUtil parseStr:model].mj_JSONString];
-
-//    NSLog(@"%@",jsonStr);
+    NSString *jsonStr = [JSONUtil parse:Request_Login params:[JSONUtil parseDic:model]];
     [self requestLogin:jsonStr];
     
 }
@@ -172,7 +169,7 @@
         NSString *text = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
         NSLog(@"返回结果->%@",text);
         LoginResponseModel *model = [LoginResponseModel mj_objectWithKeyValues:responseObject];
-        int code = [[model.response objectForKey:@"success"] integerValue];
+        NSInteger code = [[model.response objectForKey:@"success"] integerValue];
         if(code == 1)
         {
             NSString *sessionId = [model.response objectForKey:@"sessionId"];

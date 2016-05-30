@@ -188,7 +188,6 @@
 		    continue;
 		}
 		plotWidth = (sec.frame.size.width-sec.paddingLeft)/(self.rangeTo-self.rangeFrom);
-        plotHeight = (sec.frame.size.height - sec.paddingTop) / (self.rangeTo - self.rangeFrom);
 		for(int sIndex=0;sIndex<sec.series.count;sIndex++){
 			NSMutableDictionary *serie = sec.series[sIndex];
 
@@ -300,7 +299,6 @@
 //    {
 //        return;
 //    }
-    NSLog(@"%@",type);
     ChartModel *model = [self getModel:type];
     [model drawSerie:self serie:serie];
 
@@ -394,6 +392,8 @@
                     md[NSFontAttributeName] = [UIFont systemFontOfSize:10];
                     md[NSForegroundColorAttributeName] =[UIColor redColor];
 //                    [[@"" stringByAppendingFormat:format,yaxis.baseValue+i*step] drawAtPoint:CGPointMake(20,iy-7) withAttributes:md];
+                    float temp = yaxis.baseValue + i *step;
+                    NSLog(@"%f",temp);
 
 #pragma mark 中间的横向虚线
 					if(yaxis.baseValue + i*step < yaxis.max){
@@ -469,7 +469,6 @@
 				self.selectedIndex=i;
 				[self setNeedsDisplay];
 			}
-
 			return;
 		}
 	}

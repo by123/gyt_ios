@@ -19,21 +19,6 @@ typedef NS_ENUM(NSInteger, CashType) {
      CashType_Out            // 出金
 };
 
-typedef NS_ENUM(NSInteger, MoneyType) {
-    MoneyType_RMB = 1,       //人民币
-    MoneyType_USD,          //美元
-    MoneyType_HKD,          //港币
-    MoneyType_CHF,          //瑞士法郎
-    MoneyType_JPY,          //日元
-    MoneyType_KRW,          //韩元
-    MoneyType_GBP,          //英镑
-    MoneyType_RUB,          //卢布
-    MoneyType_AUD,          //澳大利亚元
-    MoneyType_SGD,          //新币
-    MoneyType_EUR,          //欧元
-    MoneyType_CAD,          //加拿大元
-    MoneyType_NZD,          //新西兰元
-};
 
 typedef NS_ENUM(NSInteger, PayType) {
     PayType_ON_LINE = 1,         //线上

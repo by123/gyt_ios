@@ -24,4 +24,6 @@
 
 -(void)setCurrent : (NSInteger)position;
 
+-(int)getCurrent;
+
 @end

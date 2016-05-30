@@ -7,8 +7,6 @@
 //
 
 #import "ReduceCell.h"
-#import "InsetTextField.h"
-#import "ByListDialog.h"
 #import "AccessGoldModel.h"
 
 
@@ -47,8 +45,9 @@ typedef void (^ReduceCellBlock)(ReduceCell *cell);
     _insetTextField.returnKeyType = UIReturnKeyDone;
     [self.contentView addSubview:_insetTextField];
     
-    _button = [[UIButton alloc]initWithFrame:CGRectMake(15, 10, SCREEN_WIDTH-30, 40)];
+    _button = [[UIButton alloc]initWithFrame:CGRectMake(15 , 10, SCREEN_WIDTH-30, 40)];
     _button.backgroundColor = [UIColor clearColor];
+    [_button setContentEdgeInsets:UIEdgeInsetsMake(0, 40, 0, 0)];
     [_button setTitleColor:TEXT_COLOR forState:UIControlStateNormal];
     _button.titleLabel.font = [UIFont systemFontOfSize:14.0f];
     _button.layer.borderColor = [[UIColor blackColor] CGColor];
@@ -103,6 +102,11 @@ typedef void (^ReduceCellBlock)(ReduceCell *cell);
         [_insetTextField setInsetTitle:model.title font:[UIFont systemFontOfSize:14.f]];
     }
     
+}
+
+-(InsetTextField *)getTextField
+{
+    return _insetTextField;
 }
 
 

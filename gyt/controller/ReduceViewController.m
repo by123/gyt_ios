@@ -48,6 +48,7 @@
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.showsVerticalScrollIndicator = NO;
     _tableView.showsHorizontalScrollIndicator = NO;
+    _tableView.scrollEnabled = NO;
     _tableView.backgroundColor = [ColorUtil colorWithHexString:@"#333333"];
     _tableView.frame = CGRectMake(0,NavigationBar_HEIGHT + StatuBar_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - (NavigationBar_HEIGHT + StatuBar_HEIGHT) - 40);
     [self.view addSubview:_tableView];
@@ -100,6 +101,10 @@
     [cell setBackgroundColor:[UIColor clearColor]];
     if(!IS_NS_COLLECTION_EMPTY(_datas))
     {
+        if(indexPath.row == 1)
+        {
+            [[cell getTextField] setKeyboardType:UIKeyboardTypeNumberPad];
+        }
         [cell setData:[_datas objectAtIndex:indexPath.row] rootView:self.view];
     }
     return cell;
@@ -118,7 +123,7 @@
     AccessGoldModel *model = [[AccessGoldModel alloc]init];
     model.m_nMoneyType = MoneyType_RMB;
     
-    NSMutableDictionary *dic = [JSONUtil parseStr:model];
+    NSMutableDictionary *dic = [JSONUtil parseDic:model];
     NSString *jsonStr = [JSONUtil parse:Request_CashApplyInfo params:dic];
     [self requsetGetCash :jsonStr];
 }
@@ -138,4 +143,5 @@
     }];
     
 }
+
 @end

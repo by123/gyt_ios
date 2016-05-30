@@ -61,7 +61,7 @@
                     break;
                 case 1:
                     label.text = model.buySell;
-                    if([model.buySell isEqualToString:@"多"])
+                    if([model.buySell isEqualToString:More])
                     {
                         label.textColor= [UIColor redColor];
                     }
@@ -81,7 +81,11 @@
                     break;
                 case 5:
                     label.text = model.profit;
-                    if([model.profit integerValue] > 0)
+                    if([model.profit integerValue] == 0)
+                    {
+                        label.textColor = TEXT_COLOR;
+                    }
+                    else if ([model.profit integerValue] > 0)
                     {
                         label.textColor= [UIColor redColor];
                     }

@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "gyt/controller/DetailViewController.m"
-            timestampString = "484806561.470634"
+            filePath = "gyt/QueryRequest.m"
+            timestampString = "486015727.367247"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "220"
-            endingLineNumber = "220"
-            landmarkName = "-OnRightClickCallBack:"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "+buildRequestJson:structId:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,27 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "gyt/data/UserInfoDataModel.m"
-            timestampString = "484735121.891699"
+            filePath = "gyt/controller/LoginViewController.m"
+            timestampString = "486021496.277155"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "14"
-            endingLineNumber = "14">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "gyt/utils/RSA.m"
-            timestampString = "484819592.482656"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "15"
-            endingLineNumber = "15"
-            landmarkName = "+getPublicKey"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
+            landmarkName = "-requestLogin:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

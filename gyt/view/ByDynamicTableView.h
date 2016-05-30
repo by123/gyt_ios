@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol ByDynamicTableViewDelegate
+
+@optional -(void)OnItemSelected : (UIView *)dynamicTableView
+                       position : (NSInteger)position;
+
+@end
+
 @interface ByDynamicTableView : UIView<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
 
 typedef NS_ENUM(NSInteger, DealType) {
@@ -29,6 +36,8 @@ typedef NS_ENUM(NSInteger, DealType) {
 
 @property (assign, nonatomic) DealType type;
 
+@property (strong, nonatomic) id delegate;
+
 -(instancetype)initWithData : (CGRect)rect
                       array : (NSMutableArray *)array
                      maxWidth : (int) maxWidth
@@ -38,5 +47,6 @@ typedef NS_ENUM(NSInteger, DealType) {
           headers : (NSArray *)headers;
 
 -(void)reloadData : (NSMutableArray *)array;
+
 
 @end

@@ -10,28 +10,25 @@
 #import "TitleContentModel.h"
 @implementation MoneyDetailModel
 
-+(NSMutableArray *)getData
++(NSMutableArray *)getData : (MoneyDetailModel *)model
 {
     NSMutableArray *datas = [[NSMutableArray alloc]init];
-    [datas addObject:[TitleContentModel buildData:@"日期" content:@"2016-05-14"]];
-    [datas addObject:[TitleContentModel buildData:@"账号编号" content:@"80012314"]];
-    [datas addObject:[TitleContentModel buildData:@"账号状态" content:@"正常"]];
-    [datas addObject:[TitleContentModel buildData:@"客户姓名" content:@"程集宏"]];
-    [datas addObject:[TitleContentModel buildData:@"币种" content:@"RMB"]];
-    [datas addObject:[TitleContentModel buildData:@"动态权益" content:@"10000002"]];
-    [datas addObject:[TitleContentModel buildData:@"静态权益" content:@"10000023"]];
-    [datas addObject:[TitleContentModel buildData:@"优先资金" content:@"10003242"]];
-    [datas addObject:[TitleContentModel buildData:@"可用资金" content:@"9992342"]];
-    [datas addObject:[TitleContentModel buildData:@"持仓盈亏" content:@"0.00"]];
+    [datas addObject:[TitleContentModel buildData:@"资金账号" content:model.m_strAccountID]];
+    [datas addObject:[TitleContentModel buildData:@"权益" content:[NSString stringWithFormat:@"%.2f",model.m_dCurBalance]]];
+    [datas addObject:[TitleContentModel buildData:@"可用资金" content:[NSString stringWithFormat:@"%.2f",model.m_dAvailable]]];
+    [datas addObject:[TitleContentModel buildData:@"币种" content:[AccessGoldModel getMoneyType:model.m_nMoneyType]]];
+    [datas addObject:[TitleContentModel buildData:@"初始权益" content:[NSString stringWithFormat:@"%.2f",model.m_dInitBalance]]];
+    [datas addObject:[TitleContentModel buildData:@"出入金" content:[NSString stringWithFormat:@"%.2f",model.m_dDeposit]]];
+    [datas addObject:[TitleContentModel buildData:@"手续费" content:[NSString stringWithFormat:@"%.2f",model.m_dCommission]]];
     [datas addObject:[TitleContentModel buildData:@"平仓盈亏" content:@"0.00"]];
-    [datas addObject:[TitleContentModel buildData:@"入金" content:@"1000000"]];
-    [datas addObject:[TitleContentModel buildData:@"出金" content:@"500000"]];
-    [datas addObject:[TitleContentModel buildData:@"暂用保证金" content:@"5000"]];
-    [datas addObject:[TitleContentModel buildData:@"冻结保证金" content:@"5000"]];
-    [datas addObject:[TitleContentModel buildData:@"手续费" content:@"840"]];
-    [datas addObject:[TitleContentModel buildData:@"冻结手续费率" content:@"5%"]];
-    [datas addObject:[TitleContentModel buildData:@"合约价值" content:@"2323"]];
-
+    [datas addObject:[TitleContentModel buildData:@"平仓盈亏率" content:@"0.00%"]];
+    [datas addObject:[TitleContentModel buildData:@"逐笔浮赢" content:@"0.00"]];
+    [datas addObject:[TitleContentModel buildData:@"逐笔浮赢率" content:@"0.00%"]];
+    [datas addObject:[TitleContentModel buildData:@"保证金" content:[NSString stringWithFormat:@"%.2f",model.m_dUsedMargin]]];
+    [datas addObject:[TitleContentModel buildData:@"挂单保证金" content:@"0.00"]];
+    [datas addObject:[TitleContentModel buildData:@"挂单手续费" content:@"0.00"]];
+    [datas addObject:[TitleContentModel buildData:@"资金使用率" content:@"0.00%"]];
+    
     return datas;
 }
 

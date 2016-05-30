@@ -51,7 +51,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = BACKGROUND_COLOR;
-    _datas = [MoneyDetailModel getData];
     [self initView];
 }
 
@@ -180,10 +179,26 @@
 
 -(void)requestAccountInfo
 {
-    [QueryRequest requestAcountInfo:self.view success:^(id responseObject) {
+    [QueryRequest requestQueryInfo:self.view requestType:XT_CAccountDetail success:^(id responseObject) {
+        QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:responseObject];
+        NSMutableArray *array = model.datas;
+        if(!IS_NS_COLLECTION_EMPTY(array))
+        {
+            //多种资金
+            for(id obj in array)
+            {
+                MoneyDetailModel *moneyDetailModel = [MoneyDetailModel mj_objectWithKeyValues:obj];
+                _datas = [MoneyDetailModel getData : moneyDetailModel];
+                [_tableView reloadData];
+            }
+        }
+        else{
+            [DialogHelper showTips:@"获取资金信息失败，请重试!"];
+        }
+  
         
     } fail:^(NSError *error) {
-        
+        [DialogHelper showTips:@"获取资金信息失败，请重试!"];
     }];
 }
 

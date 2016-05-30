@@ -24,10 +24,14 @@
     return dict.mj_JSONString;
 }
 
-+(NSMutableDictionary *)parseStr : (NSObject *)model
++(NSString *)parseStr : (NSObject *)model
 {
-    NSMutableDictionary *dict = model.mj_keyValues;
-    return dict;
+    return model.mj_keyValues.mj_JSONString;
+}
+
++(NSMutableDictionary *)parseDic: (NSObject *)model
+{
+    return model.mj_keyValues;
 }
 
 @end

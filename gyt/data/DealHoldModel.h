@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+#define Buy @"买"
+#define Sell @"卖"
+#define More @"多"
+#define Less @"空"
+
 @interface DealHoldModel : NSObject
 
 //商品名称
@@ -27,5 +32,8 @@
 
 //逐笔浮盈
 @property (copy, nonatomic) NSString *profit;
+
+//是否被选中
+@property (assign, nonatomic) BOOL isSelect;
 
 @end

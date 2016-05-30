@@ -106,4 +106,9 @@
 
 }
 
+-(int)getCurrent
+{
+    return lastButton.tag;
+}
+
 @end

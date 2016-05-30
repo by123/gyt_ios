@@ -10,4 +10,14 @@
 
 @implementation QueryRequestModel
 
+-(instancetype)init
+{
+    if(self == [super init])
+    {
+        NSString *accountInfoStr =  [[Account sharedAccount] getAccountInfo];
+        UserInfoModel *model = [UserInfoModel mj_objectWithKeyValues:accountInfoStr];
+        self.account = model;
+    }
+    return self;
+}
 @end

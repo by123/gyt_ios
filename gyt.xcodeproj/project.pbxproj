@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		8109A9450AE28C984801318D /* libPods-gyt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 234300D9AA14CCAB18F37D31 /* libPods-gyt.a */; };
+		CF0B6CF51CF843BF00850E62 /* QueryRespondsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF0B6CF41CF843BF00850E62 /* QueryRespondsModel.m */; };
+		CF0DBB741CF6CAEF0082E411 /* IPMacUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CF0DBB731CF6CAEF0082E411 /* IPMacUtil.m */; };
+		CF0DBB791CF6D45D0082E411 /* UUID.m in Sources */ = {isa = PBXBuildFile; fileRef = CF0DBB781CF6D45D0082E411 /* UUID.m */; };
+		CF0DBB7C1CF6D4A30082E411 /* KeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = CF0DBB7B1CF6D4A30082E411 /* KeyChainStore.m */; };
 		CF247A851CEB22E1000F1442 /* ByListDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = CF247A841CEB22E1000F1442 /* ByListDialog.m */; };
 		CF2A51051CE31A1D00F0EF3D /* CheckUpdateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2A51021CE31A1D00F0EF3D /* CheckUpdateUtil.m */; };
 		CF2A51061CE31A1D00F0EF3D /* UpdateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2A51041CE31A1D00F0EF3D /* UpdateModel.m */; };
@@ -131,6 +135,15 @@
 /* Begin PBXFileReference section */
 		0649C12BFD5FDC358AE11BA4 /* Pods-gyt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gyt.release.xcconfig"; path = "Pods/Target Support Files/Pods-gyt/Pods-gyt.release.xcconfig"; sourceTree = "<group>"; };
 		234300D9AA14CCAB18F37D31 /* libPods-gyt.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-gyt.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF0B6CF31CF843BF00850E62 /* QueryRespondsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryRespondsModel.h; sourceTree = "<group>"; };
+		CF0B6CF41CF843BF00850E62 /* QueryRespondsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryRespondsModel.m; sourceTree = "<group>"; };
+		CF0DBB721CF6CAEF0082E411 /* IPMacUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPMacUtil.h; sourceTree = "<group>"; };
+		CF0DBB731CF6CAEF0082E411 /* IPMacUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPMacUtil.m; sourceTree = "<group>"; };
+		CF0DBB751CF6D4000082E411 /* gyt.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = gyt.entitlements; sourceTree = "<group>"; };
+		CF0DBB771CF6D45D0082E411 /* UUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UUID.h; sourceTree = "<group>"; };
+		CF0DBB781CF6D45D0082E411 /* UUID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UUID.m; sourceTree = "<group>"; };
+		CF0DBB7A1CF6D4A30082E411 /* KeyChainStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyChainStore.h; sourceTree = "<group>"; };
+		CF0DBB7B1CF6D4A30082E411 /* KeyChainStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyChainStore.m; sourceTree = "<group>"; };
 		CF247A831CEB22E1000F1442 /* ByListDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ByListDialog.h; sourceTree = "<group>"; };
 		CF247A841CEB22E1000F1442 /* ByListDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ByListDialog.m; sourceTree = "<group>"; };
 		CF2A51011CE31A1D00F0EF3D /* CheckUpdateUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckUpdateUtil.h; sourceTree = "<group>"; };
@@ -390,6 +403,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		CF0DBB761CF6D44F0082E411 /* system */ = {
+			isa = PBXGroup;
+			children = (
+				CF0DBB721CF6CAEF0082E411 /* IPMacUtil.h */,
+				CF0DBB731CF6CAEF0082E411 /* IPMacUtil.m */,
+				CF0DBB771CF6D45D0082E411 /* UUID.h */,
+				CF0DBB781CF6D45D0082E411 /* UUID.m */,
+				CF0DBB7A1CF6D4A30082E411 /* KeyChainStore.h */,
+				CF0DBB7B1CF6D4A30082E411 /* KeyChainStore.m */,
+			);
+			name = system;
+			sourceTree = "<group>";
+		};
 		CF2A51001CE31A1000F0EF3D /* update */ = {
 			isa = PBXGroup;
 			children = (
@@ -440,6 +466,7 @@
 		CF4A6D151CBE25AA00B36C93 /* gyt */ = {
 			isa = PBXGroup;
 			children = (
+				CF0DBB751CF6D4000082E411 /* gyt.entitlements */,
 				CFF183D61CE9F09100E991C4 /* request */,
 				CFA3B8D11CD9AAB70063AE3E /* chart */,
 				CF4A6D471CBE28DD00B36C93 /* controller */,
@@ -515,6 +542,7 @@
 		CF4A6D491CBE28DD00B36C93 /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				CF0DBB761CF6D44F0082E411 /* system */,
 				CF2A51001CE31A1000F0EF3D /* update */,
 				CF4A6D4A1CBE28DD00B36C93 /* Account.h */,
 				CF4A6D4B1CBE28DD00B36C93 /* Account.m */,
@@ -918,6 +946,8 @@
 				CFF183D81CE9F0A200E991C4 /* QueryRequest.m */,
 				CF60E1851CEABF45001EF40D /* QueryRequestModel.h */,
 				CF60E1861CEABF45001EF40D /* QueryRequestModel.m */,
+				CF0B6CF31CF843BF00850E62 /* QueryRespondsModel.h */,
+				CF0B6CF41CF843BF00850E62 /* QueryRespondsModel.m */,
 			);
 			name = request;
 			sourceTree = "<group>";
@@ -966,6 +996,11 @@
 					CF4A6D121CBE25AA00B36C93 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = AB86U4DT8H;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -1085,6 +1120,7 @@
 				CF4A6D1B1CBE25AA00B36C93 /* AppDelegate.m in Sources */,
 				CFC15B8E1CBF94A90077FA19 /* MainTableCell.m in Sources */,
 				CF2A51051CE31A1D00F0EF3D /* CheckUpdateUtil.m in Sources */,
+				CF0DBB7C1CF6D4A30082E411 /* KeyChainStore.m in Sources */,
 				CF4A6D181CBE25AA00B36C93 /* main.m in Sources */,
 				CFA3B8F21CD9AAB70063AE3E /* YAxis.m in Sources */,
 				CFC15B941CC11B770077FA19 /* LeftMenuCell.m in Sources */,
@@ -1093,6 +1129,7 @@
 				CFDFFA941CBF742500401CB3 /* SlideNavigationController.m in Sources */,
 				CFF183B41CE6D13500E991C4 /* MoneyDetailModel.m in Sources */,
 				CFC15BC61CC4B8160077FA19 /* DealView.m in Sources */,
+				CF0DBB741CF6CAEF0082E411 /* IPMacUtil.m in Sources */,
 				CFA3B8F01CD9AAB70063AE3E /* Chart.m in Sources */,
 				CFA3B8FB1CD9AB050063AE3E /* EncryptHelper.m in Sources */,
 				CFF183D21CE9D6CA00E991C4 /* MoneyManageDetailViewController.m in Sources */,
@@ -1106,6 +1143,8 @@
 				CFF183991CE5AB9D00E991C4 /* BaseRespondModel.m in Sources */,
 				CFC15B971CC205390077FA19 /* MenuModel.m in Sources */,
 				CFF183BE1CE7116200E991C4 /* ReduceViewController.m in Sources */,
+				CF0DBB791CF6D45D0082E411 /* UUID.m in Sources */,
+				CF0B6CF51CF843BF00850E62 /* QueryRespondsModel.m in Sources */,
 				CFDD2EA11CCF4DE100E81E3F /* MJRefreshAutoNormalFooter.m in Sources */,
 				CF247A851CEB22E1000F1442 /* ByListDialog.m in Sources */,
 				CFDD2E9F1CCF4DE100E81E3F /* MJRefreshHeader.m in Sources */,
@@ -1280,6 +1319,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = gyt/gyt.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREFIX_HEADER = /Users/by.huang/Desktop/by/gyt_ios/gyt/Common.pch;
@@ -1299,6 +1339,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = gyt/gyt.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREFIX_HEADER = /Users/by.huang/Desktop/by/gyt_ios/gyt/Common.pch;

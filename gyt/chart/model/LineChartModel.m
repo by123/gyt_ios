@@ -32,12 +32,21 @@
 
     if(chart.selectedIndex!=-1 && chart.selectedIndex < data.count && data[chart.selectedIndex] !=nil){
         float value = [[data[chart.selectedIndex] objectAtIndex:0] floatValue];
+#pragma mark 移动竖线
         CGContextSetShouldAntialias(context, NO);
-        CGContextSetStrokeColorWithColor(context, [[UIColor alloc] initWithRed:0.2 green:0.2 blue:0.2 alpha:1.0].CGColor);
+        CGContextSetStrokeColorWithColor(context, SELECT_COLOR.CGColor);
         CGContextMoveToPoint(context, sec.frame.origin.x+sec.paddingLeft+(chart.selectedIndex-chart.rangeFrom)*chart.plotWidth+chart.plotWidth/2, sec.frame.origin.y+sec.paddingTop);
         CGContextAddLineToPoint(context,sec.frame.origin.x+sec.paddingLeft+(chart.selectedIndex-chart.rangeFrom)*chart.plotWidth+chart.plotWidth/2,sec.frame.size.height+sec.frame.origin.y);
         CGContextStrokePath(context);
+        
+#pragma mark 移动横线
+        CGContextSetShouldAntialias(context, NO);
+        CGContextSetStrokeColorWithColor(context, SELECT_COLOR.CGColor);
+        CGContextMoveToPoint(context, sec.frame.origin.x+sec.paddingLeft,sec.paddingTop);
+        CGContextAddLineToPoint(context,sec.frame.size.width+sec.frame.origin.x+sec.paddingLeft,sec.paddingTop);
+        CGContextStrokePath(context);
 
+        
         CGContextSetShouldAntialias(context, YES);
         CGContextBeginPath(context);
         CGContextSetRGBFillColor(context, R, G, B, 1.0);

@@ -7,11 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "UserInfoModel.h"
 
 @interface QueryRequestModel : NSObject
 
-@property (copy, nonatomic) NSString *account;
+@property (strong, nonatomic) UserInfoModel *account;
 
 @property (assign , nonatomic) int structId;
+
+@property (copy, nonatomic) NSString *strSessionID;
+
 
 @end

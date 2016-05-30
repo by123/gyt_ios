@@ -96,12 +96,12 @@
 
 
 
-
 -(void)initDB
 {
     [[ContractDB sharedContractDB] createDB];
-
 }
+
+
 //-(void)launchViewController
 //{
 //    UINavigationController *controller;
@@ -113,6 +113,8 @@
 //}
 
 //    login(sessionId: #s, strUserName: #s, strPassword: #s, strIpAddress: #s, strMACAdress: #s, clientID: #i) => (response:CMobileLoginResponsePtr)
+
+
 
 
 @end

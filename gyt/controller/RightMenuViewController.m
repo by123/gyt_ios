@@ -16,6 +16,7 @@
 #import "LoginModel.h"
 #import "MoneyDetailViewController.h"
 #import "MoneyManageViewController.h"
+#import "LoginViewController.h"
 
 @interface RightMenuViewController ()
 
@@ -145,13 +146,14 @@
 #pragma mark 登出
 -(void)logout
 {
+
     LoginModel *model = [[LoginModel alloc]init];
     model.strUserName = [[Account sharedAccount]getUid];
     model.sessionId = [[Account sharedAccount]getSessionId];
     
-    [JSONUtil parse:Request_Logout params:[JSONUtil parseStr:model]];
+    [JSONUtil parse:Request_Logout params:[JSONUtil parseDic:model]];
 
-    NSMutableDictionary *dic = [JSONUtil parseStr:model];
+    NSMutableDictionary *dic = [JSONUtil parseDic:model];
     NSString *jsonStr = dic.mj_JSONString;
     [self requestLogout:jsonStr];
 }
@@ -159,8 +161,8 @@
 
 -(void)requestLogout : (NSString *)jsonStr
 {
+
     [[HttpRequest sharedHttpRequest]post:jsonStr view:self.controller.view success:^(id responseObject) {
-        
         
     } fail:^(NSError *error) {
     }];

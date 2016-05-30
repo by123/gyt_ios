@@ -9,11 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "TitleContentModel.h"
 #import "ByListDialog.h"
+#import "InsetTextField.h"
 
 @interface ReduceCell : UITableViewCell<ListDialogDelegate>
 
 -(void)setData : (TitleContentModel *)model
     rootView : (UIView *)rootView;
+
+-(InsetTextField *)getTextField;
 
 +(NSString *)identify;
 

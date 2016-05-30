@@ -17,7 +17,6 @@
 {
 
     QueryRequestModel *model = [[QueryRequestModel alloc]init];
-    model.account = account;
     model.structId = structId;
     
     NSMutableDictionary *dict = model.mj_keyValues;
@@ -26,20 +25,23 @@
 }
 
 
-+(void)requestAcountInfo : (UIView *)view
++(void)requestQueryInfo  : (UIView *)view
+             requestType : (RequestType)type
                  success : (SuccessCallback)success
                     fail : (FailCallback)fail
 {
     
     QueryRequestModel *model = [[QueryRequestModel alloc]init];
-    model.structId = XT_CAccountDetail;
-    model.account = [[Account sharedAccount] getAccountInfo];
-
-    NSString *result = [JSONUtil parse:@"queryData" params:[JSONUtil parseStr:model]];
+    model.structId = type;
+    model.strSessionID = [[Account sharedAccount]getSessionId];
     
+    NSMutableDictionary *dic =[JSONUtil parseDic:model];
+    NSString *result = [JSONUtil parse:@"queryData" params:dic];
+
     NSLog(@"%@",result);
 
     [[HttpRequest sharedHttpRequest]post:result view:view success:^(id responseObject) {
+        NSLog(@"返回->%@",responseObject);
         success(responseObject);
     } fail:^(NSError *error) {
         fail(error);

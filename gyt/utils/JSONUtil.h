@@ -16,7 +16,12 @@
               params: (NSMutableDictionary *)params;
 
 
-#pragma mark 自定义模型转dic
+#pragma mark 自定义模型转string
 +(NSMutableDictionary *)parseStr : (NSObject *)model;
+
+
+#pragma mark 自定义模型转dic
++(NSMutableDictionary *)parseDic: (NSObject *)model;
+
 
 @end

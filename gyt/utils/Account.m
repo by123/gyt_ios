@@ -73,6 +73,7 @@ SINGLETON_IMPLEMENTION(Account);
 -(NSString *)getAccountInfo
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    return [userDefaults objectForKey:ACCOUNTINFO];
+    NSString *accountInfo = [userDefaults objectForKey:ACCOUNTINFO];
+    return accountInfo;
 }
 @end

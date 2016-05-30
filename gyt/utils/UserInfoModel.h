@@ -22,14 +22,14 @@
 //账户状态
 @property (copy , nonatomic) NSString *m_nStatus;
 
-//是否可交易
-@property (assign , nonatomic) Boolean m_bAllowTrade;
+////是否可交易
+//@property (assign , nonatomic) Boolean m_bAllowTrade;
 
 //是否分账号
-@property (assign , nonatomic) Boolean m_bSubAccount;
+@property (assign , nonatomic) bool m_bSubAccount;
 
-//是否模拟账号
-@property (assign , nonatomic) Boolean m_bSimAccount;
+////是否模拟账号
+//@property (assign , nonatomic) Boolean m_bSimAccount;
 
 //账号姓名
 @property (copy , nonatomic) NSString *m_strName;

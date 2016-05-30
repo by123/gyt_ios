@@ -356,24 +356,31 @@
 -(void)getUserInfo
 {
     UserInfoModel *data = [[UserInfoModel alloc]init];
-    data.m_strAccountID = [[Account sharedAccount] getUid];;
-    data.m_nAccountType = @"";
-    data.m_strPassword = @"";
-    data.m_nStatus = @"";
-    data.m_bAllowTrade = NO;
-    data.m_bSimAccount = NO;
-    data.m_bSubAccount = YES;
-    data.m_strName = @"";
-    data.m_strUserID = @"";
-    data.m_strBrokerID = @"";
+    data.m_strAccountID = [[Account sharedAccount] getUid];
+//    data.m_nAccountType = @"";
+//    data.m_strPassword = @"";
+//    data.m_nStatus = @"";
+//    data.m_bAllowTrade = NO;
+//    data.m_bSimAccount = NO;
     
+    data.m_bSubAccount = @(true);
+//    data.m_strName = @"";
+//    data.m_strUserID = @"";
+//    data.m_strBrokerID = @"";
+    
+    NSString *accountInfoStr = [JSONUtil parseStr:data];
+    NSLog(@"用户信息->%@",accountInfoStr);
+    [[Account sharedAccount] saveAccountInfo:accountInfoStr];
+
+
     
     UserInfoDataModel *model = [[UserInfoDataModel alloc]init];
     model.sessionId = [[Account sharedAccount] getSessionId];
-    model.accountInfo = [JSONUtil parseStr:data];
+    model.accountInfo = [JSONUtil parseDic:data];
 
     
-    NSMutableDictionary *dic = [JSONUtil parseStr:model];
+    NSMutableDictionary *dic = [JSONUtil parseDic:model];
+    
     NSString *jsonStr = [JSONUtil parse:Request_UserInfo params:dic];
     
     [self requestUserInfo : jsonStr];

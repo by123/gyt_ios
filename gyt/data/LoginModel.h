@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSInteger, ClientID) {
+    ClientID_Mobile_Manage = 3,
+    ClientID_Mobile_TRADE = 4
+};
+
+
 @interface LoginModel : NSObject
 
 @property (copy, nonatomic) NSString *sessionId;

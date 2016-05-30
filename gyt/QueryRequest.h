@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "QueryRequestModel.h"
+#import "QueryRespondsModel.h"
 
 @interface QueryRequest : NSObject
 
@@ -73,8 +75,9 @@ typedef NS_ENUM(NSInteger, RequestType) {
 +(NSString *)buildRequestJson : (NSString *)account
                       structId: (int)structId;
 
-#pragma mark 请求用户基本信息
-+(void)requestAcountInfo : (UIView *)view
+#pragma mark 请求查询信息
++(void)requestQueryInfo  : (UIView *)view
+             requestType : (RequestType)type
                  success : (SuccessCallback)success
                     fail : (FailCallback)fail;
 
