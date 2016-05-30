@@ -12,6 +12,9 @@
 		CF0DBB741CF6CAEF0082E411 /* IPMacUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CF0DBB731CF6CAEF0082E411 /* IPMacUtil.m */; };
 		CF0DBB791CF6D45D0082E411 /* UUID.m in Sources */ = {isa = PBXBuildFile; fileRef = CF0DBB781CF6D45D0082E411 /* UUID.m */; };
 		CF0DBB7C1CF6D4A30082E411 /* KeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = CF0DBB7B1CF6D4A30082E411 /* KeyChainStore.m */; };
+		CF111D491CFBDF4100298C78 /* OrderRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF111D481CFBDF4100298C78 /* OrderRequestModel.m */; };
+		CF111D4C1CFBEABB00298C78 /* OrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF111D4B1CFBEABB00298C78 /* OrderModel.m */; };
+		CF111D4F1CFBF5A000298C78 /* OrderTagModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF111D4E1CFBF5A000298C78 /* OrderTagModel.m */; };
 		CF247A851CEB22E1000F1442 /* ByListDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = CF247A841CEB22E1000F1442 /* ByListDialog.m */; };
 		CF2A51051CE31A1D00F0EF3D /* CheckUpdateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2A51021CE31A1D00F0EF3D /* CheckUpdateUtil.m */; };
 		CF2A51061CE31A1D00F0EF3D /* UpdateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2A51041CE31A1D00F0EF3D /* UpdateModel.m */; };
@@ -35,6 +38,19 @@
 		CF4A6D7F1CBE2EAB00B36C93 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D7E1CBE2EAB00B36C93 /* BaseViewController.m */; };
 		CF60E1871CEABF45001EF40D /* QueryRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF60E1861CEABF45001EF40D /* QueryRequestModel.m */; };
 		CF60E18A1CEAC983001EF40D /* UserRespondModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF60E1891CEAC983001EF40D /* UserRespondModel.m */; };
+		CF6CED571CFC1E64007F97AA /* OrderRespondModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CED561CFC1E64007F97AA /* OrderRespondModel.m */; };
+		CF6CED781CFC367A007F97AA /* ConnectTest-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CF6CED5B1CFC367A007F97AA /* ConnectTest-Info.plist */; };
+		CF6CED791CFC367A007F97AA /* ConnectTestAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CED5E1CFC367A007F97AA /* ConnectTestAppDelegate.m */; };
+		CF6CED7C1CFC367A007F97AA /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CED641CFC367A007F97AA /* Reachability.m */; };
+		CF6CED7D1CFC367A007F97AA /* TcpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CED661CFC367A007F97AA /* TcpClient.m */; };
+		CF6CED7E1CFC367A007F97AA /* TestUI.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CED681CFC367A007F97AA /* TestUI.m */; };
+		CF6CED7F1CFC367A007F97AA /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CED6A1CFC367A007F97AA /* GCDAsyncSocket.m */; };
+		CF6CED801CFC367A007F97AA /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CED6C1CFC367A007F97AA /* GCDAsyncUdpSocket.m */; };
+		CF6CED811CFC367A007F97AA /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CED6F1CFC367A007F97AA /* DDAbstractDatabaseLogger.m */; };
+		CF6CED821CFC367A007F97AA /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CED711CFC367A007F97AA /* DDASLLogger.m */; };
+		CF6CED831CFC367A007F97AA /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CED731CFC367A007F97AA /* DDFileLogger.m */; };
+		CF6CED841CFC367A007F97AA /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CED751CFC367A007F97AA /* DDLog.m */; };
+		CF6CED851CFC367A007F97AA /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CED771CFC367A007F97AA /* DDTTYLogger.m */; };
 		CFA3B8E81CD9AAB70063AE3E /* CandleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA3B8D31CD9AAB70063AE3E /* CandleView.m */; };
 		CFA3B8E91CD9AAB70063AE3E /* indicators.json in Resources */ = {isa = PBXBuildFile; fileRef = CFA3B8D41CD9AAB70063AE3E /* indicators.json */; };
 		CFA3B8EA1CD9AAB70063AE3E /* AreaChartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA3B8D71CD9AAB70063AE3E /* AreaChartModel.m */; };
@@ -144,6 +160,12 @@
 		CF0DBB781CF6D45D0082E411 /* UUID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UUID.m; sourceTree = "<group>"; };
 		CF0DBB7A1CF6D4A30082E411 /* KeyChainStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyChainStore.h; sourceTree = "<group>"; };
 		CF0DBB7B1CF6D4A30082E411 /* KeyChainStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyChainStore.m; sourceTree = "<group>"; };
+		CF111D471CFBDF4100298C78 /* OrderRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderRequestModel.h; sourceTree = "<group>"; };
+		CF111D481CFBDF4100298C78 /* OrderRequestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderRequestModel.m; sourceTree = "<group>"; };
+		CF111D4A1CFBEABB00298C78 /* OrderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderModel.h; sourceTree = "<group>"; };
+		CF111D4B1CFBEABB00298C78 /* OrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderModel.m; sourceTree = "<group>"; };
+		CF111D4D1CFBF5A000298C78 /* OrderTagModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderTagModel.h; sourceTree = "<group>"; };
+		CF111D4E1CFBF5A000298C78 /* OrderTagModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderTagModel.m; sourceTree = "<group>"; };
 		CF247A831CEB22E1000F1442 /* ByListDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ByListDialog.h; sourceTree = "<group>"; };
 		CF247A841CEB22E1000F1442 /* ByListDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ByListDialog.m; sourceTree = "<group>"; };
 		CF2A51011CE31A1D00F0EF3D /* CheckUpdateUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckUpdateUtil.h; sourceTree = "<group>"; };
@@ -192,6 +214,33 @@
 		CF60E1861CEABF45001EF40D /* QueryRequestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryRequestModel.m; sourceTree = "<group>"; };
 		CF60E1881CEAC983001EF40D /* UserRespondModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserRespondModel.h; sourceTree = "<group>"; };
 		CF60E1891CEAC983001EF40D /* UserRespondModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserRespondModel.m; sourceTree = "<group>"; };
+		CF6CED551CFC1E64007F97AA /* OrderRespondModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderRespondModel.h; sourceTree = "<group>"; };
+		CF6CED561CFC1E64007F97AA /* OrderRespondModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderRespondModel.m; sourceTree = "<group>"; };
+		CF6CED5B1CFC367A007F97AA /* ConnectTest-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ConnectTest-Info.plist"; sourceTree = "<group>"; };
+		CF6CED5C1CFC367A007F97AA /* ConnectTest-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ConnectTest-Prefix.pch"; sourceTree = "<group>"; };
+		CF6CED5D1CFC367A007F97AA /* ConnectTestAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectTestAppDelegate.h; sourceTree = "<group>"; };
+		CF6CED5E1CFC367A007F97AA /* ConnectTestAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectTestAppDelegate.m; sourceTree = "<group>"; };
+		CF6CED611CFC367A007F97AA /* ITcpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITcpClient.h; sourceTree = "<group>"; };
+		CF6CED631CFC367A007F97AA /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		CF6CED641CFC367A007F97AA /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		CF6CED651CFC367A007F97AA /* TcpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TcpClient.h; sourceTree = "<group>"; };
+		CF6CED661CFC367A007F97AA /* TcpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TcpClient.m; sourceTree = "<group>"; };
+		CF6CED671CFC367A007F97AA /* TestUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestUI.h; sourceTree = "<group>"; };
+		CF6CED681CFC367A007F97AA /* TestUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestUI.m; sourceTree = "<group>"; };
+		CF6CED691CFC367A007F97AA /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		CF6CED6A1CFC367A007F97AA /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
+		CF6CED6B1CFC367A007F97AA /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
+		CF6CED6C1CFC367A007F97AA /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
+		CF6CED6E1CFC367A007F97AA /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
+		CF6CED6F1CFC367A007F97AA /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
+		CF6CED701CFC367A007F97AA /* DDASLLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDASLLogger.h; sourceTree = "<group>"; };
+		CF6CED711CFC367A007F97AA /* DDASLLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDASLLogger.m; sourceTree = "<group>"; };
+		CF6CED721CFC367A007F97AA /* DDFileLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDFileLogger.h; sourceTree = "<group>"; };
+		CF6CED731CFC367A007F97AA /* DDFileLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDFileLogger.m; sourceTree = "<group>"; };
+		CF6CED741CFC367A007F97AA /* DDLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDLog.h; sourceTree = "<group>"; };
+		CF6CED751CFC367A007F97AA /* DDLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDLog.m; sourceTree = "<group>"; };
+		CF6CED761CFC367A007F97AA /* DDTTYLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDTTYLogger.h; sourceTree = "<group>"; };
+		CF6CED771CFC367A007F97AA /* DDTTYLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDTTYLogger.m; sourceTree = "<group>"; };
 		CFA3B8D21CD9AAB70063AE3E /* CandleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CandleView.h; sourceTree = "<group>"; };
 		CFA3B8D31CD9AAB70063AE3E /* CandleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CandleView.m; sourceTree = "<group>"; };
 		CFA3B8D41CD9AAB70063AE3E /* indicators.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = indicators.json; sourceTree = "<group>"; };
@@ -466,6 +515,7 @@
 		CF4A6D151CBE25AA00B36C93 /* gyt */ = {
 			isa = PBXGroup;
 			children = (
+				CF6CED591CFC367A007F97AA /* connect */,
 				CF0DBB751CF6D4000082E411 /* gyt.entitlements */,
 				CFF183D61CE9F09100E991C4 /* request */,
 				CFA3B8D11CD9AAB70063AE3E /* chart */,
@@ -629,6 +679,54 @@
 				CF4A6D6E1CBE2A0800B36C93 /* UIView+Frame.m */,
 			);
 			path = extra;
+			sourceTree = "<group>";
+		};
+		CF6CED591CFC367A007F97AA /* connect */ = {
+			isa = PBXGroup;
+			children = (
+				CF6CED5A1CFC367A007F97AA /* ConnectTest */,
+				CF6CED6D1CFC367A007F97AA /* vendor */,
+				CF6CED691CFC367A007F97AA /* GCDAsyncSocket.h */,
+				CF6CED6A1CFC367A007F97AA /* GCDAsyncSocket.m */,
+				CF6CED6B1CFC367A007F97AA /* GCDAsyncUdpSocket.h */,
+				CF6CED6C1CFC367A007F97AA /* GCDAsyncUdpSocket.m */,
+			);
+			path = connect;
+			sourceTree = "<group>";
+		};
+		CF6CED5A1CFC367A007F97AA /* ConnectTest */ = {
+			isa = PBXGroup;
+			children = (
+				CF6CED5B1CFC367A007F97AA /* ConnectTest-Info.plist */,
+				CF6CED5C1CFC367A007F97AA /* ConnectTest-Prefix.pch */,
+				CF6CED5D1CFC367A007F97AA /* ConnectTestAppDelegate.h */,
+				CF6CED5E1CFC367A007F97AA /* ConnectTestAppDelegate.m */,
+				CF6CED611CFC367A007F97AA /* ITcpClient.h */,
+				CF6CED631CFC367A007F97AA /* Reachability.h */,
+				CF6CED641CFC367A007F97AA /* Reachability.m */,
+				CF6CED651CFC367A007F97AA /* TcpClient.h */,
+				CF6CED661CFC367A007F97AA /* TcpClient.m */,
+				CF6CED671CFC367A007F97AA /* TestUI.h */,
+				CF6CED681CFC367A007F97AA /* TestUI.m */,
+			);
+			path = ConnectTest;
+			sourceTree = "<group>";
+		};
+		CF6CED6D1CFC367A007F97AA /* vendor */ = {
+			isa = PBXGroup;
+			children = (
+				CF6CED6E1CFC367A007F97AA /* DDAbstractDatabaseLogger.h */,
+				CF6CED6F1CFC367A007F97AA /* DDAbstractDatabaseLogger.m */,
+				CF6CED701CFC367A007F97AA /* DDASLLogger.h */,
+				CF6CED711CFC367A007F97AA /* DDASLLogger.m */,
+				CF6CED721CFC367A007F97AA /* DDFileLogger.h */,
+				CF6CED731CFC367A007F97AA /* DDFileLogger.m */,
+				CF6CED741CFC367A007F97AA /* DDLog.h */,
+				CF6CED751CFC367A007F97AA /* DDLog.m */,
+				CF6CED761CFC367A007F97AA /* DDTTYLogger.h */,
+				CF6CED771CFC367A007F97AA /* DDTTYLogger.m */,
+			);
+			path = vendor;
 			sourceTree = "<group>";
 		};
 		CFA3B8D11CD9AAB70063AE3E /* chart */ = {
@@ -911,6 +1009,14 @@
 				CFF183B31CE6D13500E991C4 /* MoneyDetailModel.m */,
 				CFF183BF1CE718D200E991C4 /* AccessGoldModel.h */,
 				CFF183C01CE718D200E991C4 /* AccessGoldModel.m */,
+				CF111D471CFBDF4100298C78 /* OrderRequestModel.h */,
+				CF111D481CFBDF4100298C78 /* OrderRequestModel.m */,
+				CF111D4A1CFBEABB00298C78 /* OrderModel.h */,
+				CF111D4B1CFBEABB00298C78 /* OrderModel.m */,
+				CF111D4D1CFBF5A000298C78 /* OrderTagModel.h */,
+				CF111D4E1CFBF5A000298C78 /* OrderTagModel.m */,
+				CF6CED551CFC1E64007F97AA /* OrderRespondModel.h */,
+				CF6CED561CFC1E64007F97AA /* OrderRespondModel.m */,
 			);
 			name = money;
 			sourceTree = "<group>";
@@ -1030,6 +1136,7 @@
 				CF4A6D291CBE25AA00B36C93 /* LaunchScreen.storyboard in Resources */,
 				CFDD2DE11CC9CF2300E81E3F /* Assets.xcassets in Resources */,
 				CFA3B8EF1CD9AAB70063AE3E /* securities.json in Resources */,
+				CF6CED781CFC367A007F97AA /* ConnectTest-Info.plist in Resources */,
 				CFDD2E9A1CCF4DE100E81E3F /* LICENSE in Resources */,
 				CFDD2EA91CCF4DE100E81E3F /* MJRefresh.bundle in Resources */,
 				CF4A6D211CBE25AA00B36C93 /* Main.storyboard in Resources */,
@@ -1096,6 +1203,7 @@
 				CFF183BB1CE6DD5700E991C4 /* AddViewController.m in Sources */,
 				CFDD2DF11CCB47E000E81E3F /* WarnContractViewController.m in Sources */,
 				CFDD2DEE1CCA208900E81E3F /* MyContractCell.m in Sources */,
+				CF111D491CFBDF4100298C78 /* OrderRequestModel.m in Sources */,
 				CFDD2E131CCF44AD00E81E3F /* NewsCell.m in Sources */,
 				CF4A6D591CBE28DD00B36C93 /* Account.m in Sources */,
 				CFC15BAA1CC35F700077FA19 /* HandicapCell.m in Sources */,
@@ -1110,6 +1218,7 @@
 				CFF183821CE45B2B00E991C4 /* JSONUtil.m in Sources */,
 				CFDD2DE71CCA0DAE00E81E3F /* RightMenuModel.m in Sources */,
 				CFC15BCC1CC5D15D0077FA19 /* ByTabView.m in Sources */,
+				CF6CED801CFC367A007F97AA /* GCDAsyncUdpSocket.m in Sources */,
 				CFDD2EA21CCF4DE100E81E3F /* MJRefreshAutoStateFooter.m in Sources */,
 				CFA3B8F11CD9AAB70063AE3E /* Section.m in Sources */,
 				CFDD2E9C1CCF4DE100E81E3F /* MJRefreshBackFooter.m in Sources */,
@@ -1121,8 +1230,10 @@
 				CFC15B8E1CBF94A90077FA19 /* MainTableCell.m in Sources */,
 				CF2A51051CE31A1D00F0EF3D /* CheckUpdateUtil.m in Sources */,
 				CF0DBB7C1CF6D4A30082E411 /* KeyChainStore.m in Sources */,
+				CF6CED571CFC1E64007F97AA /* OrderRespondModel.m in Sources */,
 				CF4A6D181CBE25AA00B36C93 /* main.m in Sources */,
 				CFA3B8F21CD9AAB70063AE3E /* YAxis.m in Sources */,
+				CF6CED7C1CFC367A007F97AA /* Reachability.m in Sources */,
 				CFC15B941CC11B770077FA19 /* LeftMenuCell.m in Sources */,
 				CFC15BC91CC4C7340077FA19 /* InsetTextField.m in Sources */,
 				CFF183B11CE6D07A00E991C4 /* MoneyDetailCell.m in Sources */,
@@ -1138,7 +1249,9 @@
 				CFDD2E101CCF42D400E81E3F /* NewsModel.m in Sources */,
 				CFF183D91CE9F0A200E991C4 /* QueryRequest.m in Sources */,
 				CFDD2EAD1CCF4DE100E81E3F /* UIView+MJExtension.m in Sources */,
+				CF111D4F1CFBF5A000298C78 /* OrderTagModel.m in Sources */,
 				CFC15BCF1CC604DB0077FA19 /* ByDynamicTableView.m in Sources */,
+				CF6CED831CFC367A007F97AA /* DDFileLogger.m in Sources */,
 				CFDD2EAC1CCF4DE100E81E3F /* UIScrollView+MJRefresh.m in Sources */,
 				CFF183991CE5AB9D00E991C4 /* BaseRespondModel.m in Sources */,
 				CFC15B971CC205390077FA19 /* MenuModel.m in Sources */,
@@ -1150,13 +1263,19 @@
 				CFDD2E9F1CCF4DE100E81E3F /* MJRefreshHeader.m in Sources */,
 				CFF183861CE45E1400E991C4 /* BaseRequestModel.m in Sources */,
 				CF48C6341CD0DBF800BF4EF9 /* SearchViewController.m in Sources */,
+				CF6CED811CFC367A007F97AA /* DDAbstractDatabaseLogger.m in Sources */,
+				CF6CED791CFC367A007F97AA /* ConnectTestAppDelegate.m in Sources */,
 				CFDD2E0D1CCF3C1A00E81E3F /* NewsView.m in Sources */,
 				CFDD2DD91CC8BEC600E81E3F /* DealHoldingModel.m in Sources */,
+				CF6CED821CFC367A007F97AA /* DDASLLogger.m in Sources */,
 				CFDD2EA41CCF4DE100E81E3F /* MJRefreshBackNormalFooter.m in Sources */,
+				CF111D4C1CFBEABB00298C78 /* OrderModel.m in Sources */,
 				CFDD2DEB1CCA19C900E81E3F /* MyContractViewController.m in Sources */,
 				CFDFFA9A1CBF77AB00401CB3 /* MainViewController.m in Sources */,
 				CF2A51061CE31A1D00F0EF3D /* UpdateModel.m in Sources */,
+				CF6CED851CFC367A007F97AA /* DDTTYLogger.m in Sources */,
 				CF60E18A1CEAC983001EF40D /* UserRespondModel.m in Sources */,
+				CF6CED841CFC367A007F97AA /* DDLog.m in Sources */,
 				CFC15BB01CC365650077FA19 /* HandicapBaseModel.m in Sources */,
 				CFF183AE1CE5E89B00E991C4 /* MoneyDetailViewController.m in Sources */,
 				CFDD2EA51CCF4DE100E81E3F /* MJRefreshBackStateFooter.m in Sources */,
@@ -1168,13 +1287,16 @@
 				CFDD2DDC1CC8C01000E81E3F /* DealHoldByModel.m in Sources */,
 				CF4A6D5A1CBE28DD00B36C93 /* AppUtil.m in Sources */,
 				CFC15B911CBFA6830077FA19 /* ProductModel.m in Sources */,
+				CF6CED7D1CFC367A007F97AA /* TcpClient.m in Sources */,
 				CF4A6D741CBE2BCD00B36C93 /* LoginResponseModel.m in Sources */,
 				CFA3B8FC1CD9AB050063AE3E /* ResourceHelper.m in Sources */,
 				CFDD2EA81CCF4DE100E81E3F /* MJRefreshStateHeader.m in Sources */,
+				CF6CED7F1CFC367A007F97AA /* GCDAsyncSocket.m in Sources */,
 				CFC15BD21CC607900077FA19 /* DynamicCell.m in Sources */,
 				CFC15BE21CC74F760077FA19 /* ContractDB.m in Sources */,
 				CFA3B8EB1CD9AAB70063AE3E /* CandleChartModel.m in Sources */,
 				CF4A6D7C1CBE2EA200B36C93 /* ByNavigationBar.m in Sources */,
+				CF6CED7E1CFC367A007F97AA /* TestUI.m in Sources */,
 				CFF183C71CE726C000E991C4 /* ReduceCell.m in Sources */,
 				CFDD2EAA1CCF4DE100E81E3F /* MJRefreshConst.m in Sources */,
 				CFF183891CE460A500E991C4 /* LoginModel.m in Sources */,

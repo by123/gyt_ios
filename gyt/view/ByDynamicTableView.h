@@ -17,18 +17,6 @@
 
 @interface ByDynamicTableView : UIView<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
 
-typedef NS_ENUM(NSInteger, DealType) {
-    //持仓
-    Hold,
-    //挂单
-    Holding,
-    //委托
-    HoldBy,
-    //成交
-    Profit,
-    //价格预警
-    Warn
-};
 
 
 //是否需要扩展长度

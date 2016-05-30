@@ -9,7 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
+@class GCDAsyncSocket;
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
+{
+    GCDAsyncSocket *asyncSocket;
+}
 
 @property (strong, nonatomic) UIWindow *window;
 

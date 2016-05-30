@@ -59,7 +59,10 @@
     [self initNavigationBar];
     [self initBody];
     [self initBottomView];
-    [self requestAccountInfo];
+  
+    MoneyDetailModel *moneyDetailModel = [[NSUserDefaults standardUserDefaults] objectForKey:MoneyInfo];
+    _datas = [MoneyDetailModel getData : moneyDetailModel];
+    [_tableView reloadData];
 }
 
 -(void)initNavigationBar
@@ -177,29 +180,5 @@
 
 
 
--(void)requestAccountInfo
-{
-    [QueryRequest requestQueryInfo:self.view requestType:XT_CAccountDetail success:^(id responseObject) {
-        QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:responseObject];
-        NSMutableArray *array = model.datas;
-        if(!IS_NS_COLLECTION_EMPTY(array))
-        {
-            //多种资金
-            for(id obj in array)
-            {
-                MoneyDetailModel *moneyDetailModel = [MoneyDetailModel mj_objectWithKeyValues:obj];
-                _datas = [MoneyDetailModel getData : moneyDetailModel];
-                [_tableView reloadData];
-            }
-        }
-        else{
-            [DialogHelper showTips:@"获取资金信息失败，请重试!"];
-        }
-  
-        
-    } fail:^(NSError *error) {
-        [DialogHelper showTips:@"获取资金信息失败，请重试!"];
-    }];
-}
 
 @end

@@ -18,7 +18,12 @@
 #import "UserInfoDataModel.h"
 #import "UserInfoModel.h"
 #import "UserRespondModel.h"
+#import "QueryRequest.h"
+#import "MoneyDetailModel.h"
 #define Item_Height 40
+#import "LoginModel.h"
+#import "IPMacUtil.h"
+#import "UUID.h"
 
 @interface MainViewController ()
 
@@ -62,11 +67,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _datas = [[NSMutableArray alloc]init];
+    [self connect];
     [self testData];
     [self initView];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getUserInfo) name:Notify_Update_UserInfo object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateView:) name:Notify_Menu_Title object:nil];
+    
+    
+ 
 }
 
 
@@ -111,6 +120,7 @@
     
     if([[Account sharedAccount]isLogin])
     {
+        [self requestAccountInfo];
         [self getUserInfo];
     }
 }
@@ -260,6 +270,19 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+//    LoginModel *model = [[LoginModel alloc]init];
+//    model.sessionId = @"";
+//    model.strUserName = @"800001080";
+//    model.strPassword = @"123456";
+//    model.strIpAddress = [IPMacUtil getIPAddress];
+//    model.strMACAdress = [UUID getUUID];;
+//    model.clientID = ClientID_Mobile_TRADE;
+//    
+//    
+//    NSString *jsonStr = [JSONUtil parse:Request_Login params:[JSONUtil parseDic:model]];
+//    
+//    [self sendData:jsonStr];
+//    return;
     if(!IS_NS_COLLECTION_EMPTY(_datas))
     {
         if([[Account sharedAccount]isLogin])
@@ -397,6 +420,31 @@
         
     }];
     
+}
+
+#pragma mark 请求资金信息
+-(void)requestAccountInfo
+{
+    [QueryRequest requestQueryInfo:self.view requestType:XT_CAccountDetail success:^(id responseObject) {
+        QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:responseObject];
+        NSMutableArray *array = model.datas;
+        if(!IS_NS_COLLECTION_EMPTY(array))
+        {
+            //多种资金
+            for(id obj in array)
+            {
+                MoneyDetailModel *moneyDetailModel = [MoneyDetailModel mj_objectWithKeyValues:obj];
+                [[NSUserDefaults standardUserDefaults]setValue:moneyDetailModel.mj_JSONString forKey:MoneyInfo];
+            }
+        }
+        else{
+            [DialogHelper showTips:@"获取资金信息失败，请重试!"];
+        }
+        
+        
+    } fail:^(NSError *error) {
+        [DialogHelper showTips:@"获取资金信息失败，请重试!"];
+    }];
 }
 
 

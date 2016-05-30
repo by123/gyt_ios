@@ -9,30 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "TitleContentModel.h"
 
-typedef NS_ENUM(NSInteger, TargetType) {
-    CashInOutTargetType_Proxy = 1 ,    // 代理(柜员)
-    CashInOutTargetType_Account        // 客户
-};
-
-typedef NS_ENUM(NSInteger, CashType) {
-     CashType_In = 1 ,        // 入金
-     CashType_Out            // 出金
-};
-
-
-typedef NS_ENUM(NSInteger, PayType) {
-    PayType_ON_LINE = 1,         //线上
-    PayType_OFF_LINE            //线下
-};
-
-typedef NS_ENUM(NSInteger, CashApplicationStatus) {
-    CashApplicationStatus_Submit = 1,    // 等待审核
-    CashApplicationStatus_Accepted,     // 通过
-    CashApplicationStatus_ForBidden,    // 拒绝
-    CashApplicationStatus_Auto         // 自动审核
-};
-
-
 @interface AccessGoldModel : NSObject
 
 //出入金对象ID

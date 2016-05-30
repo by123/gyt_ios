@@ -7,12 +7,6 @@
 #import "Chart.h"
 #import "YAxis.h"
 
-typedef NS_ENUM(NSInteger,CandleType)
-{
-    KLine,
-    TimeLine
-};
-
 
 @interface CandleView : UIView
 

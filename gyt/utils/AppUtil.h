@@ -20,4 +20,6 @@
 
 +(NSString*)fileMD5:(NSString*)path;
 
++(NSTimeInterval )getCurrentTime;
+
 @end

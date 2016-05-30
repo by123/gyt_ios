@@ -109,4 +109,10 @@
     
     return s;
 }
+
++(NSTimeInterval)getCurrentTime
+{
+    NSDate* date = [NSDate dateWithTimeIntervalSinceNow:0];
+    return [date timeIntervalSince1970]*1000;
+}
 @end

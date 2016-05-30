@@ -18,6 +18,8 @@
 
 #pragma mark 网络请求相关
 #define Root_Url @"http://192.168.1.111:8081"
+#define Host @"192.168.1.111"
+#define Port 64350
 //#define Root_Url @"http://114.119.6.146:8081"
 
 
@@ -38,8 +40,18 @@
 #pragma mark 小区信息存储
 #define VillageID @"villageId"
 #define VillageName @"villageName"
+#define MoneyInfo @"moneyInfo"
 
 
+//交易端
+typedef NS_ENUM(NSInteger, ClientID) {
+    ClientID_Mobile_Manage = 3,
+    ClientID_Mobile_TRADE = 4
+};
+
+
+
+//币种
 typedef NS_ENUM(NSInteger, MoneyType) {
     MoneyType_RMB = 1,       //人民币
     MoneyType_USD,          //美元
@@ -55,3 +67,157 @@ typedef NS_ENUM(NSInteger, MoneyType) {
     MoneyType_CAD,          //加拿大元
     MoneyType_NZD,          //新西兰元
 };
+
+//买卖方向
+typedef NS_ENUM(NSInteger, EEntrustBS) {
+    ENTRUST_BUY =  48,    // 买入
+    ENTRUST_SELL = 49    // 卖出
+};
+
+typedef NS_ENUM(NSInteger, TargetType) {
+    CashInOutTargetType_Proxy = 1 ,    // 代理(柜员)
+    CashInOutTargetType_Account        // 客户
+};
+
+typedef NS_ENUM(NSInteger, CashType) {
+    CashType_In = 1 ,        // 入金
+    CashType_Out            // 出金
+};
+
+
+typedef NS_ENUM(NSInteger, PayType) {
+    PayType_ON_LINE = 1,         //线上
+    PayType_OFF_LINE            //线下
+};
+
+//审核状态
+typedef NS_ENUM(NSInteger, CashApplicationStatus) {
+    CashApplicationStatus_Submit = 1,    // 等待审核
+    CashApplicationStatus_Accepted,     // 通过
+    CashApplicationStatus_ForBidden,    // 拒绝
+    CashApplicationStatus_Auto         // 自动审核
+};
+
+
+typedef NS_ENUM(NSInteger, DealType) {
+    //持仓
+    Hold,
+    //挂单
+    Holding,
+    //委托
+    HoldBy,
+    //成交
+    Profit,
+    //价格预警
+    Warn
+};
+
+typedef NS_ENUM(NSInteger,CandleType)
+{
+    KLine,
+    TimeLine
+};
+
+typedef NS_ENUM(NSInteger, InventoryType) {
+    Inventory,
+    DailyInventory,
+    DealInventory,
+};
+
+typedef NS_ENUM(NSInteger, UpdownType) {
+    UpdownPrice,
+    UpdownPercent,
+};
+
+
+typedef NS_ENUM(NSInteger, RequestType) {
+    XT_121_START = 121 * 100,
+    XT_CAccountBaseInfo,
+    XT_CLoginParam,
+    XT_CTradeLoginParam,
+    XT_CLoginResponse,
+    XT_CUserInfo,
+    XT_CAccountInfo,
+    XT_CCashInfo,
+    XT_CCashApplyInfo,
+    XT_CInstrumentDetail,
+    XT_CInstrumentMarginRate,
+    XT_CInstrumentCommissionRate,
+    XT_CInstrumentFee,
+    XT_CQueryDataReq,
+    XT_CQueryHistoryDataReq,
+    XT_CAccountDetail,//资金信息
+    XT_CFundFlow,
+    XT_COrderDetail, //委托
+    XT_CDealDetail, //成交
+    XT_CPositionDetail,
+    XT_CPositionStatics, //持仓
+    XT_CLoginInfoLog,
+    XT_CProductInfo,
+    XT_CTradeTimePair,
+    XT_CInstrumentSettlementInfo,
+    XT_CQueryMarginInfo,
+    XT_CQueryFeeInfo,
+    XT_COrderTag,
+    XT_COrderInfo,
+    XT_COrderResponse,
+    XT_CBrokerInfo,
+    XT_CQueryBaseSettingReq,
+    XT_CPriceData,
+    XT_CProxyProfit,
+    XT_CWithCapitalInfo,
+    XT_CMobileLoginResponse,
+    XT_CDealStatics,
+    XT_CSettingTemplateInfo,
+    XT_TransferResp,
+    XT_CancelResp,
+    XT_QueryAccountResp,
+    XT_QueryInvestorResp,
+    XT_QueryBankAmountResp,
+    XT_QueryExchangeResp,
+    XT_QueryInstrumentResp,
+    XT_QueryOrderResp,
+    XT_QueryInstrumentMarginRateResp,
+    XT_QuerySettlementInfoResp,
+    XT_QueryBusinessResp,
+    XT_QueryInstrumentCommissionRateResp,
+    XT_QueryPositionResp,
+    XT_QueryBankResp,
+    XT_COrderError,
+    XT_CCancelError,
+    
+};
+
+
+//开平
+typedef NS_ENUM(NSInteger , EOffset_Flag_Type)
+{
+    EOFF_THOST_FTDC_OF_INVALID = -1 ,//未知
+    EOFF_THOST_FTDC_OF_Open = 48 ,//开仓
+    EOFF_THOST_FTDC_OF_Close = 49 ,//平仓
+    EOFF_THOST_FTDC_OF_ForceClose = 50,//强平
+    EOFF_THOST_FTDC_OF_CloseToday = 51,//平今
+    EOFF_THOST_FTDC_OF_CloseYesterday = 52,//平昨
+    EOFF_THOST_FTDC_OF_ForceOff = 53,//强减
+    EOFF_THOST_FTDC_OF_LocalForceClose = 54,//本地强平
+    EOFF_THOST_FTDC_OF_PLEDGE_IN = 81,//质押入库
+    EOFF_THOST_FTDC_OF_PLEDGE_OUT = 66//质押出库
+};
+
+//委托属性（市价or限价）
+typedef NS_ENUM(NSInteger,EBrokerPriceType)
+{
+    BROKER_PRICE_ANY = 49,// 市价
+    BROKER_PRICE_LIMIT,  // 限价
+    BROKER_PRICE_BEST    // 最优价
+};
+
+
+//投机
+typedef NS_ENUM(NSInteger ,EHedge_Flag_Type)
+{
+    HEDGE_FLAG_SPECULATION = 49,//投机
+    HEDGE_FLAG_ARBITRAGE = 50,//套利
+    HEDGE_FLAG_HEDGE = 51//套保
+};
+

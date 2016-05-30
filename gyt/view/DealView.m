@@ -1,3 +1,4 @@
+
 //
 //  DealView.m
 //  gyt
@@ -15,7 +16,7 @@
 #import "DealHoldByModel.h"
 #import "DealProfitModel.h"
 #import "QueryRequest.h"
-
+#import "OrderRequestModel.h"
 @interface DealView()
 
 //权益
@@ -322,7 +323,7 @@
 -(void)OnItemSelected:(UIView *)dynamicTableView position:(NSInteger)position
 {
     currentSelect = position;
-    NSLog(@"%d",position);
+    NSLog(@"%ld",position);
     DealHoldModel *model =[holdDatas objectAtIndex:position];
     NSString *closeTxt = [NSString stringWithFormat:@"%@\n————\n平仓",model.averagePrice];
     [_closeItem setTitle:closeTxt forState:UIControlStateNormal];
@@ -519,6 +520,8 @@
         {
             [_dynamicView reloadData :holdDatas];            
         }
+        
+        [self order];
     }
 }
 
@@ -538,7 +541,7 @@
 #pragma mark 请求持仓
 -(void)requestQuery
 {
-    [QueryRequest requestQueryInfo:self requestType:XT_CPositionStatics success:^(id responseObject) {
+    [QueryRequest requestQueryInfo:self requestType:XT_COrderDetail success:^(id responseObject) {
         QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:responseObject];
         NSMutableArray *array = model.datas;
         if(!IS_NS_COLLECTION_EMPTY(array))
@@ -562,13 +565,25 @@
 }
 
 
-#pragma mark 下单
+#pragma mark 请求下单
 -(void)order
 {
- 
-//    NSMutableDictionary *dic =[JSONUtil parseDic:model];
-//    NSString *result = [JSONUtil parse:@"queryData" params:dic];
-
+    NSString *accountInfoStr =  [[Account sharedAccount] getAccountInfo];
+    UserInfoModel *account = [UserInfoModel mj_objectWithKeyValues:accountInfoStr];
+    
+    OrderRequestModel *orderModel = [[OrderRequestModel alloc]init];
+    orderModel.strSessionID = [[Account sharedAccount]getSessionId];
+    orderModel.account = account;
+    orderModel.info = [OrderModel buildOrderModel:@"CN 1606" orderPrice:9140 orderNum:1 direction:ENTRUST_BUY offsetFlag:EOFF_THOST_FTDC_OF_Open];
+    NSMutableDictionary *dic =[JSONUtil parseDic:orderModel];
+    NSString *jsonStr = [JSONUtil parse:@"order" params:dic];
+    [[HttpRequest sharedHttpRequest]post:jsonStr view:self success:^(id responseObject) {
+        OrderRespondModel *respondModel = [OrderRespondModel mj_objectWithKeyValues:responseObject];
+        NSMutableDictionary *dic = respondModel.res;
+        
+    } fail:^(NSError *error) {
+        
+    }];
 }
 
 @end

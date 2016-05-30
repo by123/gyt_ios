@@ -7,16 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-typedef NS_ENUM(NSInteger, InventoryType) {
-    Inventory,
-    DailyInventory,
-    DealInventory,
-};
-
-typedef NS_ENUM(NSInteger, UpdownType) {
-    UpdownPrice,
-    UpdownPercent,
-};
 
 @interface ProductModel : NSObject
 
