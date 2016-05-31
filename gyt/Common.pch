@@ -23,7 +23,7 @@
 #import "JSONUtil.h"
 #import "BaseRequestModel.h"
 #import "BaseRespondModel.h"
-
+#import "SocketConnect.h"
 
 #define  KEY_USERNAME_PASSWORD @"com.company.app.usernamepassword"
 #define  KEY_USERNAME @"com.company.app.username"

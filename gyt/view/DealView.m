@@ -312,8 +312,8 @@
     }
     
     NSArray *titleArray = @[@"品种",@"合约号",@"多空",@"手数",@"可用",@"开仓均价",@"逐笔浮盈",@"币种",@"损盈",@"价值",@"保证金",@"今手数",@"今可用",@"投保"];
-    NSArray *widthArray = @[@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1"];
-    _dynamicView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH , SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:holdDatas maxWidth:SCREEN_WIDTH * 2 type:Hold];
+    NSArray *widthArray = @[@"2",@"1",@"1",@"1",@"1",@"2",@"2",@"1",@"1",@"1",@"1",@"1",@"1",@"1"];
+    _dynamicView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH , SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:holdDatas maxWidth:SCREEN_WIDTH * 2.5 type:Hold];
     [_dynamicView setHeaders:widthArray headers:titleArray];
     _dynamicView.delegate = self;
     [self addSubview:_dynamicView];
@@ -323,9 +323,8 @@
 -(void)OnItemSelected:(UIView *)dynamicTableView position:(NSInteger)position
 {
     currentSelect = position;
-    NSLog(@"%ld",position);
     DealHoldModel *model =[holdDatas objectAtIndex:position];
-    NSString *closeTxt = [NSString stringWithFormat:@"%@\n————\n平仓",model.averagePrice];
+    NSString *closeTxt = [NSString stringWithFormat:@"%.f\n————\n平仓",model.m_dOpenPrice];
     [_closeItem setTitle:closeTxt forState:UIControlStateNormal];
     [_closeItem setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 }
@@ -349,8 +348,8 @@
     {
         [datas addObject:model];
     }
-    NSArray *titleArray = @[@"名称",@"开平",@"委托价",@"委托量",@"挂单量"];
-    NSArray *widthArray = @[@"2",@"1",@"2",@"1",@"1"];
+    NSArray *titleArray = @[@"时间",@"合约",@"状态",@"买卖",@"委托价",@"委托量",@"可撤",@"已成交",@"投保",@"预止损",@"合同号",@"主场号"];
+    NSArray *widthArray = @[@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1"];
     _dynamicView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH, SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:datas maxWidth:SCREEN_WIDTH type:Holding];
     [_dynamicView setHeaders:widthArray headers:titleArray];
     [self addSubview:_dynamicView];
@@ -366,21 +365,21 @@
     }
     NSMutableArray *datas = [[NSMutableArray alloc]init];
     DealHoldByModel *model = [[DealHoldByModel alloc]init];
-    model.name = @"郑麦1605";
-    model.statu = @"全成";
-    model.kaiping = @"买开";
-    model.price = @"5040";
-    model.handby = @"5";
-    model.handDeal = @"5";
-    model.handCancel = @"0";
-    model.time = @"20:12";
+//    model.name = @"郑麦1605";
+//    model.statu = @"全成";
+//    model.kaiping = @"买开";
+//    model.price = @"5040";
+//    model.handby = @"5";
+//    model.handDeal = @"5";
+//    model.handCancel = @"0";
+//    model.time = @"20:12";
 
     for(int i= 0 ;i < 20 ; i++)
     {
         [datas addObject:model];
     }
-    NSArray *titleArray = @[@"名称",@"状态",@"开平",@"委托价",@"委托量",@"已成交",@"已撤单",@"委托时间"];
-    NSArray *widthArray = @[@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1"];
+    NSArray *titleArray = @[@"时间",@"合约",@"状态",@"买卖",@"委托价",@"委托量",@"可撤",@"已成交",@"投保",@"预止损",@"合同号",@"主场号"];
+    NSArray *widthArray = @[@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1"];
     
     _dynamicView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH, SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:datas maxWidth:SCREEN_WIDTH * 1.5 type:HoldBy];
     [_dynamicView setHeaders:widthArray headers:titleArray];
@@ -406,8 +405,9 @@
     {
         [datas addObject:model];
     }
-    NSArray *titleArray = @[@"名称",@"开平",@"成交价",@"成交量",@"成交时间"];
-    NSArray *widthArray = @[@"1",@"1",@"1",@"1",@"1"];
+    NSArray *titleArray = @[@"时间",@"合约",@"买卖",@"成交价",@"成交量",@"合同号",@"主场号"];
+    NSArray *widthArray = @[@"1",@"1",@"1",@"1",@"1",@"1",@"1"];
+                             
     _dynamicView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH, SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:datas maxWidth:SCREEN_WIDTH type:Profit];
     [_dynamicView setHeaders:widthArray headers:titleArray];
     [self addSubview:_dynamicView];
@@ -442,12 +442,12 @@
     if(view == _buyItem)
     {
         DealHoldModel *tempModel = [[DealHoldModel alloc]init];
-        tempModel.name = _model.name;
-        tempModel.buySell = More;
-        tempModel.hand = _handTextField.text;
-        tempModel.canuse = _handTextField.text;
-        tempModel.averagePrice = [NSString stringWithFormat:@"%.f", _model.recentPrice];
-        tempModel.profit = @"0";
+//        tempModel.name = _model.name;
+//        tempModel.buySell = More;
+//        tempModel.hand = _handTextField.text;
+//        tempModel.canuse = _handTextField.text;
+//        tempModel.averagePrice = [NSString stringWithFormat:@"%.f", _model.recentPrice];
+//        tempModel.profit = @"0";
         
         dealModel = tempModel;
         NSString *message = [NSString stringWithFormat:@"%@，%.f，买，%@手",_model.name,_model.recentPrice,_handTextField.text];
@@ -459,12 +459,12 @@
     {
         DealHoldModel *tempModel = [[DealHoldModel alloc]init];
 
-        tempModel.name = _model.name;
-        tempModel.buySell = Less;
-        tempModel.hand = _handTextField.text;
-        tempModel.canuse = _handTextField.text;
-        tempModel.averagePrice = [NSString stringWithFormat:@"%.f", _model.recentPrice + 1];
-        tempModel.profit = @"0";
+//        tempModel.name = _model.name;
+//        tempModel.buySell = Less;
+//        tempModel.hand = _handTextField.text;
+//        tempModel.canuse = _handTextField.text;
+//        tempModel.averagePrice = [NSString stringWithFormat:@"%.f", _model.recentPrice + 1];
+//        tempModel.profit = @"0";
         
         dealModel = tempModel;
         
@@ -480,14 +480,14 @@
         {
             DealHoldModel *model = [holdDatas objectAtIndex:currentSelect];
             NSString *buySell;
-            if([model.buySell isEqualToString:More])
+            if(model.m_nDirection == ENTRUST_BUY)
             {
                 buySell = Sell;
             }
             else{
                 buySell = Buy;
             }
-            NSString *message = [NSString stringWithFormat:@"%@，%@，%@，平仓，%@手",model.name,model.averagePrice,buySell,model.hand];
+            NSString *message = [NSString stringWithFormat:@"%@，%.f，%@，平仓，%.f手",model.m_strProductName,model.m_dOpenPrice,buySell,model.m_nVolume];
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认下单吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
             alert.tag = 2;
             [alert show];

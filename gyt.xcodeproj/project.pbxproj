@@ -38,19 +38,13 @@
 		CF4A6D7F1CBE2EAB00B36C93 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D7E1CBE2EAB00B36C93 /* BaseViewController.m */; };
 		CF60E1871CEABF45001EF40D /* QueryRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF60E1861CEABF45001EF40D /* QueryRequestModel.m */; };
 		CF60E18A1CEAC983001EF40D /* UserRespondModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF60E1891CEAC983001EF40D /* UserRespondModel.m */; };
+		CF6340241CFD57CA008149B1 /* Constant.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6340231CFD57CA008149B1 /* Constant.m */; };
+		CF6340321CFD65FB008149B1 /* NSData+XTAMData.m in Sources */ = {isa = PBXBuildFile; fileRef = CF63402D1CFD65FB008149B1 /* NSData+XTAMData.m */; };
+		CF6340331CFD65FB008149B1 /* NSMutableData+XTAMData.m in Sources */ = {isa = PBXBuildFile; fileRef = CF63402F1CFD65FB008149B1 /* NSMutableData+XTAMData.m */; };
+		CF6340341CFD65FB008149B1 /* TTPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6340311CFD65FB008149B1 /* TTPackage.m */; };
+		CF6342AE1CFD952D008149B1 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6342AD1CFD952D008149B1 /* GCDAsyncSocket.m */; };
+		CF6342B11CFDA39A008149B1 /* SocketConnect.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6342B01CFDA39A008149B1 /* SocketConnect.m */; };
 		CF6CED571CFC1E64007F97AA /* OrderRespondModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CED561CFC1E64007F97AA /* OrderRespondModel.m */; };
-		CF6CED781CFC367A007F97AA /* ConnectTest-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CF6CED5B1CFC367A007F97AA /* ConnectTest-Info.plist */; };
-		CF6CED791CFC367A007F97AA /* ConnectTestAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CED5E1CFC367A007F97AA /* ConnectTestAppDelegate.m */; };
-		CF6CED7C1CFC367A007F97AA /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CED641CFC367A007F97AA /* Reachability.m */; };
-		CF6CED7D1CFC367A007F97AA /* TcpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CED661CFC367A007F97AA /* TcpClient.m */; };
-		CF6CED7E1CFC367A007F97AA /* TestUI.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CED681CFC367A007F97AA /* TestUI.m */; };
-		CF6CED7F1CFC367A007F97AA /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CED6A1CFC367A007F97AA /* GCDAsyncSocket.m */; };
-		CF6CED801CFC367A007F97AA /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CED6C1CFC367A007F97AA /* GCDAsyncUdpSocket.m */; };
-		CF6CED811CFC367A007F97AA /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CED6F1CFC367A007F97AA /* DDAbstractDatabaseLogger.m */; };
-		CF6CED821CFC367A007F97AA /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CED711CFC367A007F97AA /* DDASLLogger.m */; };
-		CF6CED831CFC367A007F97AA /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CED731CFC367A007F97AA /* DDFileLogger.m */; };
-		CF6CED841CFC367A007F97AA /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CED751CFC367A007F97AA /* DDLog.m */; };
-		CF6CED851CFC367A007F97AA /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CED771CFC367A007F97AA /* DDTTYLogger.m */; };
 		CFA3B8E81CD9AAB70063AE3E /* CandleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA3B8D31CD9AAB70063AE3E /* CandleView.m */; };
 		CFA3B8E91CD9AAB70063AE3E /* indicators.json in Resources */ = {isa = PBXBuildFile; fileRef = CFA3B8D41CD9AAB70063AE3E /* indicators.json */; };
 		CFA3B8EA1CD9AAB70063AE3E /* AreaChartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA3B8D71CD9AAB70063AE3E /* AreaChartModel.m */; };
@@ -214,33 +208,19 @@
 		CF60E1861CEABF45001EF40D /* QueryRequestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryRequestModel.m; sourceTree = "<group>"; };
 		CF60E1881CEAC983001EF40D /* UserRespondModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserRespondModel.h; sourceTree = "<group>"; };
 		CF60E1891CEAC983001EF40D /* UserRespondModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserRespondModel.m; sourceTree = "<group>"; };
+		CF6340231CFD57CA008149B1 /* Constant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constant.m; sourceTree = "<group>"; };
+		CF63402C1CFD65FB008149B1 /* NSData+XTAMData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+XTAMData.h"; sourceTree = "<group>"; };
+		CF63402D1CFD65FB008149B1 /* NSData+XTAMData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+XTAMData.m"; sourceTree = "<group>"; };
+		CF63402E1CFD65FB008149B1 /* NSMutableData+XTAMData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableData+XTAMData.h"; sourceTree = "<group>"; };
+		CF63402F1CFD65FB008149B1 /* NSMutableData+XTAMData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableData+XTAMData.m"; sourceTree = "<group>"; };
+		CF6340301CFD65FB008149B1 /* TTPackage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTPackage.h; sourceTree = "<group>"; };
+		CF6340311CFD65FB008149B1 /* TTPackage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTPackage.m; sourceTree = "<group>"; };
+		CF6342AC1CFD952D008149B1 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		CF6342AD1CFD952D008149B1 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
+		CF6342AF1CFDA39A008149B1 /* SocketConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketConnect.h; sourceTree = "<group>"; };
+		CF6342B01CFDA39A008149B1 /* SocketConnect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketConnect.m; sourceTree = "<group>"; };
 		CF6CED551CFC1E64007F97AA /* OrderRespondModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderRespondModel.h; sourceTree = "<group>"; };
 		CF6CED561CFC1E64007F97AA /* OrderRespondModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderRespondModel.m; sourceTree = "<group>"; };
-		CF6CED5B1CFC367A007F97AA /* ConnectTest-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ConnectTest-Info.plist"; sourceTree = "<group>"; };
-		CF6CED5C1CFC367A007F97AA /* ConnectTest-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ConnectTest-Prefix.pch"; sourceTree = "<group>"; };
-		CF6CED5D1CFC367A007F97AA /* ConnectTestAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectTestAppDelegate.h; sourceTree = "<group>"; };
-		CF6CED5E1CFC367A007F97AA /* ConnectTestAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectTestAppDelegate.m; sourceTree = "<group>"; };
-		CF6CED611CFC367A007F97AA /* ITcpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITcpClient.h; sourceTree = "<group>"; };
-		CF6CED631CFC367A007F97AA /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		CF6CED641CFC367A007F97AA /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
-		CF6CED651CFC367A007F97AA /* TcpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TcpClient.h; sourceTree = "<group>"; };
-		CF6CED661CFC367A007F97AA /* TcpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TcpClient.m; sourceTree = "<group>"; };
-		CF6CED671CFC367A007F97AA /* TestUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestUI.h; sourceTree = "<group>"; };
-		CF6CED681CFC367A007F97AA /* TestUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestUI.m; sourceTree = "<group>"; };
-		CF6CED691CFC367A007F97AA /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
-		CF6CED6A1CFC367A007F97AA /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
-		CF6CED6B1CFC367A007F97AA /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
-		CF6CED6C1CFC367A007F97AA /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
-		CF6CED6E1CFC367A007F97AA /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
-		CF6CED6F1CFC367A007F97AA /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
-		CF6CED701CFC367A007F97AA /* DDASLLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDASLLogger.h; sourceTree = "<group>"; };
-		CF6CED711CFC367A007F97AA /* DDASLLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDASLLogger.m; sourceTree = "<group>"; };
-		CF6CED721CFC367A007F97AA /* DDFileLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDFileLogger.h; sourceTree = "<group>"; };
-		CF6CED731CFC367A007F97AA /* DDFileLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDFileLogger.m; sourceTree = "<group>"; };
-		CF6CED741CFC367A007F97AA /* DDLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDLog.h; sourceTree = "<group>"; };
-		CF6CED751CFC367A007F97AA /* DDLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDLog.m; sourceTree = "<group>"; };
-		CF6CED761CFC367A007F97AA /* DDTTYLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDTTYLogger.h; sourceTree = "<group>"; };
-		CF6CED771CFC367A007F97AA /* DDTTYLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDTTYLogger.m; sourceTree = "<group>"; };
 		CFA3B8D21CD9AAB70063AE3E /* CandleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CandleView.h; sourceTree = "<group>"; };
 		CFA3B8D31CD9AAB70063AE3E /* CandleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CandleView.m; sourceTree = "<group>"; };
 		CFA3B8D41CD9AAB70063AE3E /* indicators.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = indicators.json; sourceTree = "<group>"; };
@@ -601,6 +581,7 @@
 				CF4A6D4E1CBE28DD00B36C93 /* ColorUtil.h */,
 				CF4A6D4F1CBE28DD00B36C93 /* ColorUtil.m */,
 				CF4A6D501CBE28DD00B36C93 /* Constant.h */,
+				CF6340231CFD57CA008149B1 /* Constant.m */,
 				CF4A6D511CBE28DD00B36C93 /* DialogHelper.h */,
 				CF4A6D521CBE28DD00B36C93 /* DialogHelper.m */,
 				CF4A6D531CBE28DD00B36C93 /* IDSAlertSheet.h */,
@@ -681,52 +662,29 @@
 			path = extra;
 			sourceTree = "<group>";
 		};
+		CF63402B1CFD65FB008149B1 /* data */ = {
+			isa = PBXGroup;
+			children = (
+				CF63402C1CFD65FB008149B1 /* NSData+XTAMData.h */,
+				CF63402D1CFD65FB008149B1 /* NSData+XTAMData.m */,
+				CF63402E1CFD65FB008149B1 /* NSMutableData+XTAMData.h */,
+				CF63402F1CFD65FB008149B1 /* NSMutableData+XTAMData.m */,
+				CF6340301CFD65FB008149B1 /* TTPackage.h */,
+				CF6340311CFD65FB008149B1 /* TTPackage.m */,
+			);
+			path = data;
+			sourceTree = "<group>";
+		};
 		CF6CED591CFC367A007F97AA /* connect */ = {
 			isa = PBXGroup;
 			children = (
-				CF6CED5A1CFC367A007F97AA /* ConnectTest */,
-				CF6CED6D1CFC367A007F97AA /* vendor */,
-				CF6CED691CFC367A007F97AA /* GCDAsyncSocket.h */,
-				CF6CED6A1CFC367A007F97AA /* GCDAsyncSocket.m */,
-				CF6CED6B1CFC367A007F97AA /* GCDAsyncUdpSocket.h */,
-				CF6CED6C1CFC367A007F97AA /* GCDAsyncUdpSocket.m */,
+				CF63402B1CFD65FB008149B1 /* data */,
+				CF6342AF1CFDA39A008149B1 /* SocketConnect.h */,
+				CF6342B01CFDA39A008149B1 /* SocketConnect.m */,
+				CF6342AC1CFD952D008149B1 /* GCDAsyncSocket.h */,
+				CF6342AD1CFD952D008149B1 /* GCDAsyncSocket.m */,
 			);
 			path = connect;
-			sourceTree = "<group>";
-		};
-		CF6CED5A1CFC367A007F97AA /* ConnectTest */ = {
-			isa = PBXGroup;
-			children = (
-				CF6CED5B1CFC367A007F97AA /* ConnectTest-Info.plist */,
-				CF6CED5C1CFC367A007F97AA /* ConnectTest-Prefix.pch */,
-				CF6CED5D1CFC367A007F97AA /* ConnectTestAppDelegate.h */,
-				CF6CED5E1CFC367A007F97AA /* ConnectTestAppDelegate.m */,
-				CF6CED611CFC367A007F97AA /* ITcpClient.h */,
-				CF6CED631CFC367A007F97AA /* Reachability.h */,
-				CF6CED641CFC367A007F97AA /* Reachability.m */,
-				CF6CED651CFC367A007F97AA /* TcpClient.h */,
-				CF6CED661CFC367A007F97AA /* TcpClient.m */,
-				CF6CED671CFC367A007F97AA /* TestUI.h */,
-				CF6CED681CFC367A007F97AA /* TestUI.m */,
-			);
-			path = ConnectTest;
-			sourceTree = "<group>";
-		};
-		CF6CED6D1CFC367A007F97AA /* vendor */ = {
-			isa = PBXGroup;
-			children = (
-				CF6CED6E1CFC367A007F97AA /* DDAbstractDatabaseLogger.h */,
-				CF6CED6F1CFC367A007F97AA /* DDAbstractDatabaseLogger.m */,
-				CF6CED701CFC367A007F97AA /* DDASLLogger.h */,
-				CF6CED711CFC367A007F97AA /* DDASLLogger.m */,
-				CF6CED721CFC367A007F97AA /* DDFileLogger.h */,
-				CF6CED731CFC367A007F97AA /* DDFileLogger.m */,
-				CF6CED741CFC367A007F97AA /* DDLog.h */,
-				CF6CED751CFC367A007F97AA /* DDLog.m */,
-				CF6CED761CFC367A007F97AA /* DDTTYLogger.h */,
-				CF6CED771CFC367A007F97AA /* DDTTYLogger.m */,
-			);
-			path = vendor;
 			sourceTree = "<group>";
 		};
 		CFA3B8D11CD9AAB70063AE3E /* chart */ = {
@@ -1136,7 +1094,6 @@
 				CF4A6D291CBE25AA00B36C93 /* LaunchScreen.storyboard in Resources */,
 				CFDD2DE11CC9CF2300E81E3F /* Assets.xcassets in Resources */,
 				CFA3B8EF1CD9AAB70063AE3E /* securities.json in Resources */,
-				CF6CED781CFC367A007F97AA /* ConnectTest-Info.plist in Resources */,
 				CFDD2E9A1CCF4DE100E81E3F /* LICENSE in Resources */,
 				CFDD2EA91CCF4DE100E81E3F /* MJRefresh.bundle in Resources */,
 				CF4A6D211CBE25AA00B36C93 /* Main.storyboard in Resources */,
@@ -1215,10 +1172,10 @@
 				CF4A6D701CBE2A0800B36C93 /* UILabel+ContentSize.m in Sources */,
 				CFDD2DF81CCDE8D000E81E3F /* WarnDialog.m in Sources */,
 				CFDD2E9B1CCF4DE100E81E3F /* MJRefreshAutoFooter.m in Sources */,
+				CF6340331CFD65FB008149B1 /* NSMutableData+XTAMData.m in Sources */,
 				CFF183821CE45B2B00E991C4 /* JSONUtil.m in Sources */,
 				CFDD2DE71CCA0DAE00E81E3F /* RightMenuModel.m in Sources */,
 				CFC15BCC1CC5D15D0077FA19 /* ByTabView.m in Sources */,
-				CF6CED801CFC367A007F97AA /* GCDAsyncUdpSocket.m in Sources */,
 				CFDD2EA21CCF4DE100E81E3F /* MJRefreshAutoStateFooter.m in Sources */,
 				CFA3B8F11CD9AAB70063AE3E /* Section.m in Sources */,
 				CFDD2E9C1CCF4DE100E81E3F /* MJRefreshBackFooter.m in Sources */,
@@ -1233,7 +1190,6 @@
 				CF6CED571CFC1E64007F97AA /* OrderRespondModel.m in Sources */,
 				CF4A6D181CBE25AA00B36C93 /* main.m in Sources */,
 				CFA3B8F21CD9AAB70063AE3E /* YAxis.m in Sources */,
-				CF6CED7C1CFC367A007F97AA /* Reachability.m in Sources */,
 				CFC15B941CC11B770077FA19 /* LeftMenuCell.m in Sources */,
 				CFC15BC91CC4C7340077FA19 /* InsetTextField.m in Sources */,
 				CFF183B11CE6D07A00E991C4 /* MoneyDetailCell.m in Sources */,
@@ -1243,6 +1199,7 @@
 				CF0DBB741CF6CAEF0082E411 /* IPMacUtil.m in Sources */,
 				CFA3B8F01CD9AAB70063AE3E /* Chart.m in Sources */,
 				CFA3B8FB1CD9AB050063AE3E /* EncryptHelper.m in Sources */,
+				CF6340321CFD65FB008149B1 /* NSData+XTAMData.m in Sources */,
 				CFF183D21CE9D6CA00E991C4 /* MoneyManageDetailViewController.m in Sources */,
 				CFF183C11CE718D200E991C4 /* AccessGoldModel.m in Sources */,
 				CF4A6D5B1CBE28DD00B36C93 /* ColorUtil.m in Sources */,
@@ -1251,7 +1208,6 @@
 				CFDD2EAD1CCF4DE100E81E3F /* UIView+MJExtension.m in Sources */,
 				CF111D4F1CFBF5A000298C78 /* OrderTagModel.m in Sources */,
 				CFC15BCF1CC604DB0077FA19 /* ByDynamicTableView.m in Sources */,
-				CF6CED831CFC367A007F97AA /* DDFileLogger.m in Sources */,
 				CFDD2EAC1CCF4DE100E81E3F /* UIScrollView+MJRefresh.m in Sources */,
 				CFF183991CE5AB9D00E991C4 /* BaseRespondModel.m in Sources */,
 				CFC15B971CC205390077FA19 /* MenuModel.m in Sources */,
@@ -1263,21 +1219,17 @@
 				CFDD2E9F1CCF4DE100E81E3F /* MJRefreshHeader.m in Sources */,
 				CFF183861CE45E1400E991C4 /* BaseRequestModel.m in Sources */,
 				CF48C6341CD0DBF800BF4EF9 /* SearchViewController.m in Sources */,
-				CF6CED811CFC367A007F97AA /* DDAbstractDatabaseLogger.m in Sources */,
-				CF6CED791CFC367A007F97AA /* ConnectTestAppDelegate.m in Sources */,
 				CFDD2E0D1CCF3C1A00E81E3F /* NewsView.m in Sources */,
 				CFDD2DD91CC8BEC600E81E3F /* DealHoldingModel.m in Sources */,
-				CF6CED821CFC367A007F97AA /* DDASLLogger.m in Sources */,
 				CFDD2EA41CCF4DE100E81E3F /* MJRefreshBackNormalFooter.m in Sources */,
 				CF111D4C1CFBEABB00298C78 /* OrderModel.m in Sources */,
 				CFDD2DEB1CCA19C900E81E3F /* MyContractViewController.m in Sources */,
 				CFDFFA9A1CBF77AB00401CB3 /* MainViewController.m in Sources */,
 				CF2A51061CE31A1D00F0EF3D /* UpdateModel.m in Sources */,
-				CF6CED851CFC367A007F97AA /* DDTTYLogger.m in Sources */,
 				CF60E18A1CEAC983001EF40D /* UserRespondModel.m in Sources */,
-				CF6CED841CFC367A007F97AA /* DDLog.m in Sources */,
 				CFC15BB01CC365650077FA19 /* HandicapBaseModel.m in Sources */,
 				CFF183AE1CE5E89B00E991C4 /* MoneyDetailViewController.m in Sources */,
+				CF6340341CFD65FB008149B1 /* TTPackage.m in Sources */,
 				CFDD2EA51CCF4DE100E81E3F /* MJRefreshBackStateFooter.m in Sources */,
 				CFA3B8ED1CD9AAB70063AE3E /* ColumnChartModel.m in Sources */,
 				CFDD2EBA1CCF97F400E81E3F /* SplashViewController.m in Sources */,
@@ -1287,16 +1239,13 @@
 				CFDD2DDC1CC8C01000E81E3F /* DealHoldByModel.m in Sources */,
 				CF4A6D5A1CBE28DD00B36C93 /* AppUtil.m in Sources */,
 				CFC15B911CBFA6830077FA19 /* ProductModel.m in Sources */,
-				CF6CED7D1CFC367A007F97AA /* TcpClient.m in Sources */,
 				CF4A6D741CBE2BCD00B36C93 /* LoginResponseModel.m in Sources */,
 				CFA3B8FC1CD9AB050063AE3E /* ResourceHelper.m in Sources */,
 				CFDD2EA81CCF4DE100E81E3F /* MJRefreshStateHeader.m in Sources */,
-				CF6CED7F1CFC367A007F97AA /* GCDAsyncSocket.m in Sources */,
 				CFC15BD21CC607900077FA19 /* DynamicCell.m in Sources */,
 				CFC15BE21CC74F760077FA19 /* ContractDB.m in Sources */,
 				CFA3B8EB1CD9AAB70063AE3E /* CandleChartModel.m in Sources */,
 				CF4A6D7C1CBE2EA200B36C93 /* ByNavigationBar.m in Sources */,
-				CF6CED7E1CFC367A007F97AA /* TestUI.m in Sources */,
 				CFF183C71CE726C000E991C4 /* ReduceCell.m in Sources */,
 				CFDD2EAA1CCF4DE100E81E3F /* MJRefreshConst.m in Sources */,
 				CFF183891CE460A500E991C4 /* LoginModel.m in Sources */,
@@ -1304,14 +1253,17 @@
 				CFA3B8FA1CD9AB050063AE3E /* CacheHelper.m in Sources */,
 				CFDD2EA31CCF4DE100E81E3F /* MJRefreshBackGifFooter.m in Sources */,
 				CFDD2EAE1CCF4DE100E81E3F /* README.md in Sources */,
+				CF6342AE1CFD952D008149B1 /* GCDAsyncSocket.m in Sources */,
 				CFF183CD1CE9B26B00E991C4 /* MoneyManageCell.m in Sources */,
 				CF4A6D5C1CBE28DD00B36C93 /* DialogHelper.m in Sources */,
 				CFF183CA1CE99D0A00E991C4 /* MoneyManageViewController.m in Sources */,
 				CFDD2DDF1CC8C08E00E81E3F /* DealProfitModel.m in Sources */,
 				CFDD2EA61CCF4DE100E81E3F /* MJRefreshGifHeader.m in Sources */,
 				CF4A6D6F1CBE2A0800B36C93 /* IDSExtendedLabel.m in Sources */,
+				CF6340241CFD57CA008149B1 /* Constant.m in Sources */,
 				CFF183931CE4BCFA00E991C4 /* HttpRequest.m in Sources */,
 				CF48C6431CD22C8B00BF4EF9 /* SearchCell.m in Sources */,
+				CF6342B11CFDA39A008149B1 /* SocketConnect.m in Sources */,
 				CFDD2DD61CC8AEE100E81E3F /* DealHoldModel.m in Sources */,
 				CFA3B8EA1CD9AAB70063AE3E /* AreaChartModel.m in Sources */,
 				CFC15BAD1CC361A80077FA19 /* HandicapModel.m in Sources */,
@@ -1444,7 +1396,9 @@
 				CODE_SIGN_ENTITLEMENTS = gyt/gyt.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_INPUT_FILETYPE = sourcecode.c.objc;
 				GCC_PREFIX_HEADER = /Users/by.huang/Desktop/by/gyt_ios/gyt/Common.pch;
+				GCC_VERSION = "";
 				INFOPLIST_FILE = gyt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1464,7 +1418,9 @@
 				CODE_SIGN_ENTITLEMENTS = gyt/gyt.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_INPUT_FILETYPE = sourcecode.c.objc;
 				GCC_PREFIX_HEADER = /Users/by.huang/Desktop/by/gyt_ios/gyt/Common.pch;
+				GCC_VERSION = "";
 				INFOPLIST_FILE = gyt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

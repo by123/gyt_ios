@@ -7,7 +7,7 @@
 //
 
 #import "BaseViewController.h"
-
 @interface SplashViewController : BaseViewController<UIScrollViewDelegate>
+
 
 @end

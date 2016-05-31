@@ -23,6 +23,7 @@
 //#define Root_Url @"http://114.119.6.146:8081"
 
 
+
 //请求登录
 #define Request_Login @"login"
 //请求登出
@@ -41,6 +42,12 @@
 #define VillageID @"villageId"
 #define VillageName @"villageName"
 #define MoneyInfo @"moneyInfo"
+
+
+#define Buy @"买"
+#define Sell @"卖"
+#define More @"多"
+#define Less @"空"
 
 
 //交易端
@@ -73,6 +80,7 @@ typedef NS_ENUM(NSInteger, EEntrustBS) {
     ENTRUST_BUY =  48,    // 买入
     ENTRUST_SELL = 49    // 卖出
 };
+
 
 typedef NS_ENUM(NSInteger, TargetType) {
     CashInOutTargetType_Proxy = 1 ,    // 代理(柜员)
@@ -220,4 +228,22 @@ typedef NS_ENUM(NSInteger ,EHedge_Flag_Type)
     HEDGE_FLAG_ARBITRAGE = 50,//套利
     HEDGE_FLAG_HEDGE = 51//套保
 };
+
+typedef NS_ENUM(NSInteger,EFutureTradeType)
+{
+    FUTRUE_TRADE_TYPE_COMMON = 48, //普通成交
+    FUTURE_TRADE_TYPE_OPTIONSEXECUTION, //期权成交ptionsExecution
+    FUTURE_TRADE_TYPE_OTC, //OTC成交
+    FUTURE_TRADE_TYPE_EFPDIRVED, //期转现衍生成交
+    FUTURE_TRADE_TYPE_COMBINATION_DERIVED //组合衍生成交
+};
+
+
+@interface Constant : NSObject
+
++(NSString *)EEntrustBSStr : (EEntrustBS) entrust;
+
++(NSString *)EHedge_Flag_TypeStr : (EHedge_Flag_Type) flagType;
+
+@end
 

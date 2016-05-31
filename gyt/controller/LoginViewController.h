@@ -8,7 +8,7 @@
 
 #import "BaseViewController.h"
 
-@interface LoginViewController : BaseViewController
+@interface LoginViewController : BaseViewController<SocketConnectDelegate>
 
 +(void)show : (BaseViewController *)controller;
 

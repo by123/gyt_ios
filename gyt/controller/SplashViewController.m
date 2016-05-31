@@ -32,6 +32,7 @@
 
 -(void)initView
 {
+    
     _scrollView = [[UIScrollView alloc]init];
     _scrollView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     _scrollView.pagingEnabled = YES;

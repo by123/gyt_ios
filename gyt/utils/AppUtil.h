@@ -22,4 +22,8 @@
 
 +(NSTimeInterval )getCurrentTime;
 
++ (NSString*) sha1 : (NSString *)content;
+
++(NSString *)hexStringFromString:(NSString *)string;
+
 @end

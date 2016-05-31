@@ -8,17 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "ByNavigationBar.h"
-#import "TcpClient.h"
 
-@interface BaseViewController : UIViewController<ByNavigationBarDelegate,ITcpClient>
-
+@interface BaseViewController : UIViewController<ByNavigationBarDelegate>
 
 @property (strong, nonatomic) ByNavigationBar *navBar;
 
 -(void)showNavigationBar;
-
--(void)connect;
-
--(void)sendData : (NSString *)content;
 
 @end

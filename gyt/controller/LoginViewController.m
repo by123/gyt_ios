@@ -156,7 +156,8 @@
     [[Account sharedAccount] saveUid:model.strUserName];
     
     NSString *jsonStr = [JSONUtil parse:Request_Login params:[JSONUtil parseDic:model]];
-    [self requestLogin:jsonStr];
+//    [self requestLogin:jsonStr];
+    [[SocketConnect sharedSocketConnect]sendData:jsonStr delegate:self];
     
 }
 
@@ -191,6 +192,26 @@
 
 }
 
+
+-(void)OnReceiveSuccess:(NSString *)result
+{
+    LoginResponseModel *model = [LoginResponseModel mj_objectWithKeyValues:result];
+    NSInteger code = [[model.response objectForKey:@"success"] integerValue];
+    if(code == 1)
+    {
+        NSString *sessionId = [model.response objectForKey:@"sessionId"];
+        [[Account sharedAccount]saveSessionid:sessionId];
+        [DialogHelper showSuccessTips:[NSString stringWithFormat:@"登录成功->%@",result]];
+        [[NSNotificationCenter defaultCenter] postNotificationName:Notify_Update_UserInfo object:nil];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    else
+    {
+        [DialogHelper showTips:@"登录失败!"];
+    }
+
+}
+
 #pragma mark 隐藏键盘
 -(void)hideKeyboard
 {
@@ -212,6 +233,7 @@
 {
     [self hideKeyboard];
 }
+
 
 
 @end

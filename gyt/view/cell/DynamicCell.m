@@ -56,45 +56,48 @@
             label.font = [UIFont systemFontOfSize:13.0f];
             int width =  [[_widths objectAtIndex:i] intValue] * maxWidth / count;
             switch (i) {
-                case 0:
-                    label.text = model.name;
+                case 0://品种
+                    label.text = model.m_strProductName;
                     break;
-                case 1:
-                    label.text = model.buySell;
-                    if([model.buySell isEqualToString:More])
-                    {
-                        label.textColor= [UIColor redColor];
-                    }
-                    else
-                    {
-                        label.textColor= [UIColor greenColor];
-                    }
+                case 1://合约号
+                    label.text = model.m_strInstrumentID;
                     break;
-                case 2:
-                    label.text = model.hand;
+                case 2://多空
+                    label.text = [Constant EEntrustBSStr:model.m_nDirection];
                     break;
-                case 3:
-                    label.text = model.canuse;
+                case 3://手数
+                    label.text = [NSString stringWithFormat:@"%.f",model.m_nVolume];
                     break;
-                case 4:
-                    label.text = model.averagePrice;
+                case 4://可用
+                    label.text = [NSString stringWithFormat:@"%.f",model.m_nVolume];
                     break;
-                case 5:
-                    label.text = model.profit;
-                    if([model.profit integerValue] == 0)
-                    {
-                        label.textColor = TEXT_COLOR;
-                    }
-                    else if ([model.profit integerValue] > 0)
-                    {
-                        label.textColor= [UIColor redColor];
-                    }
-                    else
-                    {
-                        label.textColor= [UIColor greenColor];
-                    }
+                case 5://开仓均价
+                    label.text = [NSString stringWithFormat:@"%.f",model.m_dOpenPrice];
+                    break;
+                case 6://逐笔浮盈
+                    label.text = [NSString stringWithFormat:@"%.f",model.m_dFloatProfit];
+                    break;
+                case 7://币种
+                    label.text = @"RMB";
+                    break;
+                case 8://损盈
                     break;
                     
+                case 9://价值
+                    label.text = [NSString stringWithFormat:@"%.f",model.m_dMarketValue];
+                    break;
+                case 10://保证金
+                    label.text = [NSString stringWithFormat:@"%.f",model.m_dMargin];
+                    break;
+                case 11://今手数
+                    label.text = @"1";
+                    break;
+                case 12://今可用
+                    label.text = @"1";
+                    break;
+                case 13://投保
+                    label.text = [Constant EHedge_Flag_TypeStr:model.m_nHedgeFlag];
+                    break;
                 default:
                     break;
             }
@@ -172,30 +175,30 @@
             label.font = [UIFont systemFontOfSize:13.0f];
             int width =  [[_widths objectAtIndex:i] intValue] * maxWidth / count;
             switch (i) {
-                case 0:
-                    label.text = model.name;
-                    break;
-                case 1:
-                    label.text = model.statu;
-                    break;
-                case 2:
-                    label.text = model.kaiping;
-                    break;
-                case 3:
-                    label.text = model.price;
-                    break;
-                case 4:
-                    label.text = model.handby;
-                    break;
-                case 5:
-                    label.text = model.handDeal;
-                    break;
-                case 6:
-                    label.text = model.handCancel;
-                    break;
-                case 7:
-                    label.text = model.time;
-                    break;
+//                case 0:
+//                    label.text = model.name;
+//                    break;
+//                case 1:
+//                    label.text = model.statu;
+//                    break;
+//                case 2:
+//                    label.text = model.kaiping;
+//                    break;
+//                case 3:
+//                    label.text = model.price;
+//                    break;
+//                case 4:
+//                    label.text = model.handby;
+//                    break;
+//                case 5:
+//                    label.text = model.handDeal;
+//                    break;
+//                case 6:
+//                    label.text = model.handCancel;
+//                    break;
+//                case 7:
+//                    label.text = model.time;
+//                    break;
                 default:
                     break;
             }

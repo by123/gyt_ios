@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "gyt/view/DealView.m"
-            timestampString = "486284767.007892"
+            timestampString = "486366680.855938"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "548"
@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "gyt/view/DealView.m"
-            timestampString = "486285078.555875"
+            timestampString = "486366680.855938"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "581"
-            endingLineNumber = "581"
-            landmarkName = "-order"
+            startingLineNumber = "483"
+            endingLineNumber = "483"
+            landmarkName = "-OnClick:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,61 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "gyt/view/DealView.m"
-            timestampString = "486285084.046735"
+            filePath = "gyt/connect/ConnectTest/TcpClient.m"
+            timestampString = "486378730.418869"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "583"
-            endingLineNumber = "583"
-            landmarkName = "-order"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__17-[DealView order]_block_invoke"
-                  moduleName = "gyt"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/by.huang/Desktop/by/gyt_ios/gyt/view/DealView.m"
-                  timestampString = "486303412.317239"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "584"
-                  endingLineNumber = "584"
-                  offsetFromSymbolStart = "142">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__17-[DealView order]_block_invoke_2"
-                  moduleName = "gyt"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/by.huang/Desktop/by/gyt_ios/gyt/view/DealView.m"
-                  timestampString = "486303412.31741"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "586"
-                  endingLineNumber = "586"
-                  offsetFromSymbolStart = "51">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "gyt/controller/BaseViewController.m"
-            timestampString = "486299080.711079"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
-            landmarkName = "-sendData:"
+            startingLineNumber = "268"
+            endingLineNumber = "268"
+            landmarkName = "-socket:didReadData:withTag:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -105,13 +57,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "gyt/controller/BaseViewController.m"
-            timestampString = "486299243.018187"
+            filePath = "gyt/connect/GCDAsyncSocket.m"
+            timestampString = "486378465.251577"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
-            landmarkName = "-OnReciveData:"
+            startingLineNumber = "4898"
+            endingLineNumber = "4898"
+            landmarkName = "-doReadData"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -121,13 +73,125 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "gyt/controller/BaseViewController.m"
-            timestampString = "486299243.901338"
+            filePath = "gyt/connect/GCDAsyncSocket.m"
+            timestampString = "486378980.026186"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
-            landmarkName = "-OnSendDataSuccess:"
+            startingLineNumber = "7205"
+            endingLineNumber = "7205"
+            landmarkName = "-cf_finishSSLHandshake"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "gyt/connect/GCDAsyncSocket.m"
+            timestampString = "486379024.625054"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "452"
+            endingLineNumber = "452"
+            landmarkName = "-optimalReadLengthWithDefault:shouldPreBuffer:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "gyt/connect/GCDAsyncSocket.m"
+            timestampString = "486379431.043762"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "4196"
+            endingLineNumber = "4196"
+            landmarkName = "-resumeWriteSource"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "gyt/connect/data/TTPackage.m"
+            timestampString = "486382742.003849"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "-decodeJSON:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "gyt/controller/LoginViewController.m"
+            timestampString = "486390571.958546"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "198"
+            endingLineNumber = "198"
+            landmarkName = "-OnReceiveSuccess:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "gyt/connect/SocketConnect.m"
+            timestampString = "486390869.71197"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "-sendData:delegate:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "gyt/controller/LoginViewController.m"
+            timestampString = "486390670.895305"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "156"
+            endingLineNumber = "156"
+            landmarkName = "-login"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "gyt/connect/SocketConnect.m"
+            timestampString = "486390901.633"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "-socket:didReadData:withTag:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
