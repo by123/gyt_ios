@@ -137,6 +137,12 @@ typedef NS_ENUM(NSInteger, UpdownType) {
     UpdownPercent,
 };
 
+typedef NS_ENUM(NSInteger, ResondType)
+{
+    GYT_LOGIN = 101,
+    GYT_QUERYDATA,
+    GYT_MAINPUSH
+};
 
 typedef NS_ENUM(NSInteger, RequestType) {
     XT_121_START = 121 * 100,

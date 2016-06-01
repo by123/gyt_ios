@@ -119,7 +119,7 @@
     
     if([[Account sharedAccount]isLogin])
     {
-//        [self requestAccountInfo];
+        [self requestAccountInfo];
         [self getUserInfo];
     }
 }
@@ -383,16 +383,16 @@
 
 
     
-    UserInfoDataModel *model = [[UserInfoDataModel alloc]init];
-    model.sessionId = [[Account sharedAccount] getSessionId];
-    model.accountInfo = [JSONUtil parseDic:data];
-
-    
-    NSMutableDictionary *dic = [JSONUtil parseDic:model];
-    
-    NSString *jsonStr = [JSONUtil parse:Request_UserInfo params:dic];
-    
-    [self requestUserInfo : jsonStr];
+//    UserInfoDataModel *model = [[UserInfoDataModel alloc]init];
+//    model.sessionId = [[Account sharedAccount] getSessionId];
+//    model.accountInfo = [JSONUtil parseDic:data];
+//
+//    
+//    NSMutableDictionary *dic = [JSONUtil parseDic:model];
+//    
+//    NSString *jsonStr = [JSONUtil parse:Request_UserInfo params:dic];
+//    
+//    [self requestUserInfo : jsonStr];
 }
 
 #pragma mark 请求用户资料
@@ -411,9 +411,17 @@
 #pragma mark 请求资金信息
 -(void)requestAccountInfo
 {
-    return;
-    [QueryRequest requestQueryInfo:self.view requestType:XT_CAccountDetail success:^(id responseObject) {
-        QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:responseObject];
+    NSString *jsonStr = [QueryRequest buildQueryInfo:XT_CAccountDetail];
+    [[SocketConnect sharedSocketConnect] sendData:jsonStr delegate:self seq:GYT_QUERYDATA];
+}
+
+
+-(void)OnReceiveSuccess:(id)respondObject
+{
+    PackageModel *packageModel = respondObject;
+    if(packageModel.seq == GYT_QUERYDATA)
+    {
+        QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:packageModel.result];
         NSMutableArray *array = model.datas;
         if(!IS_NS_COLLECTION_EMPTY(array))
         {
@@ -427,12 +435,6 @@
         else{
             [DialogHelper showTips:@"获取资金信息失败，请重试!"];
         }
-        
-        
-    } fail:^(NSError *error) {
-        [DialogHelper showTips:@"获取资金信息失败，请重试!"];
-    }];
+    }
 }
-
-
 @end

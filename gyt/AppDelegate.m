@@ -74,8 +74,8 @@
     }
 
     [self initDB];
-    [[SocketConnect sharedSocketConnect] connect];
     
+    [[SocketConnect sharedSocketConnect] connect];
     return YES;
 }
 

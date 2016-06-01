@@ -8,12 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "GCDAsyncSocket.h"
-#import "TTPackage.h"
 
 @protocol SocketConnectDelegate
 
 //接收数据成功
-@optional -(void)OnReceiveSuccess : (NSString *)result;
+@optional -(void)OnReceiveSuccess : (id)respondObject;
 
 //接收数据失败
 @optional -(void)OnReceiveFail : (NSError *)error;
@@ -38,8 +37,7 @@ SINGLETON_DECLARATION(SocketConnect);
 -(void)connect;
 
 -(void)sendData : (NSString *)content
-       delegate : (id)delegate;
-
--(RequestType)getRequestType : (NSString *)jsonStr;
+       delegate : (id)delegate
+            seq : (int)seq;
 
 @end

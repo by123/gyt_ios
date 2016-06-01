@@ -19,25 +19,16 @@ const static int NET_CMD_COMMODITY_FUTURE    = 7;
 const static int NET_CMD_KEEPALIVE_RESPONSE  = 8;
 
 
-@interface TTPackage : NSObject
+@interface GYTPackage : NSObject
 
-@property (nonatomic, assign) uint32_t  len;
-@property (nonatomic, assign) int64_t   seq;
-@property (nonatomic, assign) uint16_t  cmd;
+SINGLETON_DECLARATION(GYTPackage);
 
-//for json package
-@property (nonatomic, strong) NSDictionary *dict;
+@property (strong, nonatomic)PackageModel *model;
 
-//for bson package
-@property (nonatomic, strong) NSData* data;
+- (PackageModel *)decodeJSON:(NSData*)data;
 
-+ (instancetype)initPackage;
-+ (instancetype)packageWithCmd:(uint16_t)cmd;
+- (NSData*)encodeJSON  : (NSData *)data
+              requestid: (int)requestid;
 
-- (NSString *)decodeJSON:(NSData*)data;
-- (NSData*)encodeJSON  : (NSData *)data;
-
-//+ (instancetype)decodeBSON:(NSData *)data;
-//- (NSData*)encodeBSON;
 
 @end

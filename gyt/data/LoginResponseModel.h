@@ -6,8 +6,9 @@
 
 @interface LoginResponseModel : NSObject
 
-@property (strong, nonatomic) id error;
+@property (assign, nonatomic) int statu;
 
-@property (strong, nonatomic) id response;
+@property (strong, nonatomic) id params;
+
 
 @end

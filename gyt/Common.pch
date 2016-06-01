@@ -24,6 +24,8 @@
 #import "BaseRequestModel.h"
 #import "BaseRespondModel.h"
 #import "SocketConnect.h"
+#import "PackageModel.h"
+#import "GYTPackage.h"
 
 #define  KEY_USERNAME_PASSWORD @"com.company.app.usernamepassword"
 #define  KEY_USERNAME @"com.company.app.username"

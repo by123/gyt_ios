@@ -12,9 +12,18 @@
 
 SINGLETON_IMPLEMENTION(SocketConnect);
 
+-(instancetype)init
+{
+    if(self == [super init])
+    {
+        _clientSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_global_queue(0, 0)];
+    }
+    return self;
+}
+
+#pragma mark - 连接到服务器
 -(void)connect
 {
-    _clientSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_global_queue(0, 0)];
     NSError *error = nil;
     [_clientSocket connectToHost:Host onPort:Port error:&error];
     if(error)
@@ -43,41 +52,37 @@ SINGLETON_IMPLEMENTION(SocketConnect);
 -(void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err
 {
     NSLog(@"断开连接。。。");
-    if(self.delegate)
-    {
-        [self.delegate OnConnectFail];
-    }
 }
 
 
 #pragma mark - 接收服务端的数据
 -(void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
 {
-    TTPackage *package = [TTPackage initPackage];
-    NSString *result  =[package decodeJSON : data];
-    [sock readDataWithTimeout:-1 tag:0];
+    PackageModel *model =[[GYTPackage sharedGYTPackage] decodeJSON:data];
+    NSLog(@"接收到数据tag:%lld->%@",model.seq,model.result);
+    [sock readDataWithTimeout:-1 tag:tag];
     if(self.delegate)
     {
-        [self.delegate OnReceiveSuccess:result];
+        [self.delegate OnReceiveSuccess:model];
     }
 }
 
 
+-(void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag
+{
+    
+}
+
 #pragma mark - 发送数据给服务端
 -(void)sendData : (NSString *)content
        delegate : (id)delegate
+            seq : (int)seq
 {
     self.delegate = delegate;
-    TTPackage *package = [TTPackage initPackage];
-    NSData *data = [package encodeJSON : [content dataUsingEncoding:NSUTF8StringEncoding]];
-    [_clientSocket writeData:data withTimeout:-1 tag:0 ];
+    NSData *data =[[GYTPackage sharedGYTPackage]encodeJSON:[content dataUsingEncoding:NSUTF8StringEncoding] requestid:seq];
+    [_clientSocket writeData:data withTimeout:-1 tag:0];
 }
 
-
--(RequestType)getRequestType : (NSString *)jsonStr
-{
-    return nil;
-}
 
 
 

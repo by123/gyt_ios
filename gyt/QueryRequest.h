@@ -18,9 +18,6 @@
                       structId: (int)structId;
 
 #pragma mark 请求查询信息
-+(void)requestQueryInfo  : (UIView *)view
-             requestType : (RequestType)type
-                 success : (SuccessCallback)success
-                    fail : (FailCallback)fail;
++(NSString *)buildQueryInfo : (RequestType)type;
 
 @end

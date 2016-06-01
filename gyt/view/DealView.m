@@ -541,11 +541,11 @@
 #pragma mark 请求持仓
 -(void)requestQuery
 {
-    [QueryRequest requestQueryInfo:self requestType:XT_COrderDetail success:^(id responseObject) {
-        QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:responseObject];
-        NSMutableArray *array = model.datas;
-        if(!IS_NS_COLLECTION_EMPTY(array))
-        {
+//    [QueryRequest requestQueryInfo:self requestType:XT_COrderDetail success:^(id responseObject) {
+//        QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:responseObject];
+//        NSMutableArray *array = model.datas;
+//        if(!IS_NS_COLLECTION_EMPTY(array))
+//        {
 //            //多种资金
 //            for(id obj in array)
 //            {
@@ -553,15 +553,15 @@
 //                _datas = [MoneyDetailModel getData : moneyDetailModel];
 //                [_tableView reloadData];
 //            }
-        }
-        else{
-            [DialogHelper showSuccessTips:@"暂无持仓信息"];
-        }
-        
-        
-    } fail:^(NSError *error) {
-        [DialogHelper showTips:@"获取资金信息失败，请重试!"];
-    }];
+//        }
+//        else{
+//            [DialogHelper showSuccessTips:@"暂无持仓信息"];
+//        }
+//        
+//        
+//    } fail:^(NSError *error) {
+//        [DialogHelper showTips:@"获取资金信息失败，请重试!"];
+//    }];
 }
 
 

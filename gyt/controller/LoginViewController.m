@@ -12,6 +12,7 @@
 #import "LoginResponseModel.h"
 #import "IPMacUtil.h"
 #import "UUID.h"
+#import "AppDelegate.h"
 
 @interface LoginViewController ()
 
@@ -148,7 +149,8 @@
     LoginModel *model = [[LoginModel alloc]init];
     model.sessionId = @"";
     model.strUserName = _nameTextField.text;
-    model.strPassword = _passwordTextField.text;
+    NSString *passwordStr =  _passwordTextField.text;
+    model.strPassword = [AppUtil sha1:passwordStr];
     model.strIpAddress = [IPMacUtil getIPAddress];
     model.strMACAdress = [UUID getUUID];;
     model.clientID = ClientID_Mobile_TRADE;
@@ -157,26 +159,55 @@
     
     NSString *jsonStr = [JSONUtil parse:Request_Login params:[JSONUtil parseDic:model]];
 //    [self requestLogin:jsonStr];
-    [[SocketConnect sharedSocketConnect]sendData:jsonStr delegate:self];
-    
+    [[SocketConnect sharedSocketConnect] sendData:jsonStr delegate:self seq:GYT_LOGIN];
 }
 
 
-#pragma mark 请求登录
--(void)requestLogin : (NSString *)jsonStr
+//#pragma mark 请求登录
+//-(void)requestLogin : (NSString *)jsonStr
+//{
+//    
+//    [[HttpRequest sharedHttpRequest] post:jsonStr view:self.view success:^(id responseObject) {
+//        
+//        NSString *text = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
+//        NSLog(@"返回结果->%@",text);
+//        LoginResponseModel *model = [LoginResponseModel mj_objectWithKeyValues:responseObject];
+//        NSInteger code = [[model.response objectForKey:@"success"] integerValue];
+//        if(code == 1)
+//        {
+//            NSString *sessionId = [model.response objectForKey:@"sessionId"];
+//            [[Account sharedAccount]saveSessionid:sessionId];
+//            [DialogHelper showSuccessTips:[NSString stringWithFormat:@"登录成功->%@",text]];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:Notify_Update_UserInfo object:nil];
+//            [self dismissViewControllerAnimated:YES completion:nil];
+//        }
+//        else
+//        {
+//            [DialogHelper showTips:@"登录失败!"];
+//        }
+//        
+//    } fail:^(NSError *error) {
+//        [DialogHelper showTips:@"登录失败!"];
+//    }];
+//    
+//
+//}
+
+
+-(void)OnReceiveSuccess:(id)respondObject
 {
-    
-    [[HttpRequest sharedHttpRequest] post:jsonStr view:self.view success:^(id responseObject) {
-        
-        NSString *text = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSLog(@"返回结果->%@",text);
-        LoginResponseModel *model = [LoginResponseModel mj_objectWithKeyValues:responseObject];
-        NSInteger code = [[model.response objectForKey:@"success"] integerValue];
+    PackageModel *packageModel = respondObject;
+    if(packageModel.seq == GYT_LOGIN)
+    {
+        LoginResponseModel *model = [LoginResponseModel mj_objectWithKeyValues:packageModel.result];
+        NSMutableDictionary *dic = model.params;
+        NSMutableDictionary *response = [dic objectForKey:@"response"];
+        int code = [[response objectForKey:@"success"] integerValue];
         if(code == 1)
         {
-            NSString *sessionId = [model.response objectForKey:@"sessionId"];
+            NSString *sessionId = [response objectForKey:@"sessionId"];
             [[Account sharedAccount]saveSessionid:sessionId];
-            [DialogHelper showSuccessTips:[NSString stringWithFormat:@"登录成功->%@",text]];
+            [DialogHelper showSuccessTips:[NSString stringWithFormat:@"登录成功->%@",packageModel.result]];
             [[NSNotificationCenter defaultCenter] postNotificationName:Notify_Update_UserInfo object:nil];
             [self dismissViewControllerAnimated:YES completion:nil];
         }
@@ -184,32 +215,7 @@
         {
             [DialogHelper showTips:@"登录失败!"];
         }
-        
-    } fail:^(NSError *error) {
-        [DialogHelper showTips:@"登录失败!"];
-    }];
-    
-
-}
-
-
--(void)OnReceiveSuccess:(NSString *)result
-{
-    LoginResponseModel *model = [LoginResponseModel mj_objectWithKeyValues:result];
-    NSInteger code = [[model.response objectForKey:@"success"] integerValue];
-    if(code == 1)
-    {
-        NSString *sessionId = [model.response objectForKey:@"sessionId"];
-        [[Account sharedAccount]saveSessionid:sessionId];
-        [DialogHelper showSuccessTips:[NSString stringWithFormat:@"登录成功->%@",result]];
-        [[NSNotificationCenter defaultCenter] postNotificationName:Notify_Update_UserInfo object:nil];
-        [self dismissViewControllerAnimated:YES completion:nil];
     }
-    else
-    {
-        [DialogHelper showTips:@"登录失败!"];
-    }
-
 }
 
 #pragma mark 隐藏键盘

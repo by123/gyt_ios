@@ -7,7 +7,6 @@
 //
 
 #import "BaseViewController.h"
-#import "TTPackage.h"
 #import "LoginResponseModel.h"
 
 

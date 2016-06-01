@@ -25,10 +25,7 @@
 }
 
 
-+(void)requestQueryInfo  : (UIView *)view
-             requestType : (RequestType)type
-                 success : (SuccessCallback)success
-                    fail : (FailCallback)fail
++(NSString *)buildQueryInfo : (RequestType)type;
 {
     
     QueryRequestModel *model = [[QueryRequestModel alloc]init];
@@ -38,14 +35,7 @@
     NSMutableDictionary *dic =[JSONUtil parseDic:model];
     NSString *result = [JSONUtil parse:@"queryData" params:dic];
 
-    NSLog(@"%@",result);
-
-    [[HttpRequest sharedHttpRequest]post:result view:view success:^(id responseObject) {
-        NSLog(@"返回->%@",responseObject);
-        success(responseObject);
-    } fail:^(NSError *error) {
-        fail(error);
-    }];
+    return result;
 }
 
 @end

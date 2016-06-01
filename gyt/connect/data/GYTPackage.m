@@ -6,45 +6,44 @@
 //  Copyright © 2015 thinktrader. All rights reserved.
 //
 
-#import "TTPackage.h"
+#import "GYTPackage.h"
 #import "NSData+XTAMData.h"
 #import "NSMutableData+XTAMData.h"
 #import "NSJSONSerialization+stringWithJSONObject.h"
 
-@implementation TTPackage
+@implementation GYTPackage
 
-+ (instancetype)initPackage {
-    TTPackage *package = [[TTPackage alloc] init];
-    package.cmd = NET_CMD_RPC;
-    return package;
+SINGLETON_IMPLEMENTION(GYTPackage);
+
+-(instancetype)init
+{
+    if(self == [super init])
+    {
+        self.model = [[PackageModel alloc]init];
+        self.model.cmd = NET_CMD_RPC;
+    }
+    return self;
 }
 
-+ (instancetype)packageWithCmd:(uint16_t)cmd {
-    TTPackage *package = [[TTPackage alloc] init];
-    package.cmd = cmd;
-    return package;
-}
 
-- (NSString *)decodeJSON:(NSData *)data {
-    uint32_t len = [data readUInt:0];
-    int64_t seq = [data readUInt:4];
-    uint16_t cmd = [data readUShort:8];
-    uint16_t tag = [data readUShort:10];
+- (PackageModel *)decodeJSON:(NSData *)data
+{
+    PackageModel *model = [[PackageModel alloc]init];
+    model.len = [data readUInt:0];
+    model.seq = [data readUInt:4];
+    model.cmd = [data readUShort:8];
+    model.tag = [data readUShort:10];
     
     NSData *jsondata = [data subdataWithRange:NSMakeRange(12, data.length - 12)];
-    if ( cmd == NET_CMD_RPC || cmd == NET_CMD_NOTIFICATION) {
-        seq = ((int64_t)(tag >> 8) & 0x0f) << 32 | seq;
+    if (model.cmd == NET_CMD_RPC || model.cmd == NET_CMD_NOTIFICATION) {
+        model.seq = ((int64_t)(model.tag >> 8) & 0x0f) << 32 | model.seq;
         
         NSData *udata = [jsondata zlibDecompressed];
         if (udata != nil) {
             jsondata = udata;
         }
-        //<<log
-        NSString *string;
-        string = [[NSString alloc] initWithData:jsondata encoding:NSUTF8StringEncoding];
-        if (!IS_NS_STRING_EMPTY(string)) {
-            return string;
-        }
+        model.result = [[NSString alloc] initWithData:jsondata encoding:NSUTF8StringEncoding];
+    
 //        if (cmd == NET_CMD_NOTIFICATION) {
 ////            NSLog(@"decodeJSON:[push] seq[%lld] %@", seq, string);
 //        } else {
@@ -82,25 +81,30 @@
 //        return package;
 //    }
     }
-    return nil;
+    return model;
 }
 
-- (NSData*)encodeJSON  : (NSData *)data{
-//    NSLog(@"encodeJSON: seq[%lld] %@", self.seq, self.dict);
-    if (self.cmd == NET_CMD_KEEPALIVE) {
+- (NSData*)encodeJSON  : (NSData *)data
+              requestid: (int)requestid
+{
+    _model.seq = requestid;
+    if (_model.cmd == NET_CMD_KEEPALIVE)
+    {
         data = [NSMutableData dataWithLength:4];
-    } else {
-//        data = [NSJSONSerialization dataWithJSONObject:self.dict options:kNilOptions error:nil];
+    }
+    else
+    {
+//      data = [NSJSONSerialization dataWithJSONObject:self.dict options:kNilOptions error:nil];
     }
     NSMutableData* mData = [NSMutableData dataWithCapacity:data.length + 12];
     [mData appendUInt:(uint32_t)data.length + 12];
     
-    int flagSeq = (int)((self.seq >> 32) & 0x0f) << 8;
+    int flagSeq = (int)((_model.seq >> 32) & 0x0f) << 8;
     int tag = flagSeq;
     
-    [mData appendUInt:(self.seq & 0xffffffff)];
+    [mData appendUInt:(_model.seq & 0xffffffff)];
     
-    [mData appendUShort:self.cmd];
+    [mData appendUShort:_model.cmd];
     [mData appendUShort:tag];
     [mData appendData:data];
     

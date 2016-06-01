@@ -41,7 +41,7 @@
 		CF6340241CFD57CA008149B1 /* Constant.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6340231CFD57CA008149B1 /* Constant.m */; };
 		CF6340321CFD65FB008149B1 /* NSData+XTAMData.m in Sources */ = {isa = PBXBuildFile; fileRef = CF63402D1CFD65FB008149B1 /* NSData+XTAMData.m */; };
 		CF6340331CFD65FB008149B1 /* NSMutableData+XTAMData.m in Sources */ = {isa = PBXBuildFile; fileRef = CF63402F1CFD65FB008149B1 /* NSMutableData+XTAMData.m */; };
-		CF6340341CFD65FB008149B1 /* TTPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6340311CFD65FB008149B1 /* TTPackage.m */; };
+		CF6340341CFD65FB008149B1 /* GYTPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6340311CFD65FB008149B1 /* GYTPackage.m */; };
 		CF6342AE1CFD952D008149B1 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6342AD1CFD952D008149B1 /* GCDAsyncSocket.m */; };
 		CF6342B11CFDA39A008149B1 /* SocketConnect.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6342B01CFDA39A008149B1 /* SocketConnect.m */; };
 		CF6CED571CFC1E64007F97AA /* OrderRespondModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CED561CFC1E64007F97AA /* OrderRespondModel.m */; };
@@ -80,6 +80,7 @@
 		CFC15BD21CC607900077FA19 /* DynamicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15BD11CC607900077FA19 /* DynamicCell.m */; };
 		CFC15BE21CC74F760077FA19 /* ContractDB.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15BE11CC74F760077FA19 /* ContractDB.m */; };
 		CFC15BE41CC769DF0077FA19 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CFC15BE31CC769DF0077FA19 /* libsqlite3.tbd */; };
+		CFD37E0D1CFEA73100297DE2 /* PackageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD37E0C1CFEA73100297DE2 /* PackageModel.m */; };
 		CFDD2DD61CC8AEE100E81E3F /* DealHoldModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DD51CC8AEE100E81E3F /* DealHoldModel.m */; };
 		CFDD2DD91CC8BEC600E81E3F /* DealHoldingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DD81CC8BEC600E81E3F /* DealHoldingModel.m */; };
 		CFDD2DDC1CC8C01000E81E3F /* DealHoldByModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DDB1CC8C01000E81E3F /* DealHoldByModel.m */; };
@@ -213,8 +214,8 @@
 		CF63402D1CFD65FB008149B1 /* NSData+XTAMData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+XTAMData.m"; sourceTree = "<group>"; };
 		CF63402E1CFD65FB008149B1 /* NSMutableData+XTAMData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableData+XTAMData.h"; sourceTree = "<group>"; };
 		CF63402F1CFD65FB008149B1 /* NSMutableData+XTAMData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableData+XTAMData.m"; sourceTree = "<group>"; };
-		CF6340301CFD65FB008149B1 /* TTPackage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTPackage.h; sourceTree = "<group>"; };
-		CF6340311CFD65FB008149B1 /* TTPackage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTPackage.m; sourceTree = "<group>"; };
+		CF6340301CFD65FB008149B1 /* GYTPackage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GYTPackage.h; sourceTree = "<group>"; };
+		CF6340311CFD65FB008149B1 /* GYTPackage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GYTPackage.m; sourceTree = "<group>"; };
 		CF6342AC1CFD952D008149B1 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
 		CF6342AD1CFD952D008149B1 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
 		CF6342AF1CFDA39A008149B1 /* SocketConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketConnect.h; sourceTree = "<group>"; };
@@ -287,6 +288,8 @@
 		CFC15BE01CC74F760077FA19 /* ContractDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContractDB.h; sourceTree = "<group>"; };
 		CFC15BE11CC74F760077FA19 /* ContractDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContractDB.m; sourceTree = "<group>"; };
 		CFC15BE31CC769DF0077FA19 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		CFD37E0B1CFEA73100297DE2 /* PackageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PackageModel.h; sourceTree = "<group>"; };
+		CFD37E0C1CFEA73100297DE2 /* PackageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PackageModel.m; sourceTree = "<group>"; };
 		CFDD2DD41CC8AEE100E81E3F /* DealHoldModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealHoldModel.h; sourceTree = "<group>"; };
 		CFDD2DD51CC8AEE100E81E3F /* DealHoldModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealHoldModel.m; sourceTree = "<group>"; };
 		CFDD2DD71CC8BEC600E81E3F /* DealHoldingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealHoldingModel.h; sourceTree = "<group>"; };
@@ -669,8 +672,10 @@
 				CF63402D1CFD65FB008149B1 /* NSData+XTAMData.m */,
 				CF63402E1CFD65FB008149B1 /* NSMutableData+XTAMData.h */,
 				CF63402F1CFD65FB008149B1 /* NSMutableData+XTAMData.m */,
-				CF6340301CFD65FB008149B1 /* TTPackage.h */,
-				CF6340311CFD65FB008149B1 /* TTPackage.m */,
+				CF6340301CFD65FB008149B1 /* GYTPackage.h */,
+				CF6340311CFD65FB008149B1 /* GYTPackage.m */,
+				CFD37E0B1CFEA73100297DE2 /* PackageModel.h */,
+				CFD37E0C1CFEA73100297DE2 /* PackageModel.m */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -1229,7 +1234,7 @@
 				CF60E18A1CEAC983001EF40D /* UserRespondModel.m in Sources */,
 				CFC15BB01CC365650077FA19 /* HandicapBaseModel.m in Sources */,
 				CFF183AE1CE5E89B00E991C4 /* MoneyDetailViewController.m in Sources */,
-				CF6340341CFD65FB008149B1 /* TTPackage.m in Sources */,
+				CF6340341CFD65FB008149B1 /* GYTPackage.m in Sources */,
 				CFDD2EA51CCF4DE100E81E3F /* MJRefreshBackStateFooter.m in Sources */,
 				CFA3B8ED1CD9AAB70063AE3E /* ColumnChartModel.m in Sources */,
 				CFDD2EBA1CCF97F400E81E3F /* SplashViewController.m in Sources */,
@@ -1255,6 +1260,7 @@
 				CFDD2EAE1CCF4DE100E81E3F /* README.md in Sources */,
 				CF6342AE1CFD952D008149B1 /* GCDAsyncSocket.m in Sources */,
 				CFF183CD1CE9B26B00E991C4 /* MoneyManageCell.m in Sources */,
+				CFD37E0D1CFEA73100297DE2 /* PackageModel.m in Sources */,
 				CF4A6D5C1CBE28DD00B36C93 /* DialogHelper.m in Sources */,
 				CFF183CA1CE99D0A00E991C4 /* MoneyManageViewController.m in Sources */,
 				CFDD2DDF1CC8C08E00E81E3F /* DealProfitModel.m in Sources */,
