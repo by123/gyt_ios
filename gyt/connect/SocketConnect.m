@@ -9,6 +9,9 @@
 #import "SocketConnect.h"
 
 @implementation SocketConnect
+{
+    __weak MBProgressHUD *hua;
+}
 
 SINGLETON_IMPLEMENTION(SocketConnect);
 
@@ -28,11 +31,15 @@ SINGLETON_IMPLEMENTION(SocketConnect);
     [_clientSocket connectToHost:Host onPort:Port error:&error];
     if(error)
     {
-        NSLog(@"socket连接失败");
+        NSLog(@"发起tpc失败");
     }
     else{
-        NSLog(@"socket连接成功");
+        NSLog(@"发起tpc连接成功");
     }
+}
+
+-(void)disConnect
+{
 }
 
 #pragma mark - 判断与服务器是否正确链接
@@ -40,10 +47,16 @@ SINGLETON_IMPLEMENTION(SocketConnect);
 {
     //监听读取数据
     [sock readDataWithTimeout:-1 tag:0];
-    NSLog(@"连接成功。。。。");
-    if(self.delegate)
+    NSLog(@"已连接上");
+//    if(self.delegate)
+//    {
+//        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+//            [self.delegate OnConnectSuccess];
+//        }];
+//    }
+    if(hua)
     {
-        [self.delegate OnConnectSuccess];
+        [hua hide:YES];
     }
 }
 
@@ -51,7 +64,26 @@ SINGLETON_IMPLEMENTION(SocketConnect);
 #pragma mark - 连接被断开
 -(void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err
 {
-    NSLog(@"断开连接。。。");
+    NSLog(@"连接被断开");
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"您的网络有问题" message:@"是否重新连接？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        [alertView show];
+    });
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 1)
+    {
+//        UIApplication *application = [UIApplication sharedApplication];
+//        hua = [MBProgressHUD showHUDAddedTo: animated:YES];
+        [NSThread sleepForTimeInterval:3.0f];
+        [self connect];
+        NSLog(@"重新连接");
+    }
+    else{
+        NSLog(@"放弃重连");
+    }
 }
 
 
@@ -59,11 +91,13 @@ SINGLETON_IMPLEMENTION(SocketConnect);
 -(void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
 {
     PackageModel *model =[[GYTPackage sharedGYTPackage] decodeJSON:data];
-    NSLog(@"接收到数据tag:%lld->%@",model.seq,model.result);
+    NSLog(@"接收到数据->%@",model.result);
     [sock readDataWithTimeout:-1 tag:tag];
     if(self.delegate)
     {
-        [self.delegate OnReceiveSuccess:model];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.delegate OnReceiveSuccess:model];
+        });
     }
 }
 

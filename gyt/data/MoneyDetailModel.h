@@ -35,26 +35,26 @@
 //平仓盈亏
 @property (assign, nonatomic) double m_dCloseProfit;
 
-//平仓盈亏率
-@property (assign, nonatomic) double a1;
-
-//逐笔浮赢
-@property (assign, nonatomic) double a2;
-
-//逐笔浮赢率
-@property (assign, nonatomic) double a3;
+////平仓盈亏率
+//@property (assign, nonatomic) double a1;
+//
+////逐笔浮赢
+//@property (assign, nonatomic) double a2;
+//
+////逐笔浮赢率
+//@property (assign, nonatomic) double a3;
 
 //保证金
 @property (assign, nonatomic) double m_dUsedMargin;
 
-//挂单保证金
-@property (assign, nonatomic) double a4;
-
-//挂单手续费
-@property (assign, nonatomic) double *a5;
-
-//资金使用率
-@property (assign, nonatomic) double *a6;
+////挂单保证金
+//@property (assign, nonatomic) double a4;
+//
+////挂单手续费
+//@property (assign, nonatomic) double *a5;
+//
+////资金使用率
+//@property (assign, nonatomic) double *a6;
 
 
 

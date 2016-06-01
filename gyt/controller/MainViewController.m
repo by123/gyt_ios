@@ -70,9 +70,8 @@
     [self testData];
     [self initView];
     
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getUserInfo) name:Notify_Update_UserInfo object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getUserInfo) name:Notify_Update_AccountInfo object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateView:) name:Notify_Menu_Title object:nil];
-    
     
  
 }
@@ -83,7 +82,7 @@
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter]removeObserver:self name:Notify_Menu_Title object:nil];
-    [[NSNotificationCenter defaultCenter]removeObserver:self name:Notify_Update_UserInfo object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:Notify_Update_AccountInfo object:nil];
 }
 
 
@@ -119,7 +118,6 @@
     
     if([[Account sharedAccount]isLogin])
     {
-        [self requestAccountInfo];
         [self getUserInfo];
     }
 }
@@ -378,11 +376,9 @@
 //    data.m_strBrokerID = @"";
     
     NSString *accountInfoStr = [JSONUtil parseStr:data];
-    NSLog(@"用户信息->%@",accountInfoStr);
     [[Account sharedAccount] saveAccountInfo:accountInfoStr];
+    NSLog(@"用户信息->%@",accountInfoStr);
 
-
-    
 //    UserInfoDataModel *model = [[UserInfoDataModel alloc]init];
 //    model.sessionId = [[Account sharedAccount] getSessionId];
 //    model.accountInfo = [JSONUtil parseDic:data];
@@ -393,35 +389,25 @@
 //    NSString *jsonStr = [JSONUtil parse:Request_UserInfo params:dic];
 //    
 //    [self requestUserInfo : jsonStr];
-}
-
-#pragma mark 请求用户资料
--(void)requestUserInfo : (NSString *)jsonStr
-{
-    return;
-    [[HttpRequest sharedHttpRequest] post:jsonStr view:self.view success:^(id responseObject) {
-        BaseRespondModel *model = [BaseRespondModel mj_objectWithKeyValues:responseObject];
-        UserRespondModel *respondModel = [UserRespondModel mj_objectWithKeyValues:model.resp];
-    } fail:^(NSError *error) {
-        
-    }];
-    
+    [self requestAccountInfo];
 }
 
 #pragma mark 请求资金信息
 -(void)requestAccountInfo
 {
     NSString *jsonStr = [QueryRequest buildQueryInfo:XT_CAccountDetail];
-    [[SocketConnect sharedSocketConnect] sendData:jsonStr delegate:self seq:GYT_QUERYDATA];
+    [[SocketConnect sharedSocketConnect] sendData:jsonStr delegate:self seq:XT_CAccountDetail];
 }
 
 
 -(void)OnReceiveSuccess:(id)respondObject
 {
     PackageModel *packageModel = respondObject;
-    if(packageModel.seq == GYT_QUERYDATA)
+    if(packageModel.seq == XT_CAccountDetail &&  !IS_NS_STRING_EMPTY(packageModel.result))
     {
-        QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:packageModel.result];
+        BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
+        QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:respondModel.response];
+        NSLog(@"资金信息->%@",packageModel.result);
         NSMutableArray *array = model.datas;
         if(!IS_NS_COLLECTION_EMPTY(array))
         {
@@ -431,10 +417,14 @@
                 MoneyDetailModel *moneyDetailModel = [MoneyDetailModel mj_objectWithKeyValues:obj];
                 [[NSUserDefaults standardUserDefaults]setValue:moneyDetailModel.mj_JSONString forKey:MoneyInfo];
             }
+            [DialogHelper showSuccessTips:@"获取资金信息成功!"];
+
         }
         else{
             [DialogHelper showTips:@"获取资金信息失败，请重试!"];
         }
     }
+
+
 }
 @end

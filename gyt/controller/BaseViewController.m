@@ -7,7 +7,6 @@
 //
 
 #import "BaseViewController.h"
-#import "LoginResponseModel.h"
 
 
 @interface BaseViewController ()

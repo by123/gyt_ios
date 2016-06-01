@@ -60,7 +60,8 @@
     [self initBody];
     [self initBottomView];
   
-    MoneyDetailModel *moneyDetailModel = [[NSUserDefaults standardUserDefaults] objectForKey:MoneyInfo];
+    NSString *moneyDetailStr = [[NSUserDefaults standardUserDefaults] objectForKey:MoneyInfo];
+    MoneyDetailModel *moneyDetailModel = [MoneyDetailModel mj_objectWithKeyValues:moneyDetailStr];
     _datas = [MoneyDetailModel getData : moneyDetailModel];
     [_tableView reloadData];
 }

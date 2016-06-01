@@ -17,6 +17,8 @@
 #import "DealProfitModel.h"
 #import "QueryRequest.h"
 #import "OrderRequestModel.h"
+#import "MoneyDetailModel.h"
+
 @interface DealView()
 
 //权益
@@ -72,6 +74,7 @@
 
 //数据
 @property (strong, nonatomic) ProductModel *model;
+
 
 @end
 
@@ -541,27 +544,8 @@
 #pragma mark 请求持仓
 -(void)requestQuery
 {
-//    [QueryRequest requestQueryInfo:self requestType:XT_COrderDetail success:^(id responseObject) {
-//        QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:responseObject];
-//        NSMutableArray *array = model.datas;
-//        if(!IS_NS_COLLECTION_EMPTY(array))
-//        {
-//            //多种资金
-//            for(id obj in array)
-//            {
-//                MoneyDetailModel *moneyDetailModel = [MoneyDetailModel mj_objectWithKeyValues:obj];
-//                _datas = [MoneyDetailModel getData : moneyDetailModel];
-//                [_tableView reloadData];
-//            }
-//        }
-//        else{
-//            [DialogHelper showSuccessTips:@"暂无持仓信息"];
-//        }
-//        
-//        
-//    } fail:^(NSError *error) {
-//        [DialogHelper showTips:@"获取资金信息失败，请重试!"];
-//    }];
+    NSString *jsonStr = [QueryRequest buildQueryInfo:XT_COrderDetail];
+    [[SocketConnect sharedSocketConnect] sendData:jsonStr delegate:self seq:XT_COrderDetail];
 }
 
 
@@ -577,13 +561,36 @@
     orderModel.info = [OrderModel buildOrderModel:@"CN 1606" orderPrice:9140 orderNum:1 direction:ENTRUST_BUY offsetFlag:EOFF_THOST_FTDC_OF_Open];
     NSMutableDictionary *dic =[JSONUtil parseDic:orderModel];
     NSString *jsonStr = [JSONUtil parse:@"order" params:dic];
-    [[HttpRequest sharedHttpRequest]post:jsonStr view:self success:^(id responseObject) {
-        OrderRespondModel *respondModel = [OrderRespondModel mj_objectWithKeyValues:responseObject];
-        NSMutableDictionary *dic = respondModel.res;
-        
-    } fail:^(NSError *error) {
-        
-    }];
+    
+    [[SocketConnect sharedSocketConnect] sendData:jsonStr delegate:self seq:GYT_ORDER];
 }
 
+
+-(void)OnReceiveSuccess:(id)respondObject
+{
+    PackageModel *packageModel = respondObject;
+    if(packageModel.seq == XT_COrderDetail)
+    {
+        QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:packageModel.result];
+        NSMutableArray *array = model.datas;
+        if(!IS_NS_COLLECTION_EMPTY(array))
+        {
+            //多种资金
+            for(id obj in array)
+            {
+                MoneyDetailModel *moneyDetailModel = [MoneyDetailModel mj_objectWithKeyValues:obj];
+                NSLog(@"66666");
+            }
+        }
+        else{
+            [DialogHelper showSuccessTips:@"暂无持仓信息"];
+        }
+    }
+    else if(packageModel.seq == GYT_ORDER)
+    {
+        OrderRespondModel *respondModel = [OrderRespondModel mj_objectWithKeyValues:packageModel.result];
+        NSMutableDictionary *dic = respondModel.res;
+        NSLog(@"66666");
+    }
+}
 @end

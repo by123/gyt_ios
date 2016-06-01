@@ -6,7 +6,6 @@
 
 #import "CandleView.h"
 #import "ResourceHelper.h"
-#import "LoginResponseModel.h"
 @interface CandleView()
 
 @property (nonatomic,retain) Chart *candleChart;

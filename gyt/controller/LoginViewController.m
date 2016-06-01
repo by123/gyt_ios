@@ -9,14 +9,10 @@
 #import "LoginViewController.h"
 #import "InsetTextField.h"
 #import "LoginModel.h"
-#import "LoginResponseModel.h"
 #import "IPMacUtil.h"
 #import "UUID.h"
-#import "AppDelegate.h"
 
 @interface LoginViewController ()
-
-@property (strong , nonatomic) InsetTextField *companyTextField;
 
 @property (strong , nonatomic) InsetTextField *nameTextField;
 
@@ -29,6 +25,9 @@
 @end
 
 @implementation LoginViewController
+{
+    __weak MBProgressHUD *hua;
+}
 
 
 +(void)show:(BaseViewController *)controller
@@ -67,16 +66,6 @@
     rootView.frame = Default_Frame;
     rootView.backgroundColor = [ColorUtil colorWithHexString:@"#333333"];
     [self.view addSubview:rootView];
-    
-    _companyTextField = [[InsetTextField alloc]initWithFrame: CGRectMake(20, 20, SCREEN_WIDTH-40, 40)];
-    _companyTextField.hasTitle = YES;
-    [_companyTextField setInsetTitle:@"开户公司：" font:[UIFont systemFontOfSize:14.0f]];
-    _companyTextField.block = ^(InsetTextField *insetTextField) {
-        [DialogHelper showTips:@"开发中"];
-    };
-    [_companyTextField setInsetImage:[UIImage imageNamed:@"ic_search"]];
-    [rootView addSubview:_companyTextField];
-
     
     _nameTextField = [[InsetTextField alloc]initWithFrame:CGRectMake(20, 70, SCREEN_WIDTH-40, 40)];
     _nameTextField.hasTitle = YES;
@@ -129,17 +118,21 @@
 #pragma mark 请求登录
 -(void)login
 {
+    hua = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
     NSString *name = _nameTextField.text;
     NSString *password = _passwordTextField.text;
     
     if(IS_NS_STRING_EMPTY(name))
     {
         [DialogHelper showTips:@"请输入资金账号"];
+        [hua hide:YES];
         return;
     }
     if(IS_NS_STRING_EMPTY(password))
     {
         [DialogHelper showTips:@"请输入密码"];
+        [hua hide:YES];
         return;
     }
     
@@ -158,40 +151,47 @@
     [[Account sharedAccount] saveUid:model.strUserName];
     
     NSString *jsonStr = [JSONUtil parse:Request_Login params:[JSONUtil parseDic:model]];
-//    [self requestLogin:jsonStr];
     [[SocketConnect sharedSocketConnect] sendData:jsonStr delegate:self seq:GYT_LOGIN];
 }
 
+#pragma mark 测试http登录
+-(void)loginWithHttp
+{
+    NSString *name = _nameTextField.text;
+    NSString *password = _passwordTextField.text;
+    
+    if(IS_NS_STRING_EMPTY(name))
+    {
+        [DialogHelper showTips:@"请输入资金账号"];
+        return;
+    }
+    if(IS_NS_STRING_EMPTY(password))
+    {
+        [DialogHelper showTips:@"请输入密码"];
+        return;
+    }
+    
+    [self hideKeyboard];
+    
+    
+    LoginModel *model = [[LoginModel alloc]init];
+    model.sessionId = @"";
+    model.strUserName = _nameTextField.text;
+    model.strPassword = @"123456";
+    model.strIpAddress = [IPMacUtil getIPAddress];
+    model.strMACAdress = [UUID getUUID];;
+    model.clientID = ClientID_Mobile_Manage;
+    
+    [[Account sharedAccount] saveUid:model.strUserName];
+    
+    NSString *jsonStr = [JSONUtil parse:Request_Login params:[JSONUtil parseDic:model]];
 
-//#pragma mark 请求登录
-//-(void)requestLogin : (NSString *)jsonStr
-//{
-//    
-//    [[HttpRequest sharedHttpRequest] post:jsonStr view:self.view success:^(id responseObject) {
-//        
-//        NSString *text = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
-//        NSLog(@"返回结果->%@",text);
-//        LoginResponseModel *model = [LoginResponseModel mj_objectWithKeyValues:responseObject];
-//        NSInteger code = [[model.response objectForKey:@"success"] integerValue];
-//        if(code == 1)
-//        {
-//            NSString *sessionId = [model.response objectForKey:@"sessionId"];
-//            [[Account sharedAccount]saveSessionid:sessionId];
-//            [DialogHelper showSuccessTips:[NSString stringWithFormat:@"登录成功->%@",text]];
-//            [[NSNotificationCenter defaultCenter] postNotificationName:Notify_Update_UserInfo object:nil];
-//            [self dismissViewControllerAnimated:YES completion:nil];
-//        }
-//        else
-//        {
-//            [DialogHelper showTips:@"登录失败!"];
-//        }
-//        
-//    } fail:^(NSError *error) {
-//        [DialogHelper showTips:@"登录失败!"];
-//    }];
-//    
-//
-//}
+    [[HttpRequest sharedHttpRequest] post:jsonStr view:self.view success:^(id responseObject) {
+        
+    } fail:^(NSError *error) {
+        
+    }];
+}
 
 
 -(void)OnReceiveSuccess:(id)respondObject
@@ -199,16 +199,13 @@
     PackageModel *packageModel = respondObject;
     if(packageModel.seq == GYT_LOGIN)
     {
-        LoginResponseModel *model = [LoginResponseModel mj_objectWithKeyValues:packageModel.result];
-        NSMutableDictionary *dic = model.params;
-        NSMutableDictionary *response = [dic objectForKey:@"response"];
-        int code = [[response objectForKey:@"success"] integerValue];
-        if(code == 1)
+        BaseRespondModel *model = [BaseRespondModel buildModel:respondObject];
+        if(model.error.ErrorID == 0)
         {
-            NSString *sessionId = [response objectForKey:@"sessionId"];
+            NSString *sessionId = [model.response objectForKey:@"sessionId"];
             [[Account sharedAccount]saveSessionid:sessionId];
             [DialogHelper showSuccessTips:[NSString stringWithFormat:@"登录成功->%@",packageModel.result]];
-            [[NSNotificationCenter defaultCenter] postNotificationName:Notify_Update_UserInfo object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:Notify_Update_AccountInfo object:nil];
             [self dismissViewControllerAnimated:YES completion:nil];
         }
         else
@@ -216,12 +213,14 @@
             [DialogHelper showTips:@"登录失败!"];
         }
     }
+    
+    [hua hide:YES];
 }
+
 
 #pragma mark 隐藏键盘
 -(void)hideKeyboard
 {
-    [_companyTextField resignFirstResponder];
     [_nameTextField resignFirstResponder];
     [_passwordTextField resignFirstResponder];
 }

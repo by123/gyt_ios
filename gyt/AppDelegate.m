@@ -93,7 +93,11 @@
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
+    
+//    [[SocketConnect sharedSocketConnect] close];
 }
+
+
 
 -(void)initDB
 {

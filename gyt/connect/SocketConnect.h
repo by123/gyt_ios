@@ -26,7 +26,7 @@
 
 @end
 
-@interface SocketConnect : NSObject<GCDAsyncSocketDelegate>
+@interface SocketConnect : NSObject<GCDAsyncSocketDelegate,UIAlertViewDelegate>
 
 SINGLETON_DECLARATION(SocketConnect);
 

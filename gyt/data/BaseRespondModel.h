@@ -7,9 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ErrorModel.h"
 
 @interface BaseRespondModel : NSObject
 
-@property (strong, nonatomic) id resp;
+@property (assign, nonatomic) int statu;
+
+@property (strong, nonatomic) id params;
+
+@property (strong, nonatomic) id response;
+
+@property (strong, nonatomic) ErrorModel *error;
+
+
++(BaseRespondModel *) buildModel : (id)respondObject;
 
 @end

@@ -10,4 +10,14 @@
 
 @implementation BaseRespondModel
 
++(BaseRespondModel *) buildModel : (id)respondObject
+{
+    PackageModel *packageModel = respondObject;
+    BaseRespondModel *model = [BaseRespondModel mj_objectWithKeyValues:packageModel.result];
+    id params = model.params;
+    model.response = [params objectForKey:@"response"];
+    model.error = [ErrorModel mj_objectWithKeyValues:params];
+    return model;
+}
+
 @end

@@ -33,7 +33,6 @@
 		CF4A6D6F1CBE2A0800B36C93 /* IDSExtendedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D6A1CBE2A0800B36C93 /* IDSExtendedLabel.m */; };
 		CF4A6D701CBE2A0800B36C93 /* UILabel+ContentSize.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D6C1CBE2A0800B36C93 /* UILabel+ContentSize.m */; };
 		CF4A6D711CBE2A0800B36C93 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D6E1CBE2A0800B36C93 /* UIView+Frame.m */; };
-		CF4A6D741CBE2BCD00B36C93 /* LoginResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D731CBE2BCD00B36C93 /* LoginResponseModel.m */; };
 		CF4A6D7C1CBE2EA200B36C93 /* ByNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D7B1CBE2EA200B36C93 /* ByNavigationBar.m */; };
 		CF4A6D7F1CBE2EAB00B36C93 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D7E1CBE2EAB00B36C93 /* BaseViewController.m */; };
 		CF60E1871CEABF45001EF40D /* QueryRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF60E1861CEABF45001EF40D /* QueryRequestModel.m */; };
@@ -81,6 +80,7 @@
 		CFC15BE21CC74F760077FA19 /* ContractDB.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15BE11CC74F760077FA19 /* ContractDB.m */; };
 		CFC15BE41CC769DF0077FA19 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CFC15BE31CC769DF0077FA19 /* libsqlite3.tbd */; };
 		CFD37E0D1CFEA73100297DE2 /* PackageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD37E0C1CFEA73100297DE2 /* PackageModel.m */; };
+		CFD37E131CFED4E700297DE2 /* ErrorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD37E121CFED4E700297DE2 /* ErrorModel.m */; };
 		CFDD2DD61CC8AEE100E81E3F /* DealHoldModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DD51CC8AEE100E81E3F /* DealHoldModel.m */; };
 		CFDD2DD91CC8BEC600E81E3F /* DealHoldingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DD81CC8BEC600E81E3F /* DealHoldingModel.m */; };
 		CFDD2DDC1CC8C01000E81E3F /* DealHoldByModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DDB1CC8C01000E81E3F /* DealHoldByModel.m */; };
@@ -199,8 +199,6 @@
 		CF4A6D6C1CBE2A0800B36C93 /* UILabel+ContentSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+ContentSize.m"; sourceTree = "<group>"; };
 		CF4A6D6D1CBE2A0800B36C93 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
 		CF4A6D6E1CBE2A0800B36C93 /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
-		CF4A6D721CBE2BCD00B36C93 /* LoginResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginResponseModel.h; sourceTree = "<group>"; };
-		CF4A6D731CBE2BCD00B36C93 /* LoginResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginResponseModel.m; sourceTree = "<group>"; };
 		CF4A6D7A1CBE2EA200B36C93 /* ByNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ByNavigationBar.h; sourceTree = "<group>"; };
 		CF4A6D7B1CBE2EA200B36C93 /* ByNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ByNavigationBar.m; sourceTree = "<group>"; };
 		CF4A6D7D1CBE2EAB00B36C93 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
@@ -290,6 +288,8 @@
 		CFC15BE31CC769DF0077FA19 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		CFD37E0B1CFEA73100297DE2 /* PackageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PackageModel.h; sourceTree = "<group>"; };
 		CFD37E0C1CFEA73100297DE2 /* PackageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PackageModel.m; sourceTree = "<group>"; };
+		CFD37E111CFED4E700297DE2 /* ErrorModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorModel.h; sourceTree = "<group>"; };
+		CFD37E121CFED4E700297DE2 /* ErrorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorModel.m; sourceTree = "<group>"; };
 		CFDD2DD41CC8AEE100E81E3F /* DealHoldModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealHoldModel.h; sourceTree = "<group>"; };
 		CFDD2DD51CC8AEE100E81E3F /* DealHoldModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealHoldModel.m; sourceTree = "<group>"; };
 		CFDD2DD71CC8BEC600E81E3F /* DealHoldingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealHoldingModel.h; sourceTree = "<group>"; };
@@ -548,8 +548,6 @@
 				CFF1838D1CE4787A00E991C4 /* user */,
 				CFF183831CE45DFA00E991C4 /* base */,
 				CFDD2DD31CC8AEBD00E81E3F /* detail */,
-				CF4A6D721CBE2BCD00B36C93 /* LoginResponseModel.h */,
-				CF4A6D731CBE2BCD00B36C93 /* LoginResponseModel.m */,
 				CFDD2DE51CCA0DAE00E81E3F /* RightMenuModel.h */,
 				CFDD2DE61CCA0DAE00E81E3F /* RightMenuModel.m */,
 				CFC15B8F1CBFA6830077FA19 /* ProductModel.h */,
@@ -948,6 +946,8 @@
 				CFF183851CE45E1400E991C4 /* BaseRequestModel.m */,
 				CFF183971CE5AB9D00E991C4 /* BaseRespondModel.h */,
 				CFF183981CE5AB9D00E991C4 /* BaseRespondModel.m */,
+				CFD37E111CFED4E700297DE2 /* ErrorModel.h */,
+				CFD37E121CFED4E700297DE2 /* ErrorModel.m */,
 			);
 			name = base;
 			sourceTree = "<group>";
@@ -1207,6 +1207,7 @@
 				CF6340321CFD65FB008149B1 /* NSData+XTAMData.m in Sources */,
 				CFF183D21CE9D6CA00E991C4 /* MoneyManageDetailViewController.m in Sources */,
 				CFF183C11CE718D200E991C4 /* AccessGoldModel.m in Sources */,
+				CFD37E131CFED4E700297DE2 /* ErrorModel.m in Sources */,
 				CF4A6D5B1CBE28DD00B36C93 /* ColorUtil.m in Sources */,
 				CFDD2E101CCF42D400E81E3F /* NewsModel.m in Sources */,
 				CFF183D91CE9F0A200E991C4 /* QueryRequest.m in Sources */,
@@ -1244,7 +1245,6 @@
 				CFDD2DDC1CC8C01000E81E3F /* DealHoldByModel.m in Sources */,
 				CF4A6D5A1CBE28DD00B36C93 /* AppUtil.m in Sources */,
 				CFC15B911CBFA6830077FA19 /* ProductModel.m in Sources */,
-				CF4A6D741CBE2BCD00B36C93 /* LoginResponseModel.m in Sources */,
 				CFA3B8FC1CD9AB050063AE3E /* ResourceHelper.m in Sources */,
 				CFDD2EA81CCF4DE100E81E3F /* MJRefreshStateHeader.m in Sources */,
 				CFC15BD21CC607900077FA19 /* DynamicCell.m in Sources */,

@@ -11,7 +11,7 @@
 #import "ProductModel.h"
 #import "ByDynamicTableView.h"
 
-@interface DealView : UIView<ByTabViewDelegate,UIAlertViewDelegate,ByDynamicTableViewDelegate>
+@interface DealView : UIView<ByTabViewDelegate,UIAlertViewDelegate,ByDynamicTableViewDelegate,SocketConnectDelegate>
 
 -(instancetype)initWithData : (CGRect)frame
               model : (ProductModel *)model;
