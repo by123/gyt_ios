@@ -9,7 +9,6 @@
 #import "GYTPackage.h"
 #import "NSData+XTAMData.h"
 #import "NSMutableData+XTAMData.h"
-#import "NSJSONSerialization+stringWithJSONObject.h"
 
 @implementation GYTPackage
 
@@ -35,51 +34,26 @@ SINGLETON_IMPLEMENTION(GYTPackage);
     model.tag = [data readUShort:10];
     
     NSData *jsondata = [data subdataWithRange:NSMakeRange(12, data.length - 12)];
-    if (model.cmd == NET_CMD_RPC || model.cmd == NET_CMD_NOTIFICATION) {
+    
+    int compree = model.tag & 7;
+    if (compree == COMPRESS_ZLIB || compree == COMPRESS_DOUBLE_ZLIB)
+    {
+        jsondata = [jsondata zlibDecompressed];
+    }
+
+    if (model.cmd == NET_CMD_RPC) {
         model.seq = ((int64_t)(model.tag >> 8) & 0x0f) << 32 | model.seq;
         
         NSData *udata = [jsondata zlibDecompressed];
         if (udata != nil) {
             jsondata = udata;
         }
-        model.result = [[NSString alloc] initWithData:jsondata encoding:NSUTF8StringEncoding];
-    
-//        if (cmd == NET_CMD_NOTIFICATION) {
-////            NSLog(@"decodeJSON:[push] seq[%lld] %@", seq, string);
-//        } else {
-////            NSLog(@"decodeJSON:seq[%lld] %@", seq, string);
-//        }
-//        //>>
-//        NSError* error;
-//        NSDictionary *dict = [jsondata mj_keyValues];
-//
-////        NSDictionary *dict = ([jsondata objectFromJSONDataWithParseOptions:JKParseOptionStrict error:&error]);
-//        if (error != nil) {
-////            NSLog(@"error 1 - dict - %@ jsondata - %@", dict, jsondata);
-//            NSLog(@"TTPackage decodeJSON error 1:%@", error);
-//        }
-//        if (dict == nil) {
-//            error = nil;
-//            dict = [string mj_keyValues];
-////            dict = [string objectFromJSONStringWithParseOptions:JKParseOptionStrict error:&error];
-////            dict = ([[string dataUsingEncoding:NSUTF8StringEncoding] objectFromJSONDataWithParseOptions:JKParseOptionStrict error:&error]);
-//            if (error != nil) {
-//                NSLog(@"TTPackage decodeJSON error 2:%@", error);
-//            }
-//        }
-//        TTPackage *package = [[TTPackage alloc] init];
-//        package.seq = seq;
-//        package.cmd = cmd;
-//        package.dict = dict;
-//        return package;
-//    } else if (cmd == NET_CMD_KEEPALIVE_RESPONSE) {
-//        NSLog(@"keep alive response");
-//        seq = ((int64_t)(tag >> 8) & 0x0f) << 32 | seq;
-//        TTPackage *package = [[TTPackage alloc] init];
-//        package.seq = seq;
-//        package.cmd = cmd;
-//        return package;
-//    }
+        NSString *resultStr;
+        resultStr = [[NSString alloc] initWithData:jsondata encoding:NSUTF8StringEncoding];
+        if (resultStr == nil) {
+            resultStr = [[NSString alloc] initWithData:jsondata encoding:NSASCIIStringEncoding];
+        }
+        model.result = resultStr;
     }
     return model;
 }
@@ -91,10 +65,6 @@ SINGLETON_IMPLEMENTION(GYTPackage);
     if (_model.cmd == NET_CMD_KEEPALIVE)
     {
         data = [NSMutableData dataWithLength:4];
-    }
-    else
-    {
-//      data = [NSJSONSerialization dataWithJSONObject:self.dict options:kNilOptions error:nil];
     }
     NSMutableData* mData = [NSMutableData dataWithCapacity:data.length + 12];
     [mData appendUInt:(uint32_t)data.length + 12];

@@ -11,6 +11,7 @@
 #import "LoginModel.h"
 #import "IPMacUtil.h"
 #import "UUID.h"
+#import "MainViewController.h"
 
 @interface LoginViewController ()
 
@@ -28,6 +29,7 @@
 {
     __weak MBProgressHUD *hua;
 }
+
 
 
 +(void)show:(BaseViewController *)controller
@@ -206,7 +208,7 @@
             [[Account sharedAccount]saveSessionid:sessionId];
             [DialogHelper showSuccessTips:[NSString stringWithFormat:@"登录成功->%@",packageModel.result]];
             [[NSNotificationCenter defaultCenter] postNotificationName:Notify_Update_AccountInfo object:nil];
-            [self dismissViewControllerAnimated:YES completion:nil];
+            [MainViewController show : self];
         }
         else
         {

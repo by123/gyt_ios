@@ -8,6 +8,9 @@
 
 #import "BaseViewController.h"
 #import "SlideNavigationController.h"
-@interface MainViewController : BaseViewController<SlideNavigationControllerDelegate,ByNavigationBarDelegate,UITableViewDelegate,UITableViewDataSource,SocketConnectDelegate>
+@interface MainViewController : BaseViewController<ByNavigationBarDelegate,UITableViewDelegate,UITableViewDataSource,SocketConnectDelegate>
+
+
++(void)show : (BaseViewController *)controller;
 
 @end

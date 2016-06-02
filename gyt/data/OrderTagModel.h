@@ -13,13 +13,13 @@
 
 @property (copy , nonatomic) NSString *m_strUser; // 用户
 
-@property (assign , nonatomic) long m_nOrderDate; // 日期
+@property (copy , nonatomic) NSString *m_nOrderDate; // 日期
 
 @property (copy , nonatomic) NSString *m_strSessionTag; // 会话号
 
 @property (copy , nonatomic) NSString *m_strRequestId; // 请求号
 
-@property (assign , nonatomic) long *m_nOrderTime;  // 下单时间
+@property (copy , nonatomic) NSString *m_nOrderTime;  // 下单时间
 
 @property (copy , nonatomic) NSString *m_strLocalInfo; //IP MAC,以后可能有别的东西
 

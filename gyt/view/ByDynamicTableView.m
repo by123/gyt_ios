@@ -169,37 +169,6 @@
     {
         [_delegate OnItemSelected:self position:indexPath.row];
     }
-//    ProductModel *model = [_datas objectAtIndex:indexPath.row];
-//    if(!model.isSelect)
-//    {
-//        NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
-//        
-//        ProductModel *addModel = [[ProductModel alloc]init];
-//        addModel.isDelete = YES;
-//        addModel.isSelect = YES;
-//        [_datas insertObject:addModel atIndex:indexPath.row + 1];
-//        
-//        [indexPaths addObject:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
-//        
-//        [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
-//        model.isSelect = YES;
-//    }
-//    else
-//    {
-//        if(!model.isDelete)
-//        {
-//            [_datas removeObjectAtIndex:indexPath.row+1];
-//            
-//            NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
-//            [indexPaths addObject:[NSIndexPath indexPathForRow:indexPath.row+1
-//                                                     inSection:0]];
-//            
-//            [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
-//            
-//            model.isSelect = NO;
-//        }
-//    }
-
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -220,6 +189,8 @@
     _datas = array;
     [_tableView reloadData];
 }
+
+
 
 
 @end

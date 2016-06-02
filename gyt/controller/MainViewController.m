@@ -14,7 +14,6 @@
 #import "DetailViewController.h"
 #import "ContractDB.h"
 #import "SearchViewController.h"
-#import "LoginViewController.h"
 #import "UserInfoDataModel.h"
 #import "UserInfoModel.h"
 #import "UserRespondModel.h"
@@ -63,6 +62,13 @@
     }
     
 }
+
++(void)show : (BaseViewController *)controller
+{
+    MainViewController *targetController = [[MainViewController alloc]init];
+    [controller.navigationController pushViewController:targetController animated:YES];
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -269,17 +275,9 @@
 {
     if(!IS_NS_COLLECTION_EMPTY(_datas))
     {
-        if([[Account sharedAccount]isLogin])
-        {
-            ProductModel *model = [_datas objectAtIndex:indexPath.row];
-            [[ContractDB sharedContractDB] insertItem:DBHistoryContractTable model:model];
-            [DetailViewController show:self model:model];
-        }
-        else
-        {
-            [LoginViewController show:self];
-        }
-
+        ProductModel *model = [_datas objectAtIndex:indexPath.row];
+        [[ContractDB sharedContractDB] insertItem:DBHistoryContractTable model:model];
+        [DetailViewController show:self model:model];
     }
 }
 
@@ -403,11 +401,11 @@
 -(void)OnReceiveSuccess:(id)respondObject
 {
     PackageModel *packageModel = respondObject;
-    if(packageModel.seq == XT_CAccountDetail &&  !IS_NS_STRING_EMPTY(packageModel.result))
+    if(packageModel.seq == XT_CAccountDetail &&  packageModel.result)
     {
         BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
         QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:respondModel.response];
-        NSLog(@"资金信息->%@",packageModel.result);
+//        NSLog(@"资金信息->%@",package);
         NSMutableArray *array = model.datas;
         if(!IS_NS_COLLECTION_EMPTY(array))
         {

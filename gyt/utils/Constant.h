@@ -245,6 +245,34 @@ typedef NS_ENUM(NSInteger,EFutureTradeType)
     FUTURE_TRADE_TYPE_COMBINATION_DERIVED //组合衍生成交
 };
 
+typedef NS_ENUM(NSInteger,EEntrustStatus)
+{
+    ENTRUST_STATUS_WAIT_END= 0 ,     //委托状态已经在ENTRUST_STATUS_CANCELED或以上，但是成交数额还不够，等成交回报来
+    ENTRUST_STATUS_UNREPORTED = 48,  // 未报
+    ENTRUST_STATUS_WAIT_REPORTING,   // 待报
+    ENTRUST_STATUS_REPORTED,         // 已报
+    ENTRUST_STATUS_REPORTED_CANCEL,  // 已报待撤
+    ENTRUST_STATUS_PARTSUCC_CANCEL,  // 部成待撤
+    ENTRUST_STATUS_PART_CANCEL,      // 部撤
+    ENTRUST_STATUS_CANCELED,         // 已撤
+    ENTRUST_STATUS_PART_SUCC,        // 部成
+    ENTRUST_STATUS_SUCCEEDED,        // 已成
+    ENTRUST_STATUS_JUNK,             // 废单
+    ENTRUST_STATUS_UNKNOWN           // 未知
+};
+
+//委托提交状态（已成，部成，已发，已报，撤单,废除）
+typedef NS_ENUM(NSInteger,EEntrustSubmitStatus)
+{
+    ENTRUST_SUBMIT_STATUS_InsertSubmitted = 48,    // 已经提交
+    ENTRUST_SUBMIT_STATUS_CancelSubmitted ,        // 撤单已经提交
+    ENTRUST_SUBMIT_STATUS_ModifySubmitted,         // 修改已经提交
+    ENTRUST_SUBMIT_STATUS_OSS_Accepted ,           // 已经接受
+    ENTRUST_SUBMIT_STATUS_InsertRejected ,         // 报单已经被拒绝
+    ENTRUST_SUBMIT_STATUS_CancelRejected,          // 撤单已经被拒绝
+    ENTRUST_SUBMIT_STATUS_ModifyRejected           // 改单已经被拒绝
+};
+
 
 @interface Constant : NSObject
 
@@ -252,5 +280,6 @@ typedef NS_ENUM(NSInteger,EFutureTradeType)
 
 +(NSString *)EHedge_Flag_TypeStr : (EHedge_Flag_Type) flagType;
 
++(NSString *)EEntrustStatusStr : (EEntrustStatus)statu;
 @end
 

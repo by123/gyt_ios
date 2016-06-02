@@ -11,4 +11,5 @@
 @interface QueryRespondsModel : NSObject
 
 @property (strong, nonatomic) NSMutableArray *datas;
+
 @end

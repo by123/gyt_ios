@@ -10,7 +10,7 @@
 #import "SlideNavigationController.h"
 #import "LeftMenuViewContriller.h"
 #import "RightMenuViewController.h"
-#import "MainViewController.h"
+#import "LoginViewController.h"
 #import "ProductModel.h"
 #import "ContractDB.h"
 #import "SplashViewController.h"
@@ -54,10 +54,9 @@
         _window.rootViewController = controller;
         [_window makeKeyAndVisible];
     }
-    
     else
     {
-        MainViewController *mainViewController =[[MainViewController alloc]init];
+        LoginViewController *mainViewController =[[LoginViewController alloc]init];
         SlideNavigationController *controller = [[SlideNavigationController alloc]initWithRootViewController:mainViewController];
         
         LeftMenuViewContriller *leftMenu = [[LeftMenuViewContriller alloc]init];

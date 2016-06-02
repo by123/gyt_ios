@@ -175,30 +175,59 @@
             label.font = [UIFont systemFontOfSize:13.0f];
             int width =  [[_widths objectAtIndex:i] intValue] * maxWidth / count;
             switch (i) {
-//                case 0:
-//                    label.text = model.name;
-//                    break;
-//                case 1:
-//                    label.text = model.statu;
-//                    break;
-//                case 2:
-//                    label.text = model.kaiping;
-//                    break;
-//                case 3:
-//                    label.text = model.price;
-//                    break;
-//                case 4:
-//                    label.text = model.handby;
-//                    break;
-//                case 5:
-//                    label.text = model.handDeal;
-//                    break;
-//                case 6:
-//                    label.text = model.handCancel;
-//                    break;
-//                case 7:
-//                    label.text = model.time;
-//                    break;
+                case 0://时间
+                    if(IS_NS_STRING_EMPTY(model.m_tag.m_nOrderTime))
+                    {
+                        label.text = [self generateTime:[NSString stringWithFormat:@"%d",model.m_nInsertTime]];
+                    }
+                    else{
+                        label.text = [self generateTime:model.m_tag.m_nOrderTime];
+                    }
+                    break;
+                case 1://合约
+                    label.text = model.m_strInstrumentID;
+                    break;
+                case 2://状态
+                    label.text = [Constant EEntrustStatusStr:model.m_nOrderStatus];
+                    break;
+                case 3://买卖
+                    label.text = [Constant EEntrustBSStr:model.m_nDirection];
+                    break;
+                case 4://委托价
+                    if(model.m_dOrderPrice == 0)
+                    {
+                        label.text = [NSString stringWithFormat:@"%.f",model.m_dLimitPrice];
+                    }
+                    else
+                    {
+                        label.text = [NSString stringWithFormat:@"%.f",model.m_dOrderPrice];
+                    }
+                    break;
+                case 5://委托量
+                    if(model.m_nOrderNum == 0)
+                    {
+                        label.text = [NSString stringWithFormat:@"%.f",model.m_nVolumeTotalOriginal];
+                    }
+                    else
+                    {
+                        label.text = [NSString stringWithFormat:@"%d",model.m_nOrderNum];
+                    }
+                    break;
+                case 6://可撤
+                    label.text = [NSString stringWithFormat:@"%d",model.m_nVolumeLeft];
+                    break;
+                case 7://已成交
+                    label.text = [NSString stringWithFormat:@"%d",model.m_nVolumeTraded];
+                    break;
+                case 8://投保
+                    label.text = [Constant EHedge_Flag_TypeStr:model.m_nHedgeFlag];
+                    break;
+                case 9://合同号
+                    label.text = model.m_strContractNum;
+                    break;
+                case 10://主场号
+                    label.text = model.m_strContractNum;
+                    break;
                 default:
                     break;
             }
@@ -302,6 +331,15 @@
             [self.contentView addSubview:lineView];
         }
     }
+}
+
+-(NSString *)generateTime : (NSString *)time
+{
+    NSString *t1 = [time substringWithRange:NSMakeRange(0, 2)];
+    NSString *t2 = [time substringWithRange:NSMakeRange(2, 2)];
+    NSString *t3 = [time substringWithRange:NSMakeRange(2, 2)];
+    NSString *result = [NSString stringWithFormat:@"%@:%@:%@",t1,t2,t3];
+    return result;
 }
 
 +(NSString *)identify

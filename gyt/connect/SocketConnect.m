@@ -91,7 +91,14 @@ SINGLETON_IMPLEMENTION(SocketConnect);
 -(void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
 {
     PackageModel *model =[[GYTPackage sharedGYTPackage] decodeJSON:data];
-    NSLog(@"接收到数据->%@",model.result);
+    if(model.seq == 0 )
+    {
+        NSLog(@"接收到主推数据->%@",model.result);
+    }
+    else
+    {
+        NSLog(@"接收到请求数据->%@",model.result);
+    }
     [sock readDataWithTimeout:-1 tag:tag];
     if(self.delegate)
     {

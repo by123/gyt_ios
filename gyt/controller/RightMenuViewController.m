@@ -12,11 +12,9 @@
 #import "SlideNavigationController.h"
 #import "MyContractViewController.h"
 #import "WarnContractViewController.h"
-#import "LoginViewController.h"
 #import "LoginModel.h"
 #import "MoneyDetailViewController.h"
 #import "MoneyManageViewController.h"
-#import "LoginViewController.h"
 
 @interface RightMenuViewController ()
 

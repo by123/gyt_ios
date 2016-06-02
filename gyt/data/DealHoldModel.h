@@ -1,7 +1,7 @@
 //
 //  DealHoldModel.h
 //  gyt
-//
+//  持仓
 //  Created by by.huang on 16/4/21.
 //  Copyright © 2016年 by.huang. All rights reserved.
 //
@@ -18,7 +18,7 @@
 @property (copy, nonatomic) NSString *m_strTradeID;
 
 //交易所ID
-@property (copy, nonatomic) NSString *m_strExchangeID;
+@property (copy, nonatomic) NSString *m_strExchangeID;  
 
 //品种代码
 @property (copy, nonatomic) NSString *m_strProductID;

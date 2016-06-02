@@ -18,6 +18,6 @@
 
 @property (assign, nonatomic) uint16_t tag;
 
-@property (strong, nonatomic) NSString *result;
+@property (copy, nonatomic) NSString *result;
 
 @end

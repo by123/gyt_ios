@@ -81,6 +81,9 @@
 @implementation DealView
 {
     NSMutableArray *holdDatas;
+    NSMutableArray *holdingDatas;
+    NSMutableArray *holdByDatas;
+    NSMutableArray *holdProfileDatas;
     DealHoldModel *dealModel;
     NSInteger currentSelect;
 }
@@ -93,6 +96,9 @@
     {
         _model = model;
         holdDatas = [[NSMutableArray alloc]init];
+        holdingDatas = [[NSMutableArray alloc]init];
+        holdByDatas = [[NSMutableArray alloc]init];
+        holdProfileDatas = [[NSMutableArray alloc]init];
         [self initView];
         return self;
     }
@@ -107,7 +113,7 @@
     dealModel = [[DealHoldModel alloc]init];
     [self initTopView];
     [self initBottomView];
-    [self requestQuery];
+//    [self requestQuery:XT_CPositionStatics];
 
 }
 
@@ -325,11 +331,11 @@
 
 -(void)OnItemSelected:(UIView *)dynamicTableView position:(NSInteger)position
 {
-    currentSelect = position;
-    DealHoldModel *model =[holdDatas objectAtIndex:position];
-    NSString *closeTxt = [NSString stringWithFormat:@"%.f\n————\n平仓",model.m_dOpenPrice];
-    [_closeItem setTitle:closeTxt forState:UIControlStateNormal];
-    [_closeItem setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    currentSelect = position;
+//    DealHoldModel *model =[holdDatas objectAtIndex:position];
+//    NSString *closeTxt = [NSString stringWithFormat:@"%.f\n————\n平仓",model.m_dOpenPrice];
+//    [_closeItem setTitle:closeTxt forState:UIControlStateNormal];
+//    [_closeItem setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 }
 
 #pragma mark 挂单数据
@@ -366,25 +372,10 @@
     {
         [_dynamicView removeFromSuperview];
     }
-    NSMutableArray *datas = [[NSMutableArray alloc]init];
-    DealHoldByModel *model = [[DealHoldByModel alloc]init];
-//    model.name = @"郑麦1605";
-//    model.statu = @"全成";
-//    model.kaiping = @"买开";
-//    model.price = @"5040";
-//    model.handby = @"5";
-//    model.handDeal = @"5";
-//    model.handCancel = @"0";
-//    model.time = @"20:12";
-
-    for(int i= 0 ;i < 20 ; i++)
-    {
-        [datas addObject:model];
-    }
-    NSArray *titleArray = @[@"时间",@"合约",@"状态",@"买卖",@"委托价",@"委托量",@"可撤",@"已成交",@"投保",@"预止损",@"合同号",@"主场号"];
-    NSArray *widthArray = @[@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1"];
+    NSArray *titleArray = @[@"时间",@"合约",@"状态",@"买卖",@"委托价",@"委托量",@"可撤",@"已成交",@"投保",@"合同号",@"主场号"];
+    NSArray *widthArray = @[@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1"];
     
-    _dynamicView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH, SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:datas maxWidth:SCREEN_WIDTH * 1.5 type:HoldBy];
+    _dynamicView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH, SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:holdByDatas maxWidth:SCREEN_WIDTH * 2 type:HoldBy];
     [_dynamicView setHeaders:widthArray headers:titleArray];
     [self addSubview:_dynamicView];
 }
@@ -420,18 +411,23 @@
 -(void)OnSelect:(NSInteger)position
 {
     [self hideKeyboard];
+    
     switch (position) {
         case 0:
             [self initHoldData];
+//            [self requestQuery:XT_CPositionStatics];
             break;
         case 1:
             [self initHoldingData];
+//            [self requestQuery:XT_CPositionStatics];
             break;
         case 2:
             [self initHoldByData];
+            [self requestQuery:XT_COrderDetail];
             break;
         case 3:
             [self initDealData];
+//            [self requestQuery:XT_CDealDetail];
             break;
         default:
             break;
@@ -445,13 +441,6 @@
     if(view == _buyItem)
     {
         DealHoldModel *tempModel = [[DealHoldModel alloc]init];
-//        tempModel.name = _model.name;
-//        tempModel.buySell = More;
-//        tempModel.hand = _handTextField.text;
-//        tempModel.canuse = _handTextField.text;
-//        tempModel.averagePrice = [NSString stringWithFormat:@"%.f", _model.recentPrice];
-//        tempModel.profit = @"0";
-        
         dealModel = tempModel;
         NSString *message = [NSString stringWithFormat:@"%@，%.f，买，%@手",_model.name,_model.recentPrice,_handTextField.text];
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认下单吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
@@ -461,13 +450,6 @@
     else if(view == _sellItem)
     {
         DealHoldModel *tempModel = [[DealHoldModel alloc]init];
-
-//        tempModel.name = _model.name;
-//        tempModel.buySell = Less;
-//        tempModel.hand = _handTextField.text;
-//        tempModel.canuse = _handTextField.text;
-//        tempModel.averagePrice = [NSString stringWithFormat:@"%.f", _model.recentPrice + 1];
-//        tempModel.profit = @"0";
         
         dealModel = tempModel;
         
@@ -507,7 +489,6 @@
     {
         if(alertView.tag == 0 || alertView.tag == 1)
         {
-            [holdDatas addObject:dealModel];
             NSLog(@"%d",[_tabView getCurrent]);
         }
         else if(alertView.tag == 2)
@@ -518,12 +499,11 @@
                 [holdDatas removeObject:model];
             }
         }
-        
-        if([_tabView getCurrent] == 0)
-        {
-            [_dynamicView reloadData :holdDatas];            
-        }
-        
+//        if([_tabView getCurrent] == 0)
+//        {
+//            [_dynamicView reloadData :holdDatas];            
+//        }
+//        
         [self order];
     }
 }
@@ -541,11 +521,11 @@
 }
 
 
-#pragma mark 请求持仓
--(void)requestQuery
+#pragma mark 请求持仓，委托，成交
+-(void)requestQuery : (RequestType)type
 {
-    NSString *jsonStr = [QueryRequest buildQueryInfo:XT_COrderDetail];
-    [[SocketConnect sharedSocketConnect] sendData:jsonStr delegate:self seq:XT_COrderDetail];
+    NSString *jsonStr = [QueryRequest buildQueryInfo:type];
+    [[SocketConnect sharedSocketConnect] sendData:jsonStr delegate:self seq:type];
 }
 
 
@@ -569,28 +549,49 @@
 -(void)OnReceiveSuccess:(id)respondObject
 {
     PackageModel *packageModel = respondObject;
-    if(packageModel.seq == XT_COrderDetail)
+    if(packageModel.seq == XT_CPositionStatics && !IS_NS_STRING_EMPTY(packageModel.result))
     {
         QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:packageModel.result];
         NSMutableArray *array = model.datas;
         if(!IS_NS_COLLECTION_EMPTY(array))
         {
             //多种资金
-            for(id obj in array)
-            {
-                MoneyDetailModel *moneyDetailModel = [MoneyDetailModel mj_objectWithKeyValues:obj];
-                NSLog(@"66666");
-            }
+//            for(id obj in array)
+//            {
+//                MoneyDetailModel *moneyDetailModel = [MoneyDetailModel mj_objectWithKeyValues:obj];
+//                NSLog(@"66666");
+//            }
         }
         else{
             [DialogHelper showSuccessTips:@"暂无持仓信息"];
         }
     }
+    else if(packageModel.seq == XT_COrderDetail && packageModel.result)
+    {
+        [holdByDatas removeAllObjects];
+        BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
+        QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:respondModel.response];
+        NSMutableArray *array = model.datas;
+        NSLog(@"数据大小->%d",[array count]);
+        if(!IS_NS_COLLECTION_EMPTY(array))
+        {
+            for(id obj in array)
+            {
+                DealHoldByModel *holdByModel = [DealHoldByModel mj_objectWithKeyValues:obj];
+                [holdByDatas addObject:holdByModel];
+            }
+            [_dynamicView reloadData:holdByDatas];
+        }
+    }
     else if(packageModel.seq == GYT_ORDER)
     {
-        OrderRespondModel *respondModel = [OrderRespondModel mj_objectWithKeyValues:packageModel.result];
-        NSMutableDictionary *dic = respondModel.res;
-        NSLog(@"66666");
+        BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
+        id data = [respondModel.response objectForKey:@"res"];
+        DealHoldByModel *holdByModel = [DealHoldByModel mj_objectWithKeyValues:data];
+        holdByModel.m_tag = [OrderTagModel mj_objectWithKeyValues:holdByModel.m_tag];
+        [holdByDatas addObject:holdByModel];
+        [_dynamicView reloadData:holdByDatas];
+        NSLog(@"1234");
     }
 }
 @end

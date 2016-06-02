@@ -19,6 +19,10 @@ const static int NET_CMD_COMMODITY_FUTURE    = 7;
 const static int NET_CMD_KEEPALIVE_RESPONSE  = 8;
 
 
+const static int COMPRESS_NONE               = 0;
+const static int COMPRESS_ZLIB               = 1;
+const static int COMPRESS_DOUBLE_ZLIB        = 2;
+
 @interface GYTPackage : NSObject
 
 SINGLETON_DECLARATION(GYTPackage);
