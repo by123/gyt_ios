@@ -9,12 +9,28 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "gyt/controller/LoginViewController.m"
-            timestampString = "486637500.632995"
+            filePath = "gyt/view/cell/DynamicCell.m"
+            timestampString = "486641907.208658"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "203"
-            endingLineNumber = "203"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "-setHoldData:maxWidth:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "gyt/view/DealView.m"
+            timestampString = "486646360.794332"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "538"
+            endingLineNumber = "538"
             landmarkName = "-OnReceiveSuccess:"
             landmarkType = "5">
          </BreakpointContent>

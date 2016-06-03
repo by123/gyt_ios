@@ -525,13 +525,15 @@
 }
 
 
+#pragma mark 接收数据
 -(void)OnReceiveSuccess:(id)respondObject
 {
     PackageModel *packageModel = respondObject;
+    BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
+
     if(packageModel.seq == XT_CPositionStatics && !IS_NS_STRING_EMPTY(packageModel.result))
     {
         [holdDatas removeAllObjects];
-        BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
         QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:respondModel.response];
         NSMutableArray *array = model.datas;
         if(!IS_NS_COLLECTION_EMPTY(array))
@@ -540,17 +542,14 @@
             {
                 DealHoldModel *holdModel = [DealHoldModel mj_objectWithKeyValues:obj];
                 [holdDatas addObject:holdModel];
-
             }
-        }
-        else{
-            [DialogHelper showSuccessTips:@"暂无持仓信息"];
+            [_dynamicView reloadData:holdDatas];
+
         }
     }
-    else if(packageModel.seq == XT_COrderDetail && packageModel.result)
+    else if(packageModel.seq == XT_COrderDetail && !IS_NS_STRING_EMPTY(packageModel.result))
     {
         [holdByDatas removeAllObjects];
-        BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
         QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:respondModel.response];
         NSMutableArray *array = model.datas;
         if(!IS_NS_COLLECTION_EMPTY(array))
@@ -565,7 +564,6 @@
     }
     else if(packageModel.seq == GYT_ORDER)
     {
-        BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
         id data = [respondModel.response objectForKey:@"res"];
         DealHoldByModel *holdByModel = [DealHoldByModel mj_objectWithKeyValues:data];
         holdByModel.m_tag = [OrderTagModel mj_objectWithKeyValues:holdByModel.m_tag];
