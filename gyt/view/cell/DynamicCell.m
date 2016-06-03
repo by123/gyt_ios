@@ -188,7 +188,14 @@
                     label.text = model.m_strInstrumentID;
                     break;
                 case 2://状态
-                    label.text = [Constant EEntrustStatusStr:model.m_nOrderStatus];
+                    if(model.m_nOrderStatus == 0)
+                    {
+                        label.text  = @"待报";
+                    }
+                    else
+                    {
+                        label.text = [Constant EEntrustStatusStr:model.m_nOrderStatus];
+                    }
                     break;
                 case 3://买卖
                     label.text = [Constant EEntrustBSStr:model.m_nDirection];

@@ -7,10 +7,26 @@
 //
 
 #import "SocketConnect.h"
+#import "NSData+XTAMData.h"
+#import "NSMutableData+XTAMData.h"
+
+#define HEAD_TAG      666
+#define BODY_TAG      667
+#define HEAD_LENGTH   12
+
+
+@interface SocketConnect ()
+
+
+@end
+
 
 @implementation SocketConnect
 {
     __weak MBProgressHUD *hua;
+    NSMutableData *_curFrameData;
+    int32_t _curFrameLength;
+    dispatch_queue_t _processQueue;
 }
 
 SINGLETON_IMPLEMENTION(SocketConnect);
@@ -19,7 +35,9 @@ SINGLETON_IMPLEMENTION(SocketConnect);
 {
     if(self == [super init])
     {
-        _clientSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_global_queue(0, 0)];
+        _clientSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
+        _processQueue =  dispatch_queue_create("XTAMSocketClient.processQueue", NULL);
+
     }
     return self;
 }
@@ -38,14 +56,19 @@ SINGLETON_IMPLEMENTION(SocketConnect);
     }
 }
 
--(void)disConnect
+
+#pragma mark 主动断开连接
+-(void)disconnect
 {
+    if(_clientSocket)
+    {
+        [_clientSocket disconnect];
+    }
 }
 
 #pragma mark - 判断与服务器是否正确链接
 -(void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port
 {
-    //监听读取数据
     [sock readDataWithTimeout:-1 tag:0];
     NSLog(@"已连接上");
 //    if(self.delegate)
@@ -90,28 +113,82 @@ SINGLETON_IMPLEMENTION(SocketConnect);
 #pragma mark - 接收服务端的数据
 -(void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
 {
-    PackageModel *model =[[GYTPackage sharedGYTPackage] decodeJSON:data];
-    if(model.seq == 0 )
-    {
-        NSLog(@"接收到主推数据->%@",model.result);
+    
+//    if(tag == HEAD_TAG)
+//    {
+//        model = [[GYTPackage sharedGYTPackage] decodeHeader:data];
+//        NSMutableData *buffer = [NSMutableData data];
+//        [sock readDataToLength:model.len withTimeout:-1 buffer:buffer bufferOffset:0 tag:BODY_TAG];
+//    }
+//    else if(tag == BODY_TAG)
+//    {
+//        model = [[GYTPackage sharedGYTPackage] decodeBody:model data:data];
+//        if(model.seq == 0)
+//        {
+//            NSLog(@"接收到主推数据->%@",model.result);
+//        }
+//        else
+//        {
+//            NSLog(@"接收到请求数据->%@",model.result);
+//        }
+//        if(self.delegate)
+//        {
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [self.delegate OnReceiveSuccess:model];
+//                model = nil;
+//            });
+//        }
+//        
+//    }
+    
+    
+    if (_curFrameData == nil) {
+        _curFrameData = [NSMutableData dataWithData:data];
+        _curFrameLength = INT_MAX;
+    } else {
+        [_curFrameData appendData:data];
     }
-    else
-    {
-        NSLog(@"接收到请求数据->%@",model.result);
+    if (_curFrameLength == INT_MAX && _curFrameData.length > 3) {
+        _curFrameLength = [_curFrameData readInt:0];
     }
-    [sock readDataWithTimeout:-1 tag:tag];
-    if(self.delegate)
-    {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.delegate OnReceiveSuccess:model];
+    
+    while ( _curFrameData.length >= _curFrameLength) {
+        NSData *tmp = [_curFrameData subdataWithRange:NSMakeRange(0, _curFrameLength)];
+        dispatch_async(_processQueue, ^{
+            PackageModel *model = [[GYTPackage sharedGYTPackage]decodeJSON:tmp];
+            if (model && (model.cmd == NET_CMD_RPC)) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.delegate OnReceiveSuccess:model];
+                });
+            }
         });
+        if (_curFrameData.length == _curFrameLength) {
+            _curFrameData = nil;
+            _curFrameLength = INT_MAX;
+        } else {
+            _curFrameData = [NSMutableData dataWithData:[_curFrameData subdataWithRange:NSMakeRange(_curFrameLength, _curFrameData.length - _curFrameLength)]];
+            if (_curFrameData.length > 3) {
+                _curFrameLength = [_curFrameData readInt:0];
+            } else {
+                _curFrameLength = INT_MAX;
+            }
+        }
     }
+    
+    [sock readDataWithTimeout:-1 tag:0];
+
+}
+
+
+-(void)socket:(GCDAsyncSocket *)sock didReadPartialDataOfLength:(NSUInteger)partialLength tag:(long)tag
+{
+//    NSLog(@"长度－>%d",partialLength);
 }
 
 
 -(void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag
 {
-    
+    NSLog(@"发送数据成功");
 }
 
 #pragma mark - 发送数据给服务端
@@ -124,96 +201,5 @@ SINGLETON_IMPLEMENTION(SocketConnect);
     [_clientSocket writeData:data withTimeout:-1 tag:0];
 }
 
-
-
-
-//
-//-(void)netstate;
-//{
-//    NSLog(@"开启网络检测");
-//    Reachability* reach = [Reachability reachabilityWithHostname:@"www.baidu.com"];
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(reachabilityChanged:)
-//                                                 name:kReachabilityChangedNotification
-//                                               object:nil];
-//    [reach startNotifier];
-//
-//}
-//
-//- (void)reachabilityChanged: (NSNotification*)note {
-//    Reachability * reach = [note object];
-//
-//    if(![reach isReachable])
-//    {
-//        [DialogHelper showTips:@"网络不可以用"];
-//        TcpClient *tcp = [TcpClient sharedInstance];
-//        [tcp setDelegate_ITcpClient:self];
-//        [tcp.asyncSocket disconnect];
-//        return;
-//    }
-//
-//    if (reach.isReachableViaWiFi) {
-//        NSLog(@"当前通过wifi连接");
-//    }
-//    else if (reach.isReachableViaWWAN) {
-//        NSLog(@"当前通过2g/3g连接");
-//    }
-//}
-//
-//
-////连接
-//- (void)connect{
-//    TcpClient *tcp = [TcpClient sharedInstance];
-//    [tcp setDelegate_ITcpClient:self];
-//    if(tcp.asyncSocket.isConnected)
-//    {
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"网络已经连接好啦！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-//        [alert show];
-//    }
-//    else
-//    {
-//        [tcp openTcpConnection:Host port:Port];
-//    }
-//}
-//
-////发送消息
-//- (void)sendData:(NSString *)content{
-//
-//    TcpClient *tcp = [TcpClient sharedInstance];
-//    TTPackage *package = [TTPackage initPackage];
-//    NSData *data = [package encodeJSON : [content dataUsingEncoding:NSUTF8StringEncoding]];
-//    if(tcp.asyncSocket.isDisconnected){
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"网络不通" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-//        [alert show];
-//        return;
-//    }
-//    else if(tcp.asyncSocket.isConnected){
-//
-//        [tcp writeData:data];
-//    }
-//    else{
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"TCP链接没有建立" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-//        [alert show];
-//    }
-//
-//}
-//
-///**发送到服务器端的数据*/
-//-(void)OnSendDataSuccess:(NSString*)sendedTxt;
-//{
-//    NSLog(@"发送到服务端的数据成功->%@",sendedTxt);
-//}
-//
-///**收到服务器端发送的数据*/
-//-(void)OnReciveData:(NSString*)recivedTxt;
-//{
-//    NSLog(@"收到到服务端的数据成功->%@",recivedTxt);
-//}
-//
-///**socket连接出现错误*/
-//-(void)OnConnectionError:(NSError *)err;
-//{
-//    NSLog(@"连接出现错误");
-//}
 
 @end

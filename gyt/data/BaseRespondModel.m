@@ -13,6 +13,7 @@
 +(BaseRespondModel *) buildModel : (id)respondObject
 {
     PackageModel *packageModel = respondObject;
+    NSLog(@"by666->%@",packageModel.result);
     BaseRespondModel *model = [BaseRespondModel mj_objectWithKeyValues:packageModel.result];
     id params = model.params;
     model.response = [params objectForKey:@"response"];

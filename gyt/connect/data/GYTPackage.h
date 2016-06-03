@@ -34,5 +34,4 @@ SINGLETON_DECLARATION(GYTPackage);
 - (NSData*)encodeJSON  : (NSData *)data
               requestid: (int)requestid;
 
-
 @end

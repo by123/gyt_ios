@@ -11,7 +11,7 @@
 
 @interface BaseRespondModel : NSObject
 
-@property (assign, nonatomic) int statu;
+@property (assign, nonatomic) int status;
 
 @property (strong, nonatomic) id params;
 

@@ -73,7 +73,6 @@
     }
 
     [self initDB];
-    
     [[SocketConnect sharedSocketConnect] connect];
     return YES;
 }

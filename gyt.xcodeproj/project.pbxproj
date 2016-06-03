@@ -81,6 +81,7 @@
 		CFC15BE41CC769DF0077FA19 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CFC15BE31CC769DF0077FA19 /* libsqlite3.tbd */; };
 		CFD37E0D1CFEA73100297DE2 /* PackageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD37E0C1CFEA73100297DE2 /* PackageModel.m */; };
 		CFD37E131CFED4E700297DE2 /* ErrorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD37E121CFED4E700297DE2 /* ErrorModel.m */; };
+		CFD37E1C1D016C5000297DE2 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFD37E1B1D016C5000297DE2 /* CFNetwork.framework */; };
 		CFDD2DD61CC8AEE100E81E3F /* DealHoldModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DD51CC8AEE100E81E3F /* DealHoldModel.m */; };
 		CFDD2DD91CC8BEC600E81E3F /* DealHoldingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DD81CC8BEC600E81E3F /* DealHoldingModel.m */; };
 		CFDD2DDC1CC8C01000E81E3F /* DealHoldByModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DDB1CC8C01000E81E3F /* DealHoldByModel.m */; };
@@ -290,6 +291,7 @@
 		CFD37E0C1CFEA73100297DE2 /* PackageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PackageModel.m; sourceTree = "<group>"; };
 		CFD37E111CFED4E700297DE2 /* ErrorModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorModel.h; sourceTree = "<group>"; };
 		CFD37E121CFED4E700297DE2 /* ErrorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorModel.m; sourceTree = "<group>"; };
+		CFD37E1B1D016C5000297DE2 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		CFDD2DD41CC8AEE100E81E3F /* DealHoldModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealHoldModel.h; sourceTree = "<group>"; };
 		CFDD2DD51CC8AEE100E81E3F /* DealHoldModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealHoldModel.m; sourceTree = "<group>"; };
 		CFDD2DD71CC8BEC600E81E3F /* DealHoldingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealHoldingModel.h; sourceTree = "<group>"; };
@@ -414,6 +416,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFD37E1C1D016C5000297DE2 /* CFNetwork.framework in Frameworks */,
 				CFF1839E1CE5B11900E991C4 /* Security.framework in Frameworks */,
 				CFA3B9011CD9D68C0063AE3E /* libz.tbd in Frameworks */,
 				CFC15BE41CC769DF0077FA19 /* libsqlite3.tbd in Frameworks */,
@@ -427,6 +430,7 @@
 		AA72E72FA1DE389ACFDB9755 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CFD37E1B1D016C5000297DE2 /* CFNetwork.framework */,
 				CFF1839D1CE5B11900E991C4 /* Security.framework */,
 				CFA3B9001CD9D68C0063AE3E /* libz.tbd */,
 				CFC15BE31CC769DF0077FA19 /* libsqlite3.tbd */,

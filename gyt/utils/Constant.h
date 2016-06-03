@@ -17,11 +17,11 @@
 #define Notify_Update_AccountInfo @"update_accountinfo"
 
 #pragma mark 网络请求相关
-#define Root_Url @"http://192.168.1.106:8081" //陈勇
+//#define Root_Url @"http://192.168.1.106:8081" //陈勇
 //#define Root_Url @"http://192.168.1.111:8081"//夏瑶
 #define Host @"192.168.1.111"
 #define Port 64350
-//#define Root_Url @"http://114.119.6.146:8081"
+#define Root_Url @"http://114.119.6.146:8081"
 
 
 

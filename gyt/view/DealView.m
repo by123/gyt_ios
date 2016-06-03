@@ -308,6 +308,8 @@
     [self addSubview:_tabView];
     
     [self initHoldData];
+    [self requestQuery:XT_CPositionStatics];
+
 }
 
 
@@ -345,21 +347,10 @@
     {
         [_dynamicView removeFromSuperview];
     }
-    NSMutableArray *datas = [[NSMutableArray alloc]init];
-    DealHoldingModel *model = [[DealHoldingModel alloc]init];
-    model.name  = @"郑麦1605";
-    model.kaiping = @"全平";
-    model.price = @"2020";
-    model.handby = @"10";
-    model.hand = @"10";
-
-    for(int i= 0 ;i < 20 ; i++)
-    {
-        [datas addObject:model];
-    }
+  
     NSArray *titleArray = @[@"时间",@"合约",@"状态",@"买卖",@"委托价",@"委托量",@"可撤",@"已成交",@"投保",@"预止损",@"合同号",@"主场号"];
     NSArray *widthArray = @[@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1"];
-    _dynamicView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH, SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:datas maxWidth:SCREEN_WIDTH type:Holding];
+    _dynamicView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH, SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:holdingDatas maxWidth:SCREEN_WIDTH type:Holding];
     [_dynamicView setHeaders:widthArray headers:titleArray];
     [self addSubview:_dynamicView];
 
@@ -387,22 +378,10 @@
     {
         [_dynamicView removeFromSuperview];
     }
-    NSMutableArray *datas = [[NSMutableArray alloc]init];
-    DealProfitModel *model = [[DealProfitModel alloc]init];
-    model.name = @"郑麦1605";
-    model.kaiping = @"全平";
-    model.price = @"全平";
-    model.hand = @"5";
-    model.time = @"19:28";
-    
-    for(int i= 0 ;i < 20 ; i++)
-    {
-        [datas addObject:model];
-    }
     NSArray *titleArray = @[@"时间",@"合约",@"买卖",@"成交价",@"成交量",@"合同号",@"主场号"];
     NSArray *widthArray = @[@"1",@"1",@"1",@"1",@"1",@"1",@"1"];
                              
-    _dynamicView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH, SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:datas maxWidth:SCREEN_WIDTH type:Profit];
+    _dynamicView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH, SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:holdProfileDatas maxWidth:SCREEN_WIDTH type:Profit];
     [_dynamicView setHeaders:widthArray headers:titleArray];
     [self addSubview:_dynamicView];
 }
@@ -415,7 +394,7 @@
     switch (position) {
         case 0:
             [self initHoldData];
-//            [self requestQuery:XT_CPositionStatics];
+            [self requestQuery:XT_CPositionStatics];
             break;
         case 1:
             [self initHoldingData];
@@ -551,16 +530,18 @@
     PackageModel *packageModel = respondObject;
     if(packageModel.seq == XT_CPositionStatics && !IS_NS_STRING_EMPTY(packageModel.result))
     {
-        QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:packageModel.result];
+        [holdDatas removeAllObjects];
+        BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
+        QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:respondModel.response];
         NSMutableArray *array = model.datas;
         if(!IS_NS_COLLECTION_EMPTY(array))
         {
-            //多种资金
-//            for(id obj in array)
-//            {
-//                MoneyDetailModel *moneyDetailModel = [MoneyDetailModel mj_objectWithKeyValues:obj];
-//                NSLog(@"66666");
-//            }
+            for(id obj in array)
+            {
+                DealHoldModel *holdModel = [DealHoldModel mj_objectWithKeyValues:obj];
+                [holdDatas addObject:holdModel];
+
+            }
         }
         else{
             [DialogHelper showSuccessTips:@"暂无持仓信息"];
@@ -572,7 +553,6 @@
         BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
         QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:respondModel.response];
         NSMutableArray *array = model.datas;
-        NSLog(@"数据大小->%d",[array count]);
         if(!IS_NS_COLLECTION_EMPTY(array))
         {
             for(id obj in array)
@@ -589,9 +569,11 @@
         id data = [respondModel.response objectForKey:@"res"];
         DealHoldByModel *holdByModel = [DealHoldByModel mj_objectWithKeyValues:data];
         holdByModel.m_tag = [OrderTagModel mj_objectWithKeyValues:holdByModel.m_tag];
-        [holdByDatas addObject:holdByModel];
-        [_dynamicView reloadData:holdByDatas];
-        NSLog(@"1234");
+        if(holdByModel != nil)
+        {
+            [holdByDatas addObject:holdByModel];
+            [_dynamicView reloadData:holdByDatas];
+        }
     }
 }
 @end
