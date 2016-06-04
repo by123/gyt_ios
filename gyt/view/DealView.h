@@ -10,6 +10,7 @@
 #import "ByTabView.h"
 #import "ProductModel.h"
 #import "ByDynamicTableView.h"
+#import "ByTextField.h"
 
 @interface DealView : UIView<ByTabViewDelegate,UIAlertViewDelegate,ByDynamicTableViewDelegate,SocketConnectDelegate>
 

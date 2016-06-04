@@ -18,8 +18,6 @@
 #import "QueryRequest.h"
 #import "OrderRequestModel.h"
 #import "MoneyDetailModel.h"
-#import "CWNumberKeyboard.h"
-#import "ByTextField.h"
 
 @interface DealView()
 
@@ -184,6 +182,19 @@
     //价格
     _priceTextField = [[ByTextField alloc]initWithType:NumberFloat frame:CGRectMake(10 + _handTextField.width + 5 , _nameButton.y + _nameButton.height +5, _nameButton.width/2 +5, 30) rootView:_rootView title:@"价格:"];
     [_priceTextField setTextFiledText:@"9140"];
+    
+    __weak DealView *weakSelf = self;
+    _priceTextField.block = ^(BOOL isCompelete,NSString *text)
+    {
+        if(isCompelete)
+        {
+            NSString *buyTxt = [NSString stringWithFormat:@"%@\n—————————\n买多",text];
+            [weakSelf.buyItem setTitle:buyTxt forState:UIControlStateNormal];
+            
+            NSString *sellTxt = [NSString stringWithFormat:@"%@\n—————————\n卖空",text];
+            [weakSelf.sellItem setTitle:sellTxt forState:UIControlStateNormal];
+        }
+    };
     [self addSubview:_priceTextField];
     
     
@@ -404,8 +415,8 @@
 {
     UIView *view = sender;
     NSString *name = _nameButton.titleLabel.text;
-    NSString * price = _priceTextField.text;
-    NSString * hand = _handTextField.text;
+    NSString * price = [_priceTextField getTextFieldText];
+    NSString * hand = [_handTextField getTextFieldText];
     
     if(view == _buyItem)
     {
@@ -464,6 +475,7 @@
 }
 
 
+
 #pragma mark 请求持仓，委托，成交
 -(void)requestQuery : (RequestType)type
 {
@@ -482,8 +494,8 @@
     orderModel.strSessionID = [[Account sharedAccount]getSessionId];
     orderModel.account = account;
     NSString *name = _nameButton.titleLabel.text;
-    double price = [_priceTextField.text doubleValue];
-    double hand = [_handTextField.text doubleValue];
+    double price = [[_priceTextField getTextFieldText] doubleValue];
+    double hand = [[_handTextField getTextFieldText] doubleValue];
     
     orderModel.info = [OrderModel buildOrderModel:name orderPrice:price orderNum:hand direction:ENTRUST_BUY offsetFlag:EOFF_THOST_FTDC_OF_Open];
     NSMutableDictionary *dic =[JSONUtil parseDic:orderModel];

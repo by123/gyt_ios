@@ -366,7 +366,7 @@
             [self.navBar.leftMainLabel setHidden:YES];
             [self.navBar.leftSubLabel setHidden:YES];
             [self.navBar.titleLabel setHidden:NO];
-            [self.navBar setTitle:@"账户名"];
+            [self.navBar setTitle:[[Account sharedAccount] getUid]];
             [self addBuyView];
             break;
         default:

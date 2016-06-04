@@ -10,10 +10,11 @@
 #import "CWNumberKeyboard.h"
 
 
+typedef void (^ByTextFieldBlock)(BOOL isCompelete,NSString *text);
 
 @interface ByTextField : UIButton<UITextFieldDelegate>
 
-@property (strong, nonatomic) NSString *text;
+@property (strong, nonatomic) ByTextFieldBlock block;
 
 -(instancetype)initWithType : (ByTextFieldType) type
                       frame : (CGRect)frame
@@ -22,5 +23,7 @@
 
 
 -(void)setTextFiledText : (NSString *)text;
+
+-(NSString *)getTextFieldText;
 
 @end

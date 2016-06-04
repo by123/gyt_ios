@@ -69,6 +69,10 @@
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
+    if(_block)
+    {
+        _block(NO,textField.text);
+    }
     self.layer.borderColor = [SELECT_COLOR CGColor];
     [self openKeyboard];
 }
@@ -81,13 +85,16 @@
     
     [keyboard setHidden:NO];
     [keyboard showNumKeyboardViewAnimateWithPrice:_mTextField.text andBlock:^(NSString *priceString) {
-        NSLog(@"%@",priceString);
         self.layer.borderColor = [[UIColor blackColor] CGColor];
         if(!IS_NS_STRING_EMPTY(priceString))
         {
             _mTextField.text = priceString;
         }
-        self.text = priceString;
+        
+        if(_block)
+        {
+            _block(YES,_mTextField.text);
+        }
 
     }];
 }
@@ -95,6 +102,11 @@
 -(void)setTextFiledText : (NSString *)text
 {
     _mTextField.text = text;
+}
+
+-(NSString *)getTextFieldText
+{
+    return _mTextField.text;
 }
 
 @end
