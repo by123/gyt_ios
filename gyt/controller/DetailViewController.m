@@ -30,6 +30,8 @@
 
 @property (strong, nonatomic) CandleView *candleView;
 
+@property (strong, nonatomic) BottomTabView *tabView;
+
 @end
 
 @implementation DetailViewController
@@ -58,6 +60,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initView];
+
 }
 
 #pragma mark 初始化组件
@@ -100,10 +103,23 @@
     [titleArray addObject:[BottomTabView buildModel:@"分时" image:[UIImage imageNamed:@"ic_timeline_chart"]]];
     [titleArray addObject:[BottomTabView buildModel:@"k线" image:[UIImage imageNamed:@"ic_kline_chart"]]];
     [titleArray addObject:[BottomTabView buildModel:@"下单" image:[UIImage imageNamed:@"ic_lightnting_buy"]]];
-    BottomTabView *tabView = [[BottomTabView alloc]initWithData:titleArray];
-    tabView.frame = CGRectMake(0, SCREEN_HEIGHT - kBottomHeight, SCREEN_WIDTH, kBottomHeight);
-    tabView.delegate = self;
-    [self.view addSubview:tabView];
+    _tabView = [[BottomTabView alloc]initWithData:titleArray];
+    _tabView.frame = CGRectMake(0, SCREEN_HEIGHT - kBottomHeight, SCREEN_WIDTH, kBottomHeight);
+    _tabView.delegate = self;
+    [self.view addSubview:_tabView];
+}
+
+
+#pragma mark 显示底部栏
+-(void)showBottomView
+{
+    [_tabView setHidden:NO];
+}
+
+#pragma mark 隐藏底部栏
+-(void)hideBottomView
+{
+    [_tabView setHidden:YES];
 }
 
 
@@ -147,7 +163,7 @@
 -(void)addBuyView
 {
     [self clearAllView];
-    _dealView = [[DealView alloc]initWithData:CGRectMake(0, 0, SCREEN_WIDTH, kContentHeight + kTopHeight) model:_model];
+    _dealView = [[DealView alloc]initWithData:CGRectMake(0, 0, SCREEN_WIDTH, kContentHeight + kTopHeight) model:_model view:self.view];
     [_bodyView addSubview:_dealView];
 
 }

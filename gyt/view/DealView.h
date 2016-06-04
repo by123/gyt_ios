@@ -14,5 +14,6 @@
 @interface DealView : UIView<ByTabViewDelegate,UIAlertViewDelegate,ByDynamicTableViewDelegate,SocketConnectDelegate>
 
 -(instancetype)initWithData : (CGRect)frame
-              model : (ProductModel *)model;
+                      model : (ProductModel *)model
+                       view : (UIView *)rootView;
 @end

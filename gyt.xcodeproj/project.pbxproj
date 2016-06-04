@@ -82,6 +82,10 @@
 		CFD37E0D1CFEA73100297DE2 /* PackageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD37E0C1CFEA73100297DE2 /* PackageModel.m */; };
 		CFD37E131CFED4E700297DE2 /* ErrorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD37E121CFED4E700297DE2 /* ErrorModel.m */; };
 		CFD37E1C1D016C5000297DE2 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFD37E1B1D016C5000297DE2 /* CFNetwork.framework */; };
+		CFD37E251D02A95600297DE2 /* CWNumberKeyboard.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CFD37E211D02A95600297DE2 /* CWNumberKeyboard.bundle */; };
+		CFD37E261D02A95600297DE2 /* CWNumberKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD37E231D02A95600297DE2 /* CWNumberKeyboard.m */; };
+		CFD37E271D02A95600297DE2 /* CWNumberKeyboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFD37E241D02A95600297DE2 /* CWNumberKeyboard.xib */; };
+		CFD37E2A1D02AE1E00297DE2 /* ByTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD37E291D02AE1E00297DE2 /* ByTextField.m */; };
 		CFDD2DD61CC8AEE100E81E3F /* DealHoldModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DD51CC8AEE100E81E3F /* DealHoldModel.m */; };
 		CFDD2DD91CC8BEC600E81E3F /* DealHoldingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DD81CC8BEC600E81E3F /* DealHoldingModel.m */; };
 		CFDD2DDC1CC8C01000E81E3F /* DealHoldByModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DDB1CC8C01000E81E3F /* DealHoldByModel.m */; };
@@ -292,6 +296,12 @@
 		CFD37E111CFED4E700297DE2 /* ErrorModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorModel.h; sourceTree = "<group>"; };
 		CFD37E121CFED4E700297DE2 /* ErrorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorModel.m; sourceTree = "<group>"; };
 		CFD37E1B1D016C5000297DE2 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		CFD37E211D02A95600297DE2 /* CWNumberKeyboard.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CWNumberKeyboard.bundle; sourceTree = "<group>"; };
+		CFD37E221D02A95600297DE2 /* CWNumberKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWNumberKeyboard.h; sourceTree = "<group>"; };
+		CFD37E231D02A95600297DE2 /* CWNumberKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWNumberKeyboard.m; sourceTree = "<group>"; };
+		CFD37E241D02A95600297DE2 /* CWNumberKeyboard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CWNumberKeyboard.xib; sourceTree = "<group>"; };
+		CFD37E281D02AE1E00297DE2 /* ByTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ByTextField.h; sourceTree = "<group>"; };
+		CFD37E291D02AE1E00297DE2 /* ByTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ByTextField.m; sourceTree = "<group>"; };
 		CFDD2DD41CC8AEE100E81E3F /* DealHoldModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealHoldModel.h; sourceTree = "<group>"; };
 		CFDD2DD51CC8AEE100E81E3F /* DealHoldModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealHoldModel.m; sourceTree = "<group>"; };
 		CFDD2DD71CC8BEC600E81E3F /* DealHoldingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealHoldingModel.h; sourceTree = "<group>"; };
@@ -605,6 +615,7 @@
 		CF4A6D561CBE28DD00B36C93 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				CFD37E201D02A91300297DE2 /* keyboard */,
 				CF4A6D7A1CBE2EA200B36C93 /* ByNavigationBar.h */,
 				CF4A6D7B1CBE2EA200B36C93 /* ByNavigationBar.m */,
 				CFC15BCA1CC5D15D0077FA19 /* ByTabView.h */,
@@ -617,6 +628,8 @@
 				CFC15B9C1CC2249B0077FA19 /* BottomTabView.m */,
 				CFC15BC71CC4C7340077FA19 /* InsetTextField.h */,
 				CFC15BC81CC4C7340077FA19 /* InsetTextField.m */,
+				CFD37E281D02AE1E00297DE2 /* ByTextField.h */,
+				CFD37E291D02AE1E00297DE2 /* ByTextField.m */,
 				CFDD2DF51CCDE8AC00E81E3F /* dialog */,
 				CFC15BA41CC234B00077FA19 /* detail */,
 				CF4A6D571CBE28DD00B36C93 /* cell */,
@@ -798,6 +811,17 @@
 				CFC15BC51CC4B8160077FA19 /* DealView.m */,
 			);
 			name = detail;
+			sourceTree = "<group>";
+		};
+		CFD37E201D02A91300297DE2 /* keyboard */ = {
+			isa = PBXGroup;
+			children = (
+				CFD37E211D02A95600297DE2 /* CWNumberKeyboard.bundle */,
+				CFD37E221D02A95600297DE2 /* CWNumberKeyboard.h */,
+				CFD37E231D02A95600297DE2 /* CWNumberKeyboard.m */,
+				CFD37E241D02A95600297DE2 /* CWNumberKeyboard.xib */,
+			);
+			name = keyboard;
 			sourceTree = "<group>";
 		};
 		CFDD2DD31CC8AEBD00E81E3F /* detail */ = {
@@ -1102,7 +1126,9 @@
 			files = (
 				CF4A6D291CBE25AA00B36C93 /* LaunchScreen.storyboard in Resources */,
 				CFDD2DE11CC9CF2300E81E3F /* Assets.xcassets in Resources */,
+				CFD37E271D02A95600297DE2 /* CWNumberKeyboard.xib in Resources */,
 				CFA3B8EF1CD9AAB70063AE3E /* securities.json in Resources */,
+				CFD37E251D02A95600297DE2 /* CWNumberKeyboard.bundle in Resources */,
 				CFDD2E9A1CCF4DE100E81E3F /* LICENSE in Resources */,
 				CFDD2EA91CCF4DE100E81E3F /* MJRefresh.bundle in Resources */,
 				CF4A6D211CBE25AA00B36C93 /* Main.storyboard in Resources */,
@@ -1233,6 +1259,7 @@
 				CFDD2DD91CC8BEC600E81E3F /* DealHoldingModel.m in Sources */,
 				CFDD2EA41CCF4DE100E81E3F /* MJRefreshBackNormalFooter.m in Sources */,
 				CF111D4C1CFBEABB00298C78 /* OrderModel.m in Sources */,
+				CFD37E261D02A95600297DE2 /* CWNumberKeyboard.m in Sources */,
 				CFDD2DEB1CCA19C900E81E3F /* MyContractViewController.m in Sources */,
 				CFDFFA9A1CBF77AB00401CB3 /* MainViewController.m in Sources */,
 				CF2A51061CE31A1D00F0EF3D /* UpdateModel.m in Sources */,
@@ -1278,6 +1305,7 @@
 				CFA3B8EA1CD9AAB70063AE3E /* AreaChartModel.m in Sources */,
 				CFC15BAD1CC361A80077FA19 /* HandicapModel.m in Sources */,
 				CFF183B81CE6D67A00E991C4 /* TitleContentModel.m in Sources */,
+				CFD37E2A1D02AE1E00297DE2 /* ByTextField.m in Sources */,
 				CFA3B8EC1CD9AAB70063AE3E /* ChartModel.m in Sources */,
 				CFDD2DE41CCA0D8200E81E3F /* RightMenuCell.m in Sources */,
 				CFF183901CE4789000E991C4 /* UserInfoDataModel.m in Sources */,

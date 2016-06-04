@@ -18,6 +18,8 @@
 #import "QueryRequest.h"
 #import "OrderRequestModel.h"
 #import "MoneyDetailModel.h"
+#import "CWNumberKeyboard.h"
+#import "ByTextField.h"
 
 @interface DealView()
 
@@ -57,14 +59,11 @@
 //卖出按钮
 @property (strong, nonatomic) UIButton *sellItem;
 
-//平仓按钮
-@property (strong, nonatomic) UIButton *closeItem;
-
 //手数
-@property (strong, nonatomic) InsetTextField *handTextField;
+@property (strong, nonatomic) ByTextField *handTextField;
 
 //价格
-@property (strong, nonatomic) InsetTextField *priceTextField;
+@property (strong, nonatomic) ByTextField *priceTextField;
 
 //持仓，挂单，委托，成交 标题
 @property (strong, nonatomic) ByTabView *tabView;
@@ -75,6 +74,9 @@
 //数据
 @property (strong, nonatomic) ProductModel *model;
 
+@property (strong, nonatomic) MoneyDetailModel *moneyModel;
+
+@property (strong, nonatomic) UIView *rootView;
 
 @end
 
@@ -85,20 +87,25 @@
     NSMutableArray *holdByDatas;
     NSMutableArray *holdProfileDatas;
     DealHoldModel *dealModel;
-    NSInteger currentSelect;
+    NSInteger currentItemSelect;
+    NSInteger currentTabSelect;
 }
 
 -(instancetype)initWithData : (CGRect)frame
               model : (ProductModel *)model
+               view : (UIView *)rootView
 {
     self = [super initWithFrame:frame];
     if(self)
     {
         _model = model;
+        _rootView = rootView;
         holdDatas = [[NSMutableArray alloc]init];
         holdingDatas = [[NSMutableArray alloc]init];
         holdByDatas = [[NSMutableArray alloc]init];
         holdProfileDatas = [[NSMutableArray alloc]init];
+        NSString *moneyDetailStr = [[NSUserDefaults standardUserDefaults] objectForKey:MoneyInfo];
+        _moneyModel = [MoneyDetailModel mj_objectWithKeyValues:moneyDetailStr];
         [self initView];
         return self;
     }
@@ -109,7 +116,7 @@
 -(void)initView
 {
     self.backgroundColor = BACKGROUND_COLOR;
-    currentSelect= -1;
+    currentItemSelect= -1;
     dealModel = [[DealHoldModel alloc]init];
     [self initTopView];
     [self initBottomView];
@@ -127,7 +134,7 @@
     
     _rightLabel = [[UILabel alloc]init];
     _rightLabel.textColor = TEXT_COLOR;
-    _rightLabel.text = @"权益: 9999042";
+    _rightLabel.text = [NSString stringWithFormat:@"权益：%.f",_moneyModel.m_dCurBalance];
     _rightLabel.font = [UIFont systemFontOfSize:13.0f];
     _rightLabel.frame = CGRectMake(10, 0, SCREEN_WIDTH/3-5, 25);
     [view addSubview:_rightLabel];
@@ -139,7 +146,7 @@
     
     _canUseLabel = [[UILabel alloc]init];
     _canUseLabel.textColor = TEXT_COLOR;
-    _canUseLabel.text = @"可用: 9998232";
+    _canUseLabel.text = [NSString stringWithFormat:@"可用：%.f",_moneyModel.m_dAvailable];
     _canUseLabel.font = [UIFont systemFontOfSize:13.0f];
     _canUseLabel.frame = CGRectMake(SCREEN_WIDTH/3 + 5, 0, SCREEN_WIDTH/3-5, 25);
     [view addSubview:_canUseLabel];
@@ -164,25 +171,19 @@
     _nameButton.layer.borderWidth = 0.5;
     _nameButton.layer.cornerRadius = 2;
     _nameButton.layer.masksToBounds = YES;
-    [_nameButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -SCREEN_WIDTH/2 + 30, 0, 0)];
-    [_nameButton setTitle:@"名称: " forState:UIControlStateNormal];
+    [_nameButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
+    [_nameButton setTitle:@"CN 1606" forState:UIControlStateNormal];
     _nameButton.frame = CGRectMake(10, view.height+5, SCREEN_WIDTH/2+20, 30);
     [self addSubview:_nameButton];
     
     //手数
-    _handTextField = [[InsetTextField alloc]initWithFrame:CGRectMake(10,  _nameButton.y + _nameButton.height +5, _nameButton.width/2 -10, 30)];
-    _handTextField.hasTitle = YES;
-    [_handTextField setInsetTitle:@"手数：" font:[UIFont systemFontOfSize:14.0f]];
-    _handTextField.text = @"1";
-    _handTextField.keyboardType = UIKeyboardTypeNumberPad;
+    _handTextField = [[ByTextField alloc]initWithType:NumberInt frame:CGRectMake(10,  _nameButton.y + _nameButton.height +5, _nameButton.width/2 -10, 30) rootView:_rootView title:@"手数："];
+    [_handTextField setTextFiledText:@"1"];
     [self addSubview:_handTextField];
     
     //价格
-    _priceTextField = [[InsetTextField alloc]initWithFrame:CGRectMake(10 + _handTextField.width + 5 , _nameButton.y + _nameButton.height +5, _nameButton.width/2 +5, 30)];
-    _priceTextField.hasTitle = YES;
-    [_priceTextField setInsetTitle:@"价格：" font:[UIFont systemFontOfSize:14.0f]];
-    _priceTextField.text = @"1989";
-    _priceTextField.keyboardType = UIKeyboardTypeNumberPad;
+    _priceTextField = [[ByTextField alloc]initWithType:NumberFloat frame:CGRectMake(10 + _handTextField.width + 5 , _nameButton.y + _nameButton.height +5, _nameButton.width/2 +5, 30) rootView:_rootView title:@"价格:"];
+    [_priceTextField setTextFiledText:@"9140"];
     [self addSubview:_priceTextField];
     
     
@@ -238,11 +239,11 @@
     
     
     _buyItem = [[UIButton alloc]init];
-    _buyItem.frame = CGRectMake(10, _handTextField.y + _handTextField.height + 10, (SCREEN_WIDTH - 40)/3, 60);
+    _buyItem.frame = CGRectMake(10, _handTextField.y + _handTextField.height + 10, (SCREEN_WIDTH - 30)/2, 60);
     _buyItem.layer.masksToBounds = YES;
     _buyItem.layer.cornerRadius = 4;
     
-    NSString *buyTxt = [NSString stringWithFormat:@"%.f\n————\n买多",_model.recentPrice];
+    NSString *buyTxt = [NSString stringWithFormat:@"%.f\n—————————\n买多",9140.0f];
     [_buyItem setTitle:buyTxt forState:UIControlStateNormal];
     [_buyItem setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _buyItem.titleLabel.font = [UIFont systemFontOfSize:14.0f];
@@ -254,12 +255,12 @@
     [self addSubview:_buyItem];
     
     _sellItem = [[UIButton alloc]init];
-    _sellItem.frame = CGRectMake(10 * 2 + (SCREEN_WIDTH - 40)/3, _handTextField.y + _handTextField.height + 10, (SCREEN_WIDTH - 40)/3, 60);
+    _sellItem.frame = CGRectMake(10 * 2 + (SCREEN_WIDTH - 30)/2, _handTextField.y + _handTextField.height + 10, (SCREEN_WIDTH - 30)/2, 60);
     _sellItem.layer.masksToBounds = YES;
     _sellItem.layer.cornerRadius = 4;
 
 
-    NSString *sellTxt = [NSString stringWithFormat:@"%.f\n————\n卖空",_model.recentPrice+1];
+    NSString *sellTxt = [NSString stringWithFormat:@"%.f\n—————————\n卖空",9141.0f];
     [_sellItem setTitle:sellTxt forState:UIControlStateNormal];
     [_sellItem setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _sellItem.titleLabel.font = [UIFont systemFontOfSize:14.0f];
@@ -270,21 +271,6 @@
     [_sellItem addTarget:self action:@selector(OnClick:) forControlEvents:UIControlEventTouchUpInside];
 
     [self addSubview:_sellItem];
-    
-    _closeItem = [[UIButton alloc]init];
-    _closeItem.frame = CGRectMake(10 * 3 + (SCREEN_WIDTH - 40) * 2/3, _handTextField.y + _handTextField.height + 10, (SCREEN_WIDTH - 40)/3, 60);
-    _closeItem.layer.masksToBounds = YES;
-    _closeItem.layer.cornerRadius = 4;
-    [_closeItem setTitle:@"无仓位\n————\n平仓" forState:UIControlStateNormal];
-    [_closeItem setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    _closeItem.titleLabel.font = [UIFont systemFontOfSize:14.0f];
-    _closeItem.titleLabel.numberOfLines = 0;
-    _closeItem.titleLabel.textAlignment = NSTextAlignmentCenter;
-    _closeItem.titleLabel.lineBreakMode = NSLineBreakByCharWrapping;
-    _closeItem.backgroundColor = TEXT_COLOR;
-    [_closeItem addTarget:self action:@selector(OnClick:) forControlEvents:UIControlEventTouchUpInside];
-
-    [self addSubview:_closeItem];
     
 }
 
@@ -350,7 +336,7 @@
   
     NSArray *titleArray = @[@"时间",@"合约",@"状态",@"买卖",@"委托价",@"委托量",@"可撤",@"已成交",@"投保",@"预止损",@"合同号",@"主场号"];
     NSArray *widthArray = @[@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1"];
-    _dynamicView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH, SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:holdingDatas maxWidth:SCREEN_WIDTH type:Holding];
+    _dynamicView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH, SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:holdingDatas maxWidth:SCREEN_WIDTH*2.5 type:Holding];
     [_dynamicView setHeaders:widthArray headers:titleArray];
     [self addSubview:_dynamicView];
 
@@ -381,7 +367,7 @@
     NSArray *titleArray = @[@"时间",@"合约",@"买卖",@"成交价",@"成交量",@"合同号",@"主场号"];
     NSArray *widthArray = @[@"1",@"1",@"1",@"1",@"1",@"1",@"1"];
                              
-    _dynamicView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH, SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:holdProfileDatas maxWidth:SCREEN_WIDTH type:Profit];
+    _dynamicView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH, SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:holdProfileDatas maxWidth:SCREEN_WIDTH*1.5 type:Profit];
     [_dynamicView setHeaders:widthArray headers:titleArray];
     [self addSubview:_dynamicView];
 }
@@ -390,7 +376,7 @@
 -(void)OnSelect:(NSInteger)position
 {
     [self hideKeyboard];
-    
+    currentTabSelect = position;
     switch (position) {
         case 0:
             [self initHoldData];
@@ -417,45 +403,23 @@
 -(void)OnClick : (id)sender
 {
     UIView *view = sender;
+    NSString *name = _nameButton.titleLabel.text;
+    NSString * price = _priceTextField.text;
+    NSString * hand = _handTextField.text;
+    
     if(view == _buyItem)
     {
-        DealHoldModel *tempModel = [[DealHoldModel alloc]init];
-        dealModel = tempModel;
-        NSString *message = [NSString stringWithFormat:@"%@，%.f，买，%@手",_model.name,_model.recentPrice,_handTextField.text];
+        NSString *message = [NSString stringWithFormat:@"%@，%@，买，%@手",name,price,hand];
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认下单吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
         alert.tag = 0;
         [alert show];
     }
     else if(view == _sellItem)
     {
-        DealHoldModel *tempModel = [[DealHoldModel alloc]init];
-        
-        dealModel = tempModel;
-        
-        NSString *message = [NSString stringWithFormat:@"%@，%.f，卖，%@手",_model.name,_model.recentPrice+1,_handTextField.text];
+        NSString *message = [NSString stringWithFormat:@"%@，%@，卖，%@手",name,price,hand];
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认下单吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
         alert.tag = 1;
         [alert show];
-    }
-    else if(view == _closeItem)
-    {
-        
-        if(currentSelect != -1)
-        {
-            DealHoldModel *model = [holdDatas objectAtIndex:currentSelect];
-            NSString *buySell;
-            if(model.m_nDirection == ENTRUST_BUY)
-            {
-                buySell = Sell;
-            }
-            else{
-                buySell = Buy;
-            }
-            NSString *message = [NSString stringWithFormat:@"%@，%.f，%@，平仓，%.f手",model.m_strProductName,model.m_dOpenPrice,buySell,model.m_nVolume];
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认下单吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-            alert.tag = 2;
-            [alert show];
-        }
     }
     
     [self hideKeyboard];
@@ -472,9 +436,9 @@
         }
         else if(alertView.tag == 2)
         {
-            if(currentSelect != -1)
+            if(currentItemSelect != -1)
             {
-                DealHoldModel *model = [holdDatas objectAtIndex:currentSelect];
+                DealHoldModel *model = [holdDatas objectAtIndex:currentItemSelect];
                 [holdDatas removeObject:model];
             }
         }
@@ -517,7 +481,11 @@
     OrderRequestModel *orderModel = [[OrderRequestModel alloc]init];
     orderModel.strSessionID = [[Account sharedAccount]getSessionId];
     orderModel.account = account;
-    orderModel.info = [OrderModel buildOrderModel:@"CN 1606" orderPrice:9140 orderNum:1 direction:ENTRUST_BUY offsetFlag:EOFF_THOST_FTDC_OF_Open];
+    NSString *name = _nameButton.titleLabel.text;
+    double price = [_priceTextField.text doubleValue];
+    double hand = [_handTextField.text doubleValue];
+    
+    orderModel.info = [OrderModel buildOrderModel:name orderPrice:price orderNum:hand direction:ENTRUST_BUY offsetFlag:EOFF_THOST_FTDC_OF_Open];
     NSMutableDictionary *dic =[JSONUtil parseDic:orderModel];
     NSString *jsonStr = [JSONUtil parse:@"order" params:dic];
     
@@ -543,8 +511,12 @@
                 DealHoldModel *holdModel = [DealHoldModel mj_objectWithKeyValues:obj];
                 [holdDatas addObject:holdModel];
             }
-            [_dynamicView reloadData:holdDatas];
+            [self reloadData:holdDatas];
 
+        }
+        else
+        {
+            [DialogHelper showTips:@"无持仓数据"];
         }
     }
     else if(packageModel.seq == XT_COrderDetail && !IS_NS_STRING_EMPTY(packageModel.result))
@@ -559,8 +531,12 @@
                 DealHoldByModel *holdByModel = [DealHoldByModel mj_objectWithKeyValues:obj];
                 [holdByDatas addObject:holdByModel];
             }
-            [_dynamicView reloadData:holdByDatas];
+            [self reloadData:holdByDatas];
         }
+    }
+    else if(packageModel.seq == XT_CDealDetail && !IS_NS_STRING_EMPTY(packageModel.result))
+    {
+        
     }
     else if(packageModel.seq == GYT_ORDER)
     {
@@ -570,8 +546,32 @@
         if(holdByModel != nil)
         {
             [holdByDatas addObject:holdByModel];
-            [_dynamicView reloadData:holdByDatas];
+            [self reloadData:holdByDatas];
+            [DialogHelper showSuccessTips:@"下单成功"];
+        }
+        else
+        {
+            [DialogHelper showTips:@"下单失败"];
         }
     }
 }
+
+#pragma mark 更新数据
+-(void)reloadData : (NSMutableArray *)data
+{
+    if([data isKindOfClass:[DealHoldModel class]] && (currentTabSelect == 0 || currentTabSelect == 1))
+    {
+        [_dynamicView reloadData:data];
+    }
+    else if([data isKindOfClass:[DealHoldByModel class]] && currentTabSelect == 2)
+    {
+        [_dynamicView reloadData:data];
+    }
+    else if([data isKindOfClass:[DealProfitModel class]] && currentTabSelect == 3)
+    {
+        [_dynamicView reloadData:data];
+    }
+ 
+}
+
 @end

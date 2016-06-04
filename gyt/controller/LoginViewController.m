@@ -12,7 +12,7 @@
 #import "IPMacUtil.h"
 #import "UUID.h"
 #import "MainViewController.h"
-
+#import "ByTextField.h"
 @interface LoginViewController ()
 
 @property (strong , nonatomic) InsetTextField *nameTextField;
@@ -41,7 +41,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initView];
-    
 }
 
 #pragma mark 初始化控件
