@@ -20,14 +20,17 @@
 
 @property (strong, nonatomic) UIView *selectView;
 
+@property (copy, nonatomic) NSString *title;
 @end
 
 @implementation ByListDialog
 
 -(instancetype)initWithData : (NSMutableArray *)array
+                      title : (NSString *)title
 {
     if(self == [super init])
     {
+        self.title= title;
         self.datas = array;
         [self initView];
     }
@@ -49,7 +52,7 @@
     _titleLabel = [[UILabel alloc]init];
     _titleLabel.frame = CGRectMake(SCREEN_WIDTH /8, SCREEN_HEIGHT / 6-30, SCREEN_WIDTH * 3/4, 30);
     _titleLabel.backgroundColor = MAIN_COLOR;
-    _titleLabel.text = @"请选择币种";
+    _titleLabel.text = _title;
     _titleLabel.textColor = TEXT_COLOR;
     _titleLabel.textAlignment = NSTextAlignmentCenter;
     _titleLabel.font = [UIFont systemFontOfSize:13.0f];

@@ -72,7 +72,7 @@ typedef void (^ReduceCellBlock)(ReduceCell *cell);
             NSString *temp =  [AccessGoldModel getMoneyType:i];
             [array addObject:temp];
         }
-        ByListDialog *dialog = [[ByListDialog alloc]initWithData:array];
+        ByListDialog *dialog = [[ByListDialog alloc]initWithData:array title:@"请选择币种"];
         dialog.delegate = self;
         dialog.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         [self.rootView addSubview:dialog];

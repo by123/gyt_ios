@@ -19,6 +19,7 @@
 
 @property (strong, nonatomic) id delegate;
 
--(instancetype)initWithData : (NSMutableArray *)array;
+-(instancetype)initWithData : (NSMutableArray *)array
+                      title : (NSString *)title;
 
 @end

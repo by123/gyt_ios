@@ -11,8 +11,9 @@
 #import "ProductModel.h"
 #import "ByDynamicTableView.h"
 #import "ByTextField.h"
+#import "ByListDialog.h"
 
-@interface DealView : UIView<ByTabViewDelegate,UIAlertViewDelegate,ByDynamicTableViewDelegate,SocketConnectDelegate>
+@interface DealView : UIView<ByTabViewDelegate,UIAlertViewDelegate,ByDynamicTableViewDelegate,SocketConnectDelegate,ListDialogDelegate>
 
 -(instancetype)initWithData : (CGRect)frame
                       model : (ProductModel *)model

@@ -18,6 +18,8 @@
 #import "QueryRequest.h"
 #import "OrderRequestModel.h"
 #import "MoneyDetailModel.h"
+#import "ByListDialog.h"
+#import "ContractDB.h"
 
 @interface DealView()
 
@@ -172,6 +174,7 @@
     [_nameButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
     [_nameButton setTitle:@"CN 1606" forState:UIControlStateNormal];
     _nameButton.frame = CGRectMake(10, view.height+5, SCREEN_WIDTH/2+20, 30);
+    [_nameButton addTarget:self action:@selector(OnClick:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_nameButton];
     
     //手数
@@ -432,6 +435,24 @@
         alert.tag = 1;
         [alert show];
     }
+    else if(view == _nameButton)
+    {
+        NSMutableArray *array = [[ContractDB sharedContractDB] queryAll:DBMyContractTable];
+        if(IS_NS_COLLECTION_EMPTY(array))
+        {
+            [DialogHelper showTips:@"您还没有自选合约"];
+            return;
+        }
+        NSMutableArray *temps = [[NSMutableArray alloc]init];
+        for(ProductModel *model in array)
+        {
+            [temps addObject:model.name];
+        }
+        ByListDialog *dialog = [[ByListDialog alloc]initWithData:temps title:@"自选合约"];
+        dialog.delegate = self;
+        dialog.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        [self.rootView addSubview:dialog];
+    }
     
     [self hideKeyboard];
 }
@@ -474,6 +495,11 @@
     [_priceTextField resignFirstResponder];
 }
 
+
+-(void)OnListDialogItemClick:(id)data
+{
+    [_nameButton setTitle:data forState:UIControlStateNormal];
+}
 
 
 #pragma mark 请求持仓，委托，成交
