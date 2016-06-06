@@ -71,4 +71,5 @@
                      direction : (EEntrustBS)m_nDirection
                     offsetFlag : (EOffset_Flag_Type)m_nOffsetFlag;
 
+
 @end

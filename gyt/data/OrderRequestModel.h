@@ -13,7 +13,11 @@
 
 @property (strong, nonatomic) UserInfoModel *account;
 
+//下单
 @property (strong, nonatomic) OrderModel *info;
+
+//撤单
+@property (strong, nonatomic) OrderModel *order;
 
 @property (copy, nonatomic) NSString *strSessionID;
 

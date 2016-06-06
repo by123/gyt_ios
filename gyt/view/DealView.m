@@ -89,6 +89,7 @@
     DealHoldModel *dealModel;
     NSInteger currentItemSelect;
     NSInteger currentTabSelect;
+    EEntrustBS director;
 }
 
 -(instancetype)initWithData : (CGRect)frame
@@ -333,11 +334,28 @@
 
 -(void)OnItemSelected:(UIView *)dynamicTableView position:(NSInteger)position
 {
-//    currentSelect = position;
-//    DealHoldModel *model =[holdDatas objectAtIndex:position];
-//    NSString *closeTxt = [NSString stringWithFormat:@"%.f\n————\n平仓",model.m_dOpenPrice];
-//    [_closeItem setTitle:closeTxt forState:UIControlStateNormal];
-//    [_closeItem setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+
+    switch (currentTabSelect) {
+        case 0:
+            
+            break;
+        case 1:
+            
+            break;
+        case 2:
+            if(!IS_NS_COLLECTION_EMPTY(holdByDatas))
+            {
+                [self cancelOrder:[holdByDatas objectAtIndex:position]];
+            }
+            break;
+        case 3:
+            
+            break;
+            
+        default:
+            break;
+    }
+
 }
 
 #pragma mark 挂单数据
@@ -352,6 +370,7 @@
     NSArray *widthArray = @[@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1"];
     _dynamicView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH, SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:holdingDatas maxWidth:SCREEN_WIDTH*2.5 type:Holding];
     [_dynamicView setHeaders:widthArray headers:titleArray];
+    _dynamicView.delegate = self;
     [self addSubview:_dynamicView];
 
 }
@@ -368,6 +387,7 @@
     
     _dynamicView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH, SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:holdByDatas maxWidth:SCREEN_WIDTH * 2 type:HoldBy];
     [_dynamicView setHeaders:widthArray headers:titleArray];
+    _dynamicView.delegate = self;
     [self addSubview:_dynamicView];
 }
 
@@ -383,6 +403,7 @@
                              
     _dynamicView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH, SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:holdProfileDatas maxWidth:SCREEN_WIDTH*1.5 type:Profit];
     [_dynamicView setHeaders:widthArray headers:titleArray];
+    _dynamicView.delegate = self;
     [self addSubview:_dynamicView];
 }
 
@@ -406,7 +427,7 @@
             break;
         case 3:
             [self initDealData];
-//            [self requestQuery:XT_CDealDetail];
+            [self requestQuery:XT_CDealDetail];
             break;
         default:
             break;
@@ -423,6 +444,7 @@
     
     if(view == _buyItem)
     {
+        director = ENTRUST_BUY;
         NSString *message = [NSString stringWithFormat:@"%@，%@，买，%@手",name,price,hand];
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认下单吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
         alert.tag = 0;
@@ -430,6 +452,7 @@
     }
     else if(view == _sellItem)
     {
+        director = ENTRUST_SELL;
         NSString *message = [NSString stringWithFormat:@"%@，%@，卖，%@手",name,price,hand];
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认下单吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
         alert.tag = 1;
@@ -523,13 +546,31 @@
     double price = [[_priceTextField getTextFieldText] doubleValue];
     double hand = [[_handTextField getTextFieldText] doubleValue];
     
-    orderModel.info = [OrderModel buildOrderModel:name orderPrice:price orderNum:hand direction:ENTRUST_BUY offsetFlag:EOFF_THOST_FTDC_OF_Open];
+    orderModel.info = [OrderModel buildOrderModel:name orderPrice:price orderNum:hand direction:director offsetFlag:EOFF_THOST_FTDC_OF_Open];
     NSMutableDictionary *dic =[JSONUtil parseDic:orderModel];
     NSString *jsonStr = [JSONUtil parse:@"order" params:dic];
     
     [[SocketConnect sharedSocketConnect] sendData:jsonStr delegate:self seq:GYT_ORDER];
 }
 
+#pragma mark 撤单
+-(void)cancelOrder : (OrderModel *)order
+{
+    
+    NSString *accountInfoStr =  [[Account sharedAccount] getAccountInfo];
+    UserInfoModel *account = [UserInfoModel mj_objectWithKeyValues:accountInfoStr];
+    
+    OrderRequestModel *orderModel = [[OrderRequestModel alloc]init];
+    orderModel.strSessionID = [[Account sharedAccount]getSessionId];
+    orderModel.account = account;
+    orderModel.order = order;
+    NSMutableDictionary *dic =[JSONUtil parseDic:orderModel];
+    NSString *jsonStr = [JSONUtil parse:@"cancel" params:dic];
+    
+    NSLog(@"数据->%@",jsonStr);
+    [[SocketConnect sharedSocketConnect] sendData:jsonStr delegate:self seq:GYT_CANCEL];
+
+}
 
 #pragma mark 接收数据
 -(void)OnReceiveSuccess:(id)respondObject
@@ -574,7 +615,18 @@
     }
     else if(packageModel.seq == XT_CDealDetail && !IS_NS_STRING_EMPTY(packageModel.result))
     {
-        
+        [holdProfileDatas removeAllObjects];
+        QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:respondModel.response];
+        NSMutableArray *array = model.datas;
+        if(!IS_NS_COLLECTION_EMPTY(array))
+        {
+            for(id obj in array)
+            {
+                DealProfitModel *profitModel = [DealProfitModel mj_objectWithKeyValues:obj];
+                [holdProfileDatas addObject:profitModel];
+            }
+            [self reloadData:holdProfileDatas];
+        }
     }
     else if(packageModel.seq == GYT_ORDER)
     {
@@ -592,23 +644,32 @@
             [DialogHelper showTips:@"下单失败"];
         }
     }
+    else if(packageModel.seq == GYT_CANCEL)
+    {
+        NSLog(@"撤单");
+    }
+
 }
 
 #pragma mark 更新数据
 -(void)reloadData : (NSMutableArray *)data
 {
-    if([data isKindOfClass:[DealHoldModel class]] && (currentTabSelect == 0 || currentTabSelect == 1))
+    if(!IS_NS_COLLECTION_EMPTY(data))
     {
-        [_dynamicView reloadData:data];
+        if([[data objectAtIndex:0] isKindOfClass:[DealHoldModel class]] && (currentTabSelect == 0 || currentTabSelect == 1))
+        {
+            [_dynamicView reloadData:data];
+        }
+        else if([[data objectAtIndex:0] isKindOfClass:[DealHoldByModel class]] && currentTabSelect == 2)
+        {
+            [_dynamicView reloadData:data];
+        }
+        else if([[data objectAtIndex:0] isKindOfClass:[DealProfitModel class]] && currentTabSelect == 3)
+        {
+            [_dynamicView reloadData:data];
+        }
     }
-    else if([data isKindOfClass:[DealHoldByModel class]] && currentTabSelect == 2)
-    {
-        [_dynamicView reloadData:data];
-    }
-    else if([data isKindOfClass:[DealProfitModel class]] && currentTabSelect == 3)
-    {
-        [_dynamicView reloadData:data];
-    }
+
  
 }
 

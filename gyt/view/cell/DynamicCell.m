@@ -265,20 +265,26 @@
             label.font = [UIFont systemFontOfSize:13.0f];
             int width =  [[_widths objectAtIndex:i] intValue] * maxWidth / count;
             switch (i) {
-                case 0:
-                    label.text = model.name;
+                case 0://时间
+                    label.text = model.m_strTradeTime;
                     break;
-                case 1:
-                    label.text = model.kaiping;
+                case 1://合约
+                    label.text = model.m_strInstrumentID;
                     break;
-                case 2:
-                    label.text = model.price;
+                case 2://买卖
+                    label.text = [Constant EEntrustBSStr:model.m_nDirection];
                     break;
-                case 3:
-                    label.text = model.hand;
+                case 3://成交价
+                    label.text = [NSString stringWithFormat:@"%.2f",model.m_dPrice];
                     break;
-                case 4:
-                    label.text = model.time;
+                case 4://成交量
+                    label.text = [NSString stringWithFormat:@"%d",model.m_nVolume];
+                    break;
+                case 5://合同号
+                    label.text = model.m_strOrderSysID;
+                    break;
+                case 6://主场号
+                    label.text = @"";
                     break;
                 default:
                     break;
