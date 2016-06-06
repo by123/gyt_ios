@@ -84,8 +84,9 @@
     {
         model.isUp = YES;
     }
-    _nameLabel.text = model.name;
-    if([model.inventory isEqualToString:@"0"])
+    _nameLabel.text = model.m_strInstrumentID;
+    double preClose = model.m_preClose;
+    if(preClose == 0)
     {
         _recentPriceLabel.textColor = [UIColor grayColor];
         _updownLabel.textColor = [UIColor grayColor];
@@ -105,7 +106,7 @@
             _updownLabel.textColor = [UIColor greenColor];
             
         }
-        _recentPriceLabel.text = [NSString stringWithFormat:@"%.f",model.recentPrice];
+        _recentPriceLabel.text = [NSString stringWithFormat:@"%.f",preClose];
         if(updownType == UpdownPrice)
         {
             _updownLabel.text = [NSString stringWithFormat:@"%.f",model.updownPrice];
@@ -124,7 +125,7 @@
             _inventoryLabel.text = model.dailyInventory;
             break;
         case DealInventory:
-            _inventoryLabel.text = model.dealInventory;
+            _inventoryLabel.text = [NSString stringWithFormat:@"%ld",model.m_lDealVolum];
             break;
         default:
             break;

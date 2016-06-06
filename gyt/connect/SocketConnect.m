@@ -52,7 +52,7 @@ SINGLETON_IMPLEMENTION(SocketConnect);
         NSLog(@"发起tpc失败");
     }
     else{
-        NSLog(@"发起tpc连接成功");
+        NSLog(@"发起tpc成功");
     }
 }
 

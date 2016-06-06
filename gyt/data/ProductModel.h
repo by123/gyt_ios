@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "UserInfoModel.h"
 
 @interface ProductModel : NSObject
 
@@ -51,5 +52,63 @@
 
 //交易所名称
 @property (copy, nonatomic) NSString *exchangeName;
+
+
+
+
+
+//用户信息
+@property (strong, nonatomic)UserInfoModel *m_strAccountID;
+
+// 交易所ID
+@property (copy, nonatomic) NSString *m_strExchangeID;
+
+// 交易所名称
+@property (copy, nonatomic) NSString *m_strExchangeName;
+
+// 品种ID
+@property (copy, nonatomic) NSString *m_strProductID;
+
+// 品种名称代码
+@property (copy, nonatomic) NSString *m_strProductName;
+
+//合约ID
+@property (copy, nonatomic) NSString *m_strInstrumentID;
+
+//合约名称
+@property (copy, nonatomic) NSString *m_strInstrumentName;
+
+//到期日
+@property (copy, nonatomic) NSString *m_strExpireDate;
+
+//是否可交易
+@property (assign, nonatomic) BOOL m_bAllowTrade;
+
+//合约乘数 股票为1
+@property (assign, nonatomic) int m_volumeMultiple;
+
+//前收盘价
+@property (assign, nonatomic) double m_preClose;
+
+//币种
+@property (assign, nonatomic) EMoneyType m_moneyType;
+
+//前结算价
+@property (assign, nonatomic) double m_dLastSettlementPrice;
+
+//涨停价
+@property (assign, nonatomic) double m_dUpStopPrice;
+
+//跌停价
+@property (assign, nonatomic) double m_dDownStopPrice;
+
+//是否主力合约
+@property (assign, nonatomic) int m_nIsMain;
+
+//成交量
+@property (assign, nonatomic) long m_lDealVolum;
+
+//最小波动
+@property (assign, nonatomic) double m_dPriceTick;
 
 @end

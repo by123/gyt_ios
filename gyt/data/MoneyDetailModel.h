@@ -21,7 +21,7 @@
 @property (assign, nonatomic) double m_dAvailable;
 
 //币种
-@property (assign, nonatomic) MoneyType m_nMoneyType;
+@property (assign, nonatomic) EMoneyType m_nMoneyType;
 
 //初始权益
 @property (assign, nonatomic) double m_dInitBalance;

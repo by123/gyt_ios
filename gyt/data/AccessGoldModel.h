@@ -21,7 +21,7 @@
 @property (assign, nonatomic) CashType m_nCashType;
 
 //币种
-@property (assign, nonatomic) MoneyType m_nMoneyType;
+@property (assign, nonatomic) EMoneyType m_nMoneyType;
 
 //金额
 @property (assign, nonatomic) double m_dCashValue;
@@ -73,7 +73,7 @@
 
 +(NSString *)getCashType : (CashType)type;
 
-+(NSString *)getMoneyType : (MoneyType)type;
++(NSString *)getMoneyType : (EMoneyType)type;
 
 +(NSString *)getPayType : (PayType)type;
 

@@ -19,7 +19,8 @@
 #pragma mark 网络请求相关
 //#define Root_Url @"http://192.168.1.106:8081" //陈勇
 //#define Root_Url @"http://192.168.1.111:8081"//夏瑶
-#define Host @"192.168.1.111"
+#define Host @"192.168.1.118" //赵杰
+//#define Host @"192.168.1.111"   //夏瑶
 #define Port 64350
 #define Root_Url @"http://114.119.6.146:8081"
 
@@ -50,7 +51,7 @@
 #define More @"多"
 #define Less @"空"
 
-
+#define PLATFORM_OUTTER_YN_MN  41002  //外盘易盛模拟
 //交易端
 typedef NS_ENUM(NSInteger, ClientID) {
     ClientID_Mobile_Manage = 3,
@@ -60,7 +61,7 @@ typedef NS_ENUM(NSInteger, ClientID) {
 
 
 //币种
-typedef NS_ENUM(NSInteger, MoneyType) {
+typedef NS_ENUM(NSInteger, EMoneyType) {
     MoneyType_RMB = 1,       //人民币
     MoneyType_USD,          //美元
     MoneyType_HKD,          //港币

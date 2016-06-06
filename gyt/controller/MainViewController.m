@@ -23,6 +23,7 @@
 #import "LoginModel.h"
 #import "IPMacUtil.h"
 #import "UUID.h"
+#import "PushRequestModel.h"
 
 @interface MainViewController ()
 
@@ -73,7 +74,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _datas = [[NSMutableArray alloc]init];
-    [self testData];
+//    [self testData];
     [self initView];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getUserInfo) name:Notify_Update_AccountInfo object:nil];
@@ -388,6 +389,8 @@
 //    
 //    [self requestUserInfo : jsonStr];
     [self requestAccountInfo];
+    [self requestProductInfo];
+    [self requestsubMultiPrice];
 }
 
 #pragma mark 请求资金信息
@@ -397,6 +400,37 @@
     [[SocketConnect sharedSocketConnect] sendData:jsonStr delegate:self seq:XT_CAccountDetail];
 }
 
+#pragma mark 获取合约信息
+-(void)requestProductInfo
+{
+    NSString *jsonStr = [QueryRequest buildQueryInfo:XT_CInstrumentDetail];
+    [[SocketConnect sharedSocketConnect] sendData:jsonStr delegate:self seq:XT_CInstrumentDetail];
+}
+
+
+
+#pragma mark 主推订阅
+-(void)requestsubMultiPrice
+{
+    NSMutableArray *array1 = [[NSMutableArray alloc]init];
+    [array1 addObject:@"SGX-A"];
+    [array1 addObject:@"SGX-A"];
+
+    NSMutableArray *array2 = [[NSMutableArray alloc]init];
+    [array2 addObject:@"CN 1607"];
+    [array2 addObject:@"CN 1608"];
+    
+    PushRequestModel *model = [[PushRequestModel alloc]init];
+    model.sessionId = [[Account sharedAccount]getSessionId];
+    model.platformID =PLATFORM_OUTTER_YN_MN;
+    model.market = array1 ;
+    model.code = array2;
+    
+    NSString *jsonStr = [JSONUtil parse:@"subMultiPrice" params:model.mj_keyValues];
+    NSLog(@"%@",jsonStr);
+    
+    [[SocketConnect sharedSocketConnect]sendData:jsonStr delegate:self seq:0];
+}
 
 -(void)OnReceiveSuccess:(id)respondObject
 {
@@ -405,7 +439,7 @@
     {
         BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
         QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:respondModel.response];
-//        NSLog(@"资金信息->%@",package);
+//        NSLog(@"资金信息->%@",model.d);
         NSMutableArray *array = model.datas;
         if(!IS_NS_COLLECTION_EMPTY(array))
         {
@@ -422,7 +456,34 @@
             [DialogHelper showTips:@"获取资金信息失败，请重试!"];
         }
     }
-
+    else if(packageModel.seq == XT_CInstrumentDetail &&  packageModel.result)
+    {
+        NSLog(@"合约信息->%@",packageModel.result);
+        BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
+        QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:respondModel.response];
+        //        NSLog(@"资金信息->%@",model.d);
+        NSMutableArray *array = model.datas;
+        if(!IS_NS_COLLECTION_EMPTY(array))
+        {
+            for(id obj in array)
+            {
+                ProductModel *productModel = [ProductModel mj_objectWithKeyValues:obj];
+                if(productModel.m_nIsMain == 2147483647)
+                {
+                    [_datas addObject:productModel];
+                }
+            }
+            [_tableView reloadData];
+        }
+    }
+    else if(packageModel.seq == 0)
+    {
+        BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
+        if(respondModel.status == 0)
+        {
+            [DialogHelper showTips:@"订阅成功"];
+        }
+    }
 
 }
 @end

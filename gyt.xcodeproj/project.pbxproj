@@ -86,6 +86,8 @@
 		CFD37E261D02A95600297DE2 /* CWNumberKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD37E231D02A95600297DE2 /* CWNumberKeyboard.m */; };
 		CFD37E271D02A95600297DE2 /* CWNumberKeyboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFD37E241D02A95600297DE2 /* CWNumberKeyboard.xib */; };
 		CFD37E2A1D02AE1E00297DE2 /* ByTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD37E291D02AE1E00297DE2 /* ByTextField.m */; };
+		CFD37E591D05335E00297DE2 /* PushModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD37E581D05335E00297DE2 /* PushModel.m */; };
+		CFD37E5C1D05465400297DE2 /* PushRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD37E5B1D05465400297DE2 /* PushRequestModel.m */; };
 		CFDD2DD61CC8AEE100E81E3F /* DealHoldModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DD51CC8AEE100E81E3F /* DealHoldModel.m */; };
 		CFDD2DD91CC8BEC600E81E3F /* DealHoldingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DD81CC8BEC600E81E3F /* DealHoldingModel.m */; };
 		CFDD2DDC1CC8C01000E81E3F /* DealHoldByModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DDB1CC8C01000E81E3F /* DealHoldByModel.m */; };
@@ -302,6 +304,10 @@
 		CFD37E241D02A95600297DE2 /* CWNumberKeyboard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CWNumberKeyboard.xib; sourceTree = "<group>"; };
 		CFD37E281D02AE1E00297DE2 /* ByTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ByTextField.h; sourceTree = "<group>"; };
 		CFD37E291D02AE1E00297DE2 /* ByTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ByTextField.m; sourceTree = "<group>"; };
+		CFD37E571D05335E00297DE2 /* PushModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushModel.h; sourceTree = "<group>"; };
+		CFD37E581D05335E00297DE2 /* PushModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushModel.m; sourceTree = "<group>"; };
+		CFD37E5A1D05465400297DE2 /* PushRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushRequestModel.h; sourceTree = "<group>"; };
+		CFD37E5B1D05465400297DE2 /* PushRequestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushRequestModel.m; sourceTree = "<group>"; };
 		CFDD2DD41CC8AEE100E81E3F /* DealHoldModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealHoldModel.h; sourceTree = "<group>"; };
 		CFDD2DD51CC8AEE100E81E3F /* DealHoldModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealHoldModel.m; sourceTree = "<group>"; };
 		CFDD2DD71CC8BEC600E81E3F /* DealHoldingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealHoldingModel.h; sourceTree = "<group>"; };
@@ -580,6 +586,10 @@
 				CFDD2E0F1CCF42D400E81E3F /* NewsModel.m */,
 				CFF183871CE460A500E991C4 /* LoginModel.h */,
 				CFF183881CE460A500E991C4 /* LoginModel.m */,
+				CFD37E571D05335E00297DE2 /* PushModel.h */,
+				CFD37E581D05335E00297DE2 /* PushModel.m */,
+				CFD37E5A1D05465400297DE2 /* PushRequestModel.h */,
+				CFD37E5B1D05465400297DE2 /* PushRequestModel.m */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -1234,6 +1244,7 @@
 				CF0DBB741CF6CAEF0082E411 /* IPMacUtil.m in Sources */,
 				CFA3B8F01CD9AAB70063AE3E /* Chart.m in Sources */,
 				CFA3B8FB1CD9AB050063AE3E /* EncryptHelper.m in Sources */,
+				CFD37E591D05335E00297DE2 /* PushModel.m in Sources */,
 				CF6340321CFD65FB008149B1 /* NSData+XTAMData.m in Sources */,
 				CFF183D21CE9D6CA00E991C4 /* MoneyManageDetailViewController.m in Sources */,
 				CFF183C11CE718D200E991C4 /* AccessGoldModel.m in Sources */,
@@ -1283,6 +1294,7 @@
 				CFA3B8EB1CD9AAB70063AE3E /* CandleChartModel.m in Sources */,
 				CF4A6D7C1CBE2EA200B36C93 /* ByNavigationBar.m in Sources */,
 				CFF183C71CE726C000E991C4 /* ReduceCell.m in Sources */,
+				CFD37E5C1D05465400297DE2 /* PushRequestModel.m in Sources */,
 				CFDD2EAA1CCF4DE100E81E3F /* MJRefreshConst.m in Sources */,
 				CFF183891CE460A500E991C4 /* LoginModel.m in Sources */,
 				CFA3B90B1CDAF0A90063AE3E /* Slide.m in Sources */,
