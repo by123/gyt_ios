@@ -335,6 +335,7 @@
 -(void)OnItemSelected:(UIView *)dynamicTableView position:(NSInteger)position
 {
 
+    currentItemSelect = position;
     switch (currentTabSelect) {
         case 0:
             
@@ -345,7 +346,11 @@
         case 2:
             if(!IS_NS_COLLECTION_EMPTY(holdByDatas))
             {
-                [self cancelOrder:[holdByDatas objectAtIndex:position]];
+                DealHoldByModel *model = [holdByDatas objectAtIndex:position];
+                NSString *message = [NSString stringWithFormat:@"%@",model.m_strExchangeID];
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认撤单吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+                alert.tag = 2;
+                [alert show];
             }
             break;
         case 3:
@@ -487,22 +492,13 @@
     {
         if(alertView.tag == 0 || alertView.tag == 1)
         {
-            NSLog(@"%d",[_tabView getCurrent]);
+            [self order];
         }
         else if(alertView.tag == 2)
         {
-            if(currentItemSelect != -1)
-            {
-                DealHoldModel *model = [holdDatas objectAtIndex:currentItemSelect];
-                [holdDatas removeObject:model];
-            }
+            DealHoldByModel *model = [holdByDatas objectAtIndex:currentItemSelect];
+            [self cancelOrder:model];
         }
-//        if([_tabView getCurrent] == 0)
-//        {
-//            [_dynamicView reloadData :holdDatas];            
-//        }
-//        
-        [self order];
     }
 }
 
@@ -538,7 +534,6 @@
 {
     NSString *accountInfoStr =  [[Account sharedAccount] getAccountInfo];
     UserInfoModel *account = [UserInfoModel mj_objectWithKeyValues:accountInfoStr];
-    
     OrderRequestModel *orderModel = [[OrderRequestModel alloc]init];
     orderModel.strSessionID = [[Account sharedAccount]getSessionId];
     orderModel.account = account;
@@ -554,16 +549,15 @@
 }
 
 #pragma mark 撤单
--(void)cancelOrder : (OrderModel *)order
+-(void)cancelOrder : (DealHoldByModel *)order
 {
-    
     NSString *accountInfoStr =  [[Account sharedAccount] getAccountInfo];
     UserInfoModel *account = [UserInfoModel mj_objectWithKeyValues:accountInfoStr];
     
     OrderRequestModel *orderModel = [[OrderRequestModel alloc]init];
     orderModel.strSessionID = [[Account sharedAccount]getSessionId];
     orderModel.account = account;
-    orderModel.order = order;
+    orderModel.order = (OrderModel *)order;
     NSMutableDictionary *dic =[JSONUtil parseDic:orderModel];
     NSString *jsonStr = [JSONUtil parse:@"cancel" params:dic];
     
@@ -608,6 +602,9 @@
             for(id obj in array)
             {
                 DealHoldByModel *holdByModel = [DealHoldByModel mj_objectWithKeyValues:obj];
+                OrderTagModel *tagModel = [[OrderTagModel alloc]init];
+                tagModel.m_strRealTag = holdByModel.m_strOrderRef;
+                holdByModel.m_tag = tagModel;
                 [holdByDatas addObject:holdByModel];
             }
             [self reloadData:holdByDatas];
@@ -646,7 +643,7 @@
     }
     else if(packageModel.seq == GYT_CANCEL)
     {
-        NSLog(@"撤单");
+        [DialogHelper showSuccessTips:@"提交撤单申请成功"];
     }
 
 }

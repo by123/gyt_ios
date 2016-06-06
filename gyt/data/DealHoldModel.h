@@ -102,4 +102,5 @@
 @property (assign, nonatomic) double m_dMarketValue;
 
 
+
 @end

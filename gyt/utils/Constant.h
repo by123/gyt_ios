@@ -276,6 +276,20 @@ typedef NS_ENUM(NSInteger,EEntrustSubmitStatus)
     ENTRUST_SUBMIT_STATUS_ModifyRejected           // 改单已经被拒绝
 };
 
+typedef NS_ENUM(NSInteger,EXTAccountType)
+{
+    AT_OUTTER_FUTURE = 1,    // 期货外盘
+    AT_OUTBORADSTOCK = 2,    // 外盘股票
+    AT_FUTURE = 3,           // 期货账号
+    AT_GOLD =  4,            //贵金属账号
+    AT_FUTURE_OPTION=5,      // 期货期权账号
+    AT_STOCK_OPTION = 6,     // 股票期权账号
+    AT_HUGANGTONG = 7,       //沪港通账号
+    AT_NEW3BOARD = 10,       // 全国股转账号
+    AT_IB = 1002,            // IB
+    AT_STOCK = 1003          //股票账号
+};
+
 
 @interface Constant : NSObject
 

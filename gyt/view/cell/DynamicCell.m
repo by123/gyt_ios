@@ -275,7 +275,7 @@
                     label.text = [Constant EEntrustBSStr:model.m_nDirection];
                     break;
                 case 3://成交价
-                    label.text = [NSString stringWithFormat:@"%.2f",model.m_dPrice];
+                    label.text = [NSString stringWithFormat:@"%.f",model.m_dPrice];
                     break;
                 case 4://成交量
                     label.text = [NSString stringWithFormat:@"%d",model.m_nVolume];

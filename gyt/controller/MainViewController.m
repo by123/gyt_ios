@@ -363,7 +363,7 @@
 {
     UserInfoModel *data = [[UserInfoModel alloc]init];
     data.m_strAccountID = [[Account sharedAccount] getUid];
-//    data.m_nAccountType = @"";
+    data.m_nAccountType = AT_OUTTER_FUTURE;
 //    data.m_strPassword = @"";
 //    data.m_nStatus = @"";
 //    data.m_bAllowTrade = NO;

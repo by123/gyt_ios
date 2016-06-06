@@ -14,7 +14,7 @@
 @property (copy , nonatomic) NSString *m_strAccountID;
 
 //账号类型
-@property (copy , nonatomic) NSString *m_nAccountType;
+@property (assign , nonatomic) EXTAccountType m_nAccountType;
 
 //账号密码
 @property (copy , nonatomic) NSString *m_strPassword;
