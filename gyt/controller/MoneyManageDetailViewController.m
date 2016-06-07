@@ -57,7 +57,7 @@
     [self showNavigationBar];
     self.navBar.delegate = self;
     [ self.navBar.rightBtn setHidden:YES];
-    [self.navBar setTitle:[NSString stringWithFormat:@"%@详情",[AccessGoldModel getCashType:_model.m_nCashType]]];
+    [self.navBar setTitle:[NSString stringWithFormat:@"%@详情",[Constant getCashType:_model.m_nCashType]]];
     [self.navBar setLeftImage:[UIImage imageNamed:@"ic_back"]];
 }
 

@@ -57,7 +57,7 @@
             int width =  [[_widths objectAtIndex:i] intValue] * maxWidth / count;
             switch (i) {
                 case 0://品种
-                    label.text = model.m_strProductName;
+                    label.text = model.m_strProductID;
                     break;
                 case 1://合约号
                     label.text = model.m_strInstrumentID;
@@ -66,35 +66,34 @@
                     label.text = [Constant EEntrustBSStr:model.m_nDirection];
                     break;
                 case 3://手数
-                    label.text = [NSString stringWithFormat:@"%.f",model.m_nVolume];
+                    label.text = [NSString stringWithFormat:@"%.d",model.m_nOpenVolume];
                     break;
                 case 4://可用
-                    label.text = [NSString stringWithFormat:@"%.f",model.m_nVolume];
+                    label.text = [NSString stringWithFormat:@"%.d",model.m_nCanCloseVol];
                     break;
                 case 5://开仓均价
-                    label.text = [NSString stringWithFormat:@"%.f",model.m_dOpenPrice];
+                    label.text = [NSString stringWithFormat:@"%.2f",model.m_dAvgPrice];
                     break;
                 case 6://逐笔浮盈
-                    label.text = [NSString stringWithFormat:@"%.f",model.m_dFloatProfit];
+                    label.text = [NSString stringWithFormat:@"%.2f",model.m_dPositionProfit];
                     break;
                 case 7://币种
-                    label.text = @"RMB";
+                    label.text = [Constant getMoneyType:model.m_nMoneyType];
                     break;
                 case 8://损盈
+                    label.text = [NSString stringWithFormat:@"%.2f",model.m_dProfitRate];
                     break;
-                    
                 case 9://价值
-                    label.text = [NSString stringWithFormat:@"%.f",model.m_dMarketValue];
+                    label.text = [NSString stringWithFormat:@"%.f",model.m_dInstrumentValue];
                     break;
                 case 10://保证金
-                    label.text = [NSString stringWithFormat:@"%.f",model.m_dMargin];
+                    label.text = [NSString stringWithFormat:@"%.f",model.m_dUsedMargin];
                     break;
                 case 11://今手数
-                    label.text = @"1";
+                    label.text =[NSString stringWithFormat:@"%.d",model.m_nOpenVolume];
                     break;
                 case 12://今可用
-                    label.text = @"1";
-                    break;
+                    label.text = [NSString stringWithFormat:@"%.d",model.m_nCanCloseVol];                    break;
                 case 13://投保
                     label.text = [Constant EHedge_Flag_TypeStr:model.m_nHedgeFlag];
                     break;
@@ -129,20 +128,58 @@
             label.font = [UIFont systemFontOfSize:13.0f];
             int width =  [[_widths objectAtIndex:i] intValue] * maxWidth / count;
             switch (i) {
-                case 0:
-                    label.text = model.name;
+                case 0://时间
+                    if(IS_NS_STRING_EMPTY(model.m_tag.m_nOrderTime))
+                    {
+                        label.text = [self generateTime:[NSString stringWithFormat:@"%d",model.m_nInsertTime]];
+                    }
+                    else{
+                        label.text = [self generateTime:model.m_tag.m_nOrderTime];
+                    }
                     break;
-                case 1:
-                    label.text = model.kaiping;
+                case 1://合约
+                    label.text = model.m_strInstrumentID;
                     break;
-                case 2:
-                    label.text = model.price;
+                case 2://状态
+                    label.text = [Constant EEntrustStatusStr:model.m_nOrderStatus];
                     break;
-                case 3:
-                    label.text = model.handby;
+                case 3://买卖
+                    label.text = [Constant EEntrustBSStr:model.m_nDirection];
                     break;
-                case 4:
-                    label.text = model.hand;
+                case 4://委托价
+                    if(model.m_dOrderPrice == 0)
+                    {
+                        label.text = [NSString stringWithFormat:@"%.f",model.m_dLimitPrice];
+                    }
+                    else
+                    {
+                        label.text = [NSString stringWithFormat:@"%.f",model.m_dOrderPrice];
+                    }
+                    break;
+                case 5://委托量
+                    if(model.m_nOrderNum == 0)
+                    {
+                        label.text = [NSString stringWithFormat:@"%.f",model.m_nVolumeTotalOriginal];
+                    }
+                    else
+                    {
+                        label.text = [NSString stringWithFormat:@"%d",model.m_nOrderNum];
+                    }
+                    break;
+                case 6://可撤
+                    label.text = [NSString stringWithFormat:@"%d",model.m_nVolumeLeft];
+                    break;
+                case 7://已成交
+                    label.text = [NSString stringWithFormat:@"%d",model.m_nVolumeTraded];
+                    break;
+                case 8://投保
+                    label.text = [Constant EHedge_Flag_TypeStr:model.m_nHedgeFlag];
+                    break;
+                case 9://合同号
+                    label.text = model.m_strContractNum;
+                    break;
+                case 10://主场号
+                    label.text = model.m_strContractNum;
                     break;
                 default:
                     break;

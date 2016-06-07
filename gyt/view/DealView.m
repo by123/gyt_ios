@@ -12,7 +12,6 @@
 #import "ByTabView.h"
 #import "DialogHelper.h"
 #import "DealHoldModel.h"
-#import "DealHoldingModel.h"
 #import "DealHoldByModel.h"
 #import "DealProfitModel.h"
 #import "QueryRequest.h"
@@ -20,6 +19,7 @@
 #import "MoneyDetailModel.h"
 #import "ByListDialog.h"
 #import "ContractDB.h"
+#import "DealHoldingModel.h"
 
 @interface DealView()
 
@@ -324,7 +324,7 @@
     }
     
     NSArray *titleArray = @[@"品种",@"合约号",@"多空",@"手数",@"可用",@"开仓均价",@"逐笔浮盈",@"币种",@"损盈",@"价值",@"保证金",@"今手数",@"今可用",@"投保"];
-    NSArray *widthArray = @[@"2",@"1",@"1",@"1",@"1",@"2",@"2",@"1",@"1",@"1",@"1",@"1",@"1",@"1"];
+    NSArray *widthArray = @[@"1",@"2",@"1",@"1",@"1",@"2",@"2",@"1",@"1",@"1",@"1",@"1",@"1",@"1"];
     _dynamicView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH , SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:holdDatas maxWidth:SCREEN_WIDTH * 2.5 type:Hold];
     [_dynamicView setHeaders:widthArray headers:titleArray];
     _dynamicView.delegate = self;
@@ -341,17 +341,16 @@
             
             break;
         case 1:
-            
-            break;
-        case 2:
-            if(!IS_NS_COLLECTION_EMPTY(holdByDatas))
+            if(!IS_NS_COLLECTION_EMPTY(holdingDatas))
             {
-                DealHoldByModel *model = [holdByDatas objectAtIndex:position];
+                DealHoldingModel *model = [holdingDatas objectAtIndex:position];
                 NSString *message = [NSString stringWithFormat:@"%@",model.m_strExchangeID];
                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认撤单吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
                 alert.tag = 2;
                 [alert show];
             }
+            break;
+        case 2:
             break;
         case 3:
             
@@ -424,7 +423,7 @@
             break;
         case 1:
             [self initHoldingData];
-//            [self requestQuery:XT_CPositionStatics];
+            [self requestQuery:XT_COrderDetail];
             break;
         case 2:
             [self initHoldByData];
@@ -595,6 +594,7 @@
     else if(packageModel.seq == XT_COrderDetail && !IS_NS_STRING_EMPTY(packageModel.result))
     {
         [holdByDatas removeAllObjects];
+        [holdingDatas removeAllObjects];
         QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:respondModel.response];
         NSMutableArray *array = model.datas;
         if(!IS_NS_COLLECTION_EMPTY(array))
@@ -607,7 +607,25 @@
                 holdByModel.m_tag = tagModel;
                 [holdByDatas addObject:holdByModel];
             }
-            [self reloadData:holdByDatas];
+            for(id obj in array)
+            {
+                DealHoldingModel *holdingModel = [DealHoldingModel mj_objectWithKeyValues:obj];
+                OrderTagModel *tagModel = [[OrderTagModel alloc]init];
+                tagModel.m_strRealTag = holdingModel.m_strOrderRef;
+                holdingModel.m_tag = tagModel;
+                if(holdingModel.m_nOrderStatus == ENTRUST_STATUS_REPORTED)
+                {
+                    [holdingDatas addObject:holdingModel];
+                }
+            }
+            if(currentTabSelect == 1)
+            {
+                [self reloadData:holdingDatas];
+            }
+            else if(currentTabSelect == 2)
+            {
+                [self reloadData:holdByDatas];
+            }
         }
     }
     else if(packageModel.seq == XT_CDealDetail && !IS_NS_STRING_EMPTY(packageModel.result))
@@ -654,6 +672,10 @@
     if(!IS_NS_COLLECTION_EMPTY(data))
     {
         if([[data objectAtIndex:0] isKindOfClass:[DealHoldModel class]] && (currentTabSelect == 0 || currentTabSelect == 1))
+        {
+            [_dynamicView reloadData:data];
+        }
+        else if([[data objectAtIndex:0] isKindOfClass:[DealHoldingModel class]] && currentTabSelect == 1)
         {
             [_dynamicView reloadData:data];
         }

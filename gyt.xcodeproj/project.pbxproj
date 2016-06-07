@@ -88,8 +88,8 @@
 		CFD37E2A1D02AE1E00297DE2 /* ByTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD37E291D02AE1E00297DE2 /* ByTextField.m */; };
 		CFD37E591D05335E00297DE2 /* PushModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD37E581D05335E00297DE2 /* PushModel.m */; };
 		CFD37E5C1D05465400297DE2 /* PushRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD37E5B1D05465400297DE2 /* PushRequestModel.m */; };
+		CFD37E5F1D06754B00297DE2 /* DealHoldingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD37E5E1D06754B00297DE2 /* DealHoldingModel.m */; };
 		CFDD2DD61CC8AEE100E81E3F /* DealHoldModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DD51CC8AEE100E81E3F /* DealHoldModel.m */; };
-		CFDD2DD91CC8BEC600E81E3F /* DealHoldingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DD81CC8BEC600E81E3F /* DealHoldingModel.m */; };
 		CFDD2DDC1CC8C01000E81E3F /* DealHoldByModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DDB1CC8C01000E81E3F /* DealHoldByModel.m */; };
 		CFDD2DDF1CC8C08E00E81E3F /* DealProfitModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DDE1CC8C08E00E81E3F /* DealProfitModel.m */; };
 		CFDD2DE11CC9CF2300E81E3F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFDD2DE01CC9CF2300E81E3F /* Assets.xcassets */; };
@@ -308,10 +308,10 @@
 		CFD37E581D05335E00297DE2 /* PushModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushModel.m; sourceTree = "<group>"; };
 		CFD37E5A1D05465400297DE2 /* PushRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushRequestModel.h; sourceTree = "<group>"; };
 		CFD37E5B1D05465400297DE2 /* PushRequestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushRequestModel.m; sourceTree = "<group>"; };
+		CFD37E5D1D06754B00297DE2 /* DealHoldingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealHoldingModel.h; sourceTree = "<group>"; };
+		CFD37E5E1D06754B00297DE2 /* DealHoldingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealHoldingModel.m; sourceTree = "<group>"; };
 		CFDD2DD41CC8AEE100E81E3F /* DealHoldModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealHoldModel.h; sourceTree = "<group>"; };
 		CFDD2DD51CC8AEE100E81E3F /* DealHoldModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealHoldModel.m; sourceTree = "<group>"; };
-		CFDD2DD71CC8BEC600E81E3F /* DealHoldingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealHoldingModel.h; sourceTree = "<group>"; };
-		CFDD2DD81CC8BEC600E81E3F /* DealHoldingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealHoldingModel.m; sourceTree = "<group>"; };
 		CFDD2DDA1CC8C01000E81E3F /* DealHoldByModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealHoldByModel.h; sourceTree = "<group>"; };
 		CFDD2DDB1CC8C01000E81E3F /* DealHoldByModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealHoldByModel.m; sourceTree = "<group>"; };
 		CFDD2DDD1CC8C08E00E81E3F /* DealProfitModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealProfitModel.h; sourceTree = "<group>"; };
@@ -839,12 +839,12 @@
 			children = (
 				CFDD2DD41CC8AEE100E81E3F /* DealHoldModel.h */,
 				CFDD2DD51CC8AEE100E81E3F /* DealHoldModel.m */,
-				CFDD2DD71CC8BEC600E81E3F /* DealHoldingModel.h */,
-				CFDD2DD81CC8BEC600E81E3F /* DealHoldingModel.m */,
 				CFDD2DDA1CC8C01000E81E3F /* DealHoldByModel.h */,
 				CFDD2DDB1CC8C01000E81E3F /* DealHoldByModel.m */,
 				CFDD2DDD1CC8C08E00E81E3F /* DealProfitModel.h */,
 				CFDD2DDE1CC8C08E00E81E3F /* DealProfitModel.m */,
+				CFD37E5D1D06754B00297DE2 /* DealHoldingModel.h */,
+				CFD37E5E1D06754B00297DE2 /* DealHoldingModel.m */,
 			);
 			name = detail;
 			sourceTree = "<group>";
@@ -1214,6 +1214,7 @@
 				CFDD2EA01CCF4DE100E81E3F /* MJRefreshAutoGifFooter.m in Sources */,
 				CFDFFA971CBF759800401CB3 /* LeftMenuViewContriller.m in Sources */,
 				CFDD2EA71CCF4DE100E81E3F /* MJRefreshNormalHeader.m in Sources */,
+				CFD37E5F1D06754B00297DE2 /* DealHoldingModel.m in Sources */,
 				CF4A6D701CBE2A0800B36C93 /* UILabel+ContentSize.m in Sources */,
 				CFDD2DF81CCDE8D000E81E3F /* WarnDialog.m in Sources */,
 				CFDD2E9B1CCF4DE100E81E3F /* MJRefreshAutoFooter.m in Sources */,
@@ -1267,7 +1268,6 @@
 				CFF183861CE45E1400E991C4 /* BaseRequestModel.m in Sources */,
 				CF48C6341CD0DBF800BF4EF9 /* SearchViewController.m in Sources */,
 				CFDD2E0D1CCF3C1A00E81E3F /* NewsView.m in Sources */,
-				CFDD2DD91CC8BEC600E81E3F /* DealHoldingModel.m in Sources */,
 				CFDD2EA41CCF4DE100E81E3F /* MJRefreshBackNormalFooter.m in Sources */,
 				CF111D4C1CFBEABB00298C78 /* OrderModel.m in Sources */,
 				CFD37E261D02A95600297DE2 /* CWNumberKeyboard.m in Sources */,

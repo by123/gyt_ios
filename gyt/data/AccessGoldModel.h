@@ -71,14 +71,6 @@
 //审核备注
 @property (copy , nonatomic) NSString *m_strCheckMemo;
 
-+(NSString *)getCashType : (CashType)type;
-
-+(NSString *)getMoneyType : (EMoneyType)type;
-
-+(NSString *)getPayType : (PayType)type;
-
-+(NSString *)getCashApplicationStatus : (CashApplicationStatus)type;
-
 +(NSMutableArray *)getData;
 
 +(NSMutableArray *)getTitleContentData : (AccessGoldModel *)model;

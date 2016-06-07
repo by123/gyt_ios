@@ -69,7 +69,7 @@ typedef void (^ReduceCellBlock)(ReduceCell *cell);
         
         for(int i = 1 ; i<= 13; i ++)
         {
-            NSString *temp =  [AccessGoldModel getMoneyType:i];
+            NSString *temp =  [Constant getMoneyType:i];
             [array addObject:temp];
         }
         ByListDialog *dialog = [[ByListDialog alloc]initWithData:array title:@"请选择币种"];

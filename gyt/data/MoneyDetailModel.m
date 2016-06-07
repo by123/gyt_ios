@@ -16,7 +16,7 @@
     [datas addObject:[TitleContentModel buildData:@"资金账号" content:model.m_strAccountID]];
     [datas addObject:[TitleContentModel buildData:@"权益" content:[NSString stringWithFormat:@"%.2f",model.m_dCurBalance]]];
     [datas addObject:[TitleContentModel buildData:@"可用资金" content:[NSString stringWithFormat:@"%.2f",model.m_dAvailable]]];
-    [datas addObject:[TitleContentModel buildData:@"币种" content:[AccessGoldModel getMoneyType:model.m_nMoneyType]]];
+    [datas addObject:[TitleContentModel buildData:@"币种" content:[Constant getMoneyType:model.m_nMoneyType]]];
     [datas addObject:[TitleContentModel buildData:@"初始权益" content:[NSString stringWithFormat:@"%.2f",model.m_dInitBalance]]];
     [datas addObject:[TitleContentModel buildData:@"出入金" content:[NSString stringWithFormat:@"%.2f",model.m_dDeposit]]];
     [datas addObject:[TitleContentModel buildData:@"手续费" content:[NSString stringWithFormat:@"%.2f",model.m_dCommission]]];

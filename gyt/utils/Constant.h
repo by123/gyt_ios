@@ -298,5 +298,14 @@ typedef NS_ENUM(NSInteger,EXTAccountType)
 +(NSString *)EHedge_Flag_TypeStr : (EHedge_Flag_Type) flagType;
 
 +(NSString *)EEntrustStatusStr : (EEntrustStatus)statu;
+
++(NSString *)getCashType : (CashType)type;
+
++(NSString *)getMoneyType : (EMoneyType)type;
+
++(NSString *)getPayType : (PayType)type;
+
++(NSString *)getCashApplicationStatus : (CashApplicationStatus)type;
+
 @end
 

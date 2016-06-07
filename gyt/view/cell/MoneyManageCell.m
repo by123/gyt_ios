@@ -97,12 +97,12 @@
     _idNumLabel.frame = CGRectMake(5, 10, _idNumLabel.contentSize.width, _idNumLabel.contentSize.height);
     
     //出入金
-    _goldLabel.text = [NSString stringWithFormat:@"%@：%f",[AccessGoldModel getCashType:model.m_nCashType],model.m_dCashValue];
+    _goldLabel.text = [NSString stringWithFormat:@"%@：%f",[Constant getCashType:model.m_nCashType],model.m_dCashValue];
     _goldLabel.frame = CGRectMake(5, 45, _goldLabel.contentSize.width, _goldLabel.contentSize.height);
     
     
     //币种
-    _goldTypeLabel.text = [NSString stringWithFormat:@"币种：%@",[AccessGoldModel getMoneyType:model.m_nMoneyType]];
+    _goldTypeLabel.text = [NSString stringWithFormat:@"币种：%@",[Constant getMoneyType:model.m_nMoneyType]];
     _goldTypeLabel.frame = CGRectMake(SCREEN_WIDTH -25- _goldTypeLabel.contentSize.width , 45, _goldTypeLabel.contentSize.width, _goldTypeLabel.contentSize.height);
     
     //申请日期
@@ -110,7 +110,7 @@
     _dateLabel.frame = CGRectMake(5, 70, _dateLabel.contentSize.width, _dateLabel.contentSize.height);
     
     //状态
-    _statuLabel.text = [NSString stringWithFormat:@"状态：%@",[AccessGoldModel getCashApplicationStatus:model.m_nStatus]];
+    _statuLabel.text = [NSString stringWithFormat:@"状态：%@",[Constant getCashApplicationStatus:model.m_nStatus]];
     _statuLabel.frame = CGRectMake(SCREEN_WIDTH - 25 - _statuLabel.contentSize.width, 70, _statuLabel.contentSize.width, _statuLabel.contentSize.height);
     
 

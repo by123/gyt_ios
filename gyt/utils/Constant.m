@@ -71,4 +71,78 @@
     return @"未知";
 }
 
++(NSString *)getCashType : (CashType)type
+{
+    switch (type) {
+        case CashType_In:
+            return @"入金";
+        case CashType_Out:
+            return @"出金";
+        default:
+            break;
+    }
+}
+
++(NSString *)getPayType : (PayType)type
+{
+    switch (type) {
+        case PayType_ON_LINE:
+            return @"线上";
+        case PayType_OFF_LINE:
+            return @"线下";
+    }
+}
+
+
+
++(NSString *)getMoneyType : (EMoneyType)type
+{
+    switch (type) {
+        case MoneyType_RMB:
+            return @"人民币";
+        case MoneyType_USD:
+            return @"美元";
+        case MoneyType_HKD:
+            return @"港币";
+        case MoneyType_CHF:
+            return @"瑞士法郎";
+        case MoneyType_JPY:
+            return @"日元";
+        case MoneyType_KRW:
+            return @"韩元";
+        case MoneyType_GBP:
+            return @"英镑";
+        case MoneyType_RUB:
+            return @"卢布";
+        case MoneyType_AUD:
+            return @"澳大利亚元";
+        case MoneyType_SGD:
+            return @"新币";
+        case MoneyType_EUR:
+            return @"欧元";
+        case MoneyType_CAD:
+            return @"加拿大元";
+        case MoneyType_NZD:
+            return @"新西兰元";
+        default:
+            return @"人民币";
+    }
+}
+
++(NSString *)getCashApplicationStatus : (CashApplicationStatus)type
+{
+    switch (type) {
+        case CashApplicationStatus_Submit:
+            return @"等待审核";
+        case CashApplicationStatus_Accepted:
+            return @"审核通过";
+        case CashApplicationStatus_ForBidden:
+            return @"审核拒绝";
+        case CashApplicationStatus_Auto:
+            return @"自动审核";
+        default:
+            break;
+    }
+}
+
 @end

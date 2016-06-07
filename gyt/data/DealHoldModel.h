@@ -14,17 +14,14 @@
 //账号信息
 @property (strong, nonatomic) UserInfoModel *m_accountInfo;
 
-//成交号(最初开仓位的成交)
-@property (copy, nonatomic) NSString *m_strTradeID;
-
 //交易所ID
-@property (copy, nonatomic) NSString *m_strExchangeID;  
+@property (copy, nonatomic) NSString *m_strExchangeID;
+
+//交易市场名称
+@property (copy, nonatomic) NSString *m_strExchangeName;
 
 //品种代码
 @property (copy, nonatomic) NSString *m_strProductID;
-
-//品种名称
-@property (copy, nonatomic) NSString *m_strProductName;
 
 //合约ID
 @property (copy, nonatomic) NSString *m_strInstrumentID;
@@ -32,29 +29,14 @@
 //合约名称
 @property (copy, nonatomic) NSString *m_strInstrumentName;
 
-//上日持仓
-@property (assign, nonatomic) double m_nYesterdayVolume;
-
-//持仓量
-@property (assign, nonatomic) double m_nVolume;
-
 //买卖方向
 @property (assign, nonatomic) EEntrustBS m_nDirection;
 
-//使用的保证金 历史的直接用ctp的，新的自己用成本价*存量*系数算
-@property (assign, nonatomic) double m_dMargin;
+//昨仓
+@property (assign, nonatomic) int m_nYesterdayVolume;
 
-//最新价
-@property (assign, nonatomic) double m_dLastPrice;
-
-//结算价
-@property (assign, nonatomic) double m_dSettlementPrice;
-
-//昨结算
-@property (assign, nonatomic) double m_dLastSettlementPrice;
-
-//合约价值
-@property (assign, nonatomic) double m_dInstrumentValue;
+//
+@property (assign, nonatomic) int m_nPosition;
 
 //开仓成本
 @property (assign, nonatomic) double m_dOpenCost;
@@ -62,17 +44,20 @@
 //开仓价格
 @property (assign, nonatomic) double m_dOpenPrice;
 
-//持仓成本
-@property (assign, nonatomic) double m_dPositionCost;
-
 //是否今仓
-@property (assign, nonatomic) Boolean m_bIsToday;
+@property (assign, nonatomic) BOOL m_bIsToday;
 
 //投保标记
 @property (assign, nonatomic) EHedge_Flag_Type m_nHedgeFlag;
 
-//开仓日期
-@property (copy, nonatomic) NSString *m_strOpenDate;
+//
+@property (assign, nonatomic) int m_nOpenVolume;
+
+//平仓量
+@property (assign, nonatomic) int m_nCloseVolume;
+
+//持仓成本
+@property (assign, nonatomic) double m_dPositionCost;
 
 //持仓盈亏
 @property (assign, nonatomic) double m_dPositionProfit;
@@ -80,27 +65,59 @@
 //浮动盈亏
 @property (assign, nonatomic) double m_dFloatProfit;
 
-//平仓盈亏 平仓额 - 开仓价*平仓量*合约乘数（股票为1） 股票不需要
-@property (assign, nonatomic) double m_dCloseProfit;
-
 //盈亏比例
 @property (assign, nonatomic) double m_dProfitRate;
 
-//交易日
-@property (copy, nonatomic) NSString *m_strTradingDay;
+//均价
+@property (assign, nonatomic) double m_dAvgPrice;
 
-//平仓额 等于股票每次卖出的量*卖出价*合约乘数（股票为1）的累加 股票不需要
-@property (assign, nonatomic) double m_dCloseAmount;
+//合约价值
+@property (assign, nonatomic) double m_dInstrumentValue;
 
-//平仓量 等于股票已经卖掉的 股票不需要
-@property (assign, nonatomic) double m_nCloseVolume;
+//最新价
+@property (assign, nonatomic) double m_dLastPrice;
 
-//成交类型
-@property (assign, nonatomic) EFutureTradeType m_eFutureTradeType;
+//
+@property (assign, nonatomic) double m_dUsedMargin;
 
-//市值 合约价值
-@property (assign, nonatomic) double m_dMarketValue;
+//
+@property (assign, nonatomic) double m_dUsedCommission;
 
+//
+@property (assign, nonatomic) double m_dFrozenMargin;
+
+//
+@property (assign, nonatomic) double m_dFrozenCommission;
+
+//
+@property (assign, nonatomic) int m_nFrozenVolume;
+
+//
+@property (assign, nonatomic) int m_nCanCloseVol;
+
+//结算价
+@property (assign, nonatomic) double m_dSettlementPrice;
+
+//
+@property (copy, nonatomic) NSString *m_strExpireDate;
+
+//
+@property (assign, nonatomic) double m_dExchangeRate;
+
+//
+@property (assign, nonatomic) EMoneyType m_nMoneyType;
+
+//
+@property (assign, nonatomic) int m_nYestoday;
+
+//
+@property (assign, nonatomic) int m_nTodayLong;
+
+//
+@property (assign, nonatomic) int m_nTodayShort;
+
+//
+@property (assign, nonatomic) int m_dPriceTick;
 
 
 @end

@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "DealHoldModel.h"
-#import "DealHoldingModel.h"
 #import "DealHoldByModel.h"
 #import "DealProfitModel.h"
 #import "ProductModel.h"
+#import "DealHoldingModel.h"
 
 @interface DynamicCell : UITableViewCell
 
