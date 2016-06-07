@@ -13,7 +13,7 @@
 #import "ByTextField.h"
 #import "ByListDialog.h"
 
-@interface DealView : UIView<ByTabViewDelegate,UIAlertViewDelegate,ByDynamicTableViewDelegate,SocketConnectDelegate,ListDialogDelegate>
+@interface DealView : UIView<ByTabViewDelegate,UIAlertViewDelegate,ByDynamicTableViewDelegate,SocketConnectDelegate,ListDialogDelegate,PushDataHandleDelegate>
 
 -(instancetype)initWithData : (CGRect)frame
                       model : (ProductModel *)model

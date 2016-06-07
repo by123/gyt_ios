@@ -72,6 +72,7 @@
     _nameTextField.hasTitle = YES;
 //    _nameTextField.text = @"800014340";
     _nameTextField.text = @"800001080";
+//    _nameTextField.text = @"800001706";
     [_nameTextField setInsetTitle:@"资金账号：" font:[UIFont systemFontOfSize:14.0f]];
     _nameTextField.block = ^(InsetTextField *insetTextField) {
         insetTextField.text = @"";

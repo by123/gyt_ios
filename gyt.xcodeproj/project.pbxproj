@@ -89,6 +89,8 @@
 		CFD37E591D05335E00297DE2 /* PushModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD37E581D05335E00297DE2 /* PushModel.m */; };
 		CFD37E5C1D05465400297DE2 /* PushRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD37E5B1D05465400297DE2 /* PushRequestModel.m */; };
 		CFD37E5F1D06754B00297DE2 /* DealHoldingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD37E5E1D06754B00297DE2 /* DealHoldingModel.m */; };
+		CFD37E621D06AFFC00297DE2 /* PushDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD37E611D06AFFC00297DE2 /* PushDataModel.m */; };
+		CFD37E651D06C7D100297DE2 /* PushDataHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD37E641D06C7D100297DE2 /* PushDataHandle.m */; };
 		CFDD2DD61CC8AEE100E81E3F /* DealHoldModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DD51CC8AEE100E81E3F /* DealHoldModel.m */; };
 		CFDD2DDC1CC8C01000E81E3F /* DealHoldByModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DDB1CC8C01000E81E3F /* DealHoldByModel.m */; };
 		CFDD2DDF1CC8C08E00E81E3F /* DealProfitModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DDE1CC8C08E00E81E3F /* DealProfitModel.m */; };
@@ -310,6 +312,10 @@
 		CFD37E5B1D05465400297DE2 /* PushRequestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushRequestModel.m; sourceTree = "<group>"; };
 		CFD37E5D1D06754B00297DE2 /* DealHoldingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealHoldingModel.h; sourceTree = "<group>"; };
 		CFD37E5E1D06754B00297DE2 /* DealHoldingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealHoldingModel.m; sourceTree = "<group>"; };
+		CFD37E601D06AFFC00297DE2 /* PushDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushDataModel.h; sourceTree = "<group>"; };
+		CFD37E611D06AFFC00297DE2 /* PushDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushDataModel.m; sourceTree = "<group>"; };
+		CFD37E631D06C7D100297DE2 /* PushDataHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushDataHandle.h; sourceTree = "<group>"; };
+		CFD37E641D06C7D100297DE2 /* PushDataHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushDataHandle.m; sourceTree = "<group>"; };
 		CFDD2DD41CC8AEE100E81E3F /* DealHoldModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealHoldModel.h; sourceTree = "<group>"; };
 		CFDD2DD51CC8AEE100E81E3F /* DealHoldModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealHoldModel.m; sourceTree = "<group>"; };
 		CFDD2DDA1CC8C01000E81E3F /* DealHoldByModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealHoldByModel.h; sourceTree = "<group>"; };
@@ -701,6 +707,8 @@
 				CF6340311CFD65FB008149B1 /* GYTPackage.m */,
 				CFD37E0B1CFEA73100297DE2 /* PackageModel.h */,
 				CFD37E0C1CFEA73100297DE2 /* PackageModel.m */,
+				CFD37E631D06C7D100297DE2 /* PushDataHandle.h */,
+				CFD37E641D06C7D100297DE2 /* PushDataHandle.m */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -845,6 +853,8 @@
 				CFDD2DDE1CC8C08E00E81E3F /* DealProfitModel.m */,
 				CFD37E5D1D06754B00297DE2 /* DealHoldingModel.h */,
 				CFD37E5E1D06754B00297DE2 /* DealHoldingModel.m */,
+				CFD37E601D06AFFC00297DE2 /* PushDataModel.h */,
+				CFD37E611D06AFFC00297DE2 /* PushDataModel.m */,
 			);
 			name = detail;
 			sourceTree = "<group>";
@@ -1228,6 +1238,7 @@
 				CFDFFA9D1CBF78DD00401CB3 /* RightMenuViewController.m in Sources */,
 				CF60E1871CEABF45001EF40D /* QueryRequestModel.m in Sources */,
 				CF2A510B1CE31B2F00F0EF3D /* LoginViewController.m in Sources */,
+				CFD37E651D06C7D100297DE2 /* PushDataHandle.m in Sources */,
 				CFC15BB31CC37C730077FA19 /* HandicapDetailModel.m in Sources */,
 				CF4A6D1B1CBE25AA00B36C93 /* AppDelegate.m in Sources */,
 				CFC15B8E1CBF94A90077FA19 /* MainTableCell.m in Sources */,
@@ -1254,6 +1265,7 @@
 				CFDD2E101CCF42D400E81E3F /* NewsModel.m in Sources */,
 				CFF183D91CE9F0A200E991C4 /* QueryRequest.m in Sources */,
 				CFDD2EAD1CCF4DE100E81E3F /* UIView+MJExtension.m in Sources */,
+				CFD37E621D06AFFC00297DE2 /* PushDataModel.m in Sources */,
 				CF111D4F1CFBF5A000298C78 /* OrderTagModel.m in Sources */,
 				CFC15BCF1CC604DB0077FA19 /* ByDynamicTableView.m in Sources */,
 				CFDD2EAC1CCF4DE100E81E3F /* UIScrollView+MJRefresh.m in Sources */,

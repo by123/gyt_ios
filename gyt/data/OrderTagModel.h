@@ -25,15 +25,15 @@
 
 @property (strong, nonatomic) UserInfoModel *m_realAccount;// 实盘账号
 
-@property (copy, nonatomic) NSString *m_strRealTag; // 实盘标记
+@property (assign, nonatomic) long m_strRealTag; // 实盘标记
 
 @property (copy, nonatomic) NSString *m_strOrderSysId; // 实盘委托号
 
-@property (assign , nonatomic) long *m_nfrontId; //
-
-@property (assign , nonatomic) long *m_nsessionId; //
-
-@property (assign , nonatomic) long *m_nrequestId; //
+//@property (assign , nonatomic) long m_nfrontId; //
+//
+//@property (assign , nonatomic) long m_nsessionId; //
+//
+//@property (assign , nonatomic) long m_nrequestId; //
 
 
 +(NSString *)generateRequestID;

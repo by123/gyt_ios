@@ -41,7 +41,7 @@ SINGLETON_IMPLEMENTION(GYTPackage);
         jsondata = [jsondata zlibDecompressed];
     }
 
-    if (model.cmd == NET_CMD_RPC) {
+    if (model.cmd == NET_CMD_RPC || model.cmd == NET_CMD_NOTIFICATION) {
         model.seq = ((int64_t)(model.tag >> 8) & 0x0f) << 32 | model.seq;
         
         NSData *udata = [jsondata zlibDecompressed];
@@ -51,7 +51,11 @@ SINGLETON_IMPLEMENTION(GYTPackage);
         NSString *resultStr;
         resultStr = [[NSString alloc] initWithData:jsondata encoding:NSUTF8StringEncoding];
         if (resultStr == nil) {
-            resultStr = [[NSString alloc] initWithData:jsondata encoding:NSASCIIStringEncoding];
+            NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
+            resultStr = [[NSString alloc] initWithData:jsondata encoding:enc];
+            if (resultStr == nil) {
+              resultStr = [[NSString alloc] initWithData:jsondata encoding:NSASCIIStringEncoding];
+            }
         }
         model.result = resultStr;
     }

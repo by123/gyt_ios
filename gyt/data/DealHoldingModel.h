@@ -42,7 +42,7 @@
 @property (assign, nonatomic) double m_nFrontID;
 
 //内部委托号
-@property (copy, nonatomic) NSString *m_strOrderRef;
+@property (assign, nonatomic) int m_strOrderRef;
 
 //委托价格(限价单的限价，就是报价)
 @property (assign, nonatomic) double m_dLimitPrice;

@@ -49,10 +49,10 @@ SINGLETON_IMPLEMENTION(SocketConnect);
     [_clientSocket connectToHost:Host onPort:Port error:&error];
     if(error)
     {
-        NSLog(@"发起tpc失败");
+        NSLog(@"发起tcp失败");
     }
     else{
-        NSLog(@"发起tpc成功");
+        NSLog(@"发起tcp成功");
     }
 }
 
@@ -113,35 +113,7 @@ SINGLETON_IMPLEMENTION(SocketConnect);
 #pragma mark - 接收服务端的数据
 -(void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
 {
-    
-//    if(tag == HEAD_TAG)
-//    {
-//        model = [[GYTPackage sharedGYTPackage] decodeHeader:data];
-//        NSMutableData *buffer = [NSMutableData data];
-//        [sock readDataToLength:model.len withTimeout:-1 buffer:buffer bufferOffset:0 tag:BODY_TAG];
-//    }
-//    else if(tag == BODY_TAG)
-//    {
-//        model = [[GYTPackage sharedGYTPackage] decodeBody:model data:data];
-//        if(model.seq == 0)
-//        {
-//            NSLog(@"接收到主推数据->%@",model.result);
-//        }
-//        else
-//        {
-//            NSLog(@"接收到请求数据->%@",model.result);
-//        }
-//        if(self.delegate)
-//        {
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                [self.delegate OnReceiveSuccess:model];
-//                model = nil;
-//            });
-//        }
-//        
-//    }
-    
-    
+    NSLog(@"%d",data.length);
     if (_curFrameData == nil) {
         _curFrameData = [NSMutableData dataWithData:data];
         _curFrameLength = INT_MAX;
@@ -156,7 +128,7 @@ SINGLETON_IMPLEMENTION(SocketConnect);
         NSData *tmp = [_curFrameData subdataWithRange:NSMakeRange(0, _curFrameLength)];
         dispatch_async(_processQueue, ^{
             PackageModel *model = [[GYTPackage sharedGYTPackage]decodeJSON:tmp];
-            if (model && (model.cmd == NET_CMD_RPC)) {
+            if (model && (model.cmd == NET_CMD_RPC || model.cmd == NET_CMD_NOTIFICATION)) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.delegate OnReceiveSuccess:model];
                 });
@@ -188,7 +160,7 @@ SINGLETON_IMPLEMENTION(SocketConnect);
 
 -(void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag
 {
-    NSLog(@"发送数据成功");
+//    NSLog(@"发送数据成功");
 }
 
 #pragma mark - 发送数据给服务端

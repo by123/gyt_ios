@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "gyt/view/DealView.m"
-            timestampString = "486962910.897336"
+            timestampString = "486991918.729986"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "596"
-            endingLineNumber = "596"
-            landmarkName = "-OnReceiveSuccess:"
+            startingLineNumber = "709"
+            endingLineNumber = "709"
+            landmarkName = "-pushResult:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,29 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "gyt/view/DealView.m"
-            timestampString = "486962941.80251"
+            filePath = "gyt/connect/data/PushDataHandle.m"
+            timestampString = "486991979.738801"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "618"
-            endingLineNumber = "618"
-            landmarkName = "-OnReceiveSuccess:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "gyt/view/DealView.m"
-            timestampString = "486962960.980688"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "621"
-            endingLineNumber = "621"
-            landmarkName = "-OnReceiveSuccess:"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "-handlePushData:delegate:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

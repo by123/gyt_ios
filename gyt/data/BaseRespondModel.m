@@ -10,15 +10,36 @@
 
 @implementation BaseRespondModel
 
+#pragma mark 解数据包
 +(BaseRespondModel *) buildModel : (id)respondObject
 {
     PackageModel *packageModel = respondObject;
-    NSLog(@"接收到数据->%@",packageModel.result);
+    NSLog(@"--------------------接收到数据--------------------\n%@",packageModel.result);
     BaseRespondModel *model = [BaseRespondModel mj_objectWithKeyValues:packageModel.result];
     id params = model.params;
     model.response = [params objectForKey:@"response"];
-    model.error = [ErrorModel mj_objectWithKeyValues:params];
+    model.error = [self handleError:params];
+    
+    if(model.error.ErrorID == 0)
+    {
+        NSLog(@"--------------------请求成功--------------------\nseq=%lld",packageModel.seq);
+    }
+    else
+    {
+        [DialogHelper showTips:model.error.ErrorMsg];
+    }
     return model;
+}
+
+#pragma mark 处理错误请求
++(ErrorModel *)handleError : (id)data
+{
+    id error = [data objectForKey:@"error"];
+    ErrorModel *errorModel = [[ErrorModel alloc]init];
+    errorModel.ErrorID = [[error objectForKey:@"ErrorID"] intValue];
+    errorModel.ErrorMsg = [error objectForKey:@"ErrorMsg"];;
+    
+    return errorModel;
 }
 
 @end

@@ -20,6 +20,7 @@
 #import "ByListDialog.h"
 #import "ContractDB.h"
 #import "DealHoldingModel.h"
+#import "PushDataModel.h"
 
 @interface DealView()
 
@@ -86,7 +87,7 @@
     NSMutableArray *holdingDatas;
     NSMutableArray *holdByDatas;
     NSMutableArray *holdProfileDatas;
-    DealHoldModel *dealModel;
+    DealHoldModel *currentModel;
     NSInteger currentItemSelect;
     NSInteger currentTabSelect;
     EEntrustBS director;
@@ -118,7 +119,7 @@
 {
     self.backgroundColor = BACKGROUND_COLOR;
     currentItemSelect= -1;
-    dealModel = [[DealHoldModel alloc]init];
+    currentModel = [[DealHoldModel alloc]init];
     [self initTopView];
     [self initBottomView];
 //    [self requestQuery:XT_CPositionStatics];
@@ -310,6 +311,7 @@
     
     [self initHoldData];
     [self requestQuery:XT_CPositionStatics];
+    [self pushData];
 
 }
 
@@ -338,7 +340,15 @@
     currentItemSelect = position;
     switch (currentTabSelect) {
         case 0:
-            
+            if(!IS_NS_COLLECTION_EMPTY(holdDatas))
+            {
+                DealHoldModel *model = [holdDatas objectAtIndex:position];
+                currentModel = model;
+                NSString *message = [NSString stringWithFormat:@"%@",model.m_strExchangeID];
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认平仓吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+                alert.tag = 3;
+                [alert show];
+            }
             break;
         case 1:
             if(!IS_NS_COLLECTION_EMPTY(holdingDatas))
@@ -491,12 +501,16 @@
     {
         if(alertView.tag == 0 || alertView.tag == 1)
         {
-            [self order];
+            [self order : nil];
         }
         else if(alertView.tag == 2)
         {
             DealHoldByModel *model = [holdByDatas objectAtIndex:currentItemSelect];
             [self cancelOrder:model];
+        }
+        else if(alertView.tag == 3)
+        {
+            [self order : currentModel];
         }
     }
 }
@@ -529,7 +543,7 @@
 
 
 #pragma mark 请求下单
--(void)order
+-(void)order : (DealHoldModel *)model
 {
     NSString *accountInfoStr =  [[Account sharedAccount] getAccountInfo];
     UserInfoModel *account = [UserInfoModel mj_objectWithKeyValues:accountInfoStr];
@@ -540,12 +554,30 @@
     double price = [[_priceTextField getTextFieldText] doubleValue];
     double hand = [[_handTextField getTextFieldText] doubleValue];
     
-    orderModel.info = [OrderModel buildOrderModel:name orderPrice:price orderNum:hand direction:director offsetFlag:EOFF_THOST_FTDC_OF_Open];
+    if(model != nil)
+    {
+        int mDirection = 0;
+        if(model.m_nDirection == ENTRUST_BUY)
+        {
+            mDirection = ENTRUST_SELL;
+        }
+        else
+        {
+            mDirection = ENTRUST_BUY;
+        }
+        orderModel.info = [OrderModel buildOrderModel:model.m_strInstrumentID orderPrice:9140 orderNum:model.m_nOpenVolume direction:mDirection offsetFlag:EOFF_THOST_FTDC_OF_Close];
+    }
+    else
+    {
+        orderModel.info = [OrderModel buildOrderModel:name orderPrice:price orderNum:hand direction:director offsetFlag:EOFF_THOST_FTDC_OF_Open];
+    }
+
     NSMutableDictionary *dic =[JSONUtil parseDic:orderModel];
     NSString *jsonStr = [JSONUtil parse:@"order" params:dic];
     
     [[SocketConnect sharedSocketConnect] sendData:jsonStr delegate:self seq:GYT_ORDER];
 }
+
 
 #pragma mark 撤单
 -(void)cancelOrder : (DealHoldByModel *)order
@@ -563,6 +595,18 @@
     NSLog(@"数据->%@",jsonStr);
     [[SocketConnect sharedSocketConnect] sendData:jsonStr delegate:self seq:GYT_CANCEL];
 
+}
+
+#pragma mark 订阅委托数据
+-(void)pushData
+{
+//    PushDataModel *model = [[PushDataModel alloc]init];
+//    NSString *accountInfoStr =  [[Account sharedAccount] getAccountInfo];
+//    UserInfoModel *account = [UserInfoModel mj_objectWithKeyValues:accountInfoStr];
+//    model.account = account;
+
+//   NSString *jsonStr = [JSONUtil parse:@"pushData" params:nil];
+//    [[SocketConnect sharedSocketConnect]sendData:jsonStr delegate:self seq:GYT_PUSHDATA];
 }
 
 #pragma mark 接收数据
@@ -585,10 +629,6 @@
             }
             [self reloadData:holdDatas];
 
-        }
-        else
-        {
-            [DialogHelper showTips:@"无持仓数据"];
         }
     }
     else if(packageModel.seq == XT_COrderDetail && !IS_NS_STRING_EMPTY(packageModel.result))
@@ -645,23 +685,53 @@
     }
     else if(packageModel.seq == GYT_ORDER)
     {
-        id data = [respondModel.response objectForKey:@"res"];
-        DealHoldByModel *holdByModel = [DealHoldByModel mj_objectWithKeyValues:data];
-        holdByModel.m_tag = [OrderTagModel mj_objectWithKeyValues:holdByModel.m_tag];
-        if(holdByModel != nil)
-        {
-            [holdByDatas addObject:holdByModel];
-            [self reloadData:holdByDatas];
-            [DialogHelper showSuccessTips:@"下单成功"];
-        }
-        else
-        {
-            [DialogHelper showTips:@"下单失败"];
-        }
+//        id data = [respondModel.response objectForKey:@"res"];
+//        DealHoldByModel *holdByModel = [DealHoldByModel mj_objectWithKeyValues:data];
+//        holdByModel.m_tag = [OrderTagModel mj_objectWithKeyValues:holdByModel.m_tag];
+//        if(holdByModel != nil)
+//        {
+//            [holdByDatas addObject:holdByModel];
+//            [self reloadData:holdByDatas];
+//        }
     }
     else if(packageModel.seq == GYT_CANCEL)
     {
-        [DialogHelper showSuccessTips:@"提交撤单申请成功"];
+//        [DialogHelper showSuccessTips:@"提交撤单申请成功"];
+    }
+    else if(packageModel.cmd == 4)
+    {
+        [[PushDataHandle sharedPushDataHandle] handlePushData:packageModel.result delegate :self];
+    }
+}
+
+-(void)pushResult:(id)data
+{
+    if([data isKindOfClass:[DealHoldByModel class]])
+    {
+        DealHoldByModel *model = data;
+        [holdByDatas addObject:model];
+        [self reloadData:holdByDatas];
+    }
+    else if([data isKindOfClass:[DealProfitModel class]])
+    {
+        DealProfitModel *model = data;
+        [holdProfileDatas addObject:model];
+        [self reloadData:holdProfileDatas];
+    }
+    else if([data isKindOfClass:[DealHoldModel class]])
+    {
+        DealHoldModel *model = data;
+        for(DealHoldModel *tempModel in holdDatas)
+        {
+            if([tempModel.m_strInstrumentID isEqualToString:model.m_strInstrumentID] && (tempModel.m_nDirection == model.m_nDirection))
+            {
+                [holdDatas removeObject:tempModel];
+                [holdDatas addObject:model];
+                break;
+            }
+        }
+        [self reloadData:holdDatas];
+
     }
 
 }

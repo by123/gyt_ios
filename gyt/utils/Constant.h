@@ -19,11 +19,14 @@
 #pragma mark 网络请求相关
 //#define Root_Url @"http://192.168.1.106:8081" //陈勇
 //#define Root_Url @"http://192.168.1.111:8081"//夏瑶
-#define Host @"192.168.1.118" //赵杰
-//#define Host @"192.168.1.111"   //夏瑶
-#define Port 64350
-#define Root_Url @"http://114.119.6.146:8081"
 
+#define Host @"192.168.1.118" //赵杰
+#define Port 64350
+
+//#define Host @"114.119.6.146" //外网
+//#define Port 64360
+
+#define Root_Url @"http://114.119.6.146:8081"
 
 
 //请求登录
@@ -34,7 +37,6 @@
 #define Request_UserInfo @"queryAccountBaseInfo"
 //提交出入金申请
 #define Request_CashApplyInfo @"commitCashApplyInfo"
-
 
 
 #define Info_Net_Error @"网络异常，点击刷新"
@@ -144,7 +146,9 @@ typedef NS_ENUM(NSInteger, ResondType)
     GYT_MAINPUSH= 101,
     GYT_LOGIN,
     GYT_ORDER,
-    GYT_CANCEL
+    GYT_CANCEL,
+    GYT_PUSHDATA
+
 
 };
 
