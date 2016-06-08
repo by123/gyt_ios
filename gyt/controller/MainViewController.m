@@ -84,8 +84,6 @@
 }
 
 
-
-
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter]removeObserver:self name:Notify_Menu_Title object:nil];
@@ -135,7 +133,8 @@
     [self showNavigationBar];
     self.navBar.delegate = self;
     [self.navBar setTitle:@"主力合约"];
-    [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_search"]];
+    [self.navBar setLeftImage:[UIImage imageNamed:@"ic_right_menu"]];
+    [self.navBar setRightImage:[UIImage imageNamed:@"ic_search"]];
 }
 
 -(void)initHeaderView
@@ -290,7 +289,7 @@
 
 -(void)OnRightClickCallBack : (NSInteger)position
 {
-    if(position == 1)
+    if(position == 0)
     {
         [SearchViewController show:self];
         return;
@@ -461,17 +460,16 @@
         NSLog(@"合约信息->%@",packageModel.result);
         BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
         QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:respondModel.response];
-        //        NSLog(@"资金信息->%@",model.d);
         NSMutableArray *array = model.datas;
         if(!IS_NS_COLLECTION_EMPTY(array))
         {
             for(id obj in array)
             {
                 ProductModel *productModel = [ProductModel mj_objectWithKeyValues:obj];
-                if(productModel.m_nIsMain == 2147483647)
-                {
+//                if(productModel.m_nIsMain == 2147483647)
+//                {
                     [_datas addObject:productModel];
-                }
+//                }
             }
             [_tableView reloadData];
         }
@@ -483,6 +481,12 @@
         {
             [DialogHelper showTips:@"订阅成功"];
         }
+    }
+    
+    if(packageModel.cmd == 4)
+    {
+        
+        NSLog(@"123");
     }
 
 }

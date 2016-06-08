@@ -17,7 +17,7 @@
 
 
 #pragma mark 自定义模型转string
-+(NSMutableDictionary *)parseStr : (NSObject *)model;
++(NSString *)parseStr : (NSObject *)model;
 
 
 #pragma mark 自定义模型转dic

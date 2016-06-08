@@ -53,10 +53,6 @@
 //交易所名称
 @property (copy, nonatomic) NSString *exchangeName;
 
-
-
-
-
 //用户信息
 @property (strong, nonatomic)UserInfoModel *m_strAccountID;
 
@@ -110,5 +106,6 @@
 
 //最小波动
 @property (assign, nonatomic) double m_dPriceTick;
+
 
 @end

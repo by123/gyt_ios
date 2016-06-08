@@ -41,15 +41,15 @@
         SplashViewController *splashViewController = [[SplashViewController alloc]init];
         SlideNavigationController *controller = [[SlideNavigationController alloc]initWithRootViewController:splashViewController];
         
-        LeftMenuViewContriller *leftMenu = [[LeftMenuViewContriller alloc]init];
-        leftMenu.view.backgroundColor = BACKGROUND_COLOR;
+//        LeftMenuViewContriller *leftMenu = [[LeftMenuViewContriller alloc]init];
+//        leftMenu.view.backgroundColor = BACKGROUND_COLOR;
         
         RightMenuViewController *rightMenu = [[RightMenuViewController alloc]init];
         rightMenu.view.backgroundColor = BACKGROUND_COLOR;
         rightMenu.controller = controller;
         
-        controller.leftMenu = leftMenu;
-        controller.righMenu = rightMenu;
+        controller.leftMenu = rightMenu;
+//        controller.righMenu = rightMenu;
         
         _window.rootViewController = controller;
         [_window makeKeyAndVisible];
@@ -59,15 +59,15 @@
         LoginViewController *mainViewController =[[LoginViewController alloc]init];
         SlideNavigationController *controller = [[SlideNavigationController alloc]initWithRootViewController:mainViewController];
         
-        LeftMenuViewContriller *leftMenu = [[LeftMenuViewContriller alloc]init];
-        leftMenu.view.backgroundColor = BACKGROUND_COLOR;
+//        LeftMenuViewContriller *leftMenu = [[LeftMenuViewContriller alloc]init];
+//        leftMenu.view.backgroundColor = BACKGROUND_COLOR;
         
         RightMenuViewController *rightMenu = [[RightMenuViewController alloc]init];
         rightMenu.view.backgroundColor = BACKGROUND_COLOR;
         rightMenu.controller = controller;
         
-        controller.leftMenu = leftMenu;
-        controller.righMenu = rightMenu;
+        controller.leftMenu = rightMenu;
+//        controller.righMenu = rightMenu;
         _window.rootViewController = controller;
         [_window makeKeyAndVisible];
     }

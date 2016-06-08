@@ -41,13 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "gyt/connect/data/PushDataHandle.m"
-            timestampString = "486991979.738801"
+            filePath = "gyt/controller/MainViewController.m"
+            timestampString = "487060146.930657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
-            landmarkName = "-handlePushData:delegate:"
+            startingLineNumber = "489"
+            endingLineNumber = "489"
+            landmarkName = "-OnReceiveSuccess:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

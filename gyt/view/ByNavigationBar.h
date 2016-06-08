@@ -52,6 +52,8 @@
 
 -(void)setLeftSubTitle : (NSString *)subTitle;
 
+-(void)setRightImage : (UIImage *)image;
+
 -(void)setRightBtn1Image : (UIImage *)image;
 
 -(void)setRightBtn2Image : (UIImage *)image;

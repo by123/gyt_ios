@@ -133,6 +133,11 @@
     _leftSubLabel.frame = CGRectMake(40, _leftMainLabel.y + _leftMainLabel.contentSize.height, _leftSubLabel.contentSize.width,_leftSubLabel.contentSize.height);
 }
 
+-(void)setRightImage : (UIImage *)image
+{
+    [_rightBtn setImage:image forState:UIControlStateNormal];
+}
+
 #pragma mark 设置右边倒数第二个按钮图片
 -(void)setRightBtn1Image : (UIImage *)image
 {

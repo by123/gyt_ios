@@ -59,7 +59,8 @@
     UILabel *titleLabel = self.navBar.titleLabel;
     titleLabel.text = @"主菜单";
     float height = titleLabel.contentSize.height;
-    titleLabel.frame = CGRectMake(90, StatuBar_HEIGHT + (NavigationBar_HEIGHT - height)/2, SCREEN_WIDTH - 60-60, height);
+//    titleLabel.frame = CGRectMake(90, StatuBar_HEIGHT + (NavigationBar_HEIGHT - height)/2, SCREEN_WIDTH - 60-60, height);
+    titleLabel.frame = CGRectMake(30, StatuBar_HEIGHT + (NavigationBar_HEIGHT - height)/2, SCREEN_WIDTH - 60-60, height);
 }
 
 
@@ -69,7 +70,7 @@
     _tableView.showsVerticalScrollIndicator = NO;
     _tableView.showsHorizontalScrollIndicator = NO;
     _tableView.backgroundColor = [UIColor clearColor];
-    _tableView.frame = CGRectMake(60, NavigationBar_HEIGHT + StatuBar_HEIGHT, SCREEN_WIDTH - 60, SCREEN_HEIGHT - (NavigationBar_HEIGHT + StatuBar_HEIGHT));
+    _tableView.frame = CGRectMake(0, NavigationBar_HEIGHT + StatuBar_HEIGHT, SCREEN_WIDTH - 60, SCREEN_HEIGHT - (NavigationBar_HEIGHT + StatuBar_HEIGHT));
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.delegate = self;
     _tableView.dataSource = self;
