@@ -19,11 +19,12 @@
 #import "UserRespondModel.h"
 #import "QueryRequest.h"
 #import "MoneyDetailModel.h"
-#define Item_Height 40
 #import "LoginModel.h"
 #import "IPMacUtil.h"
 #import "UUID.h"
 #import "PushRequestModel.h"
+
+#define Item_Height 40
 
 @interface MainViewController ()
 
@@ -35,9 +36,14 @@
 
 @property (strong, nonatomic) UIButton *inventoryButton;
 
+@property (strong, nonatomic) MainItemDialog *mainItemDialog;
+
 @end
 
 @implementation MainViewController
+{
+    CGFloat currentY;
+}
 
 -(void)testData
 {
@@ -73,8 +79,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.automaticallyAdjustsScrollViewInsets = NO;
     _datas = [[NSMutableArray alloc]init];
-//    [self testData];
     [self initView];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getUserInfo) name:Notify_Update_AccountInfo object:nil];
@@ -99,7 +105,7 @@
 
 - (BOOL)slideNavigationControllerShouldDisplayRightMenu
 {
-    return YES;
+    return NO;
 }
 
 
@@ -125,6 +131,8 @@
     {
         [self getUserInfo];
     }
+    
+    [self initMainItemDialog];
 }
 
 
@@ -207,7 +215,12 @@
     
 }
 
-
+-(void)initMainItemDialog
+{
+    _mainItemDialog = [[MainItemDialog alloc]init];
+    _mainItemDialog.delegate = self;
+    [self.view addSubview:_mainItemDialog];
+}
 #pragma mark 更新布局
 -(void)updateView : (NSNotification *)notification
 {
@@ -267,6 +280,10 @@
         InventoryType inventoryType = [userDefaults integerForKey:UserDefault_Inventory];
 
         [cell setData:model updown:updownType inventore:inventoryType];
+        cell.tag = indexPath.row;
+        //添加长按手势
+        UILongPressGestureRecognizer * longPressGesture =[[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPress:)];
+        [cell addGestureRecognizer:longPressGesture];
     }
     return cell;
 }
@@ -280,6 +297,14 @@
         [DetailViewController show:self model:model];
     }
 }
+
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    currentY = scrollView.contentOffset.y;
+    NSLog(@"%f",currentY);
+}
+
 
 #pragma mark 点击回调事件
 -(void)OnLeftClickCallback
@@ -309,6 +334,32 @@
     {
         [self selectinventoryType];
     }
+}
+
+#pragma mark 长按cell处理
+-(void)longPress : (UILongPressGestureRecognizer *)recongizer
+{
+    MainTableCell *cell = (MainTableCell *)recongizer.view;
+    NSLog(@"%d",cell.tag);
+    if(!IS_NS_COLLECTION_EMPTY(_datas))
+    {
+        CGFloat height = Item_Height * (cell.tag + 1) + StatuBar_HEIGHT + NavigationBar_HEIGHT + 30 - currentY ;
+        [_mainItemDialog updateView:[_datas objectAtIndex:cell.tag] height:height];
+        [_mainItemDialog setHidden:NO];
+    }
+    
+}
+
+#pragma mark 点击加入自选合约
+-(void)OnLeftClicked : (ProductModel *)model
+{
+    [[ContractDB sharedContractDB] insertItem:DBMyContractTable model:model];
+}
+
+#pragma mark 点击下单
+-(void)OnRightClicked : (ProductModel *)model
+{
+    [DetailViewController show:self model:model];
 }
 
 
@@ -363,30 +414,10 @@
     UserInfoModel *data = [[UserInfoModel alloc]init];
     data.m_strAccountID = [[Account sharedAccount] getUid];
     data.m_nAccountType = AT_OUTTER_FUTURE;
-//    data.m_strPassword = @"";
-//    data.m_nStatus = @"";
-//    data.m_bAllowTrade = NO;
-//    data.m_bSimAccount = NO;
-    
     data.m_bSubAccount = @(true);
-//    data.m_strName = @"";
-//    data.m_strUserID = @"";
-//    data.m_strBrokerID = @"";
-    
     NSString *accountInfoStr = [JSONUtil parseStr:data];
     [[Account sharedAccount] saveAccountInfo:accountInfoStr];
     NSLog(@"用户信息->%@",accountInfoStr);
-
-//    UserInfoDataModel *model = [[UserInfoDataModel alloc]init];
-//    model.sessionId = [[Account sharedAccount] getSessionId];
-//    model.accountInfo = [JSONUtil parseDic:data];
-//
-//    
-//    NSMutableDictionary *dic = [JSONUtil parseDic:model];
-//    
-//    NSString *jsonStr = [JSONUtil parse:Request_UserInfo params:dic];
-//    
-//    [self requestUserInfo : jsonStr];
     [self requestAccountInfo];
     [self requestProductInfo];
     [self requestsubMultiPrice];
@@ -431,6 +462,8 @@
     [[SocketConnect sharedSocketConnect]sendData:jsonStr delegate:self seq:0];
 }
 
+
+#pragma mark 接收到服务端传来的数据
 -(void)OnReceiveSuccess:(id)respondObject
 {
     PackageModel *packageModel = respondObject;
@@ -485,7 +518,7 @@
     
     if(packageModel.cmd == 4)
     {
-        
+        //主推数据
         NSLog(@"123");
     }
 

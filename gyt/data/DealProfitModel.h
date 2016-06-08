@@ -20,7 +20,7 @@
 //交易所ID
 @property (copy, nonatomic) NSString *m_strExchangeID;
 
-// 交易所名称
+//交易所名称
 @property (copy, nonatomic) NSString *m_strExchangeName;
 
 //品种代码
@@ -44,10 +44,10 @@
 //买卖方向
 @property (assign, nonatomic) EEntrustBS m_nDirection;
 
-// 成交日期
+//成交日期
 @property (copy, nonatomic) NSString *m_strTradeDate;
 
-// 成交时间
+//成交时间
 @property (copy, nonatomic) NSString *m_strTradeTime;
 
 //开平
@@ -62,7 +62,7 @@
 //成交量
 @property (assign, nonatomic) int m_nVolume;
 
-// 手续费
+//手续费
 @property (assign, nonatomic) double m_dComssion;
 
 //类型，例如市价单 限价单

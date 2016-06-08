@@ -43,7 +43,7 @@
 @synthesize rightBarButtonItem;
 @synthesize enableSwipeGesture;
 
-#define MENU_OFFSET 60
+#define MENU_OFFSET 100
 #define MENU_SLIDE_ANIMATION_DURATION .3
 #define MENU_QUICK_SLIDE_ANIMATION_DURATION .1
 #define MENU_IMAGE @"menu-button"

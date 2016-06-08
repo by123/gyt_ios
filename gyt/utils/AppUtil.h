@@ -26,4 +26,13 @@
 
 +(NSString *)hexStringFromString:(NSString *)string;
 
+
++(UIImage*)transformImage : (UIImage *)image
+                   width  : (CGFloat)width
+                   height : (CGFloat)height;
+
++ (UIImage *)imageCompressForSize:(UIImage *)sourceImage targetSize:(CGSize)size;
+
++ (CGFloat)pointValue:(CGFloat)pixel;
+
 @end
