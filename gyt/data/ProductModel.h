@@ -53,19 +53,25 @@
 //交易所名称
 @property (copy, nonatomic) NSString *exchangeName;
 
+
+
+//-----------------------------------------------------
+
+
+
 //用户信息
 @property (strong, nonatomic)UserInfoModel *m_strAccountID;
 
-// 交易所ID
+//交易所ID
 @property (copy, nonatomic) NSString *m_strExchangeID;
 
-// 交易所名称
+//交易所名称
 @property (copy, nonatomic) NSString *m_strExchangeName;
 
-// 品种ID
+//品种ID
 @property (copy, nonatomic) NSString *m_strProductID;
 
-// 品种名称代码
+//品种名称代码
 @property (copy, nonatomic) NSString *m_strProductName;
 
 //合约ID

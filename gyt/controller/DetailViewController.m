@@ -83,7 +83,7 @@
     [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_drawline"]];
     [self.navBar setRightBtn2Image:[UIImage imageNamed:@"ic_lightning"]];
     [self.navBar setRightBtn3Image:nil];
-    currentPosition = 4;
+    currentPosition = 3;
     [self OnSelectPosition:currentPosition];
 }
 
@@ -98,7 +98,7 @@
 -(void)initBottomView
 {
     NSMutableArray *titleArray = [[NSMutableArray alloc]init];
-    [titleArray addObject:[BottomTabView buildModel:@"新闻" image:[UIImage imageNamed:@"ic_news"]]];
+//    [titleArray addObject:[BottomTabView buildModel:@"新闻" image:[UIImage imageNamed:@"ic_news"]]];
     [titleArray addObject:[BottomTabView buildModel:@"盘口" image:[UIImage imageNamed:@"ic_handicap"]]];
     [titleArray addObject:[BottomTabView buildModel:@"分时" image:[UIImage imageNamed:@"ic_timeline_chart"]]];
     [titleArray addObject:[BottomTabView buildModel:@"k线" image:[UIImage imageNamed:@"ic_kline_chart"]]];
@@ -194,13 +194,28 @@
     }
     else if(currentPosition == 0)
     {
-        
+        if(position == 0)
+        {
+            [DialogHelper showTips:@"开发中"];
+            //下单
+        }
+        else if(position == 1)
+        {
+            //加入自选合约
+            [self addContract];
+        }
+        else if(position == 2)
+        {
+            //加入预警合约
+            [self addWarnContract];
+        }
     }
     else if(currentPosition == 1)
     {
         if(position == 0)
         {
-            //下单
+            //闪电下单
+            [DialogHelper showTips:@"开发中"];
         }
         else if(position == 1)
         {
@@ -217,28 +232,13 @@
     {
         if(position == 0)
         {
-            //闪电下单
-        }
-        else if(position == 1)
-        {
-            //加入自选合约
-            [self addContract];
-        }
-        else if(position == 2)
-        {
-            //加入预警合约
-            [self addWarnContract];
-        }
-    }
-    else if(currentPosition == 3)
-    {
-        if(position == 0)
-        {
             //选时间
+            [DialogHelper showTips:@"开发中"];
         }
         else if(position == 1)
         {
             //下单
+            [DialogHelper showTips:@"开发中"];
         }
         else if(position == 2)
         {
@@ -251,11 +251,12 @@
             [self addWarnContract];
         }
     }
-    else if(currentPosition == 4)
+    else if(currentPosition == 3)
     {
         if(position == 0)
         {
             //刷新
+            [DialogHelper showTips:@"开发中"];
         }
     }
  
@@ -294,16 +295,16 @@
 -(void)OnSelectPosition:(NSInteger)position
 {
     switch (position) {
+//        case 0:
+//            [self.navBar setTitle:@"新闻"];
+//            [self.navBar setRightImage:nil];
+//            [self.navBar setRightBtn1Image:nil];
+//            [self.navBar setRightBtn2Image:nil];
+//            [self.navBar setRightBtn3Image:nil];
+//            [self.navBar setRightBtn4Image:nil];
+//            [self addNewsView];
+//            break;
         case 0:
-            [self.navBar setTitle:@"新闻"];
-            [self.navBar setRightImage:nil];
-            [self.navBar setRightBtn1Image:nil];
-            [self.navBar setRightBtn2Image:nil];
-            [self.navBar setRightBtn3Image:nil];
-            [self.navBar setRightBtn4Image:nil];
-            [self addNewsView];
-            break;
-        case 1:
             [self.navBar setLeftMainTitle:@"详细报价"];
             [self.navBar setRightImage:[UIImage imageNamed:@"ic_lightning"]];
 
@@ -323,7 +324,7 @@
             [self.navBar.titleLabel setHidden:YES];
             [self addHandicapView];
             break;
-        case 2:
+        case 1:
             [self.navBar setLeftMainTitle:@"分时图"];
             [self.navBar setRightImage:[UIImage imageNamed:@"ic_lightning"]];
             if(_model.isMyContract)
@@ -342,7 +343,7 @@
             [self.navBar.titleLabel setHidden:YES];
             [self addTimelineView];
             break;
-        case 3:
+        case 2:
             [self.navBar setLeftMainTitle:@"k线图"];
             [self.navBar setRightImage:[UIImage imageNamed:@"ic_clock"]];
             [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_lightning"]];
@@ -361,7 +362,7 @@
             [self.navBar.titleLabel setHidden:YES];
             [self addKlineView];
             break;
-        case 4:
+        case 3:
             [self.navBar setLeftMainTitle:@"下单"];
             [self.navBar setRightImage:[UIImage imageNamed:@"ic_refresh"]];
             [self.navBar setRightBtn1Image:nil];

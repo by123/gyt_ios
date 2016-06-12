@@ -35,7 +35,7 @@
         for(int i = 0; i< _datas.count ;i ++)
         {
             UIButton *button = [self build:[_datas objectAtIndex:i]];
-            button.frame = CGRectMake(i * SCREEN_WIDTH/5, 0, SCREEN_WIDTH/5, kBottomHeight);
+            button.frame = CGRectMake(i * SCREEN_WIDTH/4, 0, SCREEN_WIDTH/4, kBottomHeight);
             button.tag = i;
             if(i == 4)
             {
@@ -56,7 +56,7 @@
     UIImageView *imageView = [[UIImageView alloc]init];
     imageView.image = model.image;
     imageView.frame = CGRectMake(0, 4, 18, 18);
-    imageView.centerX = SCREEN_WIDTH/10;
+    imageView.centerX = SCREEN_WIDTH/8;
     [button addSubview:imageView];
     
     
@@ -65,7 +65,7 @@
     label.text = model.title;
     label.font = [UIFont systemFontOfSize:11.0f];
     label.frame = CGRectMake(0, 24, label.contentSize.width, label.contentSize.height);
-    label.centerX = SCREEN_WIDTH/10;
+    label.centerX = SCREEN_WIDTH/8;
     [button addSubview:label];
     
     return button;

@@ -42,18 +42,18 @@
 -(void)initView
 {
     _handicapDatas = [[NSMutableArray alloc]init];
-    [self initTopView];
+//    [self initTopView];
     [self initTableView];
 }
 
--(void)initTopView
-{
-    NSArray *array = @[@"盘口",@"成交明细"];
-    _tabView = [[ByTabView alloc]initWithTitles:CGRectMake(0, 0, SCREEN_WIDTH, kTopHeight) array:array];
-    _tabView.backgroundColor = [ColorUtil colorWithHexString:@"#444444"];
-    _tabView.delegate = self;
-    [self addSubview:_tabView];
-}
+//-(void)initTopView
+//{
+//    NSArray *array = @[@"盘口",@"成交明细"];
+//    _tabView = [[ByTabView alloc]initWithTitles:CGRectMake(0, 0, SCREEN_WIDTH, kTopHeight) array:array];
+//    _tabView.backgroundColor = [ColorUtil colorWithHexString:@"#444444"];
+//    _tabView.delegate = self;
+//    [self addSubview:_tabView];
+//}
 
 -(void)OnSelect:(NSInteger)position
 {
@@ -72,7 +72,7 @@
 -(void)initTableView
 {
     _handicapTableView = [[UITableView alloc]init];
-    _handicapTableView.frame = CGRectMake(0, kTopHeight, SCREEN_WIDTH, kContentHeight);
+    _handicapTableView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT - kTopHeight);
     _handicapTableView.backgroundColor = BACKGROUND_COLOR;
     _handicapTableView.scrollEnabled = NO;
     _handicapTableView.delegate = self;
