@@ -44,6 +44,8 @@
 		CF6342AE1CFD952D008149B1 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6342AD1CFD952D008149B1 /* GCDAsyncSocket.m */; };
 		CF6342B11CFDA39A008149B1 /* SocketConnect.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6342B01CFDA39A008149B1 /* SocketConnect.m */; };
 		CF6CED571CFC1E64007F97AA /* OrderRespondModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CED561CFC1E64007F97AA /* OrderRespondModel.m */; };
+		CF9E66011D0D586800069477 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF9E66001D0D586800069477 /* AboutViewController.m */; };
+		CF9E66041D0D593000069477 /* ManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF9E66031D0D593000069477 /* ManageViewController.m */; };
 		CFA3B8E81CD9AAB70063AE3E /* CandleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA3B8D31CD9AAB70063AE3E /* CandleView.m */; };
 		CFA3B8E91CD9AAB70063AE3E /* indicators.json in Resources */ = {isa = PBXBuildFile; fileRef = CFA3B8D41CD9AAB70063AE3E /* indicators.json */; };
 		CFA3B8EA1CD9AAB70063AE3E /* AreaChartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA3B8D71CD9AAB70063AE3E /* AreaChartModel.m */; };
@@ -230,6 +232,10 @@
 		CF6342B01CFDA39A008149B1 /* SocketConnect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketConnect.m; sourceTree = "<group>"; };
 		CF6CED551CFC1E64007F97AA /* OrderRespondModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderRespondModel.h; sourceTree = "<group>"; };
 		CF6CED561CFC1E64007F97AA /* OrderRespondModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderRespondModel.m; sourceTree = "<group>"; };
+		CF9E65FF1D0D586800069477 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		CF9E66001D0D586800069477 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		CF9E66021D0D593000069477 /* ManageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManageViewController.h; sourceTree = "<group>"; };
+		CF9E66031D0D593000069477 /* ManageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManageViewController.m; sourceTree = "<group>"; };
 		CFA3B8D21CD9AAB70063AE3E /* CandleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CandleView.h; sourceTree = "<group>"; };
 		CFA3B8D31CD9AAB70063AE3E /* CandleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CandleView.m; sourceTree = "<group>"; };
 		CFA3B8D41CD9AAB70063AE3E /* indicators.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = indicators.json; sourceTree = "<group>"; };
@@ -871,6 +877,10 @@
 				CFDD2DEA1CCA19C900E81E3F /* MyContractViewController.m */,
 				CFDD2DEF1CCB47E000E81E3F /* WarnContractViewController.h */,
 				CFDD2DF01CCB47E000E81E3F /* WarnContractViewController.m */,
+				CF9E65FF1D0D586800069477 /* AboutViewController.h */,
+				CF9E66001D0D586800069477 /* AboutViewController.m */,
+				CF9E66021D0D593000069477 /* ManageViewController.h */,
+				CF9E66031D0D593000069477 /* ManageViewController.m */,
 			);
 			name = rightmenu;
 			sourceTree = "<group>";
@@ -1238,6 +1248,7 @@
 				CFD37E681D07FEAC00297DE2 /* MainItemDialog.m in Sources */,
 				CFDD2DE71CCA0DAE00E81E3F /* RightMenuModel.m in Sources */,
 				CFC15BCC1CC5D15D0077FA19 /* ByTabView.m in Sources */,
+				CF9E66011D0D586800069477 /* AboutViewController.m in Sources */,
 				CFDD2EA21CCF4DE100E81E3F /* MJRefreshAutoStateFooter.m in Sources */,
 				CFA3B8F11CD9AAB70063AE3E /* Section.m in Sources */,
 				CFDD2E9C1CCF4DE100E81E3F /* MJRefreshBackFooter.m in Sources */,
@@ -1332,6 +1343,7 @@
 				CF48C6431CD22C8B00BF4EF9 /* SearchCell.m in Sources */,
 				CF6342B11CFDA39A008149B1 /* SocketConnect.m in Sources */,
 				CFDD2DD61CC8AEE100E81E3F /* DealHoldModel.m in Sources */,
+				CF9E66041D0D593000069477 /* ManageViewController.m in Sources */,
 				CFA3B8EA1CD9AAB70063AE3E /* AreaChartModel.m in Sources */,
 				CFC15BAD1CC361A80077FA19 /* HandicapModel.m in Sources */,
 				CFF183B81CE6D67A00E991C4 /* TitleContentModel.m in Sources */,

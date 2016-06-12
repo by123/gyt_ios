@@ -31,6 +31,7 @@
 #define  KEY_USERNAME_PASSWORD @"com.company.app.usernamepassword"
 #define  KEY_USERNAME @"com.company.app.username"
 #define  KEY_PASSWORD @"com.company.app.password"
+#define  AppName @"海华e事通"
 
 //-------------------获取设备大小-------------------------
 //NavBar高度

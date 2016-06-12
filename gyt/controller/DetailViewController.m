@@ -316,7 +316,7 @@
             {
                 [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_collect_normal"]];
             }
-            [self.navBar setRightBtn2Image:[UIImage imageNamed:@"ic_warn"]];
+            [self.navBar setRightBtn2Image:nil];
             [self.navBar setRightBtn3Image:nil];
             [self.navBar setRightBtn4Image:nil];
             [self.navBar.leftMainLabel setHidden:NO];
@@ -335,7 +335,7 @@
             {
                 [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_collect_normal"]];
             }
-            [self.navBar setRightBtn2Image:[UIImage imageNamed:@"ic_warn"]];
+            [self.navBar setRightBtn2Image:nil];
             [self.navBar setRightBtn3Image:nil];
             [self.navBar setRightBtn4Image:nil];
             [self.navBar.leftMainLabel setHidden:NO];
@@ -355,7 +355,7 @@
             {
                 [self.navBar setRightBtn2Image:[UIImage imageNamed:@"ic_collect_normal"]];
             }
-            [self.navBar setRightBtn3Image:[UIImage imageNamed:@"ic_warn"]];
+            [self.navBar setRightBtn3Image:nil];
             [self.navBar setRightBtn4Image:nil];
             [self.navBar.leftMainLabel setHidden:NO];
             [self.navBar.leftSubLabel setHidden:NO];

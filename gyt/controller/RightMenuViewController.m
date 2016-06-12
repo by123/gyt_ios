@@ -15,6 +15,8 @@
 #import "LoginModel.h"
 #import "MoneyDetailViewController.h"
 #import "MoneyManageViewController.h"
+#import "AboutViewController.h"
+#import "ManageViewController.h"
 
 @interface RightMenuViewController ()
 
@@ -123,17 +125,16 @@
             [MyContractViewController show:self.controller];
             break;
         case 3:
-            [WarnContractViewController show:self.controller]; 
+            [ManageViewController show:self.controller];
             break;
         case 4:
-            
+            [AboutViewController show:self.controller];
             break;
         case 5:
+            [self logout];
             
             break;
-        case 6:
-            [self logout];
-            break;
+    
             
         default:
             break;
