@@ -494,6 +494,8 @@
         BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
         QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:respondModel.response];
         NSMutableArray *array = model.datas;
+        [_datas addObject:[[ProductModel alloc]init]];
+
         if(!IS_NS_COLLECTION_EMPTY(array))
         {
             for(id obj in array)
@@ -504,8 +506,9 @@
                     [_datas addObject:productModel];
 //                }
             }
-            [_tableView reloadData];
         }
+        [_tableView reloadData];
+
     }
     else if(packageModel.seq == 0)
     {

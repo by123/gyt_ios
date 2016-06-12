@@ -13,7 +13,7 @@
 +(NSMutableArray *)getData : (MoneyDetailModel *)model
 {
     NSMutableArray *datas = [[NSMutableArray alloc]init];
-    [datas addObject:[TitleContentModel buildData:@"资金账号" content:model.m_strAccountID]];
+    [datas addObject:[TitleContentModel buildData:@"资金账号" content:[[Account sharedAccount]getUid]]];
     [datas addObject:[TitleContentModel buildData:@"权益" content:[NSString stringWithFormat:@"%.2f",model.m_dCurBalance]]];
     [datas addObject:[TitleContentModel buildData:@"可用资金" content:[NSString stringWithFormat:@"%.2f",model.m_dAvailable]]];
     [datas addObject:[TitleContentModel buildData:@"币种" content:[Constant getMoneyType:model.m_nMoneyType]]];

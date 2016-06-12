@@ -198,16 +198,16 @@
     }
     else if(currentPosition == 1)
     {
-        if(position == 1)
+        if(position == 0)
         {
             //下单
         }
-        else if(position == 2)
+        else if(position == 1)
         {
             //加入自选合约
             [self addContract];
         }
-        else if(position == 3)
+        else if(position == 2)
         {
             //加入预警合约
             [self addWarnContract];
@@ -215,16 +215,16 @@
     }
     else if(currentPosition == 2)
     {
-        if(position == 1)
+        if(position == 0)
         {
             //闪电下单
         }
-        else if(position == 2)
+        else if(position == 1)
         {
             //加入自选合约
             [self addContract];
         }
-        else if(position == 3)
+        else if(position == 2)
         {
             //加入预警合约
             [self addWarnContract];
@@ -232,20 +232,20 @@
     }
     else if(currentPosition == 3)
     {
-        if(position == 1)
+        if(position == 0)
         {
             //选时间
         }
-        else if(position == 2)
+        else if(position == 1)
         {
             //下单
         }
-        else if(position == 3)
+        else if(position == 2)
         {
             //加入自选合约
             [self addContract];
         }
-        else if(position == 4)
+        else if(position == 3)
         {
             //加入预警合约
             [self addWarnContract];
@@ -253,7 +253,7 @@
     }
     else if(currentPosition == 4)
     {
-        if(position == 1)
+        if(position == 0)
         {
             //刷新
         }
@@ -296,6 +296,7 @@
     switch (position) {
         case 0:
             [self.navBar setTitle:@"新闻"];
+            [self.navBar setRightImage:nil];
             [self.navBar setRightBtn1Image:nil];
             [self.navBar setRightBtn2Image:nil];
             [self.navBar setRightBtn3Image:nil];
@@ -304,16 +305,18 @@
             break;
         case 1:
             [self.navBar setLeftMainTitle:@"详细报价"];
-            [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_lightning"]];
+            [self.navBar setRightImage:[UIImage imageNamed:@"ic_lightning"]];
+
             if(_model.isMyContract)
             {
-                [self.navBar setRightBtn2Image:[UIImage imageNamed:@"ic_collect_press"]];
+                [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_collect_press"]];
             }
             else
             {
-                [self.navBar setRightBtn2Image:[UIImage imageNamed:@"ic_collect_normal"]];
+                [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_collect_normal"]];
             }
-            [self.navBar setRightBtn3Image:[UIImage imageNamed:@"ic_warn"]];
+            [self.navBar setRightBtn2Image:[UIImage imageNamed:@"ic_warn"]];
+            [self.navBar setRightBtn3Image:nil];
             [self.navBar setRightBtn4Image:nil];
             [self.navBar.leftMainLabel setHidden:NO];
             [self.navBar.leftSubLabel setHidden:NO];
@@ -322,6 +325,26 @@
             break;
         case 2:
             [self.navBar setLeftMainTitle:@"分时图"];
+            [self.navBar setRightImage:[UIImage imageNamed:@"ic_lightning"]];
+            if(_model.isMyContract)
+            {
+                [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_collect_press"]];
+            }
+            else
+            {
+                [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_collect_normal"]];
+            }
+            [self.navBar setRightBtn2Image:[UIImage imageNamed:@"ic_warn"]];
+            [self.navBar setRightBtn3Image:nil];
+            [self.navBar setRightBtn4Image:nil];
+            [self.navBar.leftMainLabel setHidden:NO];
+            [self.navBar.leftSubLabel setHidden:NO];
+            [self.navBar.titleLabel setHidden:YES];
+            [self addTimelineView];
+            break;
+        case 3:
+            [self.navBar setLeftMainTitle:@"k线图"];
+            [self.navBar setRightImage:[UIImage imageNamed:@"ic_clock"]];
             [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_lightning"]];
             if(_model.isMyContract)
             {
@@ -332,26 +355,7 @@
                 [self.navBar setRightBtn2Image:[UIImage imageNamed:@"ic_collect_normal"]];
             }
             [self.navBar setRightBtn3Image:[UIImage imageNamed:@"ic_warn"]];
-
             [self.navBar setRightBtn4Image:nil];
-            [self.navBar.leftMainLabel setHidden:NO];
-            [self.navBar.leftSubLabel setHidden:NO];
-            [self.navBar.titleLabel setHidden:YES];
-            [self addTimelineView];
-            break;
-        case 3:
-            [self.navBar setLeftMainTitle:@"k线图"];
-            [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_clock"]];
-            [self.navBar setRightBtn2Image:[UIImage imageNamed:@"ic_lightning"]];
-            if(_model.isMyContract)
-            {
-                [self.navBar setRightBtn3Image:[UIImage imageNamed:@"ic_collect_press"]];
-            }
-            else
-            {
-                [self.navBar setRightBtn3Image:[UIImage imageNamed:@"ic_collect_normal"]];
-            }
-            [self.navBar setRightBtn4Image:[UIImage imageNamed:@"ic_warn"]];
             [self.navBar.leftMainLabel setHidden:NO];
             [self.navBar.leftSubLabel setHidden:NO];
             [self.navBar.titleLabel setHidden:YES];
@@ -359,7 +363,8 @@
             break;
         case 4:
             [self.navBar setLeftMainTitle:@"下单"];
-            [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_refresh"]];
+            [self.navBar setRightImage:[UIImage imageNamed:@"ic_refresh"]];
+            [self.navBar setRightBtn1Image:nil];
             [self.navBar setRightBtn2Image:nil];
             [self.navBar setRightBtn3Image:nil];
             [self.navBar setRightBtn4Image:nil];
