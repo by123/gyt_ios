@@ -46,6 +46,7 @@
 		CF6CED571CFC1E64007F97AA /* OrderRespondModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CED561CFC1E64007F97AA /* OrderRespondModel.m */; };
 		CF9E66011D0D586800069477 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF9E66001D0D586800069477 /* AboutViewController.m */; };
 		CF9E66041D0D593000069477 /* ManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF9E66031D0D593000069477 /* ManageViewController.m */; };
+		CF9E66071D0D898500069477 /* TimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF9E66061D0D898500069477 /* TimeView.m */; };
 		CFA3B8E81CD9AAB70063AE3E /* CandleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA3B8D31CD9AAB70063AE3E /* CandleView.m */; };
 		CFA3B8E91CD9AAB70063AE3E /* indicators.json in Resources */ = {isa = PBXBuildFile; fileRef = CFA3B8D41CD9AAB70063AE3E /* indicators.json */; };
 		CFA3B8EA1CD9AAB70063AE3E /* AreaChartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA3B8D71CD9AAB70063AE3E /* AreaChartModel.m */; };
@@ -127,7 +128,6 @@
 		CFDD2EAB1CCF4DE100E81E3F /* UIScrollView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2E921CCF4DE100E81E3F /* UIScrollView+MJExtension.m */; };
 		CFDD2EAC1CCF4DE100E81E3F /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2E941CCF4DE100E81E3F /* UIScrollView+MJRefresh.m */; };
 		CFDD2EAD1CCF4DE100E81E3F /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2E961CCF4DE100E81E3F /* UIView+MJExtension.m */; };
-		CFDD2EAE1CCF4DE100E81E3F /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2E981CCF4DE100E81E3F /* README.md */; };
 		CFDD2EBA1CCF97F400E81E3F /* SplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2EB91CCF97F400E81E3F /* SplashViewController.m */; };
 		CFDFFA941CBF742500401CB3 /* SlideNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDFFA931CBF742500401CB3 /* SlideNavigationController.m */; };
 		CFDFFA971CBF759800401CB3 /* LeftMenuViewContriller.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDFFA961CBF759800401CB3 /* LeftMenuViewContriller.m */; };
@@ -236,6 +236,8 @@
 		CF9E66001D0D586800069477 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		CF9E66021D0D593000069477 /* ManageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManageViewController.h; sourceTree = "<group>"; };
 		CF9E66031D0D593000069477 /* ManageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManageViewController.m; sourceTree = "<group>"; };
+		CF9E66051D0D898500069477 /* TimeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeView.h; sourceTree = "<group>"; };
+		CF9E66061D0D898500069477 /* TimeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeView.m; sourceTree = "<group>"; };
 		CFA3B8D21CD9AAB70063AE3E /* CandleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CandleView.h; sourceTree = "<group>"; };
 		CFA3B8D31CD9AAB70063AE3E /* CandleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CandleView.m; sourceTree = "<group>"; };
 		CFA3B8D41CD9AAB70063AE3E /* indicators.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = indicators.json; sourceTree = "<group>"; };
@@ -389,7 +391,6 @@
 		CFDD2E941CCF4DE100E81E3F /* UIScrollView+MJRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJRefresh.m"; sourceTree = "<group>"; };
 		CFDD2E951CCF4DE100E81E3F /* UIView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MJExtension.h"; sourceTree = "<group>"; };
 		CFDD2E961CCF4DE100E81E3F /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
-		CFDD2E981CCF4DE100E81E3F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		CFDD2EB81CCF97F400E81E3F /* SplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplashViewController.h; sourceTree = "<group>"; };
 		CFDD2EB91CCF97F400E81E3F /* SplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashViewController.m; sourceTree = "<group>"; };
 		CFDFFA921CBF742500401CB3 /* SlideNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideNavigationController.h; sourceTree = "<group>"; };
@@ -659,6 +660,8 @@
 				CFC15BA41CC234B00077FA19 /* detail */,
 				CF4A6D571CBE28DD00B36C93 /* cell */,
 				CF4A6D581CBE28DD00B36C93 /* extra */,
+				CF9E66051D0D898500069477 /* TimeView.h */,
+				CF9E66061D0D898500069477 /* TimeView.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -994,7 +997,6 @@
 			children = (
 				CFDD2E6A1CCF4DE100E81E3F /* LICENSE */,
 				CFDD2E971CCF4DE100E81E3F /* MJRefresh */,
-				CFDD2E981CCF4DE100E81E3F /* README.md */,
 			);
 			name = MJRefresh;
 			path = ../Pods/MJRefresh;
@@ -1273,6 +1275,7 @@
 				CF0DBB741CF6CAEF0082E411 /* IPMacUtil.m in Sources */,
 				CFA3B8F01CD9AAB70063AE3E /* Chart.m in Sources */,
 				CFA3B8FB1CD9AB050063AE3E /* EncryptHelper.m in Sources */,
+				CF9E66071D0D898500069477 /* TimeView.m in Sources */,
 				CFD37E591D05335E00297DE2 /* PushModel.m in Sources */,
 				CF6340321CFD65FB008149B1 /* NSData+XTAMData.m in Sources */,
 				CFF183D21CE9D6CA00E991C4 /* MoneyManageDetailViewController.m in Sources */,
@@ -1329,7 +1332,6 @@
 				CFA3B90B1CDAF0A90063AE3E /* Slide.m in Sources */,
 				CFA3B8FA1CD9AB050063AE3E /* CacheHelper.m in Sources */,
 				CFDD2EA31CCF4DE100E81E3F /* MJRefreshBackGifFooter.m in Sources */,
-				CFDD2EAE1CCF4DE100E81E3F /* README.md in Sources */,
 				CF6342AE1CFD952D008149B1 /* GCDAsyncSocket.m in Sources */,
 				CFF183CD1CE9B26B00E991C4 /* MoneyManageCell.m in Sources */,
 				CFD37E0D1CFEA73100297DE2 /* PackageModel.m in Sources */,

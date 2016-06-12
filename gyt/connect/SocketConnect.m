@@ -9,6 +9,7 @@
 #import "SocketConnect.h"
 #import "NSData+XTAMData.h"
 #import "NSMutableData+XTAMData.h"
+#import "AppDelegate.h"
 
 #define HEAD_TAG      666
 #define BODY_TAG      667
@@ -66,6 +67,7 @@ SINGLETON_IMPLEMENTION(SocketConnect);
     }
 }
 
+
 #pragma mark - 判断与服务器是否正确链接
 -(void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port
 {
@@ -98,9 +100,6 @@ SINGLETON_IMPLEMENTION(SocketConnect);
 {
     if(buttonIndex == 1)
     {
-//        UIApplication *application = [UIApplication sharedApplication];
-//        hua = [MBProgressHUD showHUDAddedTo: animated:YES];
-        [NSThread sleepForTimeInterval:3.0f];
         [self connect];
         NSLog(@"重新连接");
     }

@@ -15,6 +15,7 @@
 
 @implementation BaseViewController
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = BACKGROUND_COLOR;
@@ -29,5 +30,7 @@
     _navBar.delegate = self;
     [self.view addSubview:_navBar];
 }
+
+
 
 @end

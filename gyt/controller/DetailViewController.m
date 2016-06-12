@@ -14,6 +14,7 @@
 #import "WarnDialog.h"
 #import "NewsView.h"
 #import "CandleView.h"
+#import "TimeView.h"
 
 
 @interface DetailViewController ()
@@ -188,11 +189,8 @@
 
 -(void)OnRightClickCallBack : (NSInteger) position
 {
-    if(position == 0)
-    {
-        [[SlideNavigationController sharedInstance]righttMenuSelected:nil];
-    }
-    else if(currentPosition == 0)
+
+    if(currentPosition == 0)
     {
         if(position == 0)
         {
@@ -233,7 +231,7 @@
         if(position == 0)
         {
             //选时间
-            [DialogHelper showTips:@"开发中"];
+            [self addTimeView];
         }
         else if(position == 1)
         {
@@ -290,6 +288,14 @@
 {
     WarnDialog *dialog = [[WarnDialog alloc]initWithData:_model];
     [self.view addSubview:dialog];
+}
+
+
+#pragma mark 选择时间
+-(void)addTimeView
+{
+    TimeView *timeView = [[TimeView alloc]init];
+    [self.view addSubview:timeView];
 }
 
 -(void)OnSelectPosition:(NSInteger)position

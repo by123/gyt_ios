@@ -8,17 +8,23 @@
 
 #import "AddViewController.h"
 
+
+
 @interface AddViewController()
 
 @property (strong, nonatomic) UIWebView *webView;
+
+@property (assign, nonatomic) CashType cashType;
 
 @end
 
 @implementation AddViewController
 
 +(void)show : (BaseViewController *)controller
+       type : (CashType) type
 {
     AddViewController *targetController = [[AddViewController alloc]init];
+    targetController.cashType = type;
     [controller.navigationController pushViewController:targetController animated:YES];
 }
 
@@ -33,7 +39,16 @@
     [self showNavigationBar];
     self.navBar.delegate = self;
     [ self.navBar.rightBtn setHidden:YES];
-    [self.navBar setTitle:@"银行转期货"];
+    if(_cashType == CashType_In)
+    {
+        [self.navBar setTitle:@"银行转期货"];
+    }
+    else
+    {
+        [self.navBar setTitle:@"期货转银行"];
+    }
+   
+    
     [self.navBar setLeftImage:[UIImage imageNamed:@"ic_back"]];
 }
 

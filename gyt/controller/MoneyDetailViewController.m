@@ -169,14 +169,14 @@
 #pragma mark 银行转期货
 -(void)OnBankToFuture
 {
-    [AddViewController show:self];
+    [AddViewController show:self type:CashType_In];
 }
 
 
 #pragma mark 期货转银行
 -(void)OnFutureToBank
 {
-    [ReduceViewController show:self];
+    [AddViewController show:self type:CashType_Out];
 }
 
 

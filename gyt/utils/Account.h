@@ -36,4 +36,5 @@ SINGLETON_DECLARATION(Account);
 - (NSString *)getAccountInfo;
 
 
+
 @end

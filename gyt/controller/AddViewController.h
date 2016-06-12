@@ -11,6 +11,7 @@
 
 @interface AddViewController : BaseViewController<ByNavigationBarDelegate,UIWebViewDelegate>
 
-+(void)show : (BaseViewController *)controller;
++(void)show : (BaseViewController *)controller
+       type : (CashType) type;
 
 @end
