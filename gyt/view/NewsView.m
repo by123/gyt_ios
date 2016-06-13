@@ -25,7 +25,7 @@
 
 
 -(instancetype)initWithData : (CGRect)frame
-                      model : (ProductModel *)model
+                      model : (PushModel *)model
 {
     self = [super initWithFrame:frame];
     if(self)

@@ -19,7 +19,7 @@
 @property (strong, nonatomic) UIView *lineView;
 
 
-@property (strong, nonatomic) ProductModel *model;
+@property (strong, nonatomic) PushModel *model;
 
 @end
 
@@ -65,7 +65,7 @@
     
 }
 
--(void)updateView : (ProductModel *)model
+-(void)updateView : (PushModel *)model
            height : (CGFloat)height
 {
     self.model = model;

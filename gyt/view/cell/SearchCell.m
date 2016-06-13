@@ -51,12 +51,12 @@
 }
 
 
--(void)setData : (ProductModel *)model
+-(void)setData : (PushModel *)model
 {
-    _nameLabel.text = model.name;
+    _nameLabel.text = model.m_strInstrumentID;
     _nameLabel.frame = CGRectMake(15, 0, _nameLabel.contentSize.width, 40);
     
-    _exchangeLabel.text = model.exchangeName;
+    _exchangeLabel.text = model.m_strExchangeName;
     _exchangeLabel.frame = CGRectMake(SCREEN_WIDTH -15 - _exchangeLabel.contentSize.width, 0, _exchangeLabel.contentSize.width, 40);
 
 }

@@ -8,7 +8,7 @@
 //
 
 #import "SearchViewController.h"
-#import "ProductModel.h"
+#import "PushModel.h"
 #import "ContractDB.h"
 #import "InsetTextField.h"
 #import "SearchCell.h"
@@ -100,9 +100,9 @@
     InsetTextField *textField = sender;
     
     [_searchDatas removeAllObjects];
-    for(ProductModel *model in _datas)
+    for(PushModel *model in _datas)
     {
-        if([model.name containsString:textField.text])
+        if([model.m_strInstrumentID containsString:textField.text])
         {
             [_searchDatas addObject:model];
         }
@@ -139,8 +139,8 @@
     cell.selectedBackgroundView.backgroundColor = SELECT_COLOR;
     if(!IS_NS_COLLECTION_EMPTY(_searchDatas))
     {
-        ProductModel *model = [_searchDatas objectAtIndex:indexPath.row];
-        model.exchangeName = @"上海期货交易所";
+        PushModel *model = [_searchDatas objectAtIndex:indexPath.row];
+        model.m_strExchangeName = @"上海期货交易所";
         [cell setData:model];
     }
     return cell;
@@ -150,8 +150,8 @@
 {
     if(!IS_NS_COLLECTION_EMPTY(_searchDatas))
     {
-        ProductModel *model = [_searchDatas objectAtIndex:indexPath.row];
-        _searchTextField.text = model.name;
+        PushModel *model = [_searchDatas objectAtIndex:indexPath.row];
+        _searchTextField.text = model.m_strInstrumentID;
         [[ContractDB sharedContractDB] insertItem:DBSearchContractTable model:model];
         [_tableView reloadData];
         [DetailViewController show:self model:model];

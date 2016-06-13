@@ -19,7 +19,7 @@
 
 @interface DetailViewController ()
 
-@property (strong, nonatomic) ProductModel *model;
+@property (strong, nonatomic) PushModel *model;
 
 @property (strong, nonatomic) UIView *bodyView;
 
@@ -41,10 +41,10 @@
 }
 
 +(void)show : (BaseViewController *)controller
-      model : (ProductModel *) model
+      model : (PushModel *) model
 {
     DetailViewController *targetController = [[DetailViewController alloc]init];
-    ProductModel *temp = [[ContractDB sharedContractDB] queryItem:DBMyContractTable pid:model.pid];
+    PushModel *temp = [[ContractDB sharedContractDB] queryItem:DBMyContractTable instrumentid:model.m_strInstrumentID];
     if(temp)
     {
         targetController.model = temp;
@@ -54,8 +54,6 @@
         targetController.model = model;
     }
     [controller presentViewController:targetController animated:YES completion:nil];
-
-//    [controller.navigationController pushViewController:targetController animated:YES];
 }
 
 - (void)viewDidLoad {
@@ -80,7 +78,7 @@
     self.navBar.delegate = self;
     [self.navBar setLeftImage:[UIImage imageNamed:@"ic_back"]];
     [self.navBar setLeftMainTitle:@"分时图"];
-    [self.navBar setLeftSubTitle:_model.name];
+    [self.navBar setLeftSubTitle:_model.m_strInstrumentID];
     [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_drawline"]];
     [self.navBar setRightBtn2Image:[UIImage imageNamed:@"ic_lightning"]];
     [self.navBar setRightBtn3Image:nil];
@@ -266,19 +264,19 @@
     if(_model.isMyContract)
     {
         _model.isMyContract = NO;
-        [DialogHelper showWarnTips:[NSString stringWithFormat:@"%@已取消自选合约",_model.name]];
-        [[ContractDB sharedContractDB] deleteItem:DBMyContractTable pid:_model.pid];
+        [DialogHelper showWarnTips:[NSString stringWithFormat:@"%@已取消自选合约",_model.m_strInstrumentID]];
+        [[ContractDB sharedContractDB] deleteItem:DBMyContractTable instrumentid:_model.m_strInstrumentID];
 
     }
     else
     {
         _model.isMyContract = YES;
-        [DialogHelper showSuccessTips:[NSString stringWithFormat:@"%@已加入自选合约",_model.name]];
+        [DialogHelper showSuccessTips:[NSString stringWithFormat:@"%@已加入自选合约",_model.m_strInstrumentID]];
         [[ContractDB sharedContractDB] insertItem:DBMyContractTable model:_model];
 
     }
-    [[ContractDB sharedContractDB] updateItem:DBHistoryContractTable pid:_model.pid model:_model];
-    [[ContractDB sharedContractDB] updateItem:DBWarnContractTable pid:_model.pid model:_model];
+    [[ContractDB sharedContractDB] updateItem:DBHistoryContractTable instrumentid:_model.m_strInstrumentID model:_model];
+    [[ContractDB sharedContractDB] updateItem:DBWarnContractTable instrumentid:_model.m_strInstrumentID model:_model];
 
     [self OnSelectPosition:currentPosition];
 }

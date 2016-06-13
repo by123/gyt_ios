@@ -73,7 +73,7 @@
 @property (strong, nonatomic) ByDynamicTableView *dynamicView;
 
 //数据
-@property (strong, nonatomic) ProductModel *model;
+@property (strong, nonatomic) PushModel *model;
 
 @property (strong, nonatomic) MoneyDetailModel *moneyModel;
 
@@ -94,7 +94,7 @@
 }
 
 -(instancetype)initWithData : (CGRect)frame
-              model : (ProductModel *)model
+              model : (PushModel *)model
                view : (UIView *)rootView
 {
     self = [super initWithFrame:frame];
@@ -174,7 +174,7 @@
     _nameButton.layer.cornerRadius = 2;
     _nameButton.layer.masksToBounds = YES;
     [_nameButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
-    [_nameButton setTitle:@"CN 1606" forState:UIControlStateNormal];
+    [_nameButton setTitle:_model.m_strInstrumentID forState:UIControlStateNormal];
     _nameButton.frame = CGRectMake(10, view.height+5, SCREEN_WIDTH/2+20, 30);
     [_nameButton addTarget:self action:@selector(OnClick:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_nameButton];
@@ -186,7 +186,7 @@
     
     //价格
     _priceTextField = [[ByTextField alloc]initWithType:NumberFloat frame:CGRectMake(10 + _handTextField.width + 5 , _nameButton.y + _nameButton.height +5, _nameButton.width/2 +5, 30) rootView:_rootView title:@"价格:"];
-    [_priceTextField setTextFiledText:@"9140"];
+    [_priceTextField setTextFiledText:[NSString stringWithFormat:@"%.1f",_model.m_dLastPrice]];
     
     __weak DealView *weakSelf = self;
     _priceTextField.block = ^(BOOL isCompelete,NSString *text)
@@ -212,7 +212,7 @@
     
     _currentPriceLabel = [[UILabel alloc]init];
     _currentPriceLabel.textColor = TEXT_COLOR;
-    _currentPriceLabel.text = [NSString stringWithFormat:@"新:%.f",_model.recentPrice];
+    _currentPriceLabel.text = [NSString stringWithFormat:@"新:%.f",_model.m_dLastPrice];
     _currentPriceLabel.font = [UIFont systemFontOfSize:13.0f];
     _currentPriceLabel.frame = CGRectMake(5, 2.5, _currentPriceLabel.contentSize.width, 20);
     [priceView addSubview:_currentPriceLabel];
@@ -226,7 +226,7 @@
     
     _buyPriceLabel = [[UILabel alloc]init];
     _buyPriceLabel.textColor = TEXT_COLOR;
-    _buyPriceLabel.text = [NSString stringWithFormat:@"买:%.f",_model.recentPrice];
+    _buyPriceLabel.text = [NSString stringWithFormat:@"买:%.f",_model.m_dLastPrice];
     _buyPriceLabel.font = [UIFont systemFontOfSize:13.0f];
     _buyPriceLabel.frame = CGRectMake(5, 22.5, _buyPriceLabel.contentSize.width, 20);
     [priceView addSubview:_buyPriceLabel];
@@ -240,7 +240,7 @@
     
     _sellPriceLabel = [[UILabel alloc]init];
     _sellPriceLabel.textColor = TEXT_COLOR;
-    _sellPriceLabel.text = [NSString stringWithFormat:@"卖:%.f",_model.recentPrice+1];
+    _sellPriceLabel.text = [NSString stringWithFormat:@"卖:%.f",_model.m_dLastPrice+1];
     _sellPriceLabel.font = [UIFont systemFontOfSize:13.0f];
     _sellPriceLabel.frame = CGRectMake(5, 42.5, _sellPriceLabel.contentSize.width, 20);
     [priceView addSubview:_sellPriceLabel];
@@ -481,9 +481,9 @@
             return;
         }
         NSMutableArray *temps = [[NSMutableArray alloc]init];
-        for(ProductModel *model in array)
+        for(PushModel *model in array)
         {
-            [temps addObject:model.name];
+            [temps addObject:model.m_strInstrumentID];
         }
         ByListDialog *dialog = [[ByListDialog alloc]initWithData:temps title:@"自选合约"];
         dialog.delegate = self;

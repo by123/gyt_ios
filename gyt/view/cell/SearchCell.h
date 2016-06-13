@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ProductModel.h"
+#import "PushModel.h"
 
 @interface SearchCell : UITableViewCell
 
 
--(void)setData : (ProductModel *)model;
+-(void)setData : (PushModel *)model;
 
 +(NSString *)identify;
 

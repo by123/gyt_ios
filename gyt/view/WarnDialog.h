@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ProductModel.h"
+#import "PushModel.h"
 
 
 @interface WarnDialog : UIView
 
--(instancetype)initWithData : (ProductModel *)model;
+-(instancetype)initWithData : (PushModel *)model;
 
 @end

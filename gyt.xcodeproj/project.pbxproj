@@ -64,7 +64,6 @@
 		CFA3B9011CD9D68C0063AE3E /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CFA3B9001CD9D68C0063AE3E /* libz.tbd */; };
 		CFA3B90B1CDAF0A90063AE3E /* Slide.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA3B90A1CDAF0A90063AE3E /* Slide.m */; };
 		CFC15B8E1CBF94A90077FA19 /* MainTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15B8D1CBF94A90077FA19 /* MainTableCell.m */; };
-		CFC15B911CBFA6830077FA19 /* ProductModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15B901CBFA6830077FA19 /* ProductModel.m */; };
 		CFC15B941CC11B770077FA19 /* LeftMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15B931CC11B770077FA19 /* LeftMenuCell.m */; };
 		CFC15B971CC205390077FA19 /* MenuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15B961CC205390077FA19 /* MenuModel.m */; };
 		CFC15B9A1CC20F070077FA19 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15B991CC20F070077FA19 /* DetailViewController.m */; };
@@ -269,8 +268,6 @@
 		CFA3B90A1CDAF0A90063AE3E /* Slide.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Slide.m; sourceTree = "<group>"; };
 		CFC15B8C1CBF94A90077FA19 /* MainTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTableCell.h; sourceTree = "<group>"; };
 		CFC15B8D1CBF94A90077FA19 /* MainTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableCell.m; sourceTree = "<group>"; };
-		CFC15B8F1CBFA6830077FA19 /* ProductModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductModel.h; sourceTree = "<group>"; };
-		CFC15B901CBFA6830077FA19 /* ProductModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductModel.m; sourceTree = "<group>"; };
 		CFC15B921CC11B770077FA19 /* LeftMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftMenuCell.h; sourceTree = "<group>"; };
 		CFC15B931CC11B770077FA19 /* LeftMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftMenuCell.m; sourceTree = "<group>"; };
 		CFC15B951CC205390077FA19 /* MenuModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuModel.h; sourceTree = "<group>"; };
@@ -586,8 +583,6 @@
 				CFDD2DD31CC8AEBD00E81E3F /* detail */,
 				CFDD2DE51CCA0DAE00E81E3F /* RightMenuModel.h */,
 				CFDD2DE61CCA0DAE00E81E3F /* RightMenuModel.m */,
-				CFC15B8F1CBFA6830077FA19 /* ProductModel.h */,
-				CFC15B901CBFA6830077FA19 /* ProductModel.m */,
 				CFC15B951CC205390077FA19 /* MenuModel.h */,
 				CFC15B961CC205390077FA19 /* MenuModel.m */,
 				CFC15B9E1CC22BE10077FA19 /* BottomModel.h */,
@@ -1318,7 +1313,6 @@
 				CFF1838C1CE472CE00E991C4 /* UserInfoModel.m in Sources */,
 				CFDD2DDC1CC8C01000E81E3F /* DealHoldByModel.m in Sources */,
 				CF4A6D5A1CBE28DD00B36C93 /* AppUtil.m in Sources */,
-				CFC15B911CBFA6830077FA19 /* ProductModel.m in Sources */,
 				CFA3B8FC1CD9AB050063AE3E /* ResourceHelper.m in Sources */,
 				CFDD2EA81CCF4DE100E81E3F /* MJRefreshStateHeader.m in Sources */,
 				CFC15BD21CC607900077FA19 /* DynamicCell.m in Sources */,

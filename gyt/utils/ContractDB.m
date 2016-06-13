@@ -131,10 +131,10 @@ SINGLETON_IMPLEMENTION(ContractDB);
 
 #pragma mark 插入一条数据
 -(BOOL)insertItem : (NSString *)tableName
-            model : (ProductModel *)model
+            model : (PushModel *)model
 {
     BOOL res = NO;
-    if([self queryItem:tableName pid:model.pid] != nil)
+    if([self queryItem:tableName instrumentid:model.m_strInstrumentID] != nil)
     {
         NSLog(@"数据库已有数据！");
         return NO;
@@ -151,16 +151,16 @@ SINGLETON_IMPLEMENTION(ContractDB);
                model.m_strInstrumentID,
                model.m_strInstrumentName,
                model.m_strExpireDate,
-               model.m_bAllowTrade,
-               model.m_volumeMultiple,
-               model.m_preClose,
-               model.m_moneyType,
-               model.m_dLastSettlementPrice,
-               model.m_dUpStopPrice,
-               model.m_dDownStopPrice,
-               model.m_nIsMain,
-               model.m_lDealVolum,
-               model.m_dPriceTick
+               [NSString stringWithFormat:model.m_bAllowTrade ? @"YES": @"NO"],
+               [NSString stringWithFormat:@"%d",model.m_volumeMultiple],
+               [NSString stringWithFormat:@"%f",model.m_preClose],
+               [NSString stringWithFormat:@"%ld",(long)model.m_moneyType],
+               [NSString stringWithFormat:@"%f",model.m_dLastSettlementPrice],
+               [NSString stringWithFormat:@"%f",model.m_dUpStopPrice],
+               [NSString stringWithFormat:@"%f",model.m_dDownStopPrice],
+               [NSString stringWithFormat:@"%d",model.m_nIsMain],
+               [NSString stringWithFormat:@"%ld",model.m_lDealVolum],
+               [NSString stringWithFormat:@"%f",model.m_dPriceTick]
                ];
         [_db commit];
         [_db close];
@@ -178,8 +178,8 @@ SINGLETON_IMPLEMENTION(ContractDB);
 
 #pragma mark 更新一条数据
 -(BOOL)updateItem : (NSString *)tableName
-              pid : (int)pid
-            model : (ProductModel *)model
+     instrumentid : (NSString *)instrumentID
+            model : (PushModel *)model
 {
     BOOL res = NO;
     if([_db open])
@@ -203,7 +203,7 @@ SINGLETON_IMPLEMENTION(ContractDB);
               Item_IsMain,
               Item_DealVolum,
               Item_PriceTick,
-              Item_ID
+              Item_InstrumentID
               ],
                model.m_strExchangeID,
                model.m_strExchangeName,
@@ -222,7 +222,7 @@ SINGLETON_IMPLEMENTION(ContractDB);
                model.m_nIsMain,
                model.m_lDealVolum,
                model.m_dPriceTick,
-               [NSString stringWithFormat:@"%d",model.pid]];        
+               [NSString stringWithFormat:@"%@",model.m_strInstrumentID]];
         [_db commit];
         [_db close];
     }
@@ -240,12 +240,12 @@ SINGLETON_IMPLEMENTION(ContractDB);
 
 #pragma mark 删除一条数据
 -(BOOL)deleteItem : (NSString *)tableName
-              pid : (int)pid
+     instrumentid : (NSString *)instrumentID
 {
     BOOL res = NO;
     if([_db open])
     {
-        res = [_db executeUpdate:[NSString stringWithFormat:@"DELETE FROM %@ WHERE %@ = ?",tableName,Item_ProductID],[NSString stringWithFormat:@"%d",pid]];
+        res = [_db executeUpdate:[NSString stringWithFormat:@"DELETE FROM %@ WHERE %@ = ?",tableName,Item_InstrumentID],[NSString stringWithFormat:@"%@",instrumentID]];
         [_db close];
     }
     if(res)
@@ -267,8 +267,7 @@ SINGLETON_IMPLEMENTION(ContractDB);
     {
         FMResultSet *s = [_db executeQuery:[NSString stringWithFormat:@"SELECT * FROM %@",tableName]];
         while ([s next]) {
-            ProductModel *model = [[ProductModel alloc]init];
-            model.pid = [s intForColumn:Item_ProductID];
+            PushModel *model = [[PushModel alloc]init];
             model.m_strExchangeID = [s stringForColumn:Item_ExchangeID];
             model.m_strExchangeName = [s stringForColumn:Item_ExchangeName];
             model.m_strProductID = [s stringForColumn:Item_ProductID];
@@ -294,18 +293,17 @@ SINGLETON_IMPLEMENTION(ContractDB);
 }
 
 #pragma mark 查找一条数据
--(ProductModel *)queryItem : (NSString *)tableName
-                       pid : (int)pid
+-(PushModel *)queryItem:(NSString *)tableName
+             instrumentid : (NSString *)instrumentID
 {
-    ProductModel *model = nil;
+    PushModel *model = nil;
     if([_db open])
     {
         FMResultSet *s = [_db executeQuery:[NSString stringWithFormat:@"SELECT * FROM %@",tableName]];
         while ([s next]) {
-            if(pid == [s intForColumn:Item_ProductID])
+            if([instrumentID isEqualToString:[s stringForColumn:Item_InstrumentID]])
             {
-                model = [[ProductModel alloc]init];
-                model.pid = [s intForColumn:Item_ProductID];
+                model = [[PushModel alloc]init];
                 model.m_strExchangeID = [s stringForColumn:Item_ExchangeID];
                 model.m_strExchangeName = [s stringForColumn:Item_ExchangeName];
                 model.m_strProductID = [s stringForColumn:Item_ProductID];

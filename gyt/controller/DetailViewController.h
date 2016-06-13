@@ -7,13 +7,13 @@
 //
 
 #import "BaseViewController.h"
-#import "ProductModel.h"
+#import "PushModel.h"
 #import "BottomTabView.h"
 
 @interface DetailViewController : BaseViewController<ByNavigationBarDelegate,BottomTabViewDelegate>
 
 
 +(void)show : (BaseViewController *)controller
-      model : (ProductModel *) model;
+      model : (PushModel *) model;
 
 @end

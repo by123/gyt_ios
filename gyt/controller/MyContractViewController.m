@@ -7,7 +7,7 @@
 //
 
 #import "MyContractViewController.h"
-#import "ProductModel.h"
+#import "PushModel.h"
 #import "ContractDB.h"
 #import "MyContractCell.h"
 
@@ -88,8 +88,8 @@
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     if(!IS_NS_COLLECTION_EMPTY(_datas))
     {
-        ProductModel *model = [_datas objectAtIndex:indexPath.row];
-        [cell setData:model.name];
+        PushModel *model = [_datas objectAtIndex:indexPath.row];
+        [cell setData:model.m_strInstrumentID];
     }
     return cell;
 }
@@ -113,9 +113,9 @@
     
     if (editingStyle ==UITableViewCellEditingStyleDelete)
     {
-        ProductModel *model = [_datas objectAtIndex:indexPath.row];
+        PushModel *model = [_datas objectAtIndex:indexPath.row];
         [_datas removeObject:model];
-        [[ContractDB sharedContractDB] deleteItem:DBMyContractTable pid:model.pid];
+        [[ContractDB sharedContractDB] deleteItem:DBMyContractTable instrumentid:model.m_strInstrumentID];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
           withRowAnimation:UITableViewRowAnimationTop];
     }

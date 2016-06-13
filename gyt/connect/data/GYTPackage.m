@@ -55,8 +55,12 @@ SINGLETON_IMPLEMENTION(GYTPackage);
             resultStr = [[NSString alloc] initWithData:jsondata encoding:enc];
             if (resultStr == nil) {
               resultStr = [[NSString alloc] initWithData:jsondata encoding:NSASCIIStringEncoding];
+              
             }
         }
+        //最大值处理
+        resultStr = [resultStr stringByReplacingOccurrencesOfString:@"1.797693134862316e+308" withString:@"0"];
+        resultStr  = [resultStr stringByReplacingOccurrencesOfString:@"4.197936507034086e-006" withString:@"0"];
         model.result = resultStr;
     }
     return model;

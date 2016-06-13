@@ -341,7 +341,7 @@
 }
 
 
--(void)setWarnData : (ProductModel *)model
+-(void)setWarnData : (PushModel *)model
           maxWidth : (int)maxWidth
 {
     if(!IS_NS_COLLECTION_EMPTY(_widths))
@@ -355,7 +355,7 @@
             int width =  [[_widths objectAtIndex:i] intValue] * maxWidth / count;
             switch (i) {
                 case 0:
-                    label.text = model.name;
+                    label.text = model.m_strInstrumentID;
                     break;
                 case 1:
                     label.text = @"123";
@@ -364,7 +364,7 @@
                     label.text = @"111";
                     break;
                 case 3:
-                    label.text = [NSString stringWithFormat:@"%.f",model.recentPrice];
+                    label.text = [NSString stringWithFormat:@"%.f",model.m_dLastPrice];
                     break;
                 default:
                     break;

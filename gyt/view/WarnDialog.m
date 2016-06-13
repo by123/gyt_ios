@@ -15,7 +15,7 @@
 
 @interface WarnDialog()
 
-@property (strong , nonatomic) ProductModel *model;
+@property (strong , nonatomic) PushModel *model;
 
 @property (strong , nonatomic) UIButton *cancelBtn;
 
@@ -36,7 +36,7 @@
 
 @implementation WarnDialog
 
--(instancetype)initWithData : (ProductModel *)model;
+-(instancetype)initWithData : (PushModel *)model;
 {
     self = [super init];
     if(self)
@@ -62,7 +62,7 @@
     [self addSubview:rootView];
     
     _titleLabel = [[UILabel alloc]init];
-    _titleLabel.text = [NSString stringWithFormat:@"设置价格预警－%@",_model.name];
+    _titleLabel.text = [NSString stringWithFormat:@"设置价格预警－%@",_model.m_strInstrumentName];
     _titleLabel.font = [UIFont systemFontOfSize:16.0f];
     _titleLabel.textColor = [UIColor whiteColor];
     _titleLabel.backgroundColor = LINE_COLOR;
@@ -80,14 +80,14 @@
     
     _upTextField = [[InsetTextField alloc]init];
     _upTextField.hasTitle = NO;
-    _upTextField.text = [NSString stringWithFormat:@"%.f",_model.recentPrice];
+    _upTextField.text = [NSString stringWithFormat:@"%.f",_model.m_dLastPrice];
     _upTextField.frame = CGRectMake(170, 55, 80, 30);
     [_upTextField setKeyboardType:UIKeyboardTypeNumberPad];
     [rootView addSubview:_upTextField];
     
     _downTextField = [[InsetTextField alloc]init];
     _downTextField.hasTitle = NO;
-    _downTextField.text = [NSString stringWithFormat:@"%.f",_model.recentPrice];
+    _downTextField.text = [NSString stringWithFormat:@"%.f",_model.m_dLastPrice];
     [_downTextField setKeyboardType:UIKeyboardTypeNumberPad];
     _downTextField.frame = CGRectMake(170, 105, 80, 30);
     [rootView addSubview:_downTextField];
@@ -143,7 +143,7 @@
         }
         else
         {
-            [DialogHelper showSuccessTips:[NSString stringWithFormat:@"%@已加入预警合约",_model.name]];
+            [DialogHelper showSuccessTips:[NSString stringWithFormat:@"%@已加入预警合约",_model.m_strInstrumentName]];
             [[ContractDB sharedContractDB]insertItem:DBWarnContractTable model:_model];
             [self removeFromSuperview];
         }

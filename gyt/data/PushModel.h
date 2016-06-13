@@ -139,4 +139,55 @@
 @property (assign, nonatomic) double m_dPrePrice;
 
 
+
+//交易所名称
+@property (copy, nonatomic) NSString *m_strExchangeName;
+
+//品种ID
+@property (copy, nonatomic) NSString *m_strProductID;
+
+//品种名称代码
+@property (copy, nonatomic) NSString *m_strProductName;
+
+//到期日
+@property (copy, nonatomic) NSString *m_strExpireDate;
+
+//是否可交易
+@property (assign, nonatomic) BOOL m_bAllowTrade;
+
+//合约乘数 股票为1
+@property (assign, nonatomic) int m_volumeMultiple;
+
+//前收盘价
+@property (assign, nonatomic) double m_preClose;
+
+//币种
+@property (assign, nonatomic) EMoneyType m_moneyType;
+
+//前结算价
+@property (assign, nonatomic) double m_dLastSettlementPrice;
+
+//涨停价
+@property (assign, nonatomic) double m_dUpStopPrice;
+
+//跌停价
+@property (assign, nonatomic) double m_dDownStopPrice;
+
+//是否主力合约
+@property (assign, nonatomic) int m_nIsMain;
+
+//成交量
+@property (assign, nonatomic) long m_lDealVolum;
+
+//最小波动
+@property (assign, nonatomic) double m_dPriceTick;
+
+//是否上涨
+@property (assign, nonatomic) BOOL isUp;
+
+
+//是否加入自选合约
+@property (assign, nonatomic) BOOL isMyContract;
+
+
 @end

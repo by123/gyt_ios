@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ProductModel.h"
+#import "PushModel.h"
 
 #define DBMyContractTable @"mycontract"
 #define DBHistoryContractTable @"historycontract"
@@ -32,21 +32,21 @@ SINGLETON_DECLARATION(ContractDB);
 
 //插入一条数据
 -(BOOL)insertItem : (NSString *)tableName
-            model : (ProductModel *)model;
+            model : (PushModel *)model;
 //更新一条数据
 -(BOOL)updateItem : (NSString *)tableName
-              pid : (int)pid
-            model : (ProductModel *)model;
+     instrumentid : (NSString *)instrumentID
+            model : (PushModel *)model;
 
 //删除一条数据
 -(BOOL)deleteItem : (NSString *)tableName
-              pid : (int)pid;
+     instrumentid : (NSString *)instrumentID;
 //查找所有
 -(NSMutableArray *)queryAll : (NSString *)tableName;
 
 //查找一条数据
--(ProductModel *)queryItem : (NSString *)tableName
-                       pid : (int)pid;
+-(PushModel *)queryItem : (NSString *)tableName
+              instrumentid : (NSString *)instrumentID;
 //
 
 

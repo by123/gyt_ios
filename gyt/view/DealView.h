@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ByTabView.h"
-#import "ProductModel.h"
+#import "PushModel.h"
 #import "ByDynamicTableView.h"
 #import "ByTextField.h"
 #import "ByListDialog.h"
@@ -16,6 +16,6 @@
 @interface DealView : UIView<ByTabViewDelegate,UIAlertViewDelegate,ByDynamicTableViewDelegate,SocketConnectDelegate,ListDialogDelegate,PushDataHandleDelegate>
 
 -(instancetype)initWithData : (CGRect)frame
-                      model : (ProductModel *)model
+                      model : (PushModel *)model
                        view : (UIView *)rootView;
 @end

@@ -76,17 +76,17 @@
 
 }
 
--(void)setData : (ProductModel *)model
+-(void)setData : (PushModel *)model
         updown : (UpdownType) updownType
      inventore : (InventoryType) inventoryType
 {
-    if(model.updownPrice > 0)
+    if(model.m_dOpenPrice < model.m_dLastPrice)
     {
         model.isUp = YES;
     }
     _nameLabel.text = model.m_strInstrumentID;
-    double preClose = model.m_preClose;
-    if(preClose == 0)
+    double lastPrice = model.m_dLastPrice;
+    if(lastPrice == 0)
     {
         _recentPriceLabel.textColor = [UIColor grayColor];
         _updownLabel.textColor = [UIColor grayColor];
@@ -106,26 +106,27 @@
             _updownLabel.textColor = [UIColor greenColor];
             
         }
-        _recentPriceLabel.text = [NSString stringWithFormat:@"%.f",preClose];
+        _recentPriceLabel.text = [NSString stringWithFormat:@"%.2f",model.m_dLastPrice];
         if(updownType == UpdownPrice)
         {
-            _updownLabel.text = [NSString stringWithFormat:@"%.f",model.updownPrice];
+            _updownLabel.text = [NSString stringWithFormat:@"%.2f",model.m_dLastPrice - model.m_dOpenPrice];
         }
         else if(updownType == UpdownPercent)
         {
-            _updownLabel.text = [NSString stringWithFormat:@"%.f",model.updownPercent];
+            float percent = (model.m_dLastPrice - model.m_dOpenPrice) / model.m_dOpenPrice;
+            _updownLabel.text = [NSString stringWithFormat:@"%.2f",percent * 100];
         }
     }
  
     switch (inventoryType) {
         case Inventory:
-            _inventoryLabel.text = model.inventory;
+            _inventoryLabel.text = [NSString stringWithFormat:@"%.f",model.m_dOpenInterest];
             break;
         case DailyInventory:
-            _inventoryLabel.text = model.dailyInventory;
+            _inventoryLabel.text = [NSString stringWithFormat:@"%.f",model.m_dOpenInterest - model.m_dPreOpenInterest];
             break;
         case DealInventory:
-            _inventoryLabel.text = [NSString stringWithFormat:@"%ld",model.m_lDealVolum];
+            _inventoryLabel.text = [NSString stringWithFormat:@"%d",model.m_nVolume];
             break;
         default:
             break;

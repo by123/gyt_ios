@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ProductModel.h"
+#import "PushModel.h"
 
 @interface NewsView : UIView<UITableViewDelegate,UITableViewDataSource>
 
 -(instancetype)initWithData : (CGRect)frame
-                      model : (ProductModel *)model;
+                      model : (PushModel *)model;
 
 
 @end

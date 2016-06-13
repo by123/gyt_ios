@@ -10,7 +10,7 @@
 #import "DealHoldModel.h"
 #import "DealHoldByModel.h"
 #import "DealProfitModel.h"
-#import "ProductModel.h"
+#import "PushModel.h"
 #import "DealHoldingModel.h"
 
 @interface DynamicCell : UITableViewCell
@@ -32,7 +32,7 @@
              maxWidth : (int)maxWidth;
 
 
--(void)setWarnData : (ProductModel *)model
+-(void)setWarnData : (PushModel *)model
             maxWidth : (int)maxWidth;
 
 +(NSString *)identify ;

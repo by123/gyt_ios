@@ -11,7 +11,7 @@
 #import "LeftMenuViewContriller.h"
 #import "RightMenuViewController.h"
 #import "LoginViewController.h"
-#import "ProductModel.h"
+#import "PushModel.h"
 #import "ContractDB.h"
 #import "SplashViewController.h"
 #import "GCDAsyncSocket.h"

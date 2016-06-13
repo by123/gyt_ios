@@ -7,13 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ProductModel.h"
+#import "PushModel.h"
 
 @protocol MainItemDialogDelegate <NSObject>
 
-@required -(void)OnLeftClicked : (ProductModel *)model;
+@required -(void)OnLeftClicked : (PushModel *)model;
 
-@required -(void)OnRightClicked : (ProductModel *)model;
+@required -(void)OnRightClicked : (PushModel *)model;
 
 @end
 
@@ -21,7 +21,7 @@
 
 @property (strong, nonatomic) id delegate;
 
--(void)updateView : (ProductModel *)model
+-(void)updateView : (PushModel *)model
            height : (CGFloat)height;
 
 @end

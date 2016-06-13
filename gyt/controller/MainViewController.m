@@ -9,7 +9,7 @@
 #import "MainViewController.h"
 #import "LeftMenuViewContriller.h"
 #import "MainTableCell.h"
-#import "ProductModel.h"
+#import "PushModel.h"
 #import "MenuModel.h"
 #import "DetailViewController.h"
 #import "ContractDB.h"
@@ -23,6 +23,7 @@
 #import "IPMacUtil.h"
 #import "UUID.h"
 #import "PushRequestModel.h"
+#import "PushModel.h"
 
 #define Item_Height 40
 
@@ -45,30 +46,6 @@
     CGFloat currentY;
 }
 
--(void)testData
-{
-    [_datas removeAllObjects];
-    for(int i =0 ; i < 100 ;i ++)
-    {
-        ProductModel *model = [[ProductModel alloc]init];
-        model.pid = i;
-        model.name = [NSString stringWithFormat:@"%@%d",@"橡胶",1600+i];
-        model.recentPrice = 2000 + arc4random() % 10000;
-        float temp = arc4random() % 100;
-        model.updownPrice = temp - 50;
-        model.updownPercent = model.updownPrice / 15;
-        
-        float temp2 = arc4random() %100;
-        model.inventory = [NSString stringWithFormat:@"%.f",temp2 * 100];
-        float temp3 = arc4random() %100;
-        model.dailyInventory = [NSString stringWithFormat:@"%.f",temp3 * 10];
-        float temp4 = arc4random() %100;
-        model.dealInventory = [NSString stringWithFormat:@"%.f",temp4 * 1000];
-
-        [_datas addObject:model];
-    }
-    
-}
 
 +(void)show : (BaseViewController *)controller
 {
@@ -140,7 +117,8 @@
 {
     [self showNavigationBar];
     self.navBar.delegate = self;
-    [self.navBar setTitle:@"主力合约"];
+    [self.navBar setTitle:@"主力合约 ▼"];
+    [self.navBar setTitleClick:YES];
     [self.navBar setLeftImage:[UIImage imageNamed:@"ic_right_menu"]];
     [self.navBar setRightImage:[UIImage imageNamed:@"ic_search"]];
 }
@@ -244,7 +222,6 @@
     }
     else
     {
-        [self testData];
         [_tableView reloadData];
     }
 
@@ -274,7 +251,7 @@
     cell.selectedBackgroundView.backgroundColor = SELECT_COLOR;
     if(!IS_NS_COLLECTION_EMPTY(_datas))
     {
-        ProductModel *model = [_datas objectAtIndex:indexPath.row];
+        PushModel *model = [_datas objectAtIndex:indexPath.row];
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         UpdownType updownType = [userDefaults integerForKey:UserDefault_Updown];
         InventoryType inventoryType = [userDefaults integerForKey:UserDefault_Inventory];
@@ -292,7 +269,7 @@
 {
     if(!IS_NS_COLLECTION_EMPTY(_datas))
     {
-        ProductModel *model = [_datas objectAtIndex:indexPath.row];
+        PushModel *model = [_datas objectAtIndex:indexPath.row];
         [[ContractDB sharedContractDB] insertItem:DBHistoryContractTable model:model];
         [DetailViewController show:self model:model];
     }
@@ -302,7 +279,6 @@
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     currentY = scrollView.contentOffset.y;
-    NSLog(@"%f",currentY);
 }
 
 
@@ -322,6 +298,11 @@
     [[SlideNavigationController sharedInstance]righttMenuSelected:nil];
 }
 
+
+-(void)OnTitleClick
+{
+    NSLog(@"123");
+}
 
 -(void)OnClick : (id)sender
 {
@@ -351,13 +332,13 @@
 }
 
 #pragma mark 点击加入自选合约
--(void)OnLeftClicked : (ProductModel *)model
+-(void)OnLeftClicked : (PushModel *)model
 {
     [[ContractDB sharedContractDB] insertItem:DBMyContractTable model:model];
 }
 
 #pragma mark 点击下单
--(void)OnRightClicked : (ProductModel *)model
+-(void)OnRightClicked : (PushModel *)model
 {
     [DetailViewController show:self model:model];
 }
@@ -420,7 +401,6 @@
     NSLog(@"用户信息->%@",accountInfoStr);
     [self requestAccountInfo];
     [self requestProductInfo];
-    [self requestsubMultiPrice];
 }
 
 #pragma mark 请求资金信息
@@ -443,12 +423,14 @@
 -(void)requestsubMultiPrice
 {
     NSMutableArray *array1 = [[NSMutableArray alloc]init];
-    [array1 addObject:@"SGX-A"];
-    [array1 addObject:@"SGX-A"];
-
     NSMutableArray *array2 = [[NSMutableArray alloc]init];
-    [array2 addObject:@"CN 1607"];
-    [array2 addObject:@"CN 1608"];
+
+    for(PushModel *model in _datas)
+    {
+        [array1 addObject:model.m_strExchangeID];
+        [array2 addObject:model.m_strInstrumentID];
+    }
+
     
     PushRequestModel *model = [[PushRequestModel alloc]init];
     model.sessionId = [[Account sharedAccount]getSessionId];
@@ -494,13 +476,11 @@
         BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
         QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:respondModel.response];
         NSMutableArray *array = model.datas;
-        [_datas addObject:[[ProductModel alloc]init]];
-
         if(!IS_NS_COLLECTION_EMPTY(array))
         {
             for(id obj in array)
             {
-                ProductModel *productModel = [ProductModel mj_objectWithKeyValues:obj];
+                PushModel *productModel = [PushModel mj_objectWithKeyValues:obj];
 //                if(productModel.m_nIsMain == 2147483647)
 //                {
                     [_datas addObject:productModel];
@@ -508,22 +488,64 @@
             }
         }
         [_tableView reloadData];
+        [self requestsubMultiPrice];
 
     }
-    else if(packageModel.seq == 0)
-    {
-        BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
-        if(respondModel.status == 0)
-        {
-            [DialogHelper showTips:@"订阅成功"];
-        }
-    }
-    
+//    else if(packageModel.seq == 0)
+//    {
+//        BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
+//        if(respondModel.status == 0)
+//        {
+//            [DialogHelper showTips:@"订阅成功"];
+//        }
+//    }
+//    
     if(packageModel.cmd == 4)
     {
-        //主推数据
-        NSLog(@"123");
+        BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
+
+        if([respondModel.method isEqualToString:@"pushQuoteData"])
+        {
+            //行情主推
+            id params = respondModel.params;
+            id data  = [params objectForKey:@"data"];
+            PushModel *pushModel = [PushModel mj_objectWithKeyValues:data];
+            [self handleResult:pushModel];
+        }
+
     }
 
+}
+
+#pragma mark 处理行情变化
+-(void)handleResult : (PushModel *)pushModel
+{
+    NSMutableArray *temps = [[NSMutableArray alloc]init];
+    [temps addObjectsFromArray:_datas];
+    
+    if(!IS_NS_COLLECTION_EMPTY(temps))
+    {
+        int count = [temps count];
+        for(int i = 0 ; i< count; i++)
+        {
+            PushModel *model = [temps objectAtIndex:i];
+            if([model.m_strInstrumentID isEqualToString:pushModel.m_strInstrumentID])
+            {
+                if([model.m_strInstrumentID isEqualToString:@"CN 1607"])
+                {
+                    NSLog(@"停一下");
+                }
+                [_datas replaceObjectAtIndex:i withObject:pushModel];
+                if([model.m_strInstrumentID isEqualToString:@"CN 1607"])
+                {
+                    NSLog(@"停一下");
+                }
+                break;
+            }
+        }
+        
+        [_tableView reloadData];
+    }
+ 
 }
 @end
