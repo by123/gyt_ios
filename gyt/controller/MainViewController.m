@@ -44,6 +44,7 @@
 @implementation MainViewController
 {
     CGFloat currentY;
+    int current;
 }
 
 
@@ -118,9 +119,13 @@
     [self showNavigationBar];
     self.navBar.delegate = self;
     [self.navBar setTitle:@"主力合约 ▼"];
-    [self.navBar setTitleClick:YES];
     [self.navBar setLeftImage:[UIImage imageNamed:@"ic_right_menu"]];
     [self.navBar setRightImage:[UIImage imageNamed:@"ic_search"]];
+    [self.navBar setRightBtn1Image:nil];
+    [self.navBar setRightBtn2Image:nil];
+    [self.navBar setRightBtn3Image:nil];
+    [self.navBar setRightBtn4Image:nil];
+
 }
 
 -(void)initHeaderView
@@ -288,6 +293,31 @@
     [[SlideNavigationController sharedInstance]leftMenuSelected:nil];
 }
 
+
+-(void)OnTitleClick
+{
+    current ++;
+    if(current > 2)
+    {
+        current = 0;
+    }
+    switch (current) {
+        case 0:
+            [self.navBar setTitle:@"主力合约 ▼"];
+            break;
+        case 1:
+            [self.navBar setTitle:@"自选合约 ▼"];
+            break;
+        case 2:
+            [self.navBar setTitle:@"历史浏览记录 ▼"];
+            break;
+            
+        default:
+            break;
+    }
+
+}
+
 -(void)OnRightClickCallBack : (NSInteger)position
 {
     if(position == 0)
@@ -295,14 +325,8 @@
         [SearchViewController show:self];
         return;
     }
-    [[SlideNavigationController sharedInstance]righttMenuSelected:nil];
 }
 
-
--(void)OnTitleClick
-{
-    NSLog(@"123");
-}
 
 -(void)OnClick : (id)sender
 {

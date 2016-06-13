@@ -42,15 +42,12 @@
     [_rightBtn setImage:rightImage forState:UIControlStateNormal];
     
     _titleLabel = [[UILabel alloc]init];
+    _titleLabel.userInteractionEnabled = YES;
     _titleLabel.textColor = [UIColor whiteColor];
     _titleLabel.textAlignment = NSTextAlignmentCenter;
     _titleLabel.font = [UIFont systemFontOfSize:16.0f];
-    
-    _titleClickBtn= [[UIButton alloc]init];
-    _titleClickBtn.frame = self.frame;
-    _titleClickBtn.backgroundColor = [UIColor clearColor];
-    _titleClickBtn.hidden = YES;
-    [_titleClickBtn addTarget:self action:@selector(OnTapTitle) forControlEvents:UIControlEventTouchUpInside];
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(OnTitleCallBack:)];
+    [_titleLabel addGestureRecognizer:recognizer];
     
     _leftMainLabel = [[UILabel alloc]init];
     _leftMainLabel.textColor = [UIColor whiteColor];
@@ -88,16 +85,11 @@
     
     
     [self addSubview:_leftBtn];
-    [self addSubview:_rightBtn];
     [self addSubview:_titleLabel];
-    [self addSubview:_titleClickBtn];
     [self addSubview:_leftMainLabel];
     [self addSubview:_leftSubLabel];
-    [self addSubview:_rightBtn1];
-    [self addSubview:_rightBtn2];
-    [self addSubview:_rightBtn3];
-    [self addSubview:_rightBtn4];
-
+    
+    self.userInteractionEnabled = YES;
 
 }
 
@@ -107,9 +99,8 @@
 {
     if(_titleLabel)
     {
-        [_titleLabel setText:title];
-        float height = _titleLabel.contentSize.height;
-        _titleLabel.frame = CGRectMake(30, StatuBar_HEIGHT + (NavigationBar_HEIGHT - height)/2, SCREEN_WIDTH - 60, height);
+        _titleLabel.text = title;
+        _titleLabel.frame = CGRectMake((SCREEN_WIDTH -  200)/2, StatuBar_HEIGHT , 200, NavigationBar_HEIGHT);
     }
 }
 
@@ -135,31 +126,60 @@
 
 -(void)setRightImage : (UIImage *)image
 {
-    [_rightBtn setImage:image forState:UIControlStateNormal];
+    if(image)
+    {
+        [_rightBtn setImage:image forState:UIControlStateNormal];
+        [self addSubview:_rightBtn];
+        return;
+    }
+    [_rightBtn removeFromSuperview];
 }
 
 #pragma mark 设置右边倒数第二个按钮图片
 -(void)setRightBtn1Image : (UIImage *)image
 {
-    [_rightBtn1 setImage:image forState:UIControlStateNormal];
-}
+    if(image)
+    {
+        [_rightBtn1 setImage:image forState:UIControlStateNormal];
+        [self addSubview:_rightBtn1];
+        return;
+    }
+    [_rightBtn1 removeFromSuperview];}
 
 #pragma mark 设置右边倒数第三个按钮图片
 -(void)setRightBtn2Image : (UIImage *)image
 {
-    [_rightBtn2 setImage:image forState:UIControlStateNormal];
+    if(image)
+    {
+        [_rightBtn2 setImage:image forState:UIControlStateNormal];
+        [self addSubview:_rightBtn2];
+        return;
+    }
+    [_rightBtn2 removeFromSuperview];
 }
 
 #pragma mark 设置右边倒数第四个按钮图片
 -(void)setRightBtn3Image : (UIImage *)image
 {
-    [_rightBtn3 setImage:image forState:UIControlStateNormal];
+    if(image)
+    {
+        [_rightBtn3 setImage:image forState:UIControlStateNormal];
+        [self addSubview:_rightBtn3];
+        return;
+    }
+    [_rightBtn3 removeFromSuperview];
 }
 
 #pragma mark 设置右边倒数第五个按钮图片
 -(void)setRightBtn4Image : (UIImage *)image
 {
-    [_rightBtn4 setImage:image forState:UIControlStateNormal];
+    if(image)
+    {
+        [_rightBtn4 setImage:image forState:UIControlStateNormal];
+        [self addSubview:_rightBtn4];
+        return;
+    }
+    [_rightBtn4 removeFromSuperview];
 }
 
 
@@ -177,26 +197,17 @@
     if(self.delegate)
     {
         UIButton *button = sender;
+        NSLog(@"%d",button.tag);
         [self.delegate OnRightClickCallBack:button.tag];
     }
 }
 
--(void)OnTapTitle
+-(void)OnTitleCallBack : (id)sender
 {
     if(self.delegate)
     {
         [self.delegate OnTitleClick];
     }
-}
-
--(void)setTitleClick : (BOOL)isClick
-{
-    if(isClick)
-    {
-        [_titleClickBtn setHidden:NO];
-        return;
-    }
-    [_titleClickBtn setHidden:YES];
 }
 
 

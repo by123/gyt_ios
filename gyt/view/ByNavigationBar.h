@@ -26,8 +26,6 @@
 
 @property (strong, nonatomic) UIButton *rightBtn;
 
-@property (strong, nonatomic) UIButton *titleClickBtn;
-
 @property (strong, nonatomic) UILabel *leftMainLabel;
 
 @property (strong, nonatomic) UILabel *leftSubLabel;
@@ -43,8 +41,6 @@
 @property (strong, nonatomic) id delegate;
 
 -(void)setTitle : (NSString *)title;
-
--(void)setTitleClick : (BOOL)isClick;
 
 -(void)setLeftImage : (UIImage *)image;
 
