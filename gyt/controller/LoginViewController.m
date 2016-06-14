@@ -55,7 +55,7 @@
 {
     [self showNavigationBar];
     self.navBar.delegate = self;
-    [self.navBar setLeftImage:[UIImage imageNamed:@"ic_close"]];
+    [self.navBar setLeftImage:nil];
     [self.navBar.rightBtn setHidden:YES];
     [self.navBar setTitle:@"委托登录"];
 }

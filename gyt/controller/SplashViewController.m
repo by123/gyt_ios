@@ -12,6 +12,7 @@
 #import "RightMenuViewController.h"
 #import "LeftMenuViewContriller.h"
 #import "AppDelegate.h"
+#import "LoginViewController.h"
 
 @interface SplashViewController ()
 
@@ -102,9 +103,11 @@
 
 -(void)goMainViewController
 {
-    MainViewController *mainViewController =[[MainViewController alloc]init];
-    [self.navigationController pushViewController:mainViewController animated:YES];
+    [LoginViewController show:self];
     
+//    MainViewController *mainViewController =[[MainViewController alloc]init];
+//    [self.navigationController pushViewController:mainViewController animated:YES];
+//    
 }
 
 @end
