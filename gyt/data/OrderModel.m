@@ -10,7 +10,8 @@
 
 @implementation OrderModel
 
-+(OrderModel *)buildOrderModel : (NSString *)m_strInstrumentID
++(OrderModel *)buildOrderModel : (NSString *)m_strProductID
+                  instrumentID : (NSString *)m_strInstrumentID
                     orderPrice : (double)m_dOrderPrice
                       orderNum : (int)m_nOrderNum
                      direction : (EEntrustBS)m_nDirection
@@ -20,7 +21,7 @@
     tagModel.m_strRequestId = [OrderTagModel generateRequestID];
     
     OrderModel *model = [[OrderModel alloc]init];
-    model.m_strProductID = @"CN";
+    model.m_strProductID = m_strProductID;
     model.m_strInstrumentID = m_strInstrumentID;
     model.m_dOrderPrice = m_dOrderPrice;
     model.m_nOrderNum = m_nOrderNum;

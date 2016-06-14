@@ -86,7 +86,7 @@ alpha:alphaValue]
             }
             else
             {
-                _block([NSString stringWithFormat:@"%.2f",vaule]);
+                _block([NSString stringWithFormat:@"%.1f",vaule]);
             }
         }
         [self.mTextNumberFiled resignFirstResponder];

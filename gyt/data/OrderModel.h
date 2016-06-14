@@ -65,7 +65,8 @@
 @property (strong, nonatomic) OrderTagModel *m_tag;
 
 
-+(OrderModel *)buildOrderModel : (NSString *)m_strInstrumentID
++(OrderModel *)buildOrderModel : (NSString *)m_strProductID
+                  instrumentID : (NSString *)m_strInstrumentID
                     orderPrice : (double)m_dOrderPrice
                       orderNum : (int)m_nOrderNum
                      direction : (EEntrustBS)m_nDirection

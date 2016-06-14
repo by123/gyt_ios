@@ -446,6 +446,39 @@
     [self addSubview:_dynamicView];
 }
 
+
+#pragma mark 获得实际买卖价格
+-(NSString *)getPrice : (BOOL)isBuy
+{
+    NSString *price;
+    NSString *priceStr = [_priceTextField getTextFieldText];
+    if(isBuy)
+    {
+        NSString *lastPrice = [NSString stringWithFormat:@"%.1f",_model.m_dLastPrice];
+        if(![priceStr isEqualToString:lastPrice])
+        {
+            price = priceStr;
+        }
+        else
+        {
+            price = [NSString stringWithFormat:@"%.1f",_model.m_dAskPrice1];
+        }
+    }
+    else
+    {
+        NSString *lastPrice = [NSString stringWithFormat:@"%.1f",_model.m_dLastPrice];
+        if(![priceStr isEqualToString:lastPrice])
+        {
+            price = priceStr;
+        }
+        else
+        {
+            price = [NSString stringWithFormat:@"%.1f",_model.m_dBidPrice1];
+        }
+    }
+    return price;
+}
+
 #pragma mark tabview选择
 -(void)OnSelect:(NSInteger)position
 {
@@ -477,14 +510,12 @@
 -(void)OnClick : (id)sender
 {
     UIView *view = sender;
-    NSString *name = _nameButton.titleLabel.text;
-    NSString * price = [_priceTextField getTextFieldText];
     NSString * hand = [_handTextField getTextFieldText];
     
     if(view == _buyItem)
     {
         director = ENTRUST_BUY;
-        NSString *message = [NSString stringWithFormat:@"%@，%@，买，%@手",name,price,hand];
+        NSString *message = [NSString stringWithFormat:@"%@，%@，买，%@手",_model.m_strInstrumentID,[self getPrice : YES],hand];
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认下单吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
         alert.tag = 0;
         [alert show];
@@ -492,7 +523,7 @@
     else if(view == _sellItem)
     {
         director = ENTRUST_SELL;
-        NSString *message = [NSString stringWithFormat:@"%@，%@，卖，%@手",name,price,hand];
+        NSString *message = [NSString stringWithFormat:@"%@，%@，卖，%@手",_model.m_strInstrumentID,[self getPrice : NO],hand];
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认下单吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
         alert.tag = 1;
         [alert show];
@@ -575,29 +606,26 @@
     OrderRequestModel *orderModel = [[OrderRequestModel alloc]init];
     orderModel.strSessionID = [[Account sharedAccount]getSessionId];
     orderModel.account = account;
-    NSString *name = _nameButton.titleLabel.text;
     double price = [[_priceTextField getTextFieldText] doubleValue];
     double hand = [[_handTextField getTextFieldText] doubleValue];
     
     if(model != nil)
     {
-        int mDirection = 0;
-        double price = 0;
-        if(model.m_nDirection == ENTRUST_BUY)
-        {
-            mDirection = ENTRUST_SELL;
-            price = _model.m_dBidPrice1;
-        }
-        else
-        {
-            mDirection = ENTRUST_BUY;
-            price = _model.m_dAskPrice1;
-        }
-        orderModel.info = [OrderModel buildOrderModel:model.m_strInstrumentID orderPrice:price orderNum:model.m_nOpenVolume direction:mDirection offsetFlag:EOFF_THOST_FTDC_OF_Close];
+        //撤单
+        orderModel.info = [OrderModel buildOrderModel :model.m_strProductID  instrumentID:model.m_strInstrumentID orderPrice:model.m_dLastPrice orderNum:model.m_nOpenVolume direction:model.m_nDirection offsetFlag:EOFF_THOST_FTDC_OF_Close];
     }
     else
     {
-        orderModel.info = [OrderModel buildOrderModel:name orderPrice:price orderNum:hand direction:director offsetFlag:EOFF_THOST_FTDC_OF_Open];
+        //下单
+        if(director == ENTRUST_BUY)
+        {
+            price = _model.m_dAskPrice1;
+        }
+        else
+        {
+            price = _model.m_dBidPrice1;
+        }
+        orderModel.info = [OrderModel buildOrderModel : _model.m_strProductID instrumentID:_model.m_strInstrumentID  orderPrice:price orderNum:hand direction:director offsetFlag:EOFF_THOST_FTDC_OF_Open];
     }
 
     NSMutableDictionary *dic =[JSONUtil parseDic:orderModel];
