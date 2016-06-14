@@ -187,7 +187,7 @@
 
 
 //是否加入自选合约
-@property (assign, nonatomic) BOOL isMyContract;
+@property (assign, nonatomic) int isMyContract;
 
 
 @end

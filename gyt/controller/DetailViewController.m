@@ -262,16 +262,16 @@
 #pragma mark 加入自选合约
 -(void)addContract
 {
-    if(_model.isMyContract)
+    if(_model.isMyContract == 1)
     {
-        _model.isMyContract = NO;
+        _model.isMyContract = 0;
         [DialogHelper showWarnTips:[NSString stringWithFormat:@"%@已取消自选合约",_model.m_strInstrumentID]];
         [[ContractDB sharedContractDB] deleteItem:DBMyContractTable instrumentid:_model.m_strInstrumentID];
 
     }
     else
     {
-        _model.isMyContract = YES;
+        _model.isMyContract = 1;
         [DialogHelper showSuccessTips:[NSString stringWithFormat:@"%@已加入自选合约",_model.m_strInstrumentID]];
         [[ContractDB sharedContractDB] insertItem:DBMyContractTable model:_model];
 
@@ -313,7 +313,7 @@
             [self.navBar setLeftMainTitle:@"详细报价"];
             [self.navBar setRightImage:[UIImage imageNamed:@"ic_lightning"]];
 
-            if(_model.isMyContract)
+            if(_model.isMyContract == 1)
             {
                 [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_collect_press"]];
             }
@@ -332,7 +332,7 @@
         case 1:
             [self.navBar setLeftMainTitle:@"分时图"];
             [self.navBar setRightImage:[UIImage imageNamed:@"ic_lightning"]];
-            if(_model.isMyContract)
+            if(_model.isMyContract == 1)
             {
                 [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_collect_press"]];
             }
@@ -352,7 +352,7 @@
             [self.navBar setLeftMainTitle:@"k线图"];
             [self.navBar setRightImage:[UIImage imageNamed:@"ic_clock"]];
             [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_lightning"]];
-            if(_model.isMyContract)
+            if(_model.isMyContract == 1)
             {
                 [self.navBar setRightBtn2Image:[UIImage imageNamed:@"ic_collect_press"]];
             }

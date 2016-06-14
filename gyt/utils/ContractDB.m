@@ -29,6 +29,10 @@
 #define Item_IsMain @"m_nIsMain"
 #define Item_DealVolum @"m_lDealVolum"
 #define Item_PriceTick @"m_dPriceTick"
+#define Item_LastPrice @"m_dLastPrice"
+#define Item_OpenPrice @"m_dOpenPrice"
+#define Item_Volume @"m_nVolume"
+#define Item_MyContract @"isMyContract"
 
 
 //#define Item_ProductID @"pid"
@@ -81,7 +85,7 @@ SINGLETON_IMPLEMENTION(ContractDB);
 {
     BOOL res = NO;
     if ([_db open]) {
-        NSString *sqlCreateTable =  [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS '%@' ('%@' INTEGER PRIMARY KEY AUTOINCREMENT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT)" ,
+        NSString *sqlCreateTable =  [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS '%@' ('%@' INTEGER PRIMARY KEY AUTOINCREMENT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT,'%@' TEXT)" ,
              tableName,
              Item_ID,
              Item_ExchangeID,
@@ -100,7 +104,12 @@ SINGLETON_IMPLEMENTION(ContractDB);
              Item_DownStopPrice,
              Item_IsMain,
              Item_DealVolum,
-             Item_PriceTick];
+             Item_PriceTick,
+             Item_LastPrice,
+             Item_OpenPrice,
+             Item_Volume,
+             Item_MyContract
+];
         
 
         res = [_db executeUpdate:sqlCreateTable];
@@ -142,7 +151,7 @@ SINGLETON_IMPLEMENTION(ContractDB);
     if([_db open])
     {
         [_db beginTransaction];
-        res = [_db executeUpdate:[NSString stringWithFormat:@"INSERT INTO %@ VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",tableName],
+        res = [_db executeUpdate:[NSString stringWithFormat:@"INSERT INTO %@ VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",tableName],
                NULL,
                model.m_strExchangeID,
                model.m_strExchangeName,
@@ -160,7 +169,11 @@ SINGLETON_IMPLEMENTION(ContractDB);
                [NSString stringWithFormat:@"%f",model.m_dDownStopPrice],
                [NSString stringWithFormat:@"%d",model.m_nIsMain],
                [NSString stringWithFormat:@"%ld",model.m_lDealVolum],
-               [NSString stringWithFormat:@"%f",model.m_dPriceTick]
+               [NSString stringWithFormat:@"%f",model.m_dPriceTick],
+               [NSString stringWithFormat:@"%f",model.m_dLastPrice],
+               [NSString stringWithFormat:@"%f",model.m_dOpenPrice],
+               [NSString stringWithFormat:@"%d",model.m_nVolume],
+               [NSString stringWithFormat:@"%d",model.isMyContract]
                ];
         [_db commit];
         [_db close];
@@ -181,11 +194,16 @@ SINGLETON_IMPLEMENTION(ContractDB);
      instrumentid : (NSString *)instrumentID
             model : (PushModel *)model
 {
+    if([self queryItem:tableName instrumentid:model.m_strInstrumentID] == nil)
+    {
+        NSLog(@"数据不存在！");
+        return NO;
+    }
     BOOL res = NO;
     if([_db open])
     {
         [_db beginTransaction];
-        res = [_db executeUpdate:[NSString stringWithFormat:@"UPDATE %@ SET %@ = ? ,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ? WHERE %@ = ?",tableName,
+        res = [_db executeUpdate:[NSString stringWithFormat:@"UPDATE %@ SET %@ = ? ,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ? ,%@ = ? WHERE %@ = ?",tableName,
               Item_ExchangeID,
               Item_ExchangeName,
               Item_ProductID,
@@ -203,6 +221,10 @@ SINGLETON_IMPLEMENTION(ContractDB);
               Item_IsMain,
               Item_DealVolum,
               Item_PriceTick,
+              Item_LastPrice,
+              Item_OpenPrice,
+              Item_Volume,
+              Item_MyContract,
               Item_InstrumentID
               ],
                model.m_strExchangeID,
@@ -212,16 +234,20 @@ SINGLETON_IMPLEMENTION(ContractDB);
                model.m_strInstrumentID,
                model.m_strInstrumentName,
                model.m_strExpireDate,
-               model.m_bAllowTrade,
-               model.m_volumeMultiple,
-               model.m_preClose,
-               model.m_moneyType,
-               model.m_dLastSettlementPrice,
-               model.m_dUpStopPrice,
-               model.m_dDownStopPrice,
-               model.m_nIsMain,
-               model.m_lDealVolum,
-               model.m_dPriceTick,
+               [NSString stringWithFormat:model.m_bAllowTrade ? @"YES": @"NO"],
+               [NSString stringWithFormat:@"%d",model.m_volumeMultiple],
+               [NSString stringWithFormat:@"%f",model.m_preClose],
+               [NSString stringWithFormat:@"%ld",(long)model.m_moneyType],
+               [NSString stringWithFormat:@"%f",model.m_dLastSettlementPrice],
+               [NSString stringWithFormat:@"%f",model.m_dUpStopPrice],
+               [NSString stringWithFormat:@"%f",model.m_dDownStopPrice],
+               [NSString stringWithFormat:@"%d",model.m_nIsMain],
+               [NSString stringWithFormat:@"%ld",model.m_lDealVolum],
+               [NSString stringWithFormat:@"%f",model.m_dPriceTick],
+               [NSString stringWithFormat:@"%f",model.m_dLastPrice],
+               [NSString stringWithFormat:@"%f",model.m_dOpenPrice],
+               [NSString stringWithFormat:@"%d",model.m_nVolume],
+               [NSString stringWithFormat:@"%d",model.isMyContract],
                [NSString stringWithFormat:@"%@",model.m_strInstrumentID]];
         [_db commit];
         [_db close];
@@ -285,6 +311,10 @@ SINGLETON_IMPLEMENTION(ContractDB);
             model.m_nIsMain = [s intForColumn:Item_IsMain];
             model.m_lDealVolum = [s longForColumn:Item_DealVolum];
             model.m_dPriceTick = [s doubleForColumn:Item_PriceTick];
+            model.m_dLastPrice = [s doubleForColumn:Item_LastPrice];
+            model.m_dOpenPrice = [s doubleForColumn:Item_OpenPrice];
+            model.m_nVolume = [s intForColumn:Item_Volume];
+            model.isMyContract = [s intForColumn:Item_MyContract];
             [array addObject:model];
         }
         [_db close];
@@ -321,6 +351,10 @@ SINGLETON_IMPLEMENTION(ContractDB);
                 model.m_nIsMain = [s intForColumn:Item_IsMain];
                 model.m_lDealVolum = [s longForColumn:Item_DealVolum];
                 model.m_dPriceTick = [s doubleForColumn:Item_PriceTick];
+                model.m_dLastPrice = [s doubleForColumn:Item_LastPrice];
+                model.m_dOpenPrice = [s doubleForColumn:Item_OpenPrice];
+                model.m_nVolume = [s intForColumn:Item_Volume];
+                model.isMyContract = [s intForColumn:Item_MyContract];
                 break;
             }
         }

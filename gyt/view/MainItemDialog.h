@@ -25,4 +25,6 @@
          position : (NSInteger)position
            height : (CGFloat)height;
 
+-(void)setLeftImage : (int )myContract;
+
 @end

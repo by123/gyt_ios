@@ -67,6 +67,23 @@
     
 }
 
+-(void)setLeftImage : (int )myContract
+{
+    UIImage *leftImage;
+    if(myContract == 0)
+    {
+        [_leftBtn setTitle:@"加入自选合约" forState:UIControlStateNormal];
+        leftImage = [UIImage imageNamed:@"ic_collect_normal"];
+    }
+    else
+    {
+        [_leftBtn setTitle:@"取消自选合约" forState:UIControlStateNormal];
+        leftImage = [UIImage imageNamed:@"ic_collect_press"];
+    }
+
+    [_leftBtn setImage:[AppUtil transformImage:leftImage width:20 height:20] forState:UIControlStateNormal];
+}
+
 -(void)updateView : (PushModel *)model
           position:(NSInteger)position
            height : (CGFloat)height

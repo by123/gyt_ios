@@ -306,17 +306,24 @@
     switch (current) {
         case 0:
             [self.navBar setTitle:@"主力合约 ▼"];
+            [_datas removeAllObjects];
+            [self requestProductInfo];
             break;
         case 1:
             [self.navBar setTitle:@"自选合约 ▼"];
+            [_datas removeAllObjects];
+            _datas = [[ContractDB sharedContractDB] queryAll:DBMyContractTable];
             break;
         case 2:
             [self.navBar setTitle:@"历史浏览记录 ▼"];
+            [_datas removeAllObjects];
+            _datas = [[ContractDB sharedContractDB] queryAll:DBHistoryContractTable];
             break;
             
         default:
             break;
     }
+    [_tableView reloadData];
 
 }
 
@@ -350,8 +357,10 @@
     NSLog(@"%d",cell.tag);
     if(!IS_NS_COLLECTION_EMPTY(_datas))
     {
+        PushModel *model = [_datas objectAtIndex:cell.tag];
         CGFloat height = Item_Height * (cell.tag + 1) + StatuBar_HEIGHT + NavigationBar_HEIGHT + 30 - currentY ;
-        [_mainItemDialog updateView:[_datas objectAtIndex:cell.tag] position:cell.tag height:height];
+        [_mainItemDialog updateView:model position:cell.tag height:height];
+        [_mainItemDialog setLeftImage :model.isMyContract];
         [_mainItemDialog setHidden:NO];
     }
     
@@ -360,7 +369,22 @@
 #pragma mark 点击加入自选合约
 -(void)OnLeftClicked : (PushModel *)model
 {
-    [[ContractDB sharedContractDB] insertItem:DBMyContractTable model:model];
+    if(model.isMyContract == 1)
+    {
+        model.isMyContract = 0;
+        [_mainItemDialog setLeftImage : model.isMyContract];
+        [DialogHelper showWarnTips:[NSString stringWithFormat:@"%@已取消自选合约",model.m_strInstrumentID]];
+        [[ContractDB sharedContractDB] deleteItem:DBMyContractTable instrumentid:model.m_strInstrumentID];
+    }
+    else
+    {
+        model.isMyContract = 1;
+        [_mainItemDialog setLeftImage : model.isMyContract];
+        [DialogHelper showSuccessTips:[NSString stringWithFormat:@"%@已加入自选合约",model.m_strInstrumentID]];
+        [[ContractDB sharedContractDB] insertItem:DBMyContractTable model:model];
+        
+    }
+    [[ContractDB sharedContractDB] updateItem:DBHistoryContractTable instrumentid:model.m_strInstrumentID model:model];
 }
 
 #pragma mark 点击下单
@@ -505,6 +529,11 @@
             for(id obj in array)
             {
                 PushModel *productModel = [PushModel mj_objectWithKeyValues:obj];
+                PushModel *model = [[ContractDB sharedContractDB]queryItem:DBMyContractTable instrumentid:productModel.m_strInstrumentID];
+                if(model)
+                {
+                    productModel.isMyContract = model.isMyContract;
+                }
 //                if([productModel.m_strInstrumentID isEqualToString:@"CN 1606"])
 //                {
                     [_datas addObject:productModel];
@@ -561,7 +590,13 @@
                 }
                 else
                 {
-                    [_datas replaceObjectAtIndex:i withObject:pushModel];
+                    model.m_dLastPrice = pushModel.m_dLastPrice;
+                    model.m_dOpenPrice = pushModel.m_dOpenPrice;
+                    model.m_nVolume = pushModel.m_nVolume;
+                    model.m_dAskPrice1 = pushModel.m_dAskPrice1;
+                    model.m_dBidPrice1 = pushModel.m_dBidPrice1;
+                    model.m_nAskVolume1 = pushModel.m_nAskVolume1;
+                    model.m_nBidVolume1 = pushModel.m_nBidVolume1;
                     [[NSNotificationCenter defaultCenter]postNotificationName:Notify_Main_Push object:_datas];
                     break;
                 }
