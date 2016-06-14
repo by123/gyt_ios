@@ -10,6 +10,8 @@
 #import "NSData+XTAMData.h"
 #import "NSMutableData+XTAMData.h"
 #import "AppDelegate.h"
+#import "LoginViewController.h"
+#import "RightMenuViewController.h"
 
 #define HEAD_TAG      666
 #define BODY_TAG      667
@@ -91,28 +93,33 @@ SINGLETON_IMPLEMENTION(SocketConnect);
 {
     NSLog(@"连接被断开");
     dispatch_async(dispatch_get_main_queue(), ^{
-        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"您的网络有问题" message:@"是否重新连接？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"连接失败" message:@"您已经与服务器断开连接，请点击确定重新连接" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alertView show];
     });
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if(buttonIndex == 1)
-    {
         [self connect];
         NSLog(@"重新连接");
-    }
-    else{
-        NSLog(@"放弃重连");
-    }
+        
+        AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        UIWindow *window = delegate.window;
+        LoginViewController *mainViewController =[[LoginViewController alloc]init];
+        SlideNavigationController *controller = [[SlideNavigationController alloc]initWithRootViewController:mainViewController];
+        RightMenuViewController *rightMenu = [[RightMenuViewController alloc]init];
+        rightMenu.view.backgroundColor = BACKGROUND_COLOR;
+        rightMenu.controller = controller;
+        
+        controller.leftMenu = rightMenu;
+        window.rootViewController = controller;
+        [window makeKeyAndVisible];
 }
 
 
 #pragma mark - 接收服务端的数据
 -(void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
 {
-    NSLog(@"%d",data.length);
     if (_curFrameData == nil) {
         _curFrameData = [NSMutableData dataWithData:data];
         _curFrameLength = INT_MAX;

@@ -251,7 +251,8 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MainTableCell *cell = [[MainTableCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[MainTableCell identify]];
-    [cell setBackgroundColor:[UIColor clearColor]];
+    [cell setBackgroundColor:BACKGROUND_COLOR];
+    [cell setOpaque:YES];
     cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.frame];
     cell.selectedBackgroundView.backgroundColor = SELECT_COLOR;
     if(!IS_NS_COLLECTION_EMPTY(_datas))
@@ -260,13 +261,14 @@
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         UpdownType updownType = [userDefaults integerForKey:UserDefault_Updown];
         InventoryType inventoryType = [userDefaults integerForKey:UserDefault_Inventory];
-
+        
         [cell setData:model updown:updownType inventore:inventoryType];
         cell.tag = indexPath.row;
         //添加长按手势
         UILongPressGestureRecognizer * longPressGesture =[[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPress:)];
         [cell addGestureRecognizer:longPressGesture];
     }
+
     return cell;
 }
 
@@ -505,7 +507,7 @@
             for(id obj in array)
             {
                 PushModel *productModel = [PushModel mj_objectWithKeyValues:obj];
-//                if(productModel.m_nIsMain == 2147483647)
+//                if([productModel.m_strInstrumentID isEqualToString:@"CN 1606"])
 //                {
                     [_datas addObject:productModel];
 //                }
@@ -555,14 +557,13 @@
             PushModel *model = [temps objectAtIndex:i];
             if([model.m_strInstrumentID isEqualToString:pushModel.m_strInstrumentID])
             {
-                if([model.m_strInstrumentID isEqualToString:@"CN 1607"])
+                if(pushModel.m_dLastPrice == model.m_dLastPrice)
                 {
-                    NSLog(@"停一下");
+                    return;
                 }
-                [_datas replaceObjectAtIndex:i withObject:pushModel];
-                if([model.m_strInstrumentID isEqualToString:@"CN 1607"])
+                else
                 {
-                    NSLog(@"停一下");
+                    [_datas replaceObjectAtIndex:i withObject:pushModel];
                 }
                 break;
             }
