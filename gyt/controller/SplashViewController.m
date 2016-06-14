@@ -103,11 +103,9 @@
 
 -(void)goMainViewController
 {
-    [LoginViewController show:self];
-    
-//    MainViewController *mainViewController =[[MainViewController alloc]init];
-//    [self.navigationController pushViewController:mainViewController animated:YES];
-//    
+    LoginViewController *target = [[LoginViewController alloc]init];
+    [self.navigationController pushViewController:target animated:YES];
+
 }
 
 @end
