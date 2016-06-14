@@ -42,6 +42,7 @@
 
 +(void)show : (BaseViewController *)controller
       model : (PushModel *) model
+   position : (NSInteger)position
 {
     DetailViewController *targetController = [[DetailViewController alloc]init];
     PushModel *temp = [[ContractDB sharedContractDB] queryItem:DBMyContractTable instrumentid:model.m_strInstrumentID];

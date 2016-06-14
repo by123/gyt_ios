@@ -75,6 +75,8 @@
 //数据
 @property (strong, nonatomic) PushModel *model;
 
+@property (assign, nonatomic) NSInteger position;
+
 @property (strong, nonatomic) MoneyDetailModel *moneyModel;
 
 @property (strong, nonatomic) UIView *rootView;
@@ -115,6 +117,7 @@
 }
 
 #pragma mark 初始化
+
 -(void)initView
 {
     self.backgroundColor = BACKGROUND_COLOR;
@@ -122,9 +125,16 @@
     currentModel = [[DealHoldModel alloc]init];
     [self initTopView];
     [self initBottomView];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateData:) name:Notify_Main_Push object:nil];
 //    [self requestQuery:XT_CPositionStatics];
 
 }
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:Notify_Main_Push object:nil];
+}
+
 
 
 -(void)initTopView
@@ -212,42 +222,42 @@
     
     _currentPriceLabel = [[UILabel alloc]init];
     _currentPriceLabel.textColor = TEXT_COLOR;
-    _currentPriceLabel.text = [NSString stringWithFormat:@"新:%.f",_model.m_dLastPrice];
+    _currentPriceLabel.text = [NSString stringWithFormat:@"新:%.1f",_model.m_dLastPrice];
     _currentPriceLabel.font = [UIFont systemFontOfSize:13.0f];
     _currentPriceLabel.frame = CGRectMake(5, 2.5, _currentPriceLabel.contentSize.width, 20);
     [priceView addSubview:_currentPriceLabel];
     
     _currentCountLabel = [[UILabel alloc]init];
     _currentCountLabel.textColor = TEXT_COLOR;
-    _currentCountLabel.text = @"12323";
+    _currentCountLabel.text = [NSString stringWithFormat:@"%d",_model.m_nVolume];
     _currentCountLabel.font = [UIFont systemFontOfSize:13.0f];
     _currentCountLabel.frame = CGRectMake(priceView.size.width - _currentCountLabel.contentSize.width-5, 2.5, _currentPriceLabel.contentSize.width, 20);
     [priceView addSubview:_currentCountLabel];
     
     _buyPriceLabel = [[UILabel alloc]init];
     _buyPriceLabel.textColor = TEXT_COLOR;
-    _buyPriceLabel.text = [NSString stringWithFormat:@"买:%.f",_model.m_dLastPrice];
+    _buyPriceLabel.text = [NSString stringWithFormat:@"买:%.1f",_model.m_dAskPrice1];
     _buyPriceLabel.font = [UIFont systemFontOfSize:13.0f];
     _buyPriceLabel.frame = CGRectMake(5, 22.5, _buyPriceLabel.contentSize.width, 20);
     [priceView addSubview:_buyPriceLabel];
     
     _buyCountLabel = [[UILabel alloc]init];
     _buyCountLabel.textColor = TEXT_COLOR;
-    _buyCountLabel.text = @"2000";
+    _buyCountLabel.text = [NSString stringWithFormat:@"%d",_model.m_nAskVolume1];
     _buyCountLabel.font = [UIFont systemFontOfSize:13.0f];
     _buyCountLabel.frame = CGRectMake(priceView.size.width - _buyCountLabel.contentSize.width-5, 22.5, _buyCountLabel.contentSize.width, 20);
     [priceView addSubview:_buyCountLabel];
     
     _sellPriceLabel = [[UILabel alloc]init];
     _sellPriceLabel.textColor = TEXT_COLOR;
-    _sellPriceLabel.text = [NSString stringWithFormat:@"卖:%.f",_model.m_dLastPrice+1];
+    _sellPriceLabel.text = [NSString stringWithFormat:@"卖:%.1f",_model.m_dBidPrice1];
     _sellPriceLabel.font = [UIFont systemFontOfSize:13.0f];
     _sellPriceLabel.frame = CGRectMake(5, 42.5, _sellPriceLabel.contentSize.width, 20);
     [priceView addSubview:_sellPriceLabel];
     
     _sellCountLabel = [[UILabel alloc]init];
     _sellCountLabel.textColor = TEXT_COLOR;
-    _sellCountLabel.text = @"120";
+    _sellCountLabel.text = [NSString stringWithFormat:@"%d",_model.m_nBidVolume1];;
     _sellCountLabel.font = [UIFont systemFontOfSize:13.0f];
     _sellCountLabel.frame = CGRectMake(priceView.size.width - _sellCountLabel.contentSize.width-5, 42.5, _sellCountLabel.contentSize.width, 20);
     [priceView addSubview:_sellCountLabel];
@@ -259,7 +269,7 @@
     _buyItem.layer.masksToBounds = YES;
     _buyItem.layer.cornerRadius = 4;
     
-    NSString *buyTxt = [NSString stringWithFormat:@"%.f\n—————————\n买多",9140.0f];
+    NSString *buyTxt = [NSString stringWithFormat:@"%.1f\n—————————\n买多",_model.m_dAskPrice1];
     [_buyItem setTitle:buyTxt forState:UIControlStateNormal];
     [_buyItem setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _buyItem.titleLabel.font = [UIFont systemFontOfSize:14.0f];
@@ -276,7 +286,7 @@
     _sellItem.layer.cornerRadius = 4;
 
 
-    NSString *sellTxt = [NSString stringWithFormat:@"%.f\n—————————\n卖空",9141.0f];
+    NSString *sellTxt = [NSString stringWithFormat:@"%.1f\n—————————\n卖空",_model.m_dBidPrice1];
     [_sellItem setTitle:sellTxt forState:UIControlStateNormal];
     [_sellItem setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _sellItem.titleLabel.font = [UIFont systemFontOfSize:14.0f];
@@ -315,6 +325,21 @@
 
 }
 
+#pragma mark 动态数据
+-(void)updateData : (NSNotification *)notification
+{
+    NSMutableArray *datas = [notification object];
+    if(!IS_NS_COLLECTION_EMPTY(datas))
+    {
+        PushModel *model = [datas objectAtIndex:_position];
+        if(model.m_dLastPrice != _model.m_dLastPrice)
+        {
+            _model = model;
+            [_priceTextField setTextFiledText:[NSString stringWithFormat:@"%.1f",_model.m_dLastPrice]];
+        }
+    }
+    
+}
 
 
 #pragma mark 持仓数据
@@ -557,15 +582,18 @@
     if(model != nil)
     {
         int mDirection = 0;
+        double price = 0;
         if(model.m_nDirection == ENTRUST_BUY)
         {
             mDirection = ENTRUST_SELL;
+            price = _model.m_dBidPrice1;
         }
         else
         {
             mDirection = ENTRUST_BUY;
+            price = _model.m_dAskPrice1;
         }
-        orderModel.info = [OrderModel buildOrderModel:model.m_strInstrumentID orderPrice:9140 orderNum:model.m_nOpenVolume direction:mDirection offsetFlag:EOFF_THOST_FTDC_OF_Close];
+        orderModel.info = [OrderModel buildOrderModel:model.m_strInstrumentID orderPrice:price orderNum:model.m_nOpenVolume direction:mDirection offsetFlag:EOFF_THOST_FTDC_OF_Close];
     }
     else
     {
@@ -761,5 +789,7 @@
 
  
 }
+
+
 
 @end

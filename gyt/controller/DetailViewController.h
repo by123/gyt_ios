@@ -14,6 +14,7 @@
 
 
 +(void)show : (BaseViewController *)controller
-      model : (PushModel *) model;
+      model : (PushModel *) model
+   position : (NSInteger)position;
 
 @end

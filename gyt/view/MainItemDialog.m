@@ -21,6 +21,8 @@
 
 @property (strong, nonatomic) PushModel *model;
 
+@property (assign, nonatomic) NSInteger position;
+
 @end
 
 @implementation MainItemDialog
@@ -66,9 +68,11 @@
 }
 
 -(void)updateView : (PushModel *)model
+          position:(NSInteger)position
            height : (CGFloat)height
 {
     self.model = model;
+    self.position = position;
     _leftBtn.frame = CGRectMake(0, height, SCREEN_WIDTH/2, Item_Height);
     _rightBtn.frame = CGRectMake(SCREEN_WIDTH/2, height, SCREEN_WIDTH/2, Item_Height);
     _lineView.frame = CGRectMake(SCREEN_WIDTH/2, height, 0.5, Item_Height);
@@ -90,7 +94,7 @@
         if(self.delegate)
         {
             [self setHidden:YES];
-            [self.delegate OnRightClicked : _model];
+            [self.delegate OnRightClicked : _model position:_position];
         }
     }
 }

@@ -89,11 +89,11 @@
 @property (assign, nonatomic) int m_nUpdateMillisec;
 
 //申买价一
-@property (assign, nonatomic) double m_dBidPrice1;
+@property (assign, nonatomic) double m_dBidPrice1;//(卖出)
 //申买量一
 @property (assign, nonatomic) int m_nBidVolume1;
 //申卖价一
-@property (assign, nonatomic) double m_dAskPrice1;
+@property (assign, nonatomic) double m_dAskPrice1;//(买入)
 //申卖量一
 @property (assign, nonatomic) int m_nAskVolume1;
 

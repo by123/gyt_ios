@@ -13,7 +13,7 @@
 
 @required -(void)OnLeftClicked : (PushModel *)model;
 
-@required -(void)OnRightClicked : (PushModel *)model;
+@required -(void)OnRightClicked : (PushModel *)model position : (NSInteger)position;
 
 @end
 
@@ -22,6 +22,7 @@
 @property (strong, nonatomic) id delegate;
 
 -(void)updateView : (PushModel *)model
+         position : (NSInteger)position
            height : (CGFloat)height;
 
 @end

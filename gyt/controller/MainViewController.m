@@ -278,7 +278,7 @@
     {
         PushModel *model = [_datas objectAtIndex:indexPath.row];
         [[ContractDB sharedContractDB] insertItem:DBHistoryContractTable model:model];
-        [DetailViewController show:self model:model];
+        [DetailViewController show:self model:model position:indexPath.row];
     }
 }
 
@@ -351,7 +351,7 @@
     if(!IS_NS_COLLECTION_EMPTY(_datas))
     {
         CGFloat height = Item_Height * (cell.tag + 1) + StatuBar_HEIGHT + NavigationBar_HEIGHT + 30 - currentY ;
-        [_mainItemDialog updateView:[_datas objectAtIndex:cell.tag] height:height];
+        [_mainItemDialog updateView:[_datas objectAtIndex:cell.tag] position:cell.tag height:height];
         [_mainItemDialog setHidden:NO];
     }
     
@@ -364,9 +364,9 @@
 }
 
 #pragma mark 点击下单
--(void)OnRightClicked : (PushModel *)model
+-(void)OnRightClicked : (PushModel *)model position:(NSInteger)position
 {
-    [DetailViewController show:self model:model];
+    [DetailViewController show:self model:model position:position];
 }
 
 
@@ -457,7 +457,6 @@
         [array2 addObject:model.m_strInstrumentID];
     }
 
-    
     PushRequestModel *model = [[PushRequestModel alloc]init];
     model.sessionId = [[Account sharedAccount]getSessionId];
     model.platformID =PLATFORM_OUTTER_YN_MN;
@@ -465,7 +464,6 @@
     model.code = array2;
     
     NSString *jsonStr = [JSONUtil parse:@"subMultiPrice" params:model.mj_keyValues];
-    NSLog(@"%@",jsonStr);
     
     [[SocketConnect sharedSocketConnect]sendData:jsonStr delegate:self seq:0];
 }
@@ -564,8 +562,9 @@
                 else
                 {
                     [_datas replaceObjectAtIndex:i withObject:pushModel];
+                    [[NSNotificationCenter defaultCenter]postNotificationName:Notify_Main_Push object:_datas];
+                    break;
                 }
-                break;
             }
         }
         
