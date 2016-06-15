@@ -178,6 +178,9 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+-(void)OnTitleClick
+{}
+
 -(void)OnRightClickCallBack : (NSInteger) position
 {
 

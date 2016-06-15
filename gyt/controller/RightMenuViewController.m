@@ -93,6 +93,9 @@
     return 0;
 }
 
+-(void)OnTitleClick
+{}
+
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

@@ -31,6 +31,8 @@
     [self.view addSubview:_navBar];
 }
 
-
+-(void)OnTitleClick
+{
+}
 
 @end
