@@ -759,7 +759,7 @@
     }
     else if(packageModel.seq == GYT_ORDER)
     {
-        [self handleMoney:packageModel respondModel:respondModel];
+        
     }
     else if(packageModel.seq == GYT_CANCEL)
     {
@@ -776,9 +776,19 @@
 {
     if([data isKindOfClass:[DealHoldByModel class]])
     {
-        DealHoldByModel *model = data;
-        [holdByDatas addObject:model];
-        [self reloadData:holdByDatas];
+        if(currentTabSelect == 1)
+        {
+            DealHoldingModel *model = data;
+            [holdingDatas addObject:model];
+            [self reloadData:holdingDatas];
+        }
+        else if(currentTabSelect == 2)
+        {
+            DealHoldByModel *model = data;
+            [holdByDatas addObject:model];
+            [self reloadData:holdByDatas];
+        }
+
     }
     else if([data isKindOfClass:[DealProfitModel class]])
     {
@@ -810,36 +820,17 @@
             [self updateData:_model];
         }
     }
-
-}
-
-
-#pragma mark 下单后的处理
--(void)handleMoney : (PackageModel *)packageModel
-      respondModel : (BaseRespondModel *)respondModel
-{
-    //资金变化
-    if(packageModel.result)
+    else if([data isKindOfClass:[MoneyDetailModel class]])
     {
-        QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:respondModel.response];
-        NSMutableArray *array = model.datas;
-        if(!IS_NS_COLLECTION_EMPTY(array))
-        {
-            for(id obj in array)
-            {
-                MoneyDetailModel *moneyDetailModel = [MoneyDetailModel mj_objectWithKeyValues:obj];
-                [[NSUserDefaults standardUserDefaults]setValue:moneyDetailModel.mj_JSONString forKey:MoneyInfo];
-            }
-            
-        }
-        NSString *moneyDetailStr = [[NSUserDefaults standardUserDefaults] objectForKey:MoneyInfo];
-        _moneyModel = [MoneyDetailModel mj_objectWithKeyValues:moneyDetailStr];
-        _rightLabel.text = [NSString stringWithFormat:@"权益：%.f",_moneyModel.m_dCurBalance];
-        _canUseLabel.text = [NSString stringWithFormat:@"可用：%.f",_moneyModel.m_dAvailable];
-        
+        MoneyDetailModel *model = data;
+        [[NSUserDefaults standardUserDefaults]setValue:model.mj_JSONString forKey:MoneyInfo];
+        _rightLabel.text = [NSString stringWithFormat:@"权益：%.f",model.m_dCurBalance];
+        _canUseLabel.text = [NSString stringWithFormat:@"可用：%.f",model.m_dAvailable];
+
     }
-    
+
 }
+
 
 #pragma mark 更新数据
 -(void)reloadData : (NSMutableArray *)data
@@ -863,7 +854,6 @@
             [_dynamicView reloadData:data];
         }
     }
-
  
 }
 

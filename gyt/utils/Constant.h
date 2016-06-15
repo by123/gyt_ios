@@ -166,12 +166,12 @@ typedef NS_ENUM(NSInteger, RequestType) {
     XT_CInstrumentFee,
     XT_CQueryDataReq,
     XT_CQueryHistoryDataReq,
-    XT_CAccountDetail,//资金信息
+    XT_CAccountDetail,//资金信息12115
     XT_CFundFlow,
-    XT_COrderDetail, //委托
-    XT_CDealDetail, //成交
-    XT_CPositionDetail,
-    XT_CPositionStatics, //持仓
+    XT_COrderDetail, //委托12117
+    XT_CDealDetail, //成交12118
+    XT_CPositionDetail,//持仓详情12119
+    XT_CPositionStatics, //持仓12120
     XT_CLoginInfoLog,
     XT_CProductInfo,
     XT_CTradeTimePair,
