@@ -208,7 +208,7 @@
         {
             NSString *sessionId = [model.response objectForKey:@"sessionId"];
             [[Account sharedAccount]saveSessionid:sessionId];
-            [DialogHelper showSuccessTips:[NSString stringWithFormat:@"登录成功->%@",packageModel.result]];
+//            [DialogHelper showSuccessTips:[NSString stringWithFormat:@"登录成功->%@",packageModel.result]];
             [[NSNotificationCenter defaultCenter] postNotificationName:Notify_Update_AccountInfo object:nil];
             [MainViewController show : self];
         }

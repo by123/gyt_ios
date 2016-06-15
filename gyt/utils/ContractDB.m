@@ -254,7 +254,7 @@ SINGLETON_IMPLEMENTION(ContractDB);
     }
     if(res)
     {
-        NSLog(@"更新数据成功！");
+//        NSLog(@"更新数据成功！");
     }
     else
     {
@@ -268,6 +268,11 @@ SINGLETON_IMPLEMENTION(ContractDB);
 -(BOOL)deleteItem : (NSString *)tableName
      instrumentid : (NSString *)instrumentID
 {
+    if([self queryItem:tableName instrumentid:instrumentID] == nil)
+    {
+        NSLog(@"数据不存在！");
+        return NO;
+    }
     BOOL res = NO;
     if([_db open])
     {

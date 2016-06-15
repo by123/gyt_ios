@@ -15,7 +15,6 @@
 #pragma mark 广播
 #define Notify_Menu_Title @"menu_title"
 #define Notify_Update_AccountInfo @"update_accountinfo"
-#define Notify_Main_Push @"main_push"
 
 #pragma mark 网络请求相关
 //#define Root_Url @"http://192.168.1.106:8081" //陈勇
@@ -25,7 +24,7 @@
 #define Port 64360
 
 //#define Host @"114.119.6.146" //外网
-//#define Port 64360
+//#define Port 64350
 
 #define Root_Url @"http://114.119.6.146:8081"
 
@@ -42,12 +41,10 @@
 
 #define Info_Net_Error @"网络异常，点击刷新"
 
-
 #pragma mark 小区信息存储
 #define VillageID @"villageId"
 #define VillageName @"villageName"
 #define MoneyInfo @"moneyInfo"
-
 
 #define Buy @"买"
 #define Sell @"卖"

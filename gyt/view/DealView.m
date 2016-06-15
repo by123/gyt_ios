@@ -125,14 +125,8 @@
     currentModel = [[DealHoldModel alloc]init];
     [self initTopView];
     [self initBottomView];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateData:) name:Notify_Main_Push object:nil];
 //    [self requestQuery:XT_CPositionStatics];
 
-}
-
--(void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:Notify_Main_Push object:nil];
 }
 
 
@@ -196,17 +190,17 @@
     
     //价格
     _priceTextField = [[ByTextField alloc]initWithType:NumberFloat frame:CGRectMake(10 + _handTextField.width + 5 , _nameButton.y + _nameButton.height +5, _nameButton.width/2 +5, 30) rootView:_rootView title:@"价格:"];
-    [_priceTextField setTextFiledText:[NSString stringWithFormat:@"%.1f",_model.m_dLastPrice]];
+    [_priceTextField setTextFiledText:[NSString stringWithFormat:@"%.2f",_model.m_dLastPrice]];
     
     __weak DealView *weakSelf = self;
     _priceTextField.block = ^(BOOL isCompelete,NSString *text)
     {
         if(isCompelete)
         {
-            NSString *buyTxt = [NSString stringWithFormat:@"%@\n—————————\n买多",text];
+            NSString *buyTxt = [NSString stringWithFormat:@"%.2f\n—————————\n买多",weakSelf.model.m_dAskPrice1];
             [weakSelf.buyItem setTitle:buyTxt forState:UIControlStateNormal];
             
-            NSString *sellTxt = [NSString stringWithFormat:@"%@\n—————————\n卖空",text];
+            NSString *sellTxt = [NSString stringWithFormat:@"%.2f\n—————————\n卖空",weakSelf.model.m_dBidPrice1];
             [weakSelf.sellItem setTitle:sellTxt forState:UIControlStateNormal];
         }
     };
@@ -222,7 +216,7 @@
     
     _currentPriceLabel = [[UILabel alloc]init];
     _currentPriceLabel.textColor = TEXT_COLOR;
-    _currentPriceLabel.text = [NSString stringWithFormat:@"新:%.1f",_model.m_dLastPrice];
+    _currentPriceLabel.text = [NSString stringWithFormat:@"新:%.2f",_model.m_dLastPrice];
     _currentPriceLabel.font = [UIFont systemFontOfSize:13.0f];
     _currentPriceLabel.frame = CGRectMake(5, 2.5, _currentPriceLabel.contentSize.width, 20);
     [priceView addSubview:_currentPriceLabel];
@@ -236,28 +230,28 @@
     
     _buyPriceLabel = [[UILabel alloc]init];
     _buyPriceLabel.textColor = TEXT_COLOR;
-    _buyPriceLabel.text = [NSString stringWithFormat:@"买:%.1f",_model.m_dAskPrice1];
+    _buyPriceLabel.text = [NSString stringWithFormat:@"买:%.2f",_model.m_dBidPrice1];
     _buyPriceLabel.font = [UIFont systemFontOfSize:13.0f];
     _buyPriceLabel.frame = CGRectMake(5, 22.5, _buyPriceLabel.contentSize.width, 20);
     [priceView addSubview:_buyPriceLabel];
     
     _buyCountLabel = [[UILabel alloc]init];
     _buyCountLabel.textColor = TEXT_COLOR;
-    _buyCountLabel.text = [NSString stringWithFormat:@"%d",_model.m_nAskVolume1];
+    _buyCountLabel.text = [NSString stringWithFormat:@"%d",_model.m_nBidVolume1];
     _buyCountLabel.font = [UIFont systemFontOfSize:13.0f];
     _buyCountLabel.frame = CGRectMake(priceView.size.width - _buyCountLabel.contentSize.width-5, 22.5, _buyCountLabel.contentSize.width, 20);
     [priceView addSubview:_buyCountLabel];
     
     _sellPriceLabel = [[UILabel alloc]init];
     _sellPriceLabel.textColor = TEXT_COLOR;
-    _sellPriceLabel.text = [NSString stringWithFormat:@"卖:%.1f",_model.m_dBidPrice1];
+    _sellPriceLabel.text = [NSString stringWithFormat:@"卖:%.2f",_model.m_dAskPrice1];
     _sellPriceLabel.font = [UIFont systemFontOfSize:13.0f];
     _sellPriceLabel.frame = CGRectMake(5, 42.5, _sellPriceLabel.contentSize.width, 20);
     [priceView addSubview:_sellPriceLabel];
     
     _sellCountLabel = [[UILabel alloc]init];
     _sellCountLabel.textColor = TEXT_COLOR;
-    _sellCountLabel.text = [NSString stringWithFormat:@"%d",_model.m_nBidVolume1];;
+    _sellCountLabel.text = [NSString stringWithFormat:@"%d",_model.m_nAskVolume1];;
     _sellCountLabel.font = [UIFont systemFontOfSize:13.0f];
     _sellCountLabel.frame = CGRectMake(priceView.size.width - _sellCountLabel.contentSize.width-5, 42.5, _sellCountLabel.contentSize.width, 20);
     [priceView addSubview:_sellCountLabel];
@@ -269,7 +263,7 @@
     _buyItem.layer.masksToBounds = YES;
     _buyItem.layer.cornerRadius = 4;
     
-    NSString *buyTxt = [NSString stringWithFormat:@"%.1f\n—————————\n买多",_model.m_dAskPrice1];
+    NSString *buyTxt = [NSString stringWithFormat:@"%.2f\n—————————\n买多",_model.m_dAskPrice1];
     [_buyItem setTitle:buyTxt forState:UIControlStateNormal];
     [_buyItem setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _buyItem.titleLabel.font = [UIFont systemFontOfSize:14.0f];
@@ -286,7 +280,7 @@
     _sellItem.layer.cornerRadius = 4;
 
 
-    NSString *sellTxt = [NSString stringWithFormat:@"%.1f\n—————————\n卖空",_model.m_dBidPrice1];
+    NSString *sellTxt = [NSString stringWithFormat:@"%.2f\n—————————\n卖空",_model.m_dBidPrice1];
     [_sellItem setTitle:sellTxt forState:UIControlStateNormal];
     [_sellItem setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _sellItem.titleLabel.font = [UIFont systemFontOfSize:14.0f];
@@ -326,18 +320,20 @@
 }
 
 #pragma mark 动态数据
--(void)updateData : (NSNotification *)notification
+-(void)updateData : (PushModel *)model
 {
-    NSMutableArray *datas = [notification object];
-    if(!IS_NS_COLLECTION_EMPTY(datas))
-    {
-        PushModel *model = [datas objectAtIndex:_position];
-        if(model.m_dLastPrice != _model.m_dLastPrice)
-        {
-            _model = model;
-            [_priceTextField setTextFiledText:[NSString stringWithFormat:@"%.1f",_model.m_dLastPrice]];
-        }
-    }
+    [_priceTextField setTextFiledText:[NSString stringWithFormat:@"%.2f",model.m_dLastPrice]];
+    NSString *buyTxt = [NSString stringWithFormat:@"%.2f\n—————————\n买多",model.m_dAskPrice1];
+    [_buyItem setTitle:buyTxt forState:UIControlStateNormal];
+    NSString *sellTxt = [NSString stringWithFormat:@"%.2f\n—————————\n卖空",model.m_dBidPrice1];
+    [_sellItem setTitle:sellTxt forState:UIControlStateNormal];
+    
+    _currentPriceLabel.text = [NSString stringWithFormat:@"新:%.2f",model.m_dLastPrice];
+    _currentCountLabel.text = [NSString stringWithFormat:@"%d",model.m_nVolume];
+    _buyPriceLabel.text = [NSString stringWithFormat:@"买:%.2f",model.m_dBidPrice1];
+    _buyCountLabel.text = [NSString stringWithFormat:@"%d",model.m_nBidVolume1];
+    _sellPriceLabel.text = [NSString stringWithFormat:@"卖:%.2f",model.m_dAskPrice1];
+    _sellCountLabel.text = [NSString stringWithFormat:@"%d",model.m_nAskVolume1];;
     
 }
 
@@ -447,37 +443,37 @@
 }
 
 
-#pragma mark 获得实际买卖价格
--(NSString *)getPrice : (BOOL)isBuy
-{
-    NSString *price;
-    NSString *priceStr = [_priceTextField getTextFieldText];
-    if(isBuy)
-    {
-        NSString *lastPrice = [NSString stringWithFormat:@"%.1f",_model.m_dLastPrice];
-        if(![priceStr isEqualToString:lastPrice])
-        {
-            price = priceStr;
-        }
-        else
-        {
-            price = [NSString stringWithFormat:@"%.1f",_model.m_dAskPrice1];
-        }
-    }
-    else
-    {
-        NSString *lastPrice = [NSString stringWithFormat:@"%.1f",_model.m_dLastPrice];
-        if(![priceStr isEqualToString:lastPrice])
-        {
-            price = priceStr;
-        }
-        else
-        {
-            price = [NSString stringWithFormat:@"%.1f",_model.m_dBidPrice1];
-        }
-    }
-    return price;
-}
+//#pragma mark 获得实际买卖价格
+//-(NSString *)getPrice : (BOOL)isBuy
+//{
+//    NSString *price;
+//    NSString *priceStr = [_priceTextField getTextFieldText];
+//    if(isBuy)
+//    {
+//        NSString *lastPrice = [NSString stringWithFormat:@"%.1f",_model.m_dLastPrice];
+//        if(![priceStr isEqualToString:lastPrice])
+//        {
+//            price = priceStr;
+//        }
+//        else
+//        {
+//            price = [NSString stringWithFormat:@"%.1f",_model.m_dAskPrice1];
+//        }
+//    }
+//    else
+//    {
+//        NSString *lastPrice = [NSString stringWithFormat:@"%.1f",_model.m_dLastPrice];
+//        if(![priceStr isEqualToString:lastPrice])
+//        {
+//            price = priceStr;
+//        }
+//        else
+//        {
+//            price = [NSString stringWithFormat:@"%.1f",_model.m_dBidPrice1];
+//        }
+//    }
+//    return price;
+//}
 
 #pragma mark tabview选择
 -(void)OnSelect:(NSInteger)position
@@ -515,7 +511,7 @@
     if(view == _buyItem)
     {
         director = ENTRUST_BUY;
-        NSString *message = [NSString stringWithFormat:@"%@，%@，买，%@手",_model.m_strInstrumentID,[self getPrice : YES],hand];
+        NSString *message = [NSString stringWithFormat:@"%@，%.2f，买，%@手",_model.m_strInstrumentID,_model.m_dAskPrice1,hand];
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认下单吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
         alert.tag = 0;
         [alert show];
@@ -523,7 +519,7 @@
     else if(view == _sellItem)
     {
         director = ENTRUST_SELL;
-        NSString *message = [NSString stringWithFormat:@"%@，%@，卖，%@手",_model.m_strInstrumentID,[self getPrice : NO],hand];
+        NSString *message = [NSString stringWithFormat:@"%@，%.2f，卖，%@手",_model.m_strInstrumentID,_model.m_dBidPrice1,hand];
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认下单吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
         alert.tag = 1;
         [alert show];
@@ -606,7 +602,6 @@
     OrderRequestModel *orderModel = [[OrderRequestModel alloc]init];
     orderModel.strSessionID = [[Account sharedAccount]getSessionId];
     orderModel.account = account;
-    double price = [[_priceTextField getTextFieldText] doubleValue];
     double hand = [[_handTextField getTextFieldText] doubleValue];
     
     if(model != nil)
@@ -616,6 +611,7 @@
     }
     else
     {
+        double price;
         //下单
         if(director == ENTRUST_BUY)
         {
@@ -741,18 +737,11 @@
     }
     else if(packageModel.seq == GYT_ORDER)
     {
-//        id data = [respondModel.response objectForKey:@"res"];
-//        DealHoldByModel *holdByModel = [DealHoldByModel mj_objectWithKeyValues:data];
-//        holdByModel.m_tag = [OrderTagModel mj_objectWithKeyValues:holdByModel.m_tag];
-//        if(holdByModel != nil)
-//        {
-//            [holdByDatas addObject:holdByModel];
-//            [self reloadData:holdByDatas];
-//        }
+        NSLog(@"123");
     }
     else if(packageModel.seq == GYT_CANCEL)
     {
-//        [DialogHelper showSuccessTips:@"提交撤单申请成功"];
+        [DialogHelper showSuccessTips:@"提交撤单申请成功"];
     }
     else if(packageModel.cmd == 4)
     {
@@ -788,6 +777,15 @@
         }
         [self reloadData:holdDatas];
 
+    }
+    else if([data isKindOfClass:[PushModel class]])
+    {
+        PushModel *model = data;
+        if([model.m_strInstrumentID isEqualToString:_model.m_strInstrumentID])
+        {
+            _model = model;
+            [self updateData:_model];
+        }
     }
 
 }

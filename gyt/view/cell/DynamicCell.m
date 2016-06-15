@@ -129,12 +129,15 @@
             int width =  [[_widths objectAtIndex:i] intValue] * maxWidth / count;
             switch (i) {
                 case 0://时间
-                    if(IS_NS_STRING_EMPTY(model.m_tag.m_nOrderTime))
+                    if(model.m_tag)
                     {
-                        label.text = [self generateTime:[NSString stringWithFormat:@"%d",model.m_nInsertTime]];
-                    }
-                    else{
-                        label.text = [self generateTime:model.m_tag.m_nOrderTime];
+                        if(IS_NS_STRING_EMPTY(model.m_tag.m_nOrderTime))
+                        {
+                            label.text = [self generateTime:[NSString stringWithFormat:@"%d",model.m_nInsertTime]];
+                        }
+                        else{
+                            label.text = [self generateTime:model.m_tag.m_nOrderTime];
+                        }
                     }
                     break;
                 case 1://合约
@@ -213,12 +216,15 @@
             int width =  [[_widths objectAtIndex:i] intValue] * maxWidth / count;
             switch (i) {
                 case 0://时间
-                    if(IS_NS_STRING_EMPTY(model.m_tag.m_nOrderTime))
+                    if(model.m_tag)
                     {
-                        label.text = [self generateTime:[NSString stringWithFormat:@"%d",model.m_nInsertTime]];
-                    }
-                    else{
-                        label.text = [self generateTime:model.m_tag.m_nOrderTime];
+                        if(IS_NS_STRING_EMPTY(model.m_tag.m_nOrderTime))
+                        {
+                            label.text = [self generateTime:[NSString stringWithFormat:@"%d",model.m_nInsertTime]];
+                        }
+                        else{
+                            label.text = [self generateTime:model.m_tag.m_nOrderTime];
+                        }
                     }
                     break;
                 case 1://合约

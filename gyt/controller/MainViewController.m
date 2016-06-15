@@ -313,17 +313,18 @@
             [self.navBar setTitle:@"自选合约 ▼"];
             [_datas removeAllObjects];
             _datas = [[ContractDB sharedContractDB] queryAll:DBMyContractTable];
+            [_tableView reloadData];
             break;
         case 2:
             [self.navBar setTitle:@"历史浏览记录 ▼"];
             [_datas removeAllObjects];
             _datas = [[ContractDB sharedContractDB] queryAll:DBHistoryContractTable];
+            [_tableView reloadData];
             break;
             
         default:
             break;
     }
-    [_tableView reloadData];
 
 }
 
@@ -584,7 +585,8 @@
             PushModel *model = [temps objectAtIndex:i];
             if([model.m_strInstrumentID isEqualToString:pushModel.m_strInstrumentID])
             {
-                if(pushModel.m_dLastPrice == model.m_dLastPrice)
+                //无数据变化不刷新
+                if(pushModel.m_dLastPrice == model.m_dLastPrice && pushModel.m_nVolume == model.m_nVolume)
                 {
                     return;
                 }
@@ -597,13 +599,21 @@
                     model.m_dBidPrice1 = pushModel.m_dBidPrice1;
                     model.m_nAskVolume1 = pushModel.m_nAskVolume1;
                     model.m_nBidVolume1 = pushModel.m_nBidVolume1;
-                    [[NSNotificationCenter defaultCenter]postNotificationName:Notify_Main_Push object:_datas];
+                    if(model.isMyContract)
+                    {
+                        [[ContractDB sharedContractDB]updateItem:DBMyContractTable instrumentid:model.m_strInstrumentID model:model];
+                    }
+                    [[ContractDB sharedContractDB]updateItem:DBHistoryContractTable instrumentid:model.m_strInstrumentID model:model];
+                
+                    NSLog(@"%@->%f->%d",model.m_strInstrumentID,model.m_dLastPrice,model.m_nVolume);
+                    //只刷新变化的那一行
+                    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:i inSection:0];
+                    [_tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
                     break;
                 }
             }
         }
-        
-        [_tableView reloadData];
+    
     }
  
 }

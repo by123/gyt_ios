@@ -11,6 +11,7 @@
 #import "DealHoldByModel.h"
 #import "DealProfitModel.h"
 #import "DealHoldModel.h"
+#import "PushModel.h"
 
 @implementation PushDataHandle
 
@@ -54,6 +55,17 @@ SINGLETON_IMPLEMENTION(PushDataHandle)
             [delegate pushResult:result];
         }
     }
+    else if([method isEqualToString:@"pushQuoteData"])
+    {
+        id params = model.params;
+        id data  = [params objectForKey:@"data"];
+        id result = [self handlePushModel:data];
+        if(delegate)
+        {
+            [delegate pushResult:result];
+        }
+
+    }
     
 }
 
@@ -83,6 +95,12 @@ SINGLETON_IMPLEMENTION(PushDataHandle)
     DealHoldModel *dealHoldModel = [DealHoldModel mj_objectWithKeyValues:data];
     return dealHoldModel;
 
+}
+
+-(PushModel *)handlePushModel : (id)data
+{
+    PushModel *pushModel = [PushModel mj_objectWithKeyValues:data];
+    return pushModel;
 }
 
 @end

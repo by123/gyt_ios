@@ -45,15 +45,7 @@
    position : (NSInteger)position
 {
     DetailViewController *targetController = [[DetailViewController alloc]init];
-    PushModel *temp = [[ContractDB sharedContractDB] queryItem:DBMyContractTable instrumentid:model.m_strInstrumentID];
-    if(temp)
-    {
-        targetController.model = temp;
-    }
-    else
-    {
-        targetController.model = model;
-    }
+    targetController.model = model;
     [controller presentViewController:targetController animated:YES completion:nil];
 }
 
