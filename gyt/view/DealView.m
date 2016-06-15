@@ -686,6 +686,7 @@
     PackageModel *packageModel = respondObject;
     BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
 
+    //持仓
     if(packageModel.seq == XT_CPositionStatics && !IS_NS_STRING_EMPTY(packageModel.result))
     {
         [holdDatas removeAllObjects];
@@ -702,6 +703,7 @@
 
         }
     }
+    //委托
     else if(packageModel.seq == XT_COrderDetail && !IS_NS_STRING_EMPTY(packageModel.result))
     {
         [holdByDatas removeAllObjects];
@@ -710,35 +712,36 @@
         NSMutableArray *array = model.datas;
         if(!IS_NS_COLLECTION_EMPTY(array))
         {
-            for(id obj in array)
-            {
-                DealHoldByModel *holdByModel = [DealHoldByModel mj_objectWithKeyValues:obj];
-                OrderTagModel *tagModel = [[OrderTagModel alloc]init];
-                tagModel.m_strRealTag = holdByModel.m_strOrderRef;
-                holdByModel.m_tag = tagModel;
-                [holdByDatas addObject:holdByModel];
-            }
-            for(id obj in array)
-            {
-                DealHoldingModel *holdingModel = [DealHoldingModel mj_objectWithKeyValues:obj];
-                OrderTagModel *tagModel = [[OrderTagModel alloc]init];
-                tagModel.m_strRealTag = holdingModel.m_strOrderRef;
-                holdingModel.m_tag = tagModel;
-                if(holdingModel.m_nOrderStatus == ENTRUST_STATUS_REPORTED)
-                {
-                    [holdingDatas addObject:holdingModel];
-                }
-            }
             if(currentTabSelect == 1)
             {
+                for(id obj in array)
+                {
+                    DealHoldingModel *holdingModel = [DealHoldingModel mj_objectWithKeyValues:obj];
+                    OrderTagModel *tagModel = [[OrderTagModel alloc]init];
+                    tagModel.m_strRealTag = holdingModel.m_strOrderRef;
+                    holdingModel.m_tag = tagModel;
+                    if(holdingModel.m_nOrderStatus == ENTRUST_STATUS_REPORTED)
+                    {
+                        [holdingDatas addObject:holdingModel];
+                    }
+                }
                 [self reloadData:holdingDatas];
             }
             else if(currentTabSelect == 2)
             {
+                for(id obj in array)
+                {
+                    DealHoldByModel *holdByModel = [DealHoldByModel mj_objectWithKeyValues:obj];
+                    OrderTagModel *tagModel = [[OrderTagModel alloc]init];
+                    tagModel.m_strRealTag = holdByModel.m_strOrderRef;
+                    holdByModel.m_tag = tagModel;
+                    [holdByDatas addObject:holdByModel];
+                }
                 [self reloadData:holdByDatas];
             }
         }
     }
+    //成交
     else if(packageModel.seq == XT_CDealDetail && !IS_NS_STRING_EMPTY(packageModel.result))
     {
         [holdProfileDatas removeAllObjects];
@@ -756,7 +759,7 @@
     }
     else if(packageModel.seq == GYT_ORDER)
     {
-        NSLog(@"123");
+        [self handleMoney:packageModel respondModel:respondModel];
     }
     else if(packageModel.seq == GYT_CANCEL)
     {
@@ -767,6 +770,7 @@
         [[PushDataHandle sharedPushDataHandle] handlePushData:packageModel.result delegate :self];
     }
 }
+
 
 -(void)pushResult:(id)data
 {
@@ -809,12 +813,40 @@
 
 }
 
+
+#pragma mark 下单后的处理
+-(void)handleMoney : (PackageModel *)packageModel
+      respondModel : (BaseRespondModel *)respondModel
+{
+    //资金变化
+    if(packageModel.result)
+    {
+        QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:respondModel.response];
+        NSMutableArray *array = model.datas;
+        if(!IS_NS_COLLECTION_EMPTY(array))
+        {
+            for(id obj in array)
+            {
+                MoneyDetailModel *moneyDetailModel = [MoneyDetailModel mj_objectWithKeyValues:obj];
+                [[NSUserDefaults standardUserDefaults]setValue:moneyDetailModel.mj_JSONString forKey:MoneyInfo];
+            }
+            
+        }
+        NSString *moneyDetailStr = [[NSUserDefaults standardUserDefaults] objectForKey:MoneyInfo];
+        _moneyModel = [MoneyDetailModel mj_objectWithKeyValues:moneyDetailStr];
+        _rightLabel.text = [NSString stringWithFormat:@"权益：%.f",_moneyModel.m_dCurBalance];
+        _canUseLabel.text = [NSString stringWithFormat:@"可用：%.f",_moneyModel.m_dAvailable];
+        
+    }
+    
+}
+
 #pragma mark 更新数据
 -(void)reloadData : (NSMutableArray *)data
 {
     if(!IS_NS_COLLECTION_EMPTY(data))
     {
-        if([[data objectAtIndex:0] isKindOfClass:[DealHoldModel class]] && (currentTabSelect == 0 || currentTabSelect == 1))
+        if([[data objectAtIndex:0] isKindOfClass:[DealHoldModel class]] && currentTabSelect == 0)
         {
             [_dynamicView reloadData:data];
         }

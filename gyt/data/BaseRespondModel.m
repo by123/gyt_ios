@@ -14,7 +14,7 @@
 +(BaseRespondModel *) buildModel : (id)respondObject
 {
     PackageModel *packageModel = respondObject;
-//    NSLog(@"--------------------接收到数据--------------------\n%@",packageModel.result);
+    NSLog(@"--------------------接收到数据--------------------\n%@",packageModel.result);
     BaseRespondModel *model = [BaseRespondModel mj_objectWithKeyValues:packageModel.result];
     id params = model.params;
     model.response = [params objectForKey:@"response"];
@@ -22,7 +22,7 @@
     
     if(model.error.ErrorID == 0)
     {
-//        NSLog(@"--------------------请求成功--------------------\nseq=%lld",packageModel.seq);
+        NSLog(@"--------------------请求成功--------------------\nseq=%lld",packageModel.seq);
     }
     else
     {
