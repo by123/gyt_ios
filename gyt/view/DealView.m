@@ -33,6 +33,9 @@
 //使用率
 @property (strong, nonatomic) UILabel *userPercentLabel;
 
+//价格显示区
+@property (strong, nonatomic) UIView *priceView;
+
 //最新价
 @property (strong, nonatomic) UILabel *currentPriceLabel;
 
@@ -207,54 +210,54 @@
     [self addSubview:_priceTextField];
     
     
-    UIView *priceView = [[UIView alloc]init];
-    priceView.backgroundColor = [ColorUtil colorWithHexString:@"#262626"];;
-    priceView.frame = CGRectMake(_priceTextField.x + _priceTextField.width+5 , view.height + 5, SCREEN_WIDTH - 25 - _nameButton.width, 65);
-    priceView.layer.cornerRadius = 4;
-    priceView.layer.masksToBounds = YES;
-    [self addSubview:priceView];
+    _priceView = [[UIView alloc]init];
+    _priceView.backgroundColor = [ColorUtil colorWithHexString:@"#262626"];;
+    _priceView.frame = CGRectMake(_priceTextField.x + _priceTextField.width+5 , view.height + 5, SCREEN_WIDTH - 15 - _nameButton.width, 65);
+    _priceView.layer.cornerRadius = 4;
+    _priceView.layer.masksToBounds = YES;
+    [self addSubview:_priceView];
     
     _currentPriceLabel = [[UILabel alloc]init];
     _currentPriceLabel.textColor = TEXT_COLOR;
     _currentPriceLabel.text = [NSString stringWithFormat:@"新:%.2f",_model.m_dLastPrice];
     _currentPriceLabel.font = [UIFont systemFontOfSize:13.0f];
     _currentPriceLabel.frame = CGRectMake(5, 2.5, _currentPriceLabel.contentSize.width, 20);
-    [priceView addSubview:_currentPriceLabel];
+    [_priceView addSubview:_currentPriceLabel];
     
     _currentCountLabel = [[UILabel alloc]init];
     _currentCountLabel.textColor = TEXT_COLOR;
     _currentCountLabel.text = [NSString stringWithFormat:@"%d",_model.m_nVolume];
     _currentCountLabel.font = [UIFont systemFontOfSize:13.0f];
-    _currentCountLabel.frame = CGRectMake(priceView.size.width - _currentCountLabel.contentSize.width-5, 2.5, _currentPriceLabel.contentSize.width, 20);
-    [priceView addSubview:_currentCountLabel];
+    _currentCountLabel.frame = CGRectMake(_priceView.size.width - _currentCountLabel.contentSize.width-5, 2.5, _currentPriceLabel.contentSize.width, 20);
+    [_priceView addSubview:_currentCountLabel];
     
     _buyPriceLabel = [[UILabel alloc]init];
     _buyPriceLabel.textColor = TEXT_COLOR;
     _buyPriceLabel.text = [NSString stringWithFormat:@"买:%.2f",_model.m_dBidPrice1];
     _buyPriceLabel.font = [UIFont systemFontOfSize:13.0f];
     _buyPriceLabel.frame = CGRectMake(5, 22.5, _buyPriceLabel.contentSize.width, 20);
-    [priceView addSubview:_buyPriceLabel];
+    [_priceView addSubview:_buyPriceLabel];
     
     _buyCountLabel = [[UILabel alloc]init];
     _buyCountLabel.textColor = TEXT_COLOR;
     _buyCountLabel.text = [NSString stringWithFormat:@"%d",_model.m_nBidVolume1];
     _buyCountLabel.font = [UIFont systemFontOfSize:13.0f];
-    _buyCountLabel.frame = CGRectMake(priceView.size.width - _buyCountLabel.contentSize.width-5, 22.5, _buyCountLabel.contentSize.width, 20);
-    [priceView addSubview:_buyCountLabel];
+    _buyCountLabel.frame = CGRectMake(_priceView.size.width - _buyCountLabel.contentSize.width-5, 22.5, _buyCountLabel.contentSize.width, 20);
+    [_priceView addSubview:_buyCountLabel];
     
     _sellPriceLabel = [[UILabel alloc]init];
     _sellPriceLabel.textColor = TEXT_COLOR;
     _sellPriceLabel.text = [NSString stringWithFormat:@"卖:%.2f",_model.m_dAskPrice1];
     _sellPriceLabel.font = [UIFont systemFontOfSize:13.0f];
     _sellPriceLabel.frame = CGRectMake(5, 42.5, _sellPriceLabel.contentSize.width, 20);
-    [priceView addSubview:_sellPriceLabel];
+    [_priceView addSubview:_sellPriceLabel];
     
     _sellCountLabel = [[UILabel alloc]init];
     _sellCountLabel.textColor = TEXT_COLOR;
     _sellCountLabel.text = [NSString stringWithFormat:@"%d",_model.m_nAskVolume1];;
     _sellCountLabel.font = [UIFont systemFontOfSize:13.0f];
-    _sellCountLabel.frame = CGRectMake(priceView.size.width - _sellCountLabel.contentSize.width-5, 42.5, _sellCountLabel.contentSize.width, 20);
-    [priceView addSubview:_sellCountLabel];
+    _sellCountLabel.frame = CGRectMake(_priceView.size.width - _sellCountLabel.contentSize.width-5, 42.5, _sellCountLabel.contentSize.width, 20);
+    [_priceView addSubview:_sellCountLabel];
 
     
     
@@ -328,12 +331,28 @@
     NSString *sellTxt = [NSString stringWithFormat:@"%.2f\n—————————\n卖空",model.m_dBidPrice1];
     [_sellItem setTitle:sellTxt forState:UIControlStateNormal];
     
+    int width = _priceView.size.width;
     _currentPriceLabel.text = [NSString stringWithFormat:@"新:%.2f",model.m_dLastPrice];
+    _currentPriceLabel.frame = CGRectMake(5, 2.5,(width - 10)/2, 20);
+
     _currentCountLabel.text = [NSString stringWithFormat:@"%d",model.m_nVolume];
+    _currentCountLabel.textAlignment = NSTextAlignmentRight;
+    _currentCountLabel.frame = CGRectMake(width/2, 2.5, width/2, 20);
+
     _buyPriceLabel.text = [NSString stringWithFormat:@"买:%.2f",model.m_dBidPrice1];
+    _buyPriceLabel.frame = CGRectMake(5, 22.5, (width - 10)/2, 20);
+
+    
     _buyCountLabel.text = [NSString stringWithFormat:@"%d",model.m_nBidVolume1];
+    _buyCountLabel.textAlignment = NSTextAlignmentRight;
+    _buyCountLabel.frame = CGRectMake(width/2, 22.5, width/2, 20);
+
     _sellPriceLabel.text = [NSString stringWithFormat:@"卖:%.2f",model.m_dAskPrice1];
-    _sellCountLabel.text = [NSString stringWithFormat:@"%d",model.m_nAskVolume1];;
+    _sellPriceLabel.frame = CGRectMake(5, 42.5, (width - 10)/2, 20);
+
+    _sellCountLabel.text = [NSString stringWithFormat:@"%d",model.m_nAskVolume1];
+    _sellCountLabel.textAlignment = NSTextAlignmentRight;
+    _sellCountLabel.frame = CGRectMake(width/2, 42.5, width/2, 20);
     
 }
 

@@ -104,11 +104,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "gyt/view/DealView.m"
-            timestampString = "487667306.88503"
+            timestampString = "487669165.408492"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "698"
-            endingLineNumber = "698"
+            startingLineNumber = "717"
+            endingLineNumber = "717"
             landmarkName = "-OnReceiveSuccess:"
             landmarkType = "5">
          </BreakpointContent>
@@ -120,11 +120,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "gyt/view/DealView.m"
-            timestampString = "487667306.88503"
+            timestampString = "487669165.408492"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "705"
-            endingLineNumber = "705"
+            startingLineNumber = "724"
+            endingLineNumber = "724"
             landmarkName = "-OnReceiveSuccess:"
             landmarkType = "5">
          </BreakpointContent>
@@ -136,11 +136,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "gyt/view/DealView.m"
-            timestampString = "487667306.88503"
+            timestampString = "487669165.408492"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "786"
-            endingLineNumber = "786"
+            startingLineNumber = "805"
+            endingLineNumber = "805"
             landmarkName = "-pushResult:"
             landmarkType = "5">
          </BreakpointContent>
@@ -152,11 +152,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "gyt/view/DealView.m"
-            timestampString = "487667306.88503"
+            timestampString = "487668323.721858"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "324"
-            endingLineNumber = "324"
+            startingLineNumber = "327"
+            endingLineNumber = "327"
             landmarkName = "-updateData:"
             landmarkType = "5">
          </BreakpointContent>
