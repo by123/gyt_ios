@@ -67,7 +67,7 @@
 @property (strong, nonatomic) ByTextField *handTextField;
 
 //价格
-@property (strong, nonatomic) ByTextField *priceTextField;
+@property (strong, nonatomic) UIButton *priceButton;
 
 //持仓，挂单，委托，成交 标题
 @property (strong, nonatomic) ByTabView *tabView;
@@ -192,27 +192,39 @@
     [self addSubview:_handTextField];
     
     //价格
-    _priceTextField = [[ByTextField alloc]initWithType:NumberFloat frame:CGRectMake(10 + _handTextField.width + 5 , _nameButton.y + _nameButton.height +5, _nameButton.width/2 +5, 30) rootView:_rootView title:@"价格:"];
-    [_priceTextField setTextFiledText:[NSString stringWithFormat:@"%.2f",_model.m_dLastPrice]];
-    
-    __weak DealView *weakSelf = self;
-    _priceTextField.block = ^(BOOL isCompelete,NSString *text)
-    {
-        if(isCompelete)
-        {
-            NSString *buyTxt = [NSString stringWithFormat:@"%.2f\n—————————\n买多",weakSelf.model.m_dAskPrice1];
-            [weakSelf.buyItem setTitle:buyTxt forState:UIControlStateNormal];
-            
-            NSString *sellTxt = [NSString stringWithFormat:@"%.2f\n—————————\n卖空",weakSelf.model.m_dBidPrice1];
-            [weakSelf.sellItem setTitle:sellTxt forState:UIControlStateNormal];
-        }
-    };
-    [self addSubview:_priceTextField];
+    _priceButton = [[UIButton alloc]init];
+    [_priceButton setTitleColor:TEXT_COLOR forState:UIControlStateNormal];
+    _priceButton.titleLabel.font = [UIFont systemFontOfSize:14.0f];
+    _priceButton.layer.borderColor = [[UIColor blackColor] CGColor];
+    _priceButton.layer.borderWidth = 0.5;
+    _priceButton.layer.cornerRadius = 2;
+    _priceButton.layer.masksToBounds = YES;
+    [_priceButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
+    [_priceButton setTitle:@"价格: 对手价" forState:UIControlStateNormal];
+    _priceButton.frame = CGRectMake(10 + _handTextField.width + 5 , _nameButton.y + _nameButton.height +5, _nameButton.width/2 +5, 30);
+    [_priceButton addTarget:self action:@selector(OnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:_priceButton];
+//    _priceTextField = [[ByTextField alloc]initWithType:NumberFloat frame:CGRectMake(10 + _handTextField.width + 5 , _nameButton.y + _nameButton.height +5, _nameButton.width/2 +5, 30) rootView:_rootView title:@"价格:"];
+//    [_priceTextField setTextFiledText:@"对手价"];
+//    
+//    __weak DealView *weakSelf = self;
+//    _priceTextField.block = ^(BOOL isCompelete,NSString *text)
+//    {
+//        if(isCompelete)
+//        {
+//            NSString *buyTxt = [NSString stringWithFormat:@"%.2f\n—————————\n买多",weakSelf.model.m_dAskPrice1];
+//            [weakSelf.buyItem setTitle:buyTxt forState:UIControlStateNormal];
+//            
+//            NSString *sellTxt = [NSString stringWithFormat:@"%.2f\n—————————\n卖空",weakSelf.model.m_dBidPrice1];
+//            [weakSelf.sellItem setTitle:sellTxt forState:UIControlStateNormal];
+//        }
+//    };
+//    [self addSubview:_priceTextField];
     
     
     _priceView = [[UIView alloc]init];
     _priceView.backgroundColor = [ColorUtil colorWithHexString:@"#262626"];;
-    _priceView.frame = CGRectMake(_priceTextField.x + _priceTextField.width+5 , view.height + 5, SCREEN_WIDTH - 15 - _nameButton.width, 65);
+    _priceView.frame = CGRectMake(_priceButton.x + _priceButton.width+5 , view.height + 5, SCREEN_WIDTH - 15 - _nameButton.width, 65);
     _priceView.layer.cornerRadius = 4;
     _priceView.layer.masksToBounds = YES;
     [self addSubview:_priceView];
@@ -325,7 +337,7 @@
 #pragma mark 动态数据
 -(void)updateData : (PushModel *)model
 {
-    [_priceTextField setTextFiledText:[NSString stringWithFormat:@"%.2f",model.m_dLastPrice]];
+//    [_priceTextField setTextFiledText:[NSString stringWithFormat:@"%.2f",model.m_dLastPrice]];
     NSString *buyTxt = [NSString stringWithFormat:@"%.2f\n—————————\n买多",model.m_dAskPrice1];
     [_buyItem setTitle:buyTxt forState:UIControlStateNormal];
     NSString *sellTxt = [NSString stringWithFormat:@"%.2f\n—————————\n卖空",model.m_dBidPrice1];
@@ -557,8 +569,18 @@
             [temps addObject:model.m_strInstrumentID];
         }
         ByListDialog *dialog = [[ByListDialog alloc]initWithData:temps title:@"自选合约"];
+        dialog.tag = 0;
         dialog.delegate = self;
-        dialog.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        [self.rootView addSubview:dialog];
+    }
+    else if(view == _priceButton)
+    {
+        NSMutableArray *array = [[NSMutableArray alloc]init];
+        [array addObject:@"对手价"];
+        [array addObject:@"市价"];
+        ByListDialog *dialog = [[ByListDialog alloc]initWithData:array title:@"价格"];
+        dialog.tag = 1;
+        dialog.delegate = self;
         [self.rootView addSubview:dialog];
     }
     
@@ -595,15 +617,21 @@
 -(void)hideKeyboard
 {
     [_handTextField resignFirstResponder];
-    [_priceTextField resignFirstResponder];
+//    [_priceTextField resignFirstResponder];
 }
 
 
--(void)OnListDialogItemClick:(id)data
+-(void)OnListDialogItemClick:(id)data dialog:(ByListDialog *)dialog
 {
-    [_nameButton setTitle:data forState:UIControlStateNormal];
+    if(dialog.tag == 0)
+    {
+      [_nameButton setTitle:data forState:UIControlStateNormal];
+    }
+    else if(dialog.tag == 1)
+    {
+        [_priceButton setTitle:[NSString stringWithFormat:@"价格: %@",data] forState:UIControlStateNormal];
+    }
 }
-
 
 #pragma mark 请求持仓，委托，成交
 -(void)requestQuery : (RequestType)type

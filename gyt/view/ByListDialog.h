@@ -9,17 +9,19 @@
 #import <UIKit/UIKit.h>
 
 
-@protocol ListDialogDelegate
-
-@optional -(void)OnListDialogItemClick : (id)data;
-
-@end
-
 @interface ByListDialog : UIView<UITableViewDelegate,UITableViewDataSource>
 
 @property (strong, nonatomic) id delegate;
 
 -(instancetype)initWithData : (NSMutableArray *)array
                       title : (NSString *)title;
+
+
+@end
+
+@protocol ListDialogDelegate
+
+@optional -(void)OnListDialogItemClick : (id)data
+                                dialog : (ByListDialog *)dialog;
 
 @end

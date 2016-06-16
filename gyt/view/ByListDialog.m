@@ -28,7 +28,7 @@
 -(instancetype)initWithData : (NSMutableArray *)array
                       title : (NSString *)title
 {
-    if(self == [super init])
+    if(self == [super initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)])
     {
         self.title= title;
         self.datas = array;
@@ -41,38 +41,46 @@
 -(void)initView
 {
     self.backgroundColor = [ColorUtil colorWithHexString:@"#000000" alpha:0.3f];
-    self.layer.masksToBounds = YES;
-    self.layer.cornerRadius = 4;
-    
+
     if(IS_NS_COLLECTION_EMPTY(_datas))
     {
         return;
     }
     
+    UIView *rootView = [[UIView alloc]init];
+    rootView.frame = CGRectMake(0, 0, SCREEN_WIDTH * 3/4, 30 + 200);
+    rootView.backgroundColor =MAIN_COLOR;
+    rootView.layer.borderColor = [LINE_COLOR CGColor];
+    rootView.layer.borderWidth = 1.0f;
+    rootView.layer.masksToBounds = YES;
+    rootView.layer.cornerRadius = 4;
+    rootView.centerX = SCREEN_WIDTH/2;
+    rootView.centerY = SCREEN_HEIGHT/2;
+    [self addSubview:rootView];
+    
     _titleLabel = [[UILabel alloc]init];
-    _titleLabel.frame = CGRectMake(SCREEN_WIDTH /8, SCREEN_HEIGHT / 6-30, SCREEN_WIDTH * 3/4, 30);
-    _titleLabel.backgroundColor = MAIN_COLOR;
+    _titleLabel.frame = CGRectMake(0, 0, SCREEN_WIDTH * 3/4, 30);
     _titleLabel.text = _title;
     _titleLabel.textColor = TEXT_COLOR;
     _titleLabel.textAlignment = NSTextAlignmentCenter;
     _titleLabel.font = [UIFont systemFontOfSize:13.0f];
-    [self addSubview:_titleLabel];
+    [rootView addSubview:_titleLabel];
 
     
     _tableView = [[UITableView alloc]init];
     _tableView.delegate = self;
     _tableView.dataSource = self;
+    _tableView.backgroundColor =MAIN_COLOR;
     _tableView.showsVerticalScrollIndicator = NO;
     _tableView.showsHorizontalScrollIndicator = NO;
-    _tableView.backgroundColor = MAIN_COLOR;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    _tableView.frame = CGRectMake(SCREEN_WIDTH /8,SCREEN_HEIGHT / 6, SCREEN_WIDTH * 3/4, SCREEN_HEIGHT * 2 /3);
-    [self addSubview:_tableView];
+    _tableView.frame = CGRectMake(0,30, SCREEN_WIDTH * 3/4, 200);
+    [rootView addSubview:_tableView];
     
     UIView *lineView = [[UIView alloc]init];
     lineView.backgroundColor = LINE_COLOR;
-    lineView.frame = CGRectMake(SCREEN_WIDTH/8, SCREEN_HEIGHT / 6, SCREEN_HEIGHT *3/4, 0.5);
-    [self addSubview:lineView];
+    lineView.frame = CGRectMake(0, 30, SCREEN_HEIGHT *3/4, 0.5);
+    [rootView addSubview:lineView];
     
     _selectView = [[UIView alloc]init];
     _selectView.backgroundColor = SELECT_COLOR;
@@ -108,7 +116,6 @@
         cell.textLabel.textColor = TEXT_COLOR;
         cell.textLabel.font = [UIFont systemFontOfSize:14.0f];
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
-        
         [cell setSelectedBackgroundView:_selectView];
     }
     return cell;
@@ -118,7 +125,7 @@
 {
     if(_delegate)
     {
-        [_delegate OnListDialogItemClick:[_datas objectAtIndex:indexPath.row]];
+        [_delegate OnListDialogItemClick:[_datas objectAtIndex:indexPath.row] dialog:self];
         [self removeFromSuperview];
     }
 }
