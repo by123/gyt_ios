@@ -16,6 +16,8 @@
 #import "SplashViewController.h"
 #import "GCDAsyncSocket.h"
 #import "CheckUpdateUtil.h"
+#import <Bugtags/Bugtags.h>
+
 #define First_Launch @"first_launch"
 @interface AppDelegate ()
 
@@ -72,10 +74,31 @@
         _window.rootViewController = controller;
         [_window makeKeyAndVisible];
     }
-
+    
+    BugtagsOptions *options = [[BugtagsOptions alloc] init];
+    options.trackingCrashes = YES;        // 是否收集闪退，联机 Debug 状态下默认 NO，其它情况默认 YES
+    options.trackingUserSteps = YES;      // 是否跟踪用户操作步骤，默认 YES
+    options.trackingConsoleLog = YES;     // 是否收集控制台日志，默认 YES
+    options.trackingUserLocation = YES;   // 是否获取位置，默认 YES
+    
+    // 是否跟踪网络请求，只跟踪 HTTP / HTTPS 请求，默认 NO
+    // 强烈建议同时设置 trackingNetworkURLFilter 对需要跟踪的网络请求进行过滤
+    options.trackingNetwork = YES;
+    
+    // 设置需要跟踪的网络请求 URL，多个地址用 | 隔开，
+    // 支持正则表达式，不设置则跟踪所有请求
+    // 强烈建议设置为应用服务器接口的域名，如果接口是通过 IP 地址访问，则设置为 IP 地址
+    // 如：设置为 bugtags.com，则网络请求跟踪只对 URL 中包含 bugtags.com 的请求有效
+    options.trackingNetworkURLFilter = @"yourdomain.com";
+    
+    options.crashWithScreenshot = YES;    // 收集闪退是否附带截图，默认 YES
+    options.ignorePIPESignalCrash = YES;  // 是否忽略 PIPE Signal (SIGPIPE) 闪退，默认 NO
+    
+   [Bugtags startWithAppKey:@"7ba0bda45aa019024ea1994412900ced" invocationEvent:BTGInvocationEventShake options:options];
     [self initDB];
     [[SocketConnect sharedSocketConnect] connect];
-    
+ 
+
     [[CheckUpdateUtil sharedCheckUpdateUtil] check];
     return YES;
 }
