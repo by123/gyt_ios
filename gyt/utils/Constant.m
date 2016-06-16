@@ -9,6 +9,7 @@
 
 @implementation Constant
 
+
 +(NSString *)EEntrustBSStr : (EEntrustBS) entrust
 {
     switch (entrust) {

@@ -36,6 +36,9 @@ SINGLETON_DECLARATION(SocketConnect);
 
 -(void)connect;
 
+-(void)connect : (NSString *)host
+          port : (int)port;
+
 -(void)disconnect;
 
 -(void)sendData : (NSString *)content

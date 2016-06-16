@@ -576,7 +576,7 @@
         }
         else if(alertView.tag == 2)
         {
-            DealHoldByModel *model = [holdByDatas objectAtIndex:currentItemSelect];
+            DealHoldByModel *model = [holdingDatas objectAtIndex:currentItemSelect];
             [self cancelOrder:model];
         }
         else if(alertView.tag == 3)

@@ -20,14 +20,15 @@
 //#define Root_Url @"http://192.168.1.106:8081" //陈勇
 //#define Root_Url @"http://192.168.1.111:8081"//夏瑶
 
-#define Host @"192.168.1.118" //赵杰
-#define Port 64360
+//#define Host @"192.168.1.118" //赵杰
+//#define Port 64360
+static NSString *Host = @"192.168.1.118";
+static int Port = 64360;
 
 //#define Host @"114.119.6.146" //外网
 //#define Port 64350
 
 #define Root_Url @"http://114.119.6.146:8081"
-
 
 //请求登录
 #define Request_Login @"login"
@@ -52,6 +53,8 @@
 #define Less @"空"
 
 #define PLATFORM_OUTTER_YN_MN  41002  //外盘易盛模拟
+
+
 //交易端
 typedef NS_ENUM(NSInteger, ClientID) {
     ClientID_Mobile_Manage = 3,

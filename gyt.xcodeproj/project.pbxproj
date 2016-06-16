@@ -132,6 +132,7 @@
 		CFDFFA971CBF759800401CB3 /* LeftMenuViewContriller.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDFFA961CBF759800401CB3 /* LeftMenuViewContriller.m */; };
 		CFDFFA9A1CBF77AB00401CB3 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDFFA991CBF77AB00401CB3 /* MainViewController.m */; };
 		CFDFFA9D1CBF78DD00401CB3 /* RightMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDFFA9C1CBF78DD00401CB3 /* RightMenuViewController.m */; };
+		CFEAA1AA1D124974001B8C7C /* Test.m in Sources */ = {isa = PBXBuildFile; fileRef = CFEAA1A91D124974001B8C7C /* Test.m */; };
 		CFF183821CE45B2B00E991C4 /* JSONUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF183811CE45B2B00E991C4 /* JSONUtil.m */; };
 		CFF183861CE45E1400E991C4 /* BaseRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF183851CE45E1400E991C4 /* BaseRequestModel.m */; };
 		CFF183891CE460A500E991C4 /* LoginModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF183881CE460A500E991C4 /* LoginModel.m */; };
@@ -398,6 +399,8 @@
 		CFDFFA991CBF77AB00401CB3 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		CFDFFA9B1CBF78DD00401CB3 /* RightMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RightMenuViewController.h; sourceTree = "<group>"; };
 		CFDFFA9C1CBF78DD00401CB3 /* RightMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RightMenuViewController.m; sourceTree = "<group>"; };
+		CFEAA1A81D124974001B8C7C /* Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Test.h; sourceTree = "<group>"; };
+		CFEAA1A91D124974001B8C7C /* Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Test.m; sourceTree = "<group>"; };
 		CFF183801CE45B2B00E991C4 /* JSONUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONUtil.h; sourceTree = "<group>"; };
 		CFF183811CE45B2B00E991C4 /* JSONUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONUtil.m; sourceTree = "<group>"; };
 		CFF183841CE45E1400E991C4 /* BaseRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseRequestModel.h; sourceTree = "<group>"; };
@@ -542,6 +545,8 @@
 				CF4A6D191CBE25AA00B36C93 /* AppDelegate.h */,
 				CF4A6D1A1CBE25AA00B36C93 /* AppDelegate.m */,
 				CF4A6D161CBE25AA00B36C93 /* Supporting Files */,
+				CFEAA1A81D124974001B8C7C /* Test.h */,
+				CFEAA1A91D124974001B8C7C /* Test.m */,
 			);
 			path = gyt;
 			sourceTree = "<group>";
@@ -1268,6 +1273,7 @@
 				CFF183B41CE6D13500E991C4 /* MoneyDetailModel.m in Sources */,
 				CFC15BC61CC4B8160077FA19 /* DealView.m in Sources */,
 				CF0DBB741CF6CAEF0082E411 /* IPMacUtil.m in Sources */,
+				CFEAA1AA1D124974001B8C7C /* Test.m in Sources */,
 				CFA3B8F01CD9AAB70063AE3E /* Chart.m in Sources */,
 				CFA3B8FB1CD9AB050063AE3E /* EncryptHelper.m in Sources */,
 				CF9E66071D0D898500069477 /* TimeView.m in Sources */,

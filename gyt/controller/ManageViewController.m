@@ -7,8 +7,17 @@
 //
 
 #import "ManageViewController.h"
+#import "LoginViewController.h"
+#import "Test.h"
+
 
 @interface ManageViewController ()
+
+@property (strong, nonatomic) UIButton *updateBtn;
+
+@property (strong, nonatomic) UITextField *ipTextField;
+
+@property (strong, nonatomic) UITextField *portTextField;
 
 @end
 
@@ -29,6 +38,63 @@
 {
     [self initNavigationBar];
     self.view.backgroundColor = BACKGROUND_COLOR;
+    
+    
+    _ipTextField = [[UITextField alloc]init];
+    _ipTextField.layer.masksToBounds = YES;
+    _ipTextField.layer.cornerRadius = 4;
+    _ipTextField.backgroundColor = [UIColor whiteColor];
+    _ipTextField.frame = CGRectMake(20, 100, SCREEN_WIDTH - 40, 50);
+    [_ipTextField setText:[[Test sharedTest] host]];
+    [self.view addSubview:_ipTextField];
+    
+    _portTextField = [[UITextField alloc]init];
+    _portTextField.layer.masksToBounds = YES;
+    _portTextField.layer.cornerRadius = 4;
+    _portTextField.backgroundColor = [UIColor whiteColor];
+    _portTextField.frame = CGRectMake(20, 170, SCREEN_WIDTH - 40, 50);
+    [_portTextField setText:[NSString stringWithFormat:@"%d",[[Test sharedTest] port]]];
+    [self.view addSubview:_portTextField];
+    
+    _updateBtn = [[UIButton alloc]init];
+    _updateBtn.layer.masksToBounds = YES;
+    _updateBtn.layer.cornerRadius = 8;
+    [_updateBtn setBackgroundColor:[UIColor redColor]];
+    [_updateBtn setTitle:@"修改" forState:UIControlStateNormal];
+    [_updateBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    _updateBtn.frame = CGRectMake(20, 240,SCREEN_WIDTH - 40, 50);
+    [_updateBtn addTarget:self action:@selector(OnUpdateClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_updateBtn];
+    
+    
+}
+
+-(void)OnUpdateClick : (id)sender
+{
+    NSString *host = _ipTextField.text;
+    NSString *port = _portTextField.text;
+    
+    if([self isPureInt:port])
+    {
+        [[SocketConnect sharedSocketConnect] disconnect];
+        
+        [[Test sharedTest] setHost:host];
+        [[Test sharedTest] setPort:[port integerValue]];
+        [DialogHelper showSuccessTips:@"修改成功"];
+        [[SocketConnect sharedSocketConnect] connect];
+        LoginViewController *target = [[LoginViewController alloc]init];
+        [self.navigationController pushViewController:target animated:YES];
+    }
+    else
+    {
+        [DialogHelper showTips:@"端口输入有误"];
+    }
+}
+
+- (BOOL)isPureInt:(NSString*)string{
+    NSScanner* scan = [NSScanner scannerWithString:string];
+    int val;
+    return[scan scanInt:&val] && [scan isAtEnd];
 }
 
 -(void)initNavigationBar
@@ -44,7 +110,6 @@
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
-
 
 
 

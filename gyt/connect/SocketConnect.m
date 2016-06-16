@@ -12,6 +12,8 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "RightMenuViewController.h"
+#import "Test.h"
+
 
 #define HEAD_TAG      666
 #define BODY_TAG      667
@@ -30,7 +32,9 @@
     NSMutableData *_curFrameData;
     int32_t _curFrameLength;
     dispatch_queue_t _processQueue;
+    Boolean initiative;
 }
+
 
 SINGLETON_IMPLEMENTION(SocketConnect);
 
@@ -49,7 +53,28 @@ SINGLETON_IMPLEMENTION(SocketConnect);
 -(void)connect
 {
     NSError *error = nil;
-    [_clientSocket connectToHost:Host onPort:Port error:&error];
+    NSString *host = [[Test sharedTest] host];
+    int port = [[Test sharedTest] port];
+    if(_clientSocket == nil)
+    {
+        _clientSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
+    }
+    [_clientSocket connectToHost:host onPort:port error:&error];
+    if(error)
+    {
+        NSLog(@"发起tcp失败");
+    }
+    else{
+        NSLog(@"发起tcp成功");
+    }
+}
+
+#pragma mark - 连接到服务器
+-(void)connect : (NSString *)host
+          port : (int)port
+{
+    NSError *error = nil;
+    [_clientSocket connectToHost:host onPort:port error:&error];
     if(error)
     {
         NSLog(@"发起tcp失败");
@@ -65,7 +90,9 @@ SINGLETON_IMPLEMENTION(SocketConnect);
 {
     if(_clientSocket)
     {
+        initiative = YES;
         [_clientSocket disconnect];
+        _clientSocket = nil;
     }
 }
 
@@ -92,28 +119,31 @@ SINGLETON_IMPLEMENTION(SocketConnect);
 -(void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err
 {
     NSLog(@"连接被断开");
-    dispatch_async(dispatch_get_main_queue(), ^{
-        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"连接失败" message:@"您已经与服务器断开连接，请点击确定重新连接" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alertView show];
-    });
+    if(!initiative)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"连接失败" message:@"您已经与服务器断开连接，请点击确定重新连接" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alertView show];
+        });
+    }
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-        [self connect];
-        NSLog(@"重新连接");
-        
-        AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        UIWindow *window = delegate.window;
-        LoginViewController *mainViewController =[[LoginViewController alloc]init];
-        SlideNavigationController *controller = [[SlideNavigationController alloc]initWithRootViewController:mainViewController];
-        RightMenuViewController *rightMenu = [[RightMenuViewController alloc]init];
-        rightMenu.view.backgroundColor = BACKGROUND_COLOR;
-        rightMenu.controller = controller;
-        
-        controller.leftMenu = rightMenu;
-        window.rootViewController = controller;
-        [window makeKeyAndVisible];
+    [self connect];
+    NSLog(@"重新连接");
+    
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    UIWindow *window = delegate.window;
+    LoginViewController *mainViewController =[[LoginViewController alloc]init];
+    SlideNavigationController *controller = [[SlideNavigationController alloc]initWithRootViewController:mainViewController];
+    RightMenuViewController *rightMenu = [[RightMenuViewController alloc]init];
+    rightMenu.view.backgroundColor = BACKGROUND_COLOR;
+    rightMenu.controller = controller;
+    
+    controller.leftMenu = rightMenu;
+    window.rootViewController = controller;
+    [window makeKeyAndVisible];
 }
 
 
