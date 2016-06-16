@@ -65,7 +65,7 @@ SINGLETON_IMPLEMENTION(SocketConnect);
         NSLog(@"发起tcp失败");
     }
     else{
-        NSLog(@"发起tcp成功");
+        NSLog(@"发起tcp成功->host:%@->port:%d",host,port);
     }
 }
 

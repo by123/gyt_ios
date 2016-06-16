@@ -251,7 +251,7 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MainTableCell *cell = [[MainTableCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[MainTableCell identify]];
-    [cell setBackgroundColor:BACKGROUND_COLOR];
+    [cell setBackgroundColor:[UIColor clearColor]];
     [cell setOpaque:YES];
     cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.frame];
     cell.selectedBackgroundView.backgroundColor = SELECT_COLOR;
@@ -527,6 +527,7 @@
         NSMutableArray *array = model.datas;
         if(!IS_NS_COLLECTION_EMPTY(array))
         {
+            [_datas removeAllObjects];
             for(id obj in array)
             {
                 PushModel *productModel = [PushModel mj_objectWithKeyValues:obj];

@@ -15,7 +15,7 @@
 #import "ContractDB.h"
 #import "SplashViewController.h"
 #import "GCDAsyncSocket.h"
-
+#import "CheckUpdateUtil.h"
 #define First_Launch @"first_launch"
 @interface AppDelegate ()
 
@@ -75,6 +75,8 @@
 
     [self initDB];
     [[SocketConnect sharedSocketConnect] connect];
+    
+    [[CheckUpdateUtil sharedCheckUpdateUtil] check];
     return YES;
 }
 
