@@ -8,6 +8,8 @@
 
 #import "ShortCutView.h"
 #import "ByTextField.h"
+#import "UserInfoModel.h"
+#import "OrderRequestModel.h"
 
 #define View_Height 160
 #define View_Width SCREEN_WIDTH-60
@@ -34,6 +36,9 @@
 @end
 
 @implementation ShortCutView
+{
+    EEntrustBS director;
+}
 
 -(instancetype)initWithView : (UIView *)parentView
                       model : (PushModel *)model
@@ -114,7 +119,6 @@
     [_priceButton addSubview:_priceLabel];
     
     
-    
     //
     _buyItem = [[UIButton alloc]init];
     _buyItem.frame = CGRectMake(10, 95, (rootView.size.width-30)/2, 55);
@@ -147,13 +151,14 @@
     
     [rootView addSubview:_sellItem];
     
-    
 
 }
 
 
 -(void)OnClick : (id)sender
 {
+    NSString * hand = [_handTextField getTextFieldText];
+
     UIButton *button = sender;
     if(button == _closeButton)
     {
@@ -176,13 +181,67 @@
     }
     else if(button == _buyItem)
     {
-        
+        director = ENTRUST_BUY;
+        NSString *message = [NSString stringWithFormat:@"%@，%.2f，买，%@手",_model.m_strInstrumentID,_model.m_dAskPrice1,hand];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认下单吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        alert.tag = 0;
+        [alert show];
     }
     else if(button == _sellItem)
     {
-        
+        director = ENTRUST_SELL;
+        NSString *message = [NSString stringWithFormat:@"%@，%.2f，卖，%@手",_model.m_strInstrumentID,_model.m_dBidPrice1,hand];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认下单吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        alert.tag = 1;
+        [alert show];
     }
 }
+
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 1)
+    {
+       [self order];
+    }
+}
+
+#pragma mark 请求下单
+-(void)order
+{
+    NSString *accountInfoStr =  [[Account sharedAccount] getAccountInfo];
+    UserInfoModel *account = [UserInfoModel mj_objectWithKeyValues:accountInfoStr];
+    OrderRequestModel *orderModel = [[OrderRequestModel alloc]init];
+    orderModel.strSessionID = [[Account sharedAccount]getSessionId];
+    orderModel.account = account;
+    double hand = [[_handTextField getTextFieldText] doubleValue];
+    double price;
+    //下单
+    if(director == ENTRUST_BUY)
+    {
+        price = _model.m_dAskPrice1;
+    }
+    else
+    {
+        price = _model.m_dBidPrice1;
+    }
+    orderModel.info = [OrderModel buildOrderModel : _model.m_strProductID instrumentID:_model.m_strInstrumentID  orderPrice:price orderNum:hand direction:director offsetFlag:EOFF_THOST_FTDC_OF_Open];
+    
+    NSMutableDictionary *dic =[JSONUtil parseDic:orderModel];
+    NSString *jsonStr = [JSONUtil parse:@"order" params:dic];
+    
+    [[SocketConnect sharedSocketConnect] sendData:jsonStr delegate:self seq:GYT_ORDER];
+}
+
+-(void)OnReceiveSuccess:(id)respondObject
+{
+    PackageModel *packageModel = respondObject;
+    BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
+
+
+}
+
+
 
 
 @end
