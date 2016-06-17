@@ -10,7 +10,7 @@
 
 @interface SearchViewController : BaseViewController<UITableViewDelegate,UITableViewDataSource>
 
-+(void)show : (BaseViewController *)controller;
-
++(void)show : (BaseViewController *)controller
+      datas : (NSMutableArray *)datas;
 
 @end

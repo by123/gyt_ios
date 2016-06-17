@@ -31,8 +31,11 @@
 @implementation SearchViewController
 
 +(void)show : (BaseViewController *)controller
+      datas : (NSMutableArray *)datas
 {
+    
     SearchViewController *openController = [[SearchViewController alloc]init];
+    openController.datas = datas;
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:openController];
     [controller presentViewController:nav animated:YES completion:nil];
 }
@@ -40,7 +43,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _datas = [[ContractDB sharedContractDB] queryAll:DBHistoryContractTable];
     _searchDatas = [[ContractDB sharedContractDB] queryAll:DBSearchContractTable];
     [self initView];
 }
@@ -102,13 +104,12 @@
     [_searchDatas removeAllObjects];
     for(PushModel *model in _datas)
     {
-        if([model.m_strInstrumentID containsString:textField.text])
+        if([model.m_strInstrumentID localizedStandardContainsString:textField.text])
         {
             [_searchDatas addObject:model];
         }
     }
     [_tableView reloadData];
-    NSLog(@"这是啥->%@",textField.text);
 }
 
 
@@ -140,7 +141,7 @@
     if(!IS_NS_COLLECTION_EMPTY(_searchDatas))
     {
         PushModel *model = [_searchDatas objectAtIndex:indexPath.row];
-        model.m_strExchangeName = @"上海期货交易所";
+        model.m_strExchangeName = model.m_strExchangeName;
         [cell setData:model];
     }
     return cell;

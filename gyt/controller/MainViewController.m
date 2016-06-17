@@ -332,7 +332,7 @@
 {
     if(position == 0)
     {
-        [SearchViewController show:self];
+        [SearchViewController show:self datas:_datas];
         return;
     }
 }
