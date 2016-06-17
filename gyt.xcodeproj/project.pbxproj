@@ -133,6 +133,7 @@
 		CFDFFA9A1CBF77AB00401CB3 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDFFA991CBF77AB00401CB3 /* MainViewController.m */; };
 		CFDFFA9D1CBF78DD00401CB3 /* RightMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDFFA9C1CBF78DD00401CB3 /* RightMenuViewController.m */; };
 		CFEAA1AA1D124974001B8C7C /* Test.m in Sources */ = {isa = PBXBuildFile; fileRef = CFEAA1A91D124974001B8C7C /* Test.m */; };
+		CFEAA1B21D13E4A8001B8C7C /* ShortCutView.m in Sources */ = {isa = PBXBuildFile; fileRef = CFEAA1B11D13E4A8001B8C7C /* ShortCutView.m */; };
 		CFF183821CE45B2B00E991C4 /* JSONUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF183811CE45B2B00E991C4 /* JSONUtil.m */; };
 		CFF183861CE45E1400E991C4 /* BaseRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF183851CE45E1400E991C4 /* BaseRequestModel.m */; };
 		CFF183891CE460A500E991C4 /* LoginModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF183881CE460A500E991C4 /* LoginModel.m */; };
@@ -401,6 +402,8 @@
 		CFDFFA9C1CBF78DD00401CB3 /* RightMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RightMenuViewController.m; sourceTree = "<group>"; };
 		CFEAA1A81D124974001B8C7C /* Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Test.h; sourceTree = "<group>"; };
 		CFEAA1A91D124974001B8C7C /* Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Test.m; sourceTree = "<group>"; };
+		CFEAA1B01D13E4A8001B8C7C /* ShortCutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortCutView.h; sourceTree = "<group>"; };
+		CFEAA1B11D13E4A8001B8C7C /* ShortCutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShortCutView.m; sourceTree = "<group>"; };
 		CFF183801CE45B2B00E991C4 /* JSONUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONUtil.h; sourceTree = "<group>"; };
 		CFF183811CE45B2B00E991C4 /* JSONUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONUtil.m; sourceTree = "<group>"; };
 		CFF183841CE45E1400E991C4 /* BaseRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseRequestModel.h; sourceTree = "<group>"; };
@@ -662,6 +665,8 @@
 				CF4A6D581CBE28DD00B36C93 /* extra */,
 				CF9E66051D0D898500069477 /* TimeView.h */,
 				CF9E66061D0D898500069477 /* TimeView.m */,
+				CFEAA1B01D13E4A8001B8C7C /* ShortCutView.h */,
+				CFEAA1B11D13E4A8001B8C7C /* ShortCutView.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -1330,6 +1335,7 @@
 				CFDD2EAA1CCF4DE100E81E3F /* MJRefreshConst.m in Sources */,
 				CFF183891CE460A500E991C4 /* LoginModel.m in Sources */,
 				CFA3B90B1CDAF0A90063AE3E /* Slide.m in Sources */,
+				CFEAA1B21D13E4A8001B8C7C /* ShortCutView.m in Sources */,
 				CFA3B8FA1CD9AB050063AE3E /* CacheHelper.m in Sources */,
 				CFDD2EA31CCF4DE100E81E3F /* MJRefreshBackGifFooter.m in Sources */,
 				CF6342AE1CFD952D008149B1 /* GCDAsyncSocket.m in Sources */,

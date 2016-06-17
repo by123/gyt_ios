@@ -24,6 +24,7 @@
 #import "UUID.h"
 #import "PushRequestModel.h"
 #import "PushModel.h"
+#import "ShortCutView.h"
 
 #define Item_Height 40
 
@@ -157,11 +158,11 @@
 
     _updownButton = [[UIButton alloc]init];
     _updownButton.frame = CGRectMake(SCREEN_WIDTH * 350 /640, 0, SCREEN_WIDTH * 145 /640, 30);
-    NSString *updownTitle = @"涨跌";
+    NSString *updownTitle = @"涨跌 ▼";
 
     if([userDefaults integerForKey:UserDefault_Updown] == UpdownPercent)
     {
-        updownTitle = @"涨幅(%)";
+        updownTitle = @"涨幅(%) ▼";
     }
     [_updownButton setTitle:updownTitle forState:UIControlStateNormal];
     [_updownButton setBackgroundColor:[UIColor clearColor]];
@@ -173,13 +174,13 @@
     [headView addSubview:_updownButton];
     
     
-    NSString *inventoryTitle = @"持仓量";
+    NSString *inventoryTitle = @"持仓量 ▼";
     switch ([userDefaults integerForKey:UserDefault_Inventory]) {
         case DailyInventory:
-            inventoryTitle = @"日增仓";
+            inventoryTitle = @"日增仓 ▼";
             break;
         case DealInventory:
-            inventoryTitle = @"成交量";
+            inventoryTitle = @"成交量 ▼";
             break;
         default:
             break;
@@ -391,7 +392,9 @@
 #pragma mark 点击下单
 -(void)OnRightClicked : (PushModel *)model position:(NSInteger)position
 {
-    [DetailViewController show:self model:model position:position];
+    ShortCutView *shortCutView = [[ShortCutView alloc]initWithView:self.view model:model];
+    [self.view addSubview:shortCutView];
+//    [DetailViewController show:self model:model position:position];
 }
 
 
@@ -403,11 +406,11 @@
     switch (type) {
         case UpdownPrice:
             [userDefaults setInteger:UpdownPercent forKey:UserDefault_Updown];
-            [_updownButton setTitle:@"涨幅(%)" forState:UIControlStateNormal];
+            [_updownButton setTitle:@"涨幅(%) ▼" forState:UIControlStateNormal];
             break;
         case UpdownPercent:
             [userDefaults setInteger:UpdownPrice forKey:UserDefault_Updown];
-            [_updownButton setTitle:@"涨跌" forState:UIControlStateNormal];
+            [_updownButton setTitle:@"涨跌 ▼" forState:UIControlStateNormal];
             break;
         default:
             break;
@@ -423,15 +426,15 @@
     switch (type) {
         case Inventory:
             [userDefaults setInteger:DailyInventory forKey:UserDefault_Inventory];
-            [_inventoryButton setTitle:@"日增仓" forState:UIControlStateNormal];
+            [_inventoryButton setTitle:@"日增仓 ▼" forState:UIControlStateNormal];
             break;
         case DailyInventory:
             [userDefaults setInteger:DealInventory forKey:UserDefault_Inventory];
-            [_inventoryButton setTitle:@"成交量" forState:UIControlStateNormal];
+            [_inventoryButton setTitle:@"成交量 ▼" forState:UIControlStateNormal];
             break;
         case DealInventory:
             [userDefaults setInteger:Inventory forKey:UserDefault_Inventory];
-            [_inventoryButton setTitle:@"持仓量" forState:UIControlStateNormal];
+            [_inventoryButton setTitle:@"持仓量 ▼" forState:UIControlStateNormal];
             break;
         default:
             break;

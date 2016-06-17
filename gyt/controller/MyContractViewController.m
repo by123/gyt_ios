@@ -10,7 +10,7 @@
 #import "PushModel.h"
 #import "ContractDB.h"
 #import "MyContractCell.h"
-
+#import "DetailViewController.h"
 @interface MyContractViewController()
 
 @property (strong , nonatomic) UITableView *tableView;
@@ -107,6 +107,12 @@
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return UITableViewCellEditingStyleDelete;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    PushModel *model = [_datas objectAtIndex:indexPath.row];
+    [DetailViewController show:self model:model position:0];
 }
 
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
