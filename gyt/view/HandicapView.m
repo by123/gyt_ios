@@ -20,6 +20,8 @@
 
 @property (strong, nonatomic) ByTabView *tabView;
 
+@property (strong, nonatomic) PushModel *model;
+
 @end
 
 @implementation HandicapView
@@ -27,11 +29,12 @@
     Boolean isLeft;
 }
 
--(instancetype)init
+-(instancetype)initWithData : (PushModel *)model
 {
     self = [super init];
     if(self)
     {
+        self.model = model;
         [self initView];
         return self;
     }
@@ -101,17 +104,23 @@
 -(void)buildData
 {
     [_handicapDatas removeAllObjects];
-    [_handicapDatas addObject:[HandicapModel build:@"卖价" value1:@"11975" title2 :@"买量" value2:@"2"]];
-    [_handicapDatas addObject:[HandicapModel build:@"买价" value1:@"11970" title2:@"卖量" value2:@"2"]];
-    [_handicapDatas addObject:[HandicapModel build:@"最新" value1:@"11975" title2:@"涨跌" value2:@"-170/1.。40%"]];
-    [_handicapDatas addObject:[HandicapModel build:@"开盘" value1:@"11875" title2:@"成交量" value2:@"10728"]];
-    [_handicapDatas addObject:[HandicapModel build:@"最高" value1:@"11985" title2:@"持仓量" value2:@"45972"]];
-    [_handicapDatas addObject:[HandicapModel build:@"最低" value1:@"11855" title2:@"日增仓" value2:@"-912"]];
-    [_handicapDatas addObject:[HandicapModel build:@"均价" value1:@"11926" title2:@"外盘" value2:@"5250/49%"]];
+    [_handicapDatas addObject:[HandicapModel build:@"卖价" value1:[NSString stringWithFormat:@"%.2f",_model.m_dBidPrice1] title2 :@"买量" value2:[NSString stringWithFormat:@"%d",_model.m_nAskVolume1]]];
+    [_handicapDatas addObject:[HandicapModel build:@"买价" value1:[NSString stringWithFormat:@"%.2f",_model.m_dAskPrice1] title2:@"卖量" value2:[NSString stringWithFormat:@"%d",_model.m_nBidVolume1]]];
+    NSString *updown = [NSString stringWithFormat:@"%.f/%.f",_model.m_dOpenPrice - _model.m_dLastPrice,(_model.m_dOpenPrice - _model.m_dLastPrice ) * 100 / _model.m_dOpenPrice];
+    updown  = [updown stringByAppendingString:@"%"];
+    if(_model.m_dOpenPrice == 0)
+    {
+        updown = @"--";
+    }
+    [_handicapDatas addObject:[HandicapModel build:@"最新" value1:[NSString stringWithFormat:@"%.2f",_model.m_dLastPrice] title2:@"涨跌" value2:updown]];
+    [_handicapDatas addObject:[HandicapModel build:@"开盘" value1:[NSString stringWithFormat:@"%.2f",_model.m_dOpenPrice] title2:@"成交量" value2:[NSString stringWithFormat:@"%d",_model.m_nVolume]]];
+    [_handicapDatas addObject:[HandicapModel build:@"最高" value1:[NSString stringWithFormat:@"%.2f",_model.m_dHighestPrice] title2:@"持仓量" value2:[NSString stringWithFormat:@"%d",_model.m_dOpenInterest]]];
+    [_handicapDatas addObject:[HandicapModel build:@"最低" value1:[NSString stringWithFormat:@"%.2f",_model.m_dLowestPrice] title2:@"日增仓" value2:[NSString stringWithFormat:@"%d",_model.m_dOpenInterest - _model.m_dPreOpenInterest]]];
+    [_handicapDatas addObject:[HandicapModel build:@"均价" value1:[NSString stringWithFormat:@"%.2f",_model.m_dAveragePrice] title2:@"外盘" value2:@"--"]];
     [_handicapDatas addObject:[HandicapModel build:@"结算" value1:@"--"
-        title2:@"内盘" value2:@"5478/51%"]];
-    [_handicapDatas addObject:[HandicapModel build:@"昨结" value1:@"12145" title2:@"涨停" value2:@"12870"]];
-    [_handicapDatas addObject:[HandicapModel build:@"昨收" value1:@"11930" title2:@"跌停" value2:@"11415"]];
+        title2:@"内盘" value2:@"--"]];
+    [_handicapDatas addObject:[HandicapModel build:@"昨结" value1:@"--" title2:@"涨停" value2:@"--"]];
+    [_handicapDatas addObject:[HandicapModel build:@"昨收" value1:@"--" title2:@"跌停" value2:@"--"]];
 }
 
 #pragma mark 构建成交明细数据

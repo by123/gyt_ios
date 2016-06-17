@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "gyt/controller/MainViewController.m"
-            timestampString = "487752770.493867"
+            timestampString = "487824234.110581"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "524"
-            endingLineNumber = "524"
-            landmarkName = "-OnReceiveSuccess:"
+            startingLineNumber = "476"
+            endingLineNumber = "476"
+            landmarkName = "-requestsubMultiPrice"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -99,7 +99,7 @@
     [[SocketConnect sharedSocketConnect] connect];
  
 
-    [[CheckUpdateUtil sharedCheckUpdateUtil] check];
+//    [[CheckUpdateUtil sharedCheckUpdateUtil] check];
     return YES;
 }
 
@@ -118,7 +118,7 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     
-//    [[SocketConnect sharedSocketConnect] close];
+//    [[SocketConnect sharedSocketConnect] disconnect];
 }
 
 

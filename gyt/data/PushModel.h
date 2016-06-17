@@ -50,10 +50,10 @@
 @property (assign, nonatomic) double m_dPreSettlementPrice;
 
 //昨持仓量
-@property (assign, nonatomic) double m_dPreOpenInterest;
+@property (assign, nonatomic) int m_dPreOpenInterest;
 
 //持仓量
-@property (assign, nonatomic) double m_dOpenInterest;
+@property (assign, nonatomic) int m_dOpenInterest;
 
 //本次结算价
 @property (assign, nonatomic) double m_dSettlementPrice;

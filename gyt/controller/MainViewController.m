@@ -554,7 +554,7 @@
 //            [DialogHelper showTips:@"订阅成功"];
 //        }
 //    }
-//    
+//
     if(packageModel.cmd == 4)
     {
         BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];

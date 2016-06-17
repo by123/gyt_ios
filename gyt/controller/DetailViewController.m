@@ -128,7 +128,7 @@
 -(void)addHandicapView
 {
     [self clearAllView];
-    _handicapView = [[HandicapView alloc]init];
+    _handicapView = [[HandicapView alloc]initWithData:_model];
     _handicapView.frame = CGRectMake(0, 0, SCREEN_WIDTH, kContentHeight + kTopHeight);
     [_bodyView addSubview:_handicapView];
 }
