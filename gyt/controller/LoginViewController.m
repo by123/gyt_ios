@@ -82,17 +82,20 @@
     
     _passwordTextField = [[InsetTextField alloc]initWithFrame:CGRectMake(20, 120, SCREEN_WIDTH-40, 40)];
     _passwordTextField.hasTitle = YES;
-    _passwordTextField.text = @"123456";
+    NSString *password = [[NSUserDefaults standardUserDefaults] objectForKey:UserDefault_Password];
+    _passwordTextField.text = password;
     [_passwordTextField setInsetTitle:@"登录密码：" font:[UIFont systemFontOfSize:14.0f]];
     __weak LoginViewController *weakSelf = self;
     _passwordTextField.block = ^(InsetTextField *insetTextField){
         if(weakSelf.isSavePsw)
         {
-           [DialogHelper showSuccessTips:@"密码已保存"];
+            [[NSUserDefaults standardUserDefaults] setValue:weakSelf.passwordTextField.text forKey:UserDefault_Password];
+            [DialogHelper showSuccessTips:@"密码已保存"];
            [insetTextField setInsetImage:[UIImage imageNamed:@"ic_lock"]];
         }
         else
         {
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:UserDefault_Password];
            [DialogHelper showTips:@"密码未保存"];
            [insetTextField setInsetImage:[UIImage imageNamed:@"ic_unlock"]];
         }

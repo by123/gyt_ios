@@ -120,10 +120,10 @@
  
     switch (inventoryType) {
         case Inventory:
-            _inventoryLabel.text = [NSString stringWithFormat:@"%.f",model.m_dOpenInterest];
+            _inventoryLabel.text = [NSString stringWithFormat:@"%d",model.m_dOpenInterest];
             break;
         case DailyInventory:
-            _inventoryLabel.text = [NSString stringWithFormat:@"%.f",model.m_dOpenInterest - model.m_dPreOpenInterest];
+            _inventoryLabel.text = [NSString stringWithFormat:@"%d",model.m_dOpenInterest - model.m_dPreOpenInterest];
             break;
         case DealInventory:
             _inventoryLabel.text = [NSString stringWithFormat:@"%d",model.m_nVolume];

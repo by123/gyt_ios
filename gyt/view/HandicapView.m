@@ -106,7 +106,7 @@
     [_handicapDatas removeAllObjects];
     [_handicapDatas addObject:[HandicapModel build:@"卖价" value1:[NSString stringWithFormat:@"%.2f",_model.m_dBidPrice1] title2 :@"买量" value2:[NSString stringWithFormat:@"%d",_model.m_nAskVolume1]]];
     [_handicapDatas addObject:[HandicapModel build:@"买价" value1:[NSString stringWithFormat:@"%.2f",_model.m_dAskPrice1] title2:@"卖量" value2:[NSString stringWithFormat:@"%d",_model.m_nBidVolume1]]];
-    NSString *updown = [NSString stringWithFormat:@"%.f/%.f",_model.m_dOpenPrice - _model.m_dLastPrice,(_model.m_dOpenPrice - _model.m_dLastPrice ) * 100 / _model.m_dOpenPrice];
+    NSString *updown = [NSString stringWithFormat:@"%.2f/%.2f",_model.m_dOpenPrice - _model.m_dLastPrice,(_model.m_dOpenPrice - _model.m_dLastPrice ) * 100 / _model.m_dOpenPrice];
     updown  = [updown stringByAppendingString:@"%"];
     if(_model.m_dOpenPrice == 0)
     {

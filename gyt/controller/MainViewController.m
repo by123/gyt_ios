@@ -601,6 +601,8 @@
                     model.m_nVolume = pushModel.m_nVolume;
                     model.m_dAskPrice1 = pushModel.m_dAskPrice1;
                     model.m_dBidPrice1 = pushModel.m_dBidPrice1;
+                    model.m_dHighestPrice = pushModel.m_dHighestPrice;
+                    model.m_dLowestPrice = pushModel.m_dLowestPrice;
                     model.m_nAskVolume1 = pushModel.m_nAskVolume1;
                     model.m_nBidVolume1 = pushModel.m_nBidVolume1;
                     if(model.isMyContract)

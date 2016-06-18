@@ -11,6 +11,7 @@
 #pragma mark 本地存储
 #define UserDefault_Updown @"updown"
 #define UserDefault_Inventory @"inventory"
+#define UserDefault_Password @"password"
 
 #pragma mark 广播
 #define Notify_Menu_Title @"menu_title"
