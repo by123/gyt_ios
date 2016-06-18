@@ -101,7 +101,7 @@
         }
         weakSelf.isSavePsw = !weakSelf.isSavePsw;
     };
-    [_passwordTextField setInsetImage:[UIImage imageNamed:@"ic_lock"]];
+    [_passwordTextField setInsetImage:[UIImage imageNamed:@"ic_unlock"]];
     _passwordTextField.secureTextEntry = YES;
     [rootView addSubview:_passwordTextField];
     
@@ -210,6 +210,9 @@
         if(model.error.ErrorID == 0)
         {
             NSString *sessionId = [model.response objectForKey:@"sessionId"];
+
+            [MobClick profileSignInWithPUID:[[Account sharedAccount] getUid]];
+
             [[Account sharedAccount]saveSessionid:sessionId];
 //            [DialogHelper showSuccessTips:[NSString stringWithFormat:@"登录成功->%@",packageModel.result]];
             [[NSNotificationCenter defaultCenter] postNotificationName:Notify_Update_AccountInfo object:nil];

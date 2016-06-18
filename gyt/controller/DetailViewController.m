@@ -15,7 +15,7 @@
 #import "NewsView.h"
 #import "CandleView.h"
 #import "TimeView.h"
-
+#import "ShortCutView.h"
 
 @interface DetailViewController ()
 
@@ -188,8 +188,8 @@
     {
         if(position == 0)
         {
-            [DialogHelper showTips:@"开发中"];
             //下单
+            [self addOrder];
         }
         else if(position == 1)
         {
@@ -207,7 +207,7 @@
         if(position == 0)
         {
             //闪电下单
-            [DialogHelper showTips:@"开发中"];
+            [self addOrder];
         }
         else if(position == 1)
         {
@@ -230,7 +230,7 @@
         else if(position == 1)
         {
             //下单
-            [DialogHelper showTips:@"开发中"];
+            [self addOrder];
         }
         else if(position == 2)
         {
@@ -290,6 +290,13 @@
 {
     TimeView *timeView = [[TimeView alloc]init];
     [self.view addSubview:timeView];
+}
+
+#pragma mark 快速下单板
+-(void)addOrder
+{
+    ShortCutView *shortCutView = [[ShortCutView alloc]initWithView:self.view model:_model];
+    [self.view addSubview:shortCutView];
 }
 
 -(void)OnSelectPosition:(NSInteger)position
