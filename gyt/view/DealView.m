@@ -330,7 +330,6 @@
     
     [self initHoldData];
     [self requestQuery:XT_CPositionStatics];
-    [self pushData];
 
 }
 
@@ -388,7 +387,6 @@
 
 -(void)OnItemSelected:(UIView *)dynamicTableView position:(NSInteger)position
 {
-
     currentItemSelect = position;
     switch (currentTabSelect) {
         case 0:
@@ -396,7 +394,7 @@
             {
                 DealHoldModel *model = [holdDatas objectAtIndex:position];
                 currentModel = model;
-                NSString *message = [NSString stringWithFormat:@"%@",model.m_strExchangeID];
+                NSString *message = [NSString stringWithFormat:@"%@，平仓价：%.2f",model.m_strInstrumentID,model.m_dLastPrice];
                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认平仓吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
                 alert.tag = 3;
                 [alert show];
@@ -406,7 +404,7 @@
             if(!IS_NS_COLLECTION_EMPTY(holdingDatas))
             {
                 DealHoldingModel *model = [holdingDatas objectAtIndex:position];
-                NSString *message = [NSString stringWithFormat:@"%@",model.m_strExchangeID];
+                NSString *message = [NSString stringWithFormat:@"%@，委托价：%.2f",model.m_strInstrumentID,model.m_dLimitPrice];
                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认撤单吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
                 alert.tag = 2;
                 [alert show];
@@ -417,7 +415,6 @@
         case 3:
             
             break;
-            
         default:
             break;
     }
@@ -473,38 +470,6 @@
     [self addSubview:_dynamicView];
 }
 
-
-//#pragma mark 获得实际买卖价格
-//-(NSString *)getPrice : (BOOL)isBuy
-//{
-//    NSString *price;
-//    NSString *priceStr = [_priceTextField getTextFieldText];
-//    if(isBuy)
-//    {
-//        NSString *lastPrice = [NSString stringWithFormat:@"%.1f",_model.m_dLastPrice];
-//        if(![priceStr isEqualToString:lastPrice])
-//        {
-//            price = priceStr;
-//        }
-//        else
-//        {
-//            price = [NSString stringWithFormat:@"%.1f",_model.m_dAskPrice1];
-//        }
-//    }
-//    else
-//    {
-//        NSString *lastPrice = [NSString stringWithFormat:@"%.1f",_model.m_dLastPrice];
-//        if(![priceStr isEqualToString:lastPrice])
-//        {
-//            price = priceStr;
-//        }
-//        else
-//        {
-//            price = [NSString stringWithFormat:@"%.1f",_model.m_dBidPrice1];
-//        }
-//    }
-//    return price;
-//}
 
 #pragma mark tabview选择
 -(void)OnSelect:(NSInteger)position
@@ -617,7 +582,6 @@
 -(void)hideKeyboard
 {
     [_handTextField resignFirstResponder];
-//    [_priceTextField resignFirstResponder];
 }
 
 
@@ -653,8 +617,16 @@
     
     if(model != nil)
     {
-        //撤单
-        orderModel.info = [OrderModel buildOrderModel :model.m_strProductID  instrumentID:model.m_strInstrumentID orderPrice:model.m_dLastPrice orderNum:model.m_nOpenVolume direction:model.m_nDirection offsetFlag:EOFF_THOST_FTDC_OF_Close];
+        //平仓
+        if(model.m_nDirection == ENTRUST_BUY)
+        {
+            model.m_nDirection = ENTRUST_SELL;
+        }
+        else
+        {
+            model.m_nDirection = ENTRUST_BUY;
+        }
+        orderModel.info = [OrderModel buildOrderModel :model.m_strProductID  instrumentID:model.m_strInstrumentID orderPrice:model.m_dLastPrice orderNum:model.m_nCanCloseVol direction:model.m_nDirection offsetFlag:EOFF_THOST_FTDC_OF_Close];
     }
     else
     {
@@ -696,17 +668,6 @@
 
 }
 
-#pragma mark 订阅委托数据
--(void)pushData
-{
-//    PushDataModel *model = [[PushDataModel alloc]init];
-//    NSString *accountInfoStr =  [[Account sharedAccount] getAccountInfo];
-//    UserInfoModel *account = [UserInfoModel mj_objectWithKeyValues:accountInfoStr];
-//    model.account = account;
-
-//   NSString *jsonStr = [JSONUtil parse:@"pushData" params:nil];
-//    [[SocketConnect sharedSocketConnect]sendData:jsonStr delegate:self seq:GYT_PUSHDATA];
-}
 
 #pragma mark 接收数据
 -(void)OnReceiveSuccess:(id)respondObject
@@ -725,7 +686,10 @@
             for(id obj in array)
             {
                 DealHoldModel *holdModel = [DealHoldModel mj_objectWithKeyValues:obj];
-                [holdDatas addObject:holdModel];
+                if(holdModel.m_nOpenVolume != 0)
+                {
+                    [holdDatas addObject:holdModel];
+                }
             }
             [self reloadData:holdDatas];
 
