@@ -44,6 +44,11 @@
 		CF6342AE1CFD952D008149B1 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6342AD1CFD952D008149B1 /* GCDAsyncSocket.m */; };
 		CF6342B11CFDA39A008149B1 /* SocketConnect.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6342B01CFDA39A008149B1 /* SocketConnect.m */; };
 		CF6CED571CFC1E64007F97AA /* OrderRespondModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CED561CFC1E64007F97AA /* OrderRespondModel.m */; };
+		CF9C8E0E1D17958600F2E6A7 /* libAFNetworking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF9C8E0D1D17958600F2E6A7 /* libAFNetworking.a */; };
+		CF9C8E101D17958B00F2E6A7 /* libFMDB.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF9C8E0F1D17958B00F2E6A7 /* libFMDB.a */; };
+		CF9C8E121D17958E00F2E6A7 /* libMBProgressHUD.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF9C8E111D17958E00F2E6A7 /* libMBProgressHUD.a */; };
+		CF9C8E141D17959100F2E6A7 /* libMJExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF9C8E131D17959100F2E6A7 /* libMJExtension.a */; };
+		CF9C8E161D17959400F2E6A7 /* libSDWebImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF9C8E151D17959400F2E6A7 /* libSDWebImage.a */; };
 		CF9E66011D0D586800069477 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF9E66001D0D586800069477 /* AboutViewController.m */; };
 		CF9E66041D0D593000069477 /* ManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF9E66031D0D593000069477 /* ManageViewController.m */; };
 		CF9E66071D0D898500069477 /* TimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF9E66061D0D898500069477 /* TimeView.m */; };
@@ -233,6 +238,11 @@
 		CF6342B01CFDA39A008149B1 /* SocketConnect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketConnect.m; sourceTree = "<group>"; };
 		CF6CED551CFC1E64007F97AA /* OrderRespondModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderRespondModel.h; sourceTree = "<group>"; };
 		CF6CED561CFC1E64007F97AA /* OrderRespondModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderRespondModel.m; sourceTree = "<group>"; };
+		CF9C8E0D1D17958600F2E6A7 /* libAFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAFNetworking.a; path = "../../../Library/Developer/Xcode/DerivedData/gyt-bfrnsjmfxkvcntdvtkstovsffurf/Build/Products/Debug-iphoneos/libAFNetworking.a"; sourceTree = "<group>"; };
+		CF9C8E0F1D17958B00F2E6A7 /* libFMDB.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFMDB.a; path = "../../../Library/Developer/Xcode/DerivedData/gyt-bfrnsjmfxkvcntdvtkstovsffurf/Build/Products/Debug-iphoneos/libFMDB.a"; sourceTree = "<group>"; };
+		CF9C8E111D17958E00F2E6A7 /* libMBProgressHUD.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMBProgressHUD.a; path = "../../../Library/Developer/Xcode/DerivedData/gyt-bfrnsjmfxkvcntdvtkstovsffurf/Build/Products/Debug-iphoneos/libMBProgressHUD.a"; sourceTree = "<group>"; };
+		CF9C8E131D17959100F2E6A7 /* libMJExtension.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMJExtension.a; path = "../../../Library/Developer/Xcode/DerivedData/gyt-bfrnsjmfxkvcntdvtkstovsffurf/Build/Products/Debug-iphoneos/libMJExtension.a"; sourceTree = "<group>"; };
+		CF9C8E151D17959400F2E6A7 /* libSDWebImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDWebImage.a; path = "../../../Library/Developer/Xcode/DerivedData/gyt-bfrnsjmfxkvcntdvtkstovsffurf/Build/Products/Debug-iphoneos/libSDWebImage.a"; sourceTree = "<group>"; };
 		CF9E65FF1D0D586800069477 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		CF9E66001D0D586800069477 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		CF9E66021D0D593000069477 /* ManageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManageViewController.h; sourceTree = "<group>"; };
@@ -451,6 +461,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF9C8E161D17959400F2E6A7 /* libSDWebImage.a in Frameworks */,
+				CF9C8E141D17959100F2E6A7 /* libMJExtension.a in Frameworks */,
+				CF9C8E121D17958E00F2E6A7 /* libMBProgressHUD.a in Frameworks */,
+				CF9C8E101D17958B00F2E6A7 /* libFMDB.a in Frameworks */,
+				CF9C8E0E1D17958600F2E6A7 /* libAFNetworking.a in Frameworks */,
 				CFD37E1C1D016C5000297DE2 /* CFNetwork.framework in Frameworks */,
 				CFF1839E1CE5B11900E991C4 /* Security.framework in Frameworks */,
 				CFA3B9011CD9D68C0063AE3E /* libz.tbd in Frameworks */,
@@ -465,6 +480,11 @@
 		AA72E72FA1DE389ACFDB9755 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CF9C8E151D17959400F2E6A7 /* libSDWebImage.a */,
+				CF9C8E131D17959100F2E6A7 /* libMJExtension.a */,
+				CF9C8E111D17958E00F2E6A7 /* libMBProgressHUD.a */,
+				CF9C8E0F1D17958B00F2E6A7 /* libFMDB.a */,
+				CF9C8E0D1D17958600F2E6A7 /* libAFNetworking.a */,
 				CFD37E1B1D016C5000297DE2 /* CFNetwork.framework */,
 				CFF1839D1CE5B11900E991C4 /* Security.framework */,
 				CFA3B9001CD9D68C0063AE3E /* libz.tbd */,
@@ -1428,7 +1448,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1467,8 +1487,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1490,10 +1511,12 @@
 				INFOPLIST_FILE = gyt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.by.ios.gyt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "armv7 arm64 armv7s";
 			};
 			name = Debug;
 		};
@@ -1512,10 +1535,12 @@
 				INFOPLIST_FILE = gyt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.by.ios.gyt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "armv7 arm64 armv7s";
 			};
 			name = Release;
 		};

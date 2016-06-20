@@ -791,9 +791,10 @@
     }
     else if(packageModel.seq == GYT_CANCEL)
     {
+        NSLog(@"撤单成功返回->%@",packageModel.result);
         [DialogHelper showSuccessTips:@"提交撤单申请成功"];
     }
-    else if(packageModel.cmd == 4)
+    else if(packageModel.cmd == NET_CMD_NOTIFICATION)
     {
         [[PushDataHandle sharedPushDataHandle] handlePushData:packageModel.result delegate :self];
     }
@@ -806,13 +807,36 @@
     {
         if(currentTabSelect == 1)
         {
+            Boolean hasModel = NO;
             DealHoldingModel *model = data;
-            [holdingDatas addObject:model];
+            for(int i = 0; i < [holdingDatas count]; i++)
+            {
+                DealHoldingModel *temp = [holdingDatas objectAtIndex:i];
+                if([temp.m_strOrderRef isEqualToString:model.m_strOrderRef])
+                {
+                    temp.m_nOrderStatus = model.m_nOrderStatus;
+                    hasModel = YES;
+                }
+            }
+            if(!hasModel)
+            {
+                [holdingDatas addObject:model];
+            }
             [self reloadData:holdingDatas];
         }
         else if(currentTabSelect == 2)
         {
             DealHoldByModel *model = data;
+            for(int i = 0; i < [holdByDatas count]; i++)
+            {
+                DealHoldByModel *temp = [holdByDatas objectAtIndex:i];
+                if([temp.m_strOrderRef isEqualToString:model.m_strOrderRef])
+                {
+                    [holdByDatas replaceObjectAtIndex:i withObject:model];
+                    [self reloadData:holdByDatas];
+                    return;
+                }
+            }
             [holdByDatas addObject:model];
             [self reloadData:holdByDatas];
         }

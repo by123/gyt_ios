@@ -19,7 +19,6 @@
 
 #pragma mark 网络请求相关
 //#define Root_Url @"http://192.168.1.106:8081" //陈勇
-//#define Root_Url @"http://192.168.1.111:8081"//夏瑶
 
 #define Host @"192.168.1.118" //赵杰
 #define Port 64360

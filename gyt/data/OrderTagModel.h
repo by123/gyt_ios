@@ -25,7 +25,7 @@
 
 @property (strong, nonatomic) UserInfoModel *m_realAccount;// 实盘账号
 
-@property (assign, nonatomic) long m_strRealTag; // 实盘标记
+@property (copy, nonatomic) NSString* m_strRealTag; // 实盘标记
 
 @property (copy, nonatomic) NSString *m_strOrderSysId; // 实盘委托号
 

@@ -181,4 +181,29 @@
 }
 
 
+-(void)OnReceiveSuccess:(id)respondObject
+{
+    PackageModel *packageModel = respondObject;
+    if(packageModel.cmd == NET_CMD_NOTIFICATION)
+    {
+        [[PushDataHandle sharedPushDataHandle] handlePushData:packageModel.result delegate :self];
+    }
+}
+
+
+-(void)pushResult:(id)data
+{
+    if([data isKindOfClass:[PushModel class]])
+    {
+        PushModel *model = data;
+        if([model.m_strInstrumentID isEqualToString:_model.m_strInstrumentID])
+        {
+            _model = model;
+            [self buildData];
+            [_handicapTableView reloadData];
+        }
+    }
+}
+
+
 @end
