@@ -141,6 +141,10 @@
                 [cell setHoldingData:[_datas objectAtIndex:indexPath.row] maxWidth:_maxWidth];
                 break;
             case HoldBy:
+                if([_datas count] - 1  ==indexPath.row)
+                {
+                    NSLog(@"");
+                }
                 [cell setHoldByData:[_datas objectAtIndex:indexPath.row] maxWidth:_maxWidth];
                 break;
             case Profit:
@@ -191,6 +195,11 @@
 }
 
 
+-(void)reloadOneRow:(NSInteger)position
+{
+    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:position inSection:0];
+    [_tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+}
 
 
 @end

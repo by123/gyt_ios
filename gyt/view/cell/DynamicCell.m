@@ -216,15 +216,13 @@
             int width =  [[_widths objectAtIndex:i] intValue] * maxWidth / count;
             switch (i) {
                 case 0://时间
-                    if(model.m_tag)
+                 
+                    if(IS_NS_STRING_EMPTY(model.m_tag.m_nOrderTime))
                     {
-                        if(IS_NS_STRING_EMPTY(model.m_tag.m_nOrderTime))
-                        {
-                            label.text = [self generateTime:[NSString stringWithFormat:@"%d",model.m_nInsertTime]];
-                        }
-                        else{
-                            label.text = [self generateTime:model.m_tag.m_nOrderTime];
-                        }
+                        label.text = [self generateTime:[NSString stringWithFormat:@"%d",model.m_nInsertTime]];
+                    }
+                    else{
+                        label.text = [self generateTime:model.m_tag.m_nOrderTime];
                     }
                     break;
                 case 1://合约
@@ -395,6 +393,7 @@
     NSString *t2 = [time substringWithRange:NSMakeRange(2, 2)];
     NSString *t3 = [time substringWithRange:NSMakeRange(2, 2)];
     NSString *result = [NSString stringWithFormat:@"%@:%@:%@",t1,t2,t3];
+    NSLog(@"%@",result);
     return result;
 }
 

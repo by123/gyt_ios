@@ -816,29 +816,34 @@
                 {
                     temp.m_nOrderStatus = model.m_nOrderStatus;
                     hasModel = YES;
+                    [_dynamicView reloadOneRow:i];
                 }
             }
             if(!hasModel)
             {
                 [holdingDatas addObject:model];
+                [self reloadData:holdingDatas];
             }
-            [self reloadData:holdingDatas];
         }
         else if(currentTabSelect == 2)
         {
+            Boolean hasModel = NO;
             DealHoldByModel *model = data;
             for(int i = 0; i < [holdByDatas count]; i++)
             {
                 DealHoldByModel *temp = [holdByDatas objectAtIndex:i];
                 if([temp.m_strOrderRef isEqualToString:model.m_strOrderRef])
                 {
-                    [holdByDatas replaceObjectAtIndex:i withObject:model];
-                    [self reloadData:holdByDatas];
-                    return;
+                    temp.m_nOrderStatus = model.m_nOrderStatus;
+                    hasModel = YES;
+                    [_dynamicView reloadOneRow:i];
                 }
             }
-            [holdByDatas addObject:model];
-            [self reloadData:holdByDatas];
+            if(!hasModel)
+            {
+                [holdByDatas addObject:model];
+                [self reloadData:holdByDatas];
+            }
         }
 
     }

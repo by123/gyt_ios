@@ -37,4 +37,6 @@
 -(void)reloadData : (NSMutableArray *)array;
 
 
+-(void)reloadOneRow : (NSInteger)position;
+
 @end
