@@ -769,14 +769,15 @@
 		if([touch locationInView:self].x < 40){
 		    self.touchFlag = [touch locationInView:self].y;
 		}
+        isSlideShow = YES;
+        [_slide setHidden:NO];
 	}else if ([ts count]==2) {
 		self.touchFlag = [ts[0] locationInView:self].x ;
 		self.touchFlagTwo = [ts[1] locationInView:self].x;
 	}
     
  
-    isSlideShow = YES;
-    [_slide setHidden:NO];
+   
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -930,11 +931,11 @@
 				}
 			}
 		}
+        isSlideShow = NO;
+        [_slide setHidden:YES];
 	}
 	self.touchFlag = 0;
     
-    isSlideShow = NO;
-    [_slide setHidden:YES];
 }
 
 
