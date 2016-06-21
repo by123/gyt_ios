@@ -50,6 +50,7 @@
 @synthesize ratios;
 @synthesize models;
 @synthesize title;
+@synthesize showMoveLine;
 
 -(float)getLocalY:(float)val withSection:(int)sectionIndex withAxis:(int)yAxisIndex{
 	Section *sec = [self sections][sectionIndex];
@@ -301,10 +302,6 @@
 #pragma mark 画k线走势和滑动的基线
 -(void)drawSerie:(NSMutableDictionary *)serie{
     NSString *type  = serie[@"type"];
-//    if([type isEqualToString:@"candle"] || [type isEqualToString:@"column"])
-//    {
-//        return;
-//    }
     ChartModel *model = [self getModel:type];
     [model drawSerie:self serie:serie];
 
@@ -777,6 +774,7 @@
 		    self.touchFlag = [touch locationInView:self].y;
 		}
         isSlideShow = YES;
+        showMoveLine = YES;
         [_slide setHidden:NO];
 	}else if ([ts count]==2) {
 		self.touchFlag = [ts[0] locationInView:self].x ;
@@ -840,17 +838,16 @@
 					self.touchFlag = [touch locationInView:self].y;
 				}
 			}
-            self.rangeX = [touch locationInView:self].y;
-            if(rangeX >= self.rangeFromX)
-            {
-                self.rangeX = self.rangeFromX;
-            }
-            else if(rangeX < self.rangeToX)
-            {
-                self.rangeX = self.rangeToX;
-            }
-
 		}
+        self.rangeX = [touch locationInView:self].y;
+        if(rangeX >= self.rangeFromX)
+        {
+            self.rangeX = self.rangeFromX;
+        }
+        else if(rangeX < self.rangeToX)
+        {
+            self.rangeX = self.rangeToX;
+        }
 
 	}else if ([ts count]==2) {
 		float currFlag = [ts[0] locationInView:self].x;
@@ -949,7 +946,9 @@
 			}
 		}
         isSlideShow = NO;
+        showMoveLine = NO;
         [_slide setHidden:YES];
+        
 	}
 	self.touchFlag = 0;
     

@@ -45,7 +45,6 @@
         CGContextMoveToPoint(context, sec.frame.origin.x+sec.paddingLeft,chart.rangeX);
         CGContextAddLineToPoint(context,sec.frame.size.width+sec.frame.origin.x+sec.paddingLeft,chart.rangeX);
         CGContextStrokePath(context);
-
         
         CGContextSetShouldAntialias(context, YES);
         CGContextBeginPath(context);
@@ -81,6 +80,11 @@
         }
     }
 
+}
+
+-(void)clearMoveLine
+{
+    
 }
 
 -(void)setValuesForYAxis:(Chart *)chart serie:(NSDictionary *)serie{

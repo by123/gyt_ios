@@ -45,6 +45,7 @@
     NSMutableDictionary *models;
 	UIColor        *borderColor;
 	NSString       *title;
+    Boolean showMoveLine;
 }
 
 @property (nonatomic)        bool  enableSelection;
@@ -74,6 +75,7 @@
 @property (nonatomic,retain) NSMutableDictionary *models;
 @property (nonatomic,retain) UIColor  *borderColor;
 @property (nonatomic,retain) NSString *title;
+@property (nonatomic)        Boolean showMoveLine;
 
 -(float)getLocalY:(float)val withSection:(int)sectionIndex withAxis:(int)yAxisIndex;
 -(void)setSelectedIndexByPoint:(CGPoint) point;
