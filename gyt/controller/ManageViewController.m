@@ -75,15 +75,13 @@
     NSString *port = _portTextField.text;
     
     if([self isPureInt:port])
-    {
-        [[SocketConnect sharedSocketConnect] disconnect];
-        
+    {        
         [[Test sharedTest] setHost:host];
         [[Test sharedTest] setPort:[port integerValue]];
         [DialogHelper showSuccessTips:@"修改成功"];
-        [[SocketConnect sharedSocketConnect] connect];
-        LoginViewController *target = [[LoginViewController alloc]init];
-        [self.navigationController pushViewController:target animated:YES];
+        [[SocketConnect sharedSocketConnect] disconnect];
+//        LoginViewController *target = [[LoginViewController alloc]init];
+//        [self.navigationController pushViewController:target animated:YES];
     }
     else
     {
@@ -108,7 +106,14 @@
 
 -(void)OnLeftClickCallback
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    if(self.navigationController)
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    else
+    {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 

@@ -13,6 +13,7 @@
 #import "UUID.h"
 #import "MainViewController.h"
 #import "ByTextField.h"
+#import "ManageViewController.h"
 @interface LoginViewController ()
 
 @property (strong , nonatomic) InsetTextField *nameTextField;
@@ -117,8 +118,22 @@
     [_loginBtn addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
     [rootView addSubview:_loginBtn];
     
+    
+//    UIButton *testBtn = [[UIButton alloc]init];
+//    [testBtn setTitle:@"配置" forState:UIControlStateNormal];
+//    testBtn.backgroundColor = [UIColor redColor];
+//    testBtn.frame = CGRectMake(0, rootView.size.height - 50, SCREEN_WIDTH, 50);
+//    [testBtn addTarget:self action:@selector(test) forControlEvents:UIControlEventTouchUpInside];
+//    [rootView addSubview:testBtn];
+    
+    
 }
 
+//-(void)test
+//{
+//    ManageViewController *controller = [[ManageViewController alloc]init];
+//    [self presentViewController:controller animated:YES completion:nil];
+//}
 
 #pragma mark 请求登录
 -(void)login
@@ -200,6 +215,11 @@
     }];
 }
 
+
+-(void)OnReceiveFail:(NSError *)error
+{
+    [hua hide:YES];
+}
 
 -(void)OnReceiveSuccess:(id)respondObject
 {

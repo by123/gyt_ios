@@ -90,9 +90,8 @@ SINGLETON_IMPLEMENTION(SocketConnect);
 {
     if(_clientSocket)
     {
-        initiative = YES;
         [_clientSocket disconnect];
-        _clientSocket = nil;
+        [self connectInterrupt];
     }
 }
 
@@ -118,32 +117,29 @@ SINGLETON_IMPLEMENTION(SocketConnect);
 #pragma mark - 连接被断开
 -(void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err
 {
-    NSLog(@"连接被断开");
-    if(!initiative)
-    {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"连接失败" message:@"您已经与服务器断开连接，请点击确定重新连接" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-            [alertView show];
-        });
-    }
+    [self connectInterrupt];
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    [self connect];
-    NSLog(@"重新连接");
-    
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    UIWindow *window = delegate.window;
-    LoginViewController *mainViewController =[[LoginViewController alloc]init];
-    SlideNavigationController *controller = [[SlideNavigationController alloc]initWithRootViewController:mainViewController];
-    RightMenuViewController *rightMenu = [[RightMenuViewController alloc]init];
-    rightMenu.view.backgroundColor = BACKGROUND_COLOR;
-    rightMenu.controller = controller;
-    
-    controller.leftMenu = rightMenu;
-    window.rootViewController = controller;
-    [window makeKeyAndVisible];
+    if(buttonIndex == 1)
+    {
+        [self connect];
+        NSLog(@"重新连接");
+        
+        AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        UIWindow *window = delegate.window;
+        LoginViewController *mainViewController =[[LoginViewController alloc]init];
+        SlideNavigationController *controller = [[SlideNavigationController alloc]initWithRootViewController:mainViewController];
+        RightMenuViewController *rightMenu = [[RightMenuViewController alloc]init];
+        rightMenu.view.backgroundColor = BACKGROUND_COLOR;
+        rightMenu.controller = controller;
+        
+        controller.leftMenu = rightMenu;
+        window.rootViewController = controller;
+        [window makeKeyAndVisible];
+    }
+
 }
 
 
@@ -207,6 +203,16 @@ SINGLETON_IMPLEMENTION(SocketConnect);
     self.delegate = delegate;
     NSData *data =[[GYTPackage sharedGYTPackage]encodeJSON:[content dataUsingEncoding:NSUTF8StringEncoding] requestid:seq];
     [_clientSocket writeData:data withTimeout:-1 tag:0];
+}
+
+#pragma mark - 断开弹出提示
+-(void)connectInterrupt
+{
+    NSLog(@"连接被断开");
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"连接失败" message:@"您已经与服务器断开连接，请点击确定重新连接" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        [alertView show];
+    });
 }
 
 

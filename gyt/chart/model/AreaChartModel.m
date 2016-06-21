@@ -61,13 +61,13 @@
 
         CGContextSetShouldAntialias(context, NO);
         CGContextSetStrokeColorWithColor(context, [[UIColor alloc] initWithRed:0.2 green:0.2 blue:0.2 alpha:1.0].CGColor);
-        CGContextMoveToPoint(context, sec.frame.origin.x+sec.paddingLeft+(chart.selectedIndex-chart.rangeFrom)*chart.plotWidth+chart.plotWidth/2, sec.frame.origin.y+sec.paddingTop);
-        CGContextAddLineToPoint(context,sec.frame.origin.x+sec.paddingLeft+(chart.selectedIndex-chart.rangeFrom)*chart.plotWidth+chart.plotWidth/2,sec.frame.size.height+sec.frame.origin.y);
+        CGContextMoveToPoint(context, sec.frame.origin.x+sec.paddingLeft+(chart.selectedIndex-chart.rangeFromY)*chart.plotWidth+chart.plotWidth/2, sec.frame.origin.y+sec.paddingTop);
+        CGContextAddLineToPoint(context,sec.frame.origin.x+sec.paddingLeft+(chart.selectedIndex-chart.rangeFromY)*chart.plotWidth+chart.plotWidth/2,sec.frame.size.height+sec.frame.origin.y);
         CGContextStrokePath(context);
 
         CGContextSetShouldAntialias(context, YES);
         CGContextBeginPath(context);
-        CGContextAddArc(context, sec.frame.origin.x+sec.paddingLeft+(chart.selectedIndex-chart.rangeFrom)*chart.plotWidth+chart.plotWidth/2, [chart getLocalY:value withSection:section withAxis:yAxis], 3, 0, 2*M_PI, 1);
+        CGContextAddArc(context, sec.frame.origin.x+sec.paddingLeft+(chart.selectedIndex-chart.rangeFromY)*chart.plotWidth+chart.plotWidth/2, [chart getLocalY:value withSection:section withAxis:yAxis], 3, 0, 2*M_PI, 1);
         CGContextFillPath(context);
     }
 
@@ -77,7 +77,7 @@
      */
     CGContextBeginPath(context);
     CGContextSetRGBFillColor(context, R, G, B, 1.0);
-    for(int i=chart.rangeFrom;i<chart.rangeTo;i++){
+    for(int i=chart.rangeFromY;i<chart.rangeToY;i++){
         if(i == data.count-1){
             break;
         }
@@ -88,45 +88,45 @@
         float value = [[data[i] objectAtIndex:0] floatValue];
 
         if(value >= yaxis.baseValue){
-            ix  = sec.frame.origin.x+sec.paddingLeft+(i-chart.rangeFrom)*chart.plotWidth;
+            ix  = sec.frame.origin.x+sec.paddingLeft+(i-chart.rangeFromY)*chart.plotWidth;
             iy = [chart getLocalY:value withSection:section withAxis:yAxis];
 
             if(found == 0){
                 found = 1;
-                if(i==chart.rangeFrom){
+                if(i==chart.rangeFromY){
                     CGContextMoveToPoint(context, ix+chart.plotWidth/2, iy);
                     startPoint = CGPointMake(ix+chart.plotWidth/2, iy);
-                }else if(i>chart.rangeFrom){
+                }else if(i>chart.rangeFromY){
                     prevValue = [[data[i - 1] objectAtIndex:0] floatValue];
 //                    iPx = sec.frame.origin.x+sec.paddingLeft+(i-1-chart.rangeFrom)*chart.plotWidth;
 //                    iPy = [chart getLocalY:prevValue withSection:section withAxis:yAxis];
                     if(prevValue < yaxis.baseValue){
-                        float baseX = (yaxis.baseValue-prevValue)*chart.plotWidth/(value-prevValue)+(sec.frame.origin.x+sec.paddingLeft+(i-1-chart.rangeFrom)*chart.plotWidth+chart.plotWidth/2);
+                        float baseX = (yaxis.baseValue-prevValue)*chart.plotWidth/(value-prevValue)+(sec.frame.origin.x+sec.paddingLeft+(i-1-chart.rangeFromY)*chart.plotWidth+chart.plotWidth/2);
                         CGContextMoveToPoint(context, baseX,iBy);
                         CGContextAddLineToPoint(context, ix+chart.plotWidth/2, iy);
                         startPoint = CGPointMake(baseX, iBy);
                         endPoint = CGPointMake(ix+chart.plotWidth/2,iy);
                     }
                 }
-            }else if(i>chart.rangeFrom){
+            }else if(i>chart.rangeFromY){
                 prevValue = [[data[i - 1] objectAtIndex:0] floatValue];
 //                iPx = sec.frame.origin.x+sec.paddingLeft+(i-1-chart.rangeFrom)*chart.plotWidth;
 //                iPy = [chart getLocalY:prevValue withSection:section withAxis:yAxis];
                 if(prevValue < yaxis.baseValue){
-                    float baseX = (yaxis.baseValue-prevValue)*chart.plotWidth/(value-prevValue)+(sec.frame.origin.x+sec.paddingLeft+(i-1-chart.rangeFrom)*chart.plotWidth+chart.plotWidth/2);
+                    float baseX = (yaxis.baseValue-prevValue)*chart.plotWidth/(value-prevValue)+(sec.frame.origin.x+sec.paddingLeft+(i-1-chart.rangeFromY)*chart.plotWidth+chart.plotWidth/2);
                     CGContextAddLineToPoint(context, baseX,iBy);
                     CGContextAddLineToPoint(context, ix+chart.plotWidth/2,iy);
                     endPoint = CGPointMake(ix+chart.plotWidth/2,iy);
                 }
             }
 
-            if (i < chart.rangeTo-1  && data[i + 1] != nil) {
+            if (i < chart.rangeToY-1  && data[i + 1] != nil) {
                 nextValue = [[data[i + 1] objectAtIndex:0] floatValue];
-                iNx = sec.frame.origin.x+sec.paddingLeft+(i+1-chart.rangeFrom)*chart.plotWidth;
+                iNx = sec.frame.origin.x+sec.paddingLeft+(i+1-chart.rangeFromY)*chart.plotWidth;
                 iNy = [chart getLocalY:nextValue withSection:section withAxis:yAxis];
 
                 if(nextValue < yaxis.baseValue){
-                    float baseX = (value-yaxis.baseValue)*chart.plotWidth/(value-nextValue)+(sec.frame.origin.x+sec.paddingLeft+(i-chart.rangeFrom)*chart.plotWidth+chart.plotWidth/2);
+                    float baseX = (value-yaxis.baseValue)*chart.plotWidth/(value-nextValue)+(sec.frame.origin.x+sec.paddingLeft+(i-chart.rangeFromY)*chart.plotWidth+chart.plotWidth/2);
                     CGContextAddLineToPoint(context, baseX,iBy);
                     endPoint = CGPointMake(baseX, iBy);
                 }else{
@@ -152,7 +152,7 @@
     found = 0;
     CGContextBeginPath(context);
     CGContextSetRGBFillColor(context, NR, NG, NB, 1.0);
-    for(int i=chart.rangeFrom;i<chart.rangeTo;i++){
+    for(int i=chart.rangeFromY;i<chart.rangeToY;i++){
         if(i == data.count-1){
             break;
         }
@@ -162,44 +162,44 @@
 
         float value = [[data[i] objectAtIndex:0] floatValue];
         if(value < yaxis.baseValue){
-            ix  = sec.frame.origin.x+sec.paddingLeft+(i-chart.rangeFrom)*chart.plotWidth;
+            ix  = sec.frame.origin.x+sec.paddingLeft+(i-chart.rangeFromY)*chart.plotWidth;
             iy = [chart getLocalY:value withSection:section withAxis:yAxis];
 
             if(found == 0){
                 found = 1;
-                if(i==chart.rangeFrom){
+                if(i==chart.rangeFromY){
                     CGContextMoveToPoint(context, ix+chart.plotWidth/2, iy);
                     startPoint = CGPointMake(ix+chart.plotWidth/2, iy);
-                }else if(i>chart.rangeFrom){
+                }else if(i>chart.rangeFromY){
                     prevValue = [[data[i - 1] objectAtIndex:0] floatValue];
 //                    iPx = sec.frame.origin.x+sec.paddingLeft+(i-1-chart.rangeFrom)*chart.plotWidth;
 //                    iPy = [chart getLocalY:prevValue withSection:section withAxis:yAxis];
                     if(prevValue > yaxis.baseValue){
-                        float baseX = (prevValue-yaxis.baseValue)*chart.plotWidth/(prevValue-value)+(sec.frame.origin.x+sec.paddingLeft+(i-1-chart.rangeFrom)*chart.plotWidth+chart.plotWidth/2);
+                        float baseX = (prevValue-yaxis.baseValue)*chart.plotWidth/(prevValue-value)+(sec.frame.origin.x+sec.paddingLeft+(i-1-chart.rangeFromY)*chart.plotWidth+chart.plotWidth/2);
                         CGContextMoveToPoint(context, baseX,iBy);
                         CGContextAddLineToPoint(context, ix+chart.plotWidth/2, iy);
                         startPoint = CGPointMake(baseX, iBy);
                         endPoint = CGPointMake(ix+chart.plotWidth/2,iy);
                     }
                 }
-            }else if(i>chart.rangeFrom){
+            }else if(i>chart.rangeFromY){
                 prevValue = [[data[i - 1] objectAtIndex:0] floatValue];
 //                iPx = sec.frame.origin.x+sec.paddingLeft+(i-1-chart.rangeFrom)*chart.plotWidth;
 //                iPy = [chart getLocalY:prevValue withSection:section withAxis:yAxis];
                 if(prevValue > yaxis.baseValue){
-                    float baseX = (prevValue-yaxis.baseValue)*chart.plotWidth/(prevValue-value)+(sec.frame.origin.x+sec.paddingLeft+(i-1-chart.rangeFrom)*chart.plotWidth+chart.plotWidth/2);
+                    float baseX = (prevValue-yaxis.baseValue)*chart.plotWidth/(prevValue-value)+(sec.frame.origin.x+sec.paddingLeft+(i-1-chart.rangeFromY)*chart.plotWidth+chart.plotWidth/2);
                     CGContextAddLineToPoint(context, baseX,iBy);
                     CGContextAddLineToPoint(context, ix+chart.plotWidth/2,iy);
                     endPoint = CGPointMake(ix+chart.plotWidth/2,iy);
                 }
             }
 
-            if (i < chart.rangeTo-1 && data[i + 1] != nil) {
+            if (i < chart.rangeToY-1 && data[i + 1] != nil) {
                 nextValue = [[data[i + 1] objectAtIndex:0] floatValue];
-                iNx = sec.frame.origin.x+sec.paddingLeft+(i+1-chart.rangeFrom)*chart.plotWidth;
+                iNx = sec.frame.origin.x+sec.paddingLeft+(i+1-chart.rangeFromY)*chart.plotWidth;
                 iNy = [chart getLocalY:nextValue withSection:section withAxis:yAxis];
                 if(nextValue > yaxis.baseValue){
-                    float baseX = (yaxis.baseValue-value)*chart.plotWidth/(nextValue-value)+(sec.frame.origin.x+sec.paddingLeft+(i-chart.rangeFrom)*chart.plotWidth+chart.plotWidth/2);
+                    float baseX = (yaxis.baseValue-value)*chart.plotWidth/(nextValue-value)+(sec.frame.origin.x+sec.paddingLeft+(i-chart.rangeFromY)*chart.plotWidth+chart.plotWidth/2);
                     CGContextAddLineToPoint(context, baseX,iBy);
                     endPoint = CGPointMake(baseX, iBy);
                 }else{
@@ -238,13 +238,13 @@
 		yaxis.decimal = [serie[@"decimal"] intValue];
 	}
 
-	float value = [[data[chart.rangeFrom] objectAtIndex:0] floatValue];
+	float value = [[data[chart.rangeFromY] objectAtIndex:0] floatValue];
     if(!yaxis.isUsed){
         [yaxis setMax:value];
         [yaxis setMin:value];
         yaxis.isUsed = YES;
     }
-    for(int i=chart.rangeFrom;i<chart.rangeTo;i++){
+    for(int i=chart.rangeFromY;i<chart.rangeToY;i++){
         if(i == data.count){
             break;
         }

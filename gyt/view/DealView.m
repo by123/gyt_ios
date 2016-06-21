@@ -837,7 +837,15 @@
         PushModel *model = data;
         if([model.m_strInstrumentID isEqualToString:_model.m_strInstrumentID])
         {
-            _model = model;
+            _model.m_dLastPrice = model.m_dLastPrice;
+            _model.m_dOpenPrice = model.m_dOpenPrice;
+            _model.m_nVolume = model.m_nVolume;
+            _model.m_dAskPrice1 = model.m_dAskPrice1;
+            _model.m_dBidPrice1 = model.m_dBidPrice1;
+            _model.m_dHighestPrice = model.m_dHighestPrice;
+            _model.m_dLowestPrice = model.m_dLowestPrice;
+            _model.m_nAskVolume1 = model.m_nAskVolume1;
+            _model.m_nBidVolume1 = model.m_nBidVolume1;
             [self updateData:_model];
         }
     }

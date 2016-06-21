@@ -17,7 +17,7 @@
 
 	CGContextRef context = UIGraphicsGetCurrentContext();
 	CGContextSetShouldAntialias(context, YES);
-	CGContextSetLineWidth(context, 1.0f);
+	CGContextSetLineWidth(context, 0.5f);
 
 	NSMutableArray *data          = serie[@"data"];
 	int            yAxis          = [serie[@"yAxis"] intValue];
@@ -34,14 +34,14 @@
         float value = [[data[chart.selectedIndex] objectAtIndex:0] floatValue];
 #pragma mark 移动竖线
         CGContextSetShouldAntialias(context, NO);
-        CGContextSetStrokeColorWithColor(context, SELECT_COLOR.CGColor);
-        CGContextMoveToPoint(context, sec.frame.origin.x+sec.paddingLeft+(chart.selectedIndex-chart.rangeFrom)*chart.plotWidth+chart.plotWidth/2, sec.frame.origin.y+sec.paddingTop);
-        CGContextAddLineToPoint(context,sec.frame.origin.x+sec.paddingLeft+(chart.selectedIndex-chart.rangeFrom)*chart.plotWidth+chart.plotWidth/2,sec.frame.size.height+sec.frame.origin.y);
+        CGContextSetStrokeColorWithColor(context, [UIColor blueColor].CGColor);
+        CGContextMoveToPoint(context, sec.frame.origin.x+sec.paddingLeft+(chart.selectedIndex-chart.rangeFromY)*chart.plotWidth+chart.plotWidth/2, sec.frame.origin.y+sec.paddingTop);
+        CGContextAddLineToPoint(context,sec.frame.origin.x+sec.paddingLeft+(chart.selectedIndex-chart.rangeFromY)*chart.plotWidth+chart.plotWidth/2,sec.frame.size.height+sec.frame.origin.y);
         CGContextStrokePath(context);
         
 #pragma mark 移动横线
         CGContextSetShouldAntialias(context, NO);
-        CGContextSetStrokeColorWithColor(context, SELECT_COLOR.CGColor);
+        CGContextSetStrokeColorWithColor(context, [UIColor blueColor].CGColor);
         CGContextMoveToPoint(context, sec.frame.origin.x+sec.paddingLeft,sec.paddingTop);
         CGContextAddLineToPoint(context,sec.frame.size.width+sec.frame.origin.x+sec.paddingLeft,sec.paddingTop);
         CGContextStrokePath(context);
@@ -51,23 +51,23 @@
         CGContextBeginPath(context);
         CGContextSetRGBFillColor(context, R, G, B, 1.0);
         if(!isnan([chart getLocalY:value withSection:section withAxis:yAxis])){
-            CGContextAddArc(context, sec.frame.origin.x+sec.paddingLeft+(chart.selectedIndex-chart.rangeFrom)*chart.plotWidth+chart.plotWidth/2, [chart getLocalY:value withSection:section withAxis:yAxis], 3, 0, 2*M_PI, 1);
+            CGContextAddArc(context, sec.frame.origin.x+sec.paddingLeft+(chart.selectedIndex-chart.rangeFromY)*chart.plotWidth+chart.plotWidth/2, [chart getLocalY:value withSection:section withAxis:yAxis], 3, 0, 2*M_PI, 1);
         }
         CGContextFillPath(context);
     }
 
     CGContextSetShouldAntialias(context, YES);
-    for(int i=chart.rangeFrom;i<chart.rangeTo;i++){
+    for(int i=chart.rangeFromY;i<chart.rangeToY;i++){
         if(i == data.count-1){
             break;
         }
         if(data[i] == nil){
             continue;
         }
-        if (i<chart.rangeTo-1 && data[i + 1] != nil) {
+        if (i<chart.rangeToY-1 && data[i + 1] != nil) {
             float value = [[data[i] objectAtIndex:0] floatValue];
-            float ix  = sec.frame.origin.x+sec.paddingLeft+(i-chart.rangeFrom)*chart.plotWidth;
-            float iNx  = sec.frame.origin.x+sec.paddingLeft+(i+1-chart.rangeFrom)*chart.plotWidth;
+            float ix  = sec.frame.origin.x+sec.paddingLeft+(i-chart.rangeFromY)*chart.plotWidth;
+            float iNx  = sec.frame.origin.x+sec.paddingLeft+(i+1-chart.rangeFromY)*chart.plotWidth;
             float iy = [chart getLocalY:value withSection:section withAxis:yAxis];
             CGContextSetStrokeColorWithColor(context, [[UIColor alloc] initWithRed:R green:G blue:B alpha:1.0].CGColor);
             CGContextMoveToPoint(context, ix+chart.plotWidth/2, iy);
@@ -97,7 +97,7 @@
 		yaxis.decimal = [serie[@"decimal"] intValue];
 	}
 
-	float value = [[data[chart.rangeFrom] objectAtIndex:0] floatValue];
+	float value = [[data[chart.rangeFromY] objectAtIndex:0] floatValue];
 
     if(!yaxis.isUsed){
         [yaxis setMax:value];
@@ -105,7 +105,7 @@
         yaxis.isUsed = YES;
     }
 
-    for(int i=chart.rangeFrom;i<chart.rangeTo;i++){
+    for(int i=chart.rangeFromY;i<chart.rangeToY;i++){
         if(i == data.count){
             break;
         }

@@ -42,7 +42,7 @@
     float NSB = [[negativeSelectedColor componentsSeparatedByString:@","][2] floatValue]/255;
 
     Section *sec = chart.sections[section];
-    for(int i=chart.rangeFrom;i<chart.rangeTo;i++){
+    for(int i=chart.rangeFromY;i<chart.rangeToY;i++){
         if(i == data.count){
             break;
         }
@@ -55,8 +55,8 @@
         float open  = [[data[i] objectAtIndex:0] floatValue];
         float close = [[data[i] objectAtIndex:1] floatValue];
 
-        float ix  = sec.frame.origin.x+sec.paddingLeft+(i-chart.rangeFrom)*chart.plotWidth;
-        float iNx = sec.frame.origin.x+sec.paddingLeft+(i+1-chart.rangeFrom)*chart.plotWidth;
+        float ix  = sec.frame.origin.x+sec.paddingLeft+(i-chart.rangeFromY)*chart.plotWidth;
+        float iNx = sec.frame.origin.x+sec.paddingLeft+(i+1-chart.rangeFromY)*chart.plotWidth;
         float iyo = [chart getLocalY:open withSection:section withAxis:yAxis];
         float iyc = [chart getLocalY:close withSection:section withAxis:yAxis];
         float iyh = [chart getLocalY:high withSection:section withAxis:yAxis];
@@ -126,8 +126,8 @@
 
 	YAxis *yaxis = [[chart.sections objectAtIndex:[section intValue]] yAxises][[yAxis intValue]];
 
-    float high = [[data[chart.rangeFrom] objectAtIndex:2] floatValue];
-    float low = [[data[chart.rangeFrom] objectAtIndex:3] floatValue];
+    float high = [[data[chart.rangeFromY] objectAtIndex:2] floatValue];
+    float low = [[data[chart.rangeFromY] objectAtIndex:3] floatValue];
 
     if(!yaxis.isUsed){
         [yaxis setMax:high];
@@ -135,7 +135,7 @@
         yaxis.isUsed = YES;
     }
 
-    for(int i=chart.rangeFrom;i<chart.rangeTo;i++){
+    for(int i=chart.rangeFromY;i<chart.rangeToY;i++){
         if(i == data.count){
             break;
         }
@@ -289,7 +289,7 @@
 	Section *sec = chart.sections[section];
 
 	if([type isEqualToString:@"candle"]){
-		for(int i=chart.rangeFrom;i<chart.rangeTo;i++){
+		for(int i=chart.rangeFromY;i<chart.rangeToY;i++){
 			if(i == data.count){
 				break;
 			}
@@ -297,7 +297,7 @@
 			    continue;
 			}
 
-			float ix  = sec.frame.origin.x+sec.paddingLeft+(i-chart.rangeFrom)*chart.plotWidth;
+			float ix  = sec.frame.origin.x+sec.paddingLeft+(i-chart.rangeFromY)*chart.plotWidth;
 
 			if(i == chart.selectedIndex && chart.selectedIndex < data.count && data[chart.selectedIndex] !=nil){
 
@@ -329,7 +329,7 @@
 	}
 
 	if([type isEqualToString:@"line"] && [name isEqualToString:@"price"]){
-		for(int i=chart.rangeFrom;i<chart.rangeTo;i++){
+		for(int i=chart.rangeFromY;i<chart.rangeToY;i++){
 			if(i == data.count){
 				break;
 			}
@@ -337,7 +337,7 @@
 			    continue;
 			}
 
-			float ix  = sec.frame.origin.x+sec.paddingLeft+(i-chart.rangeFrom)*chart.plotWidth;
+			float ix  = sec.frame.origin.x+sec.paddingLeft+(i-chart.rangeFromY)*chart.plotWidth;
 
 			if(i == chart.selectedIndex && chart.selectedIndex < data.count && data[chart.selectedIndex] !=nil){
 

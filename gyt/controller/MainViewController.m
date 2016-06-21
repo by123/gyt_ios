@@ -539,10 +539,7 @@
                 {
                     productModel.isMyContract = model.isMyContract;
                 }
-//                if([productModel.m_strInstrumentID isEqualToString:@"CN 1606"])
-//                {
-                    [_datas addObject:productModel];
-//                }
+                [_datas addObject:productModel];
             }
         }
         [_tableView reloadData];

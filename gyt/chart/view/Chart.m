@@ -18,6 +18,9 @@
 @end
 
 @implementation Chart
+{
+    Boolean isSlideShow;
+}
 
 @synthesize enableSelection;
 @synthesize isInitialized;
@@ -35,9 +38,12 @@
 @synthesize selectedIndex;
 @synthesize touchFlag;
 @synthesize touchFlagTwo;
-@synthesize rangeFrom;
-@synthesize rangeTo;
-@synthesize range;
+@synthesize rangeFromY;
+@synthesize rangeToY;
+@synthesize rangeY;
+@synthesize rangeFromX;
+@synthesize rangeToX;
+@synthesize rangeX;
 @synthesize series;
 @synthesize sections;
 @synthesize ratios;
@@ -50,7 +56,6 @@
 	CGRect fra = sec.frame;
 	float  max = yaxis.max;
 	float  min = yaxis.min;
-
     if (max == min) {
         return 0;
     }
@@ -68,17 +73,17 @@
 		}
 
 		if(self.series!=nil){
-			self.rangeTo = [[[self series][0] objectForKey:@"data"] count];
-			if(rangeTo-range >= 0){
-				self.rangeFrom = rangeTo-range;
+			self.rangeToY = [[[self series][0] objectForKey:@"data"] count];
+			if(rangeToY-rangeY >= 0){
+				self.rangeFromY = rangeToY-rangeY;
 			}else{
-			    self.rangeFrom = 0;
+			    self.rangeFromY = 0;
 			}
 		}else{
-			self.rangeTo   = 0;
-			self.rangeFrom = 0;
+			self.rangeToY   = 0;
+			self.rangeFromY = 0;
 		}
-		self.selectedIndex = self.rangeTo-1;
+		self.selectedIndex = self.rangeToY-1;
 		self.isInitialized = YES;
 	}
 
@@ -187,7 +192,7 @@
 		if(sec.hidden){
 		    continue;
 		}
-		plotWidth = (sec.frame.size.width-sec.paddingLeft)/(self.rangeTo-self.rangeFrom);
+		plotWidth = (sec.frame.size.width-sec.paddingLeft)/(self.rangeToY-self.rangeFromY);
 		for(int sIndex=0;sIndex<sec.series.count;sIndex++){
 			NSMutableDictionary *serie = sec.series[sIndex];
 
@@ -392,8 +397,8 @@
                     md[NSFontAttributeName] = [UIFont systemFontOfSize:10];
                     md[NSForegroundColorAttributeName] =[UIColor redColor];
 //                    [[@"" stringByAppendingFormat:format,yaxis.baseValue+i*step] drawAtPoint:CGPointMake(20,iy-7) withAttributes:md];
-                    float temp = yaxis.baseValue + i *step;
-                    NSLog(@"%f",temp);
+//                    float temp = yaxis.baseValue + i *step;
+//                    NSLog(@"%f",temp);
 
 #pragma mark 中间的横向虚线
 					if(yaxis.baseValue + i*step < yaxis.max){
@@ -463,8 +468,8 @@
 	}
 	Section *sec = self.sections[[self getIndexOfSection:point]];
 
-	for(int i=self.rangeFrom;i<self.rangeTo;i++){
-		if((plotWidth*(i-self.rangeFrom))<=(point.x-sec.paddingLeft-self.paddingLeft) && (point.x-sec.paddingLeft-self.paddingLeft)<plotWidth*((i-self.rangeFrom)+1)){
+	for(int i=self.rangeFromY;i<self.rangeToY;i++){
+		if((plotWidth*(i-self.rangeFromY))<=(point.x-sec.paddingLeft-self.paddingLeft) && (point.x-sec.paddingLeft-self.paddingLeft)<plotWidth*((i-self.rangeFromY)+1)){
 			if (self.selectedIndex != i) {
 				self.selectedIndex=i;
 				[self setNeedsDisplay];
@@ -686,9 +691,12 @@
 		self.paddingRight    = 0;
 		self.paddingBottom   = 0;
 		self.paddingLeft     = 0;
-		self.rangeFrom       = 0;
-		self.rangeTo         = 0;
-		self.range           = 120;
+		self.rangeFromY       = 0;
+		self.rangeToY         = 0;
+		self.rangeY           = 120;
+        self.rangeFromX      = 0;
+        self.rangeToX        = 0;
+        self.rangeX          = 0;
 		self.touchFlag       = 0;
 		self.touchFlagTwo    = 0;
 		NSMutableArray *rats = [[NSMutableArray alloc] init];
@@ -706,6 +714,7 @@
         [self initModels];
         
         _slide = [[Slide alloc]init];
+        [_slide setHidden:YES];
         _slide.frame = CGRectMake(0,  40, SCREEN_WIDTH/4,SCREEN_HEIGHT/2);
         [self addSubview:_slide];
     }
@@ -764,6 +773,10 @@
 		self.touchFlag = [ts[0] locationInView:self].x ;
 		self.touchFlagTwo = [ts[1] locationInView:self].x;
 	}
+    
+ 
+    isSlideShow = YES;
+    [_slide setHidden:NO];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -781,36 +794,36 @@
 			if([touch locationInView:self].x < sec.paddingLeft){
 				if(abs((int)([touch locationInView:self].y  - self.touchFlag)) >= MIN_INTERVAL){
 					if([touch locationInView:self].y - self.touchFlag > 0){
-						if(self.plotCount > (self.rangeTo-self.rangeFrom)){
-							if(self.rangeFrom - interval >= 0){
-								self.rangeFrom -= interval;
-								self.rangeTo   -= interval;
-								if(self.selectedIndex >= self.rangeTo){
-									self.selectedIndex = self.rangeTo-1;
+						if(self.plotCount > (self.rangeToY-self.rangeFromY)){
+							if(self.rangeFromY - interval >= 0){
+								self.rangeFromY -= interval;
+								self.rangeToY   -= interval;
+								if(self.selectedIndex >= self.rangeToY){
+									self.selectedIndex = self.rangeToY-1;
 								}
 							}else {
-								self.rangeFrom = 0;
-								self.rangeTo  -= self.rangeFrom;
-								if(self.selectedIndex >= self.rangeTo){
-									self.selectedIndex = self.rangeTo-1;
+								self.rangeFromY = 0;
+								self.rangeToY  -= self.rangeFromY;
+								if(self.selectedIndex >= self.rangeToY){
+									self.selectedIndex = self.rangeToY-1;
 								}
 							}
 							[self setNeedsDisplay];
 						}
 					}else{
-						if(self.plotCount > (self.rangeTo-self.rangeFrom)){
-							if(self.rangeTo + interval <= self.plotCount){
-								self.rangeFrom += interval;
-								self.rangeTo += interval;
-								if(self.selectedIndex < self.rangeFrom){
-									self.selectedIndex = self.rangeFrom;
+						if(self.plotCount > (self.rangeToY-self.rangeFromY)){
+							if(self.rangeToY + interval <= self.plotCount){
+								self.rangeFromY += interval;
+								self.rangeToY += interval;
+								if(self.selectedIndex < self.rangeFromY){
+									self.selectedIndex = self.rangeFromY;
 								}
 							}else {
-								self.rangeFrom  += self.plotCount-self.rangeTo;
-								self.rangeTo     = self.plotCount;
+								self.rangeFromY  += self.plotCount-self.rangeToY;
+								self.rangeToY     = self.plotCount;
 
-								if(self.selectedIndex < self.rangeFrom){
-									self.selectedIndex = self.rangeFrom;
+								if(self.selectedIndex < self.rangeFromY){
+									self.selectedIndex = self.rangeFromY;
 								}
 							}
 							[self setNeedsDisplay];
@@ -831,36 +844,36 @@
 			int interval = 5;
 
 			if((currFlag - self.touchFlag) > 0 && (currFlagTwo - self.touchFlagTwo) > 0){
-				if(self.plotCount > (self.rangeTo-self.rangeFrom)){
-					if(self.rangeFrom - interval >= 0){
-						self.rangeFrom -= interval;
-						self.rangeTo   -= interval;
-						if(self.selectedIndex >= self.rangeTo){
-							self.selectedIndex = self.rangeTo-1;
+				if(self.plotCount > (self.rangeToY-self.rangeFromY)){
+					if(self.rangeFromY - interval >= 0){
+						self.rangeFromY -= interval;
+						self.rangeToY   -= interval;
+						if(self.selectedIndex >= self.rangeToY){
+							self.selectedIndex = self.rangeToY-1;
 						}
 					}else {
-						self.rangeFrom = 0;
-						self.rangeTo  -= self.rangeFrom;
-						if(self.selectedIndex >= self.rangeTo){
-							self.selectedIndex = self.rangeTo-1;
+						self.rangeFromY = 0;
+						self.rangeToY  -= self.rangeFromY;
+						if(self.selectedIndex >= self.rangeToY){
+							self.selectedIndex = self.rangeToY-1;
 						}
 					}
 					[self setNeedsDisplay];
 				}
 			}else if((currFlag - self.touchFlag) < 0 && (currFlagTwo - self.touchFlagTwo) < 0){
-				if(self.plotCount > (self.rangeTo-self.rangeFrom)){
-					if(self.rangeTo + interval <= self.plotCount){
-						self.rangeFrom += interval;
-						self.rangeTo += interval;
-						if(self.selectedIndex < self.rangeFrom){
-							self.selectedIndex = self.rangeFrom;
+				if(self.plotCount > (self.rangeToY-self.rangeFromY)){
+					if(self.rangeToY + interval <= self.plotCount){
+						self.rangeFromY += interval;
+						self.rangeToY += interval;
+						if(self.selectedIndex < self.rangeFromY){
+							self.selectedIndex = self.rangeFromY;
 						}
 					}else {
-						self.rangeFrom  += self.plotCount-self.rangeTo;
-						self.rangeTo     = self.plotCount;
+						self.rangeFromY  += self.plotCount-self.rangeToY;
+						self.rangeToY     = self.plotCount;
 
-						if(self.selectedIndex < self.rangeFrom){
-							self.selectedIndex = self.rangeFrom;
+						if(self.selectedIndex < self.rangeFromY){
+							self.selectedIndex = self.rangeFromY;
 						}
 					}
 					[self setNeedsDisplay];
@@ -868,27 +881,27 @@
 			}else {
 				if(abs(abs((int)(currFlagTwo-currFlag))-abs((int)(self.touchFlagTwo-self.touchFlag))) >= MIN_INTERVAL){
 					if(abs((int)(currFlagTwo-currFlag))-abs((int)(self.touchFlagTwo-self.touchFlag)) > 0){
-						if(self.plotCount>self.rangeTo-self.rangeFrom){
-							if(self.rangeFrom + interval < self.rangeTo){
-								self.rangeFrom += interval;
+						if(self.plotCount>self.rangeToY-self.rangeFromY){
+							if(self.rangeFromY + interval < self.rangeToY){
+								self.rangeFromY += interval;
 							}
-							if(self.rangeTo - interval > self.rangeFrom){
-								self.rangeTo -= interval;
+							if(self.rangeToY - interval > self.rangeFromY){
+								self.rangeToY -= interval;
 							}
 						}else{
-							if(self.rangeTo - interval > self.rangeFrom){
-								self.rangeTo -= interval;
+							if(self.rangeToY - interval > self.rangeFromY){
+								self.rangeToY -= interval;
 							}
 						}
 						[self setNeedsDisplay];
 					}else{
 
-						if(self.rangeFrom - interval >= 0){
-							self.rangeFrom -= interval;
+						if(self.rangeFromY - interval >= 0){
+							self.rangeFromY -= interval;
 						}else{
-							self.rangeFrom = 0;
+							self.rangeFromY = 0;
 						}
-						self.rangeTo += interval;
+						self.rangeToY += interval;
 						[self setNeedsDisplay];
 					}
 				}
@@ -919,6 +932,9 @@
 		}
 	}
 	self.touchFlag = 0;
+    
+    isSlideShow = NO;
+    [_slide setHidden:YES];
 }
 
 
@@ -949,4 +965,5 @@
     }
         
 }
+
 @end

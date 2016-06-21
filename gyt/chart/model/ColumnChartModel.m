@@ -47,21 +47,21 @@
     if(chart.selectedIndex!=-1 && chart.selectedIndex < data.count && data[chart.selectedIndex] !=nil){
         float value = [[data[chart.selectedIndex] objectAtIndex:0] floatValue];
         CGContextSetStrokeColorWithColor(context, [[UIColor alloc] initWithRed:0.2 green:0.2 blue:0.2 alpha:1.0].CGColor);
-        CGContextMoveToPoint(context, sec.frame.origin.x+sec.paddingLeft+(chart.selectedIndex-chart.rangeFrom)*chart.plotWidth+chart.plotWidth/2, sec.frame.origin.y+sec.paddingTop);
-        CGContextAddLineToPoint(context,sec.frame.origin.x+sec.paddingLeft+(chart.selectedIndex-chart.rangeFrom)*chart.plotWidth+chart.plotWidth/2,sec.frame.size.height+sec.frame.origin.y);
+        CGContextMoveToPoint(context, sec.frame.origin.x+sec.paddingLeft+(chart.selectedIndex-chart.rangeFromY)*chart.plotWidth+chart.plotWidth/2, sec.frame.origin.y+sec.paddingTop);
+        CGContextAddLineToPoint(context,sec.frame.origin.x+sec.paddingLeft+(chart.selectedIndex-chart.rangeFromY)*chart.plotWidth+chart.plotWidth/2,sec.frame.size.height+sec.frame.origin.y);
         CGContextStrokePath(context);
 
         CGContextSetShouldAntialias(context, YES);
         CGContextBeginPath(context);
         CGContextSetRGBFillColor(context, R, G, B, 1.0);
         if(!isnan([chart getLocalY:value withSection:section withAxis:yAxis])){
-            CGContextAddArc(context, sec.frame.origin.x+sec.paddingLeft+(chart.selectedIndex-chart.rangeFrom)*chart.plotWidth+chart.plotWidth/2, [chart getLocalY:value withSection:section withAxis:yAxis], 3, 0, 2*M_PI, 1);
+            CGContextAddArc(context, sec.frame.origin.x+sec.paddingLeft+(chart.selectedIndex-chart.rangeFromY)*chart.plotWidth+chart.plotWidth/2, [chart getLocalY:value withSection:section withAxis:yAxis], 3, 0, 2*M_PI, 1);
         }
         CGContextFillPath(context);
     }
 
     CGContextSetShouldAntialias(context, NO);
-    for(int i=chart.rangeFrom;i<chart.rangeTo;i++){
+    for(int i=chart.rangeFromY;i<chart.rangeToY;i++){
         if(i == data.count){
             break;
         }
@@ -70,7 +70,7 @@
         }
 
         float value = [[data[i] objectAtIndex:0] floatValue];
-        float ix  = sec.frame.origin.x+sec.paddingLeft+(i-chart.rangeFrom)*chart.plotWidth;
+        float ix  = sec.frame.origin.x+sec.paddingLeft+(i-chart.rangeFromY)*chart.plotWidth;
         float iy = [chart getLocalY:value withSection:section withAxis:yAxis];
 
         if(value < yaxis.baseValue){
@@ -111,13 +111,13 @@
 		yaxis.decimal = [serie[@"decimal"] intValue];
 	}
 
-	float value = [[data[chart.rangeFrom] objectAtIndex:0] floatValue];
+	float value = [[data[chart.rangeFromY] objectAtIndex:0] floatValue];
 	if(!yaxis.isUsed){
         [yaxis setMax:value];
         [yaxis setMin:value];
         yaxis.isUsed = YES;
     }
-    for(int i=chart.rangeFrom;i<chart.rangeTo;i++){
+    for(int i=chart.rangeFromY;i<chart.rangeToY;i++){
         if(i == data.count){
             break;
         }

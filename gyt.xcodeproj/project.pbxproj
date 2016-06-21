@@ -59,7 +59,6 @@
 		CFA3B8EC1CD9AAB70063AE3E /* ChartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA3B8DB1CD9AAB70063AE3E /* ChartModel.m */; };
 		CFA3B8ED1CD9AAB70063AE3E /* ColumnChartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA3B8DD1CD9AAB70063AE3E /* ColumnChartModel.m */; };
 		CFA3B8EE1CD9AAB70063AE3E /* LineChartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA3B8DF1CD9AAB70063AE3E /* LineChartModel.m */; };
-		CFA3B8EF1CD9AAB70063AE3E /* securities.json in Resources */ = {isa = PBXBuildFile; fileRef = CFA3B8E01CD9AAB70063AE3E /* securities.json */; };
 		CFA3B8F01CD9AAB70063AE3E /* Chart.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA3B8E31CD9AAB70063AE3E /* Chart.m */; };
 		CFA3B8F11CD9AAB70063AE3E /* Section.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA3B8E51CD9AAB70063AE3E /* Section.m */; };
 		CFA3B8F21CD9AAB70063AE3E /* YAxis.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA3B8E71CD9AAB70063AE3E /* YAxis.m */; };
@@ -262,7 +261,6 @@
 		CFA3B8DD1CD9AAB70063AE3E /* ColumnChartModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColumnChartModel.m; sourceTree = "<group>"; };
 		CFA3B8DE1CD9AAB70063AE3E /* LineChartModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineChartModel.h; sourceTree = "<group>"; };
 		CFA3B8DF1CD9AAB70063AE3E /* LineChartModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineChartModel.m; sourceTree = "<group>"; };
-		CFA3B8E01CD9AAB70063AE3E /* securities.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = securities.json; sourceTree = "<group>"; };
 		CFA3B8E21CD9AAB70063AE3E /* Chart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chart.h; sourceTree = "<group>"; };
 		CFA3B8E31CD9AAB70063AE3E /* Chart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chart.m; sourceTree = "<group>"; };
 		CFA3B8E41CD9AAB70063AE3E /* Section.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Section.h; sourceTree = "<group>"; };
@@ -769,7 +767,6 @@
 				CFA3B8D21CD9AAB70063AE3E /* CandleView.h */,
 				CFA3B8D31CD9AAB70063AE3E /* CandleView.m */,
 				CFA3B8D41CD9AAB70063AE3E /* indicators.json */,
-				CFA3B8E01CD9AAB70063AE3E /* securities.json */,
 				CFA3B8D51CD9AAB70063AE3E /* model */,
 				CFA3B8E11CD9AAB70063AE3E /* view */,
 			);
@@ -1189,7 +1186,6 @@
 				CF4A6D291CBE25AA00B36C93 /* LaunchScreen.storyboard in Resources */,
 				CFDD2DE11CC9CF2300E81E3F /* Assets.xcassets in Resources */,
 				CFD37E271D02A95600297DE2 /* CWNumberKeyboard.xib in Resources */,
-				CFA3B8EF1CD9AAB70063AE3E /* securities.json in Resources */,
 				CFD37E251D02A95600297DE2 /* CWNumberKeyboard.bundle in Resources */,
 				CFDD2E9A1CCF4DE100E81E3F /* LICENSE in Resources */,
 				CFDD2EA91CCF4DE100E81E3F /* MJRefresh.bundle in Resources */,
