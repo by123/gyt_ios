@@ -34,16 +34,16 @@
         float value = [[data[chart.selectedIndex] objectAtIndex:0] floatValue];
 #pragma mark 移动竖线
         CGContextSetShouldAntialias(context, NO);
-        CGContextSetStrokeColorWithColor(context, [UIColor blueColor].CGColor);
-        CGContextMoveToPoint(context, sec.frame.origin.x+sec.paddingLeft+(chart.selectedIndex-chart.rangeFromY)*chart.plotWidth+chart.plotWidth/2, sec.frame.origin.y+sec.paddingTop);
-        CGContextAddLineToPoint(context,sec.frame.origin.x+sec.paddingLeft+(chart.selectedIndex-chart.rangeFromY)*chart.plotWidth+chart.plotWidth/2,sec.frame.size.height+sec.frame.origin.y);
+        CGContextSetStrokeColorWithColor(context, SELECT_COLOR.CGColor);
+        CGContextMoveToPoint(context, sec.frame.origin.x+sec.paddingLeft+(chart.selectedIndex-chart.rangeFromY)*chart.plotWidth+chart.plotWidth/2, chart.rangeFromX);
+        CGContextAddLineToPoint(context,sec.frame.origin.x+sec.paddingLeft+(chart.selectedIndex-chart.rangeFromY)*chart.plotWidth+chart.plotWidth/2,chart.rangeToX);
         CGContextStrokePath(context);
         
 #pragma mark 移动横线
         CGContextSetShouldAntialias(context, NO);
-        CGContextSetStrokeColorWithColor(context, [UIColor blueColor].CGColor);
-        CGContextMoveToPoint(context, sec.frame.origin.x+sec.paddingLeft,sec.paddingTop);
-        CGContextAddLineToPoint(context,sec.frame.size.width+sec.frame.origin.x+sec.paddingLeft,sec.paddingTop);
+        CGContextSetStrokeColorWithColor(context, SELECT_COLOR.CGColor);
+        CGContextMoveToPoint(context, sec.frame.origin.x+sec.paddingLeft,chart.rangeX);
+        CGContextAddLineToPoint(context,sec.frame.size.width+sec.frame.origin.x+sec.paddingLeft,chart.rangeX);
         CGContextStrokePath(context);
 
         

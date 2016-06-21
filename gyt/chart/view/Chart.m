@@ -38,6 +38,7 @@
 @synthesize selectedIndex;
 @synthesize touchFlag;
 @synthesize touchFlagTwo;
+//x,y写反了，悲剧不想改
 @synthesize rangeFromY;
 @synthesize rangeToY;
 @synthesize rangeY;
@@ -450,13 +451,19 @@
 		if(sec.hidden){
 			continue;
 		}
-        #pragma mark 上边框
+        #pragma mark 画下边框
 		CGContextMoveToPoint(context,sec.frame.origin.x+sec.paddingLeft,sec.frame.size.height+sec.frame.origin.y);
 		CGContextAddLineToPoint(context, sec.frame.origin.x+sec.frame.size.width,sec.frame.size.height+sec.frame.origin.y);
 
-        #pragma mark 画下边框
+        #pragma mark 画上边框
 		CGContextMoveToPoint(context,sec.frame.origin.x+sec.paddingLeft,sec.frame.origin.y+sec.paddingTop);
 		CGContextAddLineToPoint(context, sec.frame.origin.x+sec.frame.size.width,sec.frame.origin.y+sec.paddingTop);
+        
+        if(secIndex == 0)
+        {
+            self.rangeFromX = sec.frame.size.height+sec.frame.origin.y;
+            self.rangeToX = sec.frame.origin.y+sec.paddingTop;
+        }
 	}
 	CGContextStrokePath(context);
 }
@@ -833,6 +840,16 @@
 					self.touchFlag = [touch locationInView:self].y;
 				}
 			}
+            self.rangeX = [touch locationInView:self].y;
+            if(rangeX >= self.rangeFromX)
+            {
+                self.rangeX = self.rangeFromX;
+            }
+            else if(rangeX < self.rangeToX)
+            {
+                self.rangeX = self.rangeToX;
+            }
+
 		}
 
 	}else if ([ts count]==2) {
