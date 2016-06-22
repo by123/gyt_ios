@@ -268,6 +268,29 @@
 				}
 			}
             
+            NSMutableDictionary *md = [NSMutableDictionary dictionary];
+            md[NSFontAttributeName] = [UIFont systemFontOfSize:12];
+            if(label.count == 5)
+            {
+                NSMutableDictionary *dic0= label[0];
+                NSMutableDictionary *dic1= label[1];
+                
+                NSString *closeStr = dic1[@"text"];
+                NSString *openStr = dic0[@"text"];
+                closeStr = [closeStr substringFromIndex:6];
+                openStr = [openStr substringFromIndex:5];
+                double close = [closeStr doubleValue];
+                double open = [openStr doubleValue];
+                md[NSForegroundColorAttributeName] =[UIColor grayColor];
+                if(close - open > 0)
+                {
+                    md[NSForegroundColorAttributeName] = RED_COLOR;
+                }
+                else if(close - open < 0)
+                {
+                    md[NSForegroundColorAttributeName] = GREEN_COLOR;
+                }
+            }
 			for(int j=0;j<label.count;j++){
 				NSMutableDictionary *lbl = label[j];
 				NSString *text  = lbl[@"text"];
@@ -276,9 +299,51 @@
 				CGContextRef context = UIGraphicsGetCurrentContext();
 				CGContextSetShouldAntialias(context, YES);
 				CGContextSetRGBFillColor(context, [colors[0] floatValue], [colors[1] floatValue], [colors[2] floatValue], 1.0);
-                NSMutableDictionary *md = [NSMutableDictionary dictionary];
-                md[NSFontAttributeName] = [UIFont systemFontOfSize:12];
-                md[NSForegroundColorAttributeName] =[UIColor grayColor];
+                
+                if([text localizedStandardContainsString:@"VR"])
+                {
+                    md[NSForegroundColorAttributeName] =[UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f];
+                }
+                else if([text localizedStandardContainsString:@"WR"])
+                {
+                    md[NSForegroundColorAttributeName] =[UIColor colorWithRed:250.0f/255.0f green:232.0f/255.0f blue:115.0f/255.0f alpha:1.0f];
+                }
+                else if([text localizedStandardContainsString:@"J:"])
+                {
+                    md[NSForegroundColorAttributeName] =[UIColor colorWithRed:232.0f/255.0f green:115.0f/255.0f blue:250.0f/255.0f alpha:1.0f];
+                }
+                else if([text localizedStandardContainsString:@"D:"])
+                {
+                    md[NSForegroundColorAttributeName] =[UIColor colorWithRed:250.0f/255.0f green:232.0f/255.0f blue:115.0f/255.0f alpha:1.0f];
+                }
+                else if([text localizedStandardContainsString:@"KDJ"])
+                {
+                    md[NSForegroundColorAttributeName] =[UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f];
+                }
+                else if([text localizedStandardContainsString:@"RSI12"])
+                {
+                    md[NSForegroundColorAttributeName] =[UIColor colorWithRed:250.0f/255.0f green:232.0f/255.0f blue:115.0f/255.0f alpha:1.0f];
+                }
+                else if([text localizedStandardContainsString:@"RSI6"])
+                {
+                    md[NSForegroundColorAttributeName] =[UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f];
+                }
+                else if([text localizedStandardContainsString:@"VOL"])
+                {
+                    md[NSForegroundColorAttributeName] =[UIColor colorWithRed:176.0f/255.0f green:52.0f/255.0f blue:52.0f/255.0f alpha:1.0f];
+                }
+                else if([text localizedStandardContainsString:@"MA10"])
+                {
+                    md[NSForegroundColorAttributeName] =[UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f];
+                }
+                else if([text localizedStandardContainsString:@"MA30"])
+                {
+                    md[NSForegroundColorAttributeName] =[UIColor colorWithRed:250/255.0f green:232/255.0f blue:115.0f/255.0f alpha:1.0f];
+                }
+                else if([text localizedStandardContainsString:@"MA60"])
+                {
+                    md[NSForegroundColorAttributeName] =[UIColor colorWithRed:232.0f/255.0f green:115.0f/255.0f blue:250.0f/255.0f alpha:1.0f];
+                }
                 text = [@" " stringByAppendingString:text];
                 [text drawAtPoint:CGPointMake(sec.frame.origin.x+sec.paddingLeft+2+w,sec.frame.origin.y+2) withAttributes:md];
                 w += [text sizeWithAttributes:md].width;

@@ -268,6 +268,13 @@ description:__VA_ARGS__];                             \
 //清除背景色
 #define CLEARCOLOR [UIColor clearColor]
 
+//红色
+#define RED_COLOR [UIColor colorWithRed:255/255.0 green:64/255.0 blue:64/255.0 alpha:1.0]
+
+//绿色
+#define GREEN_COLOR [UIColor colorWithRed:67/255.0 green:205/255.0 blue:128/255.0 alpha:1.0]
+
+
 #pragma mark - color functions
 #define RGBCOLOR(r,g,b) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1]
 #define RGBACOLOR(r,g,b,a) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:(a)]

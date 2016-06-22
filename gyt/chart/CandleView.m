@@ -49,7 +49,9 @@
     {
         //k线图
         self.chartMode  = 1; //1,candleChart
-        self.req_freq   = @"d";
+        NSString *temp = [[NSUserDefaults standardUserDefaults] objectForKey:UserDefault_KTimeLine];
+        NSString *freq = [self getTimeLine:[temp integerValue]];
+        self.req_freq   = freq;
         self.req_type   = @"H";
     }
     else if(_type == TimeLine)
@@ -174,7 +176,7 @@
     //MA60
     serie = [[NSMutableDictionary alloc] init];
     data = [[NSMutableArray alloc] init];
-    serie[@"name"] = /**/@"ma60";
+    serie[@"name"] = @"ma60";
     serie[@"label"] = @"MA60";
     serie[@"data"] = data;
     serie[@"type"] = @"line";
