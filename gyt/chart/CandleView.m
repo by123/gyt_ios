@@ -24,6 +24,10 @@
 @end
 
 @implementation CandleView
+{
+    //测试
+    NSString *tempStr;
+}
 
 -(instancetype)initWithType : (CGRect)frame
                type : (CandleType)type
@@ -264,13 +268,36 @@
          NSData *data = responseObject;
          NSString *response =  [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
 
+         tempStr = response;
          [self requestFinished:response];
+ 
          [MBProgressHUD hideAllHUDsForView:self animated:YES];
      }
          failure:^(AFHTTPRequestOperation *operation, NSError *error)
      {
          [MBProgressHUD hideAllHUDsForView:self animated:YES];
      }];
+}
+
+
+-(NSString *)getRandomNumber:(int)from to:(int)to
+{
+    srand((unsigned)time(0));
+    double temp = (double)(from + (arc4random() % (to - from + 1)));
+    NSString *result = [NSString stringWithFormat:@"%.2f",temp/100];
+    return result;
+}
+
+//测试代码
+-(void)start
+{
+    NSString *high = [self getRandomNumber:4500 to:6000];
+    NSString *low = [self getRandomNumber:2000 to:3500];
+    NSString *open = [self getRandomNumber:2000 to:6000];
+    NSString *close = [self getRandomNumber:2000 to:6000];
+    NSString *addStr = [NSString stringWithFormat:@"\n%@,%@,%@,%@,%@,%@,%@",@"2016-06-22",open,high,low,close,@"9999",close];
+    tempStr = [addStr stringByAppendingString:tempStr];
+    [self requestFinished:tempStr];
 }
 
 - (void)requestFinished:(NSString *)response
@@ -361,6 +388,8 @@
     [self.candleChart setNeedsDisplay];
     [MBProgressHUD hideHUDForView:self animated:YES];
     self.candleChart.hidden = NO;
+    
+    [self performSelector:@selector(start) withObject:self afterDelay:5.0f];
 
 }
 
