@@ -32,7 +32,11 @@
 
 @property (strong, nonatomic) UITableView *tableView;
 
-@property (strong, nonatomic) NSMutableArray *datas;
+@property (strong, nonatomic) NSMutableArray *mainDatas;
+
+@property (strong, nonatomic) NSMutableArray *myDatas;
+
+@property (strong, nonatomic) NSMutableArray *historyDatas;
 
 @property (strong, nonatomic) UIButton *updownButton;
 
@@ -59,7 +63,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    _datas = [[NSMutableArray alloc]init];
+    _mainDatas = [[NSMutableArray alloc]init];
+    _myDatas = [[NSMutableArray alloc]init];
+    _historyDatas = [[NSMutableArray alloc]init];
     [self initView];
     
     [[SocketConnect sharedSocketConnect] setDelegate:self];
@@ -216,19 +222,19 @@
     
     if([model.title isEqualToString:@"浏览记录列表"])
     {
-        _datas = [[ContractDB sharedContractDB] queryAll:DBHistoryContractTable];
+        _historyDatas = [[ContractDB sharedContractDB] queryAll:DBHistoryContractTable];
         [_tableView reloadData];
     }
     else if([model.title isEqualToString:@"自选合约列表"])
     {
-        _datas = [[ContractDB sharedContractDB] queryAll:DBMyContractTable];
+        _myDatas = [[ContractDB sharedContractDB] queryAll:DBMyContractTable];
         [_tableView reloadData];
     }
-    else if([model.title isEqualToString:@"预警合约列表"])
-    {
-        _datas = [[ContractDB sharedContractDB] queryAll:DBWarnContractTable];
-        [_tableView reloadData];
-    }
+//    else if([model.title isEqualToString:@"预警合约列表"])
+//    {
+//        _mainDatas = [[ContractDB sharedContractDB] queryAll:DBWarnContractTable];
+//        [_tableView reloadData];
+//    }
     else
     {
         [_tableView reloadData];
@@ -244,7 +250,17 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_datas count];
+    switch (current) {
+        case 0:
+            return [_mainDatas count];
+        case 1:
+            return [_myDatas count];
+        case 2:
+            return [_historyDatas count];
+        default:
+            break;
+    }
+    return 0;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -259,31 +275,49 @@
     [cell setOpaque:YES];
     cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.frame];
     cell.selectedBackgroundView.backgroundColor = SELECT_COLOR;
-    if(!IS_NS_COLLECTION_EMPTY(_datas))
+    PushModel *model;
+    if(!IS_NS_COLLECTION_EMPTY(_mainDatas) && current == 0)
     {
-        PushModel *model = [_datas objectAtIndex:indexPath.row];
-        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        UpdownType updownType = [userDefaults integerForKey:UserDefault_Updown];
-        InventoryType inventoryType = [userDefaults integerForKey:UserDefault_Inventory];
-        
-        [cell setData:model updown:updownType inventore:inventoryType];
-        cell.tag = indexPath.row;
-        //添加长按手势
-        UILongPressGestureRecognizer * longPressGesture =[[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPress:)];
-        [cell addGestureRecognizer:longPressGesture];
+        model = [_mainDatas objectAtIndex:indexPath.row];
     }
+    else if(!IS_NS_COLLECTION_EMPTY(_myDatas) && current == 1)
+    {
+        model = [_myDatas objectAtIndex:indexPath.row];
+    }
+    else if(!IS_NS_COLLECTION_EMPTY(_historyDatas) && current == 2)
+    {
+        model = [_historyDatas objectAtIndex:indexPath.row];
+    }
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    UpdownType updownType = [userDefaults integerForKey:UserDefault_Updown];
+    InventoryType inventoryType = [userDefaults integerForKey:UserDefault_Inventory];
+    
+    [cell setData:model updown:updownType inventore:inventoryType];
+    cell.tag = indexPath.row;
+    //添加长按手势
+    UILongPressGestureRecognizer * longPressGesture =[[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPress:)];
+    [cell addGestureRecognizer:longPressGesture];
 
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(!IS_NS_COLLECTION_EMPTY(_datas))
+    PushModel *model;
+    if(!IS_NS_COLLECTION_EMPTY(_mainDatas) && current == 0)
     {
-        PushModel *model = [_datas objectAtIndex:indexPath.row];
-        [[ContractDB sharedContractDB] insertItem:DBHistoryContractTable model:model];
-        [DetailViewController show:self model:model position:indexPath.row];
+        model = [_mainDatas objectAtIndex:indexPath.row];
     }
+    else if(!IS_NS_COLLECTION_EMPTY(_myDatas) && current == 1)
+    {
+        model = [_myDatas objectAtIndex:indexPath.row];
+    }
+    else if(!IS_NS_COLLECTION_EMPTY(_historyDatas) && current == 2)
+    {
+        model = [_historyDatas objectAtIndex:indexPath.row];
+    }
+    [[ContractDB sharedContractDB] insertItem:DBHistoryContractTable model:model];
+    [DetailViewController show:self model:model position:indexPath.row];
 }
 
 
@@ -310,19 +344,18 @@
     switch (current) {
         case 0:
             [self.navBar setTitle:@"主力合约 ▼"];
-            [_datas removeAllObjects];
-            [self requestProductInfo];
+            [_tableView reloadData];
             break;
         case 1:
             [self.navBar setTitle:@"自选合约 ▼"];
-            [_datas removeAllObjects];
-            _datas = [[ContractDB sharedContractDB] queryAll:DBMyContractTable];
+            [_myDatas removeAllObjects];
+            _myDatas = [[ContractDB sharedContractDB] queryAll:DBMyContractTable];
             [_tableView reloadData];
             break;
         case 2:
             [self.navBar setTitle:@"历史浏览记录 ▼"];
-            [_datas removeAllObjects];
-            _datas = [[ContractDB sharedContractDB] queryAll:DBHistoryContractTable];
+            [_historyDatas removeAllObjects];
+            _historyDatas = [[ContractDB sharedContractDB] queryAll:DBHistoryContractTable];
             [_tableView reloadData];
             break;
             
@@ -336,7 +369,7 @@
 {
     if(position == 0)
     {
-        [SearchViewController show:self datas:_datas];
+        [SearchViewController show:self datas:_mainDatas];
         return;
     }
 }
@@ -360,14 +393,23 @@
 {
     MainTableCell *cell = (MainTableCell *)recongizer.view;
     NSLog(@"%d",cell.tag);
-    if(!IS_NS_COLLECTION_EMPTY(_datas))
+    PushModel *model;
+    if(!IS_NS_COLLECTION_EMPTY(_mainDatas) && current == 0)
     {
-        PushModel *model = [_datas objectAtIndex:cell.tag];
-        CGFloat height = Item_Height * (cell.tag + 1) + StatuBar_HEIGHT + NavigationBar_HEIGHT + 30 - currentY ;
-        [_mainItemDialog updateView:model position:cell.tag height:height];
-        [_mainItemDialog setLeftImage :model.isMyContract];
-        [_mainItemDialog setHidden:NO];
+        model = [_mainDatas objectAtIndex:cell.tag];
     }
+    else if(!IS_NS_COLLECTION_EMPTY(_myDatas) && current == 1)
+    {
+        model = [_myDatas objectAtIndex:cell.tag];
+    }
+    else if(!IS_NS_COLLECTION_EMPTY(_historyDatas) && current == 2)
+    {
+        model = [_historyDatas objectAtIndex:cell.tag];
+    }
+    CGFloat height = Item_Height * (cell.tag + 1) + StatuBar_HEIGHT + NavigationBar_HEIGHT + 30 - currentY ;
+    [_mainItemDialog updateView:model position:cell.tag height:height];
+    [_mainItemDialog setLeftImage :model.isMyContract];
+    [_mainItemDialog setHidden:NO];
     
 }
 
@@ -482,7 +524,7 @@
     NSMutableArray *array1 = [[NSMutableArray alloc]init];
     NSMutableArray *array2 = [[NSMutableArray alloc]init];
 
-    for(PushModel *model in _datas)
+    for(PushModel *model in _mainDatas)
     {
         [array1 addObject:model.m_strExchangeID];
         [array2 addObject:model.m_strInstrumentID];
@@ -533,7 +575,7 @@
         NSMutableArray *array = model.datas;
         if(!IS_NS_COLLECTION_EMPTY(array))
         {
-            [_datas removeAllObjects];
+            [_mainDatas removeAllObjects];
             for(id obj in array)
             {
                 PushModel *productModel = [PushModel mj_objectWithKeyValues:obj];
@@ -542,7 +584,7 @@
                 {
                     productModel.isMyContract = model.isMyContract;
                 }
-                [_datas addObject:productModel];
+                [_mainDatas addObject:productModel];
             }
         }
         [_tableView reloadData];
@@ -579,7 +621,7 @@
 -(void)handleResult : (PushModel *)pushModel
 {
     NSMutableArray *temps = [[NSMutableArray alloc]init];
-    [temps addObjectsFromArray:_datas];
+    [temps addObjectsFromArray:_mainDatas];
     
     if(!IS_NS_COLLECTION_EMPTY(temps))
     {
