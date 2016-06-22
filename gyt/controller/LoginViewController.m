@@ -172,7 +172,8 @@
     
     NSString *jsonStr = [JSONUtil parse:Request_Login params:[JSONUtil parseDic:model]];
 //    [[SocketConnect sharedSocketConnect] sendData:jsonStr delegate:self seq:GYT_LOGIN];
-    [[SocketConnect sharedSocketConnect] sendData:jsonStr delegate:self seq:GYT_LOGIN];
+    [[SocketConnect sharedSocketConnect] setDelegate:self];
+    [[SocketConnect sharedSocketConnect] sendData:jsonStr seq:GYT_LOGIN];
 
 }
 

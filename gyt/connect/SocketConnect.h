@@ -42,7 +42,6 @@ SINGLETON_DECLARATION(SocketConnect);
 -(void)disconnect;
 
 -(void)sendData : (NSString *)content
-       delegate : (id)delegate
             seq : (int)seq;
 
 @end

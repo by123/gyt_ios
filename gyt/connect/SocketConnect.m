@@ -197,10 +197,8 @@ SINGLETON_IMPLEMENTION(SocketConnect);
 
 #pragma mark - 发送数据给服务端
 -(void)sendData : (NSString *)content
-       delegate : (id)delegate
             seq : (int)seq
 {
-    self.delegate = delegate;
     NSData *data =[[GYTPackage sharedGYTPackage]encodeJSON:[content dataUsingEncoding:NSUTF8StringEncoding] requestid:seq];
     [_clientSocket writeData:data withTimeout:-1 tag:0];
 }

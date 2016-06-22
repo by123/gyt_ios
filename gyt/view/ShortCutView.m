@@ -54,6 +54,7 @@
     {
         self.backgroundColor = [ColorUtil colorWithHexString:@"#222222" alpha:0.5f];
         [self initView];
+        [[SocketConnect sharedSocketConnect] setDelegate:self];
     }
     return  self;
 }
@@ -231,7 +232,7 @@
     NSMutableDictionary *dic =[JSONUtil parseDic:orderModel];
     NSString *jsonStr = [JSONUtil parse:@"order" params:dic];
     
-    [[SocketConnect sharedSocketConnect] sendData:jsonStr delegate:self seq:GYT_ORDER];
+    [[SocketConnect sharedSocketConnect] sendData:jsonStr seq:GYT_ORDER];
 }
 
 -(void)OnReceiveSuccess:(id)respondObject

@@ -113,6 +113,7 @@
         holdProfileDatas = [[NSMutableArray alloc]init];
         NSString *moneyDetailStr = [[NSUserDefaults standardUserDefaults] objectForKey:MoneyInfo];
         _moneyModel = [MoneyDetailModel mj_objectWithKeyValues:moneyDetailStr];
+        [[SocketConnect sharedSocketConnect] setDelegate:self];
         [self initView];
         return self;
     }
@@ -601,7 +602,8 @@
 -(void)requestQuery : (RequestType)type
 {
     NSString *jsonStr = [QueryRequest buildQueryInfo:type];
-    [[SocketConnect sharedSocketConnect] sendData:jsonStr delegate:self seq:type];
+    
+    [[SocketConnect sharedSocketConnect] sendData:jsonStr seq:type];
 }
 
 
@@ -646,7 +648,7 @@
     NSMutableDictionary *dic =[JSONUtil parseDic:orderModel];
     NSString *jsonStr = [JSONUtil parse:@"order" params:dic];
     
-    [[SocketConnect sharedSocketConnect] sendData:jsonStr delegate:self seq:GYT_ORDER];
+    [[SocketConnect sharedSocketConnect] sendData:jsonStr seq:GYT_ORDER];
 }
 
 
@@ -664,7 +666,7 @@
     NSString *jsonStr = [JSONUtil parse:@"cancel" params:dic];
     
     NSLog(@"数据->%@",jsonStr);
-    [[SocketConnect sharedSocketConnect] sendData:jsonStr delegate:self seq:GYT_CANCEL];
+    [[SocketConnect sharedSocketConnect] sendData:jsonStr seq:GYT_CANCEL];
 
 }
 

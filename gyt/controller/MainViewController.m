@@ -62,6 +62,9 @@
     _datas = [[NSMutableArray alloc]init];
     [self initView];
     
+    [[SocketConnect sharedSocketConnect] setDelegate:self];
+
+    
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getUserInfo) name:Notify_Update_AccountInfo object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateView:) name:Notify_Menu_Title object:nil];
     
@@ -461,14 +464,14 @@
 -(void)requestAccountInfo
 {
     NSString *jsonStr = [QueryRequest buildQueryInfo:XT_CAccountDetail];
-    [[SocketConnect sharedSocketConnect] sendData:jsonStr delegate:self seq:XT_CAccountDetail];
+    [[SocketConnect sharedSocketConnect] sendData:jsonStr seq:XT_CAccountDetail];
 }
 
 #pragma mark 获取合约信息
 -(void)requestProductInfo
 {
     NSString *jsonStr = [QueryRequest buildQueryInfo:XT_CInstrumentDetail];
-    [[SocketConnect sharedSocketConnect] sendData:jsonStr delegate:self seq:XT_CInstrumentDetail];
+    [[SocketConnect sharedSocketConnect] sendData:jsonStr seq:XT_CInstrumentDetail];
 }
 
 
@@ -493,7 +496,7 @@
     
     NSString *jsonStr = [JSONUtil parse:@"subMultiPrice" params:model.mj_keyValues];
     
-    [[SocketConnect sharedSocketConnect]sendData:jsonStr delegate:self seq:0];
+    [[SocketConnect sharedSocketConnect]sendData:jsonStr seq:0];
 }
 
 
