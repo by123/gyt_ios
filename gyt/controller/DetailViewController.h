@@ -9,8 +9,9 @@
 #import "BaseViewController.h"
 #import "PushModel.h"
 #import "BottomTabView.h"
+#import "TimeView.h"
 
-@interface DetailViewController : BaseViewController<ByNavigationBarDelegate,BottomTabViewDelegate>
+@interface DetailViewController : BaseViewController<ByNavigationBarDelegate,BottomTabViewDelegate,TimeViewDelegate>
 
 
 +(void)show : (BaseViewController *)controller

@@ -59,6 +59,7 @@
         self.req_freq   = @"1m";
         self.req_type   = @"T";
     }
+    
 
     
     self.req_url    = @"http://ichart.yahoo.com/table.csv?s=%@&g=%@";
@@ -71,6 +72,12 @@
     [self addSubview:self.candleChart];
     [self initChart];
     
+    [self getData];
+}
+
+-(void)update : (KTimeLine )kTimeLine
+{
+    self.req_freq = [self getTimeLine:kTimeLine];
     [self getData];
 }
 
@@ -252,8 +259,8 @@
     [manager GET:url parameters:nil
          success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
-         NSData *doubi = responseObject;
-         NSString *response =  [[NSString alloc]initWithData:doubi encoding:NSUTF8StringEncoding];
+         NSData *data = responseObject;
+         NSString *response =  [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
 
          [self requestFinished:response];
          [MBProgressHUD hideAllHUDsForView:self animated:YES];
@@ -292,7 +299,6 @@
     if(data.count==0){
 
         [MBProgressHUD hideHUDForView:self animated:YES];
-//        self.status.text = @"Error!";
         return;
     }
 
@@ -615,6 +621,40 @@
 
 - (void)viewWillDisappear:(BOOL)animated{
     [self.timer invalidate];
+}
+
+
+-(NSString *)getTimeLine : (KTimeLine)kTimeLine
+{
+    switch (kTimeLine) {
+        case Month:
+            return @"m";
+        case Week:
+            return @"w";
+        case Day:
+            return @"d";
+        case Four_Hour:
+            return @"";
+        case Three_Hour:
+            return @"";
+        case Two_Hour:
+            return @"";
+        case One_Hour:
+            return @"";
+        case Half_Hour:
+            return @"";
+        case Quarter_Hour:
+            return @"";
+        case Ten_Minute:
+            return @"";
+        case Five_Minute:
+            return @"";
+        case Three_Minute:
+            return @"";
+        case One_Minute:
+            return @"";
+    }
+    return @"";
 }
 
 @end

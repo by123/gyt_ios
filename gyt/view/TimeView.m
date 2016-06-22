@@ -41,7 +41,11 @@
     
     NSArray *array = @[@"1分钟",@"3分钟",@"5分钟",@"10分钟",@"15分钟",@"30分钟",@"1小时",@"2小时",@"3小时",@"4小时",@"1日",@"1周",@"1月"];
     
-    
+    NSString *timeLine = [[NSUserDefaults standardUserDefaults] objectForKey:UserDefault_KTimeLine];
+    if(IS_NS_STRING_EMPTY(timeLine))
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:@"10" forKey:UserDefault_KTimeLine];
+    }
     for(int i = 0 ; i < 2 ; i++)
     {
         UIView *lineView = [[UIView alloc]init];
@@ -60,6 +64,7 @@
 
     
     int size = [array count];
+    NSInteger temp = [timeLine integerValue];
     for(int i = 0 ; i < size; i ++)
     {
         UIButton *button = [[UIButton alloc]init];
@@ -73,6 +78,11 @@
         NSLog(@"left->%d,top->%d",left,top);
         button.frame = CGRectMake(left, top,  SCREEN_WIDTH / 5, ViewHeight/3);
         [button addTarget:self action:@selector(OnClick:) forControlEvents:UIControlEventTouchUpInside];
+        if(temp == i)
+        {
+            [button setBackgroundColor:SELECT_COLOR];
+            currentButton = button;
+        }
         [rootView addSubview:button];
         
     }
@@ -83,12 +93,22 @@
 -(void)OnClick : (id)sender
 {
     UIButton *button = sender;
+    int tag = button.tag;
     [button setBackgroundColor:SELECT_COLOR];
     if(currentButton != nil)
     {
         [currentButton setBackgroundColor:[UIColor clearColor]];
     }
     currentButton = button;
+    
+    [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%d",tag] forKey:UserDefault_KTimeLine];
+    
+    if(self.delegate)
+    {
+        [self.delegate OnTimeSelect:tag];
+    }
+    [self removeFromSuperview];
+
 }
 
 

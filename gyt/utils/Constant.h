@@ -12,6 +12,7 @@
 #define UserDefault_Updown @"updown"
 #define UserDefault_Inventory @"inventory"
 #define UserDefault_Password @"password"
+#define UserDefault_KTimeLine @"ktimeline"
 
 #pragma mark 广播
 #define Notify_Menu_Title @"menu_title"

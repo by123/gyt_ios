@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol TimeViewDelegate <NSObject>
+
+@optional -(void)OnTimeSelect : (NSInteger)position;
+
+@end
+
 @interface TimeView : UIView
+
+@property (strong, nonatomic) id delegate;
 
 @end

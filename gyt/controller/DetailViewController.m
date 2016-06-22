@@ -289,6 +289,7 @@
 -(void)addTimeView
 {
     TimeView *timeView = [[TimeView alloc]init];
+    timeView.delegate = self;
     [self.view addSubview:timeView];
 }
 
@@ -387,6 +388,15 @@
     }
     currentPosition = position;
 
+}
+
+
+-(void)OnTimeSelect:(NSInteger)position
+{
+    if(_candleView)
+    {
+        [_candleView update:position];
+    }
 }
 
 

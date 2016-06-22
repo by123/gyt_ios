@@ -41,13 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "gyt/chart/model/ColumnChartModel.m"
-            timestampString = "488203837.160861"
+            filePath = "gyt/chart/CandleView.m"
+            timestampString = "488271072.941257"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "14"
-            endingLineNumber = "14"
-            landmarkName = "-drawSerie:serie:"
+            startingLineNumber = "262"
+            endingLineNumber = "262"
+            landmarkName = "-getData"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -57,13 +57,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "gyt/chart/model/CandleChartModel.m"
-            timestampString = "488203842.169052"
+            filePath = "gyt/chart/CandleView.m"
+            timestampString = "488271132.467798"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "15"
-            endingLineNumber = "15"
-            landmarkName = "-drawSerie:serie:"
+            startingLineNumber = "276"
+            endingLineNumber = "276"
+            landmarkName = "-requestFinished:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -73,13 +73,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "gyt/chart/view/Chart.m"
-            timestampString = "488203887.259535"
+            filePath = "gyt/chart/CandleView.m"
+            timestampString = "488271771.342462"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "304"
-            endingLineNumber = "304"
-            landmarkName = "-drawSerie:"
+            startingLineNumber = "629"
+            endingLineNumber = "629"
+            landmarkName = "-getTimeLine:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
