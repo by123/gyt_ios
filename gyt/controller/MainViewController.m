@@ -68,13 +68,16 @@
     _historyDatas = [[NSMutableArray alloc]init];
     [self initView];
     
-    [[SocketConnect sharedSocketConnect] setDelegate:self];
-
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getUserInfo) name:Notify_Update_AccountInfo object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateView:) name:Notify_Menu_Title object:nil];
     
  
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [[SocketConnect sharedSocketConnect] setDelegate:self];
 }
 
 
@@ -111,6 +114,7 @@
     _tableView.showsHorizontalScrollIndicator = NO;
     _tableView.separatorColor = LINE_COLOR;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    [_tableView setHidden:YES];
     [self.view addSubview:_tableView];
 
     [self initHeaderView];
@@ -582,6 +586,7 @@
                 [_mainDatas addObject:productModel];
             }
         }
+        [_tableView setHidden:NO];
         [_tableView reloadData];
         [self requestsubMultiPrice];
 

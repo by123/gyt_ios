@@ -237,8 +237,8 @@
 
 -(void)OnReceiveSuccess:(id)respondObject
 {
-    PackageModel *packageModel = respondObject;
-    BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
+//    PackageModel *packageModel = respondObject;
+//    BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
 
 
 }

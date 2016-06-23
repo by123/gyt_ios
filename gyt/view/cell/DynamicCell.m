@@ -8,6 +8,7 @@
 
 #import "DynamicCell.h"
 
+#define Item_Heihgt 40
 @interface DynamicCell()
 
 @property (strong, nonatomic) NSArray *widths;
@@ -100,16 +101,16 @@
                 default:
                     break;
             }
-            label.frame = CGRectMake(currentWidth, 0, width, 30);
+            label.frame = CGRectMake(currentWidth, 0, width, Item_Heihgt);
             label.textAlignment = NSTextAlignmentCenter;
             [self.contentView addSubview:label];
             [_labels addObject:label];
             currentWidth += width;
             
-            UIView *lineView = [[UIView alloc]init];
-            lineView.backgroundColor = LINE_COLOR;
-            lineView.frame = CGRectMake(0, 30- 0.5, maxWidth, 0.5);
-            [self.contentView addSubview:lineView];
+//            UIView *lineView = [[UIView alloc]init];
+//            lineView.backgroundColor = LINE_COLOR;
+//            lineView.frame = CGRectMake(0, 30- 0.5, maxWidth, 0.5);
+//            [self.contentView addSubview:lineView];
         }
     }
 
@@ -187,16 +188,16 @@
                 default:
                     break;
             }
-            label.frame = CGRectMake(currentWidth, 0, width, 30);
+            label.frame = CGRectMake(currentWidth, 0, width, Item_Heihgt);
             label.textAlignment = NSTextAlignmentCenter;
             [self.contentView addSubview:label];
             [_labels addObject:label];
             currentWidth += width;
             
-            UIView *lineView = [[UIView alloc]init];
-            lineView.backgroundColor = LINE_COLOR;
-            lineView.frame = CGRectMake(0, 30- 0.5, maxWidth, 0.5);
-            [self.contentView addSubview:lineView];
+//            UIView *lineView = [[UIView alloc]init];
+//            lineView.backgroundColor = LINE_COLOR;
+//            lineView.frame = CGRectMake(0, 30- 0.5, maxWidth, 0.5);
+//            [self.contentView addSubview:lineView];
         }
     }
 
@@ -278,16 +279,16 @@
                 default:
                     break;
             }
-            label.frame = CGRectMake(currentWidth, 0, width, 30);
+            label.frame = CGRectMake(currentWidth, 0, width, Item_Heihgt);
             label.textAlignment = NSTextAlignmentCenter;
             [self.contentView addSubview:label];
             [_labels addObject:label];
             currentWidth += width;
             
-            UIView *lineView = [[UIView alloc]init];
-            lineView.backgroundColor = LINE_COLOR;
-            lineView.frame = CGRectMake(0, 30- 0.5, maxWidth, 0.5);
-            [self.contentView addSubview:lineView];
+//            UIView *lineView = [[UIView alloc]init];
+//            lineView.backgroundColor = LINE_COLOR;
+//            lineView.frame = CGRectMake(0, 30- 0.5, maxWidth, 0.5);
+//            [self.contentView addSubview:lineView];
         }
     }
 }
@@ -329,16 +330,16 @@
                 default:
                     break;
             }
-            label.frame = CGRectMake(currentWidth, 0, width, 30);
+            label.frame = CGRectMake(currentWidth, 0, width, Item_Heihgt);
             label.textAlignment = NSTextAlignmentCenter;
             [self.contentView addSubview:label];
             [_labels addObject:label];
             currentWidth += width;
             
-            UIView *lineView = [[UIView alloc]init];
-            lineView.backgroundColor = LINE_COLOR;
-            lineView.frame = CGRectMake(0, 30- 0.5, maxWidth, 0.5);
-            [self.contentView addSubview:lineView];
+//            UIView *lineView = [[UIView alloc]init];
+//            lineView.backgroundColor = LINE_COLOR;
+//            lineView.frame = CGRectMake(0, 30- 0.5, maxWidth, 0.5);
+//            [self.contentView addSubview:lineView];
         }
     }
 }
@@ -372,16 +373,16 @@
                 default:
                     break;
             }
-            label.frame = CGRectMake(currentWidth, 0, width, 30);
+            label.frame = CGRectMake(currentWidth, 0, width, Item_Heihgt);
             label.textAlignment = NSTextAlignmentCenter;
             [self.contentView addSubview:label];
             [_labels addObject:label];
             currentWidth += width;
             
-            UIView *lineView = [[UIView alloc]init];
-            lineView.backgroundColor = LINE_COLOR;
-            lineView.frame = CGRectMake(0, 30- 0.5, maxWidth, 0.5);
-            [self.contentView addSubview:lineView];
+//            UIView *lineView = [[UIView alloc]init];
+//            lineView.backgroundColor = LINE_COLOR;
+//            lineView.frame = CGRectMake(0, 30- 0.5, maxWidth, 0.5);
+//            [self.contentView addSubview:lineView];
         }
     }
 }

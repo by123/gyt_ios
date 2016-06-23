@@ -13,6 +13,8 @@
 @optional -(void)OnItemSelected : (UIView *)dynamicTableView
                        position : (NSInteger)position;
 
+@optional -(void)OnExpandView : (BOOL)isExpand;
+
 @end
 
 @interface ByDynamicTableView : UIView<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
@@ -25,6 +27,10 @@
 @property (assign, nonatomic) DealType type;
 
 @property (strong, nonatomic) id delegate;
+
+@property (strong, nonatomic) UIView *expandView;
+
+@property (assign, nonatomic) BOOL isExpand;
 
 -(instancetype)initWithData : (CGRect)rect
                       array : (NSMutableArray *)array

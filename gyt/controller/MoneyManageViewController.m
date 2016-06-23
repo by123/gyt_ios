@@ -25,8 +25,8 @@
 
 +(void)show : (SlideNavigationController *)controller
 {
-    MoneyManageViewController *targetController = [[MoneyManageViewController alloc]init];
-    [controller pushViewController:targetController animated:YES];
+    MoneyManageViewController *targetCoxntroller = [[MoneyManageViewController alloc]init];
+    [controller pushViewController:targetCoxntroller animated:YES];
 }
 
 - (void)viewDidLoad {

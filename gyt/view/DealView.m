@@ -21,7 +21,7 @@
 #import "ContractDB.h"
 #import "DealHoldingModel.h"
 #import "PushDataModel.h"
-
+#import "CloseView.h"
 @interface DealView()
 
 //权益
@@ -84,6 +84,9 @@
 
 @property (strong, nonatomic) UIView *rootView;
 
+//扩展view
+@property (strong, nonatomic) UIView *expandView;
+
 @end
 
 @implementation DealView
@@ -96,6 +99,7 @@
     NSInteger currentItemSelect;
     NSInteger currentTabSelect;
     EEntrustBS director;
+    Boolean isExpandView;
 }
 
 -(instancetype)initWithData : (CGRect)frame
@@ -125,7 +129,7 @@
 -(void)initView
 {
     self.backgroundColor = BACKGROUND_COLOR;
-    currentItemSelect= -1;
+    currentItemSelect= 0;
     currentModel = [[DealHoldModel alloc]init];
     [self initTopView];
     [self initBottomView];
@@ -205,22 +209,7 @@
     _priceButton.frame = CGRectMake(10 + _handTextField.width + 5 , _nameButton.y + _nameButton.height +5, _nameButton.width/2 +5, 30);
     [_priceButton addTarget:self action:@selector(OnClick:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_priceButton];
-//    _priceTextField = [[ByTextField alloc]initWithType:NumberFloat frame:CGRectMake(10 + _handTextField.width + 5 , _nameButton.y + _nameButton.height +5, _nameButton.width/2 +5, 30) rootView:_rootView title:@"价格:"];
-//    [_priceTextField setTextFiledText:@"对手价"];
-//    
-//    __weak DealView *weakSelf = self;
-//    _priceTextField.block = ^(BOOL isCompelete,NSString *text)
-//    {
-//        if(isCompelete)
-//        {
-//            NSString *buyTxt = [NSString stringWithFormat:@"%.2f\n—————————\n买多",weakSelf.model.m_dAskPrice1];
-//            [weakSelf.buyItem setTitle:buyTxt forState:UIControlStateNormal];
-//            
-//            NSString *sellTxt = [NSString stringWithFormat:@"%.2f\n—————————\n卖空",weakSelf.model.m_dBidPrice1];
-//            [weakSelf.sellItem setTitle:sellTxt forState:UIControlStateNormal];
-//        }
-//    };
-//    [self addSubview:_priceTextField];
+
     
     
     _priceView = [[UIView alloc]init];
@@ -279,7 +268,7 @@
     _buyItem.layer.masksToBounds = YES;
     _buyItem.layer.cornerRadius = 4;
     
-    NSString *buyTxt = [NSString stringWithFormat:@"%.2f\n—————————\n买多",_model.m_dAskPrice1];
+    NSString *buyTxt = [NSString stringWithFormat:@"%.2f\n—————————\n买入",_model.m_dAskPrice1];
     [_buyItem setTitle:buyTxt forState:UIControlStateNormal];
     [_buyItem setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _buyItem.titleLabel.font = [UIFont systemFontOfSize:14.0f];
@@ -296,7 +285,7 @@
     _sellItem.layer.cornerRadius = 4;
 
 
-    NSString *sellTxt = [NSString stringWithFormat:@"%.2f\n—————————\n卖空",_model.m_dBidPrice1];
+    NSString *sellTxt = [NSString stringWithFormat:@"%.2f\n—————————\n卖出",_model.m_dBidPrice1];
     [_sellItem setTitle:sellTxt forState:UIControlStateNormal];
     [_sellItem setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _sellItem.titleLabel.font = [UIFont systemFontOfSize:14.0f];
@@ -310,14 +299,6 @@
     
 }
 
-
--(void)addLineView : (CGRect)rect
-{
-    UIView *lineView = [[UIView alloc]init];
-    lineView.backgroundColor = [ColorUtil colorWithHexString:@"#262626"];
-    lineView.frame = rect;
-    [self addSubview:lineView];
-}
 
 
 -(void)initBottomView
@@ -337,12 +318,8 @@
 #pragma mark 动态数据
 -(void)updateData : (PushModel *)model
 {
-//    [_priceTextField setTextFiledText:[NSString stringWithFormat:@"%.2f",model.m_dLastPrice]];
-    NSString *buyTxt = [NSString stringWithFormat:@"%.2f\n—————————\n买多",model.m_dAskPrice1];
-    [_buyItem setTitle:buyTxt forState:UIControlStateNormal];
-    NSString *sellTxt = [NSString stringWithFormat:@"%.2f\n—————————\n卖空",model.m_dBidPrice1];
-    [_sellItem setTitle:sellTxt forState:UIControlStateNormal];
-    
+    [self updateBuySellBtn];
+
     int width = _priceView.size.width;
     _currentPriceLabel.text = [NSString stringWithFormat:@"新:%.2f",model.m_dLastPrice];
     _currentPriceLabel.frame = CGRectMake(5, 2.5,(width - 10)/2, 20);
@@ -368,6 +345,37 @@
     
 }
 
+-(void)OnExpandView:(BOOL)isExpand
+{
+    isExpandView = isExpand;
+    [self updateBuySellBtn];
+}
+
+
+#pragma mark 更新买入卖出按钮文字
+-(void)updateBuySellBtn
+{
+    NSString *sellTxt;
+    NSString *buyTxt;
+    if(currentModel && currentItemSelect == 0 &&isExpandView)
+    {
+        if(currentModel.m_nDirection == ENTRUST_BUY){
+            buyTxt = [NSString stringWithFormat:@"%.2f\n—————————\n买入",_model.m_dAskPrice1];
+            sellTxt = [NSString stringWithFormat:@"%.2f\n—————————\n平仓",_model.m_dBidPrice1];
+        }
+        else{
+            buyTxt = [NSString stringWithFormat:@"%.2f\n—————————\n平仓",_model.m_dAskPrice1];
+            sellTxt = [NSString stringWithFormat:@"%.2f\n—————————\n卖出",_model.m_dBidPrice1];
+        }
+    }
+    else{
+        buyTxt = [NSString stringWithFormat:@"%.2f\n—————————\n买入",_model.m_dAskPrice1];
+        sellTxt = [NSString stringWithFormat:@"%.2f\n—————————\n卖出",_model.m_dBidPrice1];
+    }
+    [_buyItem setTitle:buyTxt forState:UIControlStateNormal];
+    [_sellItem setTitle:sellTxt forState:UIControlStateNormal];
+}
+
 
 #pragma mark 持仓数据
 -(void)initHoldData
@@ -381,7 +389,34 @@
     NSArray *widthArray = @[@"1",@"2",@"1",@"1",@"1",@"2",@"2",@"1",@"1",@"1",@"1",@"1",@"1",@"1"];
     _dynamicView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH , SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:holdDatas maxWidth:SCREEN_WIDTH * 2.5 type:Hold];
     [_dynamicView setHeaders:widthArray headers:titleArray];
+    
+    _expandView = [[UIView alloc]init];
+    _expandView.backgroundColor = SELECT_COLOR;
+    _expandView.frame = CGRectMake(0, 0, SCREEN_WIDTH * 2.5, 40);
+    
+    UIButton *conditionBtn = [[UIButton alloc]init];
+    conditionBtn.frame = CGRectMake(SCREEN_WIDTH - 130, 4, 60, 32);
+    conditionBtn.layer.masksToBounds = YES;
+    conditionBtn.layer.cornerRadius = 4;
+    conditionBtn.titleLabel.font = [UIFont systemFontOfSize:12.0f];
+    [conditionBtn setTitle:@"止损止盈" forState:UIControlStateNormal];
+    [conditionBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    conditionBtn.backgroundColor = TEXT_COLOR;
+    [_expandView addSubview:conditionBtn];
+    
+    UIButton *handReverseBtn = [[UIButton alloc]init];
+    handReverseBtn.frame = CGRectMake(SCREEN_WIDTH - 65, 4, 60, 32);
+    handReverseBtn.layer.masksToBounds = YES;
+    handReverseBtn.layer.cornerRadius = 4;
+    handReverseBtn.titleLabel.font = [UIFont systemFontOfSize:12.0f];
+    [handReverseBtn setTitle:@"反手" forState:UIControlStateNormal];
+    [handReverseBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    handReverseBtn.backgroundColor = TEXT_COLOR;
+    [_expandView addSubview:handReverseBtn];
+    
+    
     _dynamicView.delegate = self;
+    _dynamicView.expandView = _expandView;
     [self addSubview:_dynamicView];
 }
 
@@ -395,10 +430,12 @@
             {
                 DealHoldModel *model = [holdDatas objectAtIndex:position];
                 currentModel = model;
-                NSString *message = [NSString stringWithFormat:@"%@，平仓价：%.2f",model.m_strInstrumentID,model.m_dLastPrice];
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认平仓吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-                alert.tag = 3;
-                [alert show];
+                [self updateBuySellBtn];
+
+//                NSString *message = [NSString stringWithFormat:@"%@，平仓价：%.2f",model.m_strInstrumentID,model.m_dLastPrice];
+//                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认平仓吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+//                alert.tag = 3;
+//                [alert show];
             }
             break;
         case 1:

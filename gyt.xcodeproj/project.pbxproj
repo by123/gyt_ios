@@ -85,6 +85,9 @@
 		CFC15BD21CC607900077FA19 /* DynamicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15BD11CC607900077FA19 /* DynamicCell.m */; };
 		CFC15BE21CC74F760077FA19 /* ContractDB.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15BE11CC74F760077FA19 /* ContractDB.m */; };
 		CFC15BE41CC769DF0077FA19 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CFC15BE31CC769DF0077FA19 /* libsqlite3.tbd */; };
+		CFC9E55C1D1BE15A00729A7D /* FolderCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC9E5571D1BE15A00729A7D /* FolderCoverView.m */; };
+		CFC9E55D1D1BE15A00729A7D /* UIFolderTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC9E5591D1BE15A00729A7D /* UIFolderTableView.m */; };
+		CFC9E55E1D1BE15A00729A7D /* UIView+screenshot.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC9E55B1D1BE15A00729A7D /* UIView+screenshot.m */; };
 		CFD37E0D1CFEA73100297DE2 /* PackageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD37E0C1CFEA73100297DE2 /* PackageModel.m */; };
 		CFD37E131CFED4E700297DE2 /* ErrorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD37E121CFED4E700297DE2 /* ErrorModel.m */; };
 		CFD37E1C1D016C5000297DE2 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFD37E1B1D016C5000297DE2 /* CFNetwork.framework */; };
@@ -311,6 +314,12 @@
 		CFC15BE01CC74F760077FA19 /* ContractDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContractDB.h; sourceTree = "<group>"; };
 		CFC15BE11CC74F760077FA19 /* ContractDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContractDB.m; sourceTree = "<group>"; };
 		CFC15BE31CC769DF0077FA19 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		CFC9E5561D1BE15A00729A7D /* FolderCoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderCoverView.h; sourceTree = "<group>"; };
+		CFC9E5571D1BE15A00729A7D /* FolderCoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderCoverView.m; sourceTree = "<group>"; };
+		CFC9E5581D1BE15A00729A7D /* UIFolderTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIFolderTableView.h; sourceTree = "<group>"; };
+		CFC9E5591D1BE15A00729A7D /* UIFolderTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIFolderTableView.m; sourceTree = "<group>"; };
+		CFC9E55A1D1BE15A00729A7D /* UIView+screenshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+screenshot.h"; sourceTree = "<group>"; };
+		CFC9E55B1D1BE15A00729A7D /* UIView+screenshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+screenshot.m"; sourceTree = "<group>"; };
 		CFD37E0B1CFEA73100297DE2 /* PackageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PackageModel.h; sourceTree = "<group>"; };
 		CFD37E0C1CFEA73100297DE2 /* PackageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PackageModel.m; sourceTree = "<group>"; };
 		CFD37E111CFED4E700297DE2 /* ErrorModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorModel.h; sourceTree = "<group>"; };
@@ -662,7 +671,6 @@
 		CF4A6D561CBE28DD00B36C93 /* view */ = {
 			isa = PBXGroup;
 			children = (
-				CFD37E201D02A91300297DE2 /* keyboard */,
 				CF4A6D7A1CBE2EA200B36C93 /* ByNavigationBar.h */,
 				CF4A6D7B1CBE2EA200B36C93 /* ByNavigationBar.m */,
 				CFC15BCA1CC5D15D0077FA19 /* ByTabView.h */,
@@ -677,6 +685,8 @@
 				CFC15BC81CC4C7340077FA19 /* InsetTextField.m */,
 				CFD37E281D02AE1E00297DE2 /* ByTextField.h */,
 				CFD37E291D02AE1E00297DE2 /* ByTextField.m */,
+				CFC9E5551D1BE15A00729A7D /* flodertableview */,
+				CFD37E201D02A91300297DE2 /* keyboard */,
 				CFDD2DF51CCDE8AC00E81E3F /* dialog */,
 				CFC15BA41CC234B00077FA19 /* detail */,
 				CF4A6D571CBE28DD00B36C93 /* cell */,
@@ -863,6 +873,19 @@
 				CFC15BC51CC4B8160077FA19 /* DealView.m */,
 			);
 			name = detail;
+			sourceTree = "<group>";
+		};
+		CFC9E5551D1BE15A00729A7D /* flodertableview */ = {
+			isa = PBXGroup;
+			children = (
+				CFC9E5561D1BE15A00729A7D /* FolderCoverView.h */,
+				CFC9E5571D1BE15A00729A7D /* FolderCoverView.m */,
+				CFC9E5581D1BE15A00729A7D /* UIFolderTableView.h */,
+				CFC9E5591D1BE15A00729A7D /* UIFolderTableView.m */,
+				CFC9E55A1D1BE15A00729A7D /* UIView+screenshot.h */,
+				CFC9E55B1D1BE15A00729A7D /* UIView+screenshot.m */,
+			);
+			path = flodertableview;
 			sourceTree = "<group>";
 		};
 		CFD37E201D02A91300297DE2 /* keyboard */ = {
@@ -1290,6 +1313,7 @@
 				CFC15B941CC11B770077FA19 /* LeftMenuCell.m in Sources */,
 				CFC15BC91CC4C7340077FA19 /* InsetTextField.m in Sources */,
 				CFF183B11CE6D07A00E991C4 /* MoneyDetailCell.m in Sources */,
+				CFC9E55E1D1BE15A00729A7D /* UIView+screenshot.m in Sources */,
 				CFDFFA941CBF742500401CB3 /* SlideNavigationController.m in Sources */,
 				CFF183B41CE6D13500E991C4 /* MoneyDetailModel.m in Sources */,
 				CFC15BC61CC4B8160077FA19 /* DealView.m in Sources */,
@@ -1307,6 +1331,7 @@
 				CFDD2E101CCF42D400E81E3F /* NewsModel.m in Sources */,
 				CFF183D91CE9F0A200E991C4 /* QueryRequest.m in Sources */,
 				CFDD2EAD1CCF4DE100E81E3F /* UIView+MJExtension.m in Sources */,
+				CFC9E55D1D1BE15A00729A7D /* UIFolderTableView.m in Sources */,
 				CFD37E621D06AFFC00297DE2 /* PushDataModel.m in Sources */,
 				CF111D4F1CFBF5A000298C78 /* OrderTagModel.m in Sources */,
 				CFC15BCF1CC604DB0077FA19 /* ByDynamicTableView.m in Sources */,
@@ -1348,6 +1373,7 @@
 				CF4A6D7C1CBE2EA200B36C93 /* ByNavigationBar.m in Sources */,
 				CFF183C71CE726C000E991C4 /* ReduceCell.m in Sources */,
 				CFD37E5C1D05465400297DE2 /* PushRequestModel.m in Sources */,
+				CFC9E55C1D1BE15A00729A7D /* FolderCoverView.m in Sources */,
 				CFDD2EAA1CCF4DE100E81E3F /* MJRefreshConst.m in Sources */,
 				CFF183891CE460A500E991C4 /* LoginModel.m in Sources */,
 				CFA3B90B1CDAF0A90063AE3E /* Slide.m in Sources */,
