@@ -26,7 +26,7 @@
 #import "PushModel.h"
 #import "ShortCutView.h"
 
-#define Item_Height 40
+#define Item_Height  IDSPointValue(40)
 
 @interface MainViewController ()
 
@@ -103,14 +103,14 @@
     self.view.backgroundColor = BACKGROUND_COLOR;
     [self initNavigationBar];
     
-    _tableView = [[UITableView alloc]init];
+    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, StatuBar_HEIGHT + NavigationBar_HEIGHT + 30, SCREEN_WIDTH, SCREEN_HEIGHT - (StatuBar_HEIGHT + NavigationBar_HEIGHT) - 30)];
     _tableView.backgroundColor = [ColorUtil colorWithHexString:@"#292929"];
-    _tableView.frame = CGRectMake(0, StatuBar_HEIGHT + NavigationBar_HEIGHT + 30, SCREEN_WIDTH, SCREEN_HEIGHT - (StatuBar_HEIGHT + NavigationBar_HEIGHT) - 30);
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.showsVerticalScrollIndicator = NO;
     _tableView.showsHorizontalScrollIndicator = NO;
-    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _tableView.separatorColor = LINE_COLOR;
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     [self.view addSubview:_tableView];
 
     [self initHeaderView];
@@ -271,10 +271,6 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MainTableCell *cell = [[MainTableCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[MainTableCell identify]];
-    [cell setBackgroundColor:[UIColor clearColor]];
-    [cell setOpaque:YES];
-    cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.frame];
-    cell.selectedBackgroundView.backgroundColor = SELECT_COLOR;
     PushModel *model;
     if(!IS_NS_COLLECTION_EMPTY(_mainDatas) && current == 0)
     {
@@ -392,7 +388,6 @@
 -(void)longPress : (UILongPressGestureRecognizer *)recongizer
 {
     MainTableCell *cell = (MainTableCell *)recongizer.view;
-    NSLog(@"%d",cell.tag);
     PushModel *model;
     if(!IS_NS_COLLECTION_EMPTY(_mainDatas) && current == 0)
     {

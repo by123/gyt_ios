@@ -295,7 +295,7 @@
     NSString *low = [self getRandomNumber:2000 to:3500];
     NSString *open = [self getRandomNumber:2000 to:6000];
     NSString *close = [self getRandomNumber:2000 to:6000];
-    NSString *addStr = [NSString stringWithFormat:@"\n%@,%@,%@,%@,%@,%@,%@",@"2016-06-22",open,high,low,close,@"9999",close];
+    NSString *addStr = [NSString stringWithFormat:@"\n%@,%@,%@,%@,%@,%@,%@",@"2016-06-22",open,high,low,close,@"9999999",close];
     tempStr = [addStr stringByAppendingString:tempStr];
     [self requestFinished:tempStr];
 }

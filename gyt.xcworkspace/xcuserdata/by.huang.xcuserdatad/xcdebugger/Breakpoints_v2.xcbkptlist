@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "gyt/controller/MainViewController.m"
-            timestampString = "488275066.634982"
+            timestampString = "488345502.87564"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "623"
-            endingLineNumber = "623"
+            startingLineNumber = "618"
+            endingLineNumber = "618"
             landmarkName = "-handleResult:"
             landmarkType = "5">
          </BreakpointContent>

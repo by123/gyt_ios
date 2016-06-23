@@ -8,7 +8,7 @@
 
 #import "MainItemDialog.h"
 
-#define Item_Height 44
+#define Item_Height  IDSPointValue(40)
 
 @interface MainItemDialog()
 

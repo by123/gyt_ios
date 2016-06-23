@@ -41,6 +41,10 @@
 
 -(void)initView
 {
+    self.backgroundColor = [UIColor clearColor];
+    self.selectedBackgroundView = [[UIView alloc] initWithFrame:self.frame];
+    self.selectedBackgroundView.backgroundColor = SELECT_COLOR;
+    
     _nameLabel = [[UILabel alloc]init];
     _nameLabel.textColor = [ColorUtil colorWithHexString:@"#FFC125"];
     _nameLabel.font = [UIFont systemFontOfSize:15.0f];
@@ -69,10 +73,10 @@
     _inventoryLabel.textAlignment = NSTextAlignmentCenter;
     [self.contentView addSubview:_inventoryLabel];
     
-    UIView *lineView = [[UIView alloc]init];
-    lineView.backgroundColor = LINE_COLOR;
-    lineView.frame = CGRectMake(0, self.bounds.size.height - 0.5, SCREEN_WIDTH, 0.5);
-    [self.contentView addSubview:lineView];
+//    UIView *lineView = [[UIView alloc]init];
+//    lineView.backgroundColor = LINE_COLOR;
+//    lineView.frame = CGRectMake(0, self.bounds.size.height - 0.5, SCREEN_WIDTH, 0.5);
+//    [self.contentView addSubview:lineView];
 
 }
 
