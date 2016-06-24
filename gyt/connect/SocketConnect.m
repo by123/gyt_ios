@@ -101,12 +101,12 @@ SINGLETON_IMPLEMENTION(SocketConnect);
 {
     [sock readDataWithTimeout:-1 tag:0];
     NSLog(@"已连接上");
-//    if(self.delegate)
-//    {
-//        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-//            [self.delegate OnConnectSuccess];
-//        }];
-//    }
+    if(self.delegate)
+    {
+//        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.delegate OnConnectSuccess];
+//        });
+    }
     if(hua)
     {
         [hua hide:YES];
@@ -117,6 +117,13 @@ SINGLETON_IMPLEMENTION(SocketConnect);
 #pragma mark - 连接被断开
 -(void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err
 {
+    if(self.delegate)
+    {
+        [DialogHelper showTips:@"连接被强制断开"];
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [self.delegate OnConnectFail];
+//        });
+    }
     [self connectInterrupt];
 }
 
@@ -141,7 +148,6 @@ SINGLETON_IMPLEMENTION(SocketConnect);
     }
 
 }
-
 
 #pragma mark - 接收服务端的数据
 -(void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag

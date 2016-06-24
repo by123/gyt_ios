@@ -112,8 +112,7 @@
     _tableView.dataSource = self;
     _tableView.showsVerticalScrollIndicator = NO;
     _tableView.showsHorizontalScrollIndicator = NO;
-    _tableView.separatorColor = LINE_COLOR;
-    _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [_tableView setHidden:YES];
     [self.view addSubview:_tableView];
 
@@ -599,7 +598,6 @@
 //            [DialogHelper showTips:@"订阅成功"];
 //        }
 //    }
-//
     if(packageModel.cmd == 4)
     {
         BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];

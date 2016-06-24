@@ -14,6 +14,7 @@
 #import "MainViewController.h"
 #import "ByTextField.h"
 #import "ManageViewController.h"
+#import "Test.h"
 @interface LoginViewController ()
 
 @property (strong , nonatomic) InsetTextField *nameTextField;
@@ -23,6 +24,14 @@
 @property (strong , nonatomic) UIButton *loginBtn;
 
 @property (assign , nonatomic) Boolean isSavePsw;
+
+@property (strong, nonatomic) UILabel *tipLabel;
+
+@property (strong, nonatomic) UITextField *ipTextField;
+
+@property (strong, nonatomic) UITextField *portTextField;
+
+@property (strong, nonatomic) UIButton *setBtn;
 
 @end
 
@@ -123,22 +132,81 @@
     [_loginBtn addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
     [rootView addSubview:_loginBtn];
     
-    
-//    UIButton *testBtn = [[UIButton alloc]init];
-//    [testBtn setTitle:@"配置" forState:UIControlStateNormal];
-//    testBtn.backgroundColor = [UIColor redColor];
-//    testBtn.frame = CGRectMake(0, rootView.size.height - 50, SCREEN_WIDTH, 50);
-//    [testBtn addTarget:self action:@selector(test) forControlEvents:UIControlEventTouchUpInside];
-//    [rootView addSubview:testBtn];
-    
+    [self test:rootView];
     
 }
 
-//-(void)test
-//{
-//    ManageViewController *controller = [[ManageViewController alloc]init];
-//    [self presentViewController:controller animated:YES completion:nil];
-//}
+
+
+
+#pragma mark 测试模块
+-(void)test : (UIView *)rootView
+{
+    _tipLabel = [[UILabel alloc]init];
+    _tipLabel.text = @"未连接";
+    _tipLabel.textColor = TEXT_COLOR;
+    _tipLabel.font = [UIFont systemFontOfSize:13.0f];
+    _tipLabel.textAlignment = NSTextAlignmentCenter;
+    _tipLabel.frame = CGRectMake(0, 230, SCREEN_WIDTH, 20);
+    [rootView addSubview:_tipLabel];
+    
+    _ipTextField = [[UITextField alloc]init];
+    _ipTextField.text = [Test sharedTest].host;
+    _ipTextField.textColor = [UIColor blackColor];
+    _ipTextField.backgroundColor = TEXT_COLOR;
+    _ipTextField.frame = CGRectMake(20, 260, SCREEN_WIDTH - 40, 50);
+    [rootView addSubview:_ipTextField];
+    
+    _portTextField = [[UITextField alloc]init];
+    _portTextField.text = [NSString stringWithFormat:@"%d",[Test sharedTest].port];
+    _portTextField.textColor = [UIColor blackColor];
+    _portTextField.backgroundColor = TEXT_COLOR;
+    _portTextField.frame = CGRectMake(20, 330, SCREEN_WIDTH - 40, 50);
+    [rootView addSubview:_portTextField];
+    
+    _setBtn = [[UIButton alloc]init];
+    [_setBtn setTitle:@"设置" forState:UIControlStateNormal];
+    [_setBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    _setBtn.backgroundColor = [UIColor redColor];
+    _setBtn.frame = CGRectMake(20, 400, SCREEN_WIDTH - 40, 50);
+    [_setBtn addTarget:self action:@selector(testClick:) forControlEvents:UIControlEventTouchUpInside];
+    [rootView addSubview:_setBtn];
+}
+
+-(void)testClick : (id)sender
+{
+    NSString *host = _ipTextField.text;
+    NSString *port = _portTextField.text;
+    
+    if([self isPureInt:port])
+    {
+        [[Test sharedTest] setHost:host];
+        [[Test sharedTest] setPort:[port intValue]];
+        [DialogHelper showSuccessTips:@"修改成功"];
+        [[SocketConnect sharedSocketConnect] disconnect];
+    }
+    else
+    {
+        [DialogHelper showTips:@"端口输入有误"];
+    }
+}
+
+- (BOOL)isPureInt:(NSString*)string{
+    NSScanner* scan = [NSScanner scannerWithString:string];
+    int val;
+    return[scan scanInt:&val] && [scan isAtEnd];
+}
+
+-(void)OnConnectSuccess
+{
+    _tipLabel.text = @"已连上";
+}
+
+-(void)OnConnectFail
+{
+    _tipLabel.text = @"连接被断开";
+}
+
 
 #pragma mark 请求登录
 -(void)login
@@ -272,7 +340,11 @@
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [self hideKeyboard];
+    [_ipTextField resignFirstResponder];
+    [_portTextField resignFirstResponder];
 }
+
+
 
 
 

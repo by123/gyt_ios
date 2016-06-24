@@ -73,7 +73,13 @@
 @property (strong, nonatomic) ByTabView *tabView;
 
 //持仓，挂单，委托，成交
-@property (strong, nonatomic) ByDynamicTableView *dynamicView;
+//@property (strong, nonatomic) ByDynamicTableView *dynamicView;
+@property (strong, nonatomic) ByDynamicTableView *holdTableView;
+@property (strong, nonatomic) ByDynamicTableView *holdingTableView;
+@property (strong, nonatomic) ByDynamicTableView *holdByTableView;
+@property (strong, nonatomic) ByDynamicTableView *dealTableView;
+
+
 
 //数据
 @property (strong, nonatomic) PushModel *model;
@@ -86,6 +92,10 @@
 
 //扩展view
 @property (strong, nonatomic) UIView *expandView;
+
+@property (strong, nonatomic) UIButton *handReverseBtn;
+
+@property (strong, nonatomic) UIButton *conditionBtn;
 
 @end
 
@@ -311,6 +321,12 @@
     [self addSubview:_tabView];
     
     [self initHoldData];
+    [self initHoldingData];
+    [self initHoldByData];
+    [self initDealData];
+    
+    [self showTableView:Hold];
+    
     [self requestQuery:XT_CPositionStatics];
 
 }
@@ -322,14 +338,14 @@
 
     int width = _priceView.size.width;
     _currentPriceLabel.text = [NSString stringWithFormat:@"新:%.2f",model.m_dLastPrice];
-    _currentPriceLabel.frame = CGRectMake(5, 2.5,(width - 10)/2, 20);
+    _currentPriceLabel.frame = CGRectMake(5, 2.5,(width - 10)/2+10, 20);
 
     _currentCountLabel.text = [NSString stringWithFormat:@"%d",model.m_nVolume];
     _currentCountLabel.textAlignment = NSTextAlignmentRight;
     _currentCountLabel.frame = CGRectMake(width/2, 2.5, width/2, 20);
 
     _buyPriceLabel.text = [NSString stringWithFormat:@"买:%.2f",model.m_dBidPrice1];
-    _buyPriceLabel.frame = CGRectMake(5, 22.5, (width - 10)/2, 20);
+    _buyPriceLabel.frame = CGRectMake(5, 22.5, (width - 10)/2+10, 20);
 
     
     _buyCountLabel.text = [NSString stringWithFormat:@"%d",model.m_nBidVolume1];
@@ -337,7 +353,7 @@
     _buyCountLabel.frame = CGRectMake(width/2, 22.5, width/2, 20);
 
     _sellPriceLabel.text = [NSString stringWithFormat:@"卖:%.2f",model.m_dAskPrice1];
-    _sellPriceLabel.frame = CGRectMake(5, 42.5, (width - 10)/2, 20);
+    _sellPriceLabel.frame = CGRectMake(5, 42.5, (width - 10)/2+10, 20);
 
     _sellCountLabel.text = [NSString stringWithFormat:@"%d",model.m_nAskVolume1];
     _sellCountLabel.textAlignment = NSTextAlignmentRight;
@@ -380,44 +396,45 @@
 #pragma mark 持仓数据
 -(void)initHoldData
 {
-    if(_dynamicView)
+    if(_holdTableView == nil)
     {
-        [_dynamicView removeFromSuperview];
+        NSArray *titleArray = @[@"品种",@"合约号",@"多空",@"手数",@"可用",@"开仓均价",@"逐笔浮盈",@"币种",@"损盈",@"价值",@"保证金",@"今手数",@"今可用",@"投保"];
+        NSArray *widthArray = @[@"1",@"2",@"1",@"1",@"1",@"2",@"2",@"1",@"1",@"1",@"1",@"1",@"1",@"1"];
+       
+         _holdTableView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH , SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:holdDatas maxWidth:SCREEN_WIDTH * 2.5 type:Hold];
+        [_holdTableView setHeaders:widthArray headers:titleArray];
+        
+        _expandView = [[UIView alloc]init];
+        _expandView.backgroundColor = SELECT_COLOR;
+        _expandView.frame = CGRectMake(0, 0, SCREEN_WIDTH * 2.5, 40);
+        
+        _conditionBtn = [[UIButton alloc]init];
+        _conditionBtn.frame = CGRectMake(SCREEN_WIDTH - 130, 4, 60, 32);
+        _conditionBtn.layer.masksToBounds = YES;
+        _conditionBtn.layer.cornerRadius = 4;
+        _conditionBtn.titleLabel.font = [UIFont systemFontOfSize:12.0f];
+        [_conditionBtn setTitle:@"止损止盈" forState:UIControlStateNormal];
+        [_conditionBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        _conditionBtn.backgroundColor = TEXT_COLOR;
+        [_conditionBtn addTarget:self action:@selector(OnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [_expandView addSubview:_conditionBtn];
+        
+        _handReverseBtn = [[UIButton alloc]init];
+        _handReverseBtn.frame = CGRectMake(SCREEN_WIDTH - 65, 4, 60, 32);
+        _handReverseBtn.layer.masksToBounds = YES;
+        _handReverseBtn.layer.cornerRadius = 4;
+        _handReverseBtn.titleLabel.font = [UIFont systemFontOfSize:12.0f];
+        [_handReverseBtn setTitle:@"反手" forState:UIControlStateNormal];
+        [_handReverseBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        _handReverseBtn.backgroundColor = TEXT_COLOR;
+        [_handReverseBtn addTarget:self action:@selector(OnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [_expandView addSubview:_handReverseBtn];
+        
+        
+        _holdTableView.delegate = self;
+        _holdTableView.expandView = _expandView;
+        [self addSubview:_holdTableView];
     }
-    
-    NSArray *titleArray = @[@"品种",@"合约号",@"多空",@"手数",@"可用",@"开仓均价",@"逐笔浮盈",@"币种",@"损盈",@"价值",@"保证金",@"今手数",@"今可用",@"投保"];
-    NSArray *widthArray = @[@"1",@"2",@"1",@"1",@"1",@"2",@"2",@"1",@"1",@"1",@"1",@"1",@"1",@"1"];
-    _dynamicView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH , SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:holdDatas maxWidth:SCREEN_WIDTH * 2.5 type:Hold];
-    [_dynamicView setHeaders:widthArray headers:titleArray];
-    
-    _expandView = [[UIView alloc]init];
-    _expandView.backgroundColor = SELECT_COLOR;
-    _expandView.frame = CGRectMake(0, 0, SCREEN_WIDTH * 2.5, 40);
-    
-    UIButton *conditionBtn = [[UIButton alloc]init];
-    conditionBtn.frame = CGRectMake(SCREEN_WIDTH - 130, 4, 60, 32);
-    conditionBtn.layer.masksToBounds = YES;
-    conditionBtn.layer.cornerRadius = 4;
-    conditionBtn.titleLabel.font = [UIFont systemFontOfSize:12.0f];
-    [conditionBtn setTitle:@"止损止盈" forState:UIControlStateNormal];
-    [conditionBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    conditionBtn.backgroundColor = TEXT_COLOR;
-    [_expandView addSubview:conditionBtn];
-    
-    UIButton *handReverseBtn = [[UIButton alloc]init];
-    handReverseBtn.frame = CGRectMake(SCREEN_WIDTH - 65, 4, 60, 32);
-    handReverseBtn.layer.masksToBounds = YES;
-    handReverseBtn.layer.cornerRadius = 4;
-    handReverseBtn.titleLabel.font = [UIFont systemFontOfSize:12.0f];
-    [handReverseBtn setTitle:@"反手" forState:UIControlStateNormal];
-    [handReverseBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    handReverseBtn.backgroundColor = TEXT_COLOR;
-    [_expandView addSubview:handReverseBtn];
-    
-    
-    _dynamicView.delegate = self;
-    _dynamicView.expandView = _expandView;
-    [self addSubview:_dynamicView];
 }
 
 
@@ -462,52 +479,73 @@
 #pragma mark 挂单数据
 -(void)initHoldingData
 {
-    if(_dynamicView)
-    {
-        [_dynamicView removeFromSuperview];
-    }
   
     NSArray *titleArray = @[@"时间",@"合约",@"状态",@"买卖",@"委托价",@"委托量",@"可撤",@"已成交",@"投保",@"预止损",@"合同号",@"主场号"];
     NSArray *widthArray = @[@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1"];
-    _dynamicView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH, SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:holdingDatas maxWidth:SCREEN_WIDTH*2.5 type:Holding];
-    [_dynamicView setHeaders:widthArray headers:titleArray];
-    _dynamicView.delegate = self;
-    [self addSubview:_dynamicView];
-
+    if(_holdingTableView == nil)
+    {
+        _holdingTableView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH, SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:holdingDatas maxWidth:SCREEN_WIDTH*2.5 type:Holding];
+        [_holdingTableView setHeaders:widthArray headers:titleArray];
+        _holdingTableView.delegate = self;
+        [self addSubview:_holdingTableView];
+    }
 }
 
 #pragma mark 委托数据
 -(void)initHoldByData
 {
-    if(_dynamicView)
+    if(_holdByTableView == nil)
     {
-        [_dynamicView removeFromSuperview];
+        NSArray *titleArray = @[@"时间",@"合约",@"状态",@"买卖",@"委托价",@"委托量",@"可撤",@"已成交",@"投保",@"合同号",@"主场号"];
+        NSArray *widthArray = @[@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1"];
+        
+        _holdByTableView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH, SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:holdByDatas maxWidth:SCREEN_WIDTH * 2 type:HoldBy];
+        [_holdByTableView setHeaders:widthArray headers:titleArray];
+        _holdByTableView.delegate = self;
+        [self addSubview:_holdByTableView];
     }
-    NSArray *titleArray = @[@"时间",@"合约",@"状态",@"买卖",@"委托价",@"委托量",@"可撤",@"已成交",@"投保",@"合同号",@"主场号"];
-    NSArray *widthArray = @[@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1"];
-    
-    _dynamicView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH, SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:holdByDatas maxWidth:SCREEN_WIDTH * 2 type:HoldBy];
-    [_dynamicView setHeaders:widthArray headers:titleArray];
-    _dynamicView.delegate = self;
-    [self addSubview:_dynamicView];
 }
 
 #pragma mark 成交数据
 -(void)initDealData
 {
-    if(_dynamicView)
+
+    if(_dealTableView == nil)
     {
-        [_dynamicView removeFromSuperview];
+        NSArray *titleArray = @[@"时间",@"合约",@"买卖",@"成交价",@"成交量",@"合同号",@"主场号"];
+        NSArray *widthArray = @[@"1",@"1",@"1",@"1",@"1",@"1",@"1"];
+        
+        _dealTableView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH, SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:holdProfileDatas maxWidth:SCREEN_WIDTH*1.5 type:Profit];
+        [_dealTableView setHeaders:widthArray headers:titleArray];
+        _dealTableView.delegate = self;
+        [self addSubview:_dealTableView];
     }
-    NSArray *titleArray = @[@"时间",@"合约",@"买卖",@"成交价",@"成交量",@"合同号",@"主场号"];
-    NSArray *widthArray = @[@"1",@"1",@"1",@"1",@"1",@"1",@"1"];
-                             
-    _dynamicView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH, SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:holdProfileDatas maxWidth:SCREEN_WIDTH*1.5 type:Profit];
-    [_dynamicView setHeaders:widthArray headers:titleArray];
-    _dynamicView.delegate = self;
-    [self addSubview:_dynamicView];
 }
 
+
+-(void)showTableView : (DealType)type
+{
+    _holdTableView.hidden = YES;
+    _holdingTableView.hidden = YES;
+    _holdByTableView.hidden = YES;
+    _dealTableView.hidden = YES;
+    switch (type) {
+        case Hold:
+            _holdTableView.hidden = NO;
+            break;
+        case Holding:
+            _holdingTableView.hidden = NO;
+            break;
+        case HoldBy:
+            _holdByTableView.hidden = NO;
+            break;
+        case Profit:
+            _dealTableView.hidden = NO;
+            break;
+        default:
+            break;
+    }
+}
 
 #pragma mark tabview选择
 -(void)OnSelect:(NSInteger)position
@@ -516,19 +554,19 @@
     currentTabSelect = position;
     switch (position) {
         case 0:
-            [self initHoldData];
+            [self showTableView:Hold];
             [self requestQuery:XT_CPositionStatics];
             break;
         case 1:
-            [self initHoldingData];
+            [self showTableView:Holding];
             [self requestQuery:XT_COrderDetail];
             break;
         case 2:
-            [self initHoldByData];
+            [self showTableView:HoldBy];
             [self requestQuery:XT_COrderDetail];
             break;
         case 3:
-            [self initDealData];
+            [self showTableView:Profit];
             [self requestQuery:XT_CDealDetail];
             break;
         default:
@@ -586,6 +624,14 @@
         dialog.delegate = self;
         [self.rootView addSubview:dialog];
     }
+    else if(view == _handReverseBtn)
+    {
+        [DialogHelper showTips:@"开发中"];
+    }
+    else if(view == _conditionBtn)
+    {
+        [DialogHelper showTips:@"开发中"];
+    }
     
     [self hideKeyboard];
 }
@@ -639,7 +685,6 @@
 -(void)requestQuery : (RequestType)type
 {
     NSString *jsonStr = [QueryRequest buildQueryInfo:type];
-    
     [[SocketConnect sharedSocketConnect] sendData:jsonStr seq:type];
 }
 
@@ -737,14 +782,13 @@
     //委托
     else if(packageModel.seq == XT_COrderDetail && !IS_NS_STRING_EMPTY(packageModel.result))
     {
-        [holdByDatas removeAllObjects];
-        [holdingDatas removeAllObjects];
         QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:respondModel.response];
         NSMutableArray *array = model.datas;
         if(!IS_NS_COLLECTION_EMPTY(array))
         {
             if(currentTabSelect == 1)
             {
+                [holdingDatas removeAllObjects];
                 for(id obj in array)
                 {
                     DealHoldingModel *holdingModel = [DealHoldingModel mj_objectWithKeyValues:obj];
@@ -760,6 +804,7 @@
             }
             else if(currentTabSelect == 2)
             {
+                [holdByDatas removeAllObjects];
                 for(id obj in array)
                 {
                     DealHoldByModel *holdByModel = [DealHoldByModel mj_objectWithKeyValues:obj];
@@ -819,7 +864,7 @@
                 {
                     temp.m_nOrderStatus = model.m_nOrderStatus;
                     hasModel = YES;
-                    [_dynamicView reloadOneRow:i];
+                    [_holdingTableView reloadOneRow:i];
                 }
             }
             if(!hasModel)
@@ -839,7 +884,7 @@
                 {
                     temp.m_nOrderStatus = model.m_nOrderStatus;
                     hasModel = YES;
-                    [_dynamicView reloadOneRow:i];
+                    [_holdByTableView reloadOneRow:i];
                 }
             }
             if(!hasModel)
@@ -907,19 +952,19 @@
     {
         if([[data objectAtIndex:0] isKindOfClass:[DealHoldModel class]] && currentTabSelect == 0)
         {
-            [_dynamicView reloadData:data];
+            [_holdTableView reloadData:data];
         }
         else if([[data objectAtIndex:0] isKindOfClass:[DealHoldingModel class]] && currentTabSelect == 1)
         {
-            [_dynamicView reloadData:data];
+            [_holdingTableView reloadData:data];
         }
         else if([[data objectAtIndex:0] isKindOfClass:[DealHoldByModel class]] && currentTabSelect == 2)
         {
-            [_dynamicView reloadData:data];
+            [_holdByTableView reloadData:data];
         }
         else if([[data objectAtIndex:0] isKindOfClass:[DealProfitModel class]] && currentTabSelect == 3)
         {
-            [_dynamicView reloadData:data];
+            [_dealTableView reloadData:data];
         }
     }
  
