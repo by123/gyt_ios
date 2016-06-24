@@ -306,17 +306,19 @@
     if(!IS_NS_COLLECTION_EMPTY(_mainDatas) && current == 0)
     {
         model = [_mainDatas objectAtIndex:indexPath.row];
+        [DetailViewController show:self datas:_mainDatas position:indexPath.row];
     }
     else if(!IS_NS_COLLECTION_EMPTY(_myDatas) && current == 1)
     {
         model = [_myDatas objectAtIndex:indexPath.row];
+        [DetailViewController show:self datas:_myDatas position:indexPath.row];
     }
     else if(!IS_NS_COLLECTION_EMPTY(_historyDatas) && current == 2)
     {
         model = [_historyDatas objectAtIndex:indexPath.row];
+        [DetailViewController show:self datas:_historyDatas position:indexPath.row];
     }
     [[ContractDB sharedContractDB] insertItem:DBHistoryContractTable model:model];
-    [DetailViewController show:self model:model position:indexPath.row];
 }
 
 

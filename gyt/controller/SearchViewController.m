@@ -155,7 +155,7 @@
         _searchTextField.text = model.m_strInstrumentID;
         [[ContractDB sharedContractDB] insertItem:DBSearchContractTable model:model];
         [_tableView reloadData];
-        [DetailViewController show:self model:model position:indexPath.row];
+        [DetailViewController show:self datas:_searchDatas position:indexPath.row];
         [_searchTextField resignFirstResponder];
     }
 }

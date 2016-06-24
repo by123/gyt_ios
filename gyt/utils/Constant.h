@@ -21,11 +21,11 @@
 #pragma mark 网络请求相关
 //#define Root_Url @"http://192.168.1.106:8081" //陈勇
 
-#define Host @"192.168.1.118" //赵杰
-#define Port 64360
+//#define Host @"192.168.1.118" //赵杰
+//#define Port 64360
 
-//#define Host @"114.119.6.146" //外网
-//#define Port 64350
+#define Host @"114.119.6.146" //外网
+#define Port 64350
 
 #define Root_Url @"http://114.119.6.146:8081"
 

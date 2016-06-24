@@ -19,6 +19,8 @@
 
 @interface DetailViewController ()
 
+@property (strong, nonatomic) NSMutableArray *datas;
+
 @property (strong, nonatomic) PushModel *model;
 
 @property (strong, nonatomic) UIView *bodyView;
@@ -41,11 +43,12 @@
 }
 
 +(void)show : (BaseViewController *)controller
-      model : (PushModel *) model
+      datas : (NSMutableArray *) datas
    position : (NSInteger)position
 {
     DetailViewController *targetController = [[DetailViewController alloc]init];
-    targetController.model = model;
+    targetController.datas = datas;
+    targetController.model = [datas objectAtIndex:position];
     [controller presentViewController:targetController animated:YES completion:nil];
 }
 
@@ -155,7 +158,7 @@
 -(void)addBuyView
 {
     [self clearAllView];
-    _dealView = [[DealView alloc]initWithData:CGRectMake(0, 0, SCREEN_WIDTH, kContentHeight + kTopHeight) model:_model view:self.view];
+    _dealView = [[DealView alloc]initWithData:CGRectMake(0, 0, SCREEN_WIDTH, kContentHeight + kTopHeight) datas:_datas model:_model view:self.view];
     [_bodyView addSubview:_dealView];
 
 }

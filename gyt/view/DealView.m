@@ -84,6 +84,8 @@
 //数据
 @property (strong, nonatomic) PushModel *model;
 
+@property (strong, nonatomic) NSMutableArray *datas;
+
 @property (assign, nonatomic) NSInteger position;
 
 @property (strong, nonatomic) MoneyDetailModel *moneyModel;
@@ -113,13 +115,15 @@
 }
 
 -(instancetype)initWithData : (CGRect)frame
-              model : (PushModel *)model
-               view : (UIView *)rootView
+                      datas : (NSMutableArray *)datas
+                      model : (PushModel *)model
+                       view : (UIView *)rootView
 {
     self = [super initWithFrame:frame];
     if(self)
     {
         _model = model;
+        _datas = datas;
         _rootView = rootView;
         holdDatas = [[NSMutableArray alloc]init];
         holdingDatas = [[NSMutableArray alloc]init];
@@ -331,46 +335,30 @@
 
 }
 
-#pragma mark 动态数据
--(void)updateData : (PushModel *)model
-{
-    [self updateBuySellBtn];
-
-    int width = _priceView.size.width;
-    _currentPriceLabel.text = [NSString stringWithFormat:@"新:%.2f",model.m_dLastPrice];
-    _currentPriceLabel.frame = CGRectMake(5, 2.5,(width - 10)/2+10, 20);
-
-    _currentCountLabel.text = [NSString stringWithFormat:@"%d",model.m_nVolume];
-    _currentCountLabel.textAlignment = NSTextAlignmentRight;
-    _currentCountLabel.frame = CGRectMake(width/2, 2.5, width/2, 20);
-
-    _buyPriceLabel.text = [NSString stringWithFormat:@"买:%.2f",model.m_dBidPrice1];
-    _buyPriceLabel.frame = CGRectMake(5, 22.5, (width - 10)/2+10, 20);
-
-    
-    _buyCountLabel.text = [NSString stringWithFormat:@"%d",model.m_nBidVolume1];
-    _buyCountLabel.textAlignment = NSTextAlignmentRight;
-    _buyCountLabel.frame = CGRectMake(width/2, 22.5, width/2, 20);
-
-    _sellPriceLabel.text = [NSString stringWithFormat:@"卖:%.2f",model.m_dAskPrice1];
-    _sellPriceLabel.frame = CGRectMake(5, 42.5, (width - 10)/2+10, 20);
-
-    _sellCountLabel.text = [NSString stringWithFormat:@"%d",model.m_nAskVolume1];
-    _sellCountLabel.textAlignment = NSTextAlignmentRight;
-    _sellCountLabel.frame = CGRectMake(width/2, 42.5, width/2, 20);
-    
-}
 
 -(void)OnExpandView:(BOOL)isExpand
 {
     isExpandView = isExpand;
-    [self updateBuySellBtn];
+    [self updateDealView];
 }
 
 
-#pragma mark 更新买入卖出按钮文字
--(void)updateBuySellBtn
+#pragma mark 点击合约，更新交易面板
+-(void)updateDealView
 {
+    if(!IS_NS_COLLECTION_EMPTY(_datas))
+    {
+        for(PushModel *model in _datas)
+        {
+            if([model.m_strInstrumentID isEqualToString:currentModel.m_strInstrumentID])
+            {
+                _model = model;
+                break;
+            }
+        }
+    }
+    
+    //更新买入，平仓按钮
     NSString *sellTxt;
     NSString *buyTxt;
     if(currentModel && currentItemSelect == 0 &&isExpandView)
@@ -390,6 +378,36 @@
     }
     [_buyItem setTitle:buyTxt forState:UIControlStateNormal];
     [_sellItem setTitle:sellTxt forState:UIControlStateNormal];
+    
+    //更新合约id
+    [_nameButton setTitle:_model.m_strInstrumentID forState:UIControlStateNormal];
+    
+    //更新价格
+    int width = _priceView.size.width;
+    _currentPriceLabel.text = [NSString stringWithFormat:@"新:%.2f",_model.m_dLastPrice];
+    _currentPriceLabel.frame = CGRectMake(5, 2.5,(width - 10)/2+10, 20);
+    
+    _currentCountLabel.text = [NSString stringWithFormat:@"%d",_model.m_nVolume];
+    _currentCountLabel.textAlignment = NSTextAlignmentRight;
+    _currentCountLabel.frame = CGRectMake(width/2, 2.5, width/2, 20);
+    
+    _buyPriceLabel.text = [NSString stringWithFormat:@"买:%.2f",_model.m_dBidPrice1];
+    _buyPriceLabel.frame = CGRectMake(5, 22.5, (width - 10)/2+10, 20);
+    
+    
+    _buyCountLabel.text = [NSString stringWithFormat:@"%d",_model.m_nBidVolume1];
+    _buyCountLabel.textAlignment = NSTextAlignmentRight;
+    _buyCountLabel.frame = CGRectMake(width/2, 22.5, width/2, 20);
+    
+    _sellPriceLabel.text = [NSString stringWithFormat:@"卖:%.2f",_model.m_dAskPrice1];
+    _sellPriceLabel.frame = CGRectMake(5, 42.5, (width - 10)/2+10, 20);
+    
+    _sellCountLabel.text = [NSString stringWithFormat:@"%d",_model.m_nAskVolume1];
+    _sellCountLabel.textAlignment = NSTextAlignmentRight;
+    _sellCountLabel.frame = CGRectMake(width/2, 42.5, width/2, 20);
+
+
+    //
 }
 
 
@@ -447,7 +465,7 @@
             {
                 DealHoldModel *model = [holdDatas objectAtIndex:position];
                 currentModel = model;
-                [self updateBuySellBtn];
+                [self updateDealView];
 
 //                NSString *message = [NSString stringWithFormat:@"%@，平仓价：%.2f",model.m_strInstrumentID,model.m_dLastPrice];
 //                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认平仓吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
@@ -582,19 +600,41 @@
     
     if(view == _buyItem)
     {
-        director = ENTRUST_BUY;
-        NSString *message = [NSString stringWithFormat:@"%@，%.2f，买，%@手",_model.m_strInstrumentID,_model.m_dAskPrice1,hand];
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认下单吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-        alert.tag = 0;
-        [alert show];
+        if([_buyItem.titleLabel.text localizedStandardContainsString:@"平仓"])
+        {
+            director = ENTRUST_BUY;
+            NSString *message = [NSString stringWithFormat:@"%@，%.2f，平仓，%@手",_model.m_strInstrumentID,_model.m_dAskPrice1,hand];
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认平仓吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+            alert.tag = 3;
+            [alert show];
+        }
+        else
+        {
+            director = ENTRUST_BUY;
+            NSString *message = [NSString stringWithFormat:@"%@，%.2f，买，%@手",_model.m_strInstrumentID,_model.m_dAskPrice1,hand];
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认下单吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+            alert.tag = 0;
+            [alert show];
+        }
     }
     else if(view == _sellItem)
     {
-        director = ENTRUST_SELL;
-        NSString *message = [NSString stringWithFormat:@"%@，%.2f，卖，%@手",_model.m_strInstrumentID,_model.m_dBidPrice1,hand];
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认下单吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-        alert.tag = 1;
-        [alert show];
+        if([_sellItem.titleLabel.text localizedStandardContainsString:@"平仓"])
+        {
+            director = ENTRUST_SELL;
+            NSString *message = [NSString stringWithFormat:@"%@，%.2f，平仓，%@手",_model.m_strInstrumentID,_model.m_dBidPrice1,hand];
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认平仓吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+            alert.tag = 3;
+            [alert show];
+        }
+        else
+        {
+            director = ENTRUST_SELL;
+            NSString *message = [NSString stringWithFormat:@"%@，%.2f，卖，%@手",_model.m_strInstrumentID,_model.m_dBidPrice1,hand];
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认下单吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+            alert.tag = 1;
+            [alert show];
+        }
     }
     else if(view == _nameButton)
     {
@@ -674,6 +714,8 @@
     if(dialog.tag == 0)
     {
       [_nameButton setTitle:data forState:UIControlStateNormal];
+      currentModel.m_strInstrumentID = data;
+      [self updateDealView];
     }
     else if(dialog.tag == 1)
     {
@@ -701,6 +743,11 @@
     
     if(model != nil)
     {
+        if(hand > model.m_nCanCloseVol)
+        {
+            [DialogHelper showTips:@"平仓数量大于可用数量"];
+            return;
+        }
         //平仓
         if(model.m_nDirection == ENTRUST_BUY)
         {
@@ -710,7 +757,7 @@
         {
             model.m_nDirection = ENTRUST_BUY;
         }
-        orderModel.info = [OrderModel buildOrderModel :model.m_strProductID  instrumentID:model.m_strInstrumentID orderPrice:model.m_dLastPrice orderNum:model.m_nCanCloseVol direction:model.m_nDirection offsetFlag:EOFF_THOST_FTDC_OF_Close];
+        orderModel.info = [OrderModel buildOrderModel :model.m_strProductID  instrumentID:model.m_strInstrumentID orderPrice:model.m_dLastPrice orderNum:hand direction:model.m_nDirection offsetFlag:EOFF_THOST_FTDC_OF_Close];
     }
     else
     {
@@ -930,7 +977,7 @@
             _model.m_dLowestPrice = model.m_dLowestPrice;
             _model.m_nAskVolume1 = model.m_nAskVolume1;
             _model.m_nBidVolume1 = model.m_nBidVolume1;
-            [self updateData:_model];
+            [self updateDealView];
         }
     }
     else if([data isKindOfClass:[MoneyDetailModel class]])

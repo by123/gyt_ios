@@ -15,7 +15,7 @@
 
 
 +(void)show : (BaseViewController *)controller
-      model : (PushModel *) model
+      datas : (NSMutableArray *) datas
    position : (NSInteger)position;
 
 @end

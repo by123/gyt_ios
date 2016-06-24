@@ -111,8 +111,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    PushModel *model = [_datas objectAtIndex:indexPath.row];
-    [DetailViewController show:self model:model position:0];
+    [DetailViewController show:self datas:_datas position:indexPath.row];
 }
 
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
