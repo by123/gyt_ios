@@ -62,16 +62,11 @@
        
         LoginViewController *mainViewController =[[LoginViewController alloc]init];
         SlideNavigationController *controller = [[SlideNavigationController alloc]initWithRootViewController:mainViewController];
-        
-//        LeftMenuViewContriller *leftMenu = [[LeftMenuViewContriller alloc]init];
-//        leftMenu.view.backgroundColor = BACKGROUND_COLOR;
-        
         RightMenuViewController *rightMenu = [[RightMenuViewController alloc]init];
         rightMenu.view.backgroundColor = BACKGROUND_COLOR;
         rightMenu.controller = controller;
         
         controller.leftMenu = rightMenu;
-//        controller.righMenu = rightMenu;
         _window.rootViewController = controller;
         [_window makeKeyAndVisible];
     }
@@ -101,7 +96,6 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     
-//    [[SocketConnect sharedSocketConnect] disconnect];
 }
 
 

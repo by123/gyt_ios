@@ -13,10 +13,13 @@
 #import "ByTextField.h"
 #import "ByListDialog.h"
 
-@interface DealView : UIView<ByTabViewDelegate,UIAlertViewDelegate,ByDynamicTableViewDelegate,SocketConnectDelegate,ListDialogDelegate,PushDataHandleDelegate>
+@interface DealView : UIView<ByTabViewDelegate,UIAlertViewDelegate,ByDynamicTableViewDelegate,ListDialogDelegate,PushDataHandleDelegate>
 
 -(instancetype)initWithData : (CGRect)frame
                       datas : (NSMutableArray *)datas
                       model : (PushModel *)model
                        view : (UIView *)rootView;
+
+-(void)OnReceiveSuccess:(id)respondObject;
+
 @end

@@ -131,7 +131,7 @@
         holdProfileDatas = [[NSMutableArray alloc]init];
         NSString *moneyDetailStr = [[NSUserDefaults standardUserDefaults] objectForKey:MoneyInfo];
         _moneyModel = [MoneyDetailModel mj_objectWithKeyValues:moneyDetailStr];
-        [[SocketConnect sharedSocketConnect] setDelegate:self];
+
         [self initView];
         return self;
     }
@@ -416,15 +416,15 @@
 {
     if(_holdTableView == nil)
     {
-        NSArray *titleArray = @[@"品种",@"合约号",@"多空",@"手数",@"可用",@"开仓均价",@"逐笔浮盈",@"币种",@"损盈",@"价值",@"保证金",@"今手数",@"今可用",@"投保"];
-        NSArray *widthArray = @[@"1",@"2",@"1",@"1",@"1",@"2",@"2",@"1",@"1",@"1",@"1",@"1",@"1",@"1"];
+        NSArray *titleArray = @[@"合约号",@"多空",@"手数",@"可用",@"开仓均价",@"逐笔浮盈",@"保证金",@"今手数"];
+        NSArray *widthArray = @[@"2",@"1",@"1",@"1",@"2",@"2",@"1",@"1"];
        
-         _holdTableView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH , SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:holdDatas maxWidth:SCREEN_WIDTH * 2.5 type:Hold];
+         _holdTableView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH , SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:holdDatas maxWidth:SCREEN_WIDTH * 1.5 type:Hold];
         [_holdTableView setHeaders:widthArray headers:titleArray];
         
         _expandView = [[UIView alloc]init];
         _expandView.backgroundColor = SELECT_COLOR;
-        _expandView.frame = CGRectMake(0, 0, SCREEN_WIDTH * 2.5, 40);
+        _expandView.frame = CGRectMake(0, 0, SCREEN_WIDTH * 1.5, 40);
         
         _conditionBtn = [[UIButton alloc]init];
         _conditionBtn.frame = CGRectMake(SCREEN_WIDTH - 130, 4, 60, 32);
@@ -911,14 +911,14 @@
                 {
                     temp.m_nOrderStatus = model.m_nOrderStatus;
                     hasModel = YES;
-                    [_holdingTableView reloadOneRow:i];
+//                    [_holdingTableView reloadOneRow:i];
                 }
             }
             if(!hasModel)
             {
                 [holdingDatas addObject:model];
-                [self reloadData:holdingDatas];
             }
+            [self reloadData:holdingDatas];
         }
         else if(currentTabSelect == 2)
         {
@@ -931,14 +931,14 @@
                 {
                     temp.m_nOrderStatus = model.m_nOrderStatus;
                     hasModel = YES;
-                    [_holdByTableView reloadOneRow:i];
                 }
             }
             if(!hasModel)
             {
                 [holdByDatas addObject:model];
-                [self reloadData:holdByDatas];
             }
+            [self reloadData:holdByDatas];
+
         }
 
     }

@@ -35,6 +35,8 @@
 
 @property (strong, nonatomic) BottomTabView *tabView;
 
+@property (strong, nonatomic) ShortCutView *shortCutView;
+
 @end
 
 @implementation DetailViewController
@@ -49,7 +51,8 @@
     DetailViewController *targetController = [[DetailViewController alloc]init];
     targetController.datas = datas;
     targetController.model = [datas objectAtIndex:position];
-    [controller presentViewController:targetController animated:YES completion:nil];
+    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:targetController];
+    [controller presentViewController:navController animated:YES completion:nil];
 }
 
 - (void)viewDidLoad {
@@ -72,7 +75,7 @@
 {
     [self showNavigationBar];
     self.navBar.delegate = self;
-    [self.navBar setLeftImage:[UIImage imageNamed:@"ic_back"]];
+    [self.navBar setLeftImage:[UIImage imageNamed:@"ic_close"]];
     [self.navBar setLeftMainTitle:@"分时图"];
     [self.navBar setLeftSubTitle:_model.m_strInstrumentID];
     [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_drawline"]];
@@ -299,8 +302,8 @@
 #pragma mark 快速下单板
 -(void)addOrder
 {
-    ShortCutView *shortCutView = [[ShortCutView alloc]initWithView:self.view model:_model];
-    [self.view addSubview:shortCutView];
+    _shortCutView = [[ShortCutView alloc]initWithView:self.view model:_model];
+    [self.view addSubview:_shortCutView];
 }
 
 -(void)OnSelectPosition:(NSInteger)position
@@ -399,6 +402,24 @@
     if(_candleView)
     {
         [_candleView update:position];
+    }
+}
+
+-(void)OnReceiveSuccess:(id)respondObject
+{
+    if(_dealView)
+    {
+        [_dealView OnReceiveSuccess:respondObject];
+    }
+    
+    if(_handicapView)
+    {
+        [_handicapView OnReceiveSuccess:respondObject];
+    }
+    
+    if(_shortCutView)
+    {
+        [_shortCutView OnReceiveSuccess:respondObject];
     }
 }
 

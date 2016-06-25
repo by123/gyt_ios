@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "GCDAsyncSocket.h"
+#import "BaseViewController.h"
 
 @protocol SocketConnectDelegate
 
@@ -33,6 +34,8 @@ SINGLETON_DECLARATION(SocketConnect);
 @property (retain , nonatomic) GCDAsyncSocket *clientSocket;
 
 @property (strong , nonatomic) id delegate;
+
+@property (strong, nonatomic) BaseViewController *controller;
 
 -(void)connect;
 

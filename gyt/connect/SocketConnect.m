@@ -1,4 +1,4 @@
-//
+;//
 //  SocketConnect.m
 //  gyt
 //
@@ -100,12 +100,9 @@ SINGLETON_IMPLEMENTION(SocketConnect);
 -(void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port
 {
     [sock readDataWithTimeout:-1 tag:0];
-    NSLog(@"已连接上");
     if(self.delegate)
     {
-//        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.delegate OnConnectSuccess];
-//        });
+        [self.delegate OnConnectSuccess];
     }
     if(hua)
     {
@@ -119,10 +116,7 @@ SINGLETON_IMPLEMENTION(SocketConnect);
 {
     if(self.delegate)
     {
-        [DialogHelper showTips:@"连接被强制断开"];
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [self.delegate OnConnectFail];
-//        });
+        [self.delegate OnConnectFail];
     }
     [self connectInterrupt];
 }
@@ -134,17 +128,11 @@ SINGLETON_IMPLEMENTION(SocketConnect);
         [self connect];
         NSLog(@"重新连接");
         
-        AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        UIWindow *window = delegate.window;
-        LoginViewController *mainViewController =[[LoginViewController alloc]init];
-        SlideNavigationController *controller = [[SlideNavigationController alloc]initWithRootViewController:mainViewController];
-        RightMenuViewController *rightMenu = [[RightMenuViewController alloc]init];
-        rightMenu.view.backgroundColor = BACKGROUND_COLOR;
-        rightMenu.controller = controller;
-        
-        controller.leftMenu = rightMenu;
-        window.rootViewController = controller;
-        [window makeKeyAndVisible];
+        if(_controller && ![_controller isKindOfClass:[LoginViewController class]])
+        {
+            LoginViewController *targetController = [[LoginViewController alloc]init];
+            [_controller.navigationController pushViewController:targetController animated:YES];
+        }
     }
 
 }

@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "PushModel.h"
 
-@interface ShortCutView : UIView<UIAlertViewDelegate,SocketConnectDelegate>
+@interface ShortCutView : UIView<UIAlertViewDelegate>
 
 -(instancetype)initWithView : (UIView *)parentView
 model : (PushModel *)model;
+
+-(void)OnReceiveSuccess:(id)respondObject;
 
 @end

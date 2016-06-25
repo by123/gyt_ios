@@ -75,10 +75,10 @@
  
 }
 
--(void)viewWillAppear:(BOOL)animated
-{
-    [[SocketConnect sharedSocketConnect] setDelegate:self];
-}
+//-(void)viewWillAppear:(BOOL)animated
+//{
+//    [[SocketConnect sharedSocketConnect] setDelegate:self];
+//}
 
 
 -(void)dealloc
@@ -654,9 +654,11 @@
                     [[ContractDB sharedContractDB]updateItem:DBHistoryContractTable instrumentid:model.m_strInstrumentID model:model];
                 
                     NSLog(@"%@->%f->%d",model.m_strInstrumentID,model.m_dLastPrice,model.m_nVolume);
-                    //只刷新变化的那一行
-                    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:i inSection:0];
-                    [_tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+                    
+                    [_tableView reloadData];
+//                    //只刷新变化的那一行
+//                    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:i inSection:0];
+//                    [_tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
                     break;
                 }
             }

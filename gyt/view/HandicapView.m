@@ -47,8 +47,6 @@
     _handicapDatas = [[NSMutableArray alloc]init];
 //    [self initTopView];
     [self initTableView];
-
-    [[SocketConnect sharedSocketConnect] setDelegate:self];
 }
 
 //-(void)initTopView

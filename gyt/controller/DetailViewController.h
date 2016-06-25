@@ -11,7 +11,7 @@
 #import "BottomTabView.h"
 #import "TimeView.h"
 
-@interface DetailViewController : BaseViewController<ByNavigationBarDelegate,BottomTabViewDelegate,TimeViewDelegate>
+@interface DetailViewController : BaseViewController<ByNavigationBarDelegate,BottomTabViewDelegate,TimeViewDelegate,SocketConnectDelegate>
 
 
 +(void)show : (BaseViewController *)controller

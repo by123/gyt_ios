@@ -80,8 +80,6 @@
         [[Test sharedTest] setPort:[port integerValue]];
         [DialogHelper showSuccessTips:@"修改成功"];
         [[SocketConnect sharedSocketConnect] disconnect];
-//        LoginViewController *target = [[LoginViewController alloc]init];
-//        [self.navigationController pushViewController:target animated:YES];
     }
     else
     {

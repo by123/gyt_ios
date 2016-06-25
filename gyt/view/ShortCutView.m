@@ -54,7 +54,6 @@
     {
         self.backgroundColor = [ColorUtil colorWithHexString:@"#222222" alpha:0.5f];
         [self initView];
-        [[SocketConnect sharedSocketConnect] setDelegate:self];
     }
     return  self;
 }

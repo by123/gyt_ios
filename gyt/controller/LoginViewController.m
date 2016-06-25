@@ -51,6 +51,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initView];
+    [[SocketConnect sharedSocketConnect]setController:self];
 }
 
 #pragma mark 初始化控件
@@ -61,10 +62,10 @@
     [self initBody];
 }
 
--(void)viewWillAppear:(BOOL)animated
-{
-    [[SocketConnect sharedSocketConnect] setDelegate:self];
-}
+//-(void)viewWillAppear:(BOOL)animated
+//{
+//    [[SocketConnect sharedSocketConnect] setDelegate:self];
+//}
 
 -(void)initNavigationBar
 {
@@ -86,7 +87,8 @@
     _nameTextField = [[InsetTextField alloc]initWithFrame:CGRectMake(20, 70, SCREEN_WIDTH-40, 40)];
     _nameTextField.hasTitle = YES;
 //    _nameTextField.text = @"800014340";
-    _nameTextField.text = @"800001080";
+//    _nameTextField.text = @"800001080"; //内外通用
+    _nameTextField.text = @"800003664";  //外网
 //    _nameTextField.text = @"800001706";
     [_nameTextField setInsetTitle:@"资金账号：" font:[UIFont systemFontOfSize:14.0f]];
     _nameTextField.block = ^(InsetTextField *insetTextField) {

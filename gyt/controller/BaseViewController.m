@@ -9,7 +9,7 @@
 #import "BaseViewController.h"
 
 
-@interface BaseViewController ()
+@interface BaseViewController ()<SocketConnectDelegate>
 
 @end
 
@@ -21,6 +21,9 @@
     self.view.backgroundColor = BACKGROUND_COLOR;
     self.navigationController.navigationBar.hidden = YES;
     self.automaticallyAdjustsScrollViewInsets = NO;
+    [[SocketConnect sharedSocketConnect]setDelegate:self];
+    [[SocketConnect sharedSocketConnect]setController:self];
+
     
 }
 
@@ -34,5 +37,17 @@
 -(void)OnTitleClick
 {
 }
+
+-(void)OnConnectSuccess
+{
+    NSLog(@"连接成功！");
+}
+
+-(void)OnConnectFail
+{
+    NSLog(@"连接失败!");
+}
+
+
 
 @end

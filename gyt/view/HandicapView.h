@@ -14,8 +14,10 @@
 #define kContentHeight SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT - kTopHeight - 40
 #define KTabHeight 25
 
-@interface HandicapView : UIView<UITableViewDelegate,UITableViewDataSource,ByTabViewDelegate,SocketConnectDelegate>
+@interface HandicapView : UIView<UITableViewDelegate,UITableViewDataSource,ByTabViewDelegate>
 
 -(instancetype)initWithData : (PushModel *)model;
+
+-(void)OnReceiveSuccess:(id)respondObject;
 
 @end
