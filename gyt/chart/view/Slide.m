@@ -212,30 +212,30 @@
 
 -(void)setData : (NSString *)text
 {
-    if([text containsString:@"Open"])
+    if([text myContainsString:@"Open"])
     {
         _openPriceLabel.text = [text substringFromIndex:6];
     }
-    else if([text containsString:@"Close"])
+    else if([text myContainsString:@"Close"])
     {
         _closePriceLabel.text = [text substringFromIndex:7];
     }
-    else if([text containsString:@"High"])
+    else if([text myContainsString:@"High"])
     {
         _highPriceLabel.text = [text substringFromIndex:6];
     }
-    else if([text containsString:@"Low"])
+    else if([text myContainsString:@"Low"])
     {
         _lowPriceLabel.text = [text substringFromIndex:5];
     }
-    else if([text containsString:@"Change"])
+    else if([text myContainsString:@"Change"])
     {
         NSString *change = [text substringFromIndex:8];
-        if([change containsString:@"0.00%"])
+        if([change myContainsString:@"0.00%"])
         {
             [self setUpDownTextColor:TEXT_COLOR];
         }
-        else if([change containsString:@"-"])
+        else if([change myContainsString:@"-"])
         {
             [self setUpDownTextColor:[UIColor greenColor]];
         }
@@ -245,11 +245,11 @@
         }
         _updownPercentLabel.text = change;
     }
-    else if([text containsString:@"VOL"])
+    else if([text myContainsString:@"VOL"])
     {
         _holdLabel.text = [text substringFromIndex:5];
     }
-    else if([text containsString:@"Price"])
+    else if([text myContainsString:@"Price"])
     {
         _priceLabel.text = [text substringFromIndex:7];
     }

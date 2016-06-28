@@ -67,7 +67,7 @@
                     label.text = [Constant EEntrustBSStr:model.m_nDirection];
                     break;
                 case 2://手数
-                    label.text = [NSString stringWithFormat:@"%.d",model.m_nOpenVolume];
+                    label.text = [NSString stringWithFormat:@"%.d",model.m_nPosition];
                     break;
                 case 3://可用
                     label.text = [NSString stringWithFormat:@"%.d",model.m_nCanCloseVol];

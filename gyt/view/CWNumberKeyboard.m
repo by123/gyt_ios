@@ -126,7 +126,7 @@ alpha:alphaValue]
         case 1010:
         {
             // 小数点
-            if(self.mTextNumberFiled.text.length > 0 && ![self.mTextNumberFiled.text containsString:@"."]){
+            if(self.mTextNumberFiled.text.length > 0 && ![self.mTextNumberFiled.text myContainsString:@"."]){
                 [self.mTextNumberFiled insertText:@"."];
             }
             
@@ -156,7 +156,7 @@ alpha:alphaValue]
         {
             // 数字
             // 含有小数点
-            if([self.mTextNumberFiled.text containsString:@"."]){
+            if([self.mTextNumberFiled.text myContainsString:@"."]){
                 NSRange ran = [self.mTextNumberFiled.text rangeOfString:@"."];
                 if (self.mTextNumberFiled.text.length - ran.location <= 2) {
                     NSString *text = [NSString stringWithFormat:@"%d",sender.tag - 1000];
