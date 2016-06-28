@@ -104,7 +104,7 @@
     [_searchDatas removeAllObjects];
     for(PushModel *model in _datas)
     {
-        if([model.m_strInstrumentID localizedStandardContainsString:textField.text])
+        if([model.m_strInstrumentID myContainsString:textField.text])
         {
             [_searchDatas addObject:model];
         }

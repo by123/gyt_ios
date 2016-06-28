@@ -28,6 +28,7 @@
 #import "GYTPackage.h"
 #import "PushDataHandle.h"
 #import <UMMobClick/MobClick.h>
+#import "NSString+Contains.h"
 
 #define  KEY_USERNAME_PASSWORD @"com.company.app.usernamepassword"
 #define  KEY_USERNAME @"com.company.app.username"

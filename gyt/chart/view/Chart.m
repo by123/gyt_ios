@@ -300,47 +300,47 @@
 				CGContextSetShouldAntialias(context, YES);
 				CGContextSetRGBFillColor(context, [colors[0] floatValue], [colors[1] floatValue], [colors[2] floatValue], 1.0);
                 
-                if([text localizedStandardContainsString:@"VR"])
+                if([text myContainsString:@"VR"])
                 {
                     md[NSForegroundColorAttributeName] =[UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f];
                 }
-                else if([text localizedStandardContainsString:@"WR"])
+                else if([text myContainsString:@"WR"])
                 {
                     md[NSForegroundColorAttributeName] =[UIColor colorWithRed:250.0f/255.0f green:232.0f/255.0f blue:115.0f/255.0f alpha:1.0f];
                 }
-                else if([text localizedStandardContainsString:@"J:"])
+                else if([text myContainsString:@"J:"])
                 {
                     md[NSForegroundColorAttributeName] =[UIColor colorWithRed:232.0f/255.0f green:115.0f/255.0f blue:250.0f/255.0f alpha:1.0f];
                 }
-                else if([text localizedStandardContainsString:@"D:"])
+                else if([text myContainsString:@"D:"])
                 {
                     md[NSForegroundColorAttributeName] =[UIColor colorWithRed:250.0f/255.0f green:232.0f/255.0f blue:115.0f/255.0f alpha:1.0f];
                 }
-                else if([text localizedStandardContainsString:@"KDJ"])
+                else if([text myContainsString:@"KDJ"])
                 {
                     md[NSForegroundColorAttributeName] =[UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f];
                 }
-                else if([text localizedStandardContainsString:@"RSI12"])
+                else if([text myContainsString:@"RSI12"])
                 {
                     md[NSForegroundColorAttributeName] =[UIColor colorWithRed:250.0f/255.0f green:232.0f/255.0f blue:115.0f/255.0f alpha:1.0f];
                 }
-                else if([text localizedStandardContainsString:@"RSI6"])
+                else if([text myContainsString:@"RSI6"])
                 {
                     md[NSForegroundColorAttributeName] =[UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f];
                 }
-                else if([text localizedStandardContainsString:@"VOL"])
+                else if([text myContainsString:@"VOL"])
                 {
                     md[NSForegroundColorAttributeName] =[UIColor colorWithRed:176.0f/255.0f green:52.0f/255.0f blue:52.0f/255.0f alpha:1.0f];
                 }
-                else if([text localizedStandardContainsString:@"MA10"])
+                else if([text myContainsString:@"MA10"])
                 {
                     md[NSForegroundColorAttributeName] =[UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f];
                 }
-                else if([text localizedStandardContainsString:@"MA30"])
+                else if([text myContainsString:@"MA30"])
                 {
                     md[NSForegroundColorAttributeName] =[UIColor colorWithRed:250/255.0f green:232/255.0f blue:115.0f/255.0f alpha:1.0f];
                 }
-                else if([text localizedStandardContainsString:@"MA60"])
+                else if([text myContainsString:@"MA60"])
                 {
                     md[NSForegroundColorAttributeName] =[UIColor colorWithRed:232.0f/255.0f green:115.0f/255.0f blue:250.0f/255.0f alpha:1.0f];
                 }

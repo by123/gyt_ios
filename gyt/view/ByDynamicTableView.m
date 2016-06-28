@@ -117,18 +117,17 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if(!IS_NS_COLLECTION_EMPTY(_datas))
-    {
-        return _datas.count;
-    }
-    return 0;
+    return 1;
 }
 
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
-    return 1;
+    if(!IS_NS_COLLECTION_EMPTY(_datas))
+    {
+        return _datas.count;
+    }
+    return 0;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -145,10 +144,7 @@
                 [cell setHoldingData:[_datas objectAtIndex:indexPath.row] maxWidth:_maxWidth];
                 break;
             case HoldBy:
-                if([_datas count] - 1  ==indexPath.row)
-                {
-                    NSLog(@"");
-                }
+                NSLog(@"这是什么鬼->%d",indexPath.row);
                 [cell setHoldByData:[_datas objectAtIndex:indexPath.row] maxWidth:_maxWidth];
                 break;
             case Profit:

@@ -21,7 +21,7 @@
 @implementation AddViewController
 
 +(void)show : (BaseViewController *)controller
-       type : (CashType) type
+       type : (CashType)type
 {
     AddViewController *targetController = [[AddViewController alloc]init];
     targetController.cashType = type;
@@ -47,8 +47,6 @@
     {
         [self.navBar setTitle:@"期货转银行"];
     }
-   
-    
     [self.navBar setLeftImage:[UIImage imageNamed:@"ic_back"]];
 }
 
@@ -62,7 +60,6 @@
     [self loadData];
 
 }
-
 
 -(void)loadData
 {

@@ -15,6 +15,7 @@
 		CF111D491CFBDF4100298C78 /* OrderRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF111D481CFBDF4100298C78 /* OrderRequestModel.m */; };
 		CF111D4C1CFBEABB00298C78 /* OrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF111D4B1CFBEABB00298C78 /* OrderModel.m */; };
 		CF111D4F1CFBF5A000298C78 /* OrderTagModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF111D4E1CFBF5A000298C78 /* OrderTagModel.m */; };
+		CF1B8C281D22A44C00BE5D86 /* NSString+Contains.m in Sources */ = {isa = PBXBuildFile; fileRef = CF1B8C271D22A44C00BE5D86 /* NSString+Contains.m */; };
 		CF247A851CEB22E1000F1442 /* ByListDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = CF247A841CEB22E1000F1442 /* ByListDialog.m */; };
 		CF2A51051CE31A1D00F0EF3D /* CheckUpdateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2A51021CE31A1D00F0EF3D /* CheckUpdateUtil.m */; };
 		CF2A51061CE31A1D00F0EF3D /* UpdateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2A51041CE31A1D00F0EF3D /* UpdateModel.m */; };
@@ -181,6 +182,8 @@
 		CF111D4B1CFBEABB00298C78 /* OrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderModel.m; sourceTree = "<group>"; };
 		CF111D4D1CFBF5A000298C78 /* OrderTagModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderTagModel.h; sourceTree = "<group>"; };
 		CF111D4E1CFBF5A000298C78 /* OrderTagModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderTagModel.m; sourceTree = "<group>"; };
+		CF1B8C261D22A44C00BE5D86 /* NSString+Contains.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Contains.h"; sourceTree = "<group>"; };
+		CF1B8C271D22A44C00BE5D86 /* NSString+Contains.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Contains.m"; sourceTree = "<group>"; };
 		CF247A831CEB22E1000F1442 /* ByListDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ByListDialog.h; sourceTree = "<group>"; };
 		CF247A841CEB22E1000F1442 /* ByListDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ByListDialog.m; sourceTree = "<group>"; };
 		CF2A51011CE31A1D00F0EF3D /* CheckUpdateUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckUpdateUtil.h; sourceTree = "<group>"; };
@@ -739,6 +742,8 @@
 				CF4A6D6C1CBE2A0800B36C93 /* UILabel+ContentSize.m */,
 				CF4A6D6D1CBE2A0800B36C93 /* UIView+Frame.h */,
 				CF4A6D6E1CBE2A0800B36C93 /* UIView+Frame.m */,
+				CF1B8C261D22A44C00BE5D86 /* NSString+Contains.h */,
+				CF1B8C271D22A44C00BE5D86 /* NSString+Contains.m */,
 			);
 			path = extra;
 			sourceTree = "<group>";
@@ -1361,6 +1366,7 @@
 				CF6340341CFD65FB008149B1 /* GYTPackage.m in Sources */,
 				CFDD2EA51CCF4DE100E81E3F /* MJRefreshBackStateFooter.m in Sources */,
 				CFA3B8ED1CD9AAB70063AE3E /* ColumnChartModel.m in Sources */,
+				CF1B8C281D22A44C00BE5D86 /* NSString+Contains.m in Sources */,
 				CFDD2EBA1CCF97F400E81E3F /* SplashViewController.m in Sources */,
 				CF4A6D7F1CBE2EAB00B36C93 /* BaseViewController.m in Sources */,
 				CFDD2EAB1CCF4DE100E81E3F /* UIScrollView+MJExtension.m in Sources */,

@@ -153,11 +153,11 @@
                 case 4://委托价
                     if(model.m_dOrderPrice == 0)
                     {
-                        label.text = [NSString stringWithFormat:@"%.f",model.m_dLimitPrice];
+                        label.text = [NSString stringWithFormat:@"%.2f",model.m_dLimitPrice];
                     }
                     else
                     {
-                        label.text = [NSString stringWithFormat:@"%.f",model.m_dOrderPrice];
+                        label.text = [NSString stringWithFormat:@"%.2f",model.m_dOrderPrice];
                     }
                     break;
                 case 5://委托量
@@ -244,11 +244,11 @@
                 case 4://委托价
                     if(model.m_dOrderPrice == 0)
                     {
-                        label.text = [NSString stringWithFormat:@"%.f",model.m_dLimitPrice];
+                        label.text = [NSString stringWithFormat:@"%.2f",model.m_dLimitPrice];
                     }
                     else
                     {
-                        label.text = [NSString stringWithFormat:@"%.f",model.m_dOrderPrice];
+                        label.text = [NSString stringWithFormat:@"%.2f",model.m_dOrderPrice];
                     }
                     break;
                 case 5://委托量
@@ -316,7 +316,7 @@
                     label.text = [Constant EEntrustBSStr:model.m_nDirection];
                     break;
                 case 3://成交价
-                    label.text = [NSString stringWithFormat:@"%.f",model.m_dPrice];
+                    label.text = [NSString stringWithFormat:@"%.2f",model.m_dPrice];
                     break;
                 case 4://成交量
                     label.text = [NSString stringWithFormat:@"%d",model.m_nVolume];

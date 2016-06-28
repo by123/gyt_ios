@@ -470,11 +470,6 @@
                 DealHoldModel *model = [holdDatas objectAtIndex:position];
                 currentModel = model;
                 [self updateDealView];
-
-//                NSString *message = [NSString stringWithFormat:@"%@，平仓价：%.2f",model.m_strInstrumentID,model.m_dLastPrice];
-//                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认平仓吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-//                alert.tag = 3;
-//                [alert show];
             }
             break;
         case 1:
@@ -604,7 +599,7 @@
     
     if(view == _buyItem)
     {
-        if([_buyItem.titleLabel.text localizedStandardContainsString:@"平仓"])
+        if([_buyItem.titleLabel.text myContainsString:@"平仓"])
         {
             director = ENTRUST_BUY;
             NSString *message = [NSString stringWithFormat:@"%@，%.2f，平仓，%@手",_model.m_strInstrumentID,_model.m_dAskPrice1,hand];
@@ -632,7 +627,7 @@
     }
     else if(view == _sellItem)
     {
-        if([_sellItem.titleLabel.text localizedStandardContainsString:@"平仓"])
+        if([_sellItem.titleLabel.text myContainsString:@"平仓"])
         {
             director = ENTRUST_SELL;
             NSString *message = [NSString stringWithFormat:@"%@，%.2f，平仓，%@手",_model.m_strInstrumentID,_model.m_dBidPrice1,hand];
@@ -756,6 +751,10 @@
             buyTxt = [NSString stringWithFormat:@"%.2f\n—————————\n买入",_model.m_dLowestPrice];
             sellTxt = [NSString stringWithFormat:@"%.2f\n—————————\n卖出",_model.m_dHighestPrice];
         }
+//        else if([data isEqualToString:@"自定义"])
+//        {
+//            
+//        }
         [_buyItem setTitle:buyTxt forState:UIControlStateNormal];
         [_sellItem setTitle:sellTxt forState:UIControlStateNormal];
     }
