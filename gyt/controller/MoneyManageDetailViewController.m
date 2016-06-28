@@ -101,5 +101,12 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+-(void)OnReceiveSuccess:(id)respondObject
+{
+}
+
+-(void)OnReceiveFail:(NSError *)error
+{
+}
 
 @end

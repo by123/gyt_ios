@@ -10,7 +10,7 @@
 #import "SlideNavigationController.h"
 #import "BaseViewController.h"
 
-@interface MyContractViewController : BaseViewController<ByNavigationBarDelegate,UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate>
+@interface MyContractViewController : BaseViewController<ByNavigationBarDelegate,UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,SocketConnectDelegate>
 
 +(void)show : (SlideNavigationController *)controller;
 

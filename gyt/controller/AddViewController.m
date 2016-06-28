@@ -66,7 +66,7 @@
 
 -(void)loadData
 {
-    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]]];
+    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://114.119.6.146:8088/login/"]]];
 }
 
 -(void)OnLeftClickCallback

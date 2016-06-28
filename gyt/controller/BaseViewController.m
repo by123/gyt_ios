@@ -7,6 +7,9 @@
 //
 
 #import "BaseViewController.h"
+#import "LoginViewController.h"
+#import "RightMenuViewController.h"
+#import "AppDelegate.h"
 
 
 @interface BaseViewController ()<SocketConnectDelegate>
@@ -46,6 +49,49 @@
 -(void)OnConnectFail
 {
     NSLog(@"连接失败!");
+    [self connectInterrupt];
+
+}
+
+
+#pragma mark - 断开弹出提示
+-(void)connectInterrupt
+{
+    NSLog(@"连接被断开");
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"连接失败" message:@"您已经与服务器断开连接，请点击确定重新连接" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        [alertView show];
+    });
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 1)
+    {
+        [[SocketConnect sharedSocketConnect] connect];
+        NSLog(@"重新连接");
+        
+        if(self && ![self isKindOfClass:[LoginViewController class]])
+        {
+            AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+            LoginViewController *loginViewController = [[LoginViewController alloc]init];
+            SlideNavigationController *controller = (SlideNavigationController *)appDelegate.window.rootViewController;
+            [controller switchToViewController:loginViewController withCompletion:^{
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }];
+        
+        }
+
+    }
+    
+}
+
+-(void)OnReceiveSuccess:(id)respondObject
+{
+}
+
+-(void)OnReceiveFail:(NSError *)error
+{
 }
 
 

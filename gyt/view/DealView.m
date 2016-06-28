@@ -720,6 +720,20 @@
     else if(dialog.tag == 1)
     {
         [_priceButton setTitle:[NSString stringWithFormat:@"价格: %@",data] forState:UIControlStateNormal];
+        NSString *sellTxt;
+        NSString *buyTxt;
+        if([data isEqualToString:@"对手价"])
+        {
+            buyTxt = [NSString stringWithFormat:@"%.2f\n—————————\n买入",_model.m_dAskPrice1];
+            sellTxt = [NSString stringWithFormat:@"%.2f\n—————————\n卖出",_model.m_dBidPrice1];
+        }
+        else if ([data isEqualToString:@"市价"])
+        {
+            buyTxt = [NSString stringWithFormat:@"%.2f\n—————————\n买入",_model.m_dLowestPrice];
+            sellTxt = [NSString stringWithFormat:@"%.2f\n—————————\n卖出",_model.m_dHighestPrice];
+        }
+        [_buyItem setTitle:buyTxt forState:UIControlStateNormal];
+        [_sellItem setTitle:sellTxt forState:UIControlStateNormal];
     }
 }
 

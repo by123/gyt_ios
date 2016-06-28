@@ -389,7 +389,7 @@
     [MBProgressHUD hideHUDForView:self animated:YES];
     self.candleChart.hidden = NO;
     
-    [self performSelector:@selector(start) withObject:self afterDelay:5.0f];
+//    [self performSelector:@selector(start) withObject:self afterDelay:5.0f];
 
 }
 

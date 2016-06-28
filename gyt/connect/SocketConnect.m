@@ -91,7 +91,10 @@ SINGLETON_IMPLEMENTION(SocketConnect);
     if(_clientSocket)
     {
         [_clientSocket disconnect];
-        [self connectInterrupt];
+        if(self.delegate)
+        {
+            [self.delegate OnConnectFail];
+        }
     }
 }
 
@@ -118,24 +121,8 @@ SINGLETON_IMPLEMENTION(SocketConnect);
     {
         [self.delegate OnConnectFail];
     }
-    [self connectInterrupt];
 }
 
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if(buttonIndex == 1)
-    {
-        [self connect];
-        NSLog(@"重新连接");
-        
-        if(_controller && ![_controller isKindOfClass:[LoginViewController class]])
-        {
-            LoginViewController *targetController = [[LoginViewController alloc]init];
-            [_controller.navigationController pushViewController:targetController animated:YES];
-        }
-    }
-
-}
 
 #pragma mark - 接收服务端的数据
 -(void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
@@ -197,15 +184,6 @@ SINGLETON_IMPLEMENTION(SocketConnect);
     [_clientSocket writeData:data withTimeout:-1 tag:0];
 }
 
-#pragma mark - 断开弹出提示
--(void)connectInterrupt
-{
-    NSLog(@"连接被断开");
-    dispatch_async(dispatch_get_main_queue(), ^{
-        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"连接失败" message:@"您已经与服务器断开连接，请点击确定重新连接" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-        [alertView show];
-    });
-}
 
 
 @end

@@ -102,16 +102,25 @@
     [self.navBar setLeftImage:[UIImage imageNamed:@"ic_back"]];
 }
 
+
 -(void)OnLeftClickCallback
 {
-    if(self.navigationController)
-    {
+//    if(self.navigationController)
+//    {
         [self.navigationController popViewControllerAnimated:YES];
-    }
-    else
-    {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }
+//    }
+//    else
+//    {
+//        [self dismissViewControllerAnimated:YES completion:nil];
+//    }
+}
+
+-(void)OnReceiveSuccess:(id)respondObject
+{
+}
+
+-(void)OnReceiveFail:(NSError *)error
+{
 }
 
 

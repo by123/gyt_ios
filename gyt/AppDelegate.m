@@ -37,46 +37,32 @@
     
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     BOOL firstLaunch = [userDefault boolForKey:First_Launch];
-
+    
     if(!firstLaunch)
     {
         [userDefault setBool:YES forKey:First_Launch];
         SplashViewController *splashViewController = [[SplashViewController alloc]init];
-        SlideNavigationController *controller = [[SlideNavigationController alloc]initWithRootViewController:splashViewController];
-        
-//        LeftMenuViewContriller *leftMenu = [[LeftMenuViewContriller alloc]init];
-//        leftMenu.view.backgroundColor = BACKGROUND_COLOR;
-        
-        RightMenuViewController *rightMenu = [[RightMenuViewController alloc]init];
-        rightMenu.view.backgroundColor = BACKGROUND_COLOR;
-        rightMenu.controller = controller;
-        
-        controller.leftMenu = rightMenu;
-//        controller.righMenu = rightMenu;
-        
-        _window.rootViewController = controller;
-        [_window makeKeyAndVisible];
+        [_window setRootViewController:[[SlideNavigationController alloc]initWithRootViewController:splashViewController]];
     }
     else
     {
-       
-        LoginViewController *mainViewController =[[LoginViewController alloc]init];
-        SlideNavigationController *controller = [[SlideNavigationController alloc]initWithRootViewController:mainViewController];
-        RightMenuViewController *rightMenu = [[RightMenuViewController alloc]init];
-        rightMenu.view.backgroundColor = BACKGROUND_COLOR;
-        rightMenu.controller = controller;
-        
-        controller.leftMenu = rightMenu;
-        _window.rootViewController = controller;
-        [_window makeKeyAndVisible];
+        LoginViewController *loginViewController = [[LoginViewController alloc]init];
+        [_window setRootViewController:[[SlideNavigationController alloc] initWithRootViewController:loginViewController]];
     }
+    RightMenuViewController *rightMenu = [[RightMenuViewController alloc]init];
+    rightMenu.view.backgroundColor = BACKGROUND_COLOR;
+    rightMenu.controller = (SlideNavigationController *)_window.rootViewController;
+    [SlideNavigationController sharedInstance].leftMenu = rightMenu;
+    
+    [_window makeKeyAndVisible];
+    
     
 //    [self initBugTags];
     [self initUmengAnalysis];
     [self initDB];
+    [self listenNetChange];
     [[SocketConnect sharedSocketConnect] connect];
  
-
 //    [[CheckUpdateUtil sharedCheckUpdateUtil] check];
     return YES;
 }
@@ -139,6 +125,33 @@
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     [MobClick setAppVersion:version];
         
+}
+
+-(void)listenNetChange
+{
+    AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
+    [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+            switch (status) {
+                case AFNetworkReachabilityStatusUnknown:
+                    NSLog(@"未识别的网络");
+                    break;
+                    
+                case AFNetworkReachabilityStatusNotReachable:
+                    NSLog(@"不可达的网络(未连接)");
+                    break;
+                    
+                case AFNetworkReachabilityStatusReachableViaWWAN:
+                    NSLog(@"2G,3G,4G...的网络");
+                    break;
+                    
+                case AFNetworkReachabilityStatusReachableViaWiFi:
+                    NSLog(@"wifi的网络");
+                    break;
+                default:
+                    break;
+            }
+        }];
+        [manager startMonitoring];
 }
 
 @end

@@ -15,6 +15,8 @@
 #import "ByTextField.h"
 #import "ManageViewController.h"
 #import "Test.h"
+#import "AppDelegate.h"
+#import "RightMenuViewController.h"
 @interface LoginViewController ()
 
 @property (strong , nonatomic) InsetTextField *nameTextField;
@@ -207,6 +209,53 @@
 -(void)OnConnectFail
 {
     _tipLabel.text = @"连接被断开";
+    [self connectInterrupt];
+    
+}
+
+
+#pragma mark - 断开弹出提示
+-(void)connectInterrupt
+{
+    NSLog(@"连接被断开");
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"连接失败" message:@"您已经与服务器断开连接，请点击确定重新连接" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        [alertView show];
+    });
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 1)
+    {
+        [[SocketConnect sharedSocketConnect] connect];
+        NSLog(@"重新连接");
+        
+        if(self && ![self isKindOfClass:[LoginViewController class]])
+        {
+            //            LoginViewController *targetController = [[LoginViewController alloc]init];
+            //            [self.navigationController pushViewController:targetController animated:YES];
+            
+            //移除uiwindow
+            AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+            [appDelegate.window resignKeyWindow];
+            
+            
+            UIWindow *window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
+            window.backgroundColor = BACKGROUND_COLOR;
+            
+            LoginViewController *loginViewController =[[LoginViewController alloc]init];
+            SlideNavigationController *controller = [[SlideNavigationController alloc]initWithRootViewController:loginViewController];
+            RightMenuViewController *rightMenu = [[RightMenuViewController alloc]init];
+            rightMenu.view.backgroundColor = BACKGROUND_COLOR;
+            rightMenu.controller = controller;
+            
+            controller.leftMenu = rightMenu;
+            window.rootViewController = controller;
+            [window makeKeyWindow];
+        }
+    }
+    
 }
 
 
@@ -321,6 +370,7 @@
     
     [hua hide:YES];
 }
+
 
 
 #pragma mark 隐藏键盘
