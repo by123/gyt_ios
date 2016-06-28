@@ -112,6 +112,8 @@
     NSInteger currentTabSelect;
     EEntrustBS director;
     Boolean isExpandView;
+    //停止价格联动
+    Boolean stopChange;
 }
 
 -(instancetype)initWithData : (CGRect)frame
@@ -359,26 +361,28 @@
     }
     
     //更新买入，平仓按钮
-    NSString *sellTxt;
-    NSString *buyTxt;
-    if(currentModel && currentItemSelect == 0 &&isExpandView)
+    if(!stopChange)
     {
-        if(currentModel.m_nDirection == ENTRUST_BUY){
-            buyTxt = [NSString stringWithFormat:@"%.2f\n—————————\n买入",_model.m_dAskPrice1];
-            sellTxt = [NSString stringWithFormat:@"%.2f\n—————————\n平仓",_model.m_dBidPrice1];
+        NSString *sellTxt;
+        NSString *buyTxt;
+        if(currentModel && currentItemSelect == 0 &&isExpandView)
+        {
+            if(currentModel.m_nDirection == ENTRUST_BUY){
+                buyTxt = [NSString stringWithFormat:@"%.2f\n—————————\n买入",_model.m_dAskPrice1];
+                sellTxt = [NSString stringWithFormat:@"%.2f\n—————————\n平仓",_model.m_dBidPrice1];
+            }
+            else{
+                buyTxt = [NSString stringWithFormat:@"%.2f\n—————————\n平仓",_model.m_dAskPrice1];
+                sellTxt = [NSString stringWithFormat:@"%.2f\n—————————\n卖出",_model.m_dBidPrice1];
+            }
         }
         else{
-            buyTxt = [NSString stringWithFormat:@"%.2f\n—————————\n平仓",_model.m_dAskPrice1];
+            buyTxt = [NSString stringWithFormat:@"%.2f\n—————————\n买入",_model.m_dAskPrice1];
             sellTxt = [NSString stringWithFormat:@"%.2f\n—————————\n卖出",_model.m_dBidPrice1];
         }
+        [_buyItem setTitle:buyTxt forState:UIControlStateNormal];
+        [_sellItem setTitle:sellTxt forState:UIControlStateNormal];
     }
-    else{
-        buyTxt = [NSString stringWithFormat:@"%.2f\n—————————\n买入",_model.m_dAskPrice1];
-        sellTxt = [NSString stringWithFormat:@"%.2f\n—————————\n卖出",_model.m_dBidPrice1];
-    }
-    [_buyItem setTitle:buyTxt forState:UIControlStateNormal];
-    [_sellItem setTitle:sellTxt forState:UIControlStateNormal];
-    
     //更新合约id
     [_nameButton setTitle:_model.m_strInstrumentID forState:UIControlStateNormal];
     
@@ -611,7 +615,16 @@
         else
         {
             director = ENTRUST_BUY;
-            NSString *message = [NSString stringWithFormat:@"%@，%.2f，买，%@手",_model.m_strInstrumentID,_model.m_dAskPrice1,hand];
+            double price;
+            if(stopChange)
+            {
+                price = _model.m_dLowestPrice;
+            }
+            else
+            {
+                price = _model.m_dAskPrice1;
+            }
+            NSString *message = [NSString stringWithFormat:@"%@，%.2f，买，%@手",_model.m_strInstrumentID,price,hand];
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认下单吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
             alert.tag = 0;
             [alert show];
@@ -630,7 +643,16 @@
         else
         {
             director = ENTRUST_SELL;
-            NSString *message = [NSString stringWithFormat:@"%@，%.2f，卖，%@手",_model.m_strInstrumentID,_model.m_dBidPrice1,hand];
+            double price;
+            if(stopChange)
+            {
+                price = _model.m_dHighestPrice;
+            }
+            else
+            {
+                price = _model.m_dBidPrice1;
+            }
+            NSString *message = [NSString stringWithFormat:@"%@，%.2f，卖，%@手",_model.m_strInstrumentID,price,hand];
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认下单吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
             alert.tag = 1;
             [alert show];
@@ -724,11 +746,13 @@
         NSString *buyTxt;
         if([data isEqualToString:@"对手价"])
         {
+            stopChange = NO;
             buyTxt = [NSString stringWithFormat:@"%.2f\n—————————\n买入",_model.m_dAskPrice1];
             sellTxt = [NSString stringWithFormat:@"%.2f\n—————————\n卖出",_model.m_dBidPrice1];
         }
         else if ([data isEqualToString:@"市价"])
         {
+            stopChange = YES;
             buyTxt = [NSString stringWithFormat:@"%.2f\n—————————\n买入",_model.m_dLowestPrice];
             sellTxt = [NSString stringWithFormat:@"%.2f\n—————————\n卖出",_model.m_dHighestPrice];
         }
@@ -780,10 +804,18 @@
         if(director == ENTRUST_BUY)
         {
             price = _model.m_dAskPrice1;
+            if(stopChange)
+            {
+                price = _model.m_dLowestPrice;
+            }
         }
         else
         {
             price = _model.m_dBidPrice1;
+            if(stopChange)
+            {
+                price = _model.m_dHighestPrice;
+            }
         }
         orderModel.info = [OrderModel buildOrderModel : _model.m_strProductID instrumentID:_model.m_strInstrumentID  orderPrice:price orderNum:hand direction:director offsetFlag:EOFF_THOST_FTDC_OF_Open];
     }

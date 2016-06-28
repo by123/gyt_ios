@@ -10,6 +10,7 @@
 #import "ByTextField.h"
 #import "UserInfoModel.h"
 #import "OrderRequestModel.h"
+#import "MoneyDetailModel.h"
 
 #define View_Height 160
 #define View_Width SCREEN_WIDTH-60
@@ -38,6 +39,7 @@
 @implementation ShortCutView
 {
     EEntrustBS director;
+    Boolean stopChange;
 }
 
 -(instancetype)initWithView : (UIView *)parentView
@@ -151,6 +153,7 @@
     
     [rootView addSubview:_sellItem];
     
+    [[SocketConnect sharedSocketConnect]setDelegate:self];
 
 }
 
@@ -170,14 +173,17 @@
             case 0:
                 _priceLabel.text = @"市价 ▼";
                 _priceLabel.tag = 1;
+                stopChange = YES;
                 break;
             case 1:
                 _priceLabel.text = @"对手价 ▼";
                 _priceLabel.tag = 0;
+                stopChange = NO;
                 break;
             default:
                 break;
         }
+        [self updateView];
     }
     else if(button == _buyItem)
     {
@@ -236,9 +242,64 @@
 
 -(void)OnReceiveSuccess:(id)respondObject
 {
-//    PackageModel *packageModel = respondObject;
-//    BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
+    PackageModel *packageModel = respondObject;
+    BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
+    if(packageModel.seq == GYT_ORDER)
+    {
+        
+    }
+    else if(packageModel.cmd == NET_CMD_NOTIFICATION)
+    {
+        
+        [[PushDataHandle sharedPushDataHandle] handlePushData:packageModel.result delegate :self];
+    }
+}
 
+
+-(void)pushResult:(id)data
+{
+    if([data isKindOfClass:[PushModel class]])
+    {
+        PushModel *model = data;
+        if([model.m_strInstrumentID isEqualToString:_model.m_strInstrumentID])
+        {
+            _model.m_dLastPrice = model.m_dLastPrice;
+            _model.m_dOpenPrice = model.m_dOpenPrice;
+            _model.m_nVolume = model.m_nVolume;
+            _model.m_dAskPrice1 = model.m_dAskPrice1;
+            _model.m_dBidPrice1 = model.m_dBidPrice1;
+            _model.m_dHighestPrice = model.m_dHighestPrice;
+            _model.m_dLowestPrice = model.m_dLowestPrice;
+            _model.m_nAskVolume1 = model.m_nAskVolume1;
+            _model.m_nBidVolume1 = model.m_nBidVolume1;
+            [self updateView];
+        }
+    }
+    else if([data isKindOfClass:[MoneyDetailModel class]])
+    {
+        MoneyDetailModel *model = data;
+        [[NSUserDefaults standardUserDefaults]setValue:model.mj_JSONString forKey:MoneyInfo];
+    }
+    
+}
+
+
+-(void)updateView
+{
+    NSString *buyTxt;
+    NSString *sellTxt;
+    if(stopChange)
+    {
+        buyTxt = [NSString stringWithFormat:@"%.2f\n—————\n买多",_model.m_dLowestPrice];
+        sellTxt = [NSString stringWithFormat:@"%.2f\n—————\n卖空",_model.m_dHighestPrice];
+    }
+    else
+    {
+        buyTxt = [NSString stringWithFormat:@"%.2f\n—————\n买多",_model.m_dAskPrice1];
+        sellTxt = [NSString stringWithFormat:@"%.2f\n—————\n卖空",_model.m_dBidPrice1];
+    }
+    [_buyItem setTitle:buyTxt forState:UIControlStateNormal];
+    [_sellItem setTitle:sellTxt forState:UIControlStateNormal];
 
 }
 

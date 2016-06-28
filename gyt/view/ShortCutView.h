@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "PushModel.h"
 
-@interface ShortCutView : UIView<UIAlertViewDelegate>
+@interface ShortCutView : UIView<UIAlertViewDelegate,PushDataHandleDelegate>
 
 -(instancetype)initWithView : (UIView *)parentView
 model : (PushModel *)model;
