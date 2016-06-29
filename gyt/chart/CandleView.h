@@ -6,30 +6,34 @@
 
 #import "Chart.h"
 #import "YAxis.h"
+#import "PushModel.h"
 
 
 typedef NS_ENUM(NSInteger, KTimeLine)
 {
-    One_Minute = 0,        //1分钟
-    Three_Minute,          //3分钟
-    Five_Minute,           //5分钟
-    Ten_Minute,            //10分钟
-    Quarter_Hour,          //15分钟
-    Half_Hour,             //30分钟
-    One_Hour,              //1小时
-    Two_Hour,              //2小时
-    Three_Hour,            //3小时
-    Four_Hour,             //4小时
-    Day,                   //日
-    Week,                  //周
-    Month             //月
+    MINITE_LINE = 1,        //1分钟
+    THREE_MINITE_LINE,      //3分钟
+    FIVE_MINITE_LINE,       //5分钟
+    TEN_MINITE_LINE,        //10分钟
+    FIFTEEN_MINITE_LINE,    //15分钟
+    THIRTY_MINITE_LINE,     //30分钟
+    HOUR_LINE,              //1小时
+    TWO_HOUR_LINE,          //2小时
+    DAY_LINE,               //日
+    WEEK_LINE,              //周
+    MONTH_LINE              //月
+    
 };
 
 @interface CandleView : UIView
 
 -(instancetype)initWithType : (CGRect)frame
+                      model : (PushModel *)model
                        type : (CandleType)type;
 
 -(void)update : (KTimeLine )kTimeLine;
+
+-(void)OnReceiveSuccess:(id)respondObject;
+
 
 @end

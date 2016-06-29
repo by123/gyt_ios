@@ -130,15 +130,14 @@
             int width =  [[_widths objectAtIndex:i] intValue] * maxWidth / count;
             switch (i) {
                 case 0://时间
-                    if(model.m_tag)
+                    if(model.m_nInsertTime == 0)
                     {
-                        if(IS_NS_STRING_EMPTY(model.m_tag.m_nOrderTime))
-                        {
-                            label.text = [self generateTime:[NSString stringWithFormat:@"%d",model.m_nInsertTime]];
-                        }
-                        else{
-                            label.text = [self generateTime:model.m_tag.m_nOrderTime];
-                        }
+                        NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+                        [formatter setDateFormat:@"HH:mm:ss"];
+                        label.text = [formatter stringFromDate:[NSDate dateWithTimeIntervalSinceNow:0]];
+                    }
+                    else{
+                        label.text = [self generateTime:[NSString stringWithFormat:@"%d",model.m_nInsertTime]];
                     }
                     break;
                 case 1://合约
@@ -217,12 +216,14 @@
             int width =  [[_widths objectAtIndex:i] intValue] * maxWidth / count;
             switch (i) {
                 case 0://时间
-                    if(IS_NS_STRING_EMPTY(model.m_tag.m_nOrderTime))
+                    if(model.m_nInsertTime == 0)
                     {
-                        label.text = [self generateTime:[NSString stringWithFormat:@"%d",model.m_nInsertTime]];
+                        NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+                        [formatter setDateFormat:@"HH:mm:ss"];
+                        label.text = [formatter stringFromDate:[NSDate dateWithTimeIntervalSinceNow:0]];
                     }
                     else{
-                        label.text = [self generateTime:model.m_tag.m_nOrderTime];
+                        label.text = [self generateTime:[NSString stringWithFormat:@"%d",model.m_nInsertTime]];
                     }
                     break;
                 case 1://合约

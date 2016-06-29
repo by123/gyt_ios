@@ -55,9 +55,9 @@
     [SlideNavigationController sharedInstance].leftMenu = rightMenu;
     
     [_window makeKeyAndVisible];
-    
-    
+
 //    [self initBugTags];
+
     [self initUmengAnalysis];
     [self initDB];
     [self listenNetChange];

@@ -6,6 +6,7 @@
 
 #import "CandleView.h"
 #import "ResourceHelper.h"
+#import "KLineModel.h"
 @interface CandleView()
 
 @property (nonatomic,retain) Chart *candleChart;
@@ -17,6 +18,8 @@
 @property (nonatomic,retain) NSString *req_type;
 @property (nonatomic,retain) NSString *req_url;
 @property (nonatomic,retain) NSString *req_security_id;
+
+@property (strong, nonatomic)PushModel *model;
 
 @property (assign, nonatomic) CandleType type;
 
@@ -30,12 +33,14 @@
 }
 
 -(instancetype)initWithType : (CGRect)frame
+                      model : (PushModel *)model
                type : (CandleType)type
 {
     self =  [super initWithFrame : frame];
     if(self)
     {
         self.type = type;
+        self.model = model;
         [self initView];
         return self;
     }
@@ -78,6 +83,7 @@
     [self addSubview:self.candleChart];
     [self initChart];
     
+    [[SocketConnect sharedSocketConnect] setDelegate:self];
     [self getData];
 }
 
@@ -254,29 +260,31 @@
         [self.candleChart getSection:2].hidden = NO;
     }
 
-    NSString *reqURL = [[NSString alloc] initWithFormat:self.req_url,self.req_security_id,self.req_freq];
-    NSLog(@"url:%@",reqURL);
 
-    NSString *url = [reqURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/javascript",@"text/html",@"text/csv",nil];;
-    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    [manager GET:url parameters:nil
-         success:^(AFHTTPRequestOperation *operation, id responseObject)
-     {
-         NSData *data = responseObject;
-         NSString *response =  [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-
-         tempStr = response;
-         [self requestFinished:response];
- 
-         [MBProgressHUD hideAllHUDsForView:self animated:YES];
-     }
-         failure:^(AFHTTPRequestOperation *operation, NSError *error)
-     {
-         [MBProgressHUD hideAllHUDsForView:self animated:YES];
-     }];
+    [self requestData];
+//    NSString *reqURL = [[NSString alloc] initWithFormat:self.req_url,self.req_security_id,self.req_freq];
+//    NSLog(@"url:%@",reqURL);
+//
+//    NSString *url = [reqURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+//    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/javascript",@"text/html",@"text/csv",nil];;
+//    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+//    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+//    [manager GET:url parameters:nil
+//         success:^(AFHTTPRequestOperation *operation, id responseObject)
+//     {
+//         NSData *data = responseObject;
+//         NSString *response =  [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+//
+//         tempStr = response;
+//         [self requestFinished:response];
+// 
+//         [MBProgressHUD hideAllHUDsForView:self animated:YES];
+//     }
+//         failure:^(AFHTTPRequestOperation *operation, NSError *error)
+//     {
+//         [MBProgressHUD hideAllHUDsForView:self animated:YES];
+//     }];
 }
 
 
@@ -297,33 +305,34 @@
     NSString *close = [self getRandomNumber:2000 to:6000];
     NSString *addStr = [NSString stringWithFormat:@"\n%@,%@,%@,%@,%@,%@,%@",@"2016-06-22",open,high,low,close,@"9999999",close];
     tempStr = [addStr stringByAppendingString:tempStr];
-    [self requestFinished:tempStr];
+//    [self requestFinished:tempStr];
 }
 
-- (void)requestFinished:(NSString *)response
+- (void)requestFinished:(NSMutableArray *)data
+              category : (NSMutableArray *)category
 {
-    NSMutableArray *data =[[NSMutableArray alloc] init];
-    NSMutableArray *category =[[NSMutableArray alloc] init];
-
-    NSString *content = response;
-    NSArray *lines = [content componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
-    NSInteger idx;
-    for (idx = lines.count-1; idx > 0; idx--) {
-        NSString *line = lines[idx];
-        if([line isEqualToString:@""]){
-            continue;
-        }
-        NSArray *arr = [line componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@","]];
-        [category addObject:arr[0]];
-
-        NSMutableArray *item =[[NSMutableArray alloc] init];
-        [item addObject:arr[1]];
-        [item addObject:arr[4]];
-        [item addObject:arr[2]];
-        [item addObject:arr[3]];
-        [item addObject:arr[5]];
-        [data addObject:item];
-    }
+//    NSMutableArray *data =[[NSMutableArray alloc] init];
+//    NSMutableArray *category =[[NSMutableArray alloc] init];
+//
+//    NSString *content = response;
+//    NSArray *lines = [content componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+//    NSInteger idx;
+//    for (idx = lines.count-1; idx > 0; idx--) {
+//        NSString *line = lines[idx];
+//        if([line isEqualToString:@""]){
+//            continue;
+//        }
+//        NSArray *arr = [line componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@","]];
+//        [category addObject:arr[0]];
+//
+//        NSMutableArray *item =[[NSMutableArray alloc] init];
+//        [item addObject:arr[1]];
+//        [item addObject:arr[4]];
+//        [item addObject:arr[2]];
+//        [item addObject:arr[3]];
+//        [item addObject:arr[5]];
+//        [data addObject:item];
+//    }
 
     if(data.count==0){
 
@@ -658,34 +667,86 @@
 -(NSString *)getTimeLine : (KTimeLine)kTimeLine
 {
     switch (kTimeLine) {
-        case Month:
+        case MONTH_LINE:
             return @"m";
-        case Week:
+        case WEEK_LINE:
             return @"w";
-        case Day:
+        case DAY_LINE:
             return @"d";
-        case Four_Hour:
+        case TWO_HOUR_LINE:
             return @"";
-        case Three_Hour:
+        case HOUR_LINE:
             return @"";
-        case Two_Hour:
+        case THIRTY_MINITE_LINE:
             return @"";
-        case One_Hour:
+        case FIFTEEN_MINITE_LINE:
             return @"";
-        case Half_Hour:
+        case TEN_MINITE_LINE:
             return @"";
-        case Quarter_Hour:
+        case FIVE_MINITE_LINE:
             return @"";
-        case Ten_Minute:
+        case THREE_MINITE_LINE:
             return @"";
-        case Five_Minute:
-            return @"";
-        case Three_Minute:
-            return @"";
-        case One_Minute:
+        case MINITE_LINE:
             return @"";
     }
     return @"";
 }
+
+
+-(void)requestData
+{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
+    dic[@"market"] = _model.m_strExchangeID;
+    dic[@"code"] = _model.m_strInstrumentID;
+    dic[@"date"] = @(0);
+    dic[@"type"] = @(MINITE_LINE);
+    dic[@"num"] = @(1000);
+
+    NSString *jsonStr = [JSONUtil parse:@"getKLineDate" params:dic];
+    NSLog(@"数据->%@",jsonStr);
+    [[SocketConnect sharedSocketConnect] sendData:jsonStr seq:GYT_KLINE];
+
+}
+
+
+-(void)OnReceiveSuccess:(id)respondObject
+{
+    PackageModel *packageModel = respondObject;
+    BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
+
+    if(packageModel.seq == GYT_KLINE)
+    {
+        NSMutableArray *datas =[[NSMutableArray alloc] init];
+        NSMutableArray *categorys =[[NSMutableArray alloc] init];
+        NSMutableDictionary *dic =  [respondModel.params objectForKey:@"resp"];
+        if(!IS_NS_COLLECTION_EMPTY(dic))
+        {
+            for(id temp in dic)
+            {
+                for(int i = 0 ;i < 10 ; i++)
+                {
+//                @"2016-06-22",open,high,low,close,@"9999999",close
+                    KLineModel *kLineModel = [KLineModel mj_objectWithKeyValues:temp];
+                    [categorys addObject:[NSString stringWithFormat:@"%d",kLineModel.m_date]];
+
+                    NSMutableArray *item =[[NSMutableArray alloc] init];
+                    [item addObject:[NSString stringWithFormat:@"%.2f",kLineModel.m_dOpen]];
+                    [item addObject:[NSString stringWithFormat:@"%.2f",kLineModel.m_dClose]];
+                    [item addObject:[NSString stringWithFormat:@"%.2f",kLineModel.m_dHigh]];
+                    [item addObject:[NSString stringWithFormat:@"%.2f",kLineModel.m_dLow]];
+                    [item addObject:[NSString stringWithFormat:@"%.2f",kLineModel.m_dClose]];
+                    [datas addObject:item];
+                }
+
+            }
+            
+            [self requestFinished:datas category:categorys];
+        }
+        [MBProgressHUD hideHUDForView:self animated:YES];
+
+    }
+}
+
 
 @end

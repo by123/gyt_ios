@@ -144,7 +144,7 @@
 -(void)addTimelineView
 {
     [self clearAllView];
-    _candleView = [[CandleView alloc]initWithType:CGRectMake(0, 0, SCREEN_WIDTH, kContentHeight + kTopHeight) type:TimeLine];
+    _candleView = [[CandleView alloc]initWithType:CGRectMake(0, 0, SCREEN_WIDTH, kContentHeight + kTopHeight) model : _model type:TimeLine];
     [_bodyView addSubview:_candleView];
 }
 
@@ -152,7 +152,7 @@
 -(void)addKlineView
 {
     [self clearAllView];
-    _candleView = [[CandleView alloc]initWithType:CGRectMake(0, 0, SCREEN_WIDTH, kContentHeight + kTopHeight) type:KLine];
+    _candleView = [[CandleView alloc]initWithType:CGRectMake(0, 0, SCREEN_WIDTH, kContentHeight + kTopHeight) model:_model type:KLine];
     [_bodyView addSubview:_candleView];
     
 }
@@ -420,6 +420,11 @@
     if(_shortCutView)
     {
         [_shortCutView OnReceiveSuccess:respondObject];
+    }
+    
+    if(_candleView)
+    {
+        [_candleView OnReceiveSuccess:respondObject];
     }
 }
 

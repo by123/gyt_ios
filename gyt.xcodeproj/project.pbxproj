@@ -16,6 +16,7 @@
 		CF111D4C1CFBEABB00298C78 /* OrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF111D4B1CFBEABB00298C78 /* OrderModel.m */; };
 		CF111D4F1CFBF5A000298C78 /* OrderTagModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF111D4E1CFBF5A000298C78 /* OrderTagModel.m */; };
 		CF1B8C281D22A44C00BE5D86 /* NSString+Contains.m in Sources */ = {isa = PBXBuildFile; fileRef = CF1B8C271D22A44C00BE5D86 /* NSString+Contains.m */; };
+		CF1B8C2B1D23C79700BE5D86 /* KLineModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF1B8C2A1D23C79700BE5D86 /* KLineModel.m */; };
 		CF247A851CEB22E1000F1442 /* ByListDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = CF247A841CEB22E1000F1442 /* ByListDialog.m */; };
 		CF2A51051CE31A1D00F0EF3D /* CheckUpdateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2A51021CE31A1D00F0EF3D /* CheckUpdateUtil.m */; };
 		CF2A51061CE31A1D00F0EF3D /* UpdateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2A51041CE31A1D00F0EF3D /* UpdateModel.m */; };
@@ -184,6 +185,8 @@
 		CF111D4E1CFBF5A000298C78 /* OrderTagModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderTagModel.m; sourceTree = "<group>"; };
 		CF1B8C261D22A44C00BE5D86 /* NSString+Contains.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Contains.h"; sourceTree = "<group>"; };
 		CF1B8C271D22A44C00BE5D86 /* NSString+Contains.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Contains.m"; sourceTree = "<group>"; };
+		CF1B8C291D23C79700BE5D86 /* KLineModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KLineModel.h; sourceTree = "<group>"; };
+		CF1B8C2A1D23C79700BE5D86 /* KLineModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KLineModel.m; sourceTree = "<group>"; };
 		CF247A831CEB22E1000F1442 /* ByListDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ByListDialog.h; sourceTree = "<group>"; };
 		CF247A841CEB22E1000F1442 /* ByListDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ByListDialog.m; sourceTree = "<group>"; };
 		CF2A51011CE31A1D00F0EF3D /* CheckUpdateUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckUpdateUtil.h; sourceTree = "<group>"; };
@@ -803,6 +806,8 @@
 				CFA3B8DD1CD9AAB70063AE3E /* ColumnChartModel.m */,
 				CFA3B8DE1CD9AAB70063AE3E /* LineChartModel.h */,
 				CFA3B8DF1CD9AAB70063AE3E /* LineChartModel.m */,
+				CF1B8C291D23C79700BE5D86 /* KLineModel.h */,
+				CF1B8C2A1D23C79700BE5D86 /* KLineModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1354,6 +1359,7 @@
 				CFF183861CE45E1400E991C4 /* BaseRequestModel.m in Sources */,
 				CF48C6341CD0DBF800BF4EF9 /* SearchViewController.m in Sources */,
 				CFDD2E0D1CCF3C1A00E81E3F /* NewsView.m in Sources */,
+				CF1B8C2B1D23C79700BE5D86 /* KLineModel.m in Sources */,
 				CFDD2EA41CCF4DE100E81E3F /* MJRefreshBackNormalFooter.m in Sources */,
 				CF111D4C1CFBEABB00298C78 /* OrderModel.m in Sources */,
 				CFD37E261D02A95600297DE2 /* CWNumberKeyboard.m in Sources */,
@@ -1536,6 +1542,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_INPUT_FILETYPE = sourcecode.c.objc;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREFIX_HEADER = /Users/by.huang/Desktop/by/gyt_ios/gyt/Common.pch;
 				GCC_VERSION = "";
 				INFOPLIST_FILE = gyt/Info.plist;
