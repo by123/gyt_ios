@@ -63,7 +63,7 @@
     [self listenNetChange];
     [[SocketConnect sharedSocketConnect] connect];
  
-//    [[CheckUpdateUtil sharedCheckUpdateUtil] check];
+//    [[CheckUpdateUtil sharedChec。kUpdateUtil] check];
     return YES;
 }
 

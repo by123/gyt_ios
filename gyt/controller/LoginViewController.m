@@ -106,7 +106,12 @@
     [_passwordTextField setInsetTitle:@"登录密码：" font:[UIFont systemFontOfSize:14.0f]];
     __weak LoginViewController *weakSelf = self;
     _passwordTextField.block = ^(InsetTextField *insetTextField){
-        if(weakSelf.isSavePsw)
+        if(IS_NS_STRING_EMPTY(insetTextField.text))
+        {
+            [DialogHelper showTips:@"请输入密码"];
+            return;
+        }
+        if(!weakSelf.isSavePsw)
         {
             [[NSUserDefaults standardUserDefaults] setValue:weakSelf.passwordTextField.text forKey:UserDefault_Password];
             [DialogHelper showSuccessTips:@"密码已保存"];
