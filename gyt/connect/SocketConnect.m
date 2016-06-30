@@ -184,6 +184,12 @@ SINGLETON_IMPLEMENTION(SocketConnect);
     [_clientSocket writeData:data withTimeout:-1 tag:0];
 }
 
+#pragma mark - 发送保活包
+-(void)sendAlive
+{
+    NSData *data =[[GYTPackage sharedGYTPackage]encodeJSON:nil requestid:NET_CMD_KEEPALIVE_RESPONSE];
+    [_clientSocket writeData:data withTimeout:-1 tag:0];
+}
 
 
 @end

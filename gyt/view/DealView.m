@@ -956,7 +956,6 @@
                 {
                     temp.m_nOrderStatus = model.m_nOrderStatus;
                     hasModel = YES;
-//                    [_holdingTableView reloadOneRow:i];
                 }
             }
             if(!hasModel)

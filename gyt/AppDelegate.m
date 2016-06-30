@@ -20,6 +20,7 @@
 
 
 #define First_Launch @"first_launch"
+#define TimeRepeat 5
 @interface AppDelegate ()
 
 @end
@@ -62,7 +63,8 @@
     [self initDB];
     [self listenNetChange];
     [[SocketConnect sharedSocketConnect] connect];
- 
+
+    [self startAlive];
 //    [[CheckUpdateUtil sharedChec。kUpdateUtil] check];
     return YES;
 }
@@ -152,6 +154,13 @@
             }
         }];
         [manager startMonitoring];
+}
+
+-(void)startAlive
+{
+    NSLog(@"发送保活包");
+    [[SocketConnect sharedSocketConnect] sendAlive];
+    [self performSelector:@selector(startAlive) withObject:nil afterDelay:TimeRepeat];
 }
 
 @end
