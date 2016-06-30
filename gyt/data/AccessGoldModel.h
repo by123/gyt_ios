@@ -51,10 +51,10 @@
 @property (copy , nonatomic) NSString *m_strSubmitter;
 
 //申请日期
-@property (copy , nonatomic) NSString *m_applyDate;
+@property (assign , nonatomic) int m_applyDate;
 
 //申请时间
-@property (copy , nonatomic) NSString *m_applyTime;
+@property (assign , nonatomic) int m_applyTime;
 
 //备注
 @property (copy , nonatomic) NSString *m_strApplyMemo;
@@ -63,13 +63,16 @@
 @property (copy , nonatomic) NSString *m_strChecker;
 
 //审核日期
-@property (copy , nonatomic) NSString *m_checkDate;
+@property (assign , nonatomic) int m_checkDate;
 
 //审核时间
-@property (copy , nonatomic) NSString *m_checkTime;
+@property (assign , nonatomic) int m_checkTime;
 
 //审核备注
 @property (copy , nonatomic) NSString *m_strCheckMemo;
+
+//
+@property (copy, nonatomic) NSString *m_strTargetName;
 
 +(NSMutableArray *)getData;
 

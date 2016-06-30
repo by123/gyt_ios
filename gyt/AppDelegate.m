@@ -56,7 +56,7 @@
     
     [_window makeKeyAndVisible];
 
-//    [self initBugTags];
+    [self initBugTags];
 
     [self initUmengAnalysis];
     [self initDB];

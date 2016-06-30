@@ -10,6 +10,7 @@
 #import "MoneyManageDetailViewController.h"
 #import "MoneyManageCell.h"
 #import "AccessGoldModel.h"
+#import "TZDatePickerView.h"
 
 #define Item_Height 110
 
@@ -18,6 +19,8 @@
 @property (strong, nonatomic) UITableView *tableView;
 
 @property (strong, nonatomic) NSMutableArray *datas;
+
+@property (strong, nonatomic) TZDatePickerView *pickerView;
 
 @end
 
@@ -32,20 +35,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _datas = [[NSMutableArray alloc]init];
-    AccessGoldModel *model = [AccessGoldModel new];
-    model.m_strSerialNo = @"8623234234234";
-    model.m_applyDate = @"2016-05-12";
-    model.m_applyTime = @"16:26";
-    model.m_nMoneyType = MoneyType_RMB;
-    model.m_nPayType = PayType_ON_LINE;
-    model.m_nCashType = CashType_Out;
-    model.m_nStatus = CashApplicationStatus_Submit;
-    model.m_dCashValue = 8000.000f;
+//    AccessGoldModel *model = [AccessGoldModel new];
+//    model.m_strSerialNo = @"8623234234234";
+//    model.m_applyDate = @"2016-05-12";
+//    model.m_applyTime = @"16:26";
+//    model.m_nMoneyType = MoneyType_RMB;
+//    model.m_nPayType = PayType_ON_LINE;
+//    model.m_nCashType = CashType_Out;
+//    model.m_nStatus = CashApplicationStatus_Submit;
+//    model.m_dCashValue = 8000.000f;
+//    
+//    for(int i =0 ; i < 50 ; i++)
+//    {
+//        [_datas addObject:model];
+//    }
     
-    for(int i =0 ; i < 50 ; i++)
-    {
-        [_datas addObject:model];
-    }
+    [[SocketConnect sharedSocketConnect] setDelegate:self];
+    [self requestCashApplyInfo];
     [self initView];
 }
 
@@ -69,9 +75,10 @@
 {
     [self showNavigationBar];
     self.navBar.delegate = self;
-    [ self.navBar.rightBtn setHidden:YES];
     [self.navBar setTitle:@"出入金管理"];
     [self.navBar setLeftImage:[UIImage imageNamed:@"ic_back"]];
+    [self.navBar setRightImage:[UIImage imageNamed:@"ic_filter"]];
+
 }
 
 
@@ -100,7 +107,8 @@
     MoneyManageCell *cell = [[MoneyManageCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[MoneyManageCell identify]];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     if(!IS_NS_COLLECTION_EMPTY(_datas)){
-      [cell setData:[_datas objectAtIndex:indexPath.row]];
+      AccessGoldModel *model = [AccessGoldModel mj_objectWithKeyValues:[_datas objectAtIndex:indexPath.row]];
+      [cell setData:model];
     }
     return cell;
 }
@@ -112,7 +120,8 @@
     [cell setRootViewSelect:YES];
     if(!IS_NS_COLLECTION_EMPTY(_datas))
     {
-        [MoneyManageDetailViewController show:self model:[_datas objectAtIndex:indexPath.row]];
+        AccessGoldModel *model = [AccessGoldModel mj_objectWithKeyValues:[_datas objectAtIndex:indexPath.row]];
+        [MoneyManageDetailViewController show:self model:model];
     }
 }
 
@@ -128,11 +137,53 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+-(void)OnRightClickCallBack:(NSInteger)position
+{
+    _pickerView = [[TZDatePickerView alloc]init];
+    __weak MoneyManageViewController *weakSelf = self;
+    
+    _pickerView.gotoSrceenOrderBlock = ^(NSString *beginDateStr,NSString *endDateStr){
+        [weakSelf.pickerView hide];
+    };
+    [_pickerView show];
+}
+
+
+-(void)requestCashApplyInfo
+{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
+    dic[@"sessionId"] = [[Account sharedAccount] getSessionId];
+    dic[@"strAccountID"] = [[Account sharedAccount]getUid];
+    dic[@"startDate"] = @(0);
+    dic[@"endDate"] = @(0);
+    NSString *jsonStr = [JSONUtil parse:@"queryAccountCashApplyInfo" params:dic];
+    
+    
+    [[SocketConnect sharedSocketConnect]sendData:jsonStr seq:GYT_CashApplyInfo];
+}
+
+
 -(void)OnReceiveSuccess:(id)respondObject
 {
+    PackageModel *packageModel = respondObject;
+    BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
+    if(packageModel.seq == GYT_CashApplyInfo)
+    {
+
+        _datas = [respondModel.response objectForKey:@"resp"];
+        [_tableView reloadData];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    }
+    
+
 }
 
 -(void)OnReceiveFail:(NSError *)error
 {
+    
 }
+
+
+
 @end

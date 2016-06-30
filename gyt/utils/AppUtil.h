@@ -35,4 +35,9 @@
 
 + (CGFloat)pointValue:(CGFloat)pixel;
 
+
++(NSString *)getFormatDate : (int)date;
+
++(NSString *)getFormatTime : (int)time;
+
 @end

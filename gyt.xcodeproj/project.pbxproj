@@ -21,6 +21,8 @@
 		CF2A51051CE31A1D00F0EF3D /* CheckUpdateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2A51021CE31A1D00F0EF3D /* CheckUpdateUtil.m */; };
 		CF2A51061CE31A1D00F0EF3D /* UpdateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2A51041CE31A1D00F0EF3D /* UpdateModel.m */; };
 		CF2A510B1CE31B2F00F0EF3D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2A510A1CE31B2F00F0EF3D /* LoginViewController.m */; };
+		CF2B0AA91D24EE3200F19AD3 /* TZDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2B0AA71D24EE3200F19AD3 /* TZDatePickerView.m */; };
+		CF2B0AAA1D24EE3200F19AD3 /* TZDatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF2B0AA81D24EE3200F19AD3 /* TZDatePickerView.xib */; };
 		CF48C6341CD0DBF800BF4EF9 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF48C6331CD0DBF800BF4EF9 /* SearchViewController.m */; };
 		CF48C6431CD22C8B00BF4EF9 /* SearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF48C6421CD22C8B00BF4EF9 /* SearchCell.m */; };
 		CF4A6D181CBE25AA00B36C93 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D171CBE25AA00B36C93 /* main.m */; };
@@ -195,6 +197,9 @@
 		CF2A51041CE31A1D00F0EF3D /* UpdateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateModel.m; sourceTree = "<group>"; };
 		CF2A51091CE31B2F00F0EF3D /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		CF2A510A1CE31B2F00F0EF3D /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		CF2B0AA61D24EE3200F19AD3 /* TZDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZDatePickerView.h; sourceTree = "<group>"; };
+		CF2B0AA71D24EE3200F19AD3 /* TZDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZDatePickerView.m; sourceTree = "<group>"; };
+		CF2B0AA81D24EE3200F19AD3 /* TZDatePickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TZDatePickerView.xib; sourceTree = "<group>"; };
 		CF48C6321CD0DBF800BF4EF9 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		CF48C6331CD0DBF800BF4EF9 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		CF48C6411CD22C8B00BF4EF9 /* SearchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchCell.h; sourceTree = "<group>"; };
@@ -551,6 +556,16 @@
 			name = login;
 			sourceTree = "<group>";
 		};
+		CF2B0AA51D24EE3200F19AD3 /* TZDatePicker */ = {
+			isa = PBXGroup;
+			children = (
+				CF2B0AA61D24EE3200F19AD3 /* TZDatePickerView.h */,
+				CF2B0AA71D24EE3200F19AD3 /* TZDatePickerView.m */,
+				CF2B0AA81D24EE3200F19AD3 /* TZDatePickerView.xib */,
+			);
+			path = TZDatePicker;
+			sourceTree = "<group>";
+		};
 		CF4A6D0A1CBE25AA00B36C93 = {
 			isa = PBXGroup;
 			children = (
@@ -679,6 +694,7 @@
 		CF4A6D561CBE28DD00B36C93 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				CF2B0AA51D24EE3200F19AD3 /* TZDatePicker */,
 				CF4A6D7A1CBE2EA200B36C93 /* ByNavigationBar.h */,
 				CF4A6D7B1CBE2EA200B36C93 /* ByNavigationBar.m */,
 				CFC15BCA1CC5D15D0077FA19 /* ByTabView.h */,
@@ -1221,6 +1237,7 @@
 				CF4A6D291CBE25AA00B36C93 /* LaunchScreen.storyboard in Resources */,
 				CFDD2DE11CC9CF2300E81E3F /* Assets.xcassets in Resources */,
 				CFD37E271D02A95600297DE2 /* CWNumberKeyboard.xib in Resources */,
+				CF2B0AAA1D24EE3200F19AD3 /* TZDatePickerView.xib in Resources */,
 				CFD37E251D02A95600297DE2 /* CWNumberKeyboard.bundle in Resources */,
 				CFDD2E9A1CCF4DE100E81E3F /* LICENSE in Resources */,
 				CFDD2EA91CCF4DE100E81E3F /* MJRefresh.bundle in Resources */,
@@ -1346,6 +1363,7 @@
 				CFC9E55D1D1BE15A00729A7D /* UIFolderTableView.m in Sources */,
 				CFD37E621D06AFFC00297DE2 /* PushDataModel.m in Sources */,
 				CF111D4F1CFBF5A000298C78 /* OrderTagModel.m in Sources */,
+				CF2B0AA91D24EE3200F19AD3 /* TZDatePickerView.m in Sources */,
 				CFC15BCF1CC604DB0077FA19 /* ByDynamicTableView.m in Sources */,
 				CFDD2EAC1CCF4DE100E81E3F /* UIScrollView+MJRefresh.m in Sources */,
 				CFF183991CE5AB9D00E991C4 /* BaseRespondModel.m in Sources */,

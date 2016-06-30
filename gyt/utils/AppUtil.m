@@ -244,4 +244,65 @@
     }
 }
 
++(NSString *)getFormatDate : (int)date
+{
+ 
+    NSString *dateStr = [NSString stringWithFormat:@"%d",date];
+    if(dateStr.length == 8)
+    {
+        NSRange range;
+        range.location = 0;
+        range.length = 4;
+        NSString *yearStr = [dateStr substringWithRange:range];
+        
+        range.location = 4;
+        range.length = 2;
+        NSString *monthStr = [dateStr substringWithRange:range];
+        
+        range.location = 6;
+        range.length = 2;
+        NSString *dayStr = [dateStr substringWithRange:range];
+        
+        return [NSString stringWithFormat:@"%@-%@-%@",yearStr,monthStr,dayStr];
+
+    }
+    return @"错误日期格式";
+}
+
++(NSString *)getFormatTime : (int)time
+{
+    NSString *timeStr = [NSString stringWithFormat:@"%d",time];
+    while (true) {
+        if(timeStr.length < 6)
+        {
+            timeStr = [@"0" stringByAppendingString:timeStr];
+        }
+        else
+        {
+            break;
+        }
+    }
+    
+    if(timeStr.length == 6)
+    {
+        NSRange range;
+        range.location = 0;
+        range.length = 2;
+        NSString *hourStr = [timeStr substringWithRange:range];
+        
+        range.location = 2;
+        range.length = 2;
+        NSString *minuteStr = [timeStr substringWithRange:range];
+       
+        range.location = 4;
+        range.length = 2;
+        NSString *secondStr = [timeStr substringWithRange:range];
+        
+        return [NSString stringWithFormat:@"%@:%@:%@",hourStr,minuteStr,secondStr];
+
+    }
+    
+    return @"错误时间格式";
+}
+
 @end

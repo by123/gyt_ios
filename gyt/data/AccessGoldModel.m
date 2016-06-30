@@ -31,7 +31,7 @@
 {
     NSMutableArray *data = [[NSMutableArray alloc]init];
     [data addObject:[TitleContentModel buildData:@"出入金对象ID" content:model.m_strTargetId]];
-    [data addObject:[TitleContentModel buildData:@"出入金对象名" content:@"黄成实"]];
+    [data addObject:[TitleContentModel buildData:@"出入金对象名" content:model.m_strTargetName]];
     [data addObject:[TitleContentModel buildData:@"出入金类型" content:[Constant getCashType:model.m_nCashType]]];
     [data addObject:[TitleContentModel buildData:@"币种" content:[Constant getMoneyType:model.m_nMoneyType]]];
     [data addObject:[TitleContentModel buildData:@"金额" content:[NSString stringWithFormat:@"%f",model.m_dCashValue]]];
@@ -40,11 +40,12 @@
     [data addObject:[TitleContentModel buildData:@"申请状态" content:[Constant getCashApplicationStatus:model.m_nStatus]]];
     [data addObject:[TitleContentModel buildData:@"收款人" content:model.m_strReceiver]];
     [data addObject:[TitleContentModel buildData:@"申请提交人" content:model.m_strSubmitter]];
-    [data addObject:[TitleContentModel buildData:@"申请日期" content:[NSString stringWithFormat:@"%@ %@",model.m_applyDate,model.m_applyTime]]];
+    [data addObject:[TitleContentModel buildData:@"申请日期" content:[NSString stringWithFormat:@"%@ %@",[AppUtil getFormatDate:model.m_applyDate], [AppUtil getFormatTime:model.m_applyTime]]]];
     [data addObject:[TitleContentModel buildData:@"审核人" content:model.m_strChecker]];
-    [data addObject:[TitleContentModel buildData:@"审核日期" content:[NSString stringWithFormat:@"%@ %@",model.m_checkDate,model.m_checkTime]]];
+    [data addObject:[TitleContentModel buildData:@"审核日期" content:[NSString stringWithFormat:@"%@ %@",[AppUtil getFormatDate:model.m_checkDate], [AppUtil getFormatTime:model.m_checkTime]]]];
     [data addObject:[TitleContentModel buildData:@"审核备注" content:model.m_strCheckMemo]];
     
+
     return data;
 }
 

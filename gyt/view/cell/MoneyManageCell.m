@@ -106,7 +106,7 @@
     _goldTypeLabel.frame = CGRectMake(SCREEN_WIDTH -25- _goldTypeLabel.contentSize.width , 45, _goldTypeLabel.contentSize.width, _goldTypeLabel.contentSize.height);
     
     //申请日期
-    _dateLabel.text = [NSString stringWithFormat:@"申请日期：%@ %@",model.m_applyDate,model.m_applyTime];
+    _dateLabel.text =[NSString stringWithFormat:@"%@ %@",[AppUtil getFormatDate:model.m_applyDate], [AppUtil getFormatTime:model.m_applyTime]];
     _dateLabel.frame = CGRectMake(5, 70, _dateLabel.contentSize.width, _dateLabel.contentSize.height);
     
     //状态
