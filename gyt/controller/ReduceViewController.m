@@ -34,6 +34,7 @@
     [super viewDidLoad];
     _datas = [[NSMutableArray alloc]init];
     _datas = [AccessGoldModel getData];
+    [[SocketConnect sharedSocketConnect] setDelegate:self];
     [self initView];
 }
 
@@ -122,26 +123,45 @@
 {
     AccessGoldModel *model = [[AccessGoldModel alloc]init];
     model.m_nMoneyType = MoneyType_RMB;
+    model.m_dCashValue = 1000;
+//    model.m_d
     
     NSMutableDictionary *dic = [JSONUtil parseDic:model];
-    NSString *jsonStr = [JSONUtil parse:Request_CashApplyInfo params:dic];
-    [self requsetGetCash :jsonStr];
+    NSString *jsonStr = [JSONUtil parse:@"commitCashApplyInfo" params:dic];
+    [[SocketConnect sharedSocketConnect] sendData:jsonStr seq:GYT_CommitCashApplyInfo];
 }
 
-#pragma mark 请求提现
--(void)requsetGetCash : (NSString *)jsonStr
+-(void)OnReceiveSuccess:(id)respondObject
 {
-    [[HttpRequest sharedHttpRequest] post:jsonStr view:self.view success:^(id responseObject) {
-        BaseRespondModel *model = [BaseRespondModel mj_objectWithKeyValues:responseObject];
-        [DialogHelper showSuccessTips:@"提现申请成功"];
-//        {"content": [], "error": {"ErrorMsg": "\u4e0emobileService\u8fde\u63a5\u8d85\u65f6", "ErrorID": -103}}
+    PackageModel *packageModel = respondObject;
+    BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
+    if(packageModel.seq == GYT_CommitCashApplyInfo)
+    {
         
-    } fail:^(NSError *error) {
+        NSLog(@"123");
         
-        [DialogHelper showTips:@"提交提现申请失败"];
+    }
+}
 
-    }];
+-(void)OnReceiveFail:(NSError *)error
+{
     
 }
+
+
+//#pragma mark 请求提现
+//-(void)requsetGetCash : (NSString *)jsonStr
+//{
+//    [[HttpRequest sharedHttpRequest] post:jsonStr view:self.view success:^(id responseObject) {
+//        BaseRespondModel *model = [BaseRespondModel mj_objectWithKeyValues:responseObject];
+//        [DialogHelper showSuccessTips:@"提现申请成功"];
+//        
+//    } fail:^(NSError *error) {
+//        
+//        [DialogHelper showTips:@"提交提现申请失败"];
+//
+//    }];
+//    
+//}
 
 @end

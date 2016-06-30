@@ -79,7 +79,7 @@ typedef void (^ReduceCellBlock)(ReduceCell *cell);
     }
 }
 
--(void)OnListDialogItemClick:(id)data
+-(void)OnListDialogItemClick:(id)data dialog:(ByListDialog *)dialog
 {
     NSString *title = data;
     [_button setTitle:title forState:UIControlStateNormal];

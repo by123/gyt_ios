@@ -24,11 +24,11 @@
 //#define Host @"192.168.1.118" //赵杰
 //#define Port 64360
 
-#define Host @"192.168.1.106" //陈勇
-#define Port 64340
+//#define Host @"192.168.1.106" //陈勇
+//#define Port 64340
 
-//#define Host @"114.119.6.146" //外网
-//#define Port 64350
+#define Host @"114.119.6.146" //外网
+#define Port 64350
 
 #define Root_Url @"http://114.119.6.146:8081"
 
@@ -38,9 +38,6 @@
 #define Request_Logout @"logout"
 //查询账号信息
 #define Request_UserInfo @"queryAccountBaseInfo"
-//提交出入金申请
-#define Request_CashApplyInfo @"commitCashApplyInfo"
-
 
 #define Info_Net_Error @"网络异常，点击刷新"
 
@@ -152,7 +149,8 @@ typedef NS_ENUM(NSInteger, ResondType)
     GYT_CANCEL,
     GYT_PUSHDATA,
     GYT_KLINE,
-    GYT_CashApplyInfo
+    GYT_CashApplyInfo,
+    GYT_CommitCashApplyInfo
 
 
 };

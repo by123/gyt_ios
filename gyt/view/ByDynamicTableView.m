@@ -251,7 +251,7 @@
 
 -(void)reloadData : (NSMutableArray *)array
 {
-    _datas = array;
+    _datas = (NSMutableArray *)[[array reverseObjectEnumerator] allObjects];
     [_tableView reloadData];
 }
 
