@@ -243,17 +243,17 @@
 -(void)OnReceiveSuccess:(id)respondObject
 {
     PackageModel *packageModel = respondObject;
-    BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
+//    BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
     if(packageModel.seq == GYT_ORDER)
     {
         
     }
     else if(packageModel.cmd == NET_CMD_NOTIFICATION)
     {
-        
         [[PushDataHandle sharedPushDataHandle] handlePushData:packageModel.result delegate :self];
     }
 }
+
 
 
 -(void)pushResult:(id)data

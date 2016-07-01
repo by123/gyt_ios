@@ -647,6 +647,7 @@
                     model.m_dLowestPrice = pushModel.m_dLowestPrice;
                     model.m_nAskVolume1 = pushModel.m_nAskVolume1;
                     model.m_nBidVolume1 = pushModel.m_nBidVolume1;
+//                    model.m_dPriceTick = pushModel.m_dPriceTick;
                     if(model.isMyContract)
                     {
                         [[ContractDB sharedContractDB]updateItem:DBMyContractTable instrumentid:model.m_strInstrumentID model:model];

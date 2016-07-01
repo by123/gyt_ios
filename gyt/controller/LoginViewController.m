@@ -216,7 +216,6 @@
 {
     _tipLabel.text = @"连接被断开";
     [self connectInterrupt];
-    
 }
 
 

@@ -93,7 +93,13 @@ SINGLETON_IMPLEMENTION(SocketConnect);
         [_clientSocket disconnect];
         if(self.delegate)
         {
-            [self.delegate OnConnectFail];
+            @try {
+                [self.delegate OnConnectFail];
+            } @catch (NSException *exception) {
+                
+            } @finally {
+                
+            }
         }
     }
 }
@@ -119,7 +125,13 @@ SINGLETON_IMPLEMENTION(SocketConnect);
 {
     if(self.delegate)
     {
-        [self.delegate OnConnectFail];
+        @try {
+            [self.delegate OnConnectFail];
+        } @catch (NSException *exception) {
+            
+        } @finally {
+            
+        }
     }
 }
 

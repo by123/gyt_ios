@@ -254,7 +254,10 @@
         if(position == 0)
         {
             //刷新
-            [DialogHelper showTips:@"开发中"];
+            if(_dealView)
+            {
+                [_dealView onRefresh : self.navBar.rightBtn];
+            }
         }
     }
  

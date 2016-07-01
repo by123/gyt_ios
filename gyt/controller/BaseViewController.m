@@ -50,7 +50,6 @@
 {
     NSLog(@"连接失败!");
     [self connectInterrupt];
-
 }
 
 

@@ -226,7 +226,7 @@
     }
     
     // 当前已有显示的就 remove
-    //[self removeSelf];
+//    [self removeSelf];
     
     // 添加并显示
     [[[UIApplication sharedApplication] keyWindow] addSubview:self];

@@ -57,7 +57,7 @@
     
     [_window makeKeyAndVisible];
 
-    [self initBugTags];
+//    [self initBugTags];
 
     [self initUmengAnalysis];
     [self initDB];
@@ -65,7 +65,7 @@
     [[SocketConnect sharedSocketConnect] connect];
 
     [self startAlive];
-//    [[CheckUpdateUtil sharedChec。kUpdateUtil] check];
+//    [[CheckUpdateUtil sharedCheckUpdateUtil] check];
     return YES;
 }
 

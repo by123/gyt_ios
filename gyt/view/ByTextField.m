@@ -50,14 +50,14 @@
     
     _mTitleLabel = [[UILabel alloc]init];
     _mTitleLabel.font = [UIFont systemFontOfSize:13.0f];
-    _mTitleLabel.textColor = [UIColor whiteColor];
+    _mTitleLabel.textColor = TEXT_COLOR;
     _mTitleLabel.text = _title;
     _mTitleLabel.textAlignment = NSTextAlignmentCenter;
     _mTitleLabel.frame = CGRectMake(5,0, _mTitleLabel.contentSize.width, self.frame.size.height);
     [self addSubview:_mTitleLabel];
     
     _mTextField = [[UITextField alloc]init];
-    _mTextField.textColor = [UIColor whiteColor];
+    _mTextField.textColor = TEXT_COLOR;
     _mTextField.font = [UIFont systemFontOfSize:13.0f];
     _mTextField.textAlignment = NSTextAlignmentRight;
     _mTextField.frame = CGRectMake(_mTitleLabel.contentSize.width +  10, 0, self.frame.size.width - 15 -_mTitleLabel.contentSize.width , self.frame.size.height);

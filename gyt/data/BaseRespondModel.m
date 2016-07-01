@@ -26,7 +26,9 @@
     }
     else
     {
-        [DialogHelper showTips:model.error.ErrorMsg];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [DialogHelper showTips:model.error.ErrorMsg];
+        });
     }
     return model;
 }

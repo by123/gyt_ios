@@ -22,4 +22,6 @@
 
 -(void)OnReceiveSuccess:(id)respondObject;
 
+-(void)onRefresh : (UIView *)view;
+
 @end

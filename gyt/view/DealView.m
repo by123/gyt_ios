@@ -66,8 +66,23 @@
 //手数
 @property (strong, nonatomic) ByTextField *handTextField;
 
-//价格
+//增加手数
+@property (strong, nonatomic) UIButton *addHandBtn;
+
+//减少手数
+@property (strong, nonatomic) UIButton *reduceHandBtn;
+
+//价格按钮
 @property (strong, nonatomic) UIButton *priceButton;
+
+//价格
+@property (strong, nonatomic) UILabel *priceLabel;
+
+//自定义价格框
+@property (strong, nonatomic) ByTextField *myTextField;
+
+//最小变动
+@property (strong, nonatomic) UILabel *perLabel;
 
 //持仓，挂单，委托，成交 标题
 @property (strong, nonatomic) ByTabView *tabView;
@@ -203,34 +218,99 @@
     _nameButton.layer.masksToBounds = YES;
     [_nameButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
     [_nameButton setTitle:_model.m_strInstrumentID forState:UIControlStateNormal];
-    _nameButton.frame = CGRectMake(10, view.height+5, SCREEN_WIDTH/2+20, 30);
+    _nameButton.frame = CGRectMake(10, view.height+5, SCREEN_WIDTH/2, 30);
     [_nameButton addTarget:self action:@selector(OnClick:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_nameButton];
     
+    
     //手数
-    _handTextField = [[ByTextField alloc]initWithType:NumberInt frame:CGRectMake(10,  _nameButton.y + _nameButton.height +5, _nameButton.width/2 -10, 30) rootView:_rootView title:@"手数："];
+    _handTextField = [[ByTextField alloc]initWithType:NumberInt frame:CGRectMake(10,  _nameButton.y + _nameButton.height +5, _nameButton.width/2 + 10, 30) rootView:_rootView title:@"手数："];
     [_handTextField setTextFiledText:@"1"];
     [self addSubview:_handTextField];
+    
+    
+    //增加手数
+    _addHandBtn = [[UIButton alloc]init];
+    _addHandBtn.frame = CGRectMake(_handTextField.x+_handTextField.width + 5, _handTextField.y, 30, 30);
+    [_addHandBtn setTitle:@"+" forState:UIControlStateNormal];
+    [_addHandBtn setTitleColor:TEXT_COLOR forState:UIControlStateNormal];
+    _addHandBtn.layer.masksToBounds = YES;
+    _addHandBtn.layer.cornerRadius = 4;
+    _addHandBtn.titleLabel.font = [UIFont systemFontOfSize:16.0f];
+    _addHandBtn.backgroundColor = SELECT_COLOR;
+    [_addHandBtn addTarget:self action:@selector(OnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:_addHandBtn];
+    
+    //减少手数
+    _reduceHandBtn = [[UIButton alloc]init];
+    _reduceHandBtn.frame = CGRectMake(_addHandBtn.x+_addHandBtn.width + 5, _handTextField.y, 30, 30);
+    [_reduceHandBtn setTitle:@"－" forState:UIControlStateNormal];
+    [_reduceHandBtn setTitleColor:TEXT_COLOR forState:UIControlStateNormal];
+    _reduceHandBtn.layer.masksToBounds = YES;
+    _reduceHandBtn.titleLabel.font = [UIFont systemFontOfSize:16.0f];
+    _reduceHandBtn.layer.cornerRadius = 4;
+    _reduceHandBtn.backgroundColor = SELECT_COLOR;
+    [_reduceHandBtn addTarget:self action:@selector(OnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:_reduceHandBtn];
     
     //价格
     _priceButton = [[UIButton alloc]init];
     [_priceButton setTitleColor:TEXT_COLOR forState:UIControlStateNormal];
-    _priceButton.titleLabel.font = [UIFont systemFontOfSize:14.0f];
+    _priceButton.titleLabel.font = [UIFont systemFontOfSize:13.0f];
     _priceButton.layer.borderColor = [[UIColor blackColor] CGColor];
     _priceButton.layer.borderWidth = 0.5;
     _priceButton.layer.cornerRadius = 2;
     _priceButton.layer.masksToBounds = YES;
     [_priceButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
-    [_priceButton setTitle:@"价格: 对手价" forState:UIControlStateNormal];
-    _priceButton.frame = CGRectMake(10 + _handTextField.width + 5 , _nameButton.y + _nameButton.height +5, _nameButton.width/2 +5, 30);
+    _priceButton.frame = CGRectMake(10 , _handTextField.y + _handTextField.height +5, _nameButton.width/2 +10, 30);
     [_priceButton addTarget:self action:@selector(OnClick:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_priceButton];
 
     
+    UILabel *priceTitleLabel = [[UILabel alloc]init];
+    priceTitleLabel.text = @"价格:";
+    priceTitleLabel.textColor = TEXT_COLOR;
+    priceTitleLabel.font = [UIFont systemFontOfSize:13.0f];
+    priceTitleLabel.textAlignment = NSTextAlignmentCenter;
+    priceTitleLabel.frame = CGRectMake(5, 0, priceTitleLabel.contentSize.width, 30);
+    [_priceButton addSubview:priceTitleLabel];
+    
+    _priceLabel = [[UILabel alloc]init];
+    _priceLabel.text = @"对手价";
+    _priceLabel.textColor = TEXT_COLOR;
+    _priceLabel.font = [UIFont systemFontOfSize:13.0f];
+    _priceLabel.textAlignment = NSTextAlignmentRight;
+    _priceLabel.frame = CGRectMake(0, 0, _nameButton.width/2-5, 30);
+    [_priceButton addSubview:_priceLabel];
+    
+    //自定义价格
+    _myTextField = [[ByTextField alloc]initWithType:NumberFloat frame:CGRectMake(_priceButton.x + _priceButton.width + 5,  _handTextField.y + _handTextField.height +5, _nameButton.width/2 , 30) rootView:_rootView title:nil];
+    [_myTextField setTextFiledText:@"0"];
+    __weak DealView *weakSelf = self;
+    _myTextField.block = ^(BOOL isCompelete,NSString *text)
+    {
+        NSString *buyTxt =[NSString stringWithFormat:@"%@\n—————————\n买入",text];
+        NSString *sellTxt = [NSString stringWithFormat:@"%@\n—————————\n卖出",text];
+        [weakSelf.buyItem setTitle:buyTxt forState:UIControlStateNormal];
+        [weakSelf.sellItem setTitle:sellTxt forState:UIControlStateNormal];
+    };
+    [_myTextField setHidden:YES];
+    [self addSubview:_myTextField];
+    
+    
+    _perLabel = [[UILabel alloc]init];
+    _perLabel.text = [NSString stringWithFormat:@"最小变动:%.2f",_model.m_dPriceTick];
+    _perLabel.textColor = TEXT_COLOR;
+    _perLabel.font =[UIFont systemFontOfSize:13.0f];
+    _perLabel.textAlignment = NSTextAlignmentCenter;
+    _perLabel.frame = CGRectMake(_myTextField.x + _myTextField.width + 5, _addHandBtn.y + _addHandBtn.height + 5, _perLabel.contentSize.width, 30);
+    [_perLabel setHidden:YES];
+    [self addSubview:_perLabel];
+    
     
     _priceView = [[UIView alloc]init];
     _priceView.backgroundColor = [ColorUtil colorWithHexString:@"#262626"];;
-    _priceView.frame = CGRectMake(_priceButton.x + _priceButton.width+5 , view.height + 5, SCREEN_WIDTH - 15 - _nameButton.width, 65);
+    _priceView.frame = CGRectMake(_nameButton.x + _nameButton.width+5 , view.height + 5, SCREEN_WIDTH - 15 - _nameButton.width, 65);
     _priceView.layer.cornerRadius = 4;
     _priceView.layer.masksToBounds = YES;
     [self addSubview:_priceView];
@@ -278,9 +358,8 @@
     [_priceView addSubview:_sellCountLabel];
 
     
-    
     _buyItem = [[UIButton alloc]init];
-    _buyItem.frame = CGRectMake(10, _handTextField.y + _handTextField.height + 10, (SCREEN_WIDTH - 30)/2, 60);
+    _buyItem.frame = CGRectMake(10, _priceButton.y + _priceButton.height + 10, (SCREEN_WIDTH - 30)/2, 60);
     _buyItem.layer.masksToBounds = YES;
     _buyItem.layer.cornerRadius = 4;
     
@@ -296,7 +375,7 @@
     [self addSubview:_buyItem];
     
     _sellItem = [[UIButton alloc]init];
-    _sellItem.frame = CGRectMake(10 * 2 + (SCREEN_WIDTH - 30)/2, _handTextField.y + _handTextField.height + 10, (SCREEN_WIDTH - 30)/2, 60);
+    _sellItem.frame = CGRectMake(10 * 2 + (SCREEN_WIDTH - 30)/2, _priceButton.y + _priceButton.height + 10, (SCREEN_WIDTH - 30)/2, 60);
     _sellItem.layer.masksToBounds = YES;
     _sellItem.layer.cornerRadius = 4;
 
@@ -365,7 +444,7 @@
     {
         NSString *sellTxt;
         NSString *buyTxt;
-        if(currentModel && currentItemSelect == 0 &&isExpandView)
+        if(currentModel &&isExpandView)
         {
             if(currentModel.m_nDirection == ENTRUST_BUY){
                 buyTxt = [NSString stringWithFormat:@"%.2f\n—————————\n买入",_model.m_dAskPrice1];
@@ -463,6 +542,7 @@
 -(void)OnItemSelected:(UIView *)dynamicTableView position:(NSInteger)position
 {
     currentItemSelect = position;
+    
     switch (currentTabSelect) {
         case 0:
             if(!IS_NS_COLLECTION_EMPTY(holdDatas))
@@ -599,10 +679,16 @@
     
     if(view == _buyItem)
     {
+        NSString *text = _buyItem.titleLabel.text;
+        NSRange range;
+        range.location = 0;
+        range.length = text.length - 11;
+        double price = [[text substringWithRange:range] doubleValue];
+        
         if([_buyItem.titleLabel.text myContainsString:@"平仓"])
         {
             director = ENTRUST_BUY;
-            NSString *message = [NSString stringWithFormat:@"%@，%.2f，平仓，%@手",_model.m_strInstrumentID,_model.m_dAskPrice1,hand];
+            NSString *message = [NSString stringWithFormat:@"%@，%.2f，平仓，%@手",_model.m_strInstrumentID,price,hand];
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认平仓吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
             alert.tag = 3;
             [alert show];
@@ -610,15 +696,15 @@
         else
         {
             director = ENTRUST_BUY;
-            double price;
-            if(stopChange)
-            {
-                price = _model.m_dLowestPrice;
-            }
-            else
-            {
-                price = _model.m_dAskPrice1;
-            }
+//            double price;
+//            if(stopChange)
+//            {
+//                price = _model.m_dLowestPrice;
+//            }
+//            else
+//            {
+//                price = _model.m_dAskPrice1;
+//            }
             NSString *message = [NSString stringWithFormat:@"%@，%.2f，买，%@手",_model.m_strInstrumentID,price,hand];
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认下单吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
             alert.tag = 0;
@@ -627,10 +713,16 @@
     }
     else if(view == _sellItem)
     {
+        NSString *text = _sellItem.titleLabel.text;
+        NSRange range;
+        range.location = 0;
+        range.length = text.length - 11;
+        double price = [[text substringWithRange:range] doubleValue];
+        
         if([_sellItem.titleLabel.text myContainsString:@"平仓"])
         {
             director = ENTRUST_SELL;
-            NSString *message = [NSString stringWithFormat:@"%@，%.2f，平仓，%@手",_model.m_strInstrumentID,_model.m_dBidPrice1,hand];
+            NSString *message = [NSString stringWithFormat:@"%@，%.2f，平仓，%@手",_model.m_strInstrumentID,price,hand];
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认平仓吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
             alert.tag = 3;
             [alert show];
@@ -638,15 +730,15 @@
         else
         {
             director = ENTRUST_SELL;
-            double price;
-            if(stopChange)
-            {
-                price = _model.m_dHighestPrice;
-            }
-            else
-            {
-                price = _model.m_dBidPrice1;
-            }
+//            double price;
+//            if(stopChange)
+//            {
+//                price = _model.m_dHighestPrice;
+//            }
+//            else
+//            {
+//                price = _model.m_dBidPrice1;
+//            }
             NSString *message = [NSString stringWithFormat:@"%@，%.2f，卖，%@手",_model.m_strInstrumentID,price,hand];
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认下单吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
             alert.tag = 1;
@@ -676,6 +768,7 @@
         NSMutableArray *array = [[NSMutableArray alloc]init];
         [array addObject:@"对手价"];
         [array addObject:@"市价"];
+        [array addObject:@"自定义"];
         ByListDialog *dialog = [[ByListDialog alloc]initWithData:array title:@"价格"];
         dialog.tag = 1;
         dialog.delegate = self;
@@ -688,6 +781,23 @@
     else if(view == _conditionBtn)
     {
         [DialogHelper showTips:@"开发中"];
+    }
+    else if(view == _addHandBtn)
+    {
+        int hand = [[_handTextField getTextFieldText] integerValue];
+        hand ++;
+        [_handTextField setTextFiledText:[NSString stringWithFormat:@"%d",hand]];
+    }
+    else if(view == _reduceHandBtn)
+    {
+        int hand = [[_handTextField getTextFieldText] integerValue];
+        if(hand <= 1)
+        {
+            [DialogHelper showTips:@"手数不能小于等于0"];
+            return;
+        }
+        hand --;
+        [_handTextField setTextFiledText:[NSString stringWithFormat:@"%d",hand]];
     }
     
     [self hideKeyboard];
@@ -736,7 +846,7 @@
     }
     else if(dialog.tag == 1)
     {
-        [_priceButton setTitle:[NSString stringWithFormat:@"价格: %@",data] forState:UIControlStateNormal];
+        _priceLabel.text = data;
         NSString *sellTxt;
         NSString *buyTxt;
         if([data isEqualToString:@"对手价"])
@@ -744,20 +854,43 @@
             stopChange = NO;
             buyTxt = [NSString stringWithFormat:@"%.2f\n—————————\n买入",_model.m_dAskPrice1];
             sellTxt = [NSString stringWithFormat:@"%.2f\n—————————\n卖出",_model.m_dBidPrice1];
+            [_myTextField setHidden:YES];
+            [_perLabel setHidden:YES];
         }
         else if ([data isEqualToString:@"市价"])
         {
             stopChange = YES;
             buyTxt = [NSString stringWithFormat:@"%.2f\n—————————\n买入",_model.m_dLowestPrice];
             sellTxt = [NSString stringWithFormat:@"%.2f\n—————————\n卖出",_model.m_dHighestPrice];
+            [_myTextField setHidden:YES];
+            [_perLabel setHidden:YES];
         }
-//        else if([data isEqualToString:@"自定义"])
-//        {
-//            
-//        }
+        else if([data isEqualToString:@"自定义"])
+        {
+            stopChange = YES;
+            buyTxt = [NSString stringWithFormat:@"%.2f\n—————————\n买入",0.00f];
+            sellTxt = [NSString stringWithFormat:@"%.2f\n—————————\n卖出",0.00f];
+            [_myTextField setHidden:NO];
+            [_perLabel setHidden:NO];
+        }
         [_buyItem setTitle:buyTxt forState:UIControlStateNormal];
         [_sellItem setTitle:sellTxt forState:UIControlStateNormal];
     }
+}
+
+
+-(void)onRefresh : (UIView *)view
+{
+    CABasicAnimation* rotationAnimation;
+    rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+    rotationAnimation.toValue = [NSNumber numberWithFloat: M_PI * 5.0 ];
+    rotationAnimation.duration = 1;
+    rotationAnimation.cumulative = YES;
+    rotationAnimation.repeatCount = 1;
+    
+    [view.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
+    
+    [self OnSelect:currentTabSelect];
 }
 
 #pragma mark 请求持仓，委托，成交
@@ -802,19 +935,30 @@
         //下单
         if(director == ENTRUST_BUY)
         {
-            price = _model.m_dAskPrice1;
-            if(stopChange)
-            {
-                price = _model.m_dLowestPrice;
-            }
+           
+            NSString *text = _buyItem.titleLabel.text;
+            NSRange range;
+            range.location = 0;
+            range.length = text.length - 11;
+            price = [[text substringWithRange:range] doubleValue];
+//            price = _model.m_dAskPrice1;
+//            if(stopChange)
+//            {
+//                price = _model.m_dLowestPrice;
+//            }
         }
         else
         {
-            price = _model.m_dBidPrice1;
-            if(stopChange)
-            {
-                price = _model.m_dHighestPrice;
-            }
+            NSString *text = _sellItem.titleLabel.text;
+            NSRange range;
+            range.location = 0;
+            range.length = text.length - 11;
+            price = [[text substringWithRange:range] doubleValue];
+//            price = _model.m_dBidPrice1;
+//            if(stopChange)
+//            {
+//                price = _model.m_dHighestPrice;
+//            }
         }
         orderModel.info = [OrderModel buildOrderModel : _model.m_strProductID instrumentID:_model.m_strInstrumentID  orderPrice:price orderNum:hand direction:director offsetFlag:EOFF_THOST_FTDC_OF_Open];
     }
@@ -864,7 +1008,8 @@
                 DealHoldModel *holdModel = [DealHoldModel mj_objectWithKeyValues:obj];
                 if(holdModel.m_nOpenVolume != 0)
                 {
-                    [holdDatas addObject:holdModel];
+                    [holdDatas insertObject:holdModel atIndex:0];
+//                    [holdDatas addObject:holdModel];
                 }
             }
             [self reloadData:holdDatas];
@@ -889,7 +1034,9 @@
                     holdingModel.m_tag = tagModel;
                     if(holdingModel.m_nOrderStatus == ENTRUST_STATUS_REPORTED)
                     {
-                        [holdingDatas addObject:holdingModel];
+//                        [holdingDatas addObject:holdingModel];
+                        [holdingDatas insertObject:holdingModel atIndex:0];
+
                     }
                 }
                 [self reloadData:holdingDatas];
@@ -903,7 +1050,10 @@
                     OrderTagModel *tagModel = [[OrderTagModel alloc]init];
                     tagModel.m_strRealTag = holdByModel.m_strOrderRef;
                     holdByModel.m_tag = tagModel;
-                    [holdByDatas addObject:holdByModel];
+//                    [holdByDatas addObject:holdByModel];
+                    
+                     [holdByDatas insertObject:holdByModel atIndex:0];
+
                 }
                 [self reloadData:holdByDatas];
             }
@@ -920,7 +1070,9 @@
             for(id obj in array)
             {
                 DealProfitModel *profitModel = [DealProfitModel mj_objectWithKeyValues:obj];
-                [holdProfileDatas addObject:profitModel];
+//                [holdProfileDatas addObject:profitModel];
+                [holdProfileDatas insertObject:profitModel atIndex:0];
+
             }
             [self reloadData:holdProfileDatas];
         }
@@ -961,7 +1113,8 @@
             }
             if(!hasModel)
             {
-                [holdingDatas addObject:model];
+//                [holdingDatas addObject:model];
+                [holdingDatas insertObject:model atIndex:0];
             }
             [self reloadData:holdingDatas];
         }
@@ -980,7 +1133,9 @@
             }
             if(!hasModel)
             {
-                [holdByDatas addObject:model];
+//                [holdByDatas addObject:model];
+                [holdByDatas insertObject:model atIndex:0];
+
             }
             [self reloadData:holdByDatas];
 
@@ -990,7 +1145,9 @@
     else if([data isKindOfClass:[DealProfitModel class]])
     {
         DealProfitModel *model = data;
-        [holdProfileDatas addObject:model];
+//        [holdProfileDatas addObject:model];
+        [holdProfileDatas insertObject:model atIndex:0];
+
         [self reloadData:holdProfileDatas];
     }
     else if([data isKindOfClass:[DealHoldModel class]])
@@ -1003,7 +1160,8 @@
                 [holdDatas removeObject:tempModel];
                 if(model.m_nPosition != 0)
                 {
-                    [holdDatas addObject:model];
+                    [holdDatas insertObject:model atIndex:0];
+//                    [holdDatas addObject:model];
                 }
                 break;
             }
