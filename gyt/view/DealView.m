@@ -956,6 +956,7 @@
                 {
                     temp.m_nOrderStatus = model.m_nOrderStatus;
                     hasModel = YES;
+//                    [_holdingTableView reloadOneRow:i];
                 }
             }
             if(!hasModel)
@@ -1000,10 +1001,14 @@
             if([tempModel.m_strInstrumentID isEqualToString:model.m_strInstrumentID] && (tempModel.m_nDirection == model.m_nDirection))
             {
                 [holdDatas removeObject:tempModel];
-                [holdDatas addObject:model];
+                if(model.m_nPosition != 0)
+                {
+                    [holdDatas addObject:model];
+                }
                 break;
             }
         }
+//        NSLog(@"持仓手数->%d",holdDatas.count);
         [self reloadData:holdDatas];
 
     }
