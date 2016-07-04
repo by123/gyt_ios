@@ -994,7 +994,7 @@
 {
     PackageModel *packageModel = respondObject;
     BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
-
+    
     //持仓
     if(packageModel.seq == XT_CPositionStatics && !IS_NS_STRING_EMPTY(packageModel.result))
     {
@@ -1013,10 +1013,9 @@
                 }
             }
             [self reloadData:holdDatas];
-
         }
     }
-    //委托
+    //挂单和委托
     else if(packageModel.seq == XT_COrderDetail && !IS_NS_STRING_EMPTY(packageModel.result))
     {
         QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:respondModel.response];
@@ -1079,7 +1078,7 @@
     }
     else if(packageModel.seq == GYT_ORDER)
     {
-        
+        [DialogHelper showTips:respondModel.errorMsg];
     }
     else if(packageModel.seq == GYT_CANCEL)
     {
@@ -1097,6 +1096,7 @@
 {
     if([data isKindOfClass:[DealHoldByModel class]])
     {
+        NSLog(@"#############委托变化#############");
         if(currentTabSelect == 1)
         {
             Boolean hasModel = NO;
@@ -1144,6 +1144,7 @@
     }
     else if([data isKindOfClass:[DealProfitModel class]])
     {
+        NSLog(@"#############成交变化#############");
         DealProfitModel *model = data;
 //        [holdProfileDatas addObject:model];
         [holdProfileDatas insertObject:model atIndex:0];
@@ -1152,18 +1153,26 @@
     }
     else if([data isKindOfClass:[DealHoldModel class]])
     {
+        NSLog(@"#############持仓变化#############");
         DealHoldModel *model = data;
-        for(DealHoldModel *tempModel in holdDatas)
+        if(IS_NS_COLLECTION_EMPTY(holdDatas) && model.m_nPosition != 0)
         {
-            if([tempModel.m_strInstrumentID isEqualToString:model.m_strInstrumentID] && (tempModel.m_nDirection == model.m_nDirection))
+            [holdDatas addObject:model];
+        }
+        else
+        {
+            for(DealHoldModel *tempModel in holdDatas)
             {
-                [holdDatas removeObject:tempModel];
-                if(model.m_nPosition != 0)
+                if([tempModel.m_strInstrumentID isEqualToString:model.m_strInstrumentID] && (tempModel.m_nDirection == model.m_nDirection))
                 {
-                    [holdDatas insertObject:model atIndex:0];
-//                    [holdDatas addObject:model];
+                    [holdDatas removeObject:tempModel];
+                    if(model.m_nPosition != 0)
+                    {
+                        [holdDatas insertObject:model atIndex:0];
+                        //                    [holdDatas addObject:model];
+                    }
+                    break;
                 }
-                break;
             }
         }
 //        NSLog(@"持仓手数->%d",holdDatas.count);
@@ -1172,6 +1181,7 @@
     }
     else if([data isKindOfClass:[PushModel class]])
     {
+        NSLog(@"#############行情变化#############");
         PushModel *model = data;
         if([model.m_strInstrumentID isEqualToString:_model.m_strInstrumentID])
         {
@@ -1185,15 +1195,27 @@
             _model.m_nAskVolume1 = model.m_nAskVolume1;
             _model.m_nBidVolume1 = model.m_nBidVolume1;
             [self updateDealView];
+            
+            if(!IS_NS_COLLECTION_EMPTY(holdDatas))
+            {
+                for(DealHoldModel *holdModel in holdDatas)
+                {
+                    if([_model.m_strInstrumentID isEqualToString:holdModel.m_strInstrumentID])
+                    {
+                        holdModel.m_dLastPrice = _model.m_dLastPrice;
+                    }
+                }
+                [_holdTableView reloadData:holdDatas];
+            }
         }
     }
     else if([data isKindOfClass:[MoneyDetailModel class]])
     {
+        NSLog(@"#############资金变化#############");
         MoneyDetailModel *model = data;
         [[NSUserDefaults standardUserDefaults]setValue:model.mj_JSONString forKey:MoneyInfo];
         _rightLabel.text = [NSString stringWithFormat:@"权益：%.f",model.m_dCurBalance];
         _canUseLabel.text = [NSString stringWithFormat:@"可用：%.f",model.m_dAvailable];
-
     }
 
 }

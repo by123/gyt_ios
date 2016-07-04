@@ -144,7 +144,6 @@
                 [cell setHoldingData:[_datas objectAtIndex:indexPath.row] maxWidth:_maxWidth];
                 break;
             case HoldBy:
-                NSLog(@"这是什么鬼->%d",indexPath.row);
                 [cell setHoldByData:[_datas objectAtIndex:indexPath.row] maxWidth:_maxWidth];
                 break;
             case Profit:

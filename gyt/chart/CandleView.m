@@ -722,14 +722,13 @@
         NSMutableDictionary *dic =  [respondModel.params objectForKey:@"resp"];
         if(!IS_NS_COLLECTION_EMPTY(dic))
         {
-            for(id temp in dic)
+            for(int i=0 ; i < 2 ; i ++)
             {
-                for(int i = 0 ;i < 10 ; i++)
+                for(id temp in dic)
                 {
-//                @"2016-06-22",open,high,low,close,@"9999999",close
                     KLineModel *kLineModel = [KLineModel mj_objectWithKeyValues:temp];
                     [categorys addObject:[NSString stringWithFormat:@"%d",kLineModel.m_date]];
-
+                    
                     NSMutableArray *item =[[NSMutableArray alloc] init];
                     [item addObject:[NSString stringWithFormat:@"%.2f",kLineModel.m_dOpen]];
                     [item addObject:[NSString stringWithFormat:@"%.2f",kLineModel.m_dClose]];
@@ -738,7 +737,6 @@
                     [item addObject:[NSString stringWithFormat:@"%.2f",kLineModel.m_dClose]];
                     [datas addObject:item];
                 }
-
             }
             
             [self requestFinished:datas category:categorys];

@@ -26,9 +26,7 @@
     }
     else
     {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [DialogHelper showTips:model.error.ErrorMsg];
-        });
+        model.errorMsg = model.error.ErrorMsg;
     }
     return model;
 }

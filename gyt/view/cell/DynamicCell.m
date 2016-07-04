@@ -55,6 +55,7 @@
             UILabel *label = [[UILabel alloc]init];
             label.textColor= TEXT_COLOR;
             label.font = [UIFont systemFontOfSize:13.0f];
+            label.tag = i;
             int width =  [[_widths objectAtIndex:i] intValue] * maxWidth / count;
             switch (i) {
 //                case 0://品种
@@ -67,16 +68,16 @@
                     label.text = [Constant EEntrustBSStr:model.m_nDirection];
                     break;
                 case 2://手数
-                    label.text = [NSString stringWithFormat:@"%.d",model.m_nPosition];
+                    label.text = [NSString stringWithFormat:@"%d",model.m_nPosition];
                     break;
                 case 3://可用
-                    label.text = [NSString stringWithFormat:@"%.d",model.m_nCanCloseVol];
+                    label.text = [NSString stringWithFormat:@"%d",model.m_nCanCloseVol];
                     break;
                 case 4://开仓均价
                     label.text = [NSString stringWithFormat:@"%.2f",model.m_dAvgPrice];
                     break;
                 case 5://逐笔浮盈
-                    label.text = [NSString stringWithFormat:@"%.2f",model.m_dPositionProfit];
+                    [self handleUpDown : model label:label];
                     break;
 //                case 7://币种
 //                    label.text = [Constant getMoneyType:model.m_nMoneyType];
@@ -91,10 +92,10 @@
                     label.text = [NSString stringWithFormat:@"%.f",model.m_dUsedMargin];
                     break;
                 case 7://今手数
-                    label.text =[NSString stringWithFormat:@"%.d",model.m_nOpenVolume];
+                    label.text =[NSString stringWithFormat:@"%d",model.m_nOpenVolume];
                     break;
 //                case 12://今可用
-//                    label.text = [NSString stringWithFormat:@"%.d",model.m_nCanCloseVol];                    break;
+//                    label.text = [NSString stringWithFormat:@"%d",model.m_nCanCloseVol];                    break;
 //                case 13://投保
 //                    label.text = [Constant EHedge_Flag_TypeStr:model.m_nHedgeFlag];
 //                    break;
@@ -411,4 +412,32 @@
 }
 
 
+
+//处理逐笔浮盈
+-(void)handleUpDown : (DealHoldModel *)model
+              label : (UILabel *)label
+{
+    double value = 0 ;
+    if(model.m_nDirection == ENTRUST_BUY)
+    {
+        value = (model.m_dLastPrice - model.m_dAvgPrice) * model.m_nPosition;
+    }
+    else if(model.m_nDirection == ENTRUST_SELL)
+    {
+        value = (model.m_dAvgPrice - model.m_dLastPrice) * model.m_nPosition;
+    }
+    label.text = [NSString stringWithFormat:@"%.2f",value];
+    if(value > 0)
+    {
+        label.textColor = RED_COLOR;
+    }
+    else if(value < 0)
+    {
+        label.textColor = GREEN_COLOR;
+    }
+    else
+    {
+        label.textColor = TEXT_COLOR;
+    }
+}
 @end

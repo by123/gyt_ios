@@ -21,6 +21,8 @@
 
 @property (strong, nonatomic) NSString *method;
 
+@property (strong, nonatomic) NSString *errorMsg;
+
 
 +(BaseRespondModel *) buildModel : (id)respondObject;
 
