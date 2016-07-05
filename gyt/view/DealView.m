@@ -289,10 +289,18 @@
     __weak DealView *weakSelf = self;
     _myTextField.block = ^(BOOL isCompelete,NSString *text)
     {
-        NSString *buyTxt =[NSString stringWithFormat:@"%@\n—————————\n买入",text];
-        NSString *sellTxt = [NSString stringWithFormat:@"%@\n—————————\n卖出",text];
-        [weakSelf.buyItem setTitle:buyTxt forState:UIControlStateNormal];
-        [weakSelf.sellItem setTitle:sellTxt forState:UIControlStateNormal];
+        double value = [text doubleValue];
+        if (fmod(value, _model.m_dPriceTick) == 0)
+        {
+            NSString *buyTxt =[NSString stringWithFormat:@"%@\n—————————\n买入",text];
+            NSString *sellTxt = [NSString stringWithFormat:@"%@\n—————————\n卖出",text];
+            [weakSelf.buyItem setTitle:buyTxt forState:UIControlStateNormal];
+            [weakSelf.sellItem setTitle:sellTxt forState:UIControlStateNormal];
+        }
+        else{
+            [DialogHelper showTips:@"价格设置不是最小变动的整数倍"];
+        }
+       
     };
     [_myTextField setHidden:YES];
     [self addSubview:_myTextField];

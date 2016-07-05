@@ -620,12 +620,13 @@
 #pragma mark 处理行情变化
 -(void)handleResult : (PushModel *)pushModel
 {
+    [[ContractDB sharedContractDB] insertItem:DBContractTable model:pushModel];
     NSMutableArray *temps = [[NSMutableArray alloc]init];
     [temps addObjectsFromArray:_mainDatas];
     
     if(!IS_NS_COLLECTION_EMPTY(temps))
     {
-        int count = [temps count];
+        NSInteger count = [temps count];
         for(int i = 0 ; i< count; i++)
         {
             PushModel *model = [temps objectAtIndex:i];

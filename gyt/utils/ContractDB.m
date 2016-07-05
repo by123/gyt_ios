@@ -66,6 +66,7 @@ SINGLETON_IMPLEMENTION(ContractDB);
         NSLog(@"数据库打开失败");
         return NO;
     }
+    [self createTable : DBContractTable];
     [self createTable : DBMyContractTable];
     [self createTable : DBHistoryContractTable];
     [self createTable : DBWarnContractTable];
@@ -145,6 +146,7 @@ SINGLETON_IMPLEMENTION(ContractDB);
     BOOL res = NO;
     if([self queryItem:tableName instrumentid:model.m_strInstrumentID] != nil)
     {
+        [self updateItem:tableName instrumentid:model.m_strInstrumentID model:model];
         NSLog(@"数据库已有数据！");
         return NO;
     }

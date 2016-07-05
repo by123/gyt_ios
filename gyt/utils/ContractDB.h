@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "PushModel.h"
 
+#define DBContractTable @"contract"
 #define DBMyContractTable @"mycontract"
 #define DBHistoryContractTable @"historycontract"
 #define DBWarnContractTable @"warncontract"
