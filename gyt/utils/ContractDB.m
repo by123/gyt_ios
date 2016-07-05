@@ -34,17 +34,12 @@
 #define Item_Volume @"m_nVolume"
 #define Item_MyContract @"isMyContract"
 
-
-//#define Item_ProductID @"pid"
-//#define Item_Name @"name"
-//#define Item_RecentPrice @"recent"
-//#define Item_UpdownPrice @"price"
-//#define Item_UpdownPercent @"percent"
-//#define Item_Inventory @"inventory"
-//#define Item_DailyInventory @"daily"
-//#define Item_DealInventory @"deal"
-//#define Item_MyContract @"mycontract"
-
+#define Item_AskPrice1 @"m_dAskPrice1"
+#define Item_BidPrice1 @"m_dBidPrice1"
+#define Item_HighestPrice @"m_dHighestPrice"
+#define Item_LowestPrice @"m_dLowestPrice"
+#define Item_AskVolume1 @"m_nAskVolume1"
+#define Item_BidVolume1 @"m_nBidVolume1"
 
 
 @interface ContractDB()
@@ -86,7 +81,7 @@ SINGLETON_IMPLEMENTION(ContractDB);
 {
     BOOL res = NO;
     if ([_db open]) {
-        NSString *sqlCreateTable =  [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS '%@' ('%@' INTEGER PRIMARY KEY AUTOINCREMENT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT,'%@' TEXT)" ,
+        NSString *sqlCreateTable =  [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS '%@' ('%@' INTEGER PRIMARY KEY AUTOINCREMENT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT,'%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT, '%@' TEXT)" ,
              tableName,
              Item_ID,
              Item_ExchangeID,
@@ -109,7 +104,13 @@ SINGLETON_IMPLEMENTION(ContractDB);
              Item_LastPrice,
              Item_OpenPrice,
              Item_Volume,
-             Item_MyContract
+             Item_MyContract,
+             Item_AskPrice1,
+             Item_BidPrice1,
+             Item_HighestPrice,
+             Item_LowestPrice,
+             Item_AskVolume1,
+             Item_BidVolume1
 ];
         
 
@@ -153,7 +154,7 @@ SINGLETON_IMPLEMENTION(ContractDB);
     if([_db open])
     {
         [_db beginTransaction];
-        res = [_db executeUpdate:[NSString stringWithFormat:@"INSERT INTO %@ VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",tableName],
+        res = [_db executeUpdate:[NSString stringWithFormat:@"INSERT INTO %@ VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",tableName],
                NULL,
                model.m_strExchangeID,
                model.m_strExchangeName,
@@ -175,7 +176,13 @@ SINGLETON_IMPLEMENTION(ContractDB);
                [NSString stringWithFormat:@"%f",model.m_dLastPrice],
                [NSString stringWithFormat:@"%f",model.m_dOpenPrice],
                [NSString stringWithFormat:@"%d",model.m_nVolume],
-               [NSString stringWithFormat:@"%d",model.isMyContract]
+               [NSString stringWithFormat:@"%d",model.isMyContract],
+               [NSString stringWithFormat:@"%f",model.m_dAskPrice1],
+               [NSString stringWithFormat:@"%f",model.m_dBidPrice1],
+               [NSString stringWithFormat:@"%f",model.m_dHighestPrice],
+               [NSString stringWithFormat:@"%f",model.m_dLowestPrice],
+               [NSString stringWithFormat:@"%d",model.m_nAskVolume1],
+               [NSString stringWithFormat:@"%d",model.m_nBidVolume1]
                ];
         [_db commit];
         [_db close];
@@ -205,7 +212,7 @@ SINGLETON_IMPLEMENTION(ContractDB);
     if([_db open])
     {
         [_db beginTransaction];
-        res = [_db executeUpdate:[NSString stringWithFormat:@"UPDATE %@ SET %@ = ? ,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ? ,%@ = ? WHERE %@ = ?",tableName,
+        res = [_db executeUpdate:[NSString stringWithFormat:@"UPDATE %@ SET %@ = ? ,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ? ,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ?,%@ = ? WHERE %@ = ?",tableName,
               Item_ExchangeID,
               Item_ExchangeName,
               Item_ProductID,
@@ -227,6 +234,12 @@ SINGLETON_IMPLEMENTION(ContractDB);
               Item_OpenPrice,
               Item_Volume,
               Item_MyContract,
+              Item_AskPrice1,
+              Item_BidPrice1,
+              Item_HighestPrice,
+              Item_LowestPrice,
+              Item_AskVolume1,
+              Item_BidVolume1,
               Item_InstrumentID
               ],
                model.m_strExchangeID,
@@ -250,6 +263,12 @@ SINGLETON_IMPLEMENTION(ContractDB);
                [NSString stringWithFormat:@"%f",model.m_dOpenPrice],
                [NSString stringWithFormat:@"%d",model.m_nVolume],
                [NSString stringWithFormat:@"%d",model.isMyContract],
+               [NSString stringWithFormat:@"%f",model.m_dAskPrice1],
+               [NSString stringWithFormat:@"%f",model.m_dBidPrice1],
+               [NSString stringWithFormat:@"%f",model.m_dHighestPrice],
+               [NSString stringWithFormat:@"%f",model.m_dLowestPrice],
+               [NSString stringWithFormat:@"%d",model.m_nAskVolume1],
+               [NSString stringWithFormat:@"%d",model.m_nBidVolume1],
                [NSString stringWithFormat:@"%@",model.m_strInstrumentID]];
         [_db commit];
         [_db close];
@@ -322,6 +341,14 @@ SINGLETON_IMPLEMENTION(ContractDB);
             model.m_dOpenPrice = [s doubleForColumn:Item_OpenPrice];
             model.m_nVolume = [s intForColumn:Item_Volume];
             model.isMyContract = [s intForColumn:Item_MyContract];
+            model.m_dAskPrice1 = [s doubleForColumn:Item_AskPrice1];
+            model.m_dBidPrice1 = [s doubleForColumn:Item_BidPrice1];
+            model.m_dHighestPrice = [s doubleForColumn:Item_HighestPrice];
+            model.m_dLowestPrice = [s doubleForColumn:Item_LowestPrice];
+            model.m_nAskVolume1 = [s intForColumn:Item_AskVolume1];
+            model.m_nBidVolume1 = [s intForColumn:Item_BidVolume1];
+
+    
             [array addObject:model];
         }
         [_db close];
@@ -362,6 +389,12 @@ SINGLETON_IMPLEMENTION(ContractDB);
                 model.m_dOpenPrice = [s doubleForColumn:Item_OpenPrice];
                 model.m_nVolume = [s intForColumn:Item_Volume];
                 model.isMyContract = [s intForColumn:Item_MyContract];
+                model.m_dAskPrice1 = [s doubleForColumn:Item_AskPrice1];
+                model.m_dBidPrice1 = [s doubleForColumn:Item_BidPrice1];
+                model.m_dHighestPrice = [s doubleForColumn:Item_HighestPrice];
+                model.m_dLowestPrice = [s doubleForColumn:Item_LowestPrice];
+                model.m_nAskVolume1 = [s intForColumn:Item_AskVolume1];
+                model.m_nBidVolume1 = [s intForColumn:Item_BidVolume1];
                 break;
             }
         }

@@ -579,7 +579,7 @@
             for(id obj in array)
             {
                 PushModel *productModel = [PushModel mj_objectWithKeyValues:obj];
-                PushModel *model = [[ContractDB sharedContractDB]queryItem:DBMyContractTable instrumentid:productModel.m_strInstrumentID];
+                PushModel *model = [[ContractDB sharedContractDB]queryItem:DBContractTable instrumentid:productModel.m_strInstrumentID];
                 if(model)
                 {
                     productModel.isMyContract = model.isMyContract;
@@ -649,6 +649,8 @@
                     model.m_nAskVolume1 = pushModel.m_nAskVolume1;
                     model.m_nBidVolume1 = pushModel.m_nBidVolume1;
 //                    model.m_dPriceTick = pushModel.m_dPriceTick;
+                    [[ContractDB sharedContractDB]updateItem:DBContractTable instrumentid:model.m_strInstrumentID model:model];
+
                     if(model.isMyContract)
                     {
                         [[ContractDB sharedContractDB]updateItem:DBMyContractTable instrumentid:model.m_strInstrumentID model:model];
