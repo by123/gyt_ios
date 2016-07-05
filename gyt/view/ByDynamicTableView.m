@@ -30,9 +30,13 @@
 @property (strong, nonatomic) NSDictionary *currentCate;
 @property (assign)BOOL isOpen;
 @property (nonatomic,retain)NSIndexPath *selectIndex;
+
 @end
 
 @implementation ByDynamicTableView
+{
+    CGFloat height;
+}
 
 -(instancetype)initWithData : (CGRect)rect
                       array : (NSMutableArray *)array
@@ -43,6 +47,7 @@
     if(self)
     {
         self.datas = array;
+        height = rect.size.height;
         self.maxWidth = maxWidth;
         self.type = type;
         [self initView];
@@ -68,11 +73,11 @@
     _scrollView = [[UIScrollView alloc]init];
     _scrollView.frame =self.bounds;
     _scrollView.delegate = self;
-    [_scrollView setContentSize:CGSizeMake(_maxWidth, self.bounds.size.height)];
+    [_scrollView setContentSize:CGSizeMake(_maxWidth, height)];
     [self addSubview:_scrollView];
 
     _tableView = [[UIFolderTableView alloc]init];
-    _tableView.frame =CGRectMake(0, 30, _maxWidth, self.bounds.size.height - 30);
+    _tableView.frame =CGRectMake(0, 30, _maxWidth,height - 30);
     _tableView.showsVerticalScrollIndicator = YES;
     _tableView.showsHorizontalScrollIndicator = YES;
     _tableView.delegate = self;
@@ -195,6 +200,7 @@
                                    {
                                        [_delegate OnExpandView:NO];
                                    }
+                                   [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
                                    self.tableView.scrollEnabled = YES;
                                }];
     }
@@ -261,6 +267,13 @@
     NSIndexPath *indexPath=[NSIndexPath indexPathForRow:position inSection:0];
     [_tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
 }
+
+
+-(void)deSelect
+{
+    [_tableView deselectRowAtIndexPath:_selectIndex animated:YES];
+}
+
 
 
 

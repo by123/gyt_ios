@@ -572,19 +572,26 @@
         NSLog(@"合约信息->%@",packageModel.result);
         BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
         QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:respondModel.response];
-        NSMutableArray *array = model.datas;
-        if(!IS_NS_COLLECTION_EMPTY(array))
+        [_mainDatas removeAllObjects];
+        for(id temp in model.datas)
         {
-            [_mainDatas removeAllObjects];
-            for(id obj in array)
+            [_mainDatas addObject:[PushModel mj_objectWithKeyValues:temp]];
+        }
+        NSMutableArray *contractDatas = [[ContractDB sharedContractDB] queryAll:DBContractTable];
+        for(int i = 0 ; i < [_mainDatas count] ; i++ )
+        {
+            PushModel *tempModel = [_mainDatas objectAtIndex:i];
+            if(!IS_NS_COLLECTION_EMPTY(contractDatas))
             {
-                PushModel *productModel = [PushModel mj_objectWithKeyValues:obj];
-                PushModel *model = [[ContractDB sharedContractDB]queryItem:DBContractTable instrumentid:productModel.m_strInstrumentID];
-                if(model)
+                for(PushModel *model in contractDatas)
                 {
-                    productModel.isMyContract = model.isMyContract;
+                    if([tempModel.m_strInstrumentID isEqualToString:model.m_strInstrumentID])
+                    {
+                        model.m_strProductID = tempModel.m_strProductID;
+                        model.m_dPriceTick = tempModel.m_dPriceTick;
+                        [_mainDatas replaceObjectAtIndex:i withObject:model];
+                    }
                 }
-                [_mainDatas addObject:productModel];
             }
         }
         [_tableView setHidden:NO];
@@ -649,7 +656,6 @@
                     model.m_nAskVolume1 = pushModel.m_nAskVolume1;
                     model.m_nBidVolume1 = pushModel.m_nBidVolume1;
 //                    model.m_dPriceTick = pushModel.m_dPriceTick;
-                    [[ContractDB sharedContractDB]updateItem:DBContractTable instrumentid:model.m_strInstrumentID model:model];
 
                     if(model.isMyContract)
                     {

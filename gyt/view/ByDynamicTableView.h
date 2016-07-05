@@ -42,7 +42,8 @@
 
 -(void)reloadData : (NSMutableArray *)array;
 
-
 -(void)reloadOneRow : (NSInteger)position;
+
+-(void)deSelect;
 
 @end

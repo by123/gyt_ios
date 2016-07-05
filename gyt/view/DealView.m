@@ -550,7 +550,6 @@
 -(void)OnItemSelected:(UIView *)dynamicTableView position:(NSInteger)position
 {
     currentItemSelect = position;
-    
     switch (currentTabSelect) {
         case 0:
             if(!IS_NS_COLLECTION_EMPTY(holdDatas))
@@ -704,15 +703,7 @@
         else
         {
             director = ENTRUST_BUY;
-//            double price;
-//            if(stopChange)
-//            {
-//                price = _model.m_dLowestPrice;
-//            }
-//            else
-//            {
-//                price = _model.m_dAskPrice1;
-//            }
+
             NSString *message = [NSString stringWithFormat:@"%@，%.2f，买，%@手",_model.m_strInstrumentID,price,hand];
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认下单吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
             alert.tag = 0;
@@ -738,15 +729,7 @@
         else
         {
             director = ENTRUST_SELL;
-//            double price;
-//            if(stopChange)
-//            {
-//                price = _model.m_dHighestPrice;
-//            }
-//            else
-//            {
-//                price = _model.m_dBidPrice1;
-//            }
+
             NSString *message = [NSString stringWithFormat:@"%@，%.2f，卖，%@手",_model.m_strInstrumentID,price,hand];
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认下单吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
             alert.tag = 1;
@@ -830,6 +813,7 @@
             [self order : currentModel];
         }
     }
+    
 }
 
 
@@ -943,17 +927,11 @@
         //下单
         if(director == ENTRUST_BUY)
         {
-           
             NSString *text = _buyItem.titleLabel.text;
             NSRange range;
             range.location = 0;
             range.length = text.length - 11;
             price = [[text substringWithRange:range] doubleValue];
-//            price = _model.m_dAskPrice1;
-//            if(stopChange)
-//            {
-//                price = _model.m_dLowestPrice;
-//            }
         }
         else
         {
@@ -962,11 +940,6 @@
             range.location = 0;
             range.length = text.length - 11;
             price = [[text substringWithRange:range] doubleValue];
-//            price = _model.m_dBidPrice1;
-//            if(stopChange)
-//            {
-//                price = _model.m_dHighestPrice;
-//            }
         }
         orderModel.info = [OrderModel buildOrderModel : _model.m_strProductID instrumentID:_model.m_strInstrumentID  orderPrice:price orderNum:hand direction:director offsetFlag:EOFF_THOST_FTDC_OF_Open];
     }
