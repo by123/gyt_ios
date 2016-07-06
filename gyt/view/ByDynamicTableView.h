@@ -44,6 +44,10 @@
 
 -(void)reloadOneRow : (NSInteger)position;
 
+//不选中
 -(void)deSelect;
+
+//关闭展开
+-(void)performClose;
 
 @end

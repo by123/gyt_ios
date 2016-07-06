@@ -274,6 +274,11 @@
     [_tableView deselectRowAtIndexPath:_selectIndex animated:YES];
 }
 
+-(void)performClose
+{
+    [_tableView performClose];
+}
+
 
 
 

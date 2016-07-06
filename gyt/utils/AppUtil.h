@@ -40,4 +40,6 @@
 
 +(NSString *)getFormatTime : (int)time;
 
++(int)getFormatNow;
+
 @end

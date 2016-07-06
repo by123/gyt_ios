@@ -45,7 +45,7 @@
 @property (assign, nonatomic) EEntrustBS m_nDirection;
 
 //成交日期
-@property (copy, nonatomic) NSString *m_strTradeDate;
+@property (assign, nonatomic) int m_strTradeDate;
 
 //成交时间
 @property (copy, nonatomic) NSString *m_strTradeTime;

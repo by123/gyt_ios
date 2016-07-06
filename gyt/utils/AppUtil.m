@@ -305,4 +305,17 @@
     return @"错误时间格式";
 }
 
++(int)getFormatNow
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"yyyyMMdd"];
+    NSString *formatStr = [formatter stringFromDate:[NSDate dateWithTimeIntervalSinceNow:0]];
+    if(IS_NS_STRING_EMPTY(formatStr))
+    {
+        NSLog(@"错误时间格式");
+        return 0;
+    }    
+    return [formatStr integerValue];
+}
+
 @end

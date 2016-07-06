@@ -95,8 +95,8 @@
                                   top:NO
                           transparent:NO];
     // 绑定关闭动作
-    [self.top addTarget:self action:@selector(performClose:) forControlEvents:UIControlEventTouchUpInside];
-    [self.bottom addTarget:self action:@selector(performClose:) forControlEvents:UIControlEventTouchUpInside];
+    [self.top addTarget:self action:@selector(performClose) forControlEvents:UIControlEventTouchUpInside];
+    [self.bottom addTarget:self action:@selector(performClose) forControlEvents:UIControlEventTouchUpInside];
     [self.top.cover addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureAction:)] ];
     [self.bottom.cover addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureAction:)] ];
     
@@ -170,12 +170,12 @@
     if (gesture.state == UIGestureRecognizerStateChanged || 
         gesture.state == UIGestureRecognizerStateEnded) {
         if (gesture.numberOfTapsRequired > 0) {
-            [self performClose:gesture];
+            [self performClose];
         }
     }
 }
 
-- (void)performClose:(id)sender {
+- (void)performClose {
     if (self.closing) {
         return;
     }else {

@@ -450,9 +450,9 @@
     //更新买入，平仓按钮
     if(!stopChange)
     {
-        NSString *sellTxt;
         NSString *buyTxt;
-        if(currentModel &&isExpandView)
+        NSString *sellTxt;
+        if(currentModel && isExpandView)
         {
             if(currentModel.m_nDirection == ENTRUST_BUY){
                 buyTxt = [NSString stringWithFormat:@"%.2f\n—————————\n买入",_model.m_dAskPrice1];
@@ -463,7 +463,8 @@
                 sellTxt = [NSString stringWithFormat:@"%.2f\n—————————\n卖出",_model.m_dBidPrice1];
             }
         }
-        else{
+        if(!stopChange)
+        {
             buyTxt = [NSString stringWithFormat:@"%.2f\n—————————\n买入",_model.m_dAskPrice1];
             sellTxt = [NSString stringWithFormat:@"%.2f\n—————————\n卖出",_model.m_dBidPrice1];
         }
@@ -655,6 +656,7 @@
 -(void)OnSelect:(NSInteger)position
 {
     [self hideKeyboard];
+    [_holdTableView performClose];
     currentTabSelect = position;
     switch (position) {
         case 0:
@@ -811,6 +813,10 @@
         else if(alertView.tag == 3)
         {
             [self order : currentModel];
+            if(currentTabSelect == 0)
+            {
+                [_holdTableView performClose];
+            }
         }
     }
     
@@ -990,7 +996,6 @@
                 if(holdModel.m_nOpenVolume != 0)
                 {
                     [holdDatas insertObject:holdModel atIndex:0];
-//                    [holdDatas addObject:holdModel];
                 }
             }
             [self reloadData:holdDatas];
@@ -1012,11 +1017,9 @@
                     OrderTagModel *tagModel = [[OrderTagModel alloc]init];
                     tagModel.m_strRealTag = holdingModel.m_strOrderRef;
                     holdingModel.m_tag = tagModel;
-                    if(holdingModel.m_nOrderStatus == ENTRUST_STATUS_REPORTED)
+                    if(holdingModel.m_nOrderStatus == ENTRUST_STATUS_REPORTED && [AppUtil getFormatNow] == holdingModel.m_nInsertDate)
                     {
-//                        [holdingDatas addObject:holdingModel];
                         [holdingDatas insertObject:holdingModel atIndex:0];
-
                     }
                 }
                 [self reloadData:holdingDatas];
@@ -1030,9 +1033,11 @@
                     OrderTagModel *tagModel = [[OrderTagModel alloc]init];
                     tagModel.m_strRealTag = holdByModel.m_strOrderRef;
                     holdByModel.m_tag = tagModel;
-//                    [holdByDatas addObject:holdByModel];
-                    
-                     [holdByDatas insertObject:holdByModel atIndex:0];
+
+                    if([AppUtil getFormatNow] == holdByModel.m_nInsertDate)
+                    {
+                        [holdByDatas insertObject:holdByModel atIndex:0];
+                    }
 
                 }
                 [self reloadData:holdByDatas];
@@ -1051,7 +1056,10 @@
             {
                 DealProfitModel *profitModel = [DealProfitModel mj_objectWithKeyValues:obj];
 //                [holdProfileDatas addObject:profitModel];
-                [holdProfileDatas insertObject:profitModel atIndex:0];
+                if([AppUtil getFormatNow] == profitModel.m_strTradeDate)
+                {
+                    [holdProfileDatas insertObject:profitModel atIndex:0];
+                }
 
             }
             [self reloadData:holdProfileDatas];
@@ -1129,7 +1137,6 @@
         DealProfitModel *model = data;
 //        [holdProfileDatas addObject:model];
         [holdProfileDatas insertObject:model atIndex:0];
-
         [self reloadData:holdProfileDatas];
     }
     else if([data isKindOfClass:[DealHoldModel class]])
@@ -1150,7 +1157,7 @@
                     if(model.m_nPosition != 0)
                     {
                         [holdDatas insertObject:model atIndex:0];
-                        //                    [holdDatas addObject:model];
+                        //[holdDatas addObject:model];
                     }
                     break;
                 }
