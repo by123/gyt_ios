@@ -14,48 +14,50 @@
 //资金账号
 @property (copy, nonatomic) NSString *m_strAccountID;
 
-//权益
+//昨日权益
+@property (assign, nonatomic) double m_dYesterdayBalance;
+
+//当前权益
 @property (assign, nonatomic) double m_dCurBalance;
 
-//可用资金
-@property (assign, nonatomic) double m_dAvailable;
+//优先资金
+@property (assign, nonatomic) double m_dCaptialMoney;
 
-//币种
-@property (assign, nonatomic) EMoneyType m_nMoneyType;
+//总权益
+@property (assign, nonatomic) double m_dBalance;
 
-//初始权益
-@property (assign, nonatomic) double m_dInitBalance;
-
-//出入金
-@property (assign, nonatomic) double m_dDeposit;
-
-//手续费
-@property (assign, nonatomic) double m_dCommission;
+//持仓盈亏
+@property (assign, nonatomic) double m_dPositionProfit;
 
 //平仓盈亏
 @property (assign, nonatomic) double m_dCloseProfit;
 
-////平仓盈亏率
-//@property (assign, nonatomic) double a1;
-//
-////逐笔浮赢
-//@property (assign, nonatomic) double a2;
-//
-////逐笔浮赢率
-//@property (assign, nonatomic) double a3;
+//入金
+@property (assign, nonatomic) double m_dDeposit;
 
-//保证金
-@property (assign, nonatomic) double m_dUsedMargin;
+//出金
+@property (assign, nonatomic) double m_dWithdraw;
 
-////挂单保证金
-//@property (assign, nonatomic) double a4;
-//
-////挂单手续费
-//@property (assign, nonatomic) double *a5;
-//
-////资金使用率
-//@property (assign, nonatomic) double *a6;
+//占用保证金
+@property (assign, nonatomic) double m_dCurrMargin;
 
+//冻结保证金
+@property (assign, nonatomic) double m_dFrozenMargin;
+
+//手续费
+@property (assign, nonatomic) double m_dCommission;
+
+//冻结手续费
+@property (assign, nonatomic) double m_dFrozenCommission;
+
+//合约价值
+@property (assign, nonatomic) double m_dInstrumentValue;
+
+//币种
+@property (assign, nonatomic) EMoneyType m_moneyType;
+
+//可用
+@property (assign, nonatomic) double m_dAvailable;
 
 
 +(NSMutableArray *)getData : (MoneyDetailModel *)model;

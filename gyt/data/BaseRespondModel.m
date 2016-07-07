@@ -26,7 +26,8 @@
     }
     else
     {
-        model.errorMsg = model.error.ErrorMsg;
+       model.errorMsg = model.error.ErrorMsg;
+       [ByToast showErrorToast: model.errorMsg];
     }
     return model;
 }

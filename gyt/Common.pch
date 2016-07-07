@@ -29,6 +29,7 @@
 #import "PushDataHandle.h"
 #import <UMMobClick/MobClick.h>
 #import "NSString+Contains.h"
+#import "ByToast.h"
 
 #define  KEY_USERNAME_PASSWORD @"com.company.app.usernamepassword"
 #define  KEY_USERNAME @"com.company.app.username"
@@ -261,7 +262,13 @@ description:__VA_ARGS__];                             \
 
 #define LINE_COLOR  [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.2]
 
+#define NormalColor [UIColor colorWithRed:0x67/255.0 green:0xb8/255.0 blue:0x01/255.0 alpha:1.0]
+
 #define WarnColor   [UIColor colorWithRed:0xFF/255.0 green:0x54/255.0 blue:0x54/255.0 alpha:1.0]
+
+#define ErrorColor  [UIColor colorWithRed:0xFF/255.0 green:0x40/255.0 blue:0x40/255.0 alpha:1.0]
+
+
 
 //选中色
 #define SELECT_COLOR [UIColor colorWithRed:255/255.0 green:99/255.0 blue:71/255.0 alpha:1.0]

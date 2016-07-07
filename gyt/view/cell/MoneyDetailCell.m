@@ -41,7 +41,8 @@
     _contentLabel = [[UILabel alloc]init];
     _contentLabel.font = [UIFont systemFontOfSize:12.0f];
     _contentLabel.textColor = TEXT_COLOR;
-    _contentLabel.textAlignment = NSTextAlignmentCenter;
+    _contentLabel.textAlignment = NSTextAlignmentRight;
+    _contentLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     [self.contentView addSubview:_contentLabel];
     
     _lineView = [[UIView alloc]init];
@@ -56,7 +57,7 @@
     _titleLabel.frame = CGRectMake(15, 0, _titleLabel.contentSize.width, 30);
     
     _contentLabel.text = model.content;
-    _contentLabel.frame = CGRectMake(SCREEN_WIDTH - 15 - _contentLabel.contentSize.width, 0, _contentLabel.contentSize.width,30);
+    _contentLabel.frame = CGRectMake(0, 0, SCREEN_WIDTH -10,30);
     
 
 }

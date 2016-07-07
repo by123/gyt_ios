@@ -298,7 +298,7 @@
             [weakSelf.sellItem setTitle:sellTxt forState:UIControlStateNormal];
         }
         else{
-            [DialogHelper showTips:@"价格设置不是最小变动的整数倍"];
+            [ByToast showErrorToast:@"价格设置不是最小变动的整数倍"];
         }
        
     };
@@ -743,7 +743,7 @@
         NSMutableArray *array = [[ContractDB sharedContractDB] queryAll:DBMyContractTable];
         if(IS_NS_COLLECTION_EMPTY(array))
         {
-            [DialogHelper showTips:@"您还没有自选合约"];
+            [ByToast showErrorToast:@"您还没有自选合约"];
             return;
         }
         NSMutableArray *temps = [[NSMutableArray alloc]init];
@@ -769,11 +769,11 @@
     }
     else if(view == _handReverseBtn)
     {
-        [DialogHelper showTips:@"开发中"];
+        [ByToast showErrorToast:@"开发中"];
     }
     else if(view == _conditionBtn)
     {
-        [DialogHelper showTips:@"开发中"];
+        [ByToast showErrorToast:@"开发中"];
     }
     else if(view == _addHandBtn)
     {
@@ -786,7 +786,7 @@
         int hand = [[_handTextField getTextFieldText] integerValue];
         if(hand <= 1)
         {
-            [DialogHelper showTips:@"手数不能小于等于0"];
+            [ByToast showErrorToast:@"手数不能小于等于0"];
             return;
         }
         hand --;
@@ -913,7 +913,7 @@
     {
         if(hand > model.m_nCanCloseVol)
         {
-            [DialogHelper showTips:@"平仓数量大于可用数量"];
+            [ByToast showErrorToast:@"平仓数量大于可用数量"];
             return;
         }
         //平仓
@@ -1067,12 +1067,12 @@
     }
     else if(packageModel.seq == GYT_ORDER)
     {
-        [DialogHelper showTips:respondModel.errorMsg];
+        
     }
     else if(packageModel.seq == GYT_CANCEL)
     {
         NSLog(@"撤单成功返回->%@",packageModel.result);
-        [DialogHelper showSuccessTips:@"提交撤单申请成功"];
+        [ByToast showNormalToast:@"提交撤单申请成功"];
     }
     else if(packageModel.cmd == NET_CMD_NOTIFICATION)
     {

@@ -48,6 +48,7 @@
 		CF6342AE1CFD952D008149B1 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6342AD1CFD952D008149B1 /* GCDAsyncSocket.m */; };
 		CF6342B11CFDA39A008149B1 /* SocketConnect.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6342B01CFDA39A008149B1 /* SocketConnect.m */; };
 		CF6CED571CFC1E64007F97AA /* OrderRespondModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6CED561CFC1E64007F97AA /* OrderRespondModel.m */; };
+		CF7E44521D2D00DB00C1FFC5 /* ByToast.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7E44511D2D00DB00C1FFC5 /* ByToast.m */; };
 		CF9C8E0E1D17958600F2E6A7 /* libAFNetworking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF9C8E0D1D17958600F2E6A7 /* libAFNetworking.a */; };
 		CF9C8E101D17958B00F2E6A7 /* libFMDB.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF9C8E0F1D17958B00F2E6A7 /* libFMDB.a */; };
 		CF9C8E121D17958E00F2E6A7 /* libMBProgressHUD.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF9C8E111D17958E00F2E6A7 /* libMBProgressHUD.a */; };
@@ -251,6 +252,8 @@
 		CF6342B01CFDA39A008149B1 /* SocketConnect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketConnect.m; sourceTree = "<group>"; };
 		CF6CED551CFC1E64007F97AA /* OrderRespondModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderRespondModel.h; sourceTree = "<group>"; };
 		CF6CED561CFC1E64007F97AA /* OrderRespondModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderRespondModel.m; sourceTree = "<group>"; };
+		CF7E44501D2D00DB00C1FFC5 /* ByToast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ByToast.h; sourceTree = "<group>"; };
+		CF7E44511D2D00DB00C1FFC5 /* ByToast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ByToast.m; sourceTree = "<group>"; };
 		CF9C8E0D1D17958600F2E6A7 /* libAFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAFNetworking.a; path = "../../../Library/Developer/Xcode/DerivedData/gyt-bfrnsjmfxkvcntdvtkstovsffurf/Build/Products/Debug-iphoneos/libAFNetworking.a"; sourceTree = "<group>"; };
 		CF9C8E0F1D17958B00F2E6A7 /* libFMDB.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFMDB.a; path = "../../../Library/Developer/Xcode/DerivedData/gyt-bfrnsjmfxkvcntdvtkstovsffurf/Build/Products/Debug-iphoneos/libFMDB.a"; sourceTree = "<group>"; };
 		CF9C8E111D17958E00F2E6A7 /* libMBProgressHUD.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMBProgressHUD.a; path = "../../../Library/Developer/Xcode/DerivedData/gyt-bfrnsjmfxkvcntdvtkstovsffurf/Build/Products/Debug-iphoneos/libMBProgressHUD.a"; sourceTree = "<group>"; };
@@ -709,6 +712,8 @@
 				CFC15BC81CC4C7340077FA19 /* InsetTextField.m */,
 				CFD37E281D02AE1E00297DE2 /* ByTextField.h */,
 				CFD37E291D02AE1E00297DE2 /* ByTextField.m */,
+				CF7E44501D2D00DB00C1FFC5 /* ByToast.h */,
+				CF7E44511D2D00DB00C1FFC5 /* ByToast.m */,
 				CFC9E5551D1BE15A00729A7D /* flodertableview */,
 				CFD37E201D02A91300297DE2 /* keyboard */,
 				CFDD2DF51CCDE8AC00E81E3F /* dialog */,
@@ -1335,6 +1340,7 @@
 				CF4A6D1B1CBE25AA00B36C93 /* AppDelegate.m in Sources */,
 				CFC15B8E1CBF94A90077FA19 /* MainTableCell.m in Sources */,
 				CF2A51051CE31A1D00F0EF3D /* CheckUpdateUtil.m in Sources */,
+				CF7E44521D2D00DB00C1FFC5 /* ByToast.m in Sources */,
 				CF0DBB7C1CF6D4A30082E411 /* KeyChainStore.m in Sources */,
 				CF6CED571CFC1E64007F97AA /* OrderRespondModel.m in Sources */,
 				CF4A6D181CBE25AA00B36C93 /* main.m in Sources */,

@@ -54,6 +54,7 @@
     
     _idNumLabel = [[UILabel alloc]init];
     [self setProperty:_idNumLabel];
+    _idNumLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     [_rootView addSubview:_idNumLabel];
     
     _goldLabel = [[UILabel alloc]init];
@@ -94,7 +95,7 @@
 {
     //流水号
     _idNumLabel.text = [NSString stringWithFormat:@"流水号：%@",model.m_strSerialNo];
-    _idNumLabel.frame = CGRectMake(5, 10, _idNumLabel.contentSize.width, _idNumLabel.contentSize.height);
+    _idNumLabel.frame = CGRectMake(5, 10, _rootView.size.width-10, _idNumLabel.contentSize.height);
     
     //出入金
     _goldLabel.text = [NSString stringWithFormat:@"%@：%f",[Constant getCashType:model.m_nCashType],model.m_dCashValue];

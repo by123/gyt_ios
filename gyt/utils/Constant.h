@@ -121,7 +121,7 @@ typedef NS_ENUM(NSInteger, DealType) {
     //成交
     Profit,
     //价格预警
-    Warn
+    Warning
 };
 
 typedef NS_ENUM(NSInteger,CandleType)

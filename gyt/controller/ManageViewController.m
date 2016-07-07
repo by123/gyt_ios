@@ -78,12 +78,12 @@
     {        
         [[Test sharedTest] setHost:host];
         [[Test sharedTest] setPort:[port integerValue]];
-        [DialogHelper showSuccessTips:@"修改成功"];
+        [ByToast showNormalToast:@"修改成功"];
         [[SocketConnect sharedSocketConnect] disconnect];
     }
     else
     {
-        [DialogHelper showTips:@"端口输入有误"];
+        [ByToast showErrorToast:@"端口输入有误"];
     }
 }
 

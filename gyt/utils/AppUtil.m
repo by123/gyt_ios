@@ -32,7 +32,7 @@
 
 {
     if ([str length] == 0) {
-        [DialogHelper showWarnTips:@"手机号码不能为空"];
+        [ByToast showWarnToast:@"手机号码不能为空"];
         return NO;
     }
     
@@ -40,7 +40,7 @@
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
     BOOL isMatch = [pred evaluateWithObject:str];
     if (!isMatch) {
-        [DialogHelper showWarnTips:@"请输入正确的手机号码"];
+        [ByToast showWarnToast:@"请输入正确的手机号码"];
         return NO;
     }
     return YES;

@@ -154,7 +154,7 @@
             case Profit:
                 [cell setProfitData:[_datas objectAtIndex:indexPath.row] maxWidth:_maxWidth];
                 break;
-            case Warn:
+            case Warning:
                 [cell setWarnData:[_datas objectAtIndex:indexPath.row] maxWidth:_maxWidth];
                 break;
                 

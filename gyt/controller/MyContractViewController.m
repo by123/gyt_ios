@@ -137,7 +137,7 @@
 {
     if(IS_NS_COLLECTION_EMPTY(_datas))
     {
-        [DialogHelper showWarnTips:@"没有自选合约，不能进行删除操作"];
+        [ByToast showWarnToast:@"没有自选合约，不能进行删除操作"];
         return;
     }
     UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"是否删除全部自选合约" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];

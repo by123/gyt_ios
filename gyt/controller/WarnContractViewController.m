@@ -40,7 +40,7 @@
     
     NSArray *widths = @[@"1",@"1",@"1",@"1"];
     NSArray *headers = @[@"名称",@"上限",@"下限",@"最新"];
-    _dynamicTableView = [[ByDynamicTableView alloc]initWithData:Default_Frame array:_datas maxWidth:SCREEN_WIDTH type:Warn];
+    _dynamicTableView = [[ByDynamicTableView alloc]initWithData:Default_Frame array:_datas maxWidth:SCREEN_WIDTH type:Warning];
     [_dynamicTableView setHeaders:widths headers:headers];
     [self.view addSubview:_dynamicTableView];
 }

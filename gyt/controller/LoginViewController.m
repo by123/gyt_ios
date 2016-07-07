@@ -91,7 +91,7 @@
 //    _nameTextField.text = @"800014340";
 //    _nameTextField.text = @"800001080"; //内外通用
 //    _nameTextField.text = @"800003664";  //外网
-    _nameTextField.text = @"881978165";  //外网
+    _nameTextField.text = @"820527708";  //外网
 //    _nameTextField.text = @"800001706";
     [_nameTextField setInsetTitle:@"资金账号：" font:[UIFont systemFontOfSize:14.0f]];
     _nameTextField.block = ^(InsetTextField *insetTextField) {
@@ -109,19 +109,19 @@
     _passwordTextField.block = ^(InsetTextField *insetTextField){
         if(IS_NS_STRING_EMPTY(insetTextField.text))
         {
-            [DialogHelper showTips:@"请输入密码"];
+            [ByToast showErrorToast:@"请输入密码"];
             return;
         }
         if(!weakSelf.isSavePsw)
         {
             [[NSUserDefaults standardUserDefaults] setValue:weakSelf.passwordTextField.text forKey:UserDefault_Password];
-            [DialogHelper showSuccessTips:@"密码已保存"];
+            [ByToast showNormalToast:@"密码已保存"];
            [insetTextField setInsetImage:[UIImage imageNamed:@"ic_lock"]];
         }
         else
         {
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:UserDefault_Password];
-           [DialogHelper showTips:@"密码未保存"];
+           [ByToast showErrorToast:@"密码未保存"];
            [insetTextField setInsetImage:[UIImage imageNamed:@"ic_unlock"]];
         }
         weakSelf.isSavePsw = !weakSelf.isSavePsw;
@@ -192,12 +192,12 @@
     {
         [[Test sharedTest] setHost:host];
         [[Test sharedTest] setPort:[port intValue]];
-        [DialogHelper showSuccessTips:@"修改成功"];
+        [ByToast showNormalToast:@"修改成功"];
         [[SocketConnect sharedSocketConnect] disconnect];
     }
     else
     {
-        [DialogHelper showTips:@"端口输入有误"];
+        [ByToast showErrorToast:@"端口输入有误"];
     }
 }
 
@@ -274,13 +274,13 @@
     
     if(IS_NS_STRING_EMPTY(name))
     {
-        [DialogHelper showTips:@"请输入资金账号"];
+        [ByToast showErrorToast:@"请输入资金账号"];
         [hua hide:YES];
         return;
     }
     if(IS_NS_STRING_EMPTY(password))
     {
-        [DialogHelper showTips:@"请输入密码"];
+        [ByToast showErrorToast:@"请输入密码"];
         [hua hide:YES];
         return;
     }
@@ -313,12 +313,12 @@
     
     if(IS_NS_STRING_EMPTY(name))
     {
-        [DialogHelper showTips:@"请输入资金账号"];
+        [ByToast showErrorToast:@"请输入资金账号"];
         return;
     }
     if(IS_NS_STRING_EMPTY(password))
     {
-        [DialogHelper showTips:@"请输入密码"];
+        [ByToast showErrorToast:@"请输入密码"];
         return;
     }
     
@@ -363,13 +363,12 @@
             [MobClick profileSignInWithPUID:[[Account sharedAccount] getUid]];
 
             [[Account sharedAccount]saveSessionid:sessionId];
-//            [DialogHelper showSuccessTips:[NSString stringWithFormat:@"登录成功->%@",packageModel.result]];
             [[NSNotificationCenter defaultCenter] postNotificationName:Notify_Update_AccountInfo object:nil];
             [MainViewController show : self];
         }
         else
         {
-            [DialogHelper showTips:@"登录失败!"];
+            [ByToast showErrorToast:@"登录失败!"];
         }
     }
     

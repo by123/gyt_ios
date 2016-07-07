@@ -420,14 +420,14 @@
     {
         model.isMyContract = 0;
         [_mainItemDialog setLeftImage : model.isMyContract];
-        [DialogHelper showWarnTips:[NSString stringWithFormat:@"%@已取消自选合约",model.m_strInstrumentID]];
+        [ByToast showWarnToast:[NSString stringWithFormat:@"%@已取消自选合约",model.m_strInstrumentID]];
         [[ContractDB sharedContractDB] deleteItem:DBMyContractTable instrumentid:model.m_strInstrumentID];
     }
     else
     {
         model.isMyContract = 1;
         [_mainItemDialog setLeftImage : model.isMyContract];
-        [DialogHelper showSuccessTips:[NSString stringWithFormat:@"%@已加入自选合约",model.m_strInstrumentID]];
+        [ByToast showNormalToast:[NSString stringWithFormat:@"%@已加入自选合约",model.m_strInstrumentID]];
         [[ContractDB sharedContractDB] insertItem:DBMyContractTable model:model];
         
     }
@@ -550,7 +550,6 @@
     {
         BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
         QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:respondModel.response];
-//        NSLog(@"资金信息->%@",model.d);
         NSMutableArray *array = model.datas;
         if(!IS_NS_COLLECTION_EMPTY(array))
         {
@@ -560,11 +559,11 @@
                 MoneyDetailModel *moneyDetailModel = [MoneyDetailModel mj_objectWithKeyValues:obj];
                 [[NSUserDefaults standardUserDefaults]setValue:moneyDetailModel.mj_JSONString forKey:MoneyInfo];
             }
-            [DialogHelper showSuccessTips:@"获取资金信息成功!"];
+            [ByToast showNormalToast:@"获取资金信息成功!"];
 
         }
         else{
-            [DialogHelper showTips:@"获取资金信息失败，请重试!"];
+            [ByToast showErrorToast:@"获取资金信息失败，请重试!"];
         }
     }
     else if(packageModel.seq == XT_CInstrumentDetail &&  packageModel.result)

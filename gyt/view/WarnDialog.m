@@ -139,11 +139,11 @@
     {
         if(![_upBtn isSelected] && ![_downBtn isSelected])
         {
-            [DialogHelper showTips:@"您还没有选择"];
+            [ByToast showWarnToast:@"您还没有选择"];
         }
         else
         {
-            [DialogHelper showSuccessTips:[NSString stringWithFormat:@"%@已加入预警合约",_model.m_strInstrumentName]];
+            [ByToast showNormalToast:[NSString stringWithFormat:@"%@已加入预警合约",_model.m_strInstrumentName]];
             [[ContractDB sharedContractDB]insertItem:DBWarnContractTable model:_model];
             [self removeFromSuperview];
         }
