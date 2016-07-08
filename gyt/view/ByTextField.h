@@ -26,4 +26,6 @@ typedef void (^ByTextFieldBlock)(BOOL isCompelete,NSString *text);
 
 -(NSString *)getTextFieldText;
 
+-(void)becomeFocus;
+
 @end

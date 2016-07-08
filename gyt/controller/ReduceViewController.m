@@ -122,9 +122,12 @@
 -(void)getCash
 {
     AccessGoldModel *model = [[AccessGoldModel alloc]init];
-    model.m_nMoneyType = MoneyType_RMB;
+    model.m_strTargetId = @"123123";
+    model.m_nTargetType = CashInOutTargetType_Account;
     model.m_dCashValue = 1000;
-//    model.m_d
+    model.m_nPayType = PayType_OFF_LINE;
+    model.m_nStatus = CashApplicationStatus_Submit;
+    model.m_strSubmitter =@"申请人";
     
     NSMutableDictionary *dic = [JSONUtil parseDic:model];
     NSString *jsonStr = [JSONUtil parse:@"commitCashApplyInfo" params:dic];

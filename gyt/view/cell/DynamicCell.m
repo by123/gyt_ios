@@ -89,7 +89,7 @@
 //                    label.text = [NSString stringWithFormat:@"%.f",model.m_dInstrumentValue];
 //                    break;
                 case 6://保证金
-                    label.text = [NSString stringWithFormat:@"%.f",model.m_dUsedMargin];
+                    label.text = [NSString stringWithFormat:@"%.2f",model.m_dUsedMargin];
                     break;
                 case 7://今手数
                     label.text =[NSString stringWithFormat:@"%d",model.m_nOpenVolume];

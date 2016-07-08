@@ -109,4 +109,9 @@
     return _mTextField.text;
 }
 
+-(void)becomeFocus
+{
+    [self textFieldDidBeginEditing : _mTextField];
+}
+
 @end

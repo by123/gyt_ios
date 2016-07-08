@@ -54,6 +54,8 @@
     [super viewDidLoad];
     [self initView];
     [[SocketConnect sharedSocketConnect]setController:self];
+    [[SocketConnect sharedSocketConnect] setDelegate:self];
+
 }
 
 #pragma mark 初始化控件

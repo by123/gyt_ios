@@ -559,7 +559,7 @@
                 MoneyDetailModel *moneyDetailModel = [MoneyDetailModel mj_objectWithKeyValues:obj];
                 [[NSUserDefaults standardUserDefaults]setValue:moneyDetailModel.mj_JSONString forKey:MoneyInfo];
             }
-            [ByToast showNormalToast:@"获取资金信息成功!"];
+//            [ByToast showNormalToast:@"获取资金信息成功!"];
 
         }
         else{

@@ -22,6 +22,7 @@
 @protocol ListDialogDelegate
 
 @optional -(void)OnListDialogItemClick : (id)data
+                              position : (NSInteger)position
                                 dialog : (ByListDialog *)dialog;
 
 @end

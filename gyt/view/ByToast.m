@@ -12,7 +12,7 @@
 #define ToastHeight 50
 #define EnterInterval 0.5
 #define ExitInterval 0.5
-#define TimeInterval 3
+#define TimeInterval 1
 
 
 @interface ByToast()
@@ -93,7 +93,7 @@
     [UIView animateWithDuration:0 delay:enterInterval options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.frame = CGRectMake(0, SCREEN_HEIGHT - ToastHeight, SCREEN_WIDTH, ToastHeight);
     } completion:^(BOOL finished) {
-        [NSThread sleepForTimeInterval:3];
+        [NSThread sleepForTimeInterval:TimeInterval];
         [self exit];
     }];
 }

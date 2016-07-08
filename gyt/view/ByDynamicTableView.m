@@ -255,10 +255,14 @@
 }
 
 -(void)reloadData : (NSMutableArray *)array
+        position : (NSInteger)position
 {
     _datas = array;
 //    _datas = (NSMutableArray *)[[array reverseObjectEnumerator] allObjects];
     [_tableView reloadData];
+    
+//    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:position inSection:0];
+//    [_tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
 }
 
 
@@ -268,6 +272,10 @@
     [_tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
 }
 
+-(void)select : (NSIndexPath *)indexPath
+{
+   [_tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+}
 
 -(void)deSelect
 {

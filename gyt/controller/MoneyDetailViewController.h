@@ -9,7 +9,7 @@
 #import "BaseViewController.h"
 #import "SlideNavigationController.h"
 #import "TitleContentModel.h"
-@interface MoneyDetailViewController : BaseViewController<ByNavigationBarDelegate,UITableViewDelegate,UITableViewDataSource>
+@interface MoneyDetailViewController : BaseViewController<ByNavigationBarDelegate,UITableViewDelegate,UITableViewDataSource,SocketConnectDelegate,PushDataHandleDelegate>
 
 +(void)show : (SlideNavigationController *)controller;
 

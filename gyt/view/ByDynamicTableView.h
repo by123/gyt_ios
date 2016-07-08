@@ -40,9 +40,13 @@
 -(void)setHeaders : (NSArray *)widths
           headers : (NSArray *)headers;
 
--(void)reloadData : (NSMutableArray *)array;
+-(void)reloadData : (NSMutableArray *)array
+         position : (NSInteger)position;
 
 -(void)reloadOneRow : (NSInteger)position;
+
+//选中
+-(void)select : (NSIndexPath *)indexPath;
 
 //不选中
 -(void)deSelect;

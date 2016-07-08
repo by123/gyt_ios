@@ -125,7 +125,8 @@
 {
     if(_delegate)
     {
-        [_delegate OnListDialogItemClick:[_datas objectAtIndex:indexPath.row] dialog:self];
+        NSInteger position = indexPath.row;
+        [_delegate OnListDialogItemClick:[_datas objectAtIndex:position] position:position dialog:self];
         [self removeFromSuperview];
     }
 }

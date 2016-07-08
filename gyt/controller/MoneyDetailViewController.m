@@ -51,7 +51,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = BACKGROUND_COLOR;
+    [[SocketConnect sharedSocketConnect] setDelegate:self];
     [self initView];
+    
 }
 
 -(void)initView
@@ -64,6 +66,7 @@
     MoneyDetailModel *moneyDetailModel = [MoneyDetailModel mj_objectWithKeyValues:moneyDetailStr];
     _datas = [MoneyDetailModel getData : moneyDetailModel];
     [_tableView reloadData];
+    [self requestAccountInfo];
 }
 
 -(void)initNavigationBar
@@ -178,6 +181,70 @@
 {
     [ReduceViewController show:self];
 }
+
+
+
+#pragma mark 请求资金信息
+-(void)requestAccountInfo
+{
+    NSString *jsonStr = [QueryRequest buildQueryInfo:XT_CAccountDetail];
+    [[SocketConnect sharedSocketConnect] sendData:jsonStr seq:XT_CAccountDetail];
+}
+
+
+#pragma mark 资金变化主推
+-(void)OnReceiveSuccess:(id)respondObject
+{
+    PackageModel *packageModel = respondObject;
+    if(packageModel.seq == XT_CAccountDetail &&  packageModel.result)
+    {
+        BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
+        QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:respondModel.response];
+        NSMutableArray *array = model.datas;
+        if(!IS_NS_COLLECTION_EMPTY(array))
+        {
+            //多种资金
+            for(id obj in array)
+            {
+                MoneyDetailModel *moneyDetailModel = [MoneyDetailModel mj_objectWithKeyValues:obj];
+                [self updateInfo:moneyDetailModel];
+            }
+        }
+        else{
+            [ByToast showErrorToast:@"获取资金信息失败，请重试!"];
+        }
+    }
+    else if(packageModel.cmd == NET_CMD_NOTIFICATION)
+    {
+        [[PushDataHandle sharedPushDataHandle] handlePushData:packageModel.result delegate :self];
+    }
+
+}
+
+
+-(void)OnReceiveFail:(NSError *)error
+{
+    
+}
+
+-(void)pushResult:(id)data
+{
+    if([data isKindOfClass:[MoneyDetailModel class]])
+    {
+        NSLog(@"#############资金变化#############");
+        MoneyDetailModel *model = data;
+        [self updateInfo:model];
+    }
+}
+
+-(void)updateInfo : (MoneyDetailModel *)model
+{
+    [[NSUserDefaults standardUserDefaults]setValue:model.mj_JSONString forKey:MoneyInfo];
+    _datas = [MoneyDetailModel getData : model];
+    [_tableView reloadData];
+    
+}
+
 
 
 
