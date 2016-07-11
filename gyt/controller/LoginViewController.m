@@ -93,7 +93,8 @@
 //    _nameTextField.text = @"800014340";
 //    _nameTextField.text = @"800001080"; //内外通用
 //    _nameTextField.text = @"800003664";  //外网
-    _nameTextField.text = @"820527708";  //外网
+//    _nameTextField.text = @"820527708";  //外网
+    _nameTextField.text = @"800080833";  //外网
 //    _nameTextField.text = @"800001706";
     [_nameTextField setInsetTitle:@"资金账号：" font:[UIFont systemFontOfSize:14.0f]];
     _nameTextField.block = ^(InsetTextField *insetTextField) {

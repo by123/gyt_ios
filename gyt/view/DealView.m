@@ -37,6 +37,7 @@ typedef NS_ENUM(NSInteger,PriceType)
     HandIn
 };
 
+
 @interface DealView()
 
 //权益
@@ -901,16 +902,28 @@ typedef NS_ENUM(NSInteger,PriceType)
             [ByToast showErrorToast:@"平仓数量大于可用数量"];
             return;
         }
+        double price;
         //平仓
         if(model.m_nDirection == ENTRUST_BUY)
         {
             model.m_nDirection = ENTRUST_SELL;
+            NSString *text = _sellItem.titleLabel.text;
+            NSRange range;
+            range.location = 0;
+            range.length = text.length - 11;
+            price = [[text substringWithRange:range] doubleValue];
+            
         }
         else
         {
             model.m_nDirection = ENTRUST_BUY;
+            NSString *text = _buyItem.titleLabel.text;
+            NSRange range;
+            range.location = 0;
+            range.length = text.length - 11;
+            price = [[text substringWithRange:range] doubleValue];
         }
-        orderModel.info = [OrderModel buildOrderModel :model.m_strProductID  instrumentID:model.m_strInstrumentID orderPrice:model.m_dLastPrice orderNum:hand direction:model.m_nDirection offsetFlag:EOFF_THOST_FTDC_OF_Close];
+        orderModel.info = [OrderModel buildOrderModel :model.m_strProductID  instrumentID:model.m_strInstrumentID orderPrice:price orderNum:hand direction:model.m_nDirection offsetFlag:EOFF_THOST_FTDC_OF_Close];
     }
     else
     {
@@ -983,7 +996,7 @@ typedef NS_ENUM(NSInteger,PriceType)
                     [holdDatas insertObject:holdModel atIndex:0];
                 }
             }
-            [self reloadData:holdDatas];
+            [self reloadData:holdDatas type:Hold];
         }
     }
     //挂单和委托
@@ -1007,7 +1020,7 @@ typedef NS_ENUM(NSInteger,PriceType)
                         [holdingDatas insertObject:holdingModel atIndex:0];
                     }
                 }
-                [self reloadData:holdingDatas];
+                [self reloadData:holdingDatas type:Holding];
             }
             else if(currentTabSelect == 2)
             {
@@ -1025,7 +1038,7 @@ typedef NS_ENUM(NSInteger,PriceType)
                     }
 
                 }
-                [self reloadData:holdByDatas];
+                [self reloadData:holdByDatas type:HoldBy];
             }
         }
     }
@@ -1047,7 +1060,7 @@ typedef NS_ENUM(NSInteger,PriceType)
                 }
 
             }
-            [self reloadData:holdProfileDatas];
+            [self reloadData:holdProfileDatas type:Profit];
         }
     }
     else if(packageModel.seq == GYT_ORDER)
@@ -1082,13 +1095,19 @@ typedef NS_ENUM(NSInteger,PriceType)
                 {
                     temp.m_nOrderStatus = model.m_nOrderStatus;
                     hasModel = YES;
+                    if(temp.m_nOrderStatus == ENTRUST_STATUS_CANCELED)
+                    {
+                        [holdingDatas removeObjectAtIndex:i];
+                    }
+                    break;
                 }
+                
             }
             if(!hasModel)
             {
                 [holdingDatas insertObject:model atIndex:0];
             }
-            [self reloadData:holdingDatas];
+            [self reloadData:holdingDatas type:Holding];
         }
         else if(currentTabSelect == 2)
         {
@@ -1107,7 +1126,7 @@ typedef NS_ENUM(NSInteger,PriceType)
             {
                 [holdByDatas insertObject:model atIndex:0];
             }
-            [self reloadData:holdByDatas];
+            [self reloadData:holdByDatas type:HoldBy];
 
         }
 
@@ -1117,7 +1136,7 @@ typedef NS_ENUM(NSInteger,PriceType)
         NSLog(@"#############成交变化#############");
         DealProfitModel *model = data;
         [holdProfileDatas insertObject:model atIndex:0];
-        [self reloadData:holdProfileDatas];
+        [self reloadData:holdProfileDatas type:Profit];
     }
     else if([data isKindOfClass:[DealHoldModel class]])
     {
@@ -1130,6 +1149,7 @@ typedef NS_ENUM(NSInteger,PriceType)
             DealHoldModel *tempModel = [holdDatas objectAtIndex:i];
             if([tempModel.m_strInstrumentID isEqualToString:model.m_strInstrumentID] )
             {
+                hasModel = YES;
                 if(model.m_nPosition != 0)
                 {
                     [holdDatas replaceObjectAtIndex:i withObject:model];
@@ -1145,7 +1165,7 @@ typedef NS_ENUM(NSInteger,PriceType)
         {
             [holdDatas addObject:model];
         }
-        [self reloadData:holdDatas];
+        [self reloadData:holdDatas type:Hold];
 
     }
     else if([data isKindOfClass:[PushModel class]])
@@ -1188,26 +1208,27 @@ typedef NS_ENUM(NSInteger,PriceType)
 
 #pragma mark 更新数据
 -(void)reloadData : (NSMutableArray *)data
+             type : (DealType) type
 {
-    if(!IS_NS_COLLECTION_EMPTY(data))
-    {
-        if([[data objectAtIndex:0] isKindOfClass:[DealHoldModel class]] && currentTabSelect == 0)
+//    if(!IS_NS_COLLECTION_EMPTY(data))
+//    {
+        if(type == Hold && currentTabSelect == 0)
         {
             [_holdTableView reloadData:data position:currentItemSelect];
         }
-        else if([[data objectAtIndex:0] isKindOfClass:[DealHoldingModel class]] && currentTabSelect == 1)
+        else if(type == Holding && currentTabSelect == 1)
         {
             [_holdingTableView reloadData:data position:currentItemSelect];
         }
-        else if([[data objectAtIndex:0] isKindOfClass:[DealHoldByModel class]] && currentTabSelect == 2)
+        else if(type == HoldBy && currentTabSelect == 2)
         {
             [_holdByTableView reloadData:data position:currentItemSelect];
         }
-        else if([[data objectAtIndex:0] isKindOfClass:[DealProfitModel class]] && currentTabSelect == 3)
+        else if(type == Profit && currentTabSelect == 3)
         {
             [_dealTableView reloadData:data position:currentItemSelect];
         }
-    }
+//    }
  
 }
 
@@ -1236,12 +1257,12 @@ typedef NS_ENUM(NSInteger,PriceType)
                 tempSellPrice = _model.m_dHighestPrice;
                 break;
             case Limit:
-                tempBuyPrice = [self getRealPrice:_buyItem.titleLabel.text];
-                tempSellPrice = [self getRealPrice:_sellItem.titleLabel.text];
+                tempBuyPrice = [[_myTextField getTextFieldText] doubleValue];
+                tempSellPrice = [[_myTextField getTextFieldText] doubleValue];
                 break;
             case HandIn:
-                tempBuyPrice = [self getRealPrice:_buyItem.titleLabel.text];
-                tempSellPrice = [self getRealPrice:_sellItem.titleLabel.text];
+                tempBuyPrice = [[_myTextField getTextFieldText] doubleValue];
+                tempSellPrice = [[_myTextField getTextFieldText] doubleValue];
                 break;
             default:
                 break;
