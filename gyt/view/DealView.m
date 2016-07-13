@@ -150,8 +150,6 @@ typedef NS_ENUM(NSInteger,PriceType)
     NSInteger currentTabSelect;
     EEntrustBS director;
     Boolean isExpandView;
-    //停止价格联动
-//    Boolean stopChange;
     PriceType priceType;
 }
 
@@ -692,7 +690,6 @@ typedef NS_ENUM(NSInteger,PriceType)
     }
     else if(view == _addPriceBtn)
     {
-//        stopChange = YES;
         priceType = HandIn;
         double price = [[_myTextField getTextFieldText] doubleValue];
         price += _model.m_dPriceTick;
@@ -702,15 +699,12 @@ typedef NS_ENUM(NSInteger,PriceType)
     }
     else if(view == _reducePriceBtn)
     {
-//        stopChange = YES;
         priceType = HandIn;
         double price = [[_myTextField getTextFieldText] doubleValue];
         price -= _model.m_dPriceTick;
         [_myTextField setTextFiledText:[NSString stringWithFormat:@"%.2f",price]];
         [self updateBuySellBtn:price sell:price];
     }
-    
-//    [self hideKeyboard];
 }
 
 
@@ -741,8 +735,6 @@ typedef NS_ENUM(NSInteger,PriceType)
 
 
 
-
-
 #pragma mark 价格选择
 -(void)OnListDialogItemClick:(id)data position:(NSInteger)position dialog:(ByListDialog *)dialog
 {
@@ -759,25 +751,21 @@ typedef NS_ENUM(NSInteger,PriceType)
         switch (position) {
                 //对手价
             case Rival:
-//                stopChange = NO;
                 [self updateBuySellBtn:_model.m_dAskPrice1 sell:_model.m_dBidPrice1];
                 [_myTextField setTextFiledText:[NSString stringWithFormat:@"%.2f",_model.m_dAskPrice1]];
                 break;
                 //市价
             case Market:
-//                stopChange = YES;
                 [self updateBuySellBtn:_model.m_dLowestPrice sell:_model.m_dHighestPrice];
                 [_myTextField setTextFiledText:[NSString stringWithFormat:@"%.2f",_model.m_dLowestPrice]];
                 break;
                 //最新价
             case Lastest:
-//                stopChange = NO;
                 [self updateBuySellBtn:_model.m_dLastPrice sell:_model.m_dLastPrice];
                 [_myTextField setTextFiledText:[NSString stringWithFormat:@"%.2f",_model.m_dLastPrice]];
                 break;
                 //限价
             case Limit:
-//                stopChange = YES;
                 [self updateBuySellBtn:0 sell:0];
                 [_myTextField setTextFiledText:@"0.00"];
                 [_myTextField becomeFocus];
@@ -859,7 +847,6 @@ typedef NS_ENUM(NSInteger,PriceType)
         case 2:
             break;
         case 3:
-            
             break;
         default:
             break;
@@ -1105,6 +1092,9 @@ typedef NS_ENUM(NSInteger,PriceType)
             }
             if(!hasModel)
             {
+                OrderTagModel *tagModel = [[OrderTagModel alloc]init];
+                tagModel.m_strRealTag = model.m_strOrderRef;
+                model.m_tag = tagModel;
                 [holdingDatas insertObject:model atIndex:0];
             }
             [self reloadData:holdingDatas type:Holding];

@@ -47,6 +47,7 @@
     _insetImageView.hidden = YES;
     _insetImageView.userInteractionEnabled = YES;
     [self addSubview:_insetImageView];
+
 }
 
 -(void)setInsetTitle: (NSString *)title

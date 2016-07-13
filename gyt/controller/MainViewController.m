@@ -273,7 +273,12 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MainTableCell *cell = [[MainTableCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[MainTableCell identify]];
+    NSString *identify = [MainTableCell identify];
+    MainTableCell *cell = [tableView dequeueReusableCellWithIdentifier:identify];
+    if(cell == nil)
+    {
+        cell = [[MainTableCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
+    }
     PushModel *model;
     if(!IS_NS_COLLECTION_EMPTY(_mainDatas) && current == 0)
     {
@@ -422,6 +427,9 @@
         [_mainItemDialog setLeftImage : model.isMyContract];
         [ByToast showWarnToast:[NSString stringWithFormat:@"%@已取消自选合约",model.m_strInstrumentID]];
         [[ContractDB sharedContractDB] deleteItem:DBMyContractTable instrumentid:model.m_strInstrumentID];
+        
+        [_myDatas removeObject:model];
+        [_tableView reloadData];
     }
     else
     {
@@ -675,5 +683,7 @@
     
     }
  
+    
 }
+
 @end
