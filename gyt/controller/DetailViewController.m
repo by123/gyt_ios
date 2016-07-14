@@ -68,6 +68,7 @@
     [self initNavigationBar];
     [self initBodyView];
     [self initBottomView];
+    [[SocketConnect sharedSocketConnect]setDelegate:self];
 }
 
 
@@ -163,7 +164,7 @@
     [self clearAllView];
     _dealView = [[DealView alloc]initWithData:CGRectMake(0, 0, SCREEN_WIDTH, kContentHeight + kTopHeight) datas:_datas model:_model view:self.view];
     [_bodyView addSubview:_dealView];
-
+    
 }
 
 
@@ -175,6 +176,10 @@
     {
         [_bodyView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     }
+    _dealView = nil;
+    _candleView = nil;
+    _handicapView = nil;
+    _shortCutView = nil;
 }
 
 
@@ -413,21 +418,25 @@
     if(_dealView)
     {
         [_dealView OnReceiveSuccess:respondObject];
+        return;
     }
     
     if(_handicapView)
     {
         [_handicapView OnReceiveSuccess:respondObject];
+        return;
     }
     
     if(_shortCutView)
     {
         [_shortCutView OnReceiveSuccess:respondObject];
+        return;
     }
     
     if(_candleView)
     {
         [_candleView OnReceiveSuccess:respondObject];
+        return;
     }
 }
 

@@ -83,7 +83,6 @@
     [self addSubview:self.candleChart];
     [self initChart];
     
-    [[SocketConnect sharedSocketConnect] setDelegate:self];
     [self getData];
 }
 

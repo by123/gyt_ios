@@ -27,13 +27,13 @@
 
 @property (assign , nonatomic) Boolean isSavePsw;
 
-@property (strong, nonatomic) UILabel *tipLabel;
+@property (strong , nonatomic) UILabel *tipLabel;
 
-@property (strong, nonatomic) UITextField *ipTextField;
+@property (strong , nonatomic) UITextField *ipTextField;
 
-@property (strong, nonatomic) UITextField *portTextField;
+@property (strong , nonatomic) UITextField *portTextField;
 
-@property (strong, nonatomic) UIButton *setBtn;
+@property (strong , nonatomic) UIButton *setBtn;
 
 @end
 

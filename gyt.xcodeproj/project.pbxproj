@@ -23,6 +23,7 @@
 		CF2A510B1CE31B2F00F0EF3D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2A510A1CE31B2F00F0EF3D /* LoginViewController.m */; };
 		CF2B0AA91D24EE3200F19AD3 /* TZDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2B0AA71D24EE3200F19AD3 /* TZDatePickerView.m */; };
 		CF2B0AAA1D24EE3200F19AD3 /* TZDatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF2B0AA81D24EE3200F19AD3 /* TZDatePickerView.xib */; };
+		CF336C841D3746F7004EB64D /* Test.m in Sources */ = {isa = PBXBuildFile; fileRef = CF336C831D3746F7004EB64D /* Test.m */; };
 		CF48C6341CD0DBF800BF4EF9 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF48C6331CD0DBF800BF4EF9 /* SearchViewController.m */; };
 		CF48C6431CD22C8B00BF4EF9 /* SearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF48C6421CD22C8B00BF4EF9 /* SearchCell.m */; };
 		CF4A6D181CBE25AA00B36C93 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D171CBE25AA00B36C93 /* main.m */; };
@@ -144,7 +145,6 @@
 		CFDFFA971CBF759800401CB3 /* LeftMenuViewContriller.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDFFA961CBF759800401CB3 /* LeftMenuViewContriller.m */; };
 		CFDFFA9A1CBF77AB00401CB3 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDFFA991CBF77AB00401CB3 /* MainViewController.m */; };
 		CFDFFA9D1CBF78DD00401CB3 /* RightMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDFFA9C1CBF78DD00401CB3 /* RightMenuViewController.m */; };
-		CFEAA1AA1D124974001B8C7C /* Test.m in Sources */ = {isa = PBXBuildFile; fileRef = CFEAA1A91D124974001B8C7C /* Test.m */; };
 		CFEAA1B21D13E4A8001B8C7C /* ShortCutView.m in Sources */ = {isa = PBXBuildFile; fileRef = CFEAA1B11D13E4A8001B8C7C /* ShortCutView.m */; };
 		CFF183821CE45B2B00E991C4 /* JSONUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF183811CE45B2B00E991C4 /* JSONUtil.m */; };
 		CFF183861CE45E1400E991C4 /* BaseRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF183851CE45E1400E991C4 /* BaseRequestModel.m */; };
@@ -201,6 +201,8 @@
 		CF2B0AA61D24EE3200F19AD3 /* TZDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZDatePickerView.h; sourceTree = "<group>"; };
 		CF2B0AA71D24EE3200F19AD3 /* TZDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZDatePickerView.m; sourceTree = "<group>"; };
 		CF2B0AA81D24EE3200F19AD3 /* TZDatePickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TZDatePickerView.xib; sourceTree = "<group>"; };
+		CF336C821D3746F7004EB64D /* Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Test.h; sourceTree = "<group>"; };
+		CF336C831D3746F7004EB64D /* Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Test.m; sourceTree = "<group>"; };
 		CF48C6321CD0DBF800BF4EF9 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		CF48C6331CD0DBF800BF4EF9 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		CF48C6411CD22C8B00BF4EF9 /* SearchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchCell.h; sourceTree = "<group>"; };
@@ -432,8 +434,6 @@
 		CFDFFA991CBF77AB00401CB3 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		CFDFFA9B1CBF78DD00401CB3 /* RightMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RightMenuViewController.h; sourceTree = "<group>"; };
 		CFDFFA9C1CBF78DD00401CB3 /* RightMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RightMenuViewController.m; sourceTree = "<group>"; };
-		CFEAA1A81D124974001B8C7C /* Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Test.h; sourceTree = "<group>"; };
-		CFEAA1A91D124974001B8C7C /* Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Test.m; sourceTree = "<group>"; };
 		CFEAA1B01D13E4A8001B8C7C /* ShortCutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortCutView.h; sourceTree = "<group>"; };
 		CFEAA1B11D13E4A8001B8C7C /* ShortCutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShortCutView.m; sourceTree = "<group>"; };
 		CFF183801CE45B2B00E991C4 /* JSONUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONUtil.h; sourceTree = "<group>"; };
@@ -590,6 +590,8 @@
 		CF4A6D151CBE25AA00B36C93 /* gyt */ = {
 			isa = PBXGroup;
 			children = (
+				CF336C821D3746F7004EB64D /* Test.h */,
+				CF336C831D3746F7004EB64D /* Test.m */,
 				CF6CED591CFC367A007F97AA /* connect */,
 				CF0DBB751CF6D4000082E411 /* gyt.entitlements */,
 				CFF183D61CE9F09100E991C4 /* request */,
@@ -601,8 +603,6 @@
 				CF4A6D191CBE25AA00B36C93 /* AppDelegate.h */,
 				CF4A6D1A1CBE25AA00B36C93 /* AppDelegate.m */,
 				CF4A6D161CBE25AA00B36C93 /* Supporting Files */,
-				CFEAA1A81D124974001B8C7C /* Test.h */,
-				CFEAA1A91D124974001B8C7C /* Test.m */,
 			);
 			path = gyt;
 			sourceTree = "<group>";
@@ -1331,6 +1331,7 @@
 				CF9E66011D0D586800069477 /* AboutViewController.m in Sources */,
 				CFDD2EA21CCF4DE100E81E3F /* MJRefreshAutoStateFooter.m in Sources */,
 				CFA3B8F11CD9AAB70063AE3E /* Section.m in Sources */,
+				CF336C841D3746F7004EB64D /* Test.m in Sources */,
 				CFDD2E9C1CCF4DE100E81E3F /* MJRefreshBackFooter.m in Sources */,
 				CFDFFA9D1CBF78DD00401CB3 /* RightMenuViewController.m in Sources */,
 				CF60E1871CEABF45001EF40D /* QueryRequestModel.m in Sources */,
@@ -1353,7 +1354,6 @@
 				CFF183B41CE6D13500E991C4 /* MoneyDetailModel.m in Sources */,
 				CFC15BC61CC4B8160077FA19 /* DealView.m in Sources */,
 				CF0DBB741CF6CAEF0082E411 /* IPMacUtil.m in Sources */,
-				CFEAA1AA1D124974001B8C7C /* Test.m in Sources */,
 				CFA3B8F01CD9AAB70063AE3E /* Chart.m in Sources */,
 				CFA3B8FB1CD9AB050063AE3E /* EncryptHelper.m in Sources */,
 				CF9E66071D0D898500069477 /* TimeView.m in Sources */,

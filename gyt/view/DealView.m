@@ -507,7 +507,6 @@ typedef NS_ENUM(NSInteger,PriceType)
 #pragma mark 挂单数据
 -(void)initHoldingData
 {
-  
     NSArray *titleArray = @[@"时间",@"合约",@"状态",@"买卖",@"委托价",@"委托量",@"可撤",@"已成交",@"投保",@"预止损",@"合同号",@"主场号"];
     NSArray *widthArray = @[@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1"];
     if(_holdingTableView == nil)
@@ -537,7 +536,6 @@ typedef NS_ENUM(NSInteger,PriceType)
 #pragma mark 成交数据
 -(void)initDealData
 {
-
     if(_dealTableView == nil)
     {
         NSArray *titleArray = @[@"时间",@"合约",@"买卖",@"成交价",@"成交量",@"合同号",@"主场号"];
@@ -743,6 +741,7 @@ typedef NS_ENUM(NSInteger,PriceType)
       [_nameButton setTitle:data forState:UIControlStateNormal];
       currentModel.m_strInstrumentID = data;
       [self updateView];
+      [self updateBuySellItem];
     }
     else if(dialog.tag == 1)
     {
@@ -1058,6 +1057,8 @@ typedef NS_ENUM(NSInteger,PriceType)
     {
         NSLog(@"撤单成功返回->%@",packageModel.result);
         [ByToast showNormalToast:@"提交撤单申请成功"];
+//        currentItemSelect = -1;
+//        [self updateBuySellItem];
     }
     else if(packageModel.cmd == NET_CMD_NOTIFICATION)
     {
