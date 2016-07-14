@@ -79,7 +79,7 @@
 - (CGRect)textRectForBounds:(CGRect)bounds {
     if(_hasTitle)
     {
-        return CGRectMake(_titleLabel.contentSize.width , bounds.origin.y, bounds.size.width-_titleLabel.contentSize.width, bounds.size.height);
+        return CGRectMake(_titleLabel.contentSize.width , bounds.origin.y, bounds.size.width-_titleLabel.contentSize.width-5, bounds.size.height);
     }
     return CGRectMake(5, bounds.origin.y, bounds.size.width-5, bounds.size.height);
 }
@@ -87,7 +87,7 @@
 - (CGRect)editingRectForBounds:(CGRect)bounds {
     if(_hasTitle)
     {
-        return CGRectMake(_titleLabel.contentSize.width , bounds.origin.y, bounds.size.width- _titleLabel.contentSize.width, bounds.size.height);
+        return CGRectMake(_titleLabel.contentSize.width , bounds.origin.y, bounds.size.width- _titleLabel.contentSize.width-5, bounds.size.height);
     }
     return CGRectMake(5, bounds.origin.y, bounds.size.width-5, bounds.size.height);
 }

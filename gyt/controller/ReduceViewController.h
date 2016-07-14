@@ -8,7 +8,7 @@
 
 #import "BaseViewController.h"
 
-@interface ReduceViewController : BaseViewController<UITableViewDelegate,UITableViewDataSource,SocketConnectDelegate>
+@interface ReduceViewController : BaseViewController<SocketConnectDelegate>
 
 +(void)show : (BaseViewController *)controller;
 

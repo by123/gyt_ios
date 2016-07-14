@@ -32,6 +32,25 @@
     return model;
 }
 
++(Boolean)isSuccess : (id)respondObject
+{
+    PackageModel *packageModel = respondObject;
+    BaseRespondModel *model = [BaseRespondModel mj_objectWithKeyValues:packageModel.result];
+    id params = model.params;
+    model.response = [params objectForKey:@"response"];
+    model.error = [self handleError:params];
+    
+    if(model.error.ErrorID == 0)
+    {
+        return  YES;
+    }
+    else
+    {
+        return NO;
+    }
+
+}
+
 #pragma mark 处理错误请求
 +(ErrorModel *)handleError : (id)data
 {

@@ -26,4 +26,7 @@
 
 +(BaseRespondModel *) buildModel : (id)respondObject;
 
++(Boolean)isSuccess : (id)respondObject;
+
+
 @end

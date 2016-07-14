@@ -9,16 +9,22 @@
 #import "ReduceViewController.h"
 #import "AccessGoldModel.h"
 #import "ReduceCell.h"
+#import "MoneyDetailModel.h"
+#import "ByTextField.h"
+#import "InsetTextField.h"
 
 #define Item_Height 50
 
 @interface ReduceViewController ()
 
+
 @property (strong, nonatomic) UIButton *applyBtn;
 
-@property (strong, nonatomic) UITableView *tableView;
+@property (strong, nonatomic) ByTextField *cashTextField;
 
-@property (strong, nonatomic) NSMutableArray *datas;
+@property (strong, nonatomic) UILabel *cashRMBLabel;
+
+@property (strong, nonatomic) InsetTextField *submitterTextField;
 
 @end
 
@@ -32,8 +38,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _datas = [[NSMutableArray alloc]init];
-    _datas = [AccessGoldModel getData];
     [[SocketConnect sharedSocketConnect] setDelegate:self];
     [self initView];
 }
@@ -42,17 +46,7 @@
 {
     self.view.backgroundColor = BACKGROUND_COLOR;
     [self initNavigationBar];
-    
-    _tableView = [[UITableView alloc]init];
-    _tableView.delegate = self;
-    _tableView.dataSource = self;
-    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    _tableView.showsVerticalScrollIndicator = NO;
-    _tableView.showsHorizontalScrollIndicator = NO;
-    _tableView.scrollEnabled = NO;
-    _tableView.backgroundColor = [ColorUtil colorWithHexString:@"#333333"];
-    _tableView.frame = CGRectMake(0,NavigationBar_HEIGHT + StatuBar_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - (NavigationBar_HEIGHT + StatuBar_HEIGHT) - 40);
-    [self.view addSubview:_tableView];
+    [self initBody];
     
     _applyBtn = [[UIButton alloc]init];
     _applyBtn.backgroundColor = SELECT_COLOR;
@@ -74,43 +68,52 @@
     [self.navBar setLeftImage:[UIImage imageNamed:@"ic_back"]];
 }
 
-
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+-(void)initBody
 {
-    return 1;
-}
+    NSString *moneyDetailStr = [[NSUserDefaults standardUserDefaults] objectForKey:MoneyInfo];
+    MoneyDetailModel *moneyModel = [MoneyDetailModel mj_objectWithKeyValues:moneyDetailStr];
+    
+    UILabel *rightLabel = [[UILabel alloc]init];
+    rightLabel.textColor = TEXT_COLOR;
+    rightLabel.text = [NSString stringWithFormat:@"权益：%.f",moneyModel.m_dCurBalance];
+    rightLabel.font = [UIFont systemFontOfSize:13.0f];
+    rightLabel.textAlignment = NSTextAlignmentCenter;
+    rightLabel.frame = CGRectMake(0, NavigationBar_HEIGHT + StatuBar_HEIGHT, SCREEN_WIDTH/2, 25);
+    [self.view addSubview:rightLabel];
+    
+    UILabel *canUseLabel = [[UILabel alloc]init];
+    canUseLabel.textColor = TEXT_COLOR;
+    canUseLabel.text = [NSString stringWithFormat:@"可用：%.f",moneyModel.m_dAvailable];
+    canUseLabel.font = [UIFont systemFontOfSize:13.0f];
+    canUseLabel.textAlignment = NSTextAlignmentCenter;
+    canUseLabel.frame = CGRectMake(SCREEN_WIDTH/2, NavigationBar_HEIGHT + StatuBar_HEIGHT, SCREEN_WIDTH/2, 25);
+    [self.view addSubview:canUseLabel];
+    
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    if(IS_NS_COLLECTION_EMPTY(_datas))
+    _cashTextField = [[ByTextField alloc]initWithType:NumberFloat frame:CGRectMake(10,NavigationBar_HEIGHT + StatuBar_HEIGHT + 30,SCREEN_WIDTH - 20,40) rootView:self.view title:@"金额(美元)："];
+    [_cashTextField setTextFiledText:@"0"];
+    __weak ReduceViewController *weakSelf = self;
+    _cashTextField.block = ^(BOOL isCompelete,NSString *text)
     {
-        return 0;
-    }
-    return [_datas count];
+        double value = [text doubleValue];
+        weakSelf.cashRMBLabel.text = [NSString stringWithFormat:@"人民币：%.2f",value * 6.8];
+    };
+    [self.view addSubview:_cashTextField];
+    
+    _cashRMBLabel = [[UILabel alloc]init];
+    _cashRMBLabel.textColor = TEXT_COLOR;
+    _cashRMBLabel.text = [NSString stringWithFormat:@"人民币：%.2f",0.0f];
+    _cashRMBLabel.font = [UIFont systemFontOfSize:13.0f];
+    _cashRMBLabel.textAlignment = NSTextAlignmentRight;
+    _cashRMBLabel.frame = CGRectMake(10, NavigationBar_HEIGHT + StatuBar_HEIGHT + 75, SCREEN_WIDTH - 20, 20);
+    [self.view addSubview:_cashRMBLabel];
+    
+    _submitterTextField = [[InsetTextField alloc]initWithFrame:CGRectMake(10, NavigationBar_HEIGHT + StatuBar_HEIGHT + 100, SCREEN_WIDTH - 20,40)];
+    [self.view addSubview:_submitterTextField];
+    _submitterTextField.hasTitle = YES;
+    _submitterTextField.textAlignment = NSTextAlignmentRight;
+    [_submitterTextField setInsetTitle:@"申请人姓名：" font:[UIFont systemFontOfSize:13.0f]];
 }
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return Item_Height;
-}
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    ReduceCell *cell = [[ReduceCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:
-                         [ReduceCell identify]];
-    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    [cell setBackgroundColor:[UIColor clearColor]];
-    if(!IS_NS_COLLECTION_EMPTY(_datas))
-    {
-        if(indexPath.row == 1)
-        {
-            [[cell getTextField] setKeyboardType:UIKeyboardTypeNumberPad];
-        }
-        [cell setData:[_datas objectAtIndex:indexPath.row] rootView:self.view];
-    }
-    return cell;
-}
-
 
 -(void)OnLeftClickCallback
 {
@@ -121,15 +124,30 @@
 #pragma mark 提交提现申请
 -(void)getCash
 {
+    double cash = [[_cashTextField getTextFieldText] doubleValue];
+    if(cash == 0)
+    {
+        [ByToast showErrorToast:@"请输入提现金额"];
+        return;
+    }
+    NSString *submitter = _submitterTextField.text;
+    if(IS_NS_STRING_EMPTY(submitter))
+    {
+        [ByToast showErrorToast:@"请输入申请人姓名"];
+        return;
+    }
     AccessGoldModel *model = [[AccessGoldModel alloc]init];
-    model.m_strTargetId = @"123123";
+    model.m_strTargetId =  [[Account sharedAccount]getUid];
     model.m_nTargetType = CashInOutTargetType_Account;
-    model.m_dCashValue = 1000;
+    model.m_nCashType = CashType_Out;
+    model.m_dCashValue = cash;
     model.m_nPayType = PayType_OFF_LINE;
     model.m_nStatus = CashApplicationStatus_Submit;
-    model.m_strSubmitter =@"申请人";
+    model.m_strSubmitter =submitter;
     
-    NSMutableDictionary *dic = [JSONUtil parseDic:model];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
+    dic[@"sessionId"] = [[Account sharedAccount]getSessionId];
+    dic[@"cashApplyInfo"] = [JSONUtil parseDic:model];
     NSString *jsonStr = [JSONUtil parse:@"commitCashApplyInfo" params:dic];
     [[SocketConnect sharedSocketConnect] sendData:jsonStr seq:GYT_CommitCashApplyInfo];
 }
@@ -137,14 +155,17 @@
 -(void)OnReceiveSuccess:(id)respondObject
 {
     PackageModel *packageModel = respondObject;
-    BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
     if(packageModel.seq == GYT_CommitCashApplyInfo)
     {
-        
-        NSLog(@"123");
-        
+        if([BaseRespondModel isSuccess:respondObject])
+        {
+            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"出金申请成功" message:@"我们将会在2-3个工作日内完成审核，请耐心等待，谢谢配合！" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+            [alertView show];
+        }
     }
 }
+
+
 
 -(void)OnReceiveFail:(NSError *)error
 {
@@ -152,19 +173,10 @@
 }
 
 
-//#pragma mark 请求提现
-//-(void)requsetGetCash : (NSString *)jsonStr
-//{
-//    [[HttpRequest sharedHttpRequest] post:jsonStr view:self.view success:^(id responseObject) {
-//        BaseRespondModel *model = [BaseRespondModel mj_objectWithKeyValues:responseObject];
-//        [DialogHelper showSuccessTips:@"提现申请成功"];
-//        
-//    } fail:^(NSError *error) {
-//        
-//        [DialogHelper showTips:@"提交提现申请失败"];
-//
-//    }];
-//    
-//}
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [_submitterTextField resignFirstResponder];
+    [_cashTextField resignFirstResponder];
+}
 
 @end
