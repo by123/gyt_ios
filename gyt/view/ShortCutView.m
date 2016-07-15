@@ -290,8 +290,8 @@
     NSString *sellTxt;
     if(stopChange)
     {
-        buyTxt = [NSString stringWithFormat:@"%.2f\n—————\n买多",_model.m_dLowestPrice];
-        sellTxt = [NSString stringWithFormat:@"%.2f\n—————\n卖空",_model.m_dHighestPrice];
+        buyTxt = [NSString stringWithFormat:@"%.2f\n—————\n买多",_model.m_dLastPrice * 1.1];
+        sellTxt = [NSString stringWithFormat:@"%.2f\n—————\n卖空",_model.m_dLastPrice * 0.9];
     }
     else
     {

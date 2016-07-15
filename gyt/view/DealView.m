@@ -465,7 +465,7 @@ typedef NS_ENUM(NSInteger,PriceType)
     if(_holdTableView == nil)
     {
         NSArray *titleArray = @[@"合约号",@"多空",@"手数",@"可用",@"开仓均价",@"逐笔浮盈",@"保证金",@"今手数"];
-        NSArray *widthArray = @[@"2",@"1",@"1",@"1",@"2",@"2",@"1",@"1"];
+        NSArray *widthArray = @[@"2",@"1",@"1",@"1",@"2",@"2",@"2",@"1"];
        
          _holdTableView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH , SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:holdDatas maxWidth:SCREEN_WIDTH * 1.5 type:Hold];
         [_holdTableView setHeaders:widthArray headers:titleArray];
@@ -755,8 +755,8 @@ typedef NS_ENUM(NSInteger,PriceType)
                 break;
                 //市价
             case Market:
-                [self updateBuySellBtn:_model.m_dLowestPrice sell:_model.m_dHighestPrice];
-                [_myTextField setTextFiledText:[NSString stringWithFormat:@"%.2f",_model.m_dLowestPrice]];
+                [self updateBuySellBtn:_model.m_dLastPrice * 1.1 sell:_model.m_dLastPrice * 0.9];
+                [_myTextField setTextFiledText:[NSString stringWithFormat:@"%.2f",_model.m_dLastPrice * 1.1]];
                 break;
                 //最新价
             case Lastest:
@@ -1163,6 +1163,7 @@ typedef NS_ENUM(NSInteger,PriceType)
     {
         NSLog(@"#############行情变化#############");
         PushModel *model = data;
+        [self updateUpDown : model];
         if([model.m_strInstrumentID isEqualToString:_model.m_strInstrumentID])
         {
             _model.m_dLastPrice = model.m_dLastPrice;
@@ -1176,7 +1177,6 @@ typedef NS_ENUM(NSInteger,PriceType)
             _model.m_nBidVolume1 = model.m_nBidVolume1;
             
             [self updateView];
-            [self updateUpDown];
             [self updateBuySellItem];
             
             
@@ -1244,8 +1244,8 @@ typedef NS_ENUM(NSInteger,PriceType)
                 tempSellPrice = _model.m_dLastPrice;
                 break;
             case Market:
-                tempBuyPrice = _model.m_dLowestPrice;
-                tempSellPrice = _model.m_dHighestPrice;
+                tempBuyPrice = _model.m_dLastPrice * 1.1;
+                tempSellPrice = _model.m_dLastPrice * 0.9;
                 break;
             case Limit:
                 tempBuyPrice = [[_myTextField getTextFieldText] doubleValue];
@@ -1319,15 +1319,15 @@ typedef NS_ENUM(NSInteger,PriceType)
 }
 
 #pragma mark 更新浮动盈亏
--(void)updateUpDown
+-(void)updateUpDown : (PushModel *)model
 {
     if(!IS_NS_COLLECTION_EMPTY(holdDatas))
     {
         for(DealHoldModel *holdModel in holdDatas)
         {
-            if([_model.m_strInstrumentID isEqualToString:holdModel.m_strInstrumentID])
+            if([model.m_strInstrumentID isEqualToString:holdModel.m_strInstrumentID])
             {
-                holdModel.m_dLastPrice = _model.m_dLastPrice;
+                holdModel.m_dLastPrice = model.m_dLastPrice;
             }
         }
         [_holdTableView reloadData:holdDatas position:currentItemSelect];
@@ -1349,7 +1349,7 @@ typedef NS_ENUM(NSInteger,PriceType)
             [_myTextField setTextFiledText:[NSString stringWithFormat:@"%.2f",_model.m_dAskPrice1]];
             break;
         case Market:
-            [self updateBuySellBtn:_model.m_dLowestPrice sell:_model.m_dHighestPrice];
+            [self updateBuySellBtn:_model.m_dLastPrice * 1.1 sell:_model.m_dLastPrice * 0.9];
             break;
         case Limit:
             [self updateBuySellBtn:price sell:price];

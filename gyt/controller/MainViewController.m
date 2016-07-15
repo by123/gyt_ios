@@ -634,16 +634,13 @@
 #pragma mark 处理行情变化
 -(void)handleResult : (PushModel *)pushModel
 {
-    [[ContractDB sharedContractDB] insertItem:DBContractTable model:pushModel];
     NSMutableArray *temps = [[NSMutableArray alloc]init];
     [temps addObjectsFromArray:_mainDatas];
     
     if(!IS_NS_COLLECTION_EMPTY(temps))
     {
-        NSInteger count = [temps count];
-        for(int i = 0 ; i< count; i++)
+        for(PushModel *model in temps)
         {
-            PushModel *model = [temps objectAtIndex:i];
             if([model.m_strInstrumentID isEqualToString:pushModel.m_strInstrumentID])
             {
                 //无数据变化不刷新
@@ -663,20 +660,20 @@
                     model.m_nAskVolume1 = pushModel.m_nAskVolume1;
                     model.m_nBidVolume1 = pushModel.m_nBidVolume1;
                     model.m_strUpdateTime = pushModel.m_strUpdateTime;
-//                    model.m_dPriceTick = pushModel.m_dPriceTick;
-
-//                     [[ContractDB sharedContractDB]insertItem:DBTest model:model];
+//                  [[ContractDB sharedContractDB]insertItem:DBTest model:model];
                     if(model.isMyContract)
                     {
                         [[ContractDB sharedContractDB]updateItem:DBMyContractTable instrumentid:model.m_strInstrumentID model:model];
                     }
+                    [[ContractDB sharedContractDB] insertItem:DBContractTable model:pushModel];
+
 //                    [[ContractDB sharedContractDB]updateItem:DBHistoryContractTable instrumentid:model.m_strInstrumentID model:model];
                 
                     NSLog(@"%@->%f->%d",model.m_strInstrumentID,model.m_dLastPrice,model.m_nVolume);
                     
                     [_tableView reloadData];
 //                    //只刷新变化的那一行
-//                    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:i inSection:0];
+//                    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
 //                    [_tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
                     break;
                 }
