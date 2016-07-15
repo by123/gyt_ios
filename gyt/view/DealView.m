@@ -1371,7 +1371,9 @@ typedef NS_ENUM(NSInteger,PriceType)
 #pragma mark 价格设置是否合理
 -(Boolean)isValidPrice : (double)price
 {
-    if (fmod(price, _model.m_dPriceTick) == 0)
+    int tempPrice = (int) (price * 100);
+    int tempPrice1 = (int) (_model.m_dPriceTick * 100);
+    if (fmod(tempPrice, tempPrice1) == 0)
     {
         return YES;
     }

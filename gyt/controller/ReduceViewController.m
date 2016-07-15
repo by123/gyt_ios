@@ -26,6 +26,8 @@
 
 @property (strong, nonatomic) InsetTextField *submitterTextField;
 
+@property (strong, nonatomic)  MoneyDetailModel *moneyModel;
+
 @end
 
 @implementation ReduceViewController
@@ -39,6 +41,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[SocketConnect sharedSocketConnect] setDelegate:self];
+    NSString *moneyDetailStr = [[NSUserDefaults standardUserDefaults] objectForKey:MoneyInfo];
+    _moneyModel = [MoneyDetailModel mj_objectWithKeyValues:moneyDetailStr];
     [self initView];
 }
 
@@ -70,12 +74,10 @@
 
 -(void)initBody
 {
-    NSString *moneyDetailStr = [[NSUserDefaults standardUserDefaults] objectForKey:MoneyInfo];
-    MoneyDetailModel *moneyModel = [MoneyDetailModel mj_objectWithKeyValues:moneyDetailStr];
     
     UILabel *rightLabel = [[UILabel alloc]init];
     rightLabel.textColor = TEXT_COLOR;
-    rightLabel.text = [NSString stringWithFormat:@"权益：%.f",moneyModel.m_dCurBalance];
+    rightLabel.text = [NSString stringWithFormat:@"权益：%.f",_moneyModel.m_dCurBalance];
     rightLabel.font = [UIFont systemFontOfSize:13.0f];
     rightLabel.textAlignment = NSTextAlignmentCenter;
     rightLabel.frame = CGRectMake(0, NavigationBar_HEIGHT + StatuBar_HEIGHT, SCREEN_WIDTH/2, 25);
@@ -83,7 +85,7 @@
     
     UILabel *canUseLabel = [[UILabel alloc]init];
     canUseLabel.textColor = TEXT_COLOR;
-    canUseLabel.text = [NSString stringWithFormat:@"可用：%.f",moneyModel.m_dAvailable];
+    canUseLabel.text = [NSString stringWithFormat:@"可用：%.f",_moneyModel.m_dAvailable];
     canUseLabel.font = [UIFont systemFontOfSize:13.0f];
     canUseLabel.textAlignment = NSTextAlignmentCenter;
     canUseLabel.frame = CGRectMake(SCREEN_WIDTH/2, NavigationBar_HEIGHT + StatuBar_HEIGHT, SCREEN_WIDTH/2, 25);
@@ -124,10 +126,16 @@
 #pragma mark 提交提现申请
 -(void)getCash
 {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     double cash = [[_cashTextField getTextFieldText] doubleValue];
     if(cash == 0)
     {
         [ByToast showErrorToast:@"请输入提现金额"];
+        return;
+    }
+    if(cash > _moneyModel.m_dCurBalance)
+    {
+        [ByToast showErrorToast:@"输入金额大于可提现金额"];
         return;
     }
     NSString *submitter = _submitterTextField.text;
@@ -162,6 +170,7 @@
             UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"出金申请成功" message:@"我们将会在2-3个工作日内完成审核，请耐心等待，谢谢配合！" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
             [alertView show];
         }
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }
 }
 

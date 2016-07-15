@@ -318,4 +318,13 @@
     return [formatStr integerValue];
 }
 
++(NSString *)getNowStr
+{
+    NSDate *currentDate = [NSDate date];//获取当前时间，日期
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"YYYY/MM/dd hh:mm:ss SS"];
+    NSString *dateString = [dateFormatter stringFromDate:currentDate];
+    return  dateString;
+}
+
 @end

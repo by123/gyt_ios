@@ -14,6 +14,7 @@
 #define DBHistoryContractTable @"historycontract"
 #define DBWarnContractTable @"warncontract"
 #define DBSearchContractTable @"searchcontract"
+#define DBTest @"test"
 
 @interface ContractDB : NSObject
 

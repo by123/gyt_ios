@@ -662,13 +662,15 @@
                     model.m_dLowestPrice = pushModel.m_dLowestPrice;
                     model.m_nAskVolume1 = pushModel.m_nAskVolume1;
                     model.m_nBidVolume1 = pushModel.m_nBidVolume1;
+                    model.m_strUpdateTime = pushModel.m_strUpdateTime;
 //                    model.m_dPriceTick = pushModel.m_dPriceTick;
 
+//                     [[ContractDB sharedContractDB]insertItem:DBTest model:model];
                     if(model.isMyContract)
                     {
                         [[ContractDB sharedContractDB]updateItem:DBMyContractTable instrumentid:model.m_strInstrumentID model:model];
                     }
-                    [[ContractDB sharedContractDB]updateItem:DBHistoryContractTable instrumentid:model.m_strInstrumentID model:model];
+//                    [[ContractDB sharedContractDB]updateItem:DBHistoryContractTable instrumentid:model.m_strInstrumentID model:model];
                 
                     NSLog(@"%@->%f->%d",model.m_strInstrumentID,model.m_dLastPrice,model.m_nVolume);
                     

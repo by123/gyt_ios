@@ -42,4 +42,6 @@
 
 +(int)getFormatNow;
 
++(NSString *)getNowStr;
+
 @end
