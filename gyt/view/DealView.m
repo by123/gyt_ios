@@ -1325,12 +1325,13 @@ typedef NS_ENUM(NSInteger,PriceType)
     {
         for(DealHoldModel *holdModel in holdDatas)
         {
-            if([model.m_strInstrumentID isEqualToString:holdModel.m_strInstrumentID])
+            if([model.m_strInstrumentID isEqualToString:holdModel.m_strInstrumentID] && model.m_dLastPrice != holdModel.m_dLastPrice)
             {
                 holdModel.m_dLastPrice = model.m_dLastPrice;
+                [_holdTableView reloadData:holdDatas position:currentItemSelect];
+                break;
             }
         }
-        [_holdTableView reloadData:holdDatas position:currentItemSelect];
     }
 }
 

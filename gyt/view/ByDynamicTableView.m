@@ -137,13 +137,8 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DynamicCell *cell  = [[DynamicCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[DynamicCell identify] widths:_widthDatas];
-//    DynamicCell *cell  = [tableView dequeueReusableCellWithIdentifier:[DynamicCell identify]];
-//    if(cell == nil)
-//    {
-//        cell = [[DynamicCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[DynamicCell identify] widths:_widthDatas];
-//    }
-
+    DynamicCell *cell = [[DynamicCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[DynamicCell identify]];
+    [cell setWidths:_widthDatas];
     [cell setSelectedBackgroundView:_backGroudView];
     if(!IS_NS_COLLECTION_EMPTY(_datas))
     {

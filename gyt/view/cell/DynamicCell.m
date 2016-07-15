@@ -22,26 +22,29 @@
     int count;
 }
 
--(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier widths :(NSArray *)widths
+-(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if(self)
     {
         _labels = [[NSMutableArray alloc]init];
-        _widths = widths;
-        if(!IS_NS_COLLECTION_EMPTY(_widths))
-        {
-            for(NSString *temp in _widths)
-            {
-                int tempInt = [temp intValue];
-                count +=tempInt;
-            }
-        }
-
         return self;
     }
     return nil;
+}
+
+-(void)setWidths : (NSArray *)widths
+{
+    _widths = widths;
+    if(!IS_NS_COLLECTION_EMPTY(_widths))
+    {
+        for(NSString *temp in _widths)
+        {
+            int tempInt = [temp intValue];
+            count +=tempInt;
+        }
+    }
 }
 
 -(void)setHoldData : (DealHoldModel *)model

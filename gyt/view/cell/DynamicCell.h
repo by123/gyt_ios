@@ -15,9 +15,7 @@
 
 @interface DynamicCell : UITableViewCell
 
--(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier widths :(NSArray *)widths;
-
-
+-(void)setWidths : (NSArray *)widths;
 
 -(void)setHoldData : (DealHoldModel *)model
             maxWidth : (int)maxWidth;
