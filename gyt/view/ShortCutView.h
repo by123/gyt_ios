@@ -14,6 +14,6 @@
 -(instancetype)initWithView : (UIView *)parentView
 model : (PushModel *)model;
 
--(void)OnReceiveSuccess:(id)respondObject;
+-(void)handlePushQuoteData :(PushModel *)pushModel;
 
 @end

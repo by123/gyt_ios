@@ -12,9 +12,10 @@
 #import "AppDelegate.h"
 
 
-@interface BaseViewController ()<SocketConnectDelegate>
+@interface BaseViewController ()
 
 @end
+
 
 @implementation BaseViewController
 
@@ -24,10 +25,17 @@
     self.view.backgroundColor = BACKGROUND_COLOR;
     self.navigationController.navigationBar.hidden = YES;
     self.automaticallyAdjustsScrollViewInsets = NO;
-    [[SocketConnect sharedSocketConnect]setDelegate:self];
-    [[SocketConnect sharedSocketConnect]setController:self];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(OnConnectFail) name:ConnectFail object:nil];
+//    [[SocketConnect sharedSocketConnect]setDelegate:self];
+//    [[SocketConnect sharedSocketConnect]setController:self];
 
     
+}
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:ConnectFail object:nil];
 }
 
 -(void)showNavigationBar
@@ -39,11 +47,6 @@
 
 -(void)OnTitleClick
 {
-}
-
--(void)OnConnectSuccess
-{
-    NSLog(@"连接成功！");
 }
 
 -(void)OnConnectFail
@@ -86,14 +89,6 @@
 }
 
 
--(void)OnReceiveSuccess:(id)respondObject
-{
-
-}
-
--(void)OnReceiveFail:(NSError *)error
-{
-}
 
 
 

@@ -66,7 +66,7 @@ SINGLETON_IMPLEMENTION(ContractDB);
     [self createTable : DBHistoryContractTable];
 //    [self createTable : DBWarnContractTable];
     [self createTable : DBSearchContractTable];
-    [self createTable : DBTest];
+//    [self createTable : DBTest];
 
     return YES;
 }
@@ -148,7 +148,7 @@ SINGLETON_IMPLEMENTION(ContractDB);
             model : (PushModel *)model
 {
     BOOL res = NO;
-    if(![tableName isEqualToString:DBTest])
+  /*  if(![tableName isEqualToString:DBTest])
     {
         if([self queryItem:tableName instrumentid:model.m_strInstrumentID] != nil)
         {
@@ -156,7 +156,7 @@ SINGLETON_IMPLEMENTION(ContractDB);
             NSLog(@"数据库已有数据！");
             return NO;
         }
-    }
+    }*/
     if([_db open])
     {
         

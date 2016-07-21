@@ -9,7 +9,7 @@
 #import "BaseViewController.h"
 #import "AccessGoldModel.h"
 
-@interface MoneyManageDetailViewController : BaseViewController<UITableViewDelegate,UITableViewDataSource,SocketConnectDelegate>
+@interface MoneyManageDetailViewController : BaseViewController<UITableViewDelegate,UITableViewDataSource>
 
 +(void)show : (BaseViewController *)controller
       model : (AccessGoldModel *)model;

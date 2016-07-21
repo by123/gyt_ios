@@ -54,9 +54,16 @@
     [super viewDidLoad];
     [self initView];
     [[SocketConnect sharedSocketConnect]setController:self];
-    [[SocketConnect sharedSocketConnect] setDelegate:self];
-
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleData:) name:LoginData object:nil];
 }
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:LoginData object:nil];
+}
+
+
 
 #pragma mark 初始化控件
 -(void)initView
@@ -66,10 +73,7 @@
     [self initBody];
 }
 
-//-(void)viewWillAppear:(BOOL)animated
-//{
-//    [[SocketConnect sharedSocketConnect] setDelegate:self];
-//}
+
 
 -(void)initNavigationBar
 {
@@ -90,7 +94,7 @@
     
     _nameTextField = [[InsetTextField alloc]initWithFrame:CGRectMake(20, 70, SCREEN_WIDTH-40, 40)];
     _nameTextField.hasTitle = YES;
-    _nameTextField.text = @"836979873";  //外网
+    _nameTextField.text = @"800156710";  //外网
     [_nameTextField setInsetTitle:@"资金账号：" font:[UIFont systemFontOfSize:14.0f]];
     _nameTextField.block = ^(InsetTextField *insetTextField) {
         insetTextField.text = @"";
@@ -102,6 +106,9 @@
     _passwordTextField.hasTitle = YES;
     NSString *password = [[NSUserDefaults standardUserDefaults] objectForKey:UserDefault_Password];
     _passwordTextField.text = password;
+    //测试
+    _passwordTextField.text = @"123456";
+    //测试
     [_passwordTextField setInsetTitle:@"登录密码：" font:[UIFont systemFontOfSize:14.0f]];
     __weak LoginViewController *weakSelf = self;
     _passwordTextField.block = ^(InsetTextField *insetTextField){
@@ -124,7 +131,18 @@
         }
         weakSelf.isSavePsw = !weakSelf.isSavePsw;
     };
-    [_passwordTextField setInsetImage:[UIImage imageNamed:@"ic_unlock"]];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *psw = [userDefaults objectForKey:UserDefault_Password];
+    if(IS_NS_STRING_EMPTY(psw))
+    {
+        _isSavePsw = NO;
+        [_passwordTextField setInsetImage:[UIImage imageNamed:@"ic_unlock"]];
+    }
+    else
+    {
+        _isSavePsw = YES;
+        [_passwordTextField setInsetImage:[UIImage imageNamed:@"ic_lock"]];
+    }
     _passwordTextField.secureTextEntry = YES;
     [rootView addSubview:_passwordTextField];
     
@@ -140,7 +158,7 @@
     [_loginBtn addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
     [rootView addSubview:_loginBtn];
     
-    [self test:rootView];
+//    [self test:rootView];
     
 }
 
@@ -213,6 +231,7 @@
 -(void)OnConnectFail
 {
     _tipLabel.text = @"连接被断开";
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     [self connectInterrupt];
 }
 
@@ -236,9 +255,6 @@
         
         if(self && ![self isKindOfClass:[LoginViewController class]])
         {
-            //            LoginViewController *targetController = [[LoginViewController alloc]init];
-            //            [self.navigationController pushViewController:targetController animated:YES];
-            
             //移除uiwindow
             AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
             [appDelegate.window resignKeyWindow];
@@ -298,7 +314,6 @@
     [[Account sharedAccount] saveUid:model.strUserName];
     
     NSString *jsonStr = [JSONUtil parse:Request_Login params:[JSONUtil parseDic:model]];
-//    [[SocketConnect sharedSocketConnect] sendData:jsonStr delegate:self seq:GYT_LOGIN];
     [[SocketConnect sharedSocketConnect] sendData:jsonStr seq:GYT_LOGIN];
 
 }
@@ -343,33 +358,23 @@
 }
 
 
--(void)OnReceiveFail:(NSError *)error
+-(void)handleData : (NSNotification *)notification
 {
-    [hua hide:YES];
-}
-
--(void)OnReceiveSuccess:(id)respondObject
-{
-    PackageModel *packageModel = respondObject;
-    if(packageModel.seq == GYT_LOGIN)
+    BaseRespondModel *model = notification.object;
+    if(model.error.ErrorID == 0)
     {
-        BaseRespondModel *model = [BaseRespondModel buildModel:respondObject];
-        if(model.error.ErrorID == 0)
-        {
-            NSString *sessionId = [model.response objectForKey:@"sessionId"];
-
-            [MobClick profileSignInWithPUID:[[Account sharedAccount] getUid]];
-
-            [[Account sharedAccount]saveSessionid:sessionId];
-            [[NSNotificationCenter defaultCenter] postNotificationName:Notify_Update_AccountInfo object:nil];
-            [MainViewController show : self];
-        }
-        else
-        {
-            [ByToast showErrorToast:@"登录失败!"];
-        }
+        NSString *sessionId = [model.response objectForKey:@"sessionId"];
+        
+        [MobClick profileSignInWithPUID:[[Account sharedAccount] getUid]];
+        
+        [[Account sharedAccount]saveSessionid:sessionId];
+        [[NSNotificationCenter defaultCenter] postNotificationName:Notify_Update_AccountInfo object:nil];
+        [MainViewController show : self];
     }
-    
+    else
+    {
+        [ByToast showErrorToast:@"登录失败!"];
+    }
     [hua hide:YES];
 }
 

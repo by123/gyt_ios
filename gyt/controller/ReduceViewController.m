@@ -40,10 +40,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[SocketConnect sharedSocketConnect] setDelegate:self];
     NSString *moneyDetailStr = [[NSUserDefaults standardUserDefaults] objectForKey:MoneyInfo];
     _moneyModel = [MoneyDetailModel mj_objectWithKeyValues:moneyDetailStr];
     [self initView];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleCommitCashApplyInfo:) name:CommitCashApplyInfoData object:nil];
+}
+
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:CommitCashApplyInfoData object:nil];
 }
 
 -(void)initView
@@ -57,7 +64,7 @@
     [_applyBtn setTitle:@"提现" forState:UIControlStateNormal];
     [_applyBtn setTitleColor:TEXT_COLOR forState:UIControlStateNormal];
     _applyBtn.titleLabel.font = [UIFont systemFontOfSize:16.0f];
-    _applyBtn.frame = CGRectMake(0, SCREEN_HEIGHT - 40, SCREEN_WIDTH, 40);
+    _applyBtn.frame = CGRectMake(0, SCREEN_HEIGHT - 50, SCREEN_WIDTH, 50);
     [_applyBtn addTarget:self action:@selector(getCash) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_applyBtn];
     
@@ -131,17 +138,20 @@
     if(cash == 0)
     {
         [ByToast showErrorToast:@"请输入提现金额"];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         return;
     }
     if(cash > _moneyModel.m_dCurBalance)
     {
         [ByToast showErrorToast:@"输入金额大于可提现金额"];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         return;
     }
     NSString *submitter = _submitterTextField.text;
     if(IS_NS_STRING_EMPTY(submitter))
     {
         [ByToast showErrorToast:@"请输入申请人姓名"];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         return;
     }
     AccessGoldModel *model = [[AccessGoldModel alloc]init];
@@ -160,26 +170,18 @@
     [[SocketConnect sharedSocketConnect] sendData:jsonStr seq:GYT_CommitCashApplyInfo];
 }
 
--(void)OnReceiveSuccess:(id)respondObject
+-(void)handleCommitCashApplyInfo : (NSNotification *)notification
 {
-    PackageModel *packageModel = respondObject;
-    if(packageModel.seq == GYT_CommitCashApplyInfo)
+    id  respondObject= notification.object;
+    if([BaseRespondModel isSuccess:respondObject])
     {
-        if([BaseRespondModel isSuccess:respondObject])
-        {
-            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"出金申请成功" message:@"我们将会在2-3个工作日内完成审核，请耐心等待，谢谢配合！" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-            [alertView show];
-        }
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"出金申请成功" message:@"我们将会在2-3个工作日内完成审核，请耐心等待，谢谢配合！" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        [alertView show];
     }
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+
 }
 
-
-
--(void)OnReceiveFail:(NSError *)error
-{
-    
-}
 
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

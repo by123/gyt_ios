@@ -51,10 +51,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = BACKGROUND_COLOR;
-    [[SocketConnect sharedSocketConnect] setDelegate:self];
     [self initView];
+
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleAccountDetailData:) name:AccountDetailData object:nil];
     
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handlePushData:) name:PushData object:nil];
+
 }
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:AccountDetailData object:nil];
+    
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:PushData object:nil];
+}
+
 
 -(void)initView
 {
@@ -192,46 +203,40 @@
 }
 
 
-#pragma mark 资金变化主推
--(void)OnReceiveSuccess:(id)respondObject
-{
-    PackageModel *packageModel = respondObject;
-    if(packageModel.seq == XT_CAccountDetail &&  packageModel.result)
-    {
-        BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
-        QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:respondModel.response];
-        NSMutableArray *array = model.datas;
-        if(!IS_NS_COLLECTION_EMPTY(array))
-        {
-            //多种资金
-            for(id obj in array)
-            {
-                MoneyDetailModel *moneyDetailModel = [MoneyDetailModel mj_objectWithKeyValues:obj];
-                [self updateInfo:moneyDetailModel];
-            }
-        }
-        else{
-            [ByToast showErrorToast:@"获取资金信息失败，请重试!"];
-        }
-    }
-    else if(packageModel.cmd == NET_CMD_NOTIFICATION)
-    {
-        [[PushDataHandle sharedPushDataHandle] handlePushData:packageModel.result delegate :self];
-    }
 
+#pragma mark 处理资金变化信息
+-(void)handlePushData : (NSNotification *)notification
+{
+    PackageModel *model = notification.object;
+    NSString *dataStr = model.result;
+    [[PushDataHandle sharedPushDataHandle] handlePushData:dataStr delegate :self];
 }
 
-
--(void)OnReceiveFail:(NSError *)error
+#pragma mark 处理资金请求信息
+-(void)handleAccountDetailData : (NSNotification *)notification
 {
-    
+    BaseRespondModel *respondModel = notification.object;
+    QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:respondModel.response];
+    NSMutableArray *array = model.datas;
+    if(!IS_NS_COLLECTION_EMPTY(array))
+    {
+        //多种资金
+        for(id obj in array)
+        {
+            MoneyDetailModel *moneyDetailModel = [MoneyDetailModel mj_objectWithKeyValues:obj];
+            [self updateInfo:moneyDetailModel];
+        }
+    }
+    else{
+        [ByToast showErrorToast:@"获取资金信息失败，请重试!"];
+    }
+
 }
 
 -(void)pushResult:(id)data
 {
     if([data isKindOfClass:[MoneyDetailModel class]])
     {
-        NSLog(@"#############资金变化#############");
         MoneyDetailModel *model = data;
         [self updateInfo:model];
     }

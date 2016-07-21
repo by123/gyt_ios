@@ -49,4 +49,6 @@ SINGLETON_DECLARATION(SocketConnect);
 
 -(void)sendAlive;
 
+-(BOOL)isConnect;
+
 @end

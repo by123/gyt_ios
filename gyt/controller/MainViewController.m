@@ -44,6 +44,8 @@
 
 @property (strong, nonatomic) MainItemDialog *mainItemDialog;
 
+@property (strong, nonatomic) ShortCutView *shortCutView;
+
 @end
 
 @implementation MainViewController
@@ -68,21 +70,24 @@
     _historyDatas = [[NSMutableArray alloc]init];
     [self initView];
     
-    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleAccountData:) name:AccountDetailData object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleInstrumentData:) name:InstrumentDetailData object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handlePushQuoteData:) name:PushQuoteData object:nil];
+
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getUserInfo) name:Notify_Update_AccountInfo object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateView:) name:Notify_Menu_Title object:nil];
     
- 
 }
 
-//-(void)viewWillAppear:(BOOL)animated
-//{
-//    [[SocketConnect sharedSocketConnect] setDelegate:self];
-//}
 
 
 -(void)dealloc
 {
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:AccountDetailData object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:InstrumentDetailData object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:PushQuoteData object:nil];
+
+
     [[NSNotificationCenter defaultCenter]removeObserver:self name:Notify_Menu_Title object:nil];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:Notify_Update_AccountInfo object:nil];
 }
@@ -445,9 +450,8 @@
 #pragma mark 点击下单
 -(void)OnRightClicked : (PushModel *)model position:(NSInteger)position
 {
-    ShortCutView *shortCutView = [[ShortCutView alloc]initWithView:self.view model:model];
-    [self.view addSubview:shortCutView];
-//    [DetailViewController show:self model:model position:position];
+     _shortCutView = [[ShortCutView alloc]initWithView:self.view model:model];
+    [self.view addSubview:_shortCutView];
 }
 
 
@@ -550,90 +554,69 @@
 }
 
 
-#pragma mark 接收到服务端传来的数据
--(void)OnReceiveSuccess:(id)respondObject
-{
-    PackageModel *packageModel = respondObject;
-    if(packageModel.seq == XT_CAccountDetail &&  packageModel.result)
-    {
-        BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
-        QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:respondModel.response];
-        NSMutableArray *array = model.datas;
-        if(!IS_NS_COLLECTION_EMPTY(array))
-        {
-            //多种资金
-            for(id obj in array)
-            {
-                MoneyDetailModel *moneyDetailModel = [MoneyDetailModel mj_objectWithKeyValues:obj];
-                [[NSUserDefaults standardUserDefaults]setValue:moneyDetailModel.mj_JSONString forKey:MoneyInfo];
-            }
-//            [ByToast showNormalToast:@"获取资金信息成功!"];
 
-        }
-        else{
-            [ByToast showErrorToast:@"获取资金信息失败，请重试!"];
+
+#pragma mark 获取资金信息
+-(void)handleAccountData : (NSNotification *)notification
+{
+    BaseRespondModel *respondModel = notification.object;
+    QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:respondModel.response];
+    NSMutableArray *array = model.datas;
+    if(!IS_NS_COLLECTION_EMPTY(array))
+    {
+        for(id obj in array)
+        {
+            MoneyDetailModel *moneyDetailModel = [MoneyDetailModel mj_objectWithKeyValues:obj];
+            [[NSUserDefaults standardUserDefaults]setValue:moneyDetailModel.mj_JSONString forKey:MoneyInfo];
         }
     }
-    else if(packageModel.seq == XT_CInstrumentDetail &&  packageModel.result)
+    else{
+        [ByToast showErrorToast:@"获取资金信息失败，请重试!"];
+    }
+}
+
+#pragma mark 获取合约信息
+-(void)handleInstrumentData : (NSNotification *)notification
+{
+    BaseRespondModel *respondModel = notification.object;
+    QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:respondModel.response];
+    [_mainDatas removeAllObjects];
+    for(id temp in model.datas)
     {
-        NSLog(@"合约信息->%@",packageModel.result);
-        BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
-        QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:respondModel.response];
-        [_mainDatas removeAllObjects];
-        for(id temp in model.datas)
+        [_mainDatas addObject:[PushModel mj_objectWithKeyValues:temp]];
+    }
+    NSMutableArray *contractDatas = [[ContractDB sharedContractDB] queryAll:DBContractTable];
+    for(int i = 0 ; i < [_mainDatas count] ; i++ )
+    {
+        PushModel *tempModel = [_mainDatas objectAtIndex:i];
+        if(!IS_NS_COLLECTION_EMPTY(contractDatas))
         {
-            [_mainDatas addObject:[PushModel mj_objectWithKeyValues:temp]];
-        }
-        NSMutableArray *contractDatas = [[ContractDB sharedContractDB] queryAll:DBContractTable];
-        for(int i = 0 ; i < [_mainDatas count] ; i++ )
-        {
-            PushModel *tempModel = [_mainDatas objectAtIndex:i];
-            if(!IS_NS_COLLECTION_EMPTY(contractDatas))
+            for(PushModel *model in contractDatas)
             {
-                for(PushModel *model in contractDatas)
+                if([tempModel.m_strInstrumentID isEqualToString:model.m_strInstrumentID])
                 {
-                    if([tempModel.m_strInstrumentID isEqualToString:model.m_strInstrumentID])
-                    {
-                        model.m_strProductID = tempModel.m_strProductID;
-                        model.m_dPriceTick = tempModel.m_dPriceTick;
-                        [_mainDatas replaceObjectAtIndex:i withObject:model];
-                    }
+                    model.m_strProductID = tempModel.m_strProductID;
+                    model.m_dPriceTick = tempModel.m_dPriceTick;
+                    [_mainDatas replaceObjectAtIndex:i withObject:model];
                 }
             }
         }
-        [_tableView setHidden:NO];
-        [_tableView reloadData];
-        [self requestsubMultiPrice];
-
     }
-//    else if(packageModel.seq == 0)
-//    {
-//        BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
-//        if(respondModel.status == 0)
-//        {
-//            [DialogHelper showTips:@"订阅成功"];
-//        }
-//    }
-    if(packageModel.cmd == 4)
-    {
-        BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
-
-        if([respondModel.method isEqualToString:@"pushQuoteData"])
-        {
-            //行情主推
-            id params = respondModel.params;
-            id data  = [params objectForKey:@"data"];
-            PushModel *pushModel = [PushModel mj_objectWithKeyValues:data];
-            [self handleResult:pushModel];
-        }
-
-    }
+    [_tableView setHidden:NO];
+    [_tableView reloadData];
+    [self requestsubMultiPrice];
 
 }
 
-#pragma mark 处理行情变化
--(void)handleResult : (PushModel *)pushModel
+
+#pragma mark 获取行情主推数据
+-(void)handlePushQuoteData : (NSNotification *)notification
 {
+    BaseRespondModel *respondModel = [BaseRespondModel buildModel:notification.object];
+    id params = respondModel.params;
+    id data  = [params objectForKey:@"data"];
+    PushModel *pushModel = [PushModel mj_objectWithKeyValues:data];
+    
     NSMutableArray *temps = [[NSMutableArray alloc]init];
     [temps addObjectsFromArray:_mainDatas];
     
@@ -660,29 +643,34 @@
                     model.m_nAskVolume1 = pushModel.m_nAskVolume1;
                     model.m_nBidVolume1 = pushModel.m_nBidVolume1;
                     model.m_strUpdateTime = pushModel.m_strUpdateTime;
-//                  [[ContractDB sharedContractDB]insertItem:DBTest model:model];
-                    if(model.isMyContract)
-                    {
-                        [[ContractDB sharedContractDB]updateItem:DBMyContractTable instrumentid:model.m_strInstrumentID model:model];
-                    }
-                    [[ContractDB sharedContractDB] insertItem:DBContractTable model:pushModel];
-
-//                    [[ContractDB sharedContractDB]updateItem:DBHistoryContractTable instrumentid:model.m_strInstrumentID model:model];
-                
-                    NSLog(@"%@->%f->%d",model.m_strInstrumentID,model.m_dLastPrice,model.m_nVolume);
+//                    if(model.isMyContract)
+//                    {
+//                        [[ContractDB sharedContractDB]updateItem:DBMyContractTable instrumentid:model.m_strInstrumentID model:model];
+//                    }
+//                    [[ContractDB sharedContractDB] insertItem:DBContractTable model:pushModel];
+                    
+                    //                    [[ContractDB sharedContractDB]updateItem:DBHistoryContractTable instrumentid:model.m_strInstrumentID model:model];
+                    
+//                    NSLog(@"%@->%f->%d",model.m_strInstrumentID,model.m_dLastPrice,model.m_nVolume);
+                    
                     
                     [_tableView reloadData];
-//                    //只刷新变化的那一行
-//                    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
-//                    [_tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
-                    break;
+                    
+                    //                    //只刷新变化的那一行
+                    //                    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
+                    //                    [_tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
                 }
+                break;
             }
         }
-    
+        
     }
- 
-    
+
+    if(_shortCutView)
+    {
+        [_shortCutView handlePushQuoteData:pushModel];
+    }
 }
+
 
 @end

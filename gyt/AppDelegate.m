@@ -28,7 +28,6 @@
 @implementation AppDelegate
 
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
@@ -57,15 +56,12 @@
     
     [_window makeKeyAndVisible];
 
-    [self initBugTags];
-
+//    [self initBugTags];
     [self initUmengAnalysis];
     [self initDB];
     [self listenNetChange];
-    [[SocketConnect sharedSocketConnect] connect];
-
-    [self startAlive];
-//    [[CheckUpdateUtil sharedCheckUpdateUtil] check];
+    [self handlePushData];
+    [[CheckUpdateUtil sharedCheckUpdateUtil] check];
     return YES;
 }
 
@@ -77,7 +73,18 @@
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
+    if([[SocketConnect sharedSocketConnect] isConnect])
+    {
+        NSLog(@"连接中");
+    }
+    else
+    {
+        NSLog(@"后台已经断开连接");
+        [[SocketConnect sharedSocketConnect] connect];
+        NSLog(@"开始重连");
+    }
 }
+
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
 }
@@ -87,12 +94,13 @@
 }
 
 
-
+#pragma mark 初始数据库
 -(void)initDB
 {
     [[ContractDB sharedContractDB] createDB];
 }
 
+#pragma mark bug测试
 -(void)initBugTags
 {
     BugtagsOptions *options = [[BugtagsOptions alloc] init];
@@ -117,6 +125,7 @@
     [Bugtags startWithAppKey:@"7ba0bda45aa019024ea1994412900ced" invocationEvent:BTGInvocationEventShake options:options];
 }
 
+#pragma mark 统计分析
 -(void)initUmengAnalysis
 {
     [MobClick setLogEnabled:YES];
@@ -129,6 +138,7 @@
         
 }
 
+#pragma mark 监听网络变化
 -(void)listenNetChange
 {
     AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
@@ -156,11 +166,125 @@
         [manager startMonitoring];
 }
 
+
+#pragma mark 注册主推数据
+-(void)handlePushData
+{
+    [[SocketConnect sharedSocketConnect]setDelegate:self];
+    [[SocketConnect sharedSocketConnect] connect];
+    [self startAlive];
+}
+
+#pragma mark 发送保活包
 -(void)startAlive
 {
-    NSLog(@"发送保活包");
+//    NSLog(@"发送保活包");
     [[SocketConnect sharedSocketConnect] sendAlive];
     [self performSelector:@selector(startAlive) withObject:nil afterDelay:TimeRepeat];
+}
+
+
+#pragma mark 接收数据
+-(void)OnReceiveSuccess:(id)respondObject
+{
+    PackageModel *packageModel = respondObject;
+    BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
+
+    if(packageModel.seq == GYT_LOGIN)
+    {
+        [self sendReciveData:respondModel name:LoginData];
+        NSLog(@"-----reciver----接收到登录返回");
+    }
+    else if(packageModel.seq == XT_CAccountDetail)
+    {
+        [self sendReciveData:respondModel name:AccountDetailData];
+        NSLog(@"-----reciver----接收到资金信息");
+    }
+    else if(packageModel.seq == XT_CInstrumentDetail)
+    {
+        [self sendReciveData:respondModel name:InstrumentDetailData];
+        NSLog(@"-----reciver----接收到合约信息");
+    }
+    else if(packageModel.seq == GYT_CommitCashApplyInfo)
+    {
+        [self sendReciveData:respondObject name:CommitCashApplyInfoData];
+        NSLog(@"-----reciver----接收出金返回");
+    }
+    else if(packageModel.seq == GYT_CashApplyInfo)
+    {
+        [self sendReciveData:respondModel name:CashApplyInfoData];
+        NSLog(@"-----reciver----接收查询出入金详情");
+    }
+    else if(packageModel.seq == GYT_KLINE)
+    {
+        [self sendReciveData:respondModel name:KLineData];
+        NSLog(@"-----reciver----接收k线信息");
+    }
+    else if(packageModel.seq == XT_CPositionStatics)
+    {
+        [self sendReciveData:respondModel name:PositionStaticsData];
+        NSLog(@"-----reciver----接收持仓信息");
+    }
+    else if(packageModel.seq == XT_COrderDetail)
+    {
+        [self sendReciveData:respondModel name:OrderDetailData];
+        NSLog(@"-----reciver----接收委托信息");
+    }
+    else if(packageModel.seq == XT_CDealDetail)
+    {
+        [self sendReciveData:respondModel name:DealDetailData];
+        NSLog(@"-----reciver----接收成交信息");
+    }
+    else if(packageModel.seq == GYT_ORDER)
+    {
+        [self sendReciveData:respondModel name:OrderData];
+        NSLog(@"-----reciver----接收下单信息");
+    }
+    else if(packageModel.seq == GYT_CANCEL)
+    {
+        [self sendReciveData:respondModel name:CancelData];
+        NSLog(@"-----reciver----接收撤单信息");
+    }
+
+    else if(packageModel.cmd == NET_CMD_NOTIFICATION)
+    {
+        //行情主推
+        if([respondModel.method isEqualToString:PushQuoteData])
+        {
+            [self sendReciveData:respondObject name:PushQuoteData];
+        }
+        else if([respondModel.method isEqualToString:PushData])
+        {
+            [self sendReciveData:packageModel name:PushData];
+            
+        }
+    }
+    
+}
+
+-(void)OnReceiveFail:(NSError *)error
+{
+    
+}
+
+-(void)OnConnectSuccess
+{
+    NSLog(@"连接成功");
+
+}
+
+-(void)OnConnectFail
+{
+    [self sendReciveData:nil name:ConnectFail];
+}
+
+
+#pragma mark 分发数据
+-(void)sendReciveData : (id)data
+                 name : (NSString *)name
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:name object:data];
+    
 }
 
 @end

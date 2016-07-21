@@ -181,29 +181,16 @@
 }
 
 
--(void)OnReceiveSuccess:(id)respondObject
+-(void)handlePushQuoteData:(PushModel *)model
 {
-    PackageModel *packageModel = respondObject;
-    if(packageModel.cmd == NET_CMD_NOTIFICATION)
+    if([model.m_strInstrumentID isEqualToString:_model.m_strInstrumentID])
     {
-        [[PushDataHandle sharedPushDataHandle] handlePushData:packageModel.result delegate :self];
+        _model = model;
+        [self buildData];
+        [_handicapTableView reloadData];
     }
 }
 
-
--(void)pushResult:(id)data
-{
-    if([data isKindOfClass:[PushModel class]])
-    {
-        PushModel *model = data;
-        if([model.m_strInstrumentID isEqualToString:_model.m_strInstrumentID])
-        {
-            _model = model;
-            [self buildData];
-            [_handicapTableView reloadData];
-        }
-    }
-}
 
 
 @end

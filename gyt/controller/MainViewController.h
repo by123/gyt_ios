@@ -10,7 +10,7 @@
 #import "SlideNavigationController.h"
 #import "MainItemDialog.h"
 
-@interface MainViewController : BaseViewController<ByNavigationBarDelegate,UITableViewDelegate,UITableViewDataSource,SocketConnectDelegate,MainItemDialogDelegate>
+@interface MainViewController : BaseViewController<ByNavigationBarDelegate,UITableViewDelegate,UITableViewDataSource,MainItemDialogDelegate>
 
 
 +(void)show : (BaseViewController *)controller;

@@ -708,42 +708,34 @@
 
 }
 
-
--(void)OnReceiveSuccess:(id)respondObject
+-(void)handleKlineData:(BaseRespondModel *)respondModel
 {
-    PackageModel *packageModel = respondObject;
-    BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
-
-    if(packageModel.seq == GYT_KLINE)
+    NSMutableArray *datas =[[NSMutableArray alloc] init];
+    NSMutableArray *categorys =[[NSMutableArray alloc] init];
+    NSMutableDictionary *dic =  [respondModel.params objectForKey:@"resp"];
+    if(!IS_NS_COLLECTION_EMPTY(dic))
     {
-        NSMutableArray *datas =[[NSMutableArray alloc] init];
-        NSMutableArray *categorys =[[NSMutableArray alloc] init];
-        NSMutableDictionary *dic =  [respondModel.params objectForKey:@"resp"];
-        if(!IS_NS_COLLECTION_EMPTY(dic))
+        for(int i=0 ; i < 2 ; i ++)
         {
-            for(int i=0 ; i < 2 ; i ++)
+            for(id temp in dic)
             {
-                for(id temp in dic)
-                {
-                    KLineModel *kLineModel = [KLineModel mj_objectWithKeyValues:temp];
-                    [categorys addObject:[NSString stringWithFormat:@"%d",kLineModel.m_date]];
-                    
-                    NSMutableArray *item =[[NSMutableArray alloc] init];
-                    [item addObject:[NSString stringWithFormat:@"%.2f",kLineModel.m_dOpen]];
-                    [item addObject:[NSString stringWithFormat:@"%.2f",kLineModel.m_dClose]];
-                    [item addObject:[NSString stringWithFormat:@"%.2f",kLineModel.m_dHigh]];
-                    [item addObject:[NSString stringWithFormat:@"%.2f",kLineModel.m_dLow]];
-                    [item addObject:[NSString stringWithFormat:@"%.2f",kLineModel.m_dClose]];
-                    [datas addObject:item];
-                }
+                KLineModel *kLineModel = [KLineModel mj_objectWithKeyValues:temp];
+                [categorys addObject:[NSString stringWithFormat:@"%d",kLineModel.m_date]];
+                
+                NSMutableArray *item =[[NSMutableArray alloc] init];
+                [item addObject:[NSString stringWithFormat:@"%.2f",kLineModel.m_dOpen]];
+                [item addObject:[NSString stringWithFormat:@"%.2f",kLineModel.m_dClose]];
+                [item addObject:[NSString stringWithFormat:@"%.2f",kLineModel.m_dHigh]];
+                [item addObject:[NSString stringWithFormat:@"%.2f",kLineModel.m_dLow]];
+                [item addObject:[NSString stringWithFormat:@"%.2f",kLineModel.m_dClose]];
+                [datas addObject:item];
             }
-            
-            [self requestFinished:datas category:categorys];
         }
-        [MBProgressHUD hideHUDForView:self animated:YES];
-
+        
+        [self requestFinished:datas category:categorys];
     }
-}
+    [MBProgressHUD hideHUDForView:self animated:YES];
 
+}
 
 @end

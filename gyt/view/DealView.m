@@ -960,110 +960,114 @@ typedef NS_ENUM(NSInteger,PriceType)
 }
 
 
-#pragma mark 接收数据
--(void)OnReceiveSuccess:(id)respondObject
+#pragma mark 处理持仓数据
+-(void)handlePositionStaticsData : (BaseRespondModel *)respondModel
 {
-    PackageModel *packageModel = respondObject;
-    BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
-    
-    //持仓
-    if(packageModel.seq == XT_CPositionStatics && !IS_NS_STRING_EMPTY(packageModel.result))
+    [holdDatas removeAllObjects];
+    QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:respondModel.response];
+    NSMutableArray *array = model.datas;
+    if(!IS_NS_COLLECTION_EMPTY(array))
     {
-        [holdDatas removeAllObjects];
-        QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:respondModel.response];
-        NSMutableArray *array = model.datas;
-        if(!IS_NS_COLLECTION_EMPTY(array))
+        for(id obj in array)
         {
+            DealHoldModel *holdModel = [DealHoldModel mj_objectWithKeyValues:obj];
+            if(holdModel.m_nOpenVolume != 0)
+            {
+                [holdDatas insertObject:holdModel atIndex:0];
+            }
+        }
+        [self reloadData:holdDatas type:Hold];
+    }
+}
+
+#pragma mark 处理挂单和委托数据
+-(void)handleOrderDetailData: (BaseRespondModel *)respondModel
+{
+    QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:respondModel.response];
+    NSMutableArray *array = model.datas;
+    if(!IS_NS_COLLECTION_EMPTY(array))
+    {
+        if(currentTabSelect == 1)
+        {
+            [holdingDatas removeAllObjects];
             for(id obj in array)
             {
-                DealHoldModel *holdModel = [DealHoldModel mj_objectWithKeyValues:obj];
-                if(holdModel.m_nOpenVolume != 0)
+                DealHoldingModel *holdingModel = [DealHoldingModel mj_objectWithKeyValues:obj];
+                OrderTagModel *tagModel = [[OrderTagModel alloc]init];
+                tagModel.m_strRealTag = holdingModel.m_strOrderRef;
+                holdingModel.m_tag = tagModel;
+                if(holdingModel.m_nOrderStatus == ENTRUST_STATUS_REPORTED && [AppUtil getFormatNow] == holdingModel.m_nInsertDate)
                 {
-                    [holdDatas insertObject:holdModel atIndex:0];
+                    [holdingDatas insertObject:holdingModel atIndex:0];
                 }
             }
-            [self reloadData:holdDatas type:Hold];
+            [self reloadData:holdingDatas type:Holding];
         }
-    }
-    //挂单和委托
-    else if(packageModel.seq == XT_COrderDetail && !IS_NS_STRING_EMPTY(packageModel.result))
-    {
-        QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:respondModel.response];
-        NSMutableArray *array = model.datas;
-        if(!IS_NS_COLLECTION_EMPTY(array))
+        else if(currentTabSelect == 2)
         {
-            if(currentTabSelect == 1)
-            {
-                [holdingDatas removeAllObjects];
-                for(id obj in array)
-                {
-                    DealHoldingModel *holdingModel = [DealHoldingModel mj_objectWithKeyValues:obj];
-                    OrderTagModel *tagModel = [[OrderTagModel alloc]init];
-                    tagModel.m_strRealTag = holdingModel.m_strOrderRef;
-                    holdingModel.m_tag = tagModel;
-                    if(holdingModel.m_nOrderStatus == ENTRUST_STATUS_REPORTED && [AppUtil getFormatNow] == holdingModel.m_nInsertDate)
-                    {
-                        [holdingDatas insertObject:holdingModel atIndex:0];
-                    }
-                }
-                [self reloadData:holdingDatas type:Holding];
-            }
-            else if(currentTabSelect == 2)
-            {
-                [holdByDatas removeAllObjects];
-                for(id obj in array)
-                {
-                    DealHoldByModel *holdByModel = [DealHoldByModel mj_objectWithKeyValues:obj];
-                    OrderTagModel *tagModel = [[OrderTagModel alloc]init];
-                    tagModel.m_strRealTag = holdByModel.m_strOrderRef;
-                    holdByModel.m_tag = tagModel;
-
-                    if([AppUtil getFormatNow] == holdByModel.m_nInsertDate)
-                    {
-                        [holdByDatas insertObject:holdByModel atIndex:0];
-                    }
-
-                }
-                [self reloadData:holdByDatas type:HoldBy];
-            }
-        }
-    }
-    //成交
-    else if(packageModel.seq == XT_CDealDetail && !IS_NS_STRING_EMPTY(packageModel.result))
-    {
-        [holdProfileDatas removeAllObjects];
-        QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:respondModel.response];
-        NSMutableArray *array = model.datas;
-        if(!IS_NS_COLLECTION_EMPTY(array))
-        {
+            [holdByDatas removeAllObjects];
             for(id obj in array)
             {
-                DealProfitModel *profitModel = [DealProfitModel mj_objectWithKeyValues:obj];
-//                [holdProfileDatas addObject:profitModel];
-                if([AppUtil getFormatNow] == profitModel.m_strTradeDate)
+                DealHoldByModel *holdByModel = [DealHoldByModel mj_objectWithKeyValues:obj];
+                OrderTagModel *tagModel = [[OrderTagModel alloc]init];
+                tagModel.m_strRealTag = holdByModel.m_strOrderRef;
+                holdByModel.m_tag = tagModel;
+                
+                if([AppUtil getFormatNow] == holdByModel.m_nInsertDate)
                 {
-                    [holdProfileDatas insertObject:profitModel atIndex:0];
+                    [holdByDatas insertObject:holdByModel atIndex:0];
                 }
-
+                
             }
-            [self reloadData:holdProfileDatas type:Profit];
+            [self reloadData:holdByDatas type:HoldBy];
         }
     }
-    else if(packageModel.seq == GYT_ORDER)
+}
+
+
+#pragma mark 处理成交数据
+-(void)handleDealDetailData : (BaseRespondModel *)respondModel
+{
+    [holdProfileDatas removeAllObjects];
+    QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:respondModel.response];
+    NSMutableArray *array = model.datas;
+    if(!IS_NS_COLLECTION_EMPTY(array))
     {
-        
+        for(id obj in array)
+        {
+            DealProfitModel *profitModel = [DealProfitModel mj_objectWithKeyValues:obj];
+            if([AppUtil getFormatNow] == profitModel.m_strTradeDate)
+            {
+                [holdProfileDatas insertObject:profitModel atIndex:0];
+            }
+            
+        }
+        [self reloadData:holdProfileDatas type:Profit];
     }
-    else if(packageModel.seq == GYT_CANCEL)
-    {
-        NSLog(@"撤单成功返回->%@",packageModel.result);
-        [ByToast showNormalToast:@"提交撤单申请成功"];
-//        currentItemSelect = -1;
-//        [self updateBuySellItem];
-    }
-    else if(packageModel.cmd == NET_CMD_NOTIFICATION)
-    {
-        [[PushDataHandle sharedPushDataHandle] handlePushData:packageModel.result delegate :self];
-    }
+}
+
+#pragma mark 处理下单数据
+-(void)handleOrderData : (BaseRespondModel *)respondModel
+{
+}
+
+#pragma mark 处理撤单数据
+-(void)handleCancelData : (BaseRespondModel *)respondModel
+{
+    [ByToast showNormalToast:@"提交撤单申请成功"];
+}
+
+#pragma mark 处理主推数据
+-(void)handlePushData:(PackageModel *)packageModel
+{
+    [[PushDataHandle sharedPushDataHandle] handlePushData:packageModel.result delegate :self];
+
+}
+
+#pragma mark 处理主推数据
+-(void)handlePushQuoteData:(PackageModel *)packageModel
+{
+    [[PushDataHandle sharedPushDataHandle] handlePushData:packageModel.result delegate :self];
 }
 
 
@@ -1184,7 +1188,6 @@ typedef NS_ENUM(NSInteger,PriceType)
     }
     else if([data isKindOfClass:[MoneyDetailModel class]])
     {
-        NSLog(@"#############资金变化#############");
         MoneyDetailModel *model = data;
         [[NSUserDefaults standardUserDefaults]setValue:model.mj_JSONString forKey:MoneyInfo];
         _rightLabel.text = [NSString stringWithFormat:@"权益：%.f",model.m_dCurBalance];

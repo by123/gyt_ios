@@ -105,23 +105,10 @@
 
 -(void)OnLeftClickCallback
 {
-//    if(self.navigationController)
-//    {
-        [self.navigationController popViewControllerAnimated:YES];
-//    }
-//    else
-//    {
-//        [self dismissViewControllerAnimated:YES completion:nil];
-//    }
+   [self.navigationController popViewControllerAnimated:YES];
 }
 
--(void)OnReceiveSuccess:(id)respondObject
-{
-}
 
--(void)OnReceiveFail:(NSError *)error
-{
-}
 
 
 

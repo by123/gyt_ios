@@ -20,8 +20,21 @@
                       model : (PushModel *)model
                        view : (UIView *)rootView;
 
--(void)OnReceiveSuccess:(id)respondObject;
-
 -(void)onRefresh : (UIView *)view;
+
+
+-(void)handlePositionStaticsData : (BaseRespondModel *)respondModel;
+
+-(void)handleOrderDetailData: (BaseRespondModel *)respondModel;
+
+-(void)handleDealDetailData : (BaseRespondModel *)respondModel;
+
+-(void)handleOrderData : (BaseRespondModel *)respondModel;
+
+-(void)handleCancelData : (BaseRespondModel *)respondModel;
+
+-(void)handlePushData:(PackageModel *)packageModel;
+
+-(void)handlePushQuoteData:(PackageModel *)packageModel;
 
 @end

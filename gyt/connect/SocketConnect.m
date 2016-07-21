@@ -80,7 +80,7 @@ SINGLETON_IMPLEMENTION(SocketConnect);
         NSLog(@"发起tcp失败");
     }
     else{
-        NSLog(@"发起tcp成功");
+        NSLog(@"发起tcp成功->host:%@->port:%d",host,port);
     }
 }
 
@@ -126,7 +126,10 @@ SINGLETON_IMPLEMENTION(SocketConnect);
     if(self.delegate)
     {
         @try {
-            [self.delegate OnConnectFail];
+            if(![self isConnect])
+            {
+                [self.delegate OnConnectFail];
+            }
         } @catch (NSException *exception) {
             
         } @finally {
@@ -192,8 +195,19 @@ SINGLETON_IMPLEMENTION(SocketConnect);
 -(void)sendData : (NSString *)content
             seq : (int)seq
 {
-    NSData *data =[[GYTPackage sharedGYTPackage]encodeJSON:[content dataUsingEncoding:NSUTF8StringEncoding] requestid:seq];
-    [_clientSocket writeData:data withTimeout:-1 tag:0];
+    if(_clientSocket.isConnected)
+    {
+        NSData *data =[[GYTPackage sharedGYTPackage]encodeJSON:[content dataUsingEncoding:NSUTF8StringEncoding] requestid:seq];
+        [_clientSocket writeData:data withTimeout:-1 tag:0];
+    }
+    else
+    {
+        if(_delegate)
+        {
+            [_delegate OnConnectFail];
+        }
+    }
+
 }
 
 #pragma mark - 发送保活包
@@ -201,6 +215,17 @@ SINGLETON_IMPLEMENTION(SocketConnect);
 {
     NSData *data =[[GYTPackage sharedGYTPackage]encodeJSON:nil requestid:NET_CMD_KEEPALIVE_RESPONSE];
     [_clientSocket writeData:data withTimeout:-1 tag:0];
+}
+
+
+#pragma mark - 检测是否连接上
+-(BOOL)isConnect
+{
+    if(_clientSocket)
+    {
+        return _clientSocket.isConnected;
+    }
+    return NO;
 }
 
 

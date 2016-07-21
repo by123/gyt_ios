@@ -9,7 +9,7 @@
 #import "BaseViewController.h"
 #import "SlideNavigationController.h"
 
-@interface ManageViewController : BaseViewController<SocketConnectDelegate>
+@interface ManageViewController : BaseViewController
 
 +(void)show : (SlideNavigationController *)controller;
 

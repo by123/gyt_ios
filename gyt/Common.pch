@@ -30,6 +30,7 @@
 #import <UMMobClick/MobClick.h>
 #import "NSString+Contains.h"
 #import "ByToast.h"
+#import "SocketReceive.h"
 
 #define  KEY_USERNAME_PASSWORD @"com.company.app.usernamepassword"
 #define  KEY_USERNAME @"com.company.app.username"

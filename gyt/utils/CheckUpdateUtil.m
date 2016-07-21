@@ -10,7 +10,7 @@
 #import "CheckUpdateUtil.h"
 #import "UpdateModel.h"
 
-#define APPID @"1098800414"
+#define APPID @"1125863616"
 
 @implementation CheckUpdateUtil
 {

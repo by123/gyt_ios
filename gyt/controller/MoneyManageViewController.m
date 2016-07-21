@@ -34,25 +34,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleCashApplyInfoData:) name:CashApplyInfoData object:nil];
     _datas = [[NSMutableArray alloc]init];
-//    AccessGoldModel *model = [AccessGoldModel new];
-//    model.m_strSerialNo = @"8623234234234";
-//    model.m_applyDate = @"2016-05-12";
-//    model.m_applyTime = @"16:26";
-//    model.m_nMoneyType = MoneyType_RMB;
-//    model.m_nPayType = PayType_ON_LINE;
-//    model.m_nCashType = CashType_Out;
-//    model.m_nStatus = CashApplicationStatus_Submit;
-//    model.m_dCashValue = 8000.000f;
-//    
-//    for(int i =0 ; i < 50 ; i++)
-//    {
-//        [_datas addObject:model];
-//    }
-    
-    [[SocketConnect sharedSocketConnect] setDelegate:self];
     [self requestCashApplyInfo];
     [self initView];
+}
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:CashApplyInfoData object:nil];
+
 }
 
 -(void)initView
@@ -164,26 +155,13 @@
 }
 
 
--(void)OnReceiveSuccess:(id)respondObject
+-(void)handleCashApplyInfoData : (NSNotification *)notification
 {
-    PackageModel *packageModel = respondObject;
-    BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
-    if(packageModel.seq == GYT_CashApplyInfo)
-    {
-
-        _datas = [respondModel.response objectForKey:@"resp"];
-        [_tableView reloadData];
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-    }
-    
-
+    BaseRespondModel *respondModel = notification.object;
+    _datas = [respondModel.response objectForKey:@"resp"];
+    [_tableView reloadData];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
-
--(void)OnReceiveFail:(NSError *)error
-{
-    
-}
-
 
 
 @end

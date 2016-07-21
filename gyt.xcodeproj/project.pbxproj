@@ -12,6 +12,7 @@
 		CF0DBB741CF6CAEF0082E411 /* IPMacUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CF0DBB731CF6CAEF0082E411 /* IPMacUtil.m */; };
 		CF0DBB791CF6D45D0082E411 /* UUID.m in Sources */ = {isa = PBXBuildFile; fileRef = CF0DBB781CF6D45D0082E411 /* UUID.m */; };
 		CF0DBB7C1CF6D4A30082E411 /* KeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = CF0DBB7B1CF6D4A30082E411 /* KeyChainStore.m */; };
+		CF105B6D1D40710900011AFB /* SocketReceive.m in Sources */ = {isa = PBXBuildFile; fileRef = CF105B6C1D40710900011AFB /* SocketReceive.m */; };
 		CF111D491CFBDF4100298C78 /* OrderRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF111D481CFBDF4100298C78 /* OrderRequestModel.m */; };
 		CF111D4C1CFBEABB00298C78 /* OrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF111D4B1CFBEABB00298C78 /* OrderModel.m */; };
 		CF111D4F1CFBF5A000298C78 /* OrderTagModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF111D4E1CFBF5A000298C78 /* OrderTagModel.m */; };
@@ -180,6 +181,8 @@
 		CF0DBB781CF6D45D0082E411 /* UUID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UUID.m; sourceTree = "<group>"; };
 		CF0DBB7A1CF6D4A30082E411 /* KeyChainStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyChainStore.h; sourceTree = "<group>"; };
 		CF0DBB7B1CF6D4A30082E411 /* KeyChainStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyChainStore.m; sourceTree = "<group>"; };
+		CF105B6B1D40710900011AFB /* SocketReceive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketReceive.h; sourceTree = "<group>"; };
+		CF105B6C1D40710900011AFB /* SocketReceive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketReceive.m; sourceTree = "<group>"; };
 		CF111D471CFBDF4100298C78 /* OrderRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderRequestModel.h; sourceTree = "<group>"; };
 		CF111D481CFBDF4100298C78 /* OrderRequestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderRequestModel.m; sourceTree = "<group>"; };
 		CF111D4A1CFBEABB00298C78 /* OrderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderModel.h; sourceTree = "<group>"; };
@@ -603,6 +606,8 @@
 				CF4A6D191CBE25AA00B36C93 /* AppDelegate.h */,
 				CF4A6D1A1CBE25AA00B36C93 /* AppDelegate.m */,
 				CF4A6D161CBE25AA00B36C93 /* Supporting Files */,
+				CF105B6B1D40710900011AFB /* SocketReceive.h */,
+				CF105B6C1D40710900011AFB /* SocketReceive.m */,
 			);
 			path = gyt;
 			sourceTree = "<group>";
@@ -1377,6 +1382,7 @@
 				CFF183BE1CE7116200E991C4 /* ReduceViewController.m in Sources */,
 				CF0DBB791CF6D45D0082E411 /* UUID.m in Sources */,
 				CF0B6CF51CF843BF00850E62 /* QueryRespondsModel.m in Sources */,
+				CF105B6D1D40710900011AFB /* SocketReceive.m in Sources */,
 				CFDD2EA11CCF4DE100E81E3F /* MJRefreshAutoNormalFooter.m in Sources */,
 				CF247A851CEB22E1000F1442 /* ByListDialog.m in Sources */,
 				CFDD2E9F1CCF4DE100E81E3F /* MJRefreshHeader.m in Sources */,

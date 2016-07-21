@@ -33,7 +33,6 @@ typedef NS_ENUM(NSInteger, KTimeLine)
 
 -(void)update : (KTimeLine )kTimeLine;
 
--(void)OnReceiveSuccess:(id)respondObject;
 
-
+-(void)handleKlineData : (BaseRespondModel *)respondModel;
 @end

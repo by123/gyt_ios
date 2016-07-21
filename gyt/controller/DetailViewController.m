@@ -58,6 +58,34 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initView];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleKLineData:) name:KLineData object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(hanldlePushQuoteData:) name:PushQuoteData object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handlePushData:) name:PushData object:nil];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handlePositionStaticsData:) name:PositionStaticsData object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleOrderDetailData:) name:OrderDetailData object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleDealDetailData:) name:DealDetailData object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleOrderData:) name:OrderData object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleCancelData:) name:CancelData object:nil];
+
+
+}
+
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:KLineData object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:PushData object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:PushQuoteData object:nil];
+
+    
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:PositionStaticsData object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:OrderDetailData object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:DealDetailData object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:OrderData object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:CancelData object:nil];
+
 
 }
 
@@ -68,7 +96,6 @@
     [self initNavigationBar];
     [self initBodyView];
     [self initBottomView];
-    [[SocketConnect sharedSocketConnect]setDelegate:self];
 }
 
 
@@ -413,32 +440,101 @@
     }
 }
 
--(void)OnReceiveSuccess:(id)respondObject
+
+#pragma mark 处理k线数据
+-(void)handleKLineData : (NSNotification *)notification
+{
+    if(_candleView)
+    {
+        BaseRespondModel *respondModel = notification.object;
+        [_candleView handleKlineData:respondModel];
+    }
+}
+
+
+-(void)handlePushData : (NSNotification *)notification
 {
     if(_dealView)
     {
-        [_dealView OnReceiveSuccess:respondObject];
-        return;
+        PackageModel *packageModel = notification.object;
+        [_dealView handlePushData:packageModel];
     }
+
+}
+#pragma mark 处理行情主推数据
+-(void)hanldlePushQuoteData : (NSNotification *)notification
+{
+    PackageModel *packageModel = notification.object;
+    BaseRespondModel *respondModel = [BaseRespondModel buildModel:notification.object];
+    id params = respondModel.params;
+    id data  = [params objectForKey:@"data"];
+    PushModel *model = [PushModel mj_objectWithKeyValues:data];
     
     if(_handicapView)
     {
-        [_handicapView OnReceiveSuccess:respondObject];
-        return;
+        [_handicapView handlePushQuoteData:model];
     }
-    
     if(_shortCutView)
     {
-        [_shortCutView OnReceiveSuccess:respondObject];
-        return;
+        [_shortCutView handlePushQuoteData:model];
     }
-    
-    if(_candleView)
+    if(_dealView)
     {
-        [_candleView OnReceiveSuccess:respondObject];
-        return;
+        [_dealView handlePushQuoteData:packageModel];
     }
 }
+
+
+#pragma mark 处理持仓数据
+-(void)handlePositionStaticsData : (NSNotification *)notification
+{
+    if(_dealView)
+    {
+        BaseRespondModel *model = notification.object;
+        [_dealView handlePositionStaticsData:model];
+    }
+}
+
+#pragma mark 处理委托数据
+-(void)handleOrderDetailData : (NSNotification *)notification
+{
+    if(_dealView)
+    {
+        BaseRespondModel *model = notification.object;
+        [_dealView handleOrderDetailData:model];
+    }
+}
+
+#pragma mark 处理成交数据
+-(void)handleDealDetailData : (NSNotification *)notification
+{
+    if(_dealView)
+    {
+        BaseRespondModel *model = notification.object;
+        [_dealView handleDealDetailData:model];
+    }
+}
+
+#pragma mark 处理下单数据
+-(void)handleOrderData : (NSNotification *)notification
+{
+    if(_dealView)
+    {
+        BaseRespondModel *model = notification.object;
+        [_dealView handleOrderData:model];
+    }
+}
+
+#pragma mark 处理撤单数据
+-(void)handleCancelData : (NSNotification *)notification
+{
+    if(_dealView)
+    {
+        BaseRespondModel *model = notification.object;
+        [_dealView handleCancelData:model];
+    }
+}
+
 
 
 @end
