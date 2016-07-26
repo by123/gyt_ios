@@ -1040,7 +1040,6 @@ typedef NS_ENUM(NSInteger,PriceType)
             {
                 [holdProfileDatas insertObject:profitModel atIndex:0];
             }
-            
         }
         [self reloadData:holdProfileDatas type:Profit];
     }

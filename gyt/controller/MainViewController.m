@@ -77,6 +77,9 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getUserInfo) name:Notify_Update_AccountInfo object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateView:) name:Notify_Menu_Title object:nil];
     
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleAutoLogin:) name:LoginData object:nil];
+    
 }
 
 
@@ -86,8 +89,6 @@
     [[NSNotificationCenter defaultCenter]removeObserver:self name:AccountDetailData object:nil];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:InstrumentDetailData object:nil];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:PushQuoteData object:nil];
-
-
     [[NSNotificationCenter defaultCenter]removeObserver:self name:Notify_Menu_Title object:nil];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:Notify_Update_AccountInfo object:nil];
 }
@@ -555,8 +556,7 @@
 
 
 
-
-#pragma mark 获取资金信息
+#pragma mark 处理资金信息
 -(void)handleAccountData : (NSNotification *)notification
 {
     BaseRespondModel *respondModel = notification.object;
@@ -575,7 +575,7 @@
     }
 }
 
-#pragma mark 获取合约信息
+#pragma mark 处理合约信息
 -(void)handleInstrumentData : (NSNotification *)notification
 {
     BaseRespondModel *respondModel = notification.object;
@@ -609,7 +609,7 @@
 }
 
 
-#pragma mark 获取行情主推数据
+#pragma mark 处理行情主推数据
 -(void)handlePushQuoteData : (NSNotification *)notification
 {
     BaseRespondModel *respondModel = [BaseRespondModel buildModel:notification.object];
@@ -643,22 +643,14 @@
                     model.m_nAskVolume1 = pushModel.m_nAskVolume1;
                     model.m_nBidVolume1 = pushModel.m_nBidVolume1;
                     model.m_strUpdateTime = pushModel.m_strUpdateTime;
-//                    if(model.isMyContract)
-//                    {
-//                        [[ContractDB sharedContractDB]updateItem:DBMyContractTable instrumentid:model.m_strInstrumentID model:model];
-//                    }
-//                    [[ContractDB sharedContractDB] insertItem:DBContractTable model:pushModel];
-                    
-                    //                    [[ContractDB sharedContractDB]updateItem:DBHistoryContractTable instrumentid:model.m_strInstrumentID model:model];
-                    
-//                    NSLog(@"%@->%f->%d",model.m_strInstrumentID,model.m_dLastPrice,model.m_nVolume);
-                    
-                    
+/*                    if(model.isMyContract)
+                    {
+                        [[ContractDB sharedContractDB]updateItem:DBMyContractTable instrumentid:model.m_strInstrumentID model:model];
+                    }
+                    [[ContractDB sharedContractDB] insertItem:DBContractTable model:pushModel];
+                    [[ContractDB sharedContractDB]updateItem:DBHistoryContractTable instrumentid:model.m_strInstrumentID model:model];
+                    */
                     [_tableView reloadData];
-                    
-                    //                    //只刷新变化的那一行
-                    //                    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
-                    //                    [_tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
                 }
                 break;
             }
@@ -672,5 +664,25 @@
     }
 }
 
+
+#pragma mark 处理登陆信息
+-(void)handleAutoLogin : (NSNotification *)notification
+{
+    BaseRespondModel *model = notification.object;
+    if(model.error.ErrorID == 0)
+    {
+        NSString *sessionId = [model.response objectForKey:@"sessionId"];
+        
+        [MobClick profileSignInWithPUID:[[Account sharedAccount] getUid]];
+        
+        [[Account sharedAccount]saveSessionid:sessionId];
+        [[NSNotificationCenter defaultCenter] postNotificationName:Notify_Update_AccountInfo object:nil];
+    }
+    else
+    {
+        [ByToast showErrorToast:@"登录失败!"];
+    }
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+}
 
 @end

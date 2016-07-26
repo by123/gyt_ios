@@ -94,7 +94,7 @@
     
     _nameTextField = [[InsetTextField alloc]initWithFrame:CGRectMake(20, 70, SCREEN_WIDTH-40, 40)];
     _nameTextField.hasTitle = YES;
-    _nameTextField.text = @"800156710";  //外网
+    _nameTextField.text = @"847982169";  //外网
     [_nameTextField setInsetTitle:@"资金账号：" font:[UIFont systemFontOfSize:14.0f]];
     _nameTextField.block = ^(InsetTextField *insetTextField) {
         insetTextField.text = @"";
@@ -223,28 +223,28 @@
     return[scan scanInt:&val] && [scan isAtEnd];
 }
 
--(void)OnConnectSuccess
-{
-    _tipLabel.text = @"已连上";
-}
+//-(void)OnConnectSuccess
+//{
+//    _tipLabel.text = @"已连上";
+//}
+//
+//-(void)OnConnectFail
+//{
+//    _tipLabel.text = @"连接被断开";
+//    [MBProgressHUD hideHUDForView:self.view animated:YES];
+//    [self connectInterrupt];
+//}
 
--(void)OnConnectFail
-{
-    _tipLabel.text = @"连接被断开";
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
-    [self connectInterrupt];
-}
 
-
-#pragma mark - 断开弹出提示
--(void)connectInterrupt
-{
-    NSLog(@"连接被断开");
-    dispatch_async(dispatch_get_main_queue(), ^{
-        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"连接失败" message:@"您已经与服务器断开连接，请点击确定重新连接" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-        [alertView show];
-    });
-}
+//#pragma mark - 断开弹出提示
+//-(void)connectInterrupt
+//{
+//    NSLog(@"连接被断开");
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"连接失败" message:@"您已经与服务器断开连接，请点击确定重新连接" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+//        [alertView show];
+//    });
+//}
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -368,8 +368,11 @@
         [MobClick profileSignInWithPUID:[[Account sharedAccount] getUid]];
         
         [[Account sharedAccount]saveSessionid:sessionId];
-        [[NSNotificationCenter defaultCenter] postNotificationName:Notify_Update_AccountInfo object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:LoginData object:nil];
         [MainViewController show : self];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:Notify_Update_AccountInfo object:nil];
+
+
     }
     else
     {

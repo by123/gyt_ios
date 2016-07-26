@@ -175,6 +175,7 @@ SINGLETON_IMPLEMENTION(SocketConnect);
         }
     }
     
+    NSLog(@"size->%d",_curFrameData.length);
     [sock readDataWithTimeout:-1 tag:0];
 
 }

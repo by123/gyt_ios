@@ -63,6 +63,7 @@ SINGLETON_IMPLEMENTION(GYTPackage);
         resultStr  = [resultStr stringByReplacingOccurrencesOfString:@"4.197936507034086e-006" withString:@"0"];
         model.result = resultStr;
     }
+    jsondata = nil;
     return model;
 }
 

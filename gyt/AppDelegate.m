@@ -264,13 +264,12 @@
 
 -(void)OnReceiveFail:(NSError *)error
 {
-    
+    NSLog(@"接收数据失败");
 }
 
 -(void)OnConnectSuccess
 {
     NSLog(@"连接成功");
-
 }
 
 -(void)OnConnectFail
@@ -284,7 +283,6 @@
                  name : (NSString *)name
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:name object:data];
-    
 }
 
 @end
