@@ -24,20 +24,10 @@
 #define CancelData @"cancelData"
 
 
-
+#define ConnectSuccess @"connectSuccess"
 #define ConnectFail @"connectFail"
 
-
-@interface SocketReceive : NSObject<SocketConnectDelegate>
-
-SINGLETON_DECLARATION(SocketReceive)
-
-//注册主推监听
--(void)regiseterSocketReceive;
-
-
-//移除主推监听
--(void)unRegisterSocketReceive;
+@interface SocketReceive : NSObject
 
 
 @end

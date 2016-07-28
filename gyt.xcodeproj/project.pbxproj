@@ -603,11 +603,11 @@
 				CF4A6D481CBE28DD00B36C93 /* data */,
 				CF4A6D491CBE28DD00B36C93 /* utils */,
 				CF4A6D561CBE28DD00B36C93 /* view */,
-				CF4A6D191CBE25AA00B36C93 /* AppDelegate.h */,
-				CF4A6D1A1CBE25AA00B36C93 /* AppDelegate.m */,
 				CF4A6D161CBE25AA00B36C93 /* Supporting Files */,
 				CF105B6B1D40710900011AFB /* SocketReceive.h */,
 				CF105B6C1D40710900011AFB /* SocketReceive.m */,
+				CF4A6D191CBE25AA00B36C93 /* AppDelegate.h */,
+				CF4A6D1A1CBE25AA00B36C93 /* AppDelegate.m */,
 			);
 			path = gyt;
 			sourceTree = "<group>";

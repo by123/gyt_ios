@@ -983,6 +983,7 @@ typedef NS_ENUM(NSInteger,PriceType)
 #pragma mark 处理挂单和委托数据
 -(void)handleOrderDetailData: (BaseRespondModel *)respondModel
 {
+    NSLog(@"结果->%@",[respondModel mj_JSONString]);
     QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:respondModel.response];
     NSMutableArray *array = model.datas;
     if(!IS_NS_COLLECTION_EMPTY(array))

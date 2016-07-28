@@ -25,6 +25,7 @@
 #import "PushRequestModel.h"
 #import "PushModel.h"
 #import "ShortCutView.h"
+#import "AppDelegate.h"
 
 #define Item_Height  IDSPointValue(40)
 
@@ -52,6 +53,7 @@
 {
     CGFloat currentY;
     int current;
+    int count;
 }
 
 
@@ -77,7 +79,6 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getUserInfo) name:Notify_Update_AccountInfo object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateView:) name:Notify_Menu_Title object:nil];
     
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleAutoLogin:) name:LoginData object:nil];
     
 }
@@ -86,11 +87,7 @@
 
 -(void)dealloc
 {
-    [[NSNotificationCenter defaultCenter]removeObserver:self name:AccountDetailData object:nil];
-    [[NSNotificationCenter defaultCenter]removeObserver:self name:InstrumentDetailData object:nil];
-    [[NSNotificationCenter defaultCenter]removeObserver:self name:PushQuoteData object:nil];
-    [[NSNotificationCenter defaultCenter]removeObserver:self name:Notify_Menu_Title object:nil];
-    [[NSNotificationCenter defaultCenter]removeObserver:self name:Notify_Update_AccountInfo object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
 }
 
 
@@ -602,6 +599,8 @@
             }
         }
     }
+        AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    appDelegate.mainDatas =  _mainDatas;
     [_tableView setHidden:NO];
     [_tableView reloadData];
     [self requestsubMultiPrice];
@@ -617,12 +616,12 @@
     id data  = [params objectForKey:@"data"];
     PushModel *pushModel = [PushModel mj_objectWithKeyValues:data];
     
-    NSMutableArray *temps = [[NSMutableArray alloc]init];
-    [temps addObjectsFromArray:_mainDatas];
+//    NSMutableArray *temps = [[NSMutableArray alloc]init];
+//    [temps addObjectsFromArray:_mainDatas];
     
-    if(!IS_NS_COLLECTION_EMPTY(temps))
+    if(!IS_NS_COLLECTION_EMPTY(_mainDatas))
     {
-        for(PushModel *model in temps)
+        for(PushModel *model in _mainDatas)
         {
             if([model.m_strInstrumentID isEqualToString:pushModel.m_strInstrumentID])
             {
@@ -633,6 +632,8 @@
                 }
                 else
                 {
+                    count ++;
+                    NSLog(@"数据变化次数->%d",count);
                     model.m_dLastPrice = pushModel.m_dLastPrice;
                     model.m_dOpenPrice = pushModel.m_dOpenPrice;
                     model.m_nVolume = pushModel.m_nVolume;

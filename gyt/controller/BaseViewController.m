@@ -17,9 +17,11 @@
 
 @interface BaseViewController ()
 
-@property (assign, nonatomic) Boolean isShowDialog;
+@property (strong, nonatomic) UIAlertView *alertView;
 
 @end
+
+static Boolean isAlertShow;
 
 @implementation BaseViewController
 
@@ -31,14 +33,18 @@
     self.navigationController.navigationBar.hidden = YES;
     self.automaticallyAdjustsScrollViewInsets = NO;
     
+    
+    _alertView =  [[UIAlertView alloc]initWithTitle:@"连接失败" message:@"您已经与服务器断开连接，请点击确定重新连接" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(OnConnectFail) name:ConnectFail object:nil];
-//  [[SocketConnect sharedSocketConnect]setDelegate:self];
-//  [[SocketConnect sharedSocketConnect]setController:self];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(OnConnectSuccess) name:ConnectSuccess object:nil];
     
 }
 
 -(void)dealloc
 {
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:ConnectSuccess object:nil];
+
     [[NSNotificationCenter defaultCenter]removeObserver:self name:ConnectFail object:nil];
 }
 
@@ -54,11 +60,16 @@
     
 }
 
+
+-(void)OnConnectSuccess
+{
+}
+
 -(void)OnConnectFail
 {
-    NSLog(@"连接失败!");
     if(![[SocketConnect sharedSocketConnect] isConnect])
     {
+        NSLog(@"连接失败!");
         [self connectInterrupt];
     }
 }
@@ -67,38 +78,37 @@
 #pragma mark - 断开弹出提示
 -(void)connectInterrupt
 {
-    NSLog(@"连接被断开");
-    if(!_isShowDialog)
+    NSLog(@"提示连接失败!");
+    if(!isAlertShow)
     {
-        _isShowDialog = YES;
+        isAlertShow = YES;
+        __weak BaseViewController *weakSelf = self;
         dispatch_async(dispatch_get_main_queue(), ^{
-            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"连接失败" message:@"您已经与服务器断开连接，请点击确定重新连接" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-            [alertView show];
+            [weakSelf.alertView show];
         });
     }
-
 }
+
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if(buttonIndex == 1)
     {
+        NSLog(@"开始重新连接");
         [[SocketConnect sharedSocketConnect] connect];
-        NSLog(@"重新连接");
-        
-        [self requestAutoLogin];
-//        if(self && ![self isKindOfClass:[LoginViewController class]])
-//        {
-//            AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-//            LoginViewController *loginViewController = [[LoginViewController alloc]init];
-//            SlideNavigationController *controller = (SlideNavigationController *)appDelegate.window.rootViewController;
-//            [controller switchToViewController:loginViewController withCompletion:^{
-//                  [self dismissViewControllerAnimated:YES completion:nil];
-//            }];
-//        }
-        
+        while (true) {
+            if([[SocketConnect sharedSocketConnect] isConnect])
+            {
+                [self requestAutoLogin];
+                isAlertShow = NO;
+                break;
+            }
+        }
     }
-    _isShowDialog = NO;
+    else
+    {
+        isAlertShow = NO;
+    }
 }
 
 

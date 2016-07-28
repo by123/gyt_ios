@@ -141,7 +141,7 @@
                         label.text = [formatter stringFromDate:[NSDate dateWithTimeIntervalSinceNow:0]];
                     }
                     else{
-                        label.text = [self generateTime:[NSString stringWithFormat:@"%d",model.m_nInsertTime]];
+                        label.text =  [AppUtil getFormatTime:model.m_nInsertTime];
                     }
                     break;
                 case 1://合约
@@ -227,7 +227,7 @@
                         label.text = [formatter stringFromDate:[NSDate dateWithTimeIntervalSinceNow:0]];
                     }
                     else{
-                        label.text = [self generateTime:[NSString stringWithFormat:@"%d",model.m_nInsertTime]];
+                        label.text =  [AppUtil getFormatTime:model.m_nInsertTime];
                     }
                     break;
                 case 1://合约
@@ -392,15 +392,6 @@
     }
 }
 
--(NSString *)generateTime : (NSString *)time
-{
-    NSString *t1 = [time substringWithRange:NSMakeRange(0, 2)];
-    NSString *t2 = [time substringWithRange:NSMakeRange(2, 2)];
-    NSString *t3 = [time substringWithRange:NSMakeRange(2, 2)];
-    NSString *result = [NSString stringWithFormat:@"%@:%@:%@",t1,t2,t3];
-    NSLog(@"%@",result);
-    return result;
-}
 
 +(NSString *)identify
 {

@@ -26,6 +26,9 @@
 @end
 
 @implementation AppDelegate
+{
+    int count;
+}
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -70,18 +73,18 @@
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
+    [[SocketConnect sharedSocketConnect] disconnect];
+    NSLog(@"进入后台，断开连接...");
+
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    if([[SocketConnect sharedSocketConnect] isConnect])
-    {
-        NSLog(@"连接中");
+    NSLog(@"回到前台，检查连接...");
+    if([[SocketConnect sharedSocketConnect] isConnect]){
+        NSLog(@"连接中...");
     }
-    else
-    {
-        NSLog(@"后台已经断开连接");
-        [[SocketConnect sharedSocketConnect] connect];
-        NSLog(@"开始重连");
+    else{
+        [self sendReciveData:nil name:ConnectFail];
     }
 }
 
@@ -179,6 +182,14 @@
 -(void)startAlive
 {
 //    NSLog(@"发送保活包");
+    if([[SocketConnect sharedSocketConnect] isConnect])
+    {
+        NSLog(@"连接中......")
+    }
+    else
+    {
+        NSLog(@"连接有问题......")
+    }
     [[SocketConnect sharedSocketConnect] sendAlive];
     [self performSelector:@selector(startAlive) withObject:nil afterDelay:TimeRepeat];
 }
@@ -187,6 +198,7 @@
 #pragma mark 接收数据
 -(void)OnReceiveSuccess:(id)respondObject
 {
+
     PackageModel *packageModel = respondObject;
     BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
 
@@ -251,7 +263,33 @@
         //行情主推
         if([respondModel.method isEqualToString:PushQuoteData])
         {
-            [self sendReciveData:respondObject name:PushQuoteData];
+            BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
+            id params = respondModel.params;
+            id data  = [params objectForKey:@"data"];
+            PushModel *pushModel = [PushModel mj_objectWithKeyValues:data];
+            
+            if(!IS_NS_COLLECTION_EMPTY(_mainDatas))
+            {
+                for(PushModel *model in _mainDatas)
+                {
+                    if([model.m_strInstrumentID isEqualToString:pushModel.m_strInstrumentID])
+                    {
+                        //无数据变化不刷新
+                        if(pushModel.m_dLastPrice == model.m_dLastPrice && pushModel.m_nVolume == model.m_nVolume)
+                        {
+                            return;
+                        }
+                        else
+                        {
+                            [self sendReciveData:respondObject name:PushQuoteData];
+                            count ++ ;
+                            NSLog(@"收到数据次数->%d",count);
+                            break;
+                        }
+                    }
+                }
+            }
+         
         }
         else if([respondModel.method isEqualToString:PushData])
         {
@@ -270,6 +308,7 @@
 -(void)OnConnectSuccess
 {
     NSLog(@"连接成功");
+    [self sendReciveData:nil name:ConnectSuccess];
 }
 
 -(void)OnConnectFail

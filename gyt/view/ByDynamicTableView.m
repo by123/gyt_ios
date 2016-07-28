@@ -103,7 +103,10 @@
             count +=tempInt;
         }
     }
-    
+    if(count == 0)
+    {
+        return;
+    }
     int currentWidth = 0;
     for(int i = 0 ; i< _titleDatas.count ; i++ )
     {

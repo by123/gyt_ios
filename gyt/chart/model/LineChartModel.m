@@ -131,7 +131,7 @@
 	}
 
 	NSMutableArray *data          = serie[@"data"];
-	NSString       *type          = serie[@"type"];
+//	NSString       *type          = serie[@"type"];
 	NSString       *lbl           = serie[@"label"];
 	int            yAxis          = [serie[@"yAxis"] intValue];
 	int            section        = [serie[@"section"] intValue];
