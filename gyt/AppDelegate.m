@@ -184,11 +184,11 @@
 //    NSLog(@"发送保活包");
     if([[SocketConnect sharedSocketConnect] isConnect])
     {
-        NSLog(@"连接中......")
+        NSLog(@"连接中......");
     }
     else
     {
-        NSLog(@"连接有问题......")
+        NSLog(@"连接有问题......");
     }
     [[SocketConnect sharedSocketConnect] sendAlive];
     [self performSelector:@selector(startAlive) withObject:nil afterDelay:TimeRepeat];

@@ -71,6 +71,7 @@ SINGLETON_IMPLEMENTION(GYTPackage);
               requestid: (int)requestid
 {
     _model.seq = requestid;
+    _model.cmd = NET_CMD_RPC;
     if (_model.cmd == NET_CMD_KEEPALIVE)
     {
         data = [NSMutableData dataWithLength:4];
@@ -89,6 +90,27 @@ SINGLETON_IMPLEMENTION(GYTPackage);
     
     return mData;
 }
+
+
+- (NSData*)encodeAliveJSON  : (NSData *)data
+              requestid: (int)requestid
+{
+    _model.cmd = requestid;
+    _model.seq = GYT_ALIVE;
+    NSMutableData* mData = [NSMutableData dataWithCapacity:data.length + 12];
+    [mData appendUInt:(uint32_t)data.length + 12];
+    
+    int flagSeq = (int)((_model.seq >> 32) & 0x0f) << 8;
+    int tag = flagSeq;
+    
+    [mData appendUInt:(_model.seq & 0xffffffff)];
+    [mData appendUShort:_model.cmd];
+    [mData appendUShort:tag];
+    [mData appendData:data];
+    
+    return mData;
+}
+
 //
 //- (NSData*)encodeBSON {
 //    

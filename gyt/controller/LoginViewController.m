@@ -94,7 +94,7 @@
     
     _nameTextField = [[InsetTextField alloc]initWithFrame:CGRectMake(20, 70, SCREEN_WIDTH-40, 40)];
     _nameTextField.hasTitle = YES;
-    _nameTextField.text = @"847982169";  //外网
+    _nameTextField.text = @"861313";  //外网
     [_nameTextField setInsetTitle:@"资金账号：" font:[UIFont systemFontOfSize:14.0f]];
     _nameTextField.block = ^(InsetTextField *insetTextField) {
         insetTextField.text = @"";
@@ -376,7 +376,7 @@
     }
     else
     {
-        [ByToast showErrorToast:@"登录失败!"];
+        [ByToast showErrorToast:model.error.ErrorMsg];
     }
     [hua hide:YES];
 }

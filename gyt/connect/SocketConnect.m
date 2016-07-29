@@ -18,7 +18,7 @@
 #define HEAD_TAG      666
 #define BODY_TAG      667
 #define HEAD_LENGTH   12
-#define TimeOut 60
+#define TimeOut  (-1)
 
 
 @interface SocketConnect ()
@@ -30,9 +30,9 @@
 @implementation SocketConnect
 {
     __weak MBProgressHUD *hua;
-    NSMutableData *_curFrameData;
-    int32_t _curFrameLength;
-    dispatch_queue_t _processQueue;
+    NSMutableData *curFrameData;
+    int32_t curFrameLength;
+    dispatch_queue_t processQueue;
     Boolean initiative;
 }
 
@@ -44,7 +44,7 @@ SINGLETON_IMPLEMENTION(SocketConnect);
     if(self == [super init])
     {
         _clientSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
-        _processQueue =  dispatch_queue_create("XTAMSocketClient.processQueue", NULL);
+        processQueue =  dispatch_queue_create("GYTSocket_processQueue", NULL);
 
     }
     return self;
@@ -143,40 +143,50 @@ SINGLETON_IMPLEMENTION(SocketConnect);
 #pragma mark - 接收服务端的数据
 -(void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
 {
-    if (_curFrameData == nil) {
-        _curFrameData = [NSMutableData dataWithData:data];
-        _curFrameLength = INT_MAX;
+    if (curFrameData == nil) {
+        curFrameData = [NSMutableData dataWithData:data];
+        curFrameLength = INT_MAX;
     } else {
-        [_curFrameData appendData:data];
+        [curFrameData appendData:data];
     }
-    if (_curFrameLength == INT_MAX && _curFrameData.length > 3) {
-        _curFrameLength = [_curFrameData readInt:0];
+    if (curFrameLength == INT_MAX && curFrameData.length > 3) {
+        curFrameLength = [curFrameData readInt:0];
     }
     
-    while ( _curFrameData.length >= _curFrameLength) {
-        NSData *tmp = [_curFrameData subdataWithRange:NSMakeRange(0, _curFrameLength)];
-        dispatch_async(_processQueue, ^{
+    while ( curFrameData.length >= curFrameLength) {
+        NSData *tmp = [curFrameData subdataWithRange:NSMakeRange(0, curFrameLength)];
+        dispatch_async(processQueue, ^{
             PackageModel *model = [[GYTPackage sharedGYTPackage]decodeJSON:tmp];
-            if (model && (model.cmd == NET_CMD_RPC || model.cmd == NET_CMD_NOTIFICATION)) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.delegate OnReceiveSuccess:model];
-                });
+            if(model)
+            {
+                if (model.cmd == NET_CMD_RPC || model.cmd == NET_CMD_NOTIFICATION)
+                {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.delegate OnReceiveSuccess:model];
+                    });
+                }
+                else if(model.cmd == NET_CMD_KEEPALIVE_RESPONSE)
+                {
+                    NSLog(@"保活包接收成功");
+                }
             }
+
         });
-        if (_curFrameData.length == _curFrameLength) {
-            _curFrameData = nil;
-            _curFrameLength = INT_MAX;
+        if (curFrameData.length == curFrameLength) {
+            curFrameData = nil;
+            curFrameLength = INT_MAX;
         } else {
-            _curFrameData = [NSMutableData dataWithData:[_curFrameData subdataWithRange:NSMakeRange(_curFrameLength, _curFrameData.length - _curFrameLength)]];
-            if (_curFrameData.length > 3) {
-                _curFrameLength = [_curFrameData readInt:0];
+            curFrameData = [NSMutableData dataWithData:[curFrameData subdataWithRange:NSMakeRange(curFrameLength, curFrameData.length - curFrameLength)]];
+            if (curFrameData.length > 3) {
+                curFrameLength = [curFrameData readInt:0];
             } else {
-                _curFrameLength = INT_MAX;
+                curFrameLength = INT_MAX;
             }
         }
     }
     
     [sock readDataWithTimeout:TimeOut tag:0];
+    
 
 }
 
@@ -214,8 +224,8 @@ SINGLETON_IMPLEMENTION(SocketConnect);
 #pragma mark - 发送保活包
 -(void)sendAlive
 {
-    NSData *data =[[GYTPackage sharedGYTPackage]encodeJSON:nil requestid:NET_CMD_KEEPALIVE_RESPONSE];
-    [_clientSocket writeData:data withTimeout:TimeOut tag:0];
+    NSData *data =[[GYTPackage sharedGYTPackage]encodeAliveJSON:nil requestid:NET_CMD_KEEPALIVE];
+    [_clientSocket writeData:data withTimeout:TimeOut tag:100];
 }
 
 

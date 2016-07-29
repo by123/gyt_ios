@@ -34,4 +34,7 @@ SINGLETON_DECLARATION(GYTPackage);
 - (NSData*)encodeJSON  : (NSData *)data
               requestid: (int)requestid;
 
+- (NSData*)encodeAliveJSON  : (NSData *)data
+                   requestid: (int)requestid;
+
 @end

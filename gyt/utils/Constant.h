@@ -143,7 +143,8 @@ typedef NS_ENUM(NSInteger, UpdownType) {
 
 typedef NS_ENUM(NSInteger, ResondType)
 {
-    GYT_MAINPUSH= 101,
+    GYT_ALIVE = 101,
+    GYT_MAINPUSH,
     GYT_LOGIN,
     GYT_ORDER,
     GYT_CANCEL,
