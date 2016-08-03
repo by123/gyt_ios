@@ -73,9 +73,39 @@
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    [[SocketConnect sharedSocketConnect] disconnect];
-    NSLog(@"进入后台，断开连接...");
+    NSLog(@"进入后台");
+    self.backgroundTaskIdentifier =[application beginBackgroundTaskWithExpirationHandler:^(void) {
+        [self endBackgroundTask];
+    }];
+    
+    self.myTimer =[NSTimer scheduledTimerWithTimeInterval:1.0f
+                                                   target:self
+                                                 selector:@selector(timerMethod:)     userInfo:nil
+                                                  repeats:YES];
+    
+}
 
+- (void) endBackgroundTask{
+    dispatch_queue_t mainQueue = dispatch_get_main_queue();
+    AppDelegate *weakSelf = self;
+    dispatch_async(mainQueue, ^(void) {
+        
+        AppDelegate *strongSelf = weakSelf;
+        if (strongSelf != nil){
+            [strongSelf.myTimer invalidate];
+            [[UIApplication sharedApplication] endBackgroundTask:self.backgroundTaskIdentifier];
+            strongSelf.backgroundTaskIdentifier = UIBackgroundTaskInvalid;
+        }
+    });
+}
+
+- (void) timerMethod:(NSTimer *)paramSender{
+//    NSTimeInterval backgroundTimeRemaining =[[UIApplication sharedApplication] backgroundTimeRemaining];
+//    if (backgroundTimeRemaining == DBL_MAX){
+//        NSLog(@"Background Time Remaining = Undetermined");
+//    } else {
+//        NSLog(@"Background Time Remaining = %.02f Seconds", backgroundTimeRemaining);
+//    }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -201,6 +231,9 @@
 
     PackageModel *packageModel = respondObject;
     BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
+
+//    {"rpcname":"login","rpcparams":{"strUserName":"866680","sessionId":"","strIpAddress":"192.168.1.110","strMACAdress":"EC62AD02-31E0-4A68-AB89-B27484CE58C4","clientID":4,"strPassword":"7c4a8d09ca3762af61e59520943dc26494f8941b"}}
+    
 
     if(packageModel.seq == GYT_LOGIN)
     {

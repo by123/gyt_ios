@@ -15,5 +15,11 @@
 
 @property (strong, nonatomic) NSMutableArray *mainDatas;
 
+
+//保持后台运行
+@property (nonatomic, unsafe_unretained) UIBackgroundTaskIdentifier backgroundTaskIdentifier;
+
+@property (nonatomic, strong) NSTimer *myTimer;
+
 @end
 

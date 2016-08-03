@@ -82,13 +82,30 @@ static Boolean isAlertShow;
     if(!isAlertShow)
     {
         isAlertShow = YES;
-        __weak BaseViewController *weakSelf = self;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [weakSelf.alertView show];
-        });
+//        __weak BaseViewController *weakSelf = self;
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [weakSelf.alertView show];
+//        });
+        NSLog(@"开始重新连接");
+        [self performSelector:@selector(autoLogin) withObject:nil afterDelay:1.0];
+
     }
 }
 
+
+-(void)autoLogin
+{
+    if([[SocketConnect sharedSocketConnect] isConnect])
+    {
+        [self requestAutoLogin];
+        isAlertShow = NO;
+    }
+    else
+    {
+        [[SocketConnect sharedSocketConnect] connect];
+        [self performSelector:@selector(autoLogin) withObject:nil afterDelay:1.0];
+    }
+}
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -119,7 +136,7 @@ static Boolean isAlertShow;
 //    hud.labelText = @"正在重新登陆";
     LoginModel *model = [[LoginModel alloc]init];
     model.sessionId = @"";
-    model.strUserName = [[Account sharedAccount] getUid];
+    model.strUserName = @"866680";
     NSString *passwordStr =  @"123456";
     model.strPassword = [AppUtil sha1:passwordStr];
     model.strIpAddress = [IPMacUtil getIPAddress];

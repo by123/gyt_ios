@@ -129,6 +129,8 @@ SINGLETON_IMPLEMENTION(SocketConnect);
         @try {
             if(![self isConnect])
             {
+                curFrameLength = INT_MAX;
+                curFrameData = nil;
                 [self.delegate OnConnectFail];
             }
         } @catch (NSException *exception) {

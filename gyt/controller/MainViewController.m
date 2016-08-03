@@ -53,7 +53,7 @@
 {
     CGFloat currentY;
     int current;
-    int count;
+//    int count;
 }
 
 
@@ -632,8 +632,8 @@
                 }
                 else
                 {
-                    count ++;
-                    NSLog(@"数据变化次数->%d",count);
+//                    count ++;
+//                    NSLog(@"数据变化次数->%d",count);
                     model.m_dLastPrice = pushModel.m_dLastPrice;
                     model.m_dOpenPrice = pushModel.m_dOpenPrice;
                     model.m_nVolume = pushModel.m_nVolume;

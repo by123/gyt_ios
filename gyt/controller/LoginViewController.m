@@ -25,8 +25,6 @@
 
 @property (strong , nonatomic) UIButton *loginBtn;
 
-@property (assign , nonatomic) Boolean isSavePsw;
-
 @property (strong , nonatomic) UILabel *tipLabel;
 
 @property (strong , nonatomic) UITextField *ipTextField;
@@ -94,7 +92,7 @@
     
     _nameTextField = [[InsetTextField alloc]initWithFrame:CGRectMake(20, 70, SCREEN_WIDTH-40, 40)];
     _nameTextField.hasTitle = YES;
-    _nameTextField.text = @"861313";  //外网
+    _nameTextField.text = [[Account sharedAccount]getUid];
     [_nameTextField setInsetTitle:@"资金账号：" font:[UIFont systemFontOfSize:14.0f]];
     _nameTextField.block = ^(InsetTextField *insetTextField) {
         insetTextField.text = @"";
@@ -104,11 +102,12 @@
     
     _passwordTextField = [[InsetTextField alloc]initWithFrame:CGRectMake(20, 120, SCREEN_WIDTH-40, 40)];
     _passwordTextField.hasTitle = YES;
-    NSString *password = [[NSUserDefaults standardUserDefaults] objectForKey:UserDefault_Password];
-    _passwordTextField.text = password;
-    //测试
-    _passwordTextField.text = @"123456";
-    //测试
+    Boolean savePassword = [[NSUserDefaults standardUserDefaults] boolForKey:UserDefault_SavePassword];
+    if(savePassword)
+    {
+        NSString *password = [[NSUserDefaults standardUserDefaults] objectForKey:UserDefault_Password];
+        _passwordTextField.text = password;
+    }
     [_passwordTextField setInsetTitle:@"登录密码：" font:[UIFont systemFontOfSize:14.0f]];
     __weak LoginViewController *weakSelf = self;
     _passwordTextField.block = ^(InsetTextField *insetTextField){
@@ -117,7 +116,7 @@
             [ByToast showErrorToast:@"请输入密码"];
             return;
         }
-        if(!weakSelf.isSavePsw)
+        if(!savePassword)
         {
             [[NSUserDefaults standardUserDefaults] setValue:weakSelf.passwordTextField.text forKey:UserDefault_Password];
             [ByToast showNormalToast:@"密码已保存"];
@@ -129,18 +128,21 @@
            [ByToast showErrorToast:@"密码未保存"];
            [insetTextField setInsetImage:[UIImage imageNamed:@"ic_unlock"]];
         }
-        weakSelf.isSavePsw = !weakSelf.isSavePsw;
+        
+        Boolean savePassword = [[NSUserDefaults standardUserDefaults] boolForKey:UserDefault_SavePassword];
+        savePassword = !savePassword;
+        [[NSUserDefaults standardUserDefaults] setBool:savePassword forKey:UserDefault_SavePassword];
     };
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *psw = [userDefaults objectForKey:UserDefault_Password];
     if(IS_NS_STRING_EMPTY(psw))
     {
-        _isSavePsw = NO;
+        savePassword = NO;
         [_passwordTextField setInsetImage:[UIImage imageNamed:@"ic_unlock"]];
     }
     else
     {
-        _isSavePsw = YES;
+        savePassword = YES;
         [_passwordTextField setInsetImage:[UIImage imageNamed:@"ic_lock"]];
     }
     _passwordTextField.secureTextEntry = YES;
