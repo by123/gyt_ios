@@ -412,14 +412,15 @@
               label : (UILabel *)label
 {
     double value = 0 ;
-    if(model.m_nDirection == ENTRUST_BUY)
-    {
-        value = (model.m_dLastPrice - model.m_dAvgPrice) * model.m_nPosition;
-    }
-    else if(model.m_nDirection == ENTRUST_SELL)
-    {
-        value = (model.m_dAvgPrice - model.m_dLastPrice) * model.m_nPosition;
-    }
+//    if(model.m_nDirection == ENTRUST_BUY)
+//    {
+//        value = (model.m_dLastPrice - model.m_dAvgPrice) * model.m_nPosition;
+//    }
+//    else if(model.m_nDirection == ENTRUST_SELL)
+//    {
+//        value = (model.m_dAvgPrice - model.m_dLastPrice) * model.m_nPosition;
+//    }
+    value = model.m_dFloatProfit;
     label.text = [NSString stringWithFormat:@"%.2f",value];
     if(value > 0)
     {

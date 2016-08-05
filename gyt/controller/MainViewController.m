@@ -71,16 +71,26 @@
     _myDatas = [[NSMutableArray alloc]init];
     _historyDatas = [[NSMutableArray alloc]init];
     [self initView];
-    
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleAccountData:) name:AccountDetailData object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleInstrumentData:) name:InstrumentDetailData object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handlePushQuoteData:) name:PushQuoteData object:nil];
-
+    
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getUserInfo) name:Notify_Update_AccountInfo object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateView:) name:Notify_Menu_Title object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleAutoLogin:) name:LoginData object:nil];
-    
+}
+
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
 }
 
 
@@ -599,7 +609,7 @@
             }
         }
     }
-        AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     appDelegate.mainDatas =  _mainDatas;
     [_tableView setHidden:NO];
     [_tableView reloadData];
@@ -612,51 +622,29 @@
 -(void)handlePushQuoteData : (NSNotification *)notification
 {
     BaseRespondModel *respondModel = [BaseRespondModel buildModel:notification.object];
-    id params = respondModel.params;
-    id data  = [params objectForKey:@"data"];
+    id data  = [respondModel.params objectForKey:@"data"];
     PushModel *pushModel = [PushModel mj_objectWithKeyValues:data];
-    
-//    NSMutableArray *temps = [[NSMutableArray alloc]init];
-//    [temps addObjectsFromArray:_mainDatas];
     
     if(!IS_NS_COLLECTION_EMPTY(_mainDatas))
     {
         for(PushModel *model in _mainDatas)
         {
-            if([model.m_strInstrumentID isEqualToString:pushModel.m_strInstrumentID])
+            if([model.m_strInstrumentID isEqualToString:pushModel.m_strInstrumentID] &&(pushModel.m_dLastPrice != model.m_dLastPrice || pushModel.m_nVolume != model.m_nVolume))
             {
-                //无数据变化不刷新
-                if(pushModel.m_dLastPrice == model.m_dLastPrice && pushModel.m_nVolume == model.m_nVolume)
-                {
-                    return;
-                }
-                else
-                {
-//                    count ++;
-//                    NSLog(@"数据变化次数->%d",count);
-                    model.m_dLastPrice = pushModel.m_dLastPrice;
-                    model.m_dOpenPrice = pushModel.m_dOpenPrice;
-                    model.m_nVolume = pushModel.m_nVolume;
-                    model.m_dAskPrice1 = pushModel.m_dAskPrice1;
-                    model.m_dBidPrice1 = pushModel.m_dBidPrice1;
-                    model.m_dHighestPrice = pushModel.m_dHighestPrice;
-                    model.m_dLowestPrice = pushModel.m_dLowestPrice;
-                    model.m_nAskVolume1 = pushModel.m_nAskVolume1;
-                    model.m_nBidVolume1 = pushModel.m_nBidVolume1;
-                    model.m_strUpdateTime = pushModel.m_strUpdateTime;
-/*                    if(model.isMyContract)
-                    {
-                        [[ContractDB sharedContractDB]updateItem:DBMyContractTable instrumentid:model.m_strInstrumentID model:model];
-                    }
-                    [[ContractDB sharedContractDB] insertItem:DBContractTable model:pushModel];
-                    [[ContractDB sharedContractDB]updateItem:DBHistoryContractTable instrumentid:model.m_strInstrumentID model:model];
-                    */
-                    [_tableView reloadData];
-                }
+                model.m_dLastPrice = pushModel.m_dLastPrice;
+                model.m_dOpenPrice = pushModel.m_dOpenPrice;
+                model.m_nVolume = pushModel.m_nVolume;
+                model.m_dAskPrice1 = pushModel.m_dAskPrice1;
+                model.m_dBidPrice1 = pushModel.m_dBidPrice1;
+                model.m_dHighestPrice = pushModel.m_dHighestPrice;
+                model.m_dLowestPrice = pushModel.m_dLowestPrice;
+                model.m_nAskVolume1 = pushModel.m_nAskVolume1;
+                model.m_nBidVolume1 = pushModel.m_nBidVolume1;
+                model.m_strUpdateTime = pushModel.m_strUpdateTime;
+                [_tableView reloadData];
                 break;
             }
         }
-        
     }
 
     if(_shortCutView)
@@ -665,6 +653,15 @@
     }
 }
 
+
+
+/*                    if(model.isMyContract)
+ {
+ [[ContractDB sharedContractDB]updateItem:DBMyContractTable instrumentid:model.m_strInstrumentID model:model];
+ }
+ [[ContractDB sharedContractDB] insertItem:DBContractTable model:pushModel];
+ [[ContractDB sharedContractDB]updateItem:DBHistoryContractTable instrumentid:model.m_strInstrumentID model:model];
+ */
 
 #pragma mark 处理登陆信息
 -(void)handleAutoLogin : (NSNotification *)notification

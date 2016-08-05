@@ -1167,7 +1167,7 @@ typedef NS_ENUM(NSInteger,PriceType)
     {
         NSLog(@"#############行情变化#############");
         PushModel *model = data;
-        [self updateUpDown : model];
+//        [self updateUpDown : model];
         if([model.m_strInstrumentID isEqualToString:_model.m_strInstrumentID])
         {
             _model.m_dLastPrice = model.m_dLastPrice;
@@ -1321,22 +1321,22 @@ typedef NS_ENUM(NSInteger,PriceType)
     
 }
 
-#pragma mark 更新浮动盈亏
--(void)updateUpDown : (PushModel *)model
-{
-    if(!IS_NS_COLLECTION_EMPTY(holdDatas))
-    {
-        for(DealHoldModel *holdModel in holdDatas)
-        {
-            if([model.m_strInstrumentID isEqualToString:holdModel.m_strInstrumentID] && model.m_dLastPrice != holdModel.m_dLastPrice)
-            {
-                holdModel.m_dLastPrice = model.m_dLastPrice;
-                [_holdTableView reloadData:holdDatas position:currentItemSelect];
-                break;
-            }
-        }
-    }
-}
+#pragma mark 更新浮动盈亏(弃用)
+//-(void)updateUpDown : (PushModel *)model
+//{
+//    if(!IS_NS_COLLECTION_EMPTY(holdDatas))
+//    {
+//        for(DealHoldModel *holdModel in holdDatas)
+//        {
+//            if([model.m_strInstrumentID isEqualToString:holdModel.m_strInstrumentID] && model.m_dLastPrice != holdModel.m_dLastPrice)
+//            {
+//                holdModel.m_dLastPrice = model.m_dLastPrice;
+//                [_holdTableView reloadData:holdDatas position:currentItemSelect];
+//                break;
+//            }
+//        }
+//    }
+//}
 
 
 #pragma mark 根据选择价格类型，更新买入卖出按钮价格

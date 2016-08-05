@@ -296,41 +296,29 @@
         //行情主推
         if([respondModel.method isEqualToString:PushQuoteData])
         {
-            BaseRespondModel *respondModel = [BaseRespondModel buildModel:respondObject];
-            id params = respondModel.params;
-            id data  = [params objectForKey:@"data"];
-            PushModel *pushModel = [PushModel mj_objectWithKeyValues:data];
-            
-            if(!IS_NS_COLLECTION_EMPTY(_mainDatas))
+            if(!test)
             {
-                for(PushModel *model in _mainDatas)
-                {
-                    if([model.m_strInstrumentID isEqualToString:pushModel.m_strInstrumentID])
-                    {
-                        //无数据变化不刷新
-                        if(pushModel.m_dLastPrice == model.m_dLastPrice && pushModel.m_nVolume == model.m_nVolume)
-                        {
-                            return;
-                        }
-                        else
-                        {
-                            [self sendReciveData:respondObject name:PushQuoteData];
-                            count ++ ;
-                            NSLog(@"收到数据次数->%d",count);
-                            break;
-                        }
-                    }
-                }
+                dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+                double delay = 1;
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), queue, ^{
+                    test = false;
+                    [self sendReciveData:respondObject name:PushQuoteData];
+                });
             }
-         
+
         }
         else if([respondModel.method isEqualToString:PushData])
         {
             [self sendReciveData:packageModel name:PushData];
             
         }
-    }
-    
+     }
+}
+
+static bool test;
+-(void)startPush : (id)respondObject
+{
+    [self sendReciveData:respondObject name:PushQuoteData];
 }
 
 -(void)OnReceiveFail:(NSError *)error
