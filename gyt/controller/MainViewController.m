@@ -546,10 +546,14 @@
 
     for(PushModel *model in _mainDatas)
     {
-        [array1 addObject:model.m_strExchangeID];
-        [array2 addObject:model.m_strInstrumentID];
+        if([model.m_strInstrumentID containsString:@"DAX 1609"])
+        {
+            [array1 addObject:model.m_strExchangeID];
+            [array2 addObject:model.m_strInstrumentID];
+        }
     }
 
+   
     PushRequestModel *model = [[PushRequestModel alloc]init];
     model.sessionId = [[Account sharedAccount]getSessionId];
     model.platformID =PLATFORM_OUTTER_YN_MN;

@@ -296,16 +296,9 @@
         //行情主推
         if([respondModel.method isEqualToString:PushQuoteData])
         {
-            if(!test)
-            {
-                dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-                double delay = 1;
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), queue, ^{
-                    test = false;
-                    [self sendReciveData:respondObject name:PushQuoteData];
-                });
-            }
-
+            count ++;
+            NSLog(@"count->%d",count);
+            [self sendReciveData:respondObject name:PushQuoteData];
         }
         else if([respondModel.method isEqualToString:PushData])
         {
@@ -315,7 +308,7 @@
      }
 }
 
-static bool test;
+
 -(void)startPush : (id)respondObject
 {
     [self sendReciveData:respondObject name:PushQuoteData];

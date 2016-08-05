@@ -309,6 +309,8 @@ typedef NS_ENUM(NSInteger,PriceType)
     __weak DealView *weakSelf = self;
     _myTextField.block = ^(BOOL isCompelete,NSString *text)
     {
+        priceType = HandIn;
+        weakSelf.priceLabel.text = @"限价";
         double value = [text doubleValue];
         [weakSelf isValidPrice:value];
         [weakSelf updateBuySellBtn:value sell:value];
@@ -689,6 +691,7 @@ typedef NS_ENUM(NSInteger,PriceType)
     else if(view == _addPriceBtn)
     {
         priceType = HandIn;
+        _priceLabel.text = @"限价";
         double price = [[_myTextField getTextFieldText] doubleValue];
         price += _model.m_dPriceTick;
         [_myTextField setTextFiledText:[NSString stringWithFormat:@"%.2f",price]];
@@ -698,6 +701,7 @@ typedef NS_ENUM(NSInteger,PriceType)
     else if(view == _reducePriceBtn)
     {
         priceType = HandIn;
+        _priceLabel.text = @"限价";
         double price = [[_myTextField getTextFieldText] doubleValue];
         price -= _model.m_dPriceTick;
         [_myTextField setTextFiledText:[NSString stringWithFormat:@"%.2f",price]];
@@ -1165,7 +1169,7 @@ typedef NS_ENUM(NSInteger,PriceType)
     }
     else if([data isKindOfClass:[PushModel class]])
     {
-        NSLog(@"#############行情变化#############");
+//        NSLog(@"#############行情变化#############");
         PushModel *model = data;
 //        [self updateUpDown : model];
         if([model.m_strInstrumentID isEqualToString:_model.m_strInstrumentID])
