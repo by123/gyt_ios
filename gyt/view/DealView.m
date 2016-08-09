@@ -884,7 +884,7 @@ typedef NS_ENUM(NSInteger,PriceType)
     orderModel.strSessionID = [[Account sharedAccount]getSessionId];
     orderModel.account = account;
     double hand = [[_handTextField getTextFieldText] doubleValue];
-    
+    double price = 0.0f;
     if(model != nil)
     {
         if(hand > model.m_nCanCloseVol)
@@ -892,7 +892,6 @@ typedef NS_ENUM(NSInteger,PriceType)
             [ByToast showErrorToast:@"平仓数量大于可用数量"];
             return;
         }
-        double price;
         //平仓
         if(model.m_nDirection == ENTRUST_BUY)
         {
@@ -917,7 +916,6 @@ typedef NS_ENUM(NSInteger,PriceType)
     }
     else
     {
-        double price;
         //下单
         if(director == ENTRUST_BUY)
         {
@@ -942,6 +940,10 @@ typedef NS_ENUM(NSInteger,PriceType)
     NSString *jsonStr = [JSONUtil parse:@"order" params:dic];
     
     [[SocketConnect sharedSocketConnect] sendData:jsonStr seq:GYT_ORDER];
+    
+    NSString *content = [NSString stringWithFormat:@"成功发出委托 %@ %.2f %.f手",_model.m_strInstrumentID,price,hand];
+    [ByToast showWarnToast:content];
+    
 }
 
 
@@ -960,6 +962,8 @@ typedef NS_ENUM(NSInteger,PriceType)
     
     NSLog(@"数据->%@",jsonStr);
     [[SocketConnect sharedSocketConnect] sendData:jsonStr seq:GYT_CANCEL];
+    
+    [ByToast showWarnToast:@"发出撤单申请"];
 
 }
 
@@ -1053,12 +1057,13 @@ typedef NS_ENUM(NSInteger,PriceType)
 #pragma mark 处理下单数据
 -(void)handleOrderData : (BaseRespondModel *)respondModel
 {
+    
 }
 
 #pragma mark 处理撤单数据
 -(void)handleCancelData : (BaseRespondModel *)respondModel
 {
-    [ByToast showNormalToast:@"提交撤单申请成功"];
+    [ByToast showNormalToast:@"撤单申请成功"];
 }
 
 #pragma mark 处理主推数据
@@ -1136,6 +1141,8 @@ typedef NS_ENUM(NSInteger,PriceType)
         DealProfitModel *model = data;
         [holdProfileDatas insertObject:model atIndex:0];
         [self reloadData:holdProfileDatas type:Profit];
+        NSString *content = [NSString stringWithFormat:@"委托已成交 %@ %.2f %d手",model.m_strInstrumentID,model.m_dPrice,model.m_nVolume];
+        [ByToast showNormalToast:content];
     }
     else if([data isKindOfClass:[DealHoldModel class]])
     {

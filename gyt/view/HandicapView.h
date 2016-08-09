@@ -11,8 +11,8 @@
 #import "PushModel.h"
 
 #define kTopHeight 35
-#define kContentHeight SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT - kTopHeight - 40
-#define KTabHeight 25
+#define kBottomHeight 40
+#define kContentHeight SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT - kTopHeight - kBottomHeight
 
 @interface HandicapView : UIView<UITableViewDelegate,UITableViewDataSource,ByTabViewDelegate>
 
