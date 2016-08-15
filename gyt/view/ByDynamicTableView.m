@@ -181,32 +181,32 @@
     {
         UIFolderTableView *folderTableView = (UIFolderTableView *)tableView;
         [folderTableView openFolderAtIndexPath:indexPath WithContentView:_expandView
-                                     openBlock:^(UIView *subClassView, CFTimeInterval duration, CAMediaTimingFunction *timingFunction){
-                                         
-                                         _isExpand= YES;
-                                         if(_delegate)
-                                         {
-                                             [_delegate OnExpandView:YES];
-                                         }
-                                         // opening actions
-                                         //                                    [self CloseAndOpenACtion:indexPath];
-                                     }
-                                    closeBlock:^(UIView *subClassView, CFTimeInterval duration, CAMediaTimingFunction *timingFunction){
-                                        
-                                        // closing actions
-                                        //                                    [self CloseAndOpenACtion:indexPath];
-                                        //[cell changeArrowWithUp:NO];
-                                    }
-                               completionBlock:^{
-                                   // completed actions
-                                   _isExpand = NO;
-                                   if(_delegate)
-                                   {
-                                       [_delegate OnExpandView:NO];
-                                   }
-                                   [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-                                   self.tableView.scrollEnabled = YES;
-                               }];
+                 openBlock:^(UIView *subClassView, CFTimeInterval duration, CAMediaTimingFunction *timingFunction){
+                     
+                     _isExpand= YES;
+                     if(_delegate)
+                     {
+                         [_delegate OnExpandView:YES];
+                     }
+                     // opening actions
+                     //                                    [self CloseAndOpenACtion:indexPath];
+                 }
+                closeBlock:^(UIView *subClassView, CFTimeInterval duration, CAMediaTimingFunction *timingFunction){
+                    
+                    // closing actions
+                    //                                    [self CloseAndOpenACtion:indexPath];
+                    //[cell changeArrowWithUp:NO];
+                }
+           completionBlock:^{
+               // completed actions
+               _isExpand = NO;
+               if(_delegate)
+               {
+                   [_delegate OnExpandView:NO];
+               }
+               [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+               self.tableView.scrollEnabled = YES;
+           }];
     }
     if(_delegate)
     {

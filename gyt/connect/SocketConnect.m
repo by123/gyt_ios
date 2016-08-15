@@ -18,7 +18,6 @@
 #define HEAD_TAG      666
 #define BODY_TAG      667
 #define HEAD_LENGTH   12
-#define TimeOut  (-1)
 
 
 @interface SocketConnect ()
@@ -60,6 +59,7 @@ SINGLETON_IMPLEMENTION(SocketConnect);
     {
         _clientSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
     }
+    host = [_clientSocket getProperIPWithAddress:host port:port];
     [_clientSocket connectToHost:host onPort:port error:&error];
     if(error)
     {
@@ -109,7 +109,7 @@ SINGLETON_IMPLEMENTION(SocketConnect);
 #pragma mark - 判断与服务器是否正确链接
 -(void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port
 {
-    [sock readDataWithTimeout:TimeOut tag:0];
+    [sock readDataWithTimeout:-1 tag:0];
     if(self.delegate)
     {
         [self.delegate OnConnectSuccess];
@@ -187,7 +187,7 @@ SINGLETON_IMPLEMENTION(SocketConnect);
         }
     }
     
-    [sock readDataWithTimeout:TimeOut tag:0];
+    [sock readDataWithTimeout:-1 tag:0];
     
 
 }
@@ -211,7 +211,7 @@ SINGLETON_IMPLEMENTION(SocketConnect);
     if(_clientSocket.isConnected)
     {
         NSData *data =[[GYTPackage sharedGYTPackage]encodeJSON:[content dataUsingEncoding:NSUTF8StringEncoding] requestid:seq];
-        [_clientSocket writeData:data withTimeout:TimeOut tag:0];
+        [_clientSocket writeData:data withTimeout:-1 tag:0];
     }
     else
     {
@@ -227,7 +227,7 @@ SINGLETON_IMPLEMENTION(SocketConnect);
 -(void)sendAlive
 {
     NSData *data =[[GYTPackage sharedGYTPackage]encodeAliveJSON:nil requestid:NET_CMD_KEEPALIVE];
-    [_clientSocket writeData:data withTimeout:TimeOut tag:100];
+    [_clientSocket writeData:data withTimeout:-1 tag:100];
 }
 
 

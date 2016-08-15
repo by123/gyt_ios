@@ -8236,4 +8236,30 @@ static void CFWriteStreamCallback (CFWriteStreamRef stream, CFStreamEventType ty
 	return [NSData dataWithBytes:"" length:1];
 }
 
-@end	
+
+
+- (NSString *)getProperIPWithAddress:(NSString *)ipAddr port:(UInt32)port
+{
+    NSError *addresseError = nil;
+    NSArray *addresseArray = [GCDAsyncSocket lookupHost:ipAddr
+                                                   port:port
+                                                  error:&addresseError];
+    if (addresseError) {
+        NSLog(@"");
+    }
+    
+    NSString *ipv6Addr = @"";
+    for (NSData *addrData in addresseArray) {
+        if ([GCDAsyncSocket isIPv6Address:addrData]) {
+            ipv6Addr = [GCDAsyncSocket hostFromAddress:addrData];
+        }
+    }
+    
+    if (ipv6Addr.length == 0) {
+        ipv6Addr = ipAddr;
+    }
+    
+    return ipv6Addr;
+}
+
+@end

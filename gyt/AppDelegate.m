@@ -74,14 +74,14 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     NSLog(@"进入后台");
-    self.backgroundTaskIdentifier =[application beginBackgroundTaskWithExpirationHandler:^(void) {
-        [self endBackgroundTask];
-    }];
-    
-    self.myTimer =[NSTimer scheduledTimerWithTimeInterval:1.0f
-                                                   target:self
-                                                 selector:@selector(timerMethod:)     userInfo:nil
-                                                  repeats:YES];
+//    self.backgroundTaskIdentifier =[application beginBackgroundTaskWithExpirationHandler:^(void) {
+//        [self endBackgroundTask];
+//    }];
+//    
+//    self.myTimer =[NSTimer scheduledTimerWithTimeInterval:1.0f
+//                                                   target:self
+//                                                 selector:@selector(timerMethod:)     userInfo:nil
+//                                                  repeats:YES];
     
 }
 

@@ -1027,6 +1027,10 @@ typedef NS_ENUM(NSInteger, GCDAsyncSocketError) {
 + (NSData *)LFData;     // 0x0A
 + (NSData *)ZeroData;   // 0x00
 
+//针对ipv6网络环境下适配，ipv4环境直接使用原来的地址
+- (NSString *)getProperIPWithAddress:(NSString *)ipAddr port:(UInt32)port;
+
+
 @end
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1193,5 +1197,6 @@ typedef NS_ENUM(NSInteger, GCDAsyncSocketError) {
 **/
 - (void)socket:(GCDAsyncSocket *)sock didReceiveTrust:(SecTrustRef)trust
                                     completionHandler:(void (^)(BOOL shouldTrustPeer))completionHandler;
+
 
 @end
