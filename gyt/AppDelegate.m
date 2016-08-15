@@ -297,7 +297,7 @@
         if([respondModel.method isEqualToString:PushQuoteData])
         {
             count ++;
-            NSLog(@"count->%d",count);
+//            NSLog(@"count->%d",count);
             [self sendReciveData:respondObject name:PushQuoteData];
         }
         else if([respondModel.method isEqualToString:PushData])

@@ -1149,6 +1149,7 @@ typedef NS_ENUM(NSInteger,PriceType)
         NSLog(@"#############持仓变化#############");
         DealHoldModel *model = data;
         
+        NSLog(@"持仓手数->%d",model.m_nPosition);
         BOOL hasModel = NO;
         for(int i = 0 ; i < [holdDatas count]; i ++ )
         {
@@ -1162,6 +1163,11 @@ typedef NS_ENUM(NSInteger,PriceType)
                 }
                 else
                 {
+                    if([currentModel.m_strInstrumentID isEqualToString:tempModel.m_strInstrumentID])
+                    {
+                        //by测试观察
+                        currentModel = nil;
+                    }
                     [holdDatas removeObjectAtIndex:i];
                 }
                 break;
