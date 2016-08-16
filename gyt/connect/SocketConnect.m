@@ -236,7 +236,7 @@ SINGLETON_IMPLEMENTION(SocketConnect);
 {
     if(_clientSocket)
     {
-        return _clientSocket.isConnected;
+        return [_clientSocket isConnected];
     }
     return NO;
 }

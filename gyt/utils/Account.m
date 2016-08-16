@@ -30,6 +30,11 @@ SINGLETON_IMPLEMENTION(Account);
     [userDefaults setValue:uid forKey:UID];
 }
 
+-(void)savePassword:(NSString *)password
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setValue:password forKey:PASSWORD];
+}
 
 - (void)saveSessionid : (NSString *)sessionId
 {
@@ -62,6 +67,12 @@ SINGLETON_IMPLEMENTION(Account);
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     return [userDefaults objectForKey:UID];
 
+}
+
+-(NSString *)getPassword
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    return [userDefaults objectForKey:PASSWORD];
 }
 
 - (NSString *)getSessionId

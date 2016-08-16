@@ -314,7 +314,8 @@
     model.clientID = ClientID_Mobile_TRADE;
     
     [[Account sharedAccount] saveUid:model.strUserName];
-    
+    [[Account sharedAccount] savePassword:passwordStr];
+
     NSString *jsonStr = [JSONUtil parse:Request_Login params:[JSONUtil parseDic:model]];
     [[SocketConnect sharedSocketConnect] sendData:jsonStr seq:GYT_LOGIN];
 

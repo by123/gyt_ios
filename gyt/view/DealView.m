@@ -1163,11 +1163,12 @@ typedef NS_ENUM(NSInteger,PriceType)
                 }
                 else
                 {
+                    //by测试观察
                     if([currentModel.m_strInstrumentID isEqualToString:tempModel.m_strInstrumentID])
                     {
-                        //by测试观察
                         currentModel = nil;
                     }
+                    //by测试观察
                     [holdDatas removeObjectAtIndex:i];
                 }
                 break;
