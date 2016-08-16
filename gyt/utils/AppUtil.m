@@ -327,4 +327,35 @@
     return  dateString;
 }
 
+
+//截取字符串中的一段汉字
++(NSString *)getChineseStringWithString:(NSString *)string
+{
+    int start = -1;
+    int end = -1;
+    //(unicode中文编码范围是0x4e00~0x9fa5)
+    for (int i = 0; i < string.length; i++) {
+        int utfCode = 0;
+        void *buffer = &utfCode;
+        NSRange range = NSMakeRange(i, 1);
+        
+        BOOL b = [string getBytes:buffer maxLength:2 usedLength:NULL encoding:NSUTF16LittleEndianStringEncoding options:NSStringEncodingConversionExternalRepresentation range:range remainingRange:NULL];
+        
+        if (b && (utfCode >= 0x4e00 && utfCode <= 0x9fa5)) {
+            if(start == -1)
+            {
+                start = i;
+                end = start;
+            }
+            end++;
+        }
+    }
+    if(end > start)
+    {
+        NSRange range = NSMakeRange(start, end-start+1);
+        return [string substringWithRange:range];
+    }
+    return nil;
+}
+
 @end

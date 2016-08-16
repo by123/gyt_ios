@@ -545,7 +545,7 @@
 
     for(PushModel *model in _mainDatas)
     {
-        if([model.m_strInstrumentID containsString:@"HSI"])
+        if([model.m_strInstrumentID containsString:@"DAX"])
         {
             [array1 addObject:model.m_strExchangeID];
             [array2 addObject:model.m_strInstrumentID];

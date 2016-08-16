@@ -44,4 +44,6 @@
 
 +(NSString *)getNowStr;
 
++(NSString *)getChineseStringWithString:(NSString *)string;
+
 @end

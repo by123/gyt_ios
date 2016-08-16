@@ -26,7 +26,12 @@
     }
     else
     {
-       model.errorMsg = model.error.ErrorMsg;
+        NSString *errorMsg = model.error.ErrorMsg;
+        if([errorMsg containsString:@"ErrorID"] && [errorMsg containsString:@"ErrorMsg"])
+        {
+            errorMsg = [AppUtil getChineseStringWithString:errorMsg];
+        }
+       model.errorMsg = errorMsg;
        [ByToast showErrorToast: model.errorMsg];
     }
     return model;
