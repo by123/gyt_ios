@@ -545,7 +545,7 @@
 
     for(PushModel *model in _mainDatas)
     {
-        if([model.m_strInstrumentID containsString:@"DAX"])
+        if([model.m_strInstrumentID containsString:@"DAX"] || [model.m_strInstrumentID containsString:@"HSI"])
         {
             [array1 addObject:model.m_strExchangeID];
             [array2 addObject:model.m_strInstrumentID];
@@ -588,12 +588,26 @@
 #pragma mark 处理合约信息
 -(void)handleInstrumentData : (NSNotification *)notification
 {
+    NSArray *array = @[@"DAX",@"HSI",@"CL",@"CN"];
     BaseRespondModel *respondModel = notification.object;
     QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:respondModel.response];
     [_mainDatas removeAllObjects];
     for(id temp in model.datas)
     {
-        [_mainDatas addObject:[PushModel mj_objectWithKeyValues:temp]];
+        PushModel *model = [PushModel mj_objectWithKeyValues:temp];
+        Boolean isExpect = NO;
+        for(NSString *expect in array)
+        {
+            if([expect isEqualToString:model.m_strInstrumentID])
+            {
+                isExpect = YES;
+                break;
+            }
+        }
+        if(!isExpect)
+        {
+            [_mainDatas addObject:model];
+        }
     }
     NSMutableArray *contractDatas = [[ContractDB sharedContractDB] queryAll:DBContractTable];
     for(int i = 0 ; i < [_mainDatas count] ; i++ )
