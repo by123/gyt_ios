@@ -32,6 +32,9 @@
 //平仓盈亏
 @property (assign, nonatomic) double m_dCloseProfit;
 
+//今平仓盈亏
+@property (assign, nonatomic) double m_dTodayCloseProfit;
+
 //入金
 @property (assign, nonatomic) double m_dDeposit;
 
@@ -46,6 +49,9 @@
 
 //手续费
 @property (assign, nonatomic) double m_dCommission;
+
+//今手续费
+@property (assign, nonatomic) double m_dTodayCommission;
 
 //冻结手续费
 @property (assign, nonatomic) double m_dFrozenCommission;

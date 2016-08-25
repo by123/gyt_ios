@@ -33,13 +33,13 @@
 -(void)initView
 {
     _titleLabel = [[UILabel alloc]init];
-    _titleLabel.font = [UIFont systemFontOfSize:12.0f];
+    _titleLabel.font = [UIFont systemFontOfSize:14.0f];
     _titleLabel.textColor = TEXT_COLOR;
     _titleLabel.textAlignment = NSTextAlignmentCenter;
     [self.contentView addSubview:_titleLabel];
     
     _contentLabel = [[UILabel alloc]init];
-    _contentLabel.font = [UIFont systemFontOfSize:12.0f];
+    _contentLabel.font = [UIFont systemFontOfSize:14.0f];
     _contentLabel.textColor = TEXT_COLOR;
     _contentLabel.textAlignment = NSTextAlignmentRight;
     _contentLabel.lineBreakMode = NSLineBreakByTruncatingTail;

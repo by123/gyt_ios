@@ -96,7 +96,7 @@
 
 
 
-+(NSString *)getMoneyType : (EMoneyType)type
++(NSString *)getMoneyType : (int)type
 {
     switch (type) {
         case MoneyType_RMB:

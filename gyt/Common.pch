@@ -31,11 +31,12 @@
 #import "NSString+Contains.h"
 #import "ByToast.h"
 #import "SocketReceive.h"
+#import "CustomIOSAlertView.h"
 
 #define  KEY_USERNAME_PASSWORD @"com.company.app.usernamepassword"
 #define  KEY_USERNAME @"com.company.app.username"
 #define  KEY_PASSWORD @"com.company.app.password"
-#define  AppName @"海华e事通"
+#define  AppName @"股一通"
 
 //-------------------获取设备大小-------------------------
 //NavBar高度

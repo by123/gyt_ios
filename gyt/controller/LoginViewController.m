@@ -372,6 +372,7 @@
         
         [[Account sharedAccount]saveSessionid:sessionId];
         [[NSNotificationCenter defaultCenter] removeObserver:self name:LoginData object:nil];
+        [[Account sharedAccount] setAutoLogin:YES];
         [MainViewController show : self];
 //        [[NSNotificationCenter defaultCenter] postNotificationName:Notify_Update_AccountInfo object:nil];
 

@@ -35,4 +35,7 @@ typedef NS_ENUM(NSInteger, KTimeLine)
 
 
 -(void)handleKlineData : (BaseRespondModel *)respondModel;
+
+-(void)handlePushQuoteData:(PushModel *)model;
+
 @end

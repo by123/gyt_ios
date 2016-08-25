@@ -12,7 +12,7 @@
 #define ToastHeight 50
 #define EnterInterval 0.5
 #define ExitInterval 0.5
-#define TimeInterval 1
+#define TimeInterval 0.5
 
 
 @interface ByToast()

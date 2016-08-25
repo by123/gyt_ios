@@ -9,7 +9,7 @@
 #import "BaseViewController.h"
 #import "SlideNavigationController.h"
 
-@interface ManageViewController : BaseViewController
+@interface ManageViewController : BaseViewController<UITableViewDelegate,UITableViewDataSource>
 
 +(void)show : (SlideNavigationController *)controller;
 

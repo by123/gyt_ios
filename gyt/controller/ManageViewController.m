@@ -11,17 +11,17 @@
 #import "Test.h"
 
 
+#define ItemHeight 50
 @interface ManageViewController ()
 
-@property (strong, nonatomic) UIButton *updateBtn;
-
-@property (strong, nonatomic) UITextField *ipTextField;
-
-@property (strong, nonatomic) UITextField *portTextField;
+@property (strong, nonatomic) UITableView *tableView;
 
 @end
 
 @implementation ManageViewController
+{
+    NSArray *array;
+}
 
 +(void)show : (SlideNavigationController *)controller
 {
@@ -31,6 +31,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    array = @[@"暂无内容"];
     [self initView];
 }
 
@@ -39,58 +40,17 @@
     [self initNavigationBar];
     self.view.backgroundColor = BACKGROUND_COLOR;
     
-    
-    _ipTextField = [[UITextField alloc]init];
-    _ipTextField.layer.masksToBounds = YES;
-    _ipTextField.layer.cornerRadius = 4;
-    _ipTextField.backgroundColor = [UIColor whiteColor];
-    _ipTextField.frame = CGRectMake(20, 100, SCREEN_WIDTH - 40, 50);
-    [_ipTextField setText:[[Test sharedTest] host]];
-    [self.view addSubview:_ipTextField];
-    
-    _portTextField = [[UITextField alloc]init];
-    _portTextField.layer.masksToBounds = YES;
-    _portTextField.layer.cornerRadius = 4;
-    _portTextField.backgroundColor = [UIColor whiteColor];
-    _portTextField.frame = CGRectMake(20, 170, SCREEN_WIDTH - 40, 50);
-    [_portTextField setText:[NSString stringWithFormat:@"%d",[[Test sharedTest] port]]];
-    [self.view addSubview:_portTextField];
-    
-    _updateBtn = [[UIButton alloc]init];
-    _updateBtn.layer.masksToBounds = YES;
-    _updateBtn.layer.cornerRadius = 8;
-    [_updateBtn setBackgroundColor:[UIColor redColor]];
-    [_updateBtn setTitle:@"修改" forState:UIControlStateNormal];
-    [_updateBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    _updateBtn.frame = CGRectMake(20, 240,SCREEN_WIDTH - 40, 50);
-    [_updateBtn addTarget:self action:@selector(OnUpdateClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_updateBtn];
+    _tableView = [[UITableView alloc]init];
+    _tableView.frame = Default_Frame;
+    _tableView.showsVerticalScrollIndicator = NO;
+    _tableView.showsHorizontalScrollIndicator = NO;
+    _tableView.delegate = self;
+    _tableView.backgroundColor = [UIColor clearColor];
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _tableView.dataSource = self;
+    [self.view addSubview:_tableView];
     
     
-}
-
--(void)OnUpdateClick : (id)sender
-{
-    NSString *host = _ipTextField.text;
-    NSString *port = _portTextField.text;
-    
-    if([self isPureInt:port])
-    {        
-        [[Test sharedTest] setHost:host];
-        [[Test sharedTest] setPort:[port integerValue]];
-        [ByToast showNormalToast:@"修改成功"];
-        [[SocketConnect sharedSocketConnect] disconnect];
-    }
-    else
-    {
-        [ByToast showErrorToast:@"端口输入有误"];
-    }
-}
-
-- (BOOL)isPureInt:(NSString*)string{
-    NSScanner* scan = [NSScanner scannerWithString:string];
-    int val;
-    return[scan scanInt:&val] && [scan isAtEnd];
 }
 
 -(void)initNavigationBar
@@ -109,6 +69,33 @@
 }
 
 
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [array count];
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return ItemHeight;
+}
+
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ManageTableViewCell"];
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    cell.backgroundColor = BACKGROUND_COLOR;
+    cell.textLabel.text = [array objectAtIndex:indexPath.row];
+    cell.textLabel.textColor  = [UIColor whiteColor];
+    cell.textLabel.font = [UIFont systemFontOfSize:14.0f];
+    return cell;
+}
 
 
 

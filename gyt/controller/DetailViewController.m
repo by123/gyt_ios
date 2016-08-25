@@ -109,7 +109,7 @@
     [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_drawline"]];
     [self.navBar setRightBtn2Image:[UIImage imageNamed:@"ic_lightning"]];
     [self.navBar setRightBtn3Image:nil];
-    currentPosition = 1;
+    currentPosition = 4;
     [self OnSelectPosition:currentPosition];
 }
 
@@ -124,10 +124,10 @@
 -(void)initBottomView
 {
     NSMutableArray *titleArray = [[NSMutableArray alloc]init];
-//    [titleArray addObject:[BottomTabView buildModel:@"新闻" image:[UIImage imageNamed:@"ic_news"]]];
+    [titleArray addObject:[BottomTabView buildModel:@"系统消息" image:[UIImage imageNamed:@"ic_news"]]];
     [titleArray addObject:[BottomTabView buildModel:@"盘口" image:[UIImage imageNamed:@"ic_handicap"]]];
-//    [titleArray addObject:[BottomTabView buildModel:@"分时" image:[UIImage imageNamed:@"ic_timeline_chart"]]];
-//    [titleArray addObject:[BottomTabView buildModel:@"k线" image:[UIImage imageNamed:@"ic_kline_chart"]]];
+    [titleArray addObject:[BottomTabView buildModel:@"分时" image:[UIImage imageNamed:@"ic_timeline_chart"]]];
+    [titleArray addObject:[BottomTabView buildModel:@"k线" image:[UIImage imageNamed:@"ic_kline_chart"]]];
     [titleArray addObject:[BottomTabView buildModel:@"下单" image:[UIImage imageNamed:@"ic_lightnting_buy"]]];
     _tabView = [[BottomTabView alloc]initWithData:titleArray];
     _tabView.frame = CGRectMake(0, SCREEN_HEIGHT - kBottomHeight, SCREEN_WIDTH, kBottomHeight);
@@ -149,7 +149,7 @@
 }
 
 
-#pragma mark 初始化新闻模块
+#pragma mark 初始化消息模块
 -(void)addNewsView
 {
     [self clearAllView];
@@ -224,6 +224,10 @@
 
     if(currentPosition == 0)
     {
+        
+    }
+    else if(currentPosition == 1)
+    {
         if(position == 0)
         {
             //下单
@@ -240,48 +244,48 @@
             [self addWarnContract];
         }
     }
-//    else if(currentPosition == 1)
-//    {
-//        if(position == 0)
-//        {
-//            //闪电下单
-//            [self addOrder];
-//        }
-//        else if(position == 1)
-//        {
-//            //加入自选合约
-//            [self addContract];
-//        }
-//        else if(position == 2)
-//        {
-//            //加入预警合约
-//            [self addWarnContract];
-//        }
-//    }
-//    else if(currentPosition == 2)
-//    {
-//        if(position == 0)
-//        {
-//            //选时间
-//            [self addTimeView];
-//        }
-//        else if(position == 1)
-//        {
-//            //下单
-//            [self addOrder];
-//        }
-//        else if(position == 2)
-//        {
-//            //加入自选合约
-//            [self addContract];
-//        }
-//        else if(position == 3)
-//        {
-//            //加入预警合约
-//            [self addWarnContract];
-//        }
-//    }
-    else if(currentPosition == 1)
+    else if(currentPosition == 2)
+    {
+        if(position == 0)
+        {
+            //闪电下单
+            [self addOrder];
+        }
+        else if(position == 1)
+        {
+            //加入自选合约
+            [self addContract];
+        }
+        else if(position == 2)
+        {
+            //加入预警合约
+            [self addWarnContract];
+        }
+    }
+    else if(currentPosition == 3)
+    {
+        if(position == 0)
+        {
+            //选时间
+            [self addTimeView];
+        }
+        else if(position == 1)
+        {
+            //下单
+            [self addOrder];
+        }
+        else if(position == 2)
+        {
+            //加入自选合约
+            [self addContract];
+        }
+        else if(position == 3)
+        {
+            //加入预警合约
+            [self addWarnContract];
+        }
+    }
+    else if(currentPosition == 4)
     {
         if(position == 0)
         {
@@ -344,16 +348,16 @@
 -(void)OnSelectPosition:(NSInteger)position
 {
     switch (position) {
-//        case 0:
-//            [self.navBar setTitle:@"新闻"];
-//            [self.navBar setRightImage:nil];
-//            [self.navBar setRightBtn1Image:nil];
-//            [self.navBar setRightBtn2Image:nil];
-//            [self.navBar setRightBtn3Image:nil];
-//            [self.navBar setRightBtn4Image:nil];
-//            [self addNewsView];
-//            break;
         case 0:
+            [self.navBar setTitle:@"系统消息"];
+            [self.navBar setRightImage:nil];
+            [self.navBar setRightBtn1Image:nil];
+            [self.navBar setRightBtn2Image:nil];
+            [self.navBar setRightBtn3Image:nil];
+            [self.navBar setRightBtn4Image:nil];
+            [self addNewsView];
+            break;
+        case 1:
             [self.navBar setLeftMainTitle:@"详细报价"];
             [self.navBar setRightImage:[UIImage imageNamed:@"ic_lightning"]];
 
@@ -373,45 +377,45 @@
             [self.navBar.titleLabel setHidden:YES];
             [self addHandicapView];
             break;
-//        case 1:
-//            [self.navBar setLeftMainTitle:@"分时图"];
-//            [self.navBar setRightImage:[UIImage imageNamed:@"ic_lightning"]];
-//            if(_model.isMyContract == 1)
-//            {
-//                [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_collect_press"]];
-//            }
-//            else
-//            {
-//                [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_collect_normal"]];
-//            }
-//            [self.navBar setRightBtn2Image:nil];
-//            [self.navBar setRightBtn3Image:nil];
-//            [self.navBar setRightBtn4Image:nil];
-//            [self.navBar.leftMainLabel setHidden:NO];
-//            [self.navBar.leftSubLabel setHidden:NO];
-//            [self.navBar.titleLabel setHidden:YES];
-//            [self addTimelineView];
-//            break;
-//        case 2:
-//            [self.navBar setLeftMainTitle:@"k线图"];
-//            [self.navBar setRightImage:[UIImage imageNamed:@"ic_clock"]];
-//            [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_lightning"]];
-//            if(_model.isMyContract == 1)
-//            {
-//                [self.navBar setRightBtn2Image:[UIImage imageNamed:@"ic_collect_press"]];
-//            }
-//            else
-//            {
-//                [self.navBar setRightBtn2Image:[UIImage imageNamed:@"ic_collect_normal"]];
-//            }
-//            [self.navBar setRightBtn3Image:nil];
-//            [self.navBar setRightBtn4Image:nil];
-//            [self.navBar.leftMainLabel setHidden:NO];
-//            [self.navBar.leftSubLabel setHidden:NO];
-//            [self.navBar.titleLabel setHidden:YES];
-//            [self addKlineView];
-//            break;
-        case 1:
+        case 2:
+            [self.navBar setLeftMainTitle:@"分时图"];
+            [self.navBar setRightImage:[UIImage imageNamed:@"ic_lightning"]];
+            if(_model.isMyContract == 1)
+            {
+                [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_collect_press"]];
+            }
+            else
+            {
+                [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_collect_normal"]];
+            }
+            [self.navBar setRightBtn2Image:nil];
+            [self.navBar setRightBtn3Image:nil];
+            [self.navBar setRightBtn4Image:nil];
+            [self.navBar.leftMainLabel setHidden:NO];
+            [self.navBar.leftSubLabel setHidden:NO];
+            [self.navBar.titleLabel setHidden:YES];
+            [self addTimelineView];
+            break;
+        case 3:
+            [self.navBar setLeftMainTitle:@"k线图"];
+            [self.navBar setRightImage:[UIImage imageNamed:@"ic_clock"]];
+            [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_lightning"]];
+            if(_model.isMyContract == 1)
+            {
+                [self.navBar setRightBtn2Image:[UIImage imageNamed:@"ic_collect_press"]];
+            }
+            else
+            {
+                [self.navBar setRightBtn2Image:[UIImage imageNamed:@"ic_collect_normal"]];
+            }
+            [self.navBar setRightBtn3Image:nil];
+            [self.navBar setRightBtn4Image:nil];
+            [self.navBar.leftMainLabel setHidden:NO];
+            [self.navBar.leftSubLabel setHidden:NO];
+            [self.navBar.titleLabel setHidden:YES];
+            [self addKlineView];
+            break;
+        case 4:
             [self.navBar setLeftMainTitle:@"下单"];
             [self.navBar setRightImage:[UIImage imageNamed:@"ic_refresh"]];
             [self.navBar setRightBtn1Image:nil];
@@ -481,6 +485,10 @@
     if(_dealView)
     {
         [_dealView handlePushQuoteData:packageModel];
+    }
+    if(_candleView)
+    {
+        [_candleView handlePushQuoteData:model];
     }
 }
 

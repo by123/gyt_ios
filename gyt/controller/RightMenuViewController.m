@@ -17,7 +17,9 @@
 #import "MoneyManageViewController.h"
 #import "AboutViewController.h"
 #import "ManageViewController.h"
+#import "DealHistoryViewController.h"
 #import "LoginViewController.h"
+#import "AppDelegate.h"
 
 @interface RightMenuViewController ()
 
@@ -123,20 +125,22 @@
             [MoneyDetailViewController show:self.controller];
             break;
         case 1:
-            [MoneyManageViewController show:self.controller];
+            [DealHistoryViewController show:self.controller];
             break;
         case 2:
-            [MyContractViewController show:self.controller];
+            [MoneyManageViewController show:self.controller];
             break;
         case 3:
-            [ManageViewController show:self.controller];
+            [MyContractViewController show:self.controller];
             break;
         case 4:
-            [AboutViewController show:self.controller];
+            [ManageViewController show:self.controller];
             break;
         case 5:
+            [AboutViewController show:self.controller];
+            break;
+        case 6:
             [self logout];
-            
             break;
     
             
@@ -150,6 +154,9 @@
 #pragma mark 登出
 -(void)logout
 {
+    [[Account sharedAccount] setAutoLogin:NO];
+    [[SocketConnect sharedSocketConnect] disconnect];
+    [[SocketConnect sharedSocketConnect] connect];
     LoginViewController *targetController = [[LoginViewController alloc]init];
     [self.controller pushViewController:targetController animated:YES];
 //    model.strUserName = [[Account sharedAccount]getUid];

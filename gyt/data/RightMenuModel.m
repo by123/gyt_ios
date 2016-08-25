@@ -14,8 +14,8 @@
 {
     NSMutableArray *datas = [[NSMutableArray alloc]init];
     [datas addObject:[RightMenuModel build:@"我的资金" image:@"ic_money"]];
-//    [datas addObject:[RightMenuModel build:@"我的合约" image:@"ic_warncontract"]];
-    [datas addObject:[RightMenuModel build:@"出入金管理" image:@"ic_money"]];
+    [datas addObject:[RightMenuModel build:@"交易查询" image:@"ic_history"]];
+    [datas addObject:[RightMenuModel build:@"出入金管理" image:@"ic_inout_gold"]];
     [datas addObject:[RightMenuModel build:@"自选合约管理" image:@"ic_mycontract"]];
     [datas addObject:[RightMenuModel build:@"系统设置" image:@"ic_setting"]];
     [datas addObject:[RightMenuModel build:@"关于" image:@"ic_about"]];

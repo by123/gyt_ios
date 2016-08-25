@@ -17,7 +17,7 @@
 
 
 #define Button_Height 50
-#define Item_Height 30
+#define Item_Height 40
 
 @interface MoneyDetailViewController ()
 

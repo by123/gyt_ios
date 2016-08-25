@@ -21,11 +21,13 @@
     [datas addObject:[TitleContentModel buildData:@"总权益" content:[NSString stringWithFormat:@"%.2f",model.m_dBalance]]];
     [datas addObject:[TitleContentModel buildData:@"持仓盈亏" content:[NSString stringWithFormat:@"%.2f",model.m_dPositionProfit]]];
     [datas addObject:[TitleContentModel buildData:@"平仓盈亏" content:[NSString stringWithFormat:@"%.2f",model.m_dCloseProfit]]];
+    [datas addObject:[TitleContentModel buildData:@"今平仓盈亏" content:[NSString stringWithFormat:@"%.2f",model.m_dTodayCloseProfit]]];
     [datas addObject:[TitleContentModel buildData:@"入金" content:[NSString stringWithFormat:@"%.2f",model.m_dDeposit]]];
     [datas addObject:[TitleContentModel buildData:@"出金" content:[NSString stringWithFormat:@"%.2f",model.m_dWithdraw]]];
     [datas addObject:[TitleContentModel buildData:@"占用保证金" content:[NSString stringWithFormat:@"%.2f",model.m_dCurrMargin]]];
     [datas addObject:[TitleContentModel buildData:@"冻结保证金" content:[NSString stringWithFormat:@"%.2f",model.m_dFrozenMargin]]];
     [datas addObject:[TitleContentModel buildData:@"手续费" content:[NSString stringWithFormat:@"%.2f",model.m_dCommission]]];
+    [datas addObject:[TitleContentModel buildData:@"今手续费" content:[NSString stringWithFormat:@"%.2f",model.m_dTodayCommission]]];
     [datas addObject:[TitleContentModel buildData:@"冻结手续费" content:[NSString stringWithFormat:@"%.2f",model.m_dFrozenCommission]]];
     [datas addObject:[TitleContentModel buildData:@"合约价值" content:[NSString stringWithFormat:@"%.2f",model.m_dInstrumentValue]]];
     [datas addObject:[TitleContentModel buildData:@"币种" content:[Constant getMoneyType : model.m_moneyType]]];

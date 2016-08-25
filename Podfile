@@ -10,4 +10,5 @@ pod 'FMDB', '~> 2.6'
 pod 'Bugtags'
 pod 'UMengAnalytics'
 
+
 end

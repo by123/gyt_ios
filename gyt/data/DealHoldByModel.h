@@ -132,4 +132,7 @@
 //委托附加信息
 @property (strong, nonatomic) OrderTagModel *m_tag;
 
+//币种
+@property (assign, nonatomic) int m_nMoneyType;
+
 @end

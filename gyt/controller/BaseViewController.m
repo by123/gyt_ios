@@ -87,8 +87,10 @@ static Boolean isAlertShow;
 //            [weakSelf.alertView show];
 //        });
         NSLog(@"开始重新连接");
-        [self performSelector:@selector(autoLogin) withObject:nil afterDelay:1.0];
-
+        if([Account sharedAccount].autoLogin)
+        {
+            [self performSelector:@selector(autoLogin) withObject:nil afterDelay:1.0];
+        }
     }
 }
 

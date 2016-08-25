@@ -8,7 +8,7 @@
 
 #import "BottomTabView.h"
 
-#define AreaCount 2
+#define AreaCount 5
 
 @implementation BottomTabView
 {

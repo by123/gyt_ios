@@ -26,12 +26,16 @@
 //#define Port 64360
 
 //#define Host @"192.168.1.106" //陈勇
-//#define Port 64340
+//#define Port 64360
 
-#define Host @"114.119.6.146" //外网
+//#define Host @"192.168.1.109" //
+//#define Port 64360
+
+#define Host @"119.147.47.156" //外网
 #define Port 64350
 
-#define Root_Url @"http://114.119.6.146:8081"
+
+#define Root_Url @"http://119.147.47.156:8088"
 
 //请求登录
 #define Request_Login @"login"
@@ -54,7 +58,6 @@
 
 #define PLATFORM_OUTTER_YN_MN  41002  //外盘易盛模拟
 
-
 //交易端
 typedef NS_ENUM(NSInteger, ClientID) {
     ClientID_Mobile_Manage = 3,
@@ -65,7 +68,7 @@ typedef NS_ENUM(NSInteger, ClientID) {
 
 //币种
 typedef NS_ENUM(NSInteger, EMoneyType) {
-    MoneyType_RMB = 1,       //人民币
+    MoneyType_RMB = 0,       //人民币
     MoneyType_USD,          //美元
     MoneyType_HKD,          //港币
     MoneyType_CHF,          //瑞士法郎
@@ -152,7 +155,8 @@ typedef NS_ENUM(NSInteger, ResondType)
     GYT_PUSHDATA,
     GYT_KLINE,
     GYT_CashApplyInfo,
-    GYT_CommitCashApplyInfo
+    GYT_CommitCashApplyInfo,
+    GYT_QueryHistoryData
 
 
 };
@@ -299,7 +303,6 @@ typedef NS_ENUM(NSInteger,EXTAccountType)
     AT_STOCK = 1003          //股票账号
 };
 
-
 @interface Constant : NSObject
 
 +(NSString *)EEntrustBSStr : (EEntrustBS) entrust;
@@ -310,7 +313,7 @@ typedef NS_ENUM(NSInteger,EXTAccountType)
 
 +(NSString *)getCashType : (CashType)type;
 
-+(NSString *)getMoneyType : (EMoneyType)type;
++(NSString *)getMoneyType : (int)type;
 
 +(NSString *)getPayType : (PayType)type;
 

@@ -1547,7 +1547,7 @@
 		<dict>
 			<key>children</key>
 			<array>
-				<string>7D5F44540B4CB1096900BB02BB301A00</string>
+				<string>E98155D626C4C9290EFC016E7D964854</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -2210,6 +2210,19 @@
 			<key>remoteInfo</key>
 			<string>SDWebImage</string>
 		</dict>
+		<key>7A62E431338C80258A4B660D9A59E049</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>UMMobClick.framework</string>
+			<key>path</key>
+			<string>umsdk_IOS_analyics_idfa_v4.1.0/UMMobClick.framework</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>7A9F33BBBF4EFA1255BD1D4AF4D32E71</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -2282,19 +2295,6 @@
 			<string>AFNetworkActivityIndicatorManager.m</string>
 			<key>path</key>
 			<string>UIKit+AFNetworking/AFNetworkActivityIndicatorManager.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>7D5F44540B4CB1096900BB02BB301A00</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>937A142A1671CDD52EF60FE37B41660D</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Frameworks</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -2723,19 +2723,6 @@
 			<string>UIButton+AFNetworking.m</string>
 			<key>path</key>
 			<string>UIKit+AFNetworking/UIButton+AFNetworking.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>937A142A1671CDD52EF60FE37B41660D</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>UMMobClick.framework</string>
-			<key>path</key>
-			<string>umsdk_IOS_analyics_idfa_v4.0.4/UMMobClick.framework</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -4621,6 +4608,19 @@
 			<string>9EAB3E42EF957541E6C3C76D35FD008E</string>
 			<key>targetProxy</key>
 			<string>5C1622067BA7EC98EEEBFCB06D2AE57E</string>
+		</dict>
+		<key>E98155D626C4C9290EFC016E7D964854</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>7A62E431338C80258A4B660D9A59E049</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Frameworks</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>EA233384C86234D738A5D5BB7F54BF46</key>
 		<dict>

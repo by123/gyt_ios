@@ -22,6 +22,7 @@
 #define DealDetailData @"dealDetailData"
 #define OrderData @"orderData"
 #define CancelData @"cancelData"
+#define HistoryData @"historyData"
 
 
 #define ConnectSuccess @"connectSuccess"

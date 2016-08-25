@@ -290,7 +290,11 @@
         [self sendReciveData:respondModel name:CancelData];
         NSLog(@"-----reciver----接收撤单信息");
     }
-
+    else if(packageModel.seq == GYT_QueryHistoryData)
+    {
+        [self sendReciveData:respondModel name:HistoryData];
+        NSLog(@"-----reciver----接收交易历史信息");
+    }
     else if(packageModel.cmd == NET_CMD_NOTIFICATION)
     {
         //行情主推

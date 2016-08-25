@@ -24,12 +24,21 @@
 @property (assign, nonatomic) CandleType type;
 
 
+@property (strong, nonatomic)NSMutableArray *datas;
+
+@property (strong, nonatomic)NSMutableArray *categorys;
 @end
 
 @implementation CandleView
 {
     //测试
     NSString *tempStr;
+    NSString *currentMinute;
+    NSString *currentSecond;
+    double openPrice;
+    double closePrice;
+    double highPrice;
+    double lowPrice;
 }
 
 -(instancetype)initWithType : (CGRect)frame
@@ -41,6 +50,8 @@
     {
         self.type = type;
         self.model = model;
+        _datas =[[NSMutableArray alloc] init];
+        _categorys = [[NSMutableArray alloc]init];
         [self initView];
         return self;
     }
@@ -260,7 +271,8 @@
     }
 
 
-    [self requestData];
+    
+//    [self requestData];
 //    NSString *reqURL = [[NSString alloc] initWithFormat:self.req_url,self.req_security_id,self.req_freq];
 //    NSLog(@"url:%@",reqURL);
 //
@@ -737,5 +749,64 @@
     [MBProgressHUD hideHUDForView:self animated:YES];
 
 }
+
+
+#pragma mark 处理主推数据
+-(void)handlePushQuoteData:(PushModel *)model
+{
+    if([model.m_strInstrumentID isEqualToString:_model.m_strInstrumentID])
+    {
+        [self updateData:model];
+    }
+}
+
+
+-(void)updateData:(PushModel *)model
+{
+
+    if([_model.m_strInstrumentID isEqualToString:model.m_strInstrumentID])
+    {
+        int date = [[model.m_strUpdateTime stringByReplacingOccurrencesOfString:@":" withString:@""] intValue];
+        NSRange range = NSMakeRange(3, 2);
+        NSString *minute = [model.m_strUpdateTime substringWithRange:range];
+        if(currentMinute == nil || ![currentMinute isEqualToString:minute])
+        {
+            currentMinute = minute;
+            openPrice = model.m_dLastPrice;
+        }
+        else
+        {
+            NSRange range2 = NSMakeRange(6, 2);
+            NSString *second = [model.m_strUpdateTime substringWithRange:range2];
+            if(second == nil || ![currentSecond isEqualToString:second])
+            {
+                currentSecond = second;
+                closePrice = model.m_dLastPrice;
+                highPrice = model.m_dHighestPrice;
+                lowPrice = model.m_dLowestPrice;
+                
+            }
+            else
+            {
+                return;
+            }
+        }
+        NSLog(@"时间->%@",model.m_strUpdateTime);
+        [_categorys addObject:[NSString stringWithFormat:@"%d",date]];
+        
+        NSMutableArray *item =[[NSMutableArray alloc] init];
+        [item addObject:[NSString stringWithFormat:@"%.2f",openPrice]];
+        [item addObject:[NSString stringWithFormat:@"%.2f",closePrice]];
+        [item addObject:[NSString stringWithFormat:@"%.2f",highPrice]];
+        [item addObject:[NSString stringWithFormat:@"%.2f",lowPrice]];
+        [item addObject:[NSString stringWithFormat:@"%.2f",closePrice]];
+        [_datas addObject:item];
+        
+        [self requestFinished:_datas category:_categorys];
+    }
+
+    
+}
+
 
 @end

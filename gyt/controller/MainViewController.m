@@ -545,11 +545,11 @@
 
     for(PushModel *model in _mainDatas)
     {
-        if([model.m_strInstrumentID containsString:@"DAX"] || [model.m_strInstrumentID containsString:@"HSI"])
-        {
-            [array1 addObject:model.m_strExchangeID];
-            [array2 addObject:model.m_strInstrumentID];
-        }
+//        if([model.m_strInstrumentID containsString:@"DAX"] || [model.m_strInstrumentID containsString:@"HSI"])
+//        {
+//            [array1 addObject:model.m_strExchangeID];
+//            [array2 addObject:model.m_strInstrumentID];
+//        }
     }
 
    

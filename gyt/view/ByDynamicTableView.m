@@ -73,11 +73,11 @@
     _scrollView = [[UIScrollView alloc]init];
     _scrollView.frame =self.bounds;
     _scrollView.delegate = self;
-    [_scrollView setContentSize:CGSizeMake(_maxWidth, height)];
+    [_scrollView setContentSize:CGSizeMake(_maxWidth, height+30)];
     [self addSubview:_scrollView];
 
     _tableView = [[UIFolderTableView alloc]init];
-    _tableView.frame =CGRectMake(0, 30, _maxWidth,height - 30);
+    _tableView.frame =CGRectMake(0, 30, _maxWidth,height-30);
     _tableView.showsVerticalScrollIndicator = YES;
     _tableView.showsHorizontalScrollIndicator = YES;
     _tableView.delegate = self;

@@ -117,6 +117,7 @@
 }
 
 
+
 + (NSString*) sha1 : (NSString *)content
 {
     const char *cstr = [content cStringUsingEncoding:NSUTF8StringEncoding];
@@ -326,6 +327,24 @@
     NSString *dateString = [dateFormatter stringFromDate:currentDate];
     return  dateString;
 }
+
++(NSString *)formateDate:(NSString *)dateStr
+{
+    if([dateStr length] == 10)
+    {
+        NSRange range = NSMakeRange(0, 4);
+        NSString *year = [dateStr substringWithRange:range];
+        range = NSMakeRange(5, 2);
+        NSString *month = [dateStr substringWithRange:range];
+        range = NSMakeRange(8, 2);
+        NSString *day = [dateStr substringWithRange:range];
+        NSString *dateStr = [NSString stringWithFormat:@"%@%@%@",year,month,day];
+        
+        return dateStr;
+    }
+    return nil;
+}
+
 
 
 //截取字符串中的一段汉字

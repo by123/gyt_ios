@@ -17,6 +17,8 @@
 
 @interface Account : NSObject
 
+@property (assign, nonatomic) Boolean autoLogin;
+
 SINGLETON_DECLARATION(Account);
 
 - (void)saveAccount : (NSString *)uid
