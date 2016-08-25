@@ -182,11 +182,11 @@
                 case 8://投保
                     label.text = [Constant EHedge_Flag_TypeStr:model.m_nHedgeFlag];
                     break;
-                case 9://合同号
-                    label.text = model.m_strContractNum;
-                    break;
-                case 10://主场号
-                    label.text = model.m_strContractNum;
+//                case 9://合同号
+//                    label.text = model.m_strContractNum;
+//                    break;
+//                case 10://主场号
+//                    label.text = model.m_strContractNum;
                     break;
                 default:
                     break;
@@ -275,11 +275,11 @@
                 case 8://投保
                     label.text = [Constant EHedge_Flag_TypeStr:model.m_nHedgeFlag];
                     break;
-                case 9://合同号
-                    label.text = model.m_strContractNum;
-                    break;
-                case 10://主场号
-                    label.text = model.m_strContractNum;
+//                case 9://合同号
+//                    label.text = model.m_strContractNum;
+//                    break;
+//                case 10://主场号
+//                    label.text = model.m_strContractNum;
                     break;
                 default:
                     break;
@@ -329,8 +329,16 @@
                 case 5://合同号
                     label.text = model.m_strOrderSysID;
                     break;
-                case 6://主场号
-                    label.text = @"";
+                case 6://平仓盈亏
+                    if(model.m_dCloseProfit > 0)
+                    {
+                        label.textColor = RED_COLOR;
+                    }
+                    else if(model.m_dCloseProfit < 0)
+                    {
+                        label.textColor = GREEN_COLOR;
+                    }
+                    label.text = [NSString stringWithFormat:@"%.2f",model.m_dCloseProfit];
                     break;
                 default:
                     break;
