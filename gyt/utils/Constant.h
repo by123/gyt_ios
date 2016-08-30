@@ -18,6 +18,7 @@
 #pragma mark 广播
 #define Notify_Menu_Title @"menu_title"
 #define Notify_Update_AccountInfo @"update_accountinfo"
+#define Notify_StopLoss @"stoploss"
 
 #pragma mark 网络请求相关
 //#define Root_Url @"http://192.168.1.106:8081" //陈勇

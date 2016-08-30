@@ -275,8 +275,13 @@ description:__VA_ARGS__];                             \
 //选中色
 #define SELECT_COLOR [UIColor colorWithRed:255/255.0 green:99/255.0 blue:71/255.0 alpha:1.0]
 
+#define SELECT_SELECT_COLOR [UIColor colorWithRed:255/255.0 green:99/255.0 blue:71/255.0 alpha:0.6]
+
 //文字色
-#define TEXT_COLOR [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.8]
+#define TEXT_COLOR [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0]
+
+//点击文字色
+#define TEXT_PRESS_COLOR [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.5]
 
 //清除背景色
 #define CLEARCOLOR [UIColor clearColor]
@@ -284,9 +289,12 @@ description:__VA_ARGS__];                             \
 //红色
 #define RED_COLOR [UIColor colorWithRed:255/255.0 green:64/255.0 blue:64/255.0 alpha:1.0]
 
+#define RED_SELECT_COLOR [UIColor colorWithRed:255/255.0 green:64/255.0 blue:64/255.0 alpha:0.6]
+
 //绿色
 #define GREEN_COLOR [UIColor colorWithRed:67/255.0 green:205/255.0 blue:128/255.0 alpha:1.0]
 
+#define GREEN_SELECT_COLOR [UIColor colorWithRed:67/255.0 green:205/255.0 blue:128/255.0 alpha:0.6]
 
 #pragma mark - color functions
 #define RGBCOLOR(r,g,b) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1]

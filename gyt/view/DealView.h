@@ -15,6 +15,8 @@
 
 @interface DealView : UIView<ByTabViewDelegate,UIAlertViewDelegate,ByDynamicTableViewDelegate,ListDialogDelegate,PushDataHandleDelegate>
 
+@property (strong, nonatomic) BaseViewController *viewController;
+
 -(instancetype)initWithData : (CGRect)frame
                       datas : (NSMutableArray *)datas
                       model : (PushModel *)model

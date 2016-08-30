@@ -117,7 +117,7 @@
 @property (assign, nonatomic) int m_nTodayShort;
 
 //
-@property (assign, nonatomic) int m_dPriceTick;
+@property (assign, nonatomic) double m_dPriceTick;
 
 
 @end

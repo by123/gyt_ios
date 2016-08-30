@@ -22,6 +22,8 @@
 #import "DealHoldingModel.h"
 #import "PushDataModel.h"
 #import "CloseView.h"
+#import "StopLossViewController.h"
+#import "DetailViewController.h"
 
 typedef NS_ENUM(NSInteger,PriceType)
 {
@@ -115,7 +117,6 @@ typedef NS_ENUM(NSInteger,PriceType)
 @property (strong, nonatomic) ByDynamicTableView *holdingTableView;
 @property (strong, nonatomic) ByDynamicTableView *holdByTableView;
 @property (strong, nonatomic) ByDynamicTableView *dealTableView;
-
 
 
 //数据
@@ -257,7 +258,8 @@ typedef NS_ENUM(NSInteger,PriceType)
     _addHandBtn.layer.masksToBounds = YES;
     _addHandBtn.layer.cornerRadius = 4;
     _addHandBtn.titleLabel.font = [UIFont systemFontOfSize:16.0f];
-    _addHandBtn.backgroundColor = SELECT_COLOR;
+    [_addHandBtn setBackgroundImage:[AppUtil imageWithColor:SELECT_COLOR] forState:UIControlStateNormal];
+    [_addHandBtn setBackgroundImage:[AppUtil imageWithColor:SELECT_SELECT_COLOR] forState:UIControlStateSelected];
     [_addHandBtn addTarget:self action:@selector(OnClick:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_addHandBtn];
     
@@ -269,7 +271,8 @@ typedef NS_ENUM(NSInteger,PriceType)
     _reduceHandBtn.layer.masksToBounds = YES;
     _reduceHandBtn.titleLabel.font = [UIFont systemFontOfSize:16.0f];
     _reduceHandBtn.layer.cornerRadius = 4;
-    _reduceHandBtn.backgroundColor = SELECT_COLOR;
+    [_reduceHandBtn setBackgroundImage:[AppUtil imageWithColor:SELECT_COLOR] forState:UIControlStateNormal];
+    [_reduceHandBtn setBackgroundImage:[AppUtil imageWithColor:SELECT_SELECT_COLOR] forState:UIControlStateSelected];
     [_reduceHandBtn addTarget:self action:@selector(OnClick:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_reduceHandBtn];
     
@@ -325,7 +328,8 @@ typedef NS_ENUM(NSInteger,PriceType)
     _addPriceBtn.layer.masksToBounds = YES;
     _addPriceBtn.layer.cornerRadius = 4;
     _addPriceBtn.titleLabel.font = [UIFont systemFontOfSize:16.0f];
-    _addPriceBtn.backgroundColor = SELECT_COLOR;
+    [_addPriceBtn setBackgroundImage:[AppUtil imageWithColor:SELECT_COLOR] forState:UIControlStateNormal];
+    [_addPriceBtn setBackgroundImage:[AppUtil imageWithColor:SELECT_SELECT_COLOR] forState:UIControlStateSelected];
     [_addPriceBtn addTarget:self action:@selector(OnClick:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_addPriceBtn];
     
@@ -337,7 +341,8 @@ typedef NS_ENUM(NSInteger,PriceType)
     _reducePriceBtn.layer.masksToBounds = YES;
     _reducePriceBtn.titleLabel.font = [UIFont systemFontOfSize:16.0f];
     _reducePriceBtn.layer.cornerRadius = 4;
-    _reducePriceBtn.backgroundColor = SELECT_COLOR;
+    [_reducePriceBtn setBackgroundImage:[AppUtil imageWithColor:SELECT_COLOR] forState:UIControlStateNormal];
+    [_reducePriceBtn setBackgroundImage:[AppUtil imageWithColor:SELECT_SELECT_COLOR] forState:UIControlStateSelected];
     [_reducePriceBtn addTarget:self action:@selector(OnClick:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_reducePriceBtn];
     
@@ -414,7 +419,8 @@ typedef NS_ENUM(NSInteger,PriceType)
     _buyItem.titleLabel.numberOfLines = 0;
     _buyItem.titleLabel.textAlignment = NSTextAlignmentCenter;
     _buyItem.titleLabel.lineBreakMode = NSLineBreakByCharWrapping;
-    _buyItem.backgroundColor = [ColorUtil colorWithHexString:@"#CD5555"];
+    [_buyItem setBackgroundImage:[AppUtil imageWithColor:RED_COLOR] forState:UIControlStateNormal];
+    [_buyItem setBackgroundImage:[AppUtil imageWithColor:RED_SELECT_COLOR] forState:UIControlStateSelected];
     [_buyItem addTarget:self action:@selector(OnClick:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_buyItem];
     
@@ -431,14 +437,11 @@ typedef NS_ENUM(NSInteger,PriceType)
     _sellItem.titleLabel.numberOfLines = 0;
     _sellItem.titleLabel.textAlignment = NSTextAlignmentCenter;
     _sellItem.titleLabel.lineBreakMode = NSLineBreakByCharWrapping;
-    _sellItem.backgroundColor = [ColorUtil colorWithHexString:@"#2E8B57"];
-    [_sellItem addTarget:self action:@selector(OnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [_sellItem setBackgroundImage:[AppUtil imageWithColor:GREEN_COLOR] forState:UIControlStateNormal];
+    [_sellItem setBackgroundImage:[AppUtil imageWithColor:GREEN_SELECT_COLOR] forState:UIControlStateSelected];    [_sellItem addTarget:self action:@selector(OnClick:) forControlEvents:UIControlEventTouchUpInside];
 
     [self addSubview:_sellItem];
-    
 }
-
-
 
 -(void)initBottomView
 {
@@ -835,6 +838,7 @@ typedef NS_ENUM(NSInteger,PriceType)
                 currentModel = model;
                 [self updateView];
                 [self updateBuySellItem];
+                [self openStopLossView : model];
             }
             break;
         case 1:
@@ -1412,6 +1416,13 @@ typedef NS_ENUM(NSInteger,PriceType)
     range.length = text.length - 11;
     double price = [[text substringWithRange:range] doubleValue];
     return price;
+}
+
+
+#pragma mark 打开止盈止损界面
+-(void)openStopLossView : (DealHoldModel *)model
+{
+    [StopLossViewController show:_viewController data:model];
 }
 
 @end

@@ -16,6 +16,7 @@
 #import "CandleView.h"
 #import "TimeView.h"
 #import "ShortCutView.h"
+#import "OrderStopLossViewController.h"
 
 @interface DetailViewController ()
 
@@ -190,6 +191,7 @@
 {
     [self clearAllView];
     _dealView = [[DealView alloc]initWithData:CGRectMake(0, 0, SCREEN_WIDTH, kContentHeight + kTopHeight) datas:_datas model:_model view:self.view];
+    _dealView.viewController = self;
     [_bodyView addSubview:_dealView];
     
 }
@@ -294,6 +296,10 @@
             {
                 [_dealView onRefresh : self.navBar.rightBtn];
             }
+        }
+        else if(position == 1)
+        {
+            [OrderStopLossViewController show:self data:_model];
         }
     }
  
@@ -418,7 +424,7 @@
         case 4:
             [self.navBar setLeftMainTitle:@"下单"];
             [self.navBar setRightImage:[UIImage imageNamed:@"ic_refresh"]];
-            [self.navBar setRightBtn1Image:nil];
+            [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_stoploss"]];
             [self.navBar setRightBtn2Image:nil];
             [self.navBar setRightBtn3Image:nil];
             [self.navBar setRightBtn4Image:nil];
