@@ -106,7 +106,7 @@ typedef NS_ENUM(NSInteger,PriceType)
 @property (strong, nonatomic) ByTextField *myTextField;
 
 //最小变动
-//@property (strong, nonatomic) UILabel *perLabel;
+@property (strong, nonatomic) UILabel *perLabel;
 
 //持仓，挂单，委托，成交 标题
 @property (strong, nonatomic) ByTabView *tabView;
@@ -117,6 +117,9 @@ typedef NS_ENUM(NSInteger,PriceType)
 @property (strong, nonatomic) ByDynamicTableView *holdingTableView;
 @property (strong, nonatomic) ByDynamicTableView *holdByTableView;
 @property (strong, nonatomic) ByDynamicTableView *dealTableView;
+@property (strong, nonatomic) ByDynamicTableView *lossStopTableView;
+@property (strong, nonatomic) ByDynamicTableView *conditionTableView;
+@property (strong, nonatomic) ByDynamicTableView *preTableView;
 
 
 //数据
@@ -146,6 +149,10 @@ typedef NS_ENUM(NSInteger,PriceType)
     NSMutableArray *holdingDatas;
     NSMutableArray *holdByDatas;
     NSMutableArray *holdProfileDatas;
+    NSMutableArray *lossStopDatas;
+    NSMutableArray *conditionDatas;
+    NSMutableArray *preDatas;
+
     DealHoldModel *currentModel;
     NSInteger currentItemSelect;
     NSInteger currentTabSelect;
@@ -169,6 +176,13 @@ typedef NS_ENUM(NSInteger,PriceType)
         holdingDatas = [[NSMutableArray alloc]init];
         holdByDatas = [[NSMutableArray alloc]init];
         holdProfileDatas = [[NSMutableArray alloc]init];
+        lossStopDatas = [[NSMutableArray alloc]init];
+        conditionDatas = [[NSMutableArray alloc]init];
+        preDatas = [[NSMutableArray alloc]init];
+        [lossStopDatas addObject:@"test"];
+        [conditionDatas addObject:@"test"];
+        [preDatas addObject:@"test"];
+
         NSString *moneyDetailStr = [[NSUserDefaults standardUserDefaults] objectForKey:MoneyInfo];
         _moneyModel = [MoneyDetailModel mj_objectWithKeyValues:moneyDetailStr];
         priceType = Rival;
@@ -347,14 +361,13 @@ typedef NS_ENUM(NSInteger,PriceType)
     [self addSubview:_reducePriceBtn];
     
     
-//    _perLabel = [[UILabel alloc]init];
-//    _perLabel.text = [NSString stringWithFormat:@"最小变动:%.2f",_model.m_dPriceTick];
-//    _perLabel.textColor = TEXT_COLOR;
-//    _perLabel.font =[UIFont systemFontOfSize:13.0f];
-//    _perLabel.textAlignment = NSTextAlignmentCenter;
-//    _perLabel.frame = CGRectMake(_myTextField.x + _myTextField.width + 5, _addHandBtn.y + _addHandBtn.height + 5, _perLabel.contentSize.width, 30);
-//    [_perLabel setHidden:YES];
-//    [self addSubview:_perLabel];
+    _perLabel = [[UILabel alloc]init];
+    _perLabel.text = [NSString stringWithFormat:@"变动:%.2f",_model.m_dPriceTick];
+    _perLabel.textColor = TEXT_COLOR;
+    _perLabel.font =[UIFont systemFontOfSize:13.0f];
+    _perLabel.textAlignment = NSTextAlignmentCenter;
+    _perLabel.frame = CGRectMake(_reducePriceBtn.x + _reducePriceBtn.width + 5, _addHandBtn.y + _addHandBtn.height + 5, _perLabel.contentSize.width, 30);
+    [self addSubview:_perLabel];
     
     
     _priceView = [[UIView alloc]init];
@@ -445,8 +458,8 @@ typedef NS_ENUM(NSInteger,PriceType)
 
 -(void)initBottomView
 {
-    NSArray *array = @[@"持仓",@"挂单",@"委托",@"成交"];
-    CGRect rect = CGRectMake(0, _sellItem.y + _sellItem.height+10, SCREEN_WIDTH, 40);
+    NSArray *array = @[@"持仓",@"挂单",@"委托",@"成交",@"止盈止损单",@"条件单",@"预埋单"];
+    CGRect rect = CGRectMake(0, _sellItem.y + _sellItem.height+10, SCREEN_WIDTH * 1.8, 40);
     _tabView = [[ByTabView alloc]initWithTitles:rect array:array];
     _tabView.backgroundColor = [ColorUtil colorWithHexString:@"#262626"];
     _tabView.delegate = self;
@@ -456,7 +469,10 @@ typedef NS_ENUM(NSInteger,PriceType)
     [self initHoldingData];
     [self initHoldByData];
     [self initDealData];
-    
+    [self initLossStopData];
+    [self initConditionData];
+    [self initPreData];
+
     [self showTableView:Hold];
     
     [self requestQuery:XT_CPositionStatics];
@@ -480,7 +496,7 @@ typedef NS_ENUM(NSInteger,PriceType)
         _expandView.frame = CGRectMake(0, 0, SCREEN_WIDTH * 1.5, 40);
         
         _conditionBtn = [[UIButton alloc]init];
-        _conditionBtn.frame = CGRectMake(SCREEN_WIDTH - 130, 4, 60, 32);
+        _conditionBtn.frame = CGRectMake(SCREEN_WIDTH - 65, 4, 60, 32);
         _conditionBtn.layer.masksToBounds = YES;
         _conditionBtn.layer.cornerRadius = 4;
         _conditionBtn.titleLabel.font = [UIFont systemFontOfSize:12.0f];
@@ -490,20 +506,20 @@ typedef NS_ENUM(NSInteger,PriceType)
         [_conditionBtn addTarget:self action:@selector(OnClick:) forControlEvents:UIControlEventTouchUpInside];
         [_expandView addSubview:_conditionBtn];
         
-        _handReverseBtn = [[UIButton alloc]init];
-        _handReverseBtn.frame = CGRectMake(SCREEN_WIDTH - 65, 4, 60, 32);
-        _handReverseBtn.layer.masksToBounds = YES;
-        _handReverseBtn.layer.cornerRadius = 4;
-        _handReverseBtn.titleLabel.font = [UIFont systemFontOfSize:12.0f];
-        [_handReverseBtn setTitle:@"反手" forState:UIControlStateNormal];
-        [_handReverseBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        _handReverseBtn.backgroundColor = TEXT_COLOR;
-        [_handReverseBtn addTarget:self action:@selector(OnClick:) forControlEvents:UIControlEventTouchUpInside];
-        [_expandView addSubview:_handReverseBtn];
+//        _handReverseBtn = [[UIButton alloc]init];
+//        _handReverseBtn.frame = CGRectMake(SCREEN_WIDTH - 65, 4, 60, 32);
+//        _handReverseBtn.layer.masksToBounds = YES;
+//        _handReverseBtn.layer.cornerRadius = 4;
+//        _handReverseBtn.titleLabel.font = [UIFont systemFontOfSize:12.0f];
+//        [_handReverseBtn setTitle:@"反手" forState:UIControlStateNormal];
+//        [_handReverseBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//        _handReverseBtn.backgroundColor = TEXT_COLOR;
+//        [_handReverseBtn addTarget:self action:@selector(OnClick:) forControlEvents:UIControlEventTouchUpInside];
+//        [_expandView addSubview:_handReverseBtn];
         
         
         _holdTableView.delegate = self;
-//        _holdTableView.expandView = _expandView;
+        _holdTableView.expandView = _expandView;
         [self addSubview:_holdTableView];
     }
 }
@@ -553,6 +569,51 @@ typedef NS_ENUM(NSInteger,PriceType)
     }
 }
 
+#pragma mark 止盈止损数据
+-(void)initLossStopData
+{
+    if(_lossStopTableView == nil)
+    {
+        NSArray *titleArray = @[@"时间",@"状态",@"合约",@"类型",@"下单方式",@"触发价",@"手数",@"买卖"];
+        NSArray *widthArray = @[@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1"];
+        
+        _lossStopTableView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH, SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:lossStopDatas maxWidth:SCREEN_WIDTH*2.0 type:LossStop];
+        [_lossStopTableView setHeaders:widthArray headers:titleArray];
+        _lossStopTableView.delegate = self;
+        [self addSubview:_lossStopTableView];
+    }
+}
+
+#pragma mark 条件单数据
+-(void)initConditionData
+{
+    if(_conditionTableView == nil)
+    {
+        NSArray *titleArray = @[@"时间",@"状态",@"合约",@"类型",@"时间条件",@"价格条件",@"买卖",@"下单方式",@"手数",@"止损价",@"止盈价",@"有效期"];
+        NSArray *widthArray = @[@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1"];
+        
+        _conditionTableView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH, SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:conditionDatas maxWidth:SCREEN_WIDTH*2.5 type:Condition];
+        [_conditionTableView setHeaders:widthArray headers:titleArray];
+        _conditionTableView.delegate = self;
+        [self addSubview:_conditionTableView];
+    }
+}
+
+#pragma mark 预埋单数据
+-(void)initPreData 
+{
+    if(_preTableView == nil)
+    {
+        NSArray *titleArray = @[@"时间",@"状态",@"合约",@"类型",@"买卖",@"下单方式",@"下单价格",@"手数",@"止损价",@"止盈价"];
+        NSArray *widthArray = @[@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1"];
+        
+        _preTableView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH, SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:preDatas maxWidth:SCREEN_WIDTH*2.5 type:Pre];
+        [_preTableView setHeaders:widthArray headers:titleArray];
+        _preTableView.delegate = self;
+        [self addSubview:_preTableView];
+    }
+}
+
 
 -(void)showTableView : (DealType)type
 {
@@ -560,6 +621,10 @@ typedef NS_ENUM(NSInteger,PriceType)
     _holdingTableView.hidden = YES;
     _holdByTableView.hidden = YES;
     _dealTableView.hidden = YES;
+    _lossStopTableView.hidden = YES;
+    _conditionTableView.hidden = YES;
+    _preTableView.hidden = YES;
+
     switch (type) {
         case Hold:
             _holdTableView.hidden = NO;
@@ -572,6 +637,15 @@ typedef NS_ENUM(NSInteger,PriceType)
             break;
         case Profit:
             _dealTableView.hidden = NO;
+            break;
+        case LossStop:
+            _lossStopTableView.hidden = NO;
+            break;
+        case Condition:
+            _conditionTableView.hidden = NO;
+            break;
+        case Pre:
+            _preTableView.hidden = NO;
             break;
         default:
             break;
@@ -672,7 +746,7 @@ typedef NS_ENUM(NSInteger,PriceType)
     }
     else if(view == _conditionBtn)
     {
-        [ByToast showErrorToast:@"开发中"];
+        [StopLossViewController show:_viewController data:currentModel];
     }
     else if(view == _addHandBtn)
     {
@@ -739,7 +813,6 @@ typedef NS_ENUM(NSInteger,PriceType)
 }
 
 
-
 #pragma mark 价格选择
 -(void)OnListDialogItemClick:(id)data position:(NSInteger)position dialog:(ByListDialog *)dialog
 {
@@ -776,7 +849,7 @@ typedef NS_ENUM(NSInteger,PriceType)
                 [_myTextField setTextFiledText:@"0.00"];
                 [_myTextField becomeFocus];
                 break;
-                
+
             default:
                 break;
         }
@@ -821,6 +894,15 @@ typedef NS_ENUM(NSInteger,PriceType)
             [self showTableView:Profit];
             [self requestQuery:XT_CDealDetail];
             break;
+        case 4:
+            [self showTableView:LossStop];
+            break;
+        case 5:
+            [self showTableView:Condition];
+            break;
+        case 6:
+            [self showTableView:Pre];
+            break;
         default:
             break;
     }
@@ -838,7 +920,7 @@ typedef NS_ENUM(NSInteger,PriceType)
                 currentModel = model;
                 [self updateView];
                 [self updateBuySellItem];
-                [self openStopLossView : model];
+//                [self openStopLossView : model];
             }
             break;
         case 1:
@@ -1244,6 +1326,18 @@ typedef NS_ENUM(NSInteger,PriceType)
         {
             [_dealTableView reloadData:data position:currentItemSelect];
         }
+        else if(type == LossStop && currentTabSelect == 4)
+        {
+            [_lossStopTableView reloadData:data position:currentTabSelect];
+        }
+        else if(type == Condition && currentTabSelect == 5)
+        {
+            [_conditionTableView reloadData:data position:currentTabSelect];
+        }
+        else if(type == Pre && currentTabSelect == 6)
+        {
+            [_preTableView reloadData:data position:currentTabSelect];
+        }
 //    }
  
 }
@@ -1255,8 +1349,8 @@ typedef NS_ENUM(NSInteger,PriceType)
 {
     NSString *buyTxt = [NSString stringWithFormat:@"%.2f\n—————————\n买入",buyPrice];
     NSString *sellTxt = [NSString stringWithFormat:@"%.2f\n—————————\n卖出",sellPrice];
-//    if(isExpandView)
-//    {
+    if(isExpandView)
+    {
         double tempBuyPrice = 0.0f;
         double tempSellPrice = 0.0f;
         switch (priceType) {
@@ -1294,7 +1388,7 @@ typedef NS_ENUM(NSInteger,PriceType)
                 default:
                     break;
             }
-//    }
+    }
     [_buyItem setTitle:buyTxt forState:UIControlStateNormal];
     [_sellItem setTitle:sellTxt forState:UIControlStateNormal];
 }

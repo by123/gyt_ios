@@ -7,7 +7,6 @@
 //
 
 #import "AddReduceView.h"
-#define ViewHeight 50
 
 
 @interface AddReduceView()
@@ -24,6 +23,9 @@
 @end
 
 @implementation AddReduceView
+{
+    int ViewHeight;
+}
 
 
 -(instancetype)initWithTitle : (NSString *)title
@@ -33,10 +35,15 @@
 {
     if(self == [super init])
     {
+        ViewHeight = 50;
         self.title = title;
         self.type = type;
         self.tips = tips;
         self.rootView = rootView;
+        if(IS_NS_STRING_EMPTY(tips))
+        {
+            ViewHeight = 30;
+        }
         [self initView];
     }
     return self;
@@ -51,10 +58,24 @@
     _titleLabel.text = _title;
     _titleLabel.font = [UIFont systemFontOfSize:14.0f];
     _titleLabel.textAlignment = NSTextAlignmentLeft;
-    _titleLabel.frame = CGRectMake(10, 0, 80, 30);
+    if(IS_NS_STRING_EMPTY(_title))
+    {
+        _titleLabel.frame = CGRectMake(10, 0, 0, 30);
+    }
+    else
+    {
+        _titleLabel.frame = CGRectMake(10, 0, 80, 30);
+    }
     [self addSubview:_titleLabel];
     
-    _textField = [[ByTextField alloc]initWithType:_type frame:CGRectMake(70,0,100,30) rootView:_rootView title:nil];
+    if(IS_NS_STRING_EMPTY(_title))
+    {
+        _textField = [[ByTextField alloc]initWithType:_type frame:CGRectMake(10,0,90,30) rootView:_rootView title:nil];
+    }
+    else
+    {
+         _textField = [[ByTextField alloc]initWithType:_type frame:CGRectMake(70,0,90,30) rootView:_rootView title:nil];
+    }
     
     __weak AddReduceView *weakSelf = self;
     _textField.block = ^(BOOL isCompelete,NSString *text)

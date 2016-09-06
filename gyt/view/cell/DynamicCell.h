@@ -33,6 +33,16 @@
 -(void)setWarnData : (PushModel *)model
             maxWidth : (int)maxWidth;
 
+-(void)setLossStopData : (PushModel *)model
+              maxWidth : (int)maxWidth;
+
+-(void)setConditionData : (PushModel *)model
+              maxWidth : (int)maxWidth;
+
+-(void)setPreData : (PushModel *)model
+              maxWidth : (int)maxWidth;
+
+
 +(NSString *)identify ;
 
 @end

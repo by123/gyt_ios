@@ -16,6 +16,8 @@
 
 @property (strong, nonatomic) UIView *lineView;
 
+@property (assign, nonatomic) CGRect rect;
+
 @end
 
 @implementation ByTabView
@@ -31,6 +33,7 @@
     if(self)
     {
         _buttonArrays = [[NSMutableArray alloc]init];
+        _rect = rect;
         self.array = array;
         [self initView];
         return self;
@@ -40,13 +43,19 @@
 
 -(void)initView
 {
+    UIScrollView *scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH,_rect.size.height)];
+    [scrollView setContentSize:CGSizeMake(_rect.size.width, _rect.size.height)];
+    scrollView.showsHorizontalScrollIndicator = NO;
+    scrollView.showsVerticalScrollIndicator = NO;
+    [self addSubview:scrollView];
+    
     self.userInteractionEnabled = YES;
     if(!IS_NS_COLLECTION_EMPTY(_array))
     {
         _lineView  = [[UIView alloc]init];
         _lineView.backgroundColor = SELECT_COLOR;
-        _lineView.frame = CGRectMake(0, self.bounds.size.height - 2, SCREEN_WIDTH / [_array count], 2);
-        [self addSubview:_lineView];
+        _lineView.frame = CGRectMake(0, self.bounds.size.height - 2, _rect.size.width / [_array count], 2);
+        [scrollView addSubview:_lineView];
         
         for(int i =0 ; i< [_array count] ; i++)
         {
@@ -57,8 +66,8 @@
             [button setTitleColor:TEXT_COLOR forState:UIControlStateNormal];
             button.titleLabel.font = [UIFont systemFontOfSize:14.0f];
             [button addTarget: self action:@selector(OnClick:) forControlEvents:UIControlEventTouchUpInside];
-            button.frame = CGRectMake( i * (SCREEN_WIDTH/[_array count]), 0, SCREEN_WIDTH/[_array count], self.bounds.size.height);
-            [self addSubview:button];
+            button.frame = CGRectMake( i * (_rect.size.width/[_array count]), 0, _rect.size.width/[_array count], self.bounds.size.height);
+            [scrollView addSubview:button];
             [_buttonArrays addObject:button];
             if(i == 0)
             {
@@ -101,7 +110,7 @@
 -(void)startLineAnim : (NSInteger)position
 {
     [UIView animateWithDuration:0.5f delay:0 usingSpringWithDamping:0.5 initialSpringVelocity:2 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        _lineView.frame = CGRectMake(position * (SCREEN_WIDTH / [_array count]),self.bounds.size.height - 2, SCREEN_WIDTH / [_array count], 2);
+        _lineView.frame = CGRectMake(position * (_rect.size.width / [_array count]),self.bounds.size.height - 2, _rect.size.width / [_array count], 2);
     } completion:nil];
 
 }

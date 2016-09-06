@@ -52,6 +52,7 @@
 		CF4A6D711CBE2A0800B36C93 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D6E1CBE2A0800B36C93 /* UIView+Frame.m */; };
 		CF4A6D7C1CBE2EA200B36C93 /* ByNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D7B1CBE2EA200B36C93 /* ByNavigationBar.m */; };
 		CF4A6D7F1CBE2EAB00B36C93 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D7E1CBE2EAB00B36C93 /* BaseViewController.m */; };
+		CF53E7F91D7840D70062B681 /* TipsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF53E7F81D7840D70062B681 /* TipsViewController.m */; };
 		CF5FF3671D6C012100612999 /* ByDateSelectDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5FF3661D6C012100612999 /* ByDateSelectDialog.m */; };
 		CF5FF36A1D6C29F400612999 /* CustomIOSAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5FF3691D6C29F400612999 /* CustomIOSAlertView.m */; };
 		CF5FF36D1D6C679A00612999 /* ByDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5FF36C1D6C679A00612999 /* ByDatePicker.m */; };
@@ -90,6 +91,9 @@
 		CFA3B9011CD9D68C0063AE3E /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CFA3B9001CD9D68C0063AE3E /* libz.tbd */; };
 		CFA3B90B1CDAF0A90063AE3E /* Slide.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA3B90A1CDAF0A90063AE3E /* Slide.m */; };
 		CFA5FFF21D75314B006421C4 /* AddReduceView.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA5FFF11D75314B006421C4 /* AddReduceView.m */; };
+		CFA5FFF51D75A5A4006421C4 /* ConditionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA5FFF41D75A5A4006421C4 /* ConditionViewController.m */; };
+		CFA605131D768A9B00FB1B3B /* PriceConditionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA605121D768A9B00FB1B3B /* PriceConditionView.m */; };
+		CFA605161D768AB400FB1B3B /* TimeConditionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA605151D768AB400FB1B3B /* TimeConditionView.m */; };
 		CFC15B8E1CBF94A90077FA19 /* MainTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15B8D1CBF94A90077FA19 /* MainTableCell.m */; };
 		CFC15B941CC11B770077FA19 /* LeftMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15B931CC11B770077FA19 /* LeftMenuCell.m */; };
 		CFC15B971CC205390077FA19 /* MenuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15B961CC205390077FA19 /* MenuModel.m */; };
@@ -183,6 +187,8 @@
 		CFF183CD1CE9B26B00E991C4 /* MoneyManageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF183CC1CE9B26B00E991C4 /* MoneyManageCell.m */; };
 		CFF183D21CE9D6CA00E991C4 /* MoneyManageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF183D11CE9D6CA00E991C4 /* MoneyManageDetailViewController.m */; };
 		CFF183D91CE9F0A200E991C4 /* QueryRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF183D81CE9F0A200E991C4 /* QueryRequest.m */; };
+		CFF3A5E51D768CD00077D885 /* PreConditionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF3A5E41D768CD00077D885 /* PreConditionView.m */; };
+		CFF3A5E81D76B9F90077D885 /* ByListSelect.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF3A5E71D76B9F90077D885 /* ByListSelect.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -279,6 +285,8 @@
 		CF4A6D7B1CBE2EA200B36C93 /* ByNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ByNavigationBar.m; sourceTree = "<group>"; };
 		CF4A6D7D1CBE2EAB00B36C93 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		CF4A6D7E1CBE2EAB00B36C93 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		CF53E7F71D7840D70062B681 /* TipsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipsViewController.h; sourceTree = "<group>"; };
+		CF53E7F81D7840D70062B681 /* TipsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipsViewController.m; sourceTree = "<group>"; };
 		CF5FF3651D6C012100612999 /* ByDateSelectDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ByDateSelectDialog.h; sourceTree = "<group>"; };
 		CF5FF3661D6C012100612999 /* ByDateSelectDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ByDateSelectDialog.m; sourceTree = "<group>"; };
 		CF5FF3681D6C29F400612999 /* CustomIOSAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomIOSAlertView.h; sourceTree = "<group>"; };
@@ -347,6 +355,12 @@
 		CFA3B90A1CDAF0A90063AE3E /* Slide.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Slide.m; sourceTree = "<group>"; };
 		CFA5FFF01D75314B006421C4 /* AddReduceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddReduceView.h; sourceTree = "<group>"; };
 		CFA5FFF11D75314B006421C4 /* AddReduceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddReduceView.m; sourceTree = "<group>"; };
+		CFA5FFF31D75A5A4006421C4 /* ConditionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionViewController.h; sourceTree = "<group>"; };
+		CFA5FFF41D75A5A4006421C4 /* ConditionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionViewController.m; sourceTree = "<group>"; };
+		CFA605111D768A9B00FB1B3B /* PriceConditionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceConditionView.h; sourceTree = "<group>"; };
+		CFA605121D768A9B00FB1B3B /* PriceConditionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceConditionView.m; sourceTree = "<group>"; };
+		CFA605141D768AB400FB1B3B /* TimeConditionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeConditionView.h; sourceTree = "<group>"; };
+		CFA605151D768AB400FB1B3B /* TimeConditionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeConditionView.m; sourceTree = "<group>"; };
 		CFC15B8C1CBF94A90077FA19 /* MainTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTableCell.h; sourceTree = "<group>"; };
 		CFC15B8D1CBF94A90077FA19 /* MainTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableCell.m; sourceTree = "<group>"; };
 		CFC15B921CC11B770077FA19 /* LeftMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftMenuCell.h; sourceTree = "<group>"; };
@@ -527,6 +541,10 @@
 		CFF183D11CE9D6CA00E991C4 /* MoneyManageDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoneyManageDetailViewController.m; sourceTree = "<group>"; };
 		CFF183D71CE9F0A200E991C4 /* QueryRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryRequest.h; sourceTree = "<group>"; };
 		CFF183D81CE9F0A200E991C4 /* QueryRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryRequest.m; sourceTree = "<group>"; };
+		CFF3A5E31D768CD00077D885 /* PreConditionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreConditionView.h; sourceTree = "<group>"; };
+		CFF3A5E41D768CD00077D885 /* PreConditionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreConditionView.m; sourceTree = "<group>"; };
+		CFF3A5E61D76B9F90077D885 /* ByListSelect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ByListSelect.h; sourceTree = "<group>"; };
+		CFF3A5E71D76B9F90077D885 /* ByListSelect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ByListSelect.m; sourceTree = "<group>"; };
 		E4E69CC7BA857424957CA231 /* Pods-gyt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gyt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-gyt/Pods-gyt.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -600,6 +618,8 @@
 				CF4A6D7E1CBE2EAB00B36C93 /* BaseViewController.m */,
 				CF2D013C1D703D5F00AD5F28 /* WebViewController.h */,
 				CF2D013D1D703D5F00AD5F28 /* WebViewController.m */,
+				CF53E7F71D7840D70062B681 /* TipsViewController.h */,
+				CF53E7F81D7840D70062B681 /* TipsViewController.m */,
 			);
 			name = commen;
 			sourceTree = "<group>";
@@ -788,6 +808,9 @@
 				CF5FF3661D6C012100612999 /* ByDateSelectDialog.m */,
 				CF7E44501D2D00DB00C1FFC5 /* ByToast.h */,
 				CF7E44511D2D00DB00C1FFC5 /* ByToast.m */,
+				CFF3A5E61D76B9F90077D885 /* ByListSelect.h */,
+				CFF3A5E71D76B9F90077D885 /* ByListSelect.m */,
+				CFA605101D768A8500FB1B3B /* condition */,
 				CF3426BC1D742F4F001A0B91 /* stoploss */,
 				CFC9E5551D1BE15A00729A7D /* flodertableview */,
 				CFD37E201D02A91300297DE2 /* keyboard */,
@@ -942,6 +965,19 @@
 			path = helper;
 			sourceTree = "<group>";
 		};
+		CFA605101D768A8500FB1B3B /* condition */ = {
+			isa = PBXGroup;
+			children = (
+				CFA605111D768A9B00FB1B3B /* PriceConditionView.h */,
+				CFA605121D768A9B00FB1B3B /* PriceConditionView.m */,
+				CFA605141D768AB400FB1B3B /* TimeConditionView.h */,
+				CFA605151D768AB400FB1B3B /* TimeConditionView.m */,
+				CFF3A5E31D768CD00077D885 /* PreConditionView.h */,
+				CFF3A5E41D768CD00077D885 /* PreConditionView.m */,
+			);
+			name = condition;
+			sourceTree = "<group>";
+		};
 		CFC15BA11CC234010077FA19 /* detail */ = {
 			isa = PBXGroup;
 			children = (
@@ -951,6 +987,8 @@
 				CF2D01381D6FE0DE00AD5F28 /* StopLossViewController.m */,
 				CF3426C31D7439D7001A0B91 /* OrderStopLossViewController.h */,
 				CF3426C41D7439D7001A0B91 /* OrderStopLossViewController.m */,
+				CFA5FFF31D75A5A4006421C4 /* ConditionViewController.h */,
+				CFA5FFF41D75A5A4006421C4 /* ConditionViewController.m */,
 			);
 			name = detail;
 			sourceTree = "<group>";
@@ -1397,6 +1435,7 @@
 				CFDD2DF11CCB47E000E81E3F /* WarnContractViewController.m in Sources */,
 				CFDD2DEE1CCA208900E81E3F /* MyContractCell.m in Sources */,
 				CF111D491CFBDF4100298C78 /* OrderRequestModel.m in Sources */,
+				CFA5FFF51D75A5A4006421C4 /* ConditionViewController.m in Sources */,
 				CFDD2E131CCF44AD00E81E3F /* NewsCell.m in Sources */,
 				CF4A6D591CBE28DD00B36C93 /* Account.m in Sources */,
 				CFC15BAA1CC35F700077FA19 /* HandicapCell.m in Sources */,
@@ -1432,6 +1471,7 @@
 				CF6CED571CFC1E64007F97AA /* OrderRespondModel.m in Sources */,
 				CF2D01331D6EE9D000AD5F28 /* HistoryTradeModel.m in Sources */,
 				CF4A6D181CBE25AA00B36C93 /* main.m in Sources */,
+				CFA605161D768AB400FB1B3B /* TimeConditionView.m in Sources */,
 				CFA3B8F21CD9AAB70063AE3E /* YAxis.m in Sources */,
 				CFC15B941CC11B770077FA19 /* LeftMenuCell.m in Sources */,
 				CFC15BC91CC4C7340077FA19 /* InsetTextField.m in Sources */,
@@ -1460,6 +1500,7 @@
 				CFC9E55D1D1BE15A00729A7D /* UIFolderTableView.m in Sources */,
 				CF3426BB1D73E7CC001A0B91 /* StopLossModel.m in Sources */,
 				CF2D013A1D6FE0DE00AD5F28 /* StopLossViewController.m in Sources */,
+				CF53E7F91D7840D70062B681 /* TipsViewController.m in Sources */,
 				CFD37E621D06AFFC00297DE2 /* PushDataModel.m in Sources */,
 				CF111D4F1CFBF5A000298C78 /* OrderTagModel.m in Sources */,
 				CFC15BCF1CC604DB0077FA19 /* ByDynamicTableView.m in Sources */,
@@ -1486,6 +1527,8 @@
 				CF2A51061CE31A1D00F0EF3D /* UpdateModel.m in Sources */,
 				CF60E18A1CEAC983001EF40D /* UserRespondModel.m in Sources */,
 				CFC15BB01CC365650077FA19 /* HandicapBaseModel.m in Sources */,
+				CFF3A5E81D76B9F90077D885 /* ByListSelect.m in Sources */,
+				CFF3A5E51D768CD00077D885 /* PreConditionView.m in Sources */,
 				CFF183AE1CE5E89B00E991C4 /* MoneyDetailViewController.m in Sources */,
 				CF6340341CFD65FB008149B1 /* GYTPackage.m in Sources */,
 				CFDD2EA51CCF4DE100E81E3F /* MJRefreshBackStateFooter.m in Sources */,
@@ -1523,6 +1566,7 @@
 				CFD37E0D1CFEA73100297DE2 /* PackageModel.m in Sources */,
 				CF4A6D5C1CBE28DD00B36C93 /* DialogHelper.m in Sources */,
 				CFF183CA1CE99D0A00E991C4 /* MoneyManageViewController.m in Sources */,
+				CFA605131D768A9B00FB1B3B /* PriceConditionView.m in Sources */,
 				CFDD2DDF1CC8C08E00E81E3F /* DealProfitModel.m in Sources */,
 				CFDD2EA61CCF4DE100E81E3F /* MJRefreshGifHeader.m in Sources */,
 				CF4A6D6F1CBE2A0800B36C93 /* IDSExtendedLabel.m in Sources */,

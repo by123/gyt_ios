@@ -46,6 +46,8 @@
 
 +(NSString *)getNowStr;
 
++(NSString *)getNowTimeStr;
+
 +(NSString *)getChineseStringWithString:(NSString *)string;
 
 @end

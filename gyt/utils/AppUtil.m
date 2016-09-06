@@ -328,6 +328,15 @@
     return  dateString;
 }
 
++(NSString *)getNowTimeStr
+{
+    NSDate *currentDate = [NSDate date];//获取当前时间
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"hh:mm"];
+    NSString *dateString = [dateFormatter stringFromDate:currentDate];
+    return  dateString;
+}
+
 +(NSString *)formateDate:(NSString *)dateStr
 {
     if([dateStr length] == 10)

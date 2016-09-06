@@ -401,6 +401,172 @@
 }
 
 
+-(void)setLossStopData : (PushModel *)model
+          maxWidth : (int)maxWidth
+{
+    if(!IS_NS_COLLECTION_EMPTY(_widths))
+    {
+        int currentWidth =0;
+        for(int i = 0 ; i < _widths.count ; i ++)
+        {
+            UILabel *label = [[UILabel alloc]init];
+            label.textColor= TEXT_COLOR;
+            label.font = [UIFont systemFontOfSize:13.0f];
+            int width =  [[_widths objectAtIndex:i] intValue] * maxWidth / count;
+            switch (i) {
+                case 0:
+                    label.text = @"16:27";
+                    break;
+                case 1:
+                    label.text = @"运行中";
+                    break;
+                case 2:
+                    label.text = @"CN 1607";
+                    break;
+                case 3:
+                    label.text = @"止损";
+                    break;
+                case 4:
+                    label.text = @"限价";
+                    break;
+                case 5:
+                    label.text = @"9425.00";
+                    break;
+                case 6:
+                    label.text = @"2";
+                    break;
+                case 7:
+                    label.text = @"买";
+                    break;
+                default:
+                    break;
+            }
+            label.frame = CGRectMake(currentWidth, 0, width, Item_Heihgt);
+            label.textAlignment = NSTextAlignmentCenter;
+            [self.contentView addSubview:label];
+            [_labels addObject:label];
+            currentWidth += width;
+        }
+    }
+}
+
+-(void)setConditionData : (PushModel *)model
+               maxWidth : (int)maxWidth
+{
+    if(!IS_NS_COLLECTION_EMPTY(_widths))
+    {
+        int currentWidth =0;
+        for(int i = 0 ; i < _widths.count ; i ++)
+        {
+            UILabel *label = [[UILabel alloc]init];
+            label.textColor= TEXT_COLOR;
+            label.font = [UIFont systemFontOfSize:13.0f];
+            int width =  [[_widths objectAtIndex:i] intValue] * maxWidth / count;
+            switch (i) {
+                case 0:
+                    label.text = @"16:27";
+                    break;
+                case 1:
+                    label.text = @"运行中";
+                    break;
+                case 2:
+                    label.text = @"CN 1607";
+                    break;
+                case 3:
+                    label.text = @"价格条件单";
+                    break;
+                case 4:
+                    label.text = nil;
+                    break;
+                case 5:
+                    label.text = @"> 9500";
+                    break;
+                case 6:
+                    label.text = @"买";
+                    break;
+                case 7:
+                    label.text = @"限价";
+                    break;
+                case 8:
+                    label.text = @"1";
+                    break;
+                case 9:
+                    label.text = @"9480";
+                    break;
+                case 10:
+                    label.text = @"9575";
+                    break;
+                case 11:
+                    label.text = @"永久有效";
+                    break;
+                default:
+                    break;
+            }
+            label.frame = CGRectMake(currentWidth, 0, width, Item_Heihgt);
+            label.textAlignment = NSTextAlignmentCenter;
+            [self.contentView addSubview:label];
+            [_labels addObject:label];
+            currentWidth += width;
+        }
+    }
+}
+
+-(void)setPreData:(PushModel *)model
+         maxWidth:(int)maxWidth
+{
+    if(!IS_NS_COLLECTION_EMPTY(_widths))
+    {
+        int currentWidth =0;
+        for(int i = 0 ; i < _widths.count ; i ++)
+        {
+            UILabel *label = [[UILabel alloc]init];
+            label.textColor= TEXT_COLOR;
+            label.font = [UIFont systemFontOfSize:13.0f];
+            int width =  [[_widths objectAtIndex:i] intValue] * maxWidth / count;
+            switch (i) {
+                case 0:
+                    label.text = @"16:27";
+                    break;
+                case 1:
+                    label.text = @"未发出";
+                    break;
+                case 2:
+                    label.text = @"CN 1607";
+                    break;
+                case 3:
+                    label.text = @"预埋手动单";
+                    break;
+                case 4:
+                    label.text = @"买";
+                    break;
+                case 5:
+                    label.text = @"对手价";
+                    break;
+                case 6:
+                    label.text = @"9450";
+                    break;
+                case 7:
+                    label.text = @"1";
+                    break;
+                case 8:
+                    label.text = @"9425";
+                    break;
+                case 9:
+                    label.text = @"9500";
+                    break;
+                default:
+                    break;
+            }
+            label.frame = CGRectMake(currentWidth, 0, width, Item_Heihgt);
+            label.textAlignment = NSTextAlignmentCenter;
+            [self.contentView addSubview:label];
+            [_labels addObject:label];
+            currentWidth += width;
+        }
+    }
+}
+
+
 +(NSString *)identify
 {
     return @"DynamicCell";

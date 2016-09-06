@@ -17,6 +17,7 @@
 #import "TimeView.h"
 #import "ShortCutView.h"
 #import "OrderStopLossViewController.h"
+#import "ConditionViewController.h"
 
 @interface DetailViewController ()
 
@@ -301,6 +302,10 @@
         {
             [OrderStopLossViewController show:self data:_model];
         }
+        else if(position == 2)
+        {
+            [ConditionViewController show:self data:_model];
+        }
     }
  
 }
@@ -425,7 +430,7 @@
             [self.navBar setLeftMainTitle:@"下单"];
             [self.navBar setRightImage:[UIImage imageNamed:@"ic_refresh"]];
             [self.navBar setRightBtn1Image:[UIImage imageNamed:@"ic_stoploss"]];
-            [self.navBar setRightBtn2Image:nil];
+            [self.navBar setRightBtn2Image:[UIImage imageNamed:@"ic_condition"]];
             [self.navBar setRightBtn3Image:nil];
             [self.navBar setRightBtn4Image:nil];
             [self.navBar.leftMainLabel setHidden:YES];

@@ -161,7 +161,15 @@
             case Warning:
                 [cell setWarnData:[_datas objectAtIndex:indexPath.row] maxWidth:_maxWidth];
                 break;
-                
+            case LossStop:
+                [cell setLossStopData:[_datas objectAtIndex:indexPath.row] maxWidth:_maxWidth];
+                break;
+            case Condition:
+                [cell setConditionData:[_datas objectAtIndex:indexPath.row] maxWidth:_maxWidth];
+                break;
+            case Pre:
+                [cell setPreData:[_datas objectAtIndex:indexPath.row] maxWidth:_maxWidth];
+                break;
             default:
                 break;
         }

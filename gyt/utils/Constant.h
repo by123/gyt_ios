@@ -19,6 +19,7 @@
 #define Notify_Menu_Title @"menu_title"
 #define Notify_Update_AccountInfo @"update_accountinfo"
 #define Notify_StopLoss @"stoploss"
+#define Notify_Condition @"contidion"
 
 #pragma mark 网络请求相关
 //#define Root_Url @"http://192.168.1.106:8081" //陈勇
@@ -125,6 +126,12 @@ typedef NS_ENUM(NSInteger, DealType) {
     HoldBy,
     //成交
     Profit,
+    //止盈止损单
+    LossStop,
+    //条件单
+    Condition,
+    //预埋单
+    Pre,
     //价格预警
     Warning
 };
@@ -302,6 +309,14 @@ typedef NS_ENUM(NSInteger,EXTAccountType)
     AT_NEW3BOARD = 10,       // 全国股转账号
     AT_IB = 1002,            // IB
     AT_STOCK = 1003          //股票账号
+};
+
+
+//自定义
+
+typedef NS_ENUM(NSInteger,TipsType)
+{
+    ConditionTips = 0,
 };
 
 @interface Constant : NSObject
