@@ -59,6 +59,13 @@
     
     _tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(uploadMore:)];
     
+    NewsModel *model = [[NewsModel alloc]init];
+    model.title = @"系统消息";
+    model.content = @"股一通软件上线了！";
+    model.from = @"股一通";
+    model.time = @"2016-09-14 10:00";
+    [_datas addObject:model];
+    
     [self requestList];
 }
 
@@ -108,15 +115,6 @@
 #pragma mark 请求数据
 -(void)requestList
 {
-    for(int i =0 ;i < 10 ; i ++)
-    {
-        NewsModel *model = [[NewsModel alloc]init];
-        model.title = @"系统消息";
-        model.content = @"中秋节放假通知";
-        model.from = @"股一通";
-        model.time = @"2016-08-23 10:58";
-        [_datas addObject:model];
-    }
     [_tableView.footer endRefreshing];
     [_tableView reloadData];
 }

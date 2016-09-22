@@ -61,7 +61,7 @@
     
     _applyBtn = [[UIButton alloc]init];
     _applyBtn.backgroundColor = SELECT_COLOR;
-    [_applyBtn setTitle:@"提现" forState:UIControlStateNormal];
+    [_applyBtn setTitle:@"出金" forState:UIControlStateNormal];
     [_applyBtn setTitleColor:TEXT_COLOR forState:UIControlStateNormal];
     _applyBtn.titleLabel.font = [UIFont systemFontOfSize:16.0f];
     _applyBtn.frame = CGRectMake(0, SCREEN_HEIGHT - 50, SCREEN_WIDTH, 50);
@@ -130,20 +130,20 @@
 }
 
 
-#pragma mark 提交提现申请
+#pragma mark 提交出金申请
 -(void)getCash
 {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     double cash = [[_cashTextField getTextFieldText] doubleValue];
     if(cash == 0)
     {
-        [ByToast showErrorToast:@"请输入提现金额"];
+        [ByToast showErrorToast:@"请输入出金金额"];
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         return;
     }
     if(cash > _moneyModel.m_dCurBalance)
     {
-        [ByToast showErrorToast:@"输入金额大于可提现金额"];
+        [ByToast showErrorToast:@"输入金额大于可出金金额"];
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         return;
     }

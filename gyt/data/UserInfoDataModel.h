@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "UserInfoModel.h"
 
 
 @interface UserInfoDataModel : NSObject
@@ -16,6 +16,6 @@
 @property (copy, nonatomic) NSString *sessionId;
 
 //用户信息模型
-@property (strong, nonatomic) NSMutableDictionary *accountInfo;
+@property (strong, nonatomic) UserInfoModel *accountInfo;
 
 @end

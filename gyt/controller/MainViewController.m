@@ -80,6 +80,8 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleInstrumentData:) name:InstrumentDetailData object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handlePushQuoteData:) name:PushQuoteData object:nil];
     
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleUserData:) name:UserDetailData object:nil];
+    
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getUserInfo) name:Notify_Update_AccountInfo object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateView:) name:Notify_Menu_Title object:nil];
     
@@ -517,8 +519,29 @@
     NSString *accountInfoStr = [JSONUtil parseStr:data];
     [[Account sharedAccount] saveAccountInfo:accountInfoStr];
     NSLog(@"用户信息->%@",accountInfoStr);
+//    [self requestUserInfo];
     [self requestAccountInfo];
     [self requestProductInfo];
+}
+
+#pragma mark 请求用户信息
+-(void)requestUserInfo
+{
+    UserInfoDataModel *model = [[UserInfoDataModel alloc]init];
+    model.sessionId = [[Account sharedAccount]getSessionId];
+    UserInfoModel *account = [UserInfoModel mj_objectWithKeyValues:[[Account sharedAccount] getAccountInfo]];
+    model.accountInfo = account;
+    
+    NSString *jsonStr = [JSONUtil parse:Request_UserInfo params:[JSONUtil parseDic:model]];
+
+    [[SocketConnect sharedSocketConnect] sendData:jsonStr seq:XT_CAccountBaseInfo];
+
+//    [[HttpRequest sharedHttpRequest] post:jsonStr view:self.view success:^(id responseObject) {
+//        id a = responseObject;
+//        NSLog(@"123");
+//    } fail:^(NSError *error) {
+//        
+//    }];
 }
 
 #pragma mark 请求资金信息
@@ -545,11 +568,8 @@
 
     for(PushModel *model in _mainDatas)
     {
-//        if([model.m_strInstrumentID containsString:@"DAX"] || [model.m_strInstrumentID containsString:@"HSI"])
-//        {
-            [array1 addObject:model.m_strExchangeID];
-            [array2 addObject:model.m_strInstrumentID];
-//        }
+        [array1 addObject:model.m_strExchangeID];
+        [array2 addObject:model.m_strInstrumentID];
     }
 
    
@@ -564,7 +584,12 @@
     [[SocketConnect sharedSocketConnect]sendData:jsonStr seq:0];
 }
 
-
+#pragma mark 处理用户基本资料
+-(void)handleUserData : (NSNotification *)notification
+{
+    BaseRespondModel *respondModel = notification.object;
+    NSLog(@"123");
+}
 
 #pragma mark 处理资金信息
 -(void)handleAccountData : (NSNotification *)notification

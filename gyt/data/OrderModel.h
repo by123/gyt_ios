@@ -28,6 +28,9 @@
 //下单时间
 @property (assign , nonatomic) long m_dOrderTime;
 
+//下单方式
+@property (assign, nonatomic) int m_eBrokerPriceType;
+
 //撤单时间
 @property (assign , nonatomic) long m_dCancelTime;
 
@@ -52,8 +55,8 @@
 //开平1
 @property (assign, nonatomic) EOffset_Flag_Type m_nOffsetFlag;
 
-//委托属性（市价or限价）
-@property (assign, nonatomic) EBrokerPriceType m_eBrokerPriceType;
+////委托属性（市价or限价）
+//@property (assign, nonatomic) EBrokerPriceType m_eBrokerPriceType;
 
 //投机
 @property (assign, nonatomic) EHedge_Flag_Type m_nHedgeFlag;
@@ -70,7 +73,8 @@
                     orderPrice : (double)m_dOrderPrice
                       orderNum : (int)m_nOrderNum
                      direction : (EEntrustBS)m_nDirection
-                    offsetFlag : (EOffset_Flag_Type)m_nOffsetFlag;
+                    offsetFlag : (EOffset_Flag_Type)m_nOffsetFlag
+                     priceType : (EBrokerPriceType)m_eBrokerPriceType;
 
 
 @end

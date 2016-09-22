@@ -240,6 +240,11 @@
         [self sendReciveData:respondModel name:LoginData];
         NSLog(@"-----reciver----接收到登录返回");
     }
+    else if(packageModel.seq == XT_CAccountBaseInfo)
+    {
+        [self sendReciveData:respondModel name:UserDetailData];
+        NSLog(@"-----reciver----接收到用户信息");
+    }
     else if(packageModel.seq == XT_CAccountDetail)
     {
         [self sendReciveData:respondModel name:AccountDetailData];

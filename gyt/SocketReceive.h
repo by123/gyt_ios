@@ -11,6 +11,7 @@
 #define PushQuoteData @"pushQuoteData"
 #define PushData @"pushData"
 #define LoginData @"loginData"
+#define UserDetailData @"userDetailData"
 #define AccountDetailData @"accountDetailData"
 #define InstrumentDetailData @"instrumentDetailData"
 #define CommitCashApplyInfoData @"commitCashApplyInfoData"

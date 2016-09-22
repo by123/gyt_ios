@@ -40,6 +40,7 @@
 {
     EEntrustBS director;
     Boolean stopChange;
+    EBrokerPriceType brokerPriceType;
 }
 
 -(instancetype)initWithView : (UIView *)parentView
@@ -55,6 +56,7 @@
     if(self == [super initWithFrame:rect])
     {
         self.backgroundColor = [ColorUtil colorWithHexString:@"#222222" alpha:0.5f];
+        brokerPriceType = BROKER_PRICE_COMPETE;
         [self initView];
     }
     return  self;
@@ -133,7 +135,7 @@
     _buyItem.titleLabel.numberOfLines = 0;
     _buyItem.titleLabel.textAlignment = NSTextAlignmentCenter;
     _buyItem.titleLabel.lineBreakMode = NSLineBreakByCharWrapping;
-    _buyItem.backgroundColor = [ColorUtil colorWithHexString:@"#CD5555"];
+    _buyItem.backgroundColor = RED_COLOR;
     [_buyItem addTarget:self action:@selector(OnClick:) forControlEvents:UIControlEventTouchUpInside];
     [rootView addSubview:_buyItem];
     
@@ -148,7 +150,7 @@
     _sellItem.titleLabel.numberOfLines = 0;
     _sellItem.titleLabel.textAlignment = NSTextAlignmentCenter;
     _sellItem.titleLabel.lineBreakMode = NSLineBreakByCharWrapping;
-    _sellItem.backgroundColor = [ColorUtil colorWithHexString:@"#2E8B57"];
+    _sellItem.backgroundColor = GREEN_COLOR;
     [_sellItem addTarget:self action:@selector(OnClick:) forControlEvents:UIControlEventTouchUpInside];
     
     [rootView addSubview:_sellItem];
@@ -172,11 +174,13 @@
                 _priceLabel.text = @"市价 ▼";
                 _priceLabel.tag = 1;
                 stopChange = YES;
+                brokerPriceType = BROKER_PRICE_ANY;
                 break;
             case 1:
                 _priceLabel.text = @"对手价 ▼";
                 _priceLabel.tag = 0;
                 stopChange = NO;
+                brokerPriceType = BROKER_PRICE_COMPETE;
                 break;
             default:
                 break;
@@ -230,7 +234,11 @@
     {
         price = _model.m_dBidPrice1;
     }
-    orderModel.info = [OrderModel buildOrderModel : _model.m_strProductID instrumentID:_model.m_strInstrumentID  orderPrice:price orderNum:hand direction:director offsetFlag:EOFF_THOST_FTDC_OF_Open];
+    if(brokerPriceType == BROKER_PRICE_ANY)
+    {
+        price = 0;
+    }
+    orderModel.info = [OrderModel buildOrderModel : _model.m_strProductID instrumentID:_model.m_strInstrumentID  orderPrice:price orderNum:hand direction:director offsetFlag:EOFF_THOST_FTDC_OF_Open priceType:brokerPriceType];
     
     NSMutableDictionary *dic =[JSONUtil parseDic:orderModel];
     NSString *jsonStr = [JSONUtil parse:@"order" params:dic];
@@ -264,13 +272,13 @@
     NSString *sellTxt;
     if(stopChange)
     {
-        buyTxt = [NSString stringWithFormat:@"%.2f\n—————\n买多",_model.m_dLastPrice * 1.1];
-        sellTxt = [NSString stringWithFormat:@"%.2f\n—————\n卖空",_model.m_dLastPrice * 0.9];
+        buyTxt = @"市价\n—————\n买入";
+        sellTxt = @"市价\n—————\n卖出";
     }
     else
     {
-        buyTxt = [NSString stringWithFormat:@"%.2f\n—————\n买多",_model.m_dAskPrice1];
-        sellTxt = [NSString stringWithFormat:@"%.2f\n—————\n卖空",_model.m_dBidPrice1];
+        buyTxt = [NSString stringWithFormat:@"%.2f\n—————\n买入",_model.m_dAskPrice1];
+        sellTxt = [NSString stringWithFormat:@"%.2f\n—————\n卖出",_model.m_dBidPrice1];
     }
     [_buyItem setTitle:buyTxt forState:UIControlStateNormal];
     [_sellItem setTitle:sellTxt forState:UIControlStateNormal];

@@ -40,7 +40,7 @@
 
 @implementation DealHistoryViewController
 {
-    int currentTag;
+    NSInteger currentTag;
     int requestType;
     NSString *startDateStr;
     NSString *endDateStr;
@@ -427,7 +427,7 @@
 
     if(IS_NS_COLLECTION_EMPTY(_datas))
     {
-        [ByToast showWarnToast:@"历史数据为空!"];
+        [ByToast showWarnToast:@"该时间段数据为空!"];
     }
     [_tableView reloadData];
 }

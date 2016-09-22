@@ -159,6 +159,7 @@ typedef NS_ENUM(NSInteger,PriceType)
     EEntrustBS director;
     Boolean isExpandView;
     PriceType priceType;
+    EBrokerPriceType brokerPriceType;
 }
 
 -(instancetype)initWithData : (CGRect)frame
@@ -186,6 +187,7 @@ typedef NS_ENUM(NSInteger,PriceType)
         NSString *moneyDetailStr = [[NSUserDefaults standardUserDefaults] objectForKey:MoneyInfo];
         _moneyModel = [MoneyDetailModel mj_objectWithKeyValues:moneyDetailStr];
         priceType = Rival;
+        brokerPriceType = BROKER_PRICE_COMPETE;
         [self initView];
         return self;
     }
@@ -327,6 +329,7 @@ typedef NS_ENUM(NSInteger,PriceType)
     _myTextField.block = ^(BOOL isCompelete,NSString *text)
     {
         priceType = HandIn;
+        brokerPriceType = BROKER_PRICE_LIMIT;
         weakSelf.priceLabel.text = @"限价";
         double value = [text doubleValue];
         [weakSelf isValidPrice:value];
@@ -670,6 +673,10 @@ typedef NS_ENUM(NSInteger,PriceType)
             {
                 director = ENTRUST_BUY;
                 NSString *message = [NSString stringWithFormat:@"%@，%.2f，平仓，%@手",_model.m_strInstrumentID,price,hand];
+                if(priceType == Market)
+                {
+                    message = [NSString stringWithFormat:@"%@，市价，平仓，%@手",_model.m_strInstrumentID,hand];
+                }
                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认平仓吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
                 alert.tag = 3;
                 [alert show];
@@ -677,8 +684,11 @@ typedef NS_ENUM(NSInteger,PriceType)
             else
             {
                 director = ENTRUST_BUY;
-                
                 NSString *message = [NSString stringWithFormat:@"%@，%.2f，买，%@手",_model.m_strInstrumentID,price,hand];
+                if(priceType == Market)
+                {
+                    message = [NSString stringWithFormat:@"%@，市价，买，%@手",_model.m_strInstrumentID,hand];
+                }
                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"确认下单吗？" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
                 alert.tag = 0;
                 [alert show];
@@ -768,6 +778,7 @@ typedef NS_ENUM(NSInteger,PriceType)
     else if(view == _addPriceBtn)
     {
         priceType = HandIn;
+        brokerPriceType = BROKER_PRICE_LIMIT;
         _priceLabel.text = @"限价";
         double price = [[_myTextField getTextFieldText] doubleValue];
         price += _model.m_dPriceTick;
@@ -778,6 +789,7 @@ typedef NS_ENUM(NSInteger,PriceType)
     else if(view == _reducePriceBtn)
     {
         priceType = HandIn;
+        brokerPriceType = BROKER_PRICE_LIMIT;
         _priceLabel.text = @"限价";
         double price = [[_myTextField getTextFieldText] doubleValue];
         price -= _model.m_dPriceTick;
@@ -830,21 +842,25 @@ typedef NS_ENUM(NSInteger,PriceType)
         switch (position) {
                 //对手价
             case Rival:
+                brokerPriceType = BROKER_PRICE_COMPETE;
                 [self updateBuySellBtn:_model.m_dAskPrice1 sell:_model.m_dBidPrice1];
                 [_myTextField setTextFiledText:[NSString stringWithFormat:@"%.2f",_model.m_dAskPrice1]];
                 break;
                 //市价
             case Market:
-                [self updateBuySellBtn:_model.m_dLastPrice * 1.1 sell:_model.m_dLastPrice * 0.9];
-                [_myTextField setTextFiledText:[NSString stringWithFormat:@"%.2f",_model.m_dLastPrice * 1.1]];
+                brokerPriceType = BROKER_PRICE_ANY;
+                [self updateBuySellBtn:0 sell:0];
+//                [_myTextField setTextFiledText:@"市价"];
                 break;
                 //最新价
             case Lastest:
+                brokerPriceType = BROKER_PRICE_BEST;
                 [self updateBuySellBtn:_model.m_dLastPrice sell:_model.m_dLastPrice];
                 [_myTextField setTextFiledText:[NSString stringWithFormat:@"%.2f",_model.m_dLastPrice]];
                 break;
                 //限价
             case Limit:
+                brokerPriceType = BROKER_PRICE_LIMIT;
                 [self updateBuySellBtn:0 sell:0];
                 [_myTextField setTextFiledText:@"0.00"];
                 [_myTextField becomeFocus];
@@ -998,7 +1014,7 @@ typedef NS_ENUM(NSInteger,PriceType)
             range.length = text.length - 11;
             price = [[text substringWithRange:range] doubleValue];
         }
-        orderModel.info = [OrderModel buildOrderModel :model.m_strProductID  instrumentID:model.m_strInstrumentID orderPrice:price orderNum:hand direction:model.m_nDirection offsetFlag:EOFF_THOST_FTDC_OF_Close];
+        orderModel.info = [OrderModel buildOrderModel :model.m_strProductID  instrumentID:model.m_strInstrumentID orderPrice:price orderNum:hand direction:model.m_nDirection offsetFlag:EOFF_THOST_FTDC_OF_Close priceType:brokerPriceType];
     }
     else
     {
@@ -1019,7 +1035,9 @@ typedef NS_ENUM(NSInteger,PriceType)
             range.length = text.length - 11;
             price = [[text substringWithRange:range] doubleValue];
         }
-        orderModel.info = [OrderModel buildOrderModel : _model.m_strProductID instrumentID:_model.m_strInstrumentID  orderPrice:price orderNum:hand direction:director offsetFlag:EOFF_THOST_FTDC_OF_Open];
+        
+        NSLog(@"########价格:%.2f########下单方式:%d########",price,brokerPriceType);
+        orderModel.info = [OrderModel buildOrderModel : _model.m_strProductID instrumentID:_model.m_strInstrumentID  orderPrice:price orderNum:hand direction:director offsetFlag:EOFF_THOST_FTDC_OF_Open priceType:brokerPriceType];
     }
 
     NSMutableDictionary *dic =[JSONUtil parseDic:orderModel];
@@ -1349,30 +1367,35 @@ typedef NS_ENUM(NSInteger,PriceType)
 {
     NSString *buyTxt = [NSString stringWithFormat:@"%.2f\n—————————\n买入",buyPrice];
     NSString *sellTxt = [NSString stringWithFormat:@"%.2f\n—————————\n卖出",sellPrice];
+    if(priceType == Market)
+    {
+        buyTxt = @"市价\n—————————\n买入";
+        sellTxt = @"市价\n—————————\n卖出";
+    }
     if(isExpandView)
     {
-        double tempBuyPrice = 0.0f;
-        double tempSellPrice = 0.0f;
+        NSString *tempBuyPrice = @"0.00";
+        NSString *tempSellPrice = @"0.00";
         switch (priceType) {
             case Rival:
-                tempBuyPrice = _model.m_dAskPrice1;
-                tempSellPrice = _model.m_dBidPrice1;
+                tempBuyPrice = [NSString stringWithFormat:@"%.2f",_model.m_dAskPrice1];
+                tempSellPrice = [NSString stringWithFormat:@"%.2f",_model.m_dBidPrice1];
                 break;
             case Lastest:
-                tempBuyPrice = _model.m_dLastPrice;
-                tempSellPrice = _model.m_dLastPrice;
+                tempBuyPrice = [NSString stringWithFormat:@"%.2f",_model.m_dLastPrice];
+                tempSellPrice = [NSString stringWithFormat:@"%.2f",_model.m_dLastPrice];
                 break;
             case Market:
-                tempBuyPrice = _model.m_dLastPrice * 1.1;
-                tempSellPrice = _model.m_dLastPrice * 0.9;
+                tempBuyPrice = @"市价";
+                tempSellPrice = @"市价";
                 break;
             case Limit:
-                tempBuyPrice = [[_myTextField getTextFieldText] doubleValue];
-                tempSellPrice = [[_myTextField getTextFieldText] doubleValue];
+                tempBuyPrice = [_myTextField getTextFieldText];
+                tempSellPrice = [_myTextField getTextFieldText];
                 break;
             case HandIn:
-                tempBuyPrice = [[_myTextField getTextFieldText] doubleValue];
-                tempSellPrice = [[_myTextField getTextFieldText] doubleValue];
+                tempBuyPrice = [_myTextField getTextFieldText] ;
+                tempSellPrice = [_myTextField getTextFieldText] ;
                 break;
             default:
                 break;
@@ -1380,15 +1403,16 @@ typedef NS_ENUM(NSInteger,PriceType)
         int direction = currentModel.m_nDirection;
             switch (direction) {
                 case ENTRUST_BUY:
-                    sellTxt=[NSString stringWithFormat:@"%.2f\n—————————\n平仓",tempSellPrice];
+                    sellTxt=[NSString stringWithFormat:@"%@\n—————————\n平仓",tempSellPrice];
                     break;
                 case ENTRUST_SELL:
-                    buyTxt = [NSString stringWithFormat:@"%.2f\n—————————\n平仓",tempBuyPrice] ;
+                    buyTxt = [NSString stringWithFormat:@"%@\n—————————\n平仓",tempBuyPrice] ;
                     break;
                 default:
                     break;
             }
     }
+
     [_buyItem setTitle:buyTxt forState:UIControlStateNormal];
     [_sellItem setTitle:sellTxt forState:UIControlStateNormal];
 }
@@ -1469,7 +1493,7 @@ typedef NS_ENUM(NSInteger,PriceType)
             [_myTextField setTextFiledText:[NSString stringWithFormat:@"%.2f",_model.m_dAskPrice1]];
             break;
         case Market:
-            [self updateBuySellBtn:_model.m_dLastPrice * 1.1 sell:_model.m_dLastPrice * 0.9];
+            [self updateBuySellBtn:0 sell:0];
             break;
         case Limit:
             [self updateBuySellBtn:price sell:price];

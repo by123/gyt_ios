@@ -312,7 +312,7 @@
     UIButton *button = sender;
     if(button == _orderBtn)
     {
-        
+        [self requestStart];
     }
 }
 
@@ -321,6 +321,21 @@
     [self updatePriceValue];
     [self updateLossValue];
     [self updateProfitValue];
+}
+
+#pragma mark 设置止盈止损启动
+-(void)requestStart
+{
+    NSString *orderPrice = [_priceView.textField getTextFieldText];
+    NSString *hand = [_handView.textField getTextFieldText];
+    NSString *loss = [_lossView.textField getTextFieldText];
+    NSString *profit = [_profitView.textField getTextFieldText];
+    
+    NSLog(@"价格->%@",orderPrice);
+    NSLog(@"手数->%@",hand);
+    NSLog(@"止损->%@",loss);
+    NSLog(@"止盈->%@",profit);
+
 }
 
 #pragma mark -----功能块-------

@@ -75,7 +75,7 @@
     //
     _contractNumLabel = [[UILabel alloc]init];
     [self setProperty:_contractNumLabel];
-    _contractNumLabel.frame = CGRectMake(10, 0, (SCREEN_WIDTH - 40)/2, Label_Height);
+    _contractNumLabel.frame = CGRectMake(10, 0, SCREEN_WIDTH - 40, Label_Height);
     _contractNumLabel.textAlignment = NSTextAlignmentLeft;
     [_rootView addSubview:_contractNumLabel];
     

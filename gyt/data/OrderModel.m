@@ -16,6 +16,7 @@
                       orderNum : (int)m_nOrderNum
                      direction : (EEntrustBS)m_nDirection
                     offsetFlag : (EOffset_Flag_Type)m_nOffsetFlag
+                     priceType : (EBrokerPriceType)m_eBrokerPriceType
 {
     OrderTagModel *tagModel = [[OrderTagModel alloc]init];
     tagModel.m_strRequestId = [OrderTagModel generateRequestID];
@@ -29,6 +30,7 @@
     model.m_nOffsetFlag = m_nOffsetFlag;
     model.m_eBrokerPriceType = BROKER_PRICE_LIMIT;
     model.m_nHedgeFlag = HEDGE_FLAG_SPECULATION;
+    model.m_eBrokerPriceType = m_eBrokerPriceType;
     
     model.m_tag = tagModel;
     

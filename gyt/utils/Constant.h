@@ -30,6 +30,10 @@
 //#define Host @"192.168.1.106" //陈勇
 //#define Port 64360
 
+//#define Host @"192.168.1.112" //何俊森
+//#define Port 64360
+//id:869785
+
 //#define Host @"192.168.1.109" //
 //#define Port 64360
 
@@ -67,10 +71,9 @@ typedef NS_ENUM(NSInteger, ClientID) {
 };
 
 
-
 //币种
 typedef NS_ENUM(NSInteger, EMoneyType) {
-    MoneyType_RMB = 0,       //人民币
+    MoneyType_RMB = 0,      //人民币
     MoneyType_USD,          //美元
     MoneyType_HKD,          //港币
     MoneyType_CHF,          //瑞士法郎
@@ -246,9 +249,10 @@ typedef NS_ENUM(NSInteger , EOffset_Flag_Type)
 //委托属性（市价or限价）
 typedef NS_ENUM(NSInteger,EBrokerPriceType)
 {
-    BROKER_PRICE_ANY = 49,// 市价
-    BROKER_PRICE_LIMIT,  // 限价
-    BROKER_PRICE_BEST    // 最优价
+    BROKER_PRICE_ANY = 49, // 市价
+    BROKER_PRICE_LIMIT,    // 限价
+    BROKER_PRICE_BEST,     // 最优价
+    BROKER_PRICE_COMPETE   //对手价
 };
 
 
@@ -268,6 +272,7 @@ typedef NS_ENUM(NSInteger,EFutureTradeType)
     FUTURE_TRADE_TYPE_EFPDIRVED, //期转现衍生成交
     FUTURE_TRADE_TYPE_COMBINATION_DERIVED //组合衍生成交
 };
+
 
 typedef NS_ENUM(NSInteger,EEntrustStatus)
 {
