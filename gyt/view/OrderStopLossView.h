@@ -15,12 +15,17 @@
 
 @property (strong, nonatomic) UIView *rootView;
 
+@property (strong, nonatomic) BaseViewController *controller;
+
+
 -(instancetype)initWithData : (PushModel *)model
-                       view : (UIView *)rootView;
+                       view : (BaseViewController *)controller;
 
 
 -(void)setDirector : (EEntrustBS)director;
 
 -(void)updatePushData : (PushModel *)pushModel;
+
+-(void)handleOrderData : (BaseRespondModel *)respondModel;
 
 @end

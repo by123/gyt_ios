@@ -8,7 +8,10 @@
 
 #import "OrderStopLossView.h"
 #import "ByTextField.h"
-
+#import "OrderStopLossModel.h"
+#import "OrderRequestModel.h"
+#import "OrderModel.h"
+#import "StopValueTag.h"
 
 @interface OrderStopLossView()
 
@@ -25,17 +28,20 @@
 @property (strong, nonatomic) UIButton *orderBtn;
 
 
+
+
 @end
 
 @implementation OrderStopLossView
 
 -(instancetype)initWithData : (PushModel *)model
-                       view : (UIView *)rootView
+                       view : (BaseViewController *)controller
 {
     if(self == [super init])
     {
         self.model = model;
-        self.rootView = rootView;
+        self.controller = controller;
+        self.rootView = controller.view;
         [self initView];
     }
     return self;
@@ -63,25 +69,25 @@
     [self addSubview:_priceView];
     
     
-    _handView = [[AddReduceView alloc]initWithTitle:@"手数：" type:NumberInt tips:@"<=15" rootView:_rootView];
+    _handView = [[AddReduceView alloc]initWithTitle:@"手数：" type:NumberInt tips:@"" rootView:_rootView];
     _handView.frame = CGRectMake(0, 100, SCREEN_WIDTH, 50);
     _handView.delegate = self;
     _handView.userInteractionEnabled = YES;
     [_handView setDefaultValue:@"1"];
     [self addSubview:_handView];
     
-    _lossView = [[AddReduceView alloc]initWithTitle:@"止损价：" type:NumberFloat tips:@"止损价差0.00，亏0.00" rootView:_rootView];
+    _lossView = [[AddReduceView alloc]initWithTitle:@"止损价：" type:NumberFloat tips:@"未设置" rootView:_rootView];
     _lossView.frame = CGRectMake(0, 160, SCREEN_WIDTH, 50);
     _lossView.delegate = self;
     _lossView.userInteractionEnabled = YES;
-    [_lossView setDefaultValue:[NSString stringWithFormat:@"%.2f",_model.m_dAskPrice1]];
+    [_lossView setDefaultValue:[NSString stringWithFormat:@"%.2f",0.0f]];
     [self addSubview:_lossView];
     
-    _profitView = [[AddReduceView alloc]initWithTitle:@"止盈价：" type:NumberFloat tips:@"止盈价差0.00，盈0.00" rootView:_rootView];
+    _profitView = [[AddReduceView alloc]initWithTitle:@"止盈价：" type:NumberFloat tips:@"未设置" rootView:_rootView];
     _profitView.frame = CGRectMake(0, 220, SCREEN_WIDTH, 50);
     _profitView.delegate = self;
     _profitView.userInteractionEnabled = YES;
-    [_profitView setDefaultValue:[NSString stringWithFormat:@"%.2f",_model.m_dAskPrice1]];
+    [_profitView setDefaultValue:[NSString stringWithFormat:@"%.2f",0.0f]];
     [self addSubview:_profitView];
 
 
@@ -247,6 +253,12 @@
     double currentPrice = [[_priceView.textField getTextFieldText] doubleValue];
     double currentLoss = [[_lossView.textField getTextFieldText] doubleValue];
     int hand = [[_handView.textField getTextFieldText] intValue];
+    if(currentLoss == 0)
+    {
+        _lossView.tipsLabel.text = @"未设置";
+        _lossView.tipsLabel.textColor = TEXT_COLOR;
+        return;
+    }
     if(_director == ENTRUST_BUY)
     {
         _lossView.tipsLabel.text = [NSString stringWithFormat:@"止损价差%.2f，亏%.2f",currentPrice - currentLoss,hand *(currentPrice - currentLoss)];
@@ -271,6 +283,13 @@
     double currentPrice = [[_priceView.textField getTextFieldText] doubleValue];
     double currentProfit = [[_profitView.textField getTextFieldText] doubleValue];
     int hand = [[_handView.textField getTextFieldText] intValue];
+    if(currentProfit == 0)
+    {
+        _profitView.tipsLabel.text = @"未设置";
+        _profitView.tipsLabel.textColor = TEXT_COLOR;
+        return;
+    }
+    
     if(_director == ENTRUST_BUY)
     {
         _profitView.tipsLabel.text = [NSString stringWithFormat:@"止盈价差%.2f，盈%.2f",currentProfit - currentPrice,hand *(currentProfit - currentPrice)];
@@ -326,17 +345,43 @@
 #pragma mark 设置止盈止损启动
 -(void)requestStart
 {
-    NSString *orderPrice = [_priceView.textField getTextFieldText];
-    NSString *hand = [_handView.textField getTextFieldText];
-    NSString *loss = [_lossView.textField getTextFieldText];
-    NSString *profit = [_profitView.textField getTextFieldText];
+    double orderPrice = [[_priceView.textField getTextFieldText] doubleValue];
+    int hand = [[_handView.textField getTextFieldText] intValue];
+    double profitPrice = [[_profitView.textField getTextFieldText] doubleValue];
+    double lossPrice = [[_lossView.textField getTextFieldText] doubleValue];
     
-    NSLog(@"价格->%@",orderPrice);
-    NSLog(@"手数->%@",hand);
-    NSLog(@"止损->%@",loss);
-    NSLog(@"止盈->%@",profit);
+    StopValueTag *stopValueTag = [[StopValueTag alloc]init];
+    
+    stopValueTag.m_dStopProfitValue  = profitPrice;
+    stopValueTag.m_dStopLossValue = lossPrice;
+    
+    stopValueTag.m_bEnableStopProfit = (profitPrice == 0) ? false : true;
+    stopValueTag.m_bEnableStopLoss = (lossPrice == 0) ? false : true;
+    
+    NSString *accountInfoStr =  [[Account sharedAccount] getAccountInfo];
+    UserInfoModel *account = [UserInfoModel mj_objectWithKeyValues:accountInfoStr];
+    OrderRequestModel *orderModel = [[OrderRequestModel alloc]init];
+    orderModel.strSessionID = [[Account sharedAccount]getSessionId];
+    orderModel.account = account;
 
+    orderModel.info = [OrderModel buildOrderModel : _model.m_strProductID instrumentID:_model.m_strInstrumentID  orderPrice:orderPrice orderNum:hand direction:_director offsetFlag:EOFF_THOST_FTDC_OF_Open priceType:BROKER_PRICE_COMPETE stopTag:stopValueTag];
+    
+    NSMutableDictionary *dic =[JSONUtil parseDic:orderModel];
+    NSString *jsonStr = [JSONUtil parse:@"order" params:dic];
+    NSLog(@"%@",jsonStr);
+    
+    [[SocketConnect sharedSocketConnect] sendData:jsonStr seq:GYT_ORDER];
+    
+    [self.controller.navigationController popViewControllerAnimated:YES];
 }
+
+#pragma mark 处理下单数据
+-(void)handleOrderData : (BaseRespondModel *)respondModel
+{
+    NSLog(@"123");
+}
+
+
 
 #pragma mark -----功能块-------
 

@@ -146,4 +146,46 @@
     }
 }
 
++(NSString *)getStopValueStatus:(EStopValueStatus)statu
+{
+    switch (statu) {
+        case StopValueStatus_Running:
+            return @"运行中";
+        case StopValueStatus_Pause:
+            return @"暂停";
+        case StopValueStatus_Trigger:
+            return @"已触发";
+        default:
+            break;
+    }
+}
+
++(NSString *)getStopType:(EStopType)type
+{
+    switch (type) {
+        case StopType_Profit:
+            return @"止盈";
+        case StopType_Loss:
+            return @"止损";
+        default:
+            break;
+    }
+}
+
++(NSString *)getBrokerPriceType:(EBrokerPriceType)type
+{
+    switch (type) {
+        case BROKER_PRICE_ANY:
+            return @"市价";
+        case BROKER_PRICE_LIMIT:
+            return @"限价";
+        case BROKER_PRICE_BEST:
+            return @"最优价";
+        case BROKER_PRICE_COMPETE:
+            return @"对手价";
+        default:
+            break;
+    }
+}
+
 @end

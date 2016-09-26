@@ -12,6 +12,7 @@
 #import "DealProfitModel.h"
 #import "PushModel.h"
 #import "DealHoldingModel.h"
+#import "StopLossModel.h"
 
 @interface DynamicCell : UITableViewCell
 
@@ -33,7 +34,7 @@
 -(void)setWarnData : (PushModel *)model
             maxWidth : (int)maxWidth;
 
--(void)setLossStopData : (PushModel *)model
+-(void)setLossStopData : (StopLossModel *)model
               maxWidth : (int)maxWidth;
 
 -(void)setConditionData : (PushModel *)model

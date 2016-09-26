@@ -300,6 +300,11 @@
         [self sendReciveData:respondModel name:HistoryData];
         NSLog(@"-----reciver----接收交易历史信息");
     }
+    else if(packageModel.seq == XT_CStopProfitLossSInfo)
+    {
+        [self sendReciveData:respondModel name:LossData];
+        NSLog(@"-----reciver----接收止盈止损信息");
+    }
     else if(packageModel.cmd == NET_CMD_NOTIFICATION)
     {
         //行情主推

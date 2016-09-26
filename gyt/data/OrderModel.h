@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "OrderTagModel.h"
 #import "OrderRespondModel.h"
+#import "StopValueTag.h"
 
 @interface OrderModel : NSObject
 
@@ -67,6 +68,8 @@
 //委托附加信息
 @property (strong, nonatomic) OrderTagModel *m_tag;
 
+//止盈止损
+@property (strong,nonatomic) StopValueTag *m_stopTag;
 
 +(OrderModel *)buildOrderModel : (NSString *)m_strProductID
                   instrumentID : (NSString *)m_strInstrumentID
@@ -77,4 +80,12 @@
                      priceType : (EBrokerPriceType)m_eBrokerPriceType;
 
 
++(OrderModel *)buildOrderModel : (NSString *)m_strProductID
+                  instrumentID : (NSString *)m_strInstrumentID
+                    orderPrice : (double)m_dOrderPrice
+                      orderNum : (int)m_nOrderNum
+                     direction : (EEntrustBS)m_nDirection
+                    offsetFlag : (EOffset_Flag_Type)m_nOffsetFlag
+                     priceType : (EBrokerPriceType)m_eBrokerPriceType
+                        stopTag: (StopValueTag *)m_stopTag;
 @end

@@ -39,4 +39,6 @@
 
 -(void)handlePushQuoteData:(PackageModel *)packageModel;
 
+-(void)handleLossData : (BaseRespondModel *)respondModel;
+
 @end

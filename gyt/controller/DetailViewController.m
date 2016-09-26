@@ -70,6 +70,8 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleDealDetailData:) name:DealDetailData object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleOrderData:) name:OrderData object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleCancelData:) name:CancelData object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleLossData:) name:LossData object:nil];
+
 
 
 }
@@ -80,14 +82,13 @@
     [[NSNotificationCenter defaultCenter]removeObserver:self name:KLineData object:nil];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:PushData object:nil];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:PushQuoteData object:nil];
-
     
     [[NSNotificationCenter defaultCenter]removeObserver:self name:PositionStaticsData object:nil];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:OrderDetailData object:nil];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:DealDetailData object:nil];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:OrderData object:nil];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:CancelData object:nil];
-
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:LossData object:nil];
 
 }
 
@@ -531,6 +532,16 @@
     {
         BaseRespondModel *model = notification.object;
         [_dealView handleDealDetailData:model];
+    }
+}
+
+#pragma mark 处理止盈止损数据
+-(void)handleLossData : (NSNotification *)notification
+{
+    if(_dealView)
+    {
+        BaseRespondModel *model = notification.object;
+        [_dealView handleLossData:model];
     }
 }
 

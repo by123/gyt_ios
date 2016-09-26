@@ -24,6 +24,7 @@
 #define OrderData @"orderData"
 #define CancelData @"cancelData"
 #define HistoryData @"historyData"
+#define LossData @"lossData"
 
 
 #define ConnectSuccess @"connectSuccess"

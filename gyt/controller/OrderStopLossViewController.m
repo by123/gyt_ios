@@ -34,12 +34,14 @@
     [super viewDidLoad];
     [self initView];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(hanldlePushQuoteData:) name:PushQuoteData object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleOrderData:) name:OrderData object:nil];
 
 }
 
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter]removeObserver:self name:PushQuoteData object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:OrderData object:nil];
 
 }
 
@@ -70,7 +72,8 @@
     _tabView.delegate = self;
     [self.view addSubview:_tabView];
     
-    _orderStopLossView = [[OrderStopLossView alloc]initWithData:_pushModel view:self.view];
+    _orderStopLossView = [[OrderStopLossView alloc]initWithData:_pushModel view:self];
+    [_orderStopLossView setDirector:director];
     [self.view addSubview:_orderStopLossView];
     
 }
@@ -108,5 +111,15 @@
     [_orderStopLossView updatePushData:model];
 }
 
+
+#pragma mark 处理下单数据
+-(void)handleOrderData : (NSNotification *)notification
+{
+    if(_orderStopLossView)
+    {
+        BaseRespondModel *model = notification.object;
+        [_orderStopLossView handleOrderData:model];
+    }
+}
 
 @end

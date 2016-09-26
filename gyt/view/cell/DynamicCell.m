@@ -401,7 +401,7 @@
 }
 
 
--(void)setLossStopData : (PushModel *)model
+-(void)setLossStopData : (StopLossModel *)model
           maxWidth : (int)maxWidth
 {
     if(!IS_NS_COLLECTION_EMPTY(_widths))
@@ -415,28 +415,28 @@
             int width =  [[_widths objectAtIndex:i] intValue] * maxWidth / count;
             switch (i) {
                 case 0:
-                    label.text = @"16:27";
+                    label.text = [AppUtil getFormatTime:model.m_nTime];
                     break;
                 case 1:
-                    label.text = @"运行中";
+                    label.text = [Constant getStopValueStatus:model.m_eStatus];
                     break;
                 case 2:
-                    label.text = @"CN 1607";
+                    label.text = model.m_strInstrumentID;
                     break;
                 case 3:
-                    label.text = @"止损";
+                    label.text = [Constant getStopType:model.m_eStopType];
                     break;
                 case 4:
-                    label.text = @"限价";
+                    label.text = [Constant getBrokerPriceType : model.m_nOrderPriceType];
                     break;
                 case 5:
-                    label.text = @"9425.00";
+                    label.text =[NSString stringWithFormat:@"%.2f",model.m_dStopValue];
                     break;
                 case 6:
-                    label.text = @"2";
+                    label.text = [NSString stringWithFormat:@"%d",model.m_nVolume];
                     break;
                 case 7:
-                    label.text = @"买";
+                    label.text = [Constant EEntrustBSStr : model.m_nDirection];
                     break;
                 default:
                     break;

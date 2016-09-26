@@ -36,6 +36,8 @@
 		CF3426C21D7432E4001A0B91 /* StopProfitView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF3426C11D7432E4001A0B91 /* StopProfitView.m */; };
 		CF3426C51D7439D7001A0B91 /* OrderStopLossViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF3426C41D7439D7001A0B91 /* OrderStopLossViewController.m */; };
 		CF3426C81D745D4D001A0B91 /* OrderStopLossView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF3426C71D745D4D001A0B91 /* OrderStopLossView.m */; };
+		CF36E3591D94FDC600AAEA32 /* OrderStopLossModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF36E3581D94FDC600AAEA32 /* OrderStopLossModel.m */; };
+		CF36E35C1D95097E00AAEA32 /* StopValueTag.m in Sources */ = {isa = PBXBuildFile; fileRef = CF36E35B1D95097E00AAEA32 /* StopValueTag.m */; };
 		CF48C6341CD0DBF800BF4EF9 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF48C6331CD0DBF800BF4EF9 /* SearchViewController.m */; };
 		CF48C6431CD22C8B00BF4EF9 /* SearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF48C6421CD22C8B00BF4EF9 /* SearchCell.m */; };
 		CF4A6D181CBE25AA00B36C93 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D171CBE25AA00B36C93 /* main.m */; };
@@ -251,6 +253,10 @@
 		CF3426C41D7439D7001A0B91 /* OrderStopLossViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderStopLossViewController.m; sourceTree = "<group>"; };
 		CF3426C61D745D4D001A0B91 /* OrderStopLossView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderStopLossView.h; sourceTree = "<group>"; };
 		CF3426C71D745D4D001A0B91 /* OrderStopLossView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderStopLossView.m; sourceTree = "<group>"; };
+		CF36E3571D94FDC600AAEA32 /* OrderStopLossModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderStopLossModel.h; sourceTree = "<group>"; };
+		CF36E3581D94FDC600AAEA32 /* OrderStopLossModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderStopLossModel.m; sourceTree = "<group>"; };
+		CF36E35A1D95097E00AAEA32 /* StopValueTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StopValueTag.h; sourceTree = "<group>"; };
+		CF36E35B1D95097E00AAEA32 /* StopValueTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StopValueTag.m; sourceTree = "<group>"; };
 		CF48C6321CD0DBF800BF4EF9 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		CF48C6331CD0DBF800BF4EF9 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		CF48C6411CD22C8B00BF4EF9 /* SearchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchCell.h; sourceTree = "<group>"; };
@@ -642,6 +648,17 @@
 				CF3426C11D7432E4001A0B91 /* StopProfitView.m */,
 				CF3426C61D745D4D001A0B91 /* OrderStopLossView.h */,
 				CF3426C71D745D4D001A0B91 /* OrderStopLossView.m */,
+				CF36E35A1D95097E00AAEA32 /* StopValueTag.h */,
+				CF36E35B1D95097E00AAEA32 /* StopValueTag.m */,
+			);
+			name = stoploss;
+			sourceTree = "<group>";
+		};
+		CF36E3561D94FDAD00AAEA32 /* stoploss */ = {
+			isa = PBXGroup;
+			children = (
+				CF36E3571D94FDC600AAEA32 /* OrderStopLossModel.h */,
+				CF36E3581D94FDC600AAEA32 /* OrderStopLossModel.m */,
 			);
 			name = stoploss;
 			sourceTree = "<group>";
@@ -717,6 +734,7 @@
 		CF4A6D481CBE28DD00B36C93 /* data */ = {
 			isa = PBXGroup;
 			children = (
+				CF36E3561D94FDAD00AAEA32 /* stoploss */,
 				CFF183B51CE6D66B00E991C4 /* money */,
 				CFF1838D1CE4787A00E991C4 /* user */,
 				CFF183831CE45DFA00E991C4 /* base */,
@@ -1437,6 +1455,7 @@
 				CF111D491CFBDF4100298C78 /* OrderRequestModel.m in Sources */,
 				CFA5FFF51D75A5A4006421C4 /* ConditionViewController.m in Sources */,
 				CFDD2E131CCF44AD00E81E3F /* NewsCell.m in Sources */,
+				CF36E3591D94FDC600AAEA32 /* OrderStopLossModel.m in Sources */,
 				CF4A6D591CBE28DD00B36C93 /* Account.m in Sources */,
 				CFC15BAA1CC35F700077FA19 /* HandicapCell.m in Sources */,
 				CFDD2E9D1CCF4DE100E81E3F /* MJRefreshComponent.m in Sources */,
@@ -1541,6 +1560,7 @@
 				CFF1838C1CE472CE00E991C4 /* UserInfoModel.m in Sources */,
 				CFDD2DDC1CC8C01000E81E3F /* DealHoldByModel.m in Sources */,
 				CF4A6D5A1CBE28DD00B36C93 /* AppUtil.m in Sources */,
+				CF36E35C1D95097E00AAEA32 /* StopValueTag.m in Sources */,
 				CFA3B8FC1CD9AB050063AE3E /* ResourceHelper.m in Sources */,
 				CFDD2EA81CCF4DE100E81E3F /* MJRefreshStateHeader.m in Sources */,
 				CFC15BD21CC607900077FA19 /* DynamicCell.m in Sources */,

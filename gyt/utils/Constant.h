@@ -24,8 +24,8 @@
 #pragma mark 网络请求相关
 //#define Root_Url @"http://192.168.1.106:8081" //陈勇
 
-//#define Host @"192.168.1.118" //赵杰
-//#define Port 64360
+#define Host @"192.168.1.118" //赵杰
+#define Port 64360
 
 //#define Host @"192.168.1.106" //陈勇
 //#define Port 64360
@@ -37,8 +37,8 @@
 //#define Host @"192.168.1.109" //
 //#define Port 64360
 
-#define Host @"119.147.47.156" //外网
-#define Port 64350
+//#define Host @"119.147.47.156" //外网
+//#define Port 64350
 
 
 #define Root_Url @"http://119.147.47.156:8088"
@@ -227,7 +227,7 @@ typedef NS_ENUM(NSInteger, RequestType) {
     XT_QueryBankResp,
     XT_COrderError,
     XT_CCancelError,
-    
+    XT_CStopProfitLossSInfo = 12171,
 };
 
 
@@ -324,6 +324,24 @@ typedef NS_ENUM(NSInteger,TipsType)
     ConditionTips = 0,
 };
 
+
+
+//止盈止损运行状态
+typedef NS_ENUM(NSInteger,EStopValueStatus)
+{
+    StopValueStatus_Running = 1,     //运行中
+    StopValueStatus_Pause,            //暂停
+    StopValueStatus_Trigger          //已触发
+};
+
+//止盈止损类型
+typedef NS_ENUM(NSInteger,EStopType)
+{
+    StopType_Profit = 1,             //止盈
+    StopType_Loss                  //止损
+};
+
+
 @interface Constant : NSObject
 
 +(NSString *)EEntrustBSStr : (EEntrustBS) entrust;
@@ -339,6 +357,12 @@ typedef NS_ENUM(NSInteger,TipsType)
 +(NSString *)getPayType : (PayType)type;
 
 +(NSString *)getCashApplicationStatus : (CashApplicationStatus)type;
+
++(NSString *)getStopValueStatus : (EStopValueStatus)statu;
+
++(NSString *)getStopType : (EStopType)type;
+
++(NSString *)getBrokerPriceType : (EBrokerPriceType)type;
 
 @end
 

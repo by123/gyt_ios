@@ -24,6 +24,7 @@
 #import "CloseView.h"
 #import "StopLossViewController.h"
 #import "DetailViewController.h"
+#import "StopLossModel.h"
 
 typedef NS_ENUM(NSInteger,PriceType)
 {
@@ -912,6 +913,7 @@ typedef NS_ENUM(NSInteger,PriceType)
             break;
         case 4:
             [self showTableView:LossStop];
+            [self requestQuery:XT_CStopProfitLossSInfo];
             break;
         case 5:
             [self showTableView:Condition];
@@ -969,7 +971,7 @@ typedef NS_ENUM(NSInteger,PriceType)
 
 #pragma mark ---数据请求----
 
-#pragma mark 请求持仓，委托，成交
+#pragma mark 请求持仓，委托，成交,止盈止损
 -(void)requestQuery : (RequestType)type
 {
     NSString *jsonStr = [QueryRequest buildQueryInfo:type];
@@ -1157,6 +1159,23 @@ typedef NS_ENUM(NSInteger,PriceType)
         [self reloadData:holdProfileDatas type:Profit];
     }
 }
+
+#pragma mark 处理止损止盈数据
+-(void)handleLossData : (BaseRespondModel *)respondModel
+{
+    QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:respondModel.response];
+    NSMutableArray *array = model.datas;
+    if(!IS_NS_COLLECTION_EMPTY(array))
+    {
+        for(id obj in array)
+        {
+            StopLossModel *lossModel = [StopLossModel mj_objectWithKeyValues:obj];
+            [lossStopDatas insertObject:lossModel atIndex:0];
+        }
+        [self reloadData:lossStopDatas type:LossStop];
+    }
+}
+
 
 #pragma mark 处理下单数据
 -(void)handleOrderData : (BaseRespondModel *)respondModel
