@@ -167,8 +167,13 @@ typedef NS_ENUM(NSInteger, ResondType)
     GYT_KLINE,
     GYT_CashApplyInfo,
     GYT_CommitCashApplyInfo,
-    GYT_QueryHistoryData
-
+    GYT_QueryHistoryData,
+    GYT_DeleteLossData,
+    GYT_DeleteAllLossData,
+    GYT_StartLossData,
+    GYT_PauseLossData,
+    GYT_StartAllLossData,
+    GYT_PauseAllLossData
 
 };
 
@@ -331,7 +336,8 @@ typedef NS_ENUM(NSInteger,EStopValueStatus)
 {
     StopValueStatus_Running = 1,     //运行中
     StopValueStatus_Pause,            //暂停
-    StopValueStatus_Trigger          //已触发
+    StopValueStatus_Trigger,          //已触发
+    StopValueStatus_Expiry          //已失效
 };
 
 //止盈止损类型

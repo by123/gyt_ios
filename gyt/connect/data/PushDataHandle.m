@@ -12,6 +12,7 @@
 #import "DealProfitModel.h"
 #import "DealHoldModel.h"
 #import "PushModel.h"
+#import "StopLossModel.h"
 
 @implementation PushDataHandle
 
@@ -45,6 +46,9 @@ SINGLETON_IMPLEMENTION(PushDataHandle)
                 break;
             case XT_CPositionStatics:
                 result = [self handleDealModel:data];
+                break;
+            case XT_CStopProfitLossSInfo:
+                result = [self handleStopLossModel:data];
                 break;
                 
             default:
@@ -95,6 +99,14 @@ SINGLETON_IMPLEMENTION(PushDataHandle)
     DealHoldModel *dealHoldModel = [DealHoldModel mj_objectWithKeyValues:data];
     return dealHoldModel;
 
+}
+
+
+-(StopLossModel *)handleStopLossModel : (id)data
+{
+    StopLossModel *lossModel = [StopLossModel mj_objectWithKeyValues:data];
+    return lossModel;
+    
 }
 
 -(PushModel *)handlePushModel : (id)data

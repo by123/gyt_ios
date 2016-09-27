@@ -25,6 +25,7 @@
 #import "StopLossViewController.h"
 #import "DetailViewController.h"
 #import "StopLossModel.h"
+#import "StopLossRequestModel.h"
 
 typedef NS_ENUM(NSInteger,PriceType)
 {
@@ -134,13 +135,12 @@ typedef NS_ENUM(NSInteger,PriceType)
 
 @property (strong, nonatomic) UIView *rootView;
 
-//扩展view
-@property (strong, nonatomic) UIView *expandView;
+//委托扩展view
+@property (strong, nonatomic) UIView *holdExpandView;
 
 @property (strong, nonatomic) UIButton *handReverseBtn;
 
 @property (strong, nonatomic) UIButton *conditionBtn;
-
 
 @end
 
@@ -161,6 +161,8 @@ typedef NS_ENUM(NSInteger,PriceType)
     Boolean isExpandView;
     PriceType priceType;
     EBrokerPriceType brokerPriceType;
+    StopLossModel *currentLossModel;
+
 }
 
 -(instancetype)initWithData : (CGRect)frame
@@ -181,9 +183,24 @@ typedef NS_ENUM(NSInteger,PriceType)
         lossStopDatas = [[NSMutableArray alloc]init];
         conditionDatas = [[NSMutableArray alloc]init];
         preDatas = [[NSMutableArray alloc]init];
-        [lossStopDatas addObject:@"test"];
-        [conditionDatas addObject:@"test"];
-        [preDatas addObject:@"test"];
+        
+        ///////////////////////////////////////////////////////
+//        StopLossModel *model = [[StopLossModel alloc]init];
+//        model.m_strInstrumentID = @"CN 1607";
+//        model.m_nTime = 163025;
+//        model.m_eStatus =  StopValueStatus_Running;
+//        model.m_eStopType  = StopType_Loss;
+//        model.m_dStopValue = 9787.25f;
+//        model.m_nDirection = ENTRUST_BUY;
+//        model.m_nVolume = 1;
+//        model.m_bEnableStopValue = YES;
+//        model.m_nOrderPriceType = BROKER_PRICE_COMPETE;
+//        
+//        [lossStopDatas addObject:model];
+//        [conditionDatas addObject:@"test"];
+//        [preDatas addObject:@"test"];
+        ///////////////////////////////////////////////////////
+
 
         NSString *moneyDetailStr = [[NSUserDefaults standardUserDefaults] objectForKey:MoneyInfo];
         _moneyModel = [MoneyDetailModel mj_objectWithKeyValues:moneyDetailStr];
@@ -495,9 +512,9 @@ typedef NS_ENUM(NSInteger,PriceType)
          _holdTableView = [[ByDynamicTableView alloc]initWithData:CGRectMake(0, _tabView.y+_tabView.height, SCREEN_WIDTH , SCREEN_HEIGHT - NavigationBar_HEIGHT - StatuBar_HEIGHT  -(_tabView.y+_tabView.height) - 40) array:holdDatas maxWidth:SCREEN_WIDTH * 1.5 type:Hold];
         [_holdTableView setHeaders:widthArray headers:titleArray];
         
-        _expandView = [[UIView alloc]init];
-        _expandView.backgroundColor = SELECT_COLOR;
-        _expandView.frame = CGRectMake(0, 0, SCREEN_WIDTH * 1.5, 40);
+        _holdExpandView = [[UIView alloc]init];
+        _holdExpandView.backgroundColor = SELECT_COLOR;
+        _holdExpandView.frame = CGRectMake(0, 0, SCREEN_WIDTH * 1.5, 40);
         
         _conditionBtn = [[UIButton alloc]init];
         _conditionBtn.frame = CGRectMake(SCREEN_WIDTH - 65, 4, 60, 32);
@@ -508,7 +525,7 @@ typedef NS_ENUM(NSInteger,PriceType)
         [_conditionBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         _conditionBtn.backgroundColor = TEXT_COLOR;
         [_conditionBtn addTarget:self action:@selector(OnClick:) forControlEvents:UIControlEventTouchUpInside];
-        [_expandView addSubview:_conditionBtn];
+        [_holdExpandView addSubview:_conditionBtn];
         
 //        _handReverseBtn = [[UIButton alloc]init];
 //        _handReverseBtn.frame = CGRectMake(SCREEN_WIDTH - 65, 4, 60, 32);
@@ -523,7 +540,7 @@ typedef NS_ENUM(NSInteger,PriceType)
         
         
         _holdTableView.delegate = self;
-        _holdTableView.expandView = _expandView;
+        _holdTableView.expandView = _holdExpandView;
         [self addSubview:_holdTableView];
     }
 }
@@ -761,13 +778,13 @@ typedef NS_ENUM(NSInteger,PriceType)
     }
     else if(view == _addHandBtn)
     {
-        int hand = [[_handTextField getTextFieldText] integerValue];
+        int hand = [[_handTextField getTextFieldText] intValue];
         hand ++;
         [_handTextField setTextFiledText:[NSString stringWithFormat:@"%d",hand]];
     }
     else if(view == _reduceHandBtn)
     {
-        int hand = [[_handTextField getTextFieldText] integerValue];
+        int hand = [[_handTextField getTextFieldText] intValue];
         if(hand <= 1)
         {
             [ByToast showErrorToast:@"手数不能小于等于0"];
@@ -871,6 +888,21 @@ typedef NS_ENUM(NSInteger,PriceType)
                 break;
         }
     }
+    else if(dialog.tag == 2)
+    {
+        if(currentLossModel)
+        {
+            [self deleteOneLossData:currentLossModel];
+        }
+//        switch (position) {
+//            case 0:
+//                <#statements#>
+//                break;
+//                
+//            default:
+//                break;
+//        }
+    }
 }
 
 
@@ -954,6 +986,23 @@ typedef NS_ENUM(NSInteger,PriceType)
         case 2:
             break;
         case 3:
+            break;
+        case 4:
+            if(!IS_NS_COLLECTION_EMPTY(lossStopDatas))
+            {
+                StopLossModel *model = [lossStopDatas objectAtIndex:position];
+                currentLossModel = model;
+                NSMutableArray *array = [[NSMutableArray alloc]init];
+                [array addObject:@"启动/暂停"];
+                [array addObject:@"修改"];
+                [array addObject:@"删除"];
+                [array addObject:@"全部删除"];
+                ByListDialog *dialog = [[ByListDialog alloc]initWithData:array title:model.m_strInstrumentID];
+                dialog.tag = 2;
+                dialog.delegate = self;
+                [self.rootView addSubview:dialog];
+
+            }
             break;
         default:
             break;
@@ -1066,13 +1115,47 @@ typedef NS_ENUM(NSInteger,PriceType)
     NSMutableDictionary *dic =[JSONUtil parseDic:orderModel];
     NSString *jsonStr = [JSONUtil parse:@"cancel" params:dic];
     
-    NSLog(@"数据->%@",jsonStr);
     [[SocketConnect sharedSocketConnect] sendData:jsonStr seq:GYT_CANCEL];
     
     [ByToast showWarnToast:@"发出撤单申请"];
 
 }
 
+
+#pragma mark 删除一条止盈止损
+-(void)deleteOneLossData : (StopLossModel *)model
+{
+    NSString *accountInfoStr =  [[Account sharedAccount] getAccountInfo];
+    UserInfoModel *account = [UserInfoModel mj_objectWithKeyValues:accountInfoStr];
+
+    StopLossRequestModel *requestModel = [[StopLossRequestModel alloc]init];
+    requestModel.accountInfo = account;
+    requestModel.setting = model;
+    NSMutableDictionary *dic =[JSONUtil parseDic:requestModel];
+    NSString *jsonStr = [JSONUtil parse:@"removeStopValueSetting" params:dic];
+    NSLog(@"数据->%@",jsonStr);
+    [[SocketConnect sharedSocketConnect] sendData:jsonStr seq:GYT_DeleteLossData];
+
+}
+
+#pragma mark 删除所有止盈止损
+-(void)deleteAllLossData
+{
+    
+}
+
+#pragma mark 启动或暂停止盈止损
+-(void)startOrPauseLossData : (Boolean)isStart
+                      model : (StopLossModel *)model
+{
+    
+}
+
+#pragma mark 一键启动或者一键暂停止盈止损
+-(void)startOrPauseAllLossData : (Boolean)isStart
+{
+    
+}
 
 #pragma mark 处理持仓数据
 -(void)handlePositionStaticsData : (BaseRespondModel *)respondModel
@@ -1163,6 +1246,7 @@ typedef NS_ENUM(NSInteger,PriceType)
 #pragma mark 处理止损止盈数据
 -(void)handleLossData : (BaseRespondModel *)respondModel
 {
+    [lossStopDatas removeAllObjects];
     QueryRespondsModel *model = [QueryRespondsModel mj_objectWithKeyValues:respondModel.response];
     NSMutableArray *array = model.datas;
     if(!IS_NS_COLLECTION_EMPTY(array))
@@ -1333,6 +1417,26 @@ typedef NS_ENUM(NSInteger,PriceType)
         [[NSUserDefaults standardUserDefaults]setValue:model.mj_JSONString forKey:MoneyInfo];
         _rightLabel.text = [NSString stringWithFormat:@"权益：%.f",model.m_dCurBalance];
         _canUseLabel.text = [NSString stringWithFormat:@"可用：%.f",model.m_dAvailable];
+    }
+    else if([data isKindOfClass:[StopLossModel class]])
+    {
+        StopLossModel *model = data;
+        BOOL hasModel = NO;
+        for(int i = 0 ; i < [lossStopDatas count]; i ++ )
+        {
+            StopLossModel *tempModel = [lossStopDatas objectAtIndex:i];
+            if([tempModel.m_strOrderRef isEqualToString:model.m_strOrderRef] )
+            {
+                hasModel = YES;
+                [lossStopDatas replaceObjectAtIndex:i withObject:model];
+                break;
+            }
+        }
+        if(!hasModel)
+        {
+            [lossStopDatas addObject:model];
+        }
+        [self reloadData:lossStopDatas type:LossStop];
     }
 
 }

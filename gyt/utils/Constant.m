@@ -128,6 +128,7 @@
         default:
             return @"人民币";
     }
+    return @"";
 }
 
 +(NSString *)getCashApplicationStatus : (CashApplicationStatus)type
@@ -144,6 +145,7 @@
         default:
             break;
     }
+    return @"";
 }
 
 +(NSString *)getStopValueStatus:(EStopValueStatus)statu
@@ -155,9 +157,12 @@
             return @"暂停";
         case StopValueStatus_Trigger:
             return @"已触发";
+        case StopValueStatus_Expiry:
+            return @"已失效";
         default:
             break;
     }
+    return @"";
 }
 
 +(NSString *)getStopType:(EStopType)type
@@ -170,6 +175,7 @@
         default:
             break;
     }
+    return @"";
 }
 
 +(NSString *)getBrokerPriceType:(EBrokerPriceType)type
@@ -186,6 +192,7 @@
         default:
             break;
     }
+    return @"";
 }
 
 @end

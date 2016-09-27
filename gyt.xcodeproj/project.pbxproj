@@ -38,6 +38,7 @@
 		CF3426C81D745D4D001A0B91 /* OrderStopLossView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF3426C71D745D4D001A0B91 /* OrderStopLossView.m */; };
 		CF36E3591D94FDC600AAEA32 /* OrderStopLossModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF36E3581D94FDC600AAEA32 /* OrderStopLossModel.m */; };
 		CF36E35C1D95097E00AAEA32 /* StopValueTag.m in Sources */ = {isa = PBXBuildFile; fileRef = CF36E35B1D95097E00AAEA32 /* StopValueTag.m */; };
+		CF36E35F1D9A746900AAEA32 /* StopLossRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF36E35E1D9A746900AAEA32 /* StopLossRequestModel.m */; };
 		CF48C6341CD0DBF800BF4EF9 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF48C6331CD0DBF800BF4EF9 /* SearchViewController.m */; };
 		CF48C6431CD22C8B00BF4EF9 /* SearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF48C6421CD22C8B00BF4EF9 /* SearchCell.m */; };
 		CF4A6D181CBE25AA00B36C93 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D171CBE25AA00B36C93 /* main.m */; };
@@ -257,6 +258,8 @@
 		CF36E3581D94FDC600AAEA32 /* OrderStopLossModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderStopLossModel.m; sourceTree = "<group>"; };
 		CF36E35A1D95097E00AAEA32 /* StopValueTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StopValueTag.h; sourceTree = "<group>"; };
 		CF36E35B1D95097E00AAEA32 /* StopValueTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StopValueTag.m; sourceTree = "<group>"; };
+		CF36E35D1D9A746900AAEA32 /* StopLossRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StopLossRequestModel.h; sourceTree = "<group>"; };
+		CF36E35E1D9A746900AAEA32 /* StopLossRequestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StopLossRequestModel.m; sourceTree = "<group>"; };
 		CF48C6321CD0DBF800BF4EF9 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		CF48C6331CD0DBF800BF4EF9 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		CF48C6411CD22C8B00BF4EF9 /* SearchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchCell.h; sourceTree = "<group>"; };
@@ -659,6 +662,8 @@
 			children = (
 				CF36E3571D94FDC600AAEA32 /* OrderStopLossModel.h */,
 				CF36E3581D94FDC600AAEA32 /* OrderStopLossModel.m */,
+				CF36E35D1D9A746900AAEA32 /* StopLossRequestModel.h */,
+				CF36E35E1D9A746900AAEA32 /* StopLossRequestModel.m */,
 			);
 			name = stoploss;
 			sourceTree = "<group>";
@@ -1477,6 +1482,7 @@
 				CFA3B8F11CD9AAB70063AE3E /* Section.m in Sources */,
 				CF336C841D3746F7004EB64D /* Test.m in Sources */,
 				CFDD2E9C1CCF4DE100E81E3F /* MJRefreshBackFooter.m in Sources */,
+				CF36E35F1D9A746900AAEA32 /* StopLossRequestModel.m in Sources */,
 				CFDFFA9D1CBF78DD00401CB3 /* RightMenuViewController.m in Sources */,
 				CF60E1871CEABF45001EF40D /* QueryRequestModel.m in Sources */,
 				CF2A510B1CE31B2F00F0EF3D /* LoginViewController.m in Sources */,
