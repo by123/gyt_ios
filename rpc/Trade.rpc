@@ -1,0 +1,37 @@
+﻿
+# Trade
+Namespace = ttservice
+ServiceName = Trade
+packType = 2
+#isNewError = True
+Includes = (
+    bson/src/bson.h,
+    utils/TTError.h,
+    traderBase/rpc_Structs_def.h
+)
+
+CppIncludes = (
+    common/StdAfx.h,
+    net/RPCEngine.h,
+    utils/DefaultValue.h,
+    traderBase/rpc_Structs.h
+)
+
+# 登录
+login(info:CTradeLoginParamPtr) => (success:#b)
+
+# 登出
+logout(info:CTradeLoginParamPtr) => (success:#b)
+
+# 查询数据
+queryData(account:CAccountInfoPtr, structId:#i) => (datas:[#IDataPtr])
+
+#查询合约费率和保证金
+queryIntrumentRate(account:CAccountInfoPtr, structId:#i, strInstrumentID:#s)=>(datas:[#IDataPtr])
+
+# 委托
+order(account:CAccountInfoPtr, info:COrderInfoPtr) => (res:IDataPtr)
+# 撤单
+cancel(account:CAccountInfoPtr, order:COrderInfoPtr) => (res:COrderResponsePtr)
+# 主推数据
+=> pushData(account:CAccountInfoPtr, data:IDataPtr)

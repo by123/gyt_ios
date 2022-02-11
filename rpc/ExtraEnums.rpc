@@ -1,0 +1,1682 @@
+﻿Namespace = ttservice
+ServiceName = ExtraEnums
+ExportMacro = DLL_EXPORT_IDATA
+Includes = (  
+    lua/lua.hpp,
+    idata/IDataCommon.h,
+)
+LuaIncludes = (
+    lua/lua.hpp,
+    idata/IDataCommon.h,
+)
+
+###################################################################################################################################################
+########################################################    以下是通用枚举   ######################################################################
+###################################################################################################################################################
+
+enum_EItemProperty : (
+    TIME_TEXT : 0;
+    SUMSTAT : 1;
+    ALIGN_LEFT : 2;
+    ALIGN_CENTER : 3;
+    ALIGN_RIGHT : 4;
+    TIMETAG : 5; // 把timeNULL的时间转成xxx年x月x日11:22:33字样
+    FLASH_CHANGE : 6;    // 数值变化闪烁背景提示
+    DISPLAY_LIMIT_ZERO   : 7;   // 限制某列不得显示小于0的数值，如果小于0，则显示0，注意，这只影响显示，对实际的数据不做任何改动
+    STOCK_VOLUME : 8; // 股票单位切换属性标志
+    LOCAL_INFO : 9; // 本地下单信息标志
+)
+
+enum_EXTOrderTagProperty : (
+    NORMAL    : 0;
+    STOP_LOSS : 1;
+)
+
+enum_EXTPlatForm : (
+    PLATFORM_ZTSP    : 10001;//中投实盘
+    PLATFORM_ZTMN    : 11001;//中投模拟
+    PLATFORM_ZJSP    : 10002;//中金实盘
+    PLATFORM_CJSP    : 10004;//长江实盘
+    PLATFORM_DFSP    : 10003;//东方实盘
+    PLATFORM_DFMN    : 11003;//东方模拟
+    PLATFORM_ZXSP    : 10005;//中信实盘
+    PLATFORM_ZXMN    : 11005;//中信模拟
+    PLATFORM_QLSP    : 10006;//齐鲁实盘
+    PLATFORM_QLMN    : 11006;//齐鲁模拟
+    PLATFORM_HUATAISP    : 10007;//华泰实盘
+    PLATFORM_HUATAIMN    : 11007;//华泰模拟
+    PLATFORM_GXSP    : 10008;//国信实盘
+    PLATFORM_GXMN    : 11008;//国信模拟
+    PLATFORM_XTGPMN  : 11009;//迅投自有股票
+    PLATFORM_SWSP    : 10010;//申银万国实盘
+    PLATFORM_SWMN    : 11010;//申银万国模拟
+    PLATFORM_GTSP    : 10011;//国泰君安实盘
+    PLATFORM_GTMN    : 11011;//国泰君安实盘
+    PLATFORM_UFXSP   : 10012;//UFX实盘
+    PLATFORM_UFXMN   : 11012;//UFX模拟
+    PLATFORM_GZSP    : 10013;//广州证券实盘
+    PLATFORM_GZMN    : 11013;//广州证券模拟
+    PLATFORM_GDSP    : 10014;//光大证券实盘
+    PLATFORM_GDMN    : 11014;//光大证券模拟
+    PLATFORM_SXSP    : 10015;//山西证券实盘
+    PLATFORM_SXMN    : 11015;//山西证券模拟
+    PLATFORM_HAITONGSP    : 10016;//海通证券新API实盘
+    PLATFORM_HAITONGMN    : 11016;//海通证券新API模拟  
+    PLATFORM_HAITONGSPXSP : 10017;//海通证券SPX接口实盘
+    PLATFORM_HAITONGSPXMN : 11017;//海通证券SPX接口模拟 
+    PLATFORM_YHSP    : 10018;//银河证券KCXP实盘
+    PLATFORM_YHMN    : 11018;//银河证券KCXP模拟
+    PLATFORM_YHDDSP  : 10019;//银河证券顶点柜台实盘
+    PLATFORM_YHDDMN  : 11019;//银河证券顶点柜台模拟
+    PLATFORM_O32DB   : 10020;//O32虚拟broker
+    PLATFORM_O32DBMN : 11020;//O32虚拟broker模拟    
+    PLATFORM_GUANGFASP  : 10022;//广发证券顶点柜台实盘
+    PLATFORM_GUANGFAMN  : 11022;//广发证券顶点柜台模拟    
+    PLATFORM_DONGXINGSP  : 10023;//东兴证券顶点柜台实盘
+    PLATFORM_DONGXINGMN  : 11023;//东兴证券顶点柜台模拟
+    PLATFORM_CHANGCHENGSP  : 10024;//长城证券kcxp柜台实盘
+    PLATFORM_CHANGCHENGMN  : 11024;//长城证券kcxp柜台模拟
+    PLATFORM_HUABAOSP  : 10025;//华宝CTP柜台实盘
+    PLATFORM_HUABAOMN  : 11025;//华宝CTP模拟模拟
+    PLATFORM_GUOJINSP  : 10026;//国金恒生柜台实盘
+    PLATFORM_GUOJINMN  : 11026;//国金恒生柜台模拟
+    PLATFORM_XINGYEHSSP  : 10027;//兴业恒生实盘
+    PLATFORM_XINGYEHSMN  : 11027;//兴业恒生柜台模拟
+    PLATFORM_GUANGFAHSSP  : 10028;//广发恒生实盘
+    PLATFORM_GUANGFAHSMN  : 11028;//广发恒生模拟
+    PLATFORM_CAITONGHSSP  : 10029;//财通恒生实盘
+    PLATFORM_CAITONGHSMN  : 11029;//财通恒生模拟
+    PLATFORM_HUAXISP  : 10030;//华西证券实盘
+    PLATFORM_HUAXIMN  : 11030;//华西证券模拟
+    PLATFORM_GUODUSP  : 10031;//国都证券实盘
+    PLATFORM_GUODUMN  : 11031;//国都证券模拟
+    PLATFORM_ZHAOSHANSP  : 10032;//招商证券实盘
+    PLATFORM_ZHAOSHANMN  : 11032;//招商证券模拟
+    PLATFORM_HENGTAISP  : 10033;//恒泰证券实盘
+    PLATFORM_HENGTAIMN  : 11033;//恒泰证券模拟  
+    PLATFORM_ZXJTSP  : 10034;//中信建投证券实盘
+    PLATFORM_ZXJTMN  : 11034;//中信建投证券模拟
+    PLATFORM_HUABAODINGDIANSP  : 10035;//华宝顶点柜台实盘
+    PLATFORM_HUABAODINGDIANMN  : 11035;//华宝顶点柜台模拟
+    PLATFORM_HONGXINSP  : 10036;//宏信恒生柜台实盘
+    PLATFORM_HONGXINMN  : 11036;//宏信恒生柜台模拟
+    PLATFORM_DATONGSP  : 10037;//大同恒生柜台实盘
+    PLATFORM_DATONGMN  : 11037;//大同恒生柜台模拟
+    PLATFORM_YINGDADINGDIANSP  : 10038;//英大证券顶点柜台实盘
+    PLATFORM_YINGDADINGDIANMN  : 11038;//英大证券顶点柜台模拟              
+    PLATFORM_PINGANSP  : 10039;//平安证券kcxp柜台实盘
+    PLATFORM_PINGANMN  : 11039;//平安证券kcxp柜台模拟
+    PLATFORM_ANXINSP  : 10040;//安信证券kcxp柜台实盘
+    PLATFORM_ANXINMN  : 11040;//安信证券kcxp柜台模拟
+    PLATFORM_XINDASP  : 10041;//信达证券kcxp柜台实盘
+    PLATFORM_XINDAMN  : 11041;//信达证券kcxp柜台模拟
+    PLATFORM_UFXYD11SP  : 10043;//英大UFX1.1实盘
+    PLATFORM_UFXYD11MN  : 11043;//英大UFX1.1模拟
+    PLATFORM_XINANSP  : 10044;//西南证券恒生实盘
+    PLATFORM_XINANMN  : 11044;//西南证券恒生模拟
+    PLATFORM_DIYICHUANGYESP  : 10045;//第一创业证券恒生实盘
+    PLATFORM_DIYICHUANGYEMN  : 11045;//第一创业证券恒生模拟
+    PLATFORM_HUAFUDINGDIANSP  : 10046;//华福证券顶点实盘
+    PLATFORM_HUAFUDINGDIANMN  : 11046;//华福证券顶点模拟
+    PLATFORM_FANGZHENGSP  : 10047;//方正证券恒生实盘
+    PLATFORM_FANGZHENGMN  : 11047;//方正证券恒生模拟
+    PLATFORM_ZHONGJINCMSSP  : 10048;//中金证券CMS实盘
+    PLATFORM_ZHONGJINCMSMN  : 11048;//中金证券CMS模拟
+    PLATFORM_ZXJTKUAISUSP  : 10049;//中信建投证券仿KCXP快速柜台实盘
+    PLATFORM_ZXJTKUAISUMN  : 11049;//中信建投证券仿KCXP快速柜台模拟
+    PLATFORM_ZHESHANGHSSP  : 10050;//浙商证券恒生实盘
+    PLATFORM_ZHESHANGHSMN  : 11050;//浙商证券恒生模拟
+    PLATFORM_ZHAOSHANGJIZHONGSP  : 10051;//招商证券集中实盘
+    PLATFORM_ZHAOSHANGJIZHONGMN  : 11051;//招商证券集中模拟
+    PLATFORM_RIXINSP  : 10052;//日信证券顶点实盘
+    PLATFORM_RIXINMN  : 11052;//日信证券顶点模拟
+    PLATFORM_GUOHAISP  : 10053;//国海证券恒生实盘
+    PLATFORM_GUOHAIMN  : 11053;//国海证券恒生模拟
+    PLATFORM_ZHONGXINKUAISUSP  : 10054;//中信证券恒生快速柜台实盘
+    PLATFORM_ZHONGXINKUAISUMN  : 11054;//中信证券恒生快速柜台模拟
+    PLATFORM_HUATAIKUAISUSP  : 10055;//华泰证券恒生内存快速柜台实盘
+    PLATFORM_HUATAIKUAISUMN  : 11055;//华泰证券恒生内存快速柜台模拟
+    PLATFORM_JINYUANHUNDSUNSP  : 10056;//金元证券恒生普通柜台实盘
+    PLATFORM_JINYUANHUNDSUNMN  : 11056;//金元证券恒生普通柜台模拟
+    PLATFORM_XIBUHUNDSUNSP  : 10057;//西部证券恒生普通柜台实盘
+    PLATFORM_XIBUHUNDSUNMN  : 11057;//西部证券恒生普通柜台模拟
+    PLATFORM_HONGYUANHUNDSUNSP  : 10058;//宏源证券恒生普通柜台实盘
+    PLATFORM_HONGYUANHUNDSUNMN  : 11058;//宏源证券恒生普通柜台模拟
+    PLATFORM_XINDADINGDIANSP  : 10059;//信达证券顶点柜台实盘
+    PLATFORM_XINDADINGDIANMN  : 11059;//信达证券顶点柜台模拟
+    PLATFORM_JINYUANOESSP  : 10060;//金元证券OES普通柜台实盘
+    PLATFORM_JINYUANOESMN  : 11060;//金元证券OES普通柜台模拟
+    PLATFORM_EBSSPXSP  : 10064;//光大SPX普通柜台实盘
+    PLATFORM_EBSSPXMN  : 11064;//光大SPX普通柜台模拟
+    PLATFORM_XINGYECTPSP  : 10066;//兴业CTP实盘
+    PLATFORM_XINGYECTPMN  : 11066;//兴业CTP模拟
+    PLATFORM_HUARONGSP  : 10068;//华融证券kcxp柜台实盘
+    PLATFORM_HUARONGMN  : 11068;//华融证券kcxp柜台模拟
+    PLATFORM_GUOSENSP  : 10075; //国信实盘
+    PLATFORM_GUOSENMN  : 11075; //国信模拟
+    PLATFORM_HUABAOAPEXSP  : 10085;//华宝纯顶点柜台实盘
+    PLATFORM_HUABAOAPEXMN  : 11085;//华宝纯顶点柜台模拟
+    PLATFORM_HSDBT2SP : 10097;//恒生东北T2实盘
+    PLATFORM_HSDBT2MN : 11097;//恒生东北T2模拟
+    PLATFORM_XTCLIENTBROKERSP : 10100; //特殊broker实盘
+    PLATFORM_XTCLIENTBROKERMN : 11100; //特殊broker模拟盘
+    PLATFORM_SWHYSP : 10101; //申万宏源实盘
+    PLATFORM_SWHYMN : 11101; //申万宏源模拟盘
+    PLATFORM_CMSKCBPSP : 10102; //招商证券kcbp实盘
+    PLATFORM_CMSKCBPMN : 11102; //招商证券kcbp模拟
+    PLATFORM_BAOYINGSP : 10105; //宝盈基金实盘
+    PLATFORM_BAOYINGMN : 11105; //宝盈基金模拟盘
+    PLATFORM_XTGJHQ  : 10000;//迅投高级行情
+    PLATFORM_MAX_STOCK  : 19999;//股票分界线
+    PLATFORM_CTPSP   : 20001;//CTP期货实盘
+    PLATFORM_CTPMN   : 21001;//CTP期货模拟    
+    PLATFORM_HHSP    : 20002;//华海期货实盘
+    PLATFORM_HHMN    : 21002;//华海期货模拟
+    PLATFORM_KSSP    : 20010;//金仕达期货实盘
+    PLATFORM_KSMN    : 21010;//金仕达期货模拟    
+    PLATFORM_TIANFENGSP    : 20012;//天风期货实盘
+    PLATFORM_TIANFENGMN    : 21012;//天风期货模拟
+    PLATFORM_HUALIANSP    : 20013;//华联期货实盘
+    PLATFORM_HUALIANMN    : 21013;//华联期货模拟
+    PLATFORM_JINGUSP    : 20017;  //金谷期货实盘
+    PLATFORM_JINGUMN    : 21017;  //金谷期货模拟
+    PLATFORM_YINGDASP    : 20014;  //英大期货实盘
+    PLATFORM_YINGDAMN    : 21014;  //英大期货模拟
+    PLATFORM_ZHONGYUANSP    : 20019;  //中原期货实盘
+    PLATFORM_ZHONGYUANMN    : 21019;  //中原期货模拟
+    PLATFORM_XTXHMN  : 21009;//迅投自有期货
+    PLATFORM_MAX_FUTURE : 29999;//期货分界线
+    PLATFORM_SHIWANGSP : 30001;//狮王黄金
+    PLATFORM_SHIWANGMN : 31001;//狮王黄金模拟
+    PLATFORM_MAX_GOLD  : 39999;//T+D分界线
+    PLATFORM_OUTTER_SP : 41001; //外盘SP
+    PLATFORM_OUTTER_YN_MN : 41002; //外盘易盛模拟
+    PLATFORM_OUTTER_YN_SP : 40002; //外盘易盛实盘
+    PLATFORM_OUTTER_IB_SP : 40003; //外盘期货盈透实盘
+    PLATFORM_OUTTER_IB_MN : 41003; //外盘期货盈透模拟
+    PLATFORM_MAX_OUTTER : 49999;  //外盘分界线
+    PLATFORM_HUGANGTONG_YINGHE : 51001; //沪港通之银河柜台
+    PLATFORM_HUGANGTONG_HUNDSUN : 51002; //沪港通之恒生柜台
+    PLATFORM_MAX_HUGANGTONG : 59999;  //沪港通分割线
+    PLATFORM_XHOPTIONMN : 61003; //新湖期权模拟
+    PLATFORM_XHOPTIONSP : 60003; //新湖期权实盘
+    PLATFORM_HSGGOPTIONMN : 61006; //新湖期权模拟
+    PLATFORM_HSGGOPTIONSP : 60006; //新湖期权实盘
+
+    PLATFORM_NS_TRUSTBANK : 150001;     // 场外托管平台
+)
+
+enum_EXTQueryMode : (
+    QUERYMODE_ALL               : 0;//全市场
+    QUERYMODE_FOR_EACH_MARKET  : 1;//分市场查询
+    QUERYMODE_ONLY_START       : 2;//只在启动的时候查询一次
+)
+
+enum_EXTSubjectsStatus : (
+    SUBJECTS_STATUS_NORMAL|正常 : 48;//正常
+    SUBJECTS_STATUS_PAUSE|暂停 : 49;//暂停
+    SUBJECTS_STATUS_NOT|场外的 : -1 //场外的
+)
+
+enum_EXTCompactType : (
+    COMPACT_TYPE_ALL : 32;//不限制
+    COMPACT_TYPE_FIN : 48;//融资
+    COMPACT_TYPE_SLO : 49;//融券
+)
+
+enum_EXTCompactStatus : (
+    COMPACT_STATUS_ALL    :32;//不限制
+    COMPACT_STATUS_UNDONE : 48;//未归还
+    COMPACT_STATUS_PART_DONE : 49;//部分归还
+    COMPACT_STATUS_DONE : 50;//已归还
+    COMPACT_STATUS_DONE_BY_SELF : 51;//自行了结
+    COMPACT_STATUS_DONE_BY_HAND : 52;//手工了结
+    COMPACT_STATUS_NOT_DEBT : 53;//未形成负债
+)
+
+enum_EXTSMTQueryMode : (
+    QUERY_SMT_MODE_DETAIL : 48;//明细
+    QUERY_SMT_MODE_STATISTICS : 49;//汇总
+)
+
+enum_EXTSortDirection : (
+    SORT_DIRECTION_ASC : 48;//正序
+    SORT_DIRECTION_DESC : 49;//倒序
+)
+
+enum_EXTRealStatus : (
+    REAL_STATUS_BIZ : 48;//成交
+    REAL_STATUS_JUNK : 50;//废单
+    REAL_STATUS_CONFIRM : 52;//确认
+)
+
+enum_EXTCrdtrateKind : (
+    CREDTRATE_KIND_FIN : 49;//融资利率
+    CREDTRATE_KIND_SLO : 50;//融券利率
+    CREDTRATE_KIND_FIN_PENALTY : 51;//融资罚息利率
+    CREDTRATE_KIND_SLO_PENALTY : 52;//融券罚息利率
+)
+
+enum_EXTStkBrokerError : (
+    ERR_SUCC                   : 0;    // 成功
+    ERR_CONNECTION             : 10;   // 连接错误
+    ERR_INVALID_DATA           : 11;   // 无效数据
+    ERR_FUNC_UNDEF             : 12;   // 未定义功能，尚不支持 
+    ERR_PROTOCOL_CONVERT       : 13;   // 协议转换错误
+    ERR_SESSION_INEXIST        : 14;   // 会话不存在
+    ERR_NOT_LOGIN              : 15;   // 账号未登录
+    ERR_DISCONNECTED_SECU      : 16;   // 至券商连接断开
+    ERR_INVALID_PARAM          : 17;   // 无效参数，解析有误
+    ERR_COMMUNICATION           : 101;  // 通讯错误
+    ERR_NOT_CHECK_IN           : 110;  // 尚未签入系统
+    ERR_NO_SUBSEQUENT_PACK     : 111;  // 无后续数据包
+    ERR_LOGIN_FAILED           : 301;  // 帐户登录失败
+    ERR_ACC_STATUS_INVALID     : 302;  // 您的帐户状态不正常
+    ERR_CARD_INEXIST           : 303;  // 磁卡号不存在
+    ERR_SECU_ACC_INEXIST       : 304;  // 股东代码不存在
+    ERR_FUND_ACC_INEXIST       : 305;  // 资产帐号不存在
+    ERR_USER_CODE_INEXIST      : 306;  // 用户代码不存在
+    ERR_MARKET_INEXIST         : 307;  // 交易市场不存在
+    ERR_MOD_PWD_FAILED         : 308;  // 修改密码失败
+    ERR_PASSWORD               : 309;  // 密码错误
+    ERR_OPER_FAILED            : 310;  // 操作失败
+    ERR_EXT_INST_INEXIST       : 311;  // 外部机构不存在
+    ERR_BANK_PWD               : 312;  // 银行密码错
+    ERR_PWD_INVALID            : 313;  // 密码有误
+    ERR_NO_AUTHORITY           : 314;  // 无此权限
+    ERR_ACCT_INEXIST           : 315;  // 无此账号，通用账号
+    ERR_SECU_INEXIST           : 401;  // 此股票不存在
+    ERR_TRADE_UNDO             : 402;  // 您未作指定交易
+    ERR_INVALID_ENTRUST_TYPE   : 403;  // 此股不能进行此类委托
+    ERR_ENTRUST_FAILED         : 404;  // 委托失败特别的恒生系的所有委托失败都会到这个错误，包括未做指定
+    ERR_INSUFF_ENBALE_FUND     : 405;  // 可用金额不足
+    ERR_INSUFF_SECU_VOL        : 406;  // 股票余量不足
+    ERR_STOCK_SUSPENDED        : 407;  // 股票停牌
+    ERR_MARKET_CLOSED          : 408;  // 已闭市
+    ERR_INVALID_PRICE          : 409;  // 委托价格超过涨跌停范围
+    ERR_ORDER_NOT_FOUND        : 420;  // 无此委托
+    ERR_NO_CANCEL              : 421;  // 此委托不能撤单
+    ERR_ORDER_CANCELD          : 422;  // 此委托已撤单
+    ERR_NO_RECORDS             : 501;  // 无查询结果
+    ERR_QUERY_FAILED           : 502;  // 查询失败
+    ERR_TRSF_NOT_OPEN          : 601;  // 未开通银行转帐业务
+    ERR_BANK_TRST_NOT_OPEN     : 602;  // 未开通此银行转帐业务
+    ERR_BANK_WITHOUT_TRSF      : 603;  // 该银行尚未开通该项业务
+    ERR_BANK_INEXIST           : 605;  // 银行不存在
+    ERR_TRSF_FAILED            : 604;  // 转帐失败
+    ERR_INVEST_NOT_OPEN        : 701;  // 未开通存折炒股业务
+    ERR_RESET_COST_FAILED      : 801;  // 重置成本失败
+    ERR_OTHERS                 : 999;  // 其它错误    
+)
+
+enum_EXTRcCategoryID : (
+
+    XT_RCC_SYSTEM_CODE_ALL: 1;  //所有证券和期货
+
+    XT_RCC_SYSTEM_CODE_SECURITIES_START: 1001;
+    XT_RCC_SYSTEM_CODE_SECURITIES_ALL: XT_RCC_SYSTEM_CODE_SECURITIES_START; //所有证券
+
+    XT_RCC_SYSTEM_CODE_SECURITIES_A;        //沪深A股
+    XT_RCC_SYSTEM_CODE_SECURITIES_SH_A;     //上海A
+    XT_RCC_SYSTEM_CODE_SECURITIES_SZ_A;     //深圳A
+    XT_RCC_SYSTEM_CODE_SECURITIES_SZ_ZB;    //深圳主板
+    XT_RCC_SYSTEM_CODE_SECURITIES_SZ_ZXB;   //深圳中小板
+    XT_RCC_SYSTEM_CODE_SECURITIES_SZ_CYB;   //深圳创业板
+    
+    XT_RCC_SYSTEM_CODE_SECURITIES_B;        //沪深B股
+    XT_RCC_SYSTEM_CODE_SECURITIES_SH_B;     //上海B
+    XT_RCC_SYSTEM_CODE_SECURITIES_SZ_B;     //深圳B
+
+    XT_RCC_SYSTEM_CODE_SECURITIES_ST;       //ST股
+    XT_RCC_SYSTEM_CODE_SECURITIES_7ST;      //*ST股
+    XT_RCC_SYSTEM_CODE_SECURITIES_S;        //S股
+    XT_RCC_SYSTEM_CODE_SECURITIES_SST;      //SST股
+    XT_RCC_SYSTEM_CODE_SECURITIES_S7ST;     //S*ST股
+
+    XT_RCC_SYSTEM_CODE_SECURITIES_BOND;     //付息国债
+    XT_RCC_SYSTEM_CODE_SECURITIES_BOND_SH;  //上海付息国债
+    XT_RCC_SYSTEM_CODE_SECURITIES_BOND_SZ;  //深圳付息国债
+    
+    XT_RCC_SYSTEM_CODE_SECURITIES_DISCOUNT_BOND;    //贴现国债
+    XT_RCC_SYSTEM_CODE_SECURITIES_DISCOUNT_BOND_SH; //上海贴现国债
+    XT_RCC_SYSTEM_CODE_SECURITIES_DISCOUNT_BOND_SZ; //深圳贴现国债
+    
+    XT_RCC_SYSTEM_CODE_SECURITIES_STD_BOND;     //标准券
+    XT_RCC_SYSTEM_CODE_SECURITIES_STD_BOND_SH;  //上海标准券
+    XT_RCC_SYSTEM_CODE_SECURITIES_STD_BOND_SZ;  //深圳标准券
+
+    XT_RCC_SYSTEM_CODE_SECURITIES_DFZ;      //地方债
+    XT_RCC_SYSTEM_CODE_SECURITIES_DFZ_SH;   //上海地方债
+    XT_RCC_SYSTEM_CODE_SECURITIES_DFZ_SZ;   //深圳地方债
+
+    XT_RCC_SYSTEM_CODE_SECURITIES_QYZ;      //企业债
+    XT_RCC_SYSTEM_CODE_SECURITIES_QYZ_SH;   //上海企业债
+    XT_RCC_SYSTEM_CODE_SECURITIES_QYZ_SZ;   //深圳企业债
+    
+    XT_RCC_SYSTEM_CODE_SECURITIES_GSZ;      //公司债
+    XT_RCC_SYSTEM_CODE_SECURITIES_GSZ_SH;   //上海公司债
+    XT_RCC_SYSTEM_CODE_SECURITIES_GSZ_SZ;   //深圳公司债
+    
+    XT_RCC_SYSTEM_CODE_SECURITIES_SMZ;      //私募债
+    
+    XT_RCC_SYSTEM_CODE_SECURITIES_KZZ;      //可转债
+    XT_RCC_SYSTEM_CODE_SECURITIES_KZZ_SH;   //上海可转债
+    XT_RCC_SYSTEM_CODE_SECURITIES_KZZ_SZ;   //深圳可转债
+    
+    XT_RCC_SYSTEM_CODE_SECURITIES_FLZ;      //分离债
+    XT_RCC_SYSTEM_CODE_SECURITIES_FLZ_SH;   //上海分离债
+    XT_RCC_SYSTEM_CODE_SECURITIES_FLZ_SZ;   //深圳分离债
+    
+    XT_RCC_SYSTEM_CODE_SECURITIES_ZHG;      //债券回购
+    XT_RCC_SYSTEM_CODE_SECURITIES_ZHG_SH;   //上海债券回购
+    XT_RCC_SYSTEM_CODE_SECURITIES_ZHG_SZ;   //深圳债券回购
+    
+    XT_RCC_SYSTEM_CODE_SECURITIES_YEAR_ZFZ; //一年内到期政府债
+    XT_RCC_SYSTEM_CODE_SECURITIES_YEAR_ZFZ_SH;  //上海一年内到期政府债
+    XT_RCC_SYSTEM_CODE_SECURITIES_YEAR_ZFZ_SZ;  //深圳一年内到期政府债
+    
+    XT_RCC_SYSTEM_CODE_SECURITIES_FBSJJ;    //封闭式基金
+    XT_RCC_SYSTEM_CODE_SECURITIES_FBSJJ_SH; //上海封闭式基金
+    XT_RCC_SYSTEM_CODE_SECURITIES_FBSJJ_SZ; //深圳封闭式基金
+    
+    XT_RCC_SYSTEM_CODE_SECURITIES_ETF;      //ETF
+    XT_RCC_SYSTEM_CODE_SECURITIES_ETF_SH;   //上海ETF
+    XT_RCC_SYSTEM_CODE_SECURITIES_ETF_SZ;   //深圳ETF
+    
+    XT_RCC_SYSTEM_CODE_SECURITIES_LOF;      //LOF
+    
+    XT_RCC_SYSTEM_CODE_SECURITIES_FJJJ;     //分级基金
+    
+    XT_RCC_SYSTEM_CODE_SECURITIES_FIX;      //固定收益类资产
+    XT_RCC_SYSTEM_CODE_SECURITIES_RIGHTS;   //权益类资产
+    XT_RCC_SYSTEM_CODE_SECURITIES_HBJJ;     //货币基金
+
+    XT_RCC_SYSTEM_CODE_SECURITIES_NEW;      //新股
+    
+    XT_RCC_SYSTEM_CODE_SECURITIES_KFSJJ;    //开放式基金
+    XT_RCC_SYSTEM_CODE_SECURITIES_KFSJJ_SH; //上海开放式基金
+    XT_RCC_SYSTEM_CODE_SECURITIES_KFSJJ_SZ; //深圳开放式基金
+    
+    XT_RCC_SYSTEM_CODE_SECURITIES_SUBSCRIPTION; // 新股申购
+    XT_RCC_SYSTEM_CODE_SECURITIES_HBJJ_REALTIME;     //实时申赎货币基金
+    XT_RCC_SYSTEM_CODE_SECURITIES_HBJJ_TRANSACTION;     //交易货币基金
+    
+    XT_RCC_SYSTEM_CODE_SECURITIES_ALL_JJ; //全部基金
+    XT_RCC_SYSTEM_CODE_SECURITIES_ALL_ZQ; //全部债券
+    XT_RCC_SYSTEM_CODE_SECURITIES_BOND_NEW; // 新债
+    XT_RCC_SYSTEM_CODE_SECURITIES_BOND_SUBSCRIPTION; // 新债申购
+    
+    XT_RCC_SYSTEM_CODE_SECURITIES_WARRANT; //权证
+    XT_RCC_SYSTEM_CODE_SECURITIES_WARRANT_SH; //上海权证
+    XT_RCC_SYSTEM_CODE_SECURITIES_WARRANT_SZ; //深圳权证
+
+    XT_RCC_SYSTEM_CODE_SECURITIES_POLICY_JRZ;      //政策性金融债
+    XT_RCC_SYSTEM_CODE_SECURITIES_POLICY_JRZ_SH;   //上海政策性金融债
+    XT_RCC_SYSTEM_CODE_SECURITIES_POLICY_JRZ_SZ;   //深圳政策性金融债
+
+    XT_RCC_SYSTEM_CODE_SECURITIES_LOAN_ST;  //ST债
+
+    XT_RCC_SYSTEM_CODE_SECURITIES_CROSSBORDER_ETF; //跨境ETF
+    XT_RCC_SYSTEM_CODE_SECURITIES_CROSSBORDER_ETF_SH; //上海跨境ETF
+    XT_RCC_SYSTEM_CODE_SECURITIES_CROSSBORDER_ETF_SZ; //深圳跨境ETF
+    
+    XT_RCC_SYSTEM_CODE_SECURITIES_CROSSBORDER_LOF; //跨境LOF
+    XT_RCC_SYSTEM_CODE_SECURITIES_CROSSBORDER_LOF_SH; //上海跨境LOF
+    XT_RCC_SYSTEM_CODE_SECURITIES_CROSSBORDER_LOF_SZ; //深圳跨境LOF
+    
+    XT_RCC_SYSTEM_CODE_SECURITIES_EXCHANGEABLELOAN; //可交换公司债
+    XT_RCC_SYSTEM_CODE_SECURITIES_EXCHANGEABLELOAN_SH; //上海可交换公司债
+    XT_RCC_SYSTEM_CODE_SECURITIES_EXCHANGEABLELOAN_SZ; //深圳可交换公司债
+
+    XT_RCC_SYSTEM_CODE_SECURITIES_ZB; //主板
+    
+    XT_RCC_SYSTEM_CODE_SECURITIES_SHARES_ALLOTMENT_SH; //上海配股代码
+    XT_RCC_SYSTEM_CODE_SECURITIES_SHARES_CONVERTIBLE_BOND_SH; //上海配转债代码
+    XT_RCC_SYSTEM_CODE_SECURITIES_NEW_SHARES_DISTRIBUTION_SH;// 上海新股配号
+    XT_RCC_SYSTEM_CODE_SECURITIES__PLACING_FIRST_DISTRIBUTION_SH;//上海配售首发配号
+    XT_RCC_SYSTEM_CODE_SECURITIES_CONVERTIBLE_BOUND_DISTRIBUTION_SH; //上海可转债资金申购配号
+    XT_RCC_SYSTEM_CODE_SECURITIES_SUBSCRIPTION_PRICE_SH; //上海申购款
+    XT_RCC_SYSTEM_CODE_SECURITIES_BONDS_FUNDS_SH; //上海发债款
+    XT_RCC_SYSTEM_CODE_SECURITIES_DISTRIBUTION_SH; //上海配号
+    
+    XT_RCC_SYSTEM_CODE_SECURITIES_SUBSCRIPTION_PRICE;         // 新股申购款
+    XT_RCC_SYSTEM_CODE_SECURITIES_BOND_SUBSCRIPTION_PRICE;    // 新债申购款
+    XT_RCC_SYSTEM_CODE_SECURITIES_SUBSCRIPTION_SZ; // 深圳新股申购
+    XT_RCC_SYSTEM_CODE_SECURITIES_BOND_SUBSCRIPTION_SZ; // 深圳新债申购
+    XT_RCC_SYSTEM_CODE_SECURITIES_SUBFUND;   //分级基金子基金
+    XT_RCC_SYSTEM_CODE_SECURITIES_SUBFUND_SH;   //上海分级基金子基金
+    XT_RCC_SYSTEM_CODE_SECURITIES_SUBFUND_SZ;   //深圳分级基金子基金
+    
+    XT_RCC_SYSTEM_CODE_SECURITIES_ALL_STOCK; //所有股票
+    
+    XT_RCC_SYSTEM_CODE_SECURITIES_SUSPENDED;   //停牌股
+    
+    XT_RCC_SYSTEM_CODE_SECURITIES_XGED_SH; //沪新股额
+    XT_RCC_SYSTEM_CODE_SECURITIES_XGED_SZ; //深新股额
+    XT_RCC_SYSTEM_CODE_SECURITIES_XGED_SHSZ; //沪深新股申购额度
+    
+    XT_RCC_SYSTEM_CODE_SECURITIES_GOLD_ETF;  // 黄金ETF
+    XT_RCC_SYSTEM_CODE_SECURITIES_LOAN_ETF;  // 债券ETF
+    
+    XT_RCC_SYSTEM_CODE_SECURITIES_STOCK_SEO;  // 增发股
+    
+    XT_RCC_SYSTEM_CODE_SECURITIES_END ;
+
+    XT_RCC_SYSTEM_CODE_SECURITIES_OPTION_START: 1501;
+    XT_RCC_SYSTEM_CODE_SECURITIES_OPTION_STOCK_ALL: XT_RCC_SYSTEM_CODE_SECURITIES_OPTION_START; // 全部股票期权
+    XT_RCC_SYSTEM_CODE_SECURITIES_OPTION_END;
+
+    XT_RCC_SYSTEM_CODE_SECURITIES_NEW3BOARD: 1601; // 全国股转
+    XT_RCC_SYSTEM_CODE_SECURITIES_HGT: 1701;   //所有沪港通股票
+    
+	XT_RCC_SYSTEM_CODE_SECURITIES_NS_YHJ : 1990;   // 银行间证券
+    XT_RCC_SYSTEM_CODE_FUTURES_START: 2001;
+    XT_RCC_SYSTEM_CODE_FUTURES_ALL: XT_RCC_SYSTEM_CODE_FUTURES_START;   //所有期货
+    
+    XT_RCC_SYSTEM_CODE_FUTURES_INDEX_FUTURES;  //股指期货
+    XT_RCC_SYSTEM_CODE_FUTURES_DEBT_FUTURES;  //国债期货
+    XT_RCC_SYSTEM_CODE_FUTURES_PRODUCT_FUTURES;  //商品期货
+    
+    XT_RCC_SYSTEM_CODE_FUTURES_CFFEX;   //中金所期货
+    XT_RCC_SYSTEM_CODE_FUTURES_SHFE;    //上期所期货
+    XT_RCC_SYSTEM_CODE_FUTURES_DCE;     //大商所期货
+    XT_RCC_SYSTEM_CODE_FUTURES_CZCE;    //郑商所期货
+    
+    XT_RCC_SYSTEM_CODE_FUTURES_MAJOR_INSTRUMENT;    // 主力合约
+    XT_RCC_SYSTEM_CODE_FUTURES_MINOR_INSTRUMENT;    // 次主力合约
+    XT_RCC_SYSTEM_CODE_FUTURES_3RD_INSTRUMENT;      // 第3主力合约
+    XT_RCC_SYSTEM_CODE_FUTURES_4TH_INSTRUMENT;      // 第4主力合约
+    XT_RCC_SYSTEM_CODE_FUTURES_5TH_INSTRUMENT;      // 第5主力合约
+    
+    XT_RCC_SYSTEM_CODE_FUTURES_WITHIN_MONTHLY_COMMODITY;    // 一个月内交割商品期货
+    XT_RCC_SYSTEM_CODE_FUTURES_MONTHLY_COMMODITY;           // 当月交割商品期货
+   
+    XT_RCC_SYSTEM_CODE_FUTURES_SHFE_START : 2101;   // 上期所品种
+    XT_RCC_SYSTEM_CODE_FUTURES_CFFEX_START : 2151;  // 中金所品种
+    XT_RCC_SYSTEM_CODE_FUTURES_DCE_START : 2201;    // 大商所品种
+    XT_RCC_SYSTEM_CODE_FUTURES_CZCE_START : 2251;   // 郑商所品种
+    
+    //期货套利合约
+    XT_RCC_SYSTEM_CODE_FUTURES_SP : 2301;    //大连同品种跨期组合合约 SP
+    XT_RCC_SYSTEM_CODE_FUTURES_SPC : 2302;   //大连同期跨品种组合合约 SPC
+    XT_RCC_SYSTEM_CODE_FUTURES_SPD : 2303;   //郑州同品种跨期组合合约 SPD
+    
+    XT_RCC_SYSTEM_CODE_FUTURES_END;
+    
+    XT_RCC_SYSTEM_CODE_FUTURES_LUA_START: 2501;
+    
+    XT_RCC_SYSTEM_SPECIAL_START : 3001;
+    XT_RCC_SYSTEM_SPECIAL_PRODUCT : XT_RCC_SYSTEM_SPECIAL_START; // 产品
+    XT_RCC_SYSTEM_SPECIAL_ACCOUNT_FUTURES;        // 期货账号
+    XT_RCC_SYSTEM_SPECIAL_ACCOUNT_STOCKS;        // 股票账号
+    XT_RCC_SYSTEM_SPECIAL_ACCOUNT_CREDITS;        // 信用账号
+    XT_RCC_SYSTEM_SPECIAL_ACCOUNT_HGT;            // 沪港通账号
+    XT_RCC_SYSTEM_SPECIAL_ACCOUNT_NEEQ;            // 新三板账号
+    XT_RCC_SYSTEM_SPECIAL_ACCOUNT_STOCKOPTION;     // 个股期权账号
+    XT_RCC_SYSTEM_SPECIAL_PRODUCTGROUP;             // 产品组
+    XT_RCC_SYSTEM_SPECIAL_ACCOUNT_SP;             // 外盘账号
+    XT_RCC_SYSTEM_SPECIAL_ACCOUNT_IB;               // IB外盘
+    XT_RCC_CUSTOM_CATAGORY_START : 10001;   //在LUA中扩展的用户自定义的证券期货分类
+    
+    XT_RCC_3RD_PARTY_START: 20001;             //在LUA中扩展的第三方证券期货分类
+    XT_RCC_SYSTEM_CATEGORY_GROUP_START: 40001; //系统分类的组合
+    
+    XT_RCC_CONDITIONAL_CATEGORY_START : 50001;        // 带条件的动态维度分类
+
+    XT_RCC_LOGIC_CATEGORY_START : 70001; // 带逻辑嵌套的组合分类
+    
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTURES_START: 80001;
+    
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTURES_ALL : XT_RCC_SYSTEM_CODE_OUTTER_FUTURES_START; //所有外盘期货
+    
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTURES_HKIF;         //香港交易所期货
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTURES_LME;          //伦敦金属交易所期货
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTURES_NYMEX;        //纽约商业交易所期货
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTURES_CBOT;         //易盛芝加哥期货交易所期货
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTURES_NYBOT;        //纽约期货交易所期货
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTURES_TOCOM;        //东京工业品交易所期货
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTURES_MYX;          //马来西亚交易所期货
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTURES_CME;          //芝加哥商业交易所期货
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTURES_IPE;          //伦敦国际石油交易所期货
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTURES_ASX;          //澳大利亚交易所
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTURES_DGCX;         //迪拜黄金与商品交易所
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTURES_EUREX;        //欧洲期权与期货交易所
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTURES_LIFFE;        //伦敦金融期货交易所
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTURES_MGEX;         //明尼阿波利斯谷交易所
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTURES_MX;           //蒙特利尔交易所
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTRUES_OSE;          //大阪证券交易所
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTRUES_SGA_A;        //易盛新加坡交易所A
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTRUES_SGA_B;        //易盛新加坡交易所B
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTRUES_TSE;          //东京证券交易所
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTRUES_WCE;          //加拿大期货交易所
+
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTURES_HKIF_START    : 80101;  //香港交易所品种
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTURES_LME_START     : 80151;  //伦敦金属交易所品种
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTURES_NYMEX_START   : 80201;  //纽约商业交易所品种
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTURES_CBOT_START    : 80251;  //易盛芝加哥期货交易所品种
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTURES_NYBOT_START   : 80301;  //纽约期货交易所品种
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTURES_TOCOM_START   : 80351;  //东京工业品交易所品种
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTURES_MYX_START     : 80401;  //马来西亚交易所品种
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTURES_CME_START     : 80451;  //芝加哥商业交易所品种
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTURES_IPE_START     : 80501;  //伦敦国际石油交易所品种
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTURES_ASX_START     : 80601;  //澳大利亚交易所品种
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTURES_DGCX_START    : 80651;  //迪拜黄金与商品交易所品种
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTURES_EUREX_START   : 80701;  //欧洲期权与期货交易所品种
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTURES_LIFFE_START   : 80751;  //伦敦金融期货交易所品种
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTURES_MGEX_START    : 80801;  //明尼阿波利斯谷交易所品种
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTURES_MX_START      : 80851;  //蒙特利尔交易所品种
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTRUES_OSE_START     : 80901;  //大阪证券交易所品种
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTRUES_SGA_A_START   : 80951;  //易盛新加坡交易所A品种
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTRUES_SGA_B_START   : 81001;  //易盛新加坡交易所B品种
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTRUES_TSE_START     : 81051;  //东京证券交易所
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTRUES_WCE_START     : 81101;  //加拿大期货交易所
+    XT_RCC_SYSTEM_CODE_OUTTER_FUTURES_END           : 81201;
+    
+    XT_RCC_SYSTEM_CODE_IB_OUTTER_START      : 90001;
+    XT_RCC_SYSTEM_CODE_IB_OUTTER_ALL : XT_RCC_SYSTEM_CODE_IB_OUTTER_START;    // 所有IB外盘股票期货
+    XT_RCC_SYSTEM_CODE_IB_OUTTER_SGX;           //IB新加坡交易所
+    XT_RCC_SYSTEM_CODE_IB_OUTTER_GLOBEX;        //IB芝加哥期货交易所
+    
+    XT_RCC_SYSTEM_CODE_IB_SGX_START     :    90101;   //IB新加坡交易所品种
+    XT_RCC_SYSTEM_CODE_IB_GLOBEX_START  :    90151;  //IB芝加哥期货交易所
+    XT_RCC_SYSTEM_CODE_IB_OUTTER_END    :    90201;
+){lua}
+
+enum_EXTRcFieldID : (
+
+    XT_RCF_POSITION_BEGIN : 1;
+    XT_RCF_POSITION_MARKET_VALUE : XT_RCF_POSITION_BEGIN;   // 市值
+    XT_RCF_POSITION_COST;           // 成本
+    XT_RCF_POSITION_MARGIN;         // 保证金
+    XT_RCF_POSITION_POSITION;       // 持仓量
+    XT_RCF_POSITION_MV_YESTERDAY_LONG;  // 昨多市值
+    XT_RCF_POSITION_MV_YESTERDAY_SHORT; // 昨空市值
+    XT_RCF_POSITION_MV_TODAY_LONG;  // 今多市值
+    XT_RCF_POSITION_MV_TODAY_SHORT; // 今空市值
+    XT_RCF_POSITION_MARGIN_YESTERDAY_LONG;  // 昨多保证金
+    XT_RCF_POSITION_MARGIN_YESTERDAY_SHORT; // 昨空保证金
+    XT_RCF_POSITION_MARGIN_TODAY_LONG;  // 今多保证金
+    XT_RCF_POSITION_MARGIN_TODAY_SHORT; // 今空保证金
+    XT_RCF_POSITION_MARGIN_SINGLE;      // 单边保证金
+    XT_RCF_POSITION_TODAY_DEAL_VOLUME;	// 成交量
+    XT_RCF_POSITION_WHOLE_MARGIN_YESTERDAY_LONG;    // 昨多保证金
+    XT_RCF_POSITION_WHOLE_MARGIN_YESTERDAY_SHORT;   // 昨空保证金
+    XT_RCF_POSITION_WHOLE_MARGIN_TODAY_LONG;    // 今多保证金
+    XT_RCF_POSITION_WHOLE_MARGIN_TODAY_SHORT;   // 今空保证金
+    XT_RCF_POSITION_FIN_MARKET_VALUE;               // 融资市值
+    XT_RCF_POSITION_FIN_AMOUNT;                     // 融资合约金额
+    XT_RCF_POSITION_FIN_DEBT;                       // 融资负债
+    XT_RCF_POSITION_SLO_MARKET_VALUE;               // 融券市值
+    XT_RCF_POSITION_SLO_AMOUNT;                     // 融券合约金额
+    XT_RCF_POSITION_SLO_DEBT;                       // 融券负债
+    XT_RCF_POSITION_FIN_VOLUM;                        // 融资买入数量
+    XT_RCF_POSITION_SLO_VOLUM;                        // 融券卖出数量
+    XT_RCF_POSITION_VOLUME_YESTERDAY_LONG;            // 昨多持仓量
+    XT_RCF_POSITION_VOLUME_YESTERDAY_SHORT;           // 昨空持仓量
+    XT_RCF_POSITION_VOLUME_TODAY_LONG;                // 今多持仓量
+    XT_RCF_POSITION_VOLUME_TODAY_SHORT;               // 今空持仓量
+    XT_RCF_POSITION_STOCK_NUM;                        // 持股支数
+    XT_RCF_POSITION_MODIFIED_DUR;                     // 债券收盘价修正久期
+    XT_RCF_POSITION_AHSTOCK_MARKET_VALUE;             // AH股总市值
+    XT_RCF_POSITION_DECLARATION;                      // 申报量
+    XT_RCF_POSITION_FUTURE_PRODUCT_NUM;              // 期货品种数
+    XT_RCF_POSITION_TODAY_BUY_VOLUME;                 // 当日买入量
+    XT_RCF_POSITION_TODAY_SELL_VOLUME;                // 当日卖出量
+    XT_RCF_POSITION_VARIETY_NETTING_MARKETVALUE;      // 品种轧差合约价值
+
+    XT_RCF_GROUP_BEGIN   : 1001;
+    XT_RCF_GROUP_MV_LOCK : XT_RCF_GROUP_BEGIN;  // 锁定单价值
+    XT_RCF_GROUP_MV_HEDGE;   // 跨品种套利单价值
+    XT_RCF_GROUP_MV_RENEW;   // 跨期套利单价值
+    XT_RCF_GROUP_MV_LONG;    // 趋势投机多单价值
+    XT_RCF_GROUP_MV_SHORT;   // 趋势投机空单价值
+
+    XT_RCF_CODE_BEGIN : 2001;
+    XT_RCF_CODE_FLOAT_VOLUME : XT_RCF_CODE_BEGIN;   // 流通股本
+    XT_RCF_CODE_TOTAL_VOLUME;                       // 总股本
+    XT_RCF_CODE_TODAY_DEAL_VOLUME;                  // 今日总成交量
+    XT_RCF_CODE_FLOAT_AMOUNT;                // 流通市值
+    XT_RCF_CODE_TOTAL_AMOUNT;                // 总市值
+    XT_RCF_CODE_OPEN_INTEREST;                  //期货总持仓量
+    XT_RCF_PRODUCT_START    : 3001;
+    XT_RCF_PRODUCT_NET_VALUE : XT_RCF_PRODUCT_START;    // 净值
+    XT_RCF_PRODUCT_PRE_NET_VALUE;   // 昨净值
+    XT_RCF_PRODUCT_NAV;         // 单位净值
+    XT_RCF_PRODUCT_PRE_NAV;     // 昨单位净值
+    XT_RCF_PRODUCT_B_NAV;       // B基金单位净值
+    XT_RCF_PRODUCT_PRE_B_NAV;   // 昨B基金单位净值
+    XT_RCF_PRODUCT_AVAILABLE;   // 可用资金
+    XT_RCF_PRODUCT_SECURITIES_VALUE;// 证券总权益
+    XT_RCF_PRODUCT_FUTURES_VALUE;   // 期货总权益
+    XT_RCF_PRODUCT_MAX_RETRACE;		// 当日最大回撤
+    XT_RCF_PRODUCT_B_MAX_RETRACE;		// B基金当日最大回撤
+    XT_RCF_PRODUCT_HISTORY_B_MAX_RETRACE;     //历史最大回撤
+    XT_RCF_PRODUCT_HISTORY_MAX_RETRACE;   //B基金历史最大回撤
+    XT_RCF_PRODUCT_SECURITIES_AVAILABLE;    // 证券可用资金
+    XT_RCF_PRODUCT_FUTURES_AVAILABLE;   // 期货可用资金
+    XT_RCF_PRODUCT_BALANCE; // 净资产
+    XT_RCF_PRODUCT_SHARE;   // 份额
+    XT_RCF_PRODUCT_OTHER_RIGHTS;   // 其他权益
+    XT_RCF_PRODUCT_NEEQ_AVAILABLE;  // 全国股转可用资金
+    XT_RCF_PRODUCT_NEEQ_VALUE;   // 全国股转总权益
+    XT_RCF_PRODUCT_STOCKOPTION_AVAILABLE;  // 个股期权可用资金
+    XT_RCF_PRODUCT_STOCKOPTION_VALUE; // 个股期权总权益
+    XT_RCF_PRODUCT_HGT_AVAILABLE;  // 沪港通可用资金
+    XT_RCF_PRODUCT_HGT_VALUE;  // 沪港通总权益
+    XT_RCF_PRODUCT_SP_VALUE;     // 产品 外盘期货总权益
+    XT_RCF_PRODUCT_SP_AVAILABLE;   // 产品 外盘期货可用资金
+    XT_RCF_PRODUCT_IB_VALUE;      // 产品 IB总权益
+    XT_RCF_PRODUCT_IB_AVAILABLE;  // 产品 IB可用资金
+    XT_RCF_PRODUCT_END : 4000;
+    
+    XT_RCF_ACCOUNT_FUTURES_START    : 4001;
+    XT_RCF_ACCCOUT_FUTURES_BALANCE;         // 动态权益
+    XT_RCF_ACCOUNT_FUTURES_AVAILABLE;       // 可用资金
+    XT_RCF_ACCOUNT_FUTURES_MARGIN;          // 保证金
+    XT_RCF_ACCOUNT_FUTURES_POSITION_PROFIT;	// 持仓盈亏
+    XT_RCF_ACCOUNT_FUTURES_CLOSE_PROFIT;	// 平仓盈亏
+    XT_RCF_ACCOUNT_FUTURES_PRE_BALANCE;     // 期初权益
+    
+    XT_RCF_ACCOUNT_STOCKS_START    : 5001;
+    XT_RCF_ACCOUNT_STOCKS_BALANCE;            // 总资产
+    XT_RCF_ACCOUNT_STOCKS_AVAILABLE;          // 可用资金
+    XT_RCF_ACCOUNT_STOCKS_LOANREPURCHASE_AMOUNT;              // 正回购资金余额
+    XT_RCF_ACCOUNT_STOCKS_TODAY_LOANREPURCHASE_AMOUNT;        // 正回购当日金额
+    XT_RCF_ACCOUNT_STOCKS_STANDARDBOND_VALUE;                 // 账号 标准券市值
+    XT_RCF_ACCOUNT_STOCKS_TOTAL_ORDER_NUM;                    // 委托总次数
+    XT_RCF_ACCOUNT_STOCKS_CANCEL_ORDER_NUM;                   // 撤单总次数
+    XT_RCF_ACCOUNT_STOCKS_JUNK_ORDER_NUM;                     // 废单总次数
+    XT_RCF_ACCOUNT_STOCKS_ORDERED_VOLUME_NUM;                 // 委托总量
+    XT_RCF_ACCOUNT_STOCKS_TRADED_VOLUME_NUM;                  // 成交总量
+    
+    XT_RCF_ACCOUNT_CREDITS_START    : 6001;
+    XT_RCF_ACCOUNT_CREDITS_ASSURE_ASSET;    // 信用净资产
+    XT_RCF_ACCOUNT_CREDITS_AVAILABLE;            // 信用可用资金
+    
+    XT_RCF_ACCOUNT_NEEQ_START      : 7001;
+    XT_RCF_ACCOUNT_NEEQ_BALANCE;     // 股转总资产
+    XT_RCF_ACCOUNT_NEEQ_AVAILABLE;   // 股转可用资金
+    
+    XT_RCF_ACCOUNT_STOCKOPTION_START   : 8001;
+    XT_RCF_ACCOUNT_STOCKOPTION_BALANCE;  //个股期权总资产
+    XT_RCF_ACCOUNT_STOCKOPTION_AVAILABLE;  //个股期权可用资金
+    
+    XT_RCF_ACCOUNT_HGT_START   : 9001;
+    XT_RCF_ACCOUNT_HGT_BALANCE;  // 总资产
+    XT_RCF_ACCOUNT_HGT_AVAILABLE; // 可用资金
+    
+    XT_RCF_PRODUCTGROUP_START   : 10001;
+    XT_RCF_PRODUCTGROUP_NETVALUE;       // 净值
+    XT_RCF_PRODUCTGROUP_PRE_NETVALUE;   // 昨净值
+    XT_RCF_PRODUCTGROUP_NAV;            // 单位净值
+    XT_RCF_PRODUCTGROUP_PRE_NAV;        // 昨单位净值
+    
+    XT_RCF_ACCOUNT_SP_START       : 12001;
+    XT_RCF_ACCOUNT_SP_BALANCE;           // 外盘账号 动态权益
+    XT_RCF_ACCOUNT_SP_AVAILABLE;         // 外盘账号 可用资金
+    XT_RCF_ACCOUNT_SP_MARGIN;           // 外盘账号 保证金
+    XT_RCF_ACCOUNT_SP_POSITION_PROFIT;  // 外盘账号 持仓盈亏
+    XT_RCF_ACCOUNT_SP_PRE_BALANCE;     // 外盘账号 期初权益
+    
+    XT_RCF_ACCOUNT_IB_START       : 13001;
+    XT_RCF_ACCOUNT_IB_BALANCE;           // IB账号 动态权益
+    XT_RCF_ACCOUNT_IB_AVAILABLE;         // IB账号 可用资金
+    XT_RCF_ACCOUNT_IB_MARGIN;           //  IB账号 保证金
+    XT_RCF_ACCOUNT_IB_POSITION_PROFIT;  //  IB账号 持仓盈亏
+    XT_RCF_ACCOUNT_IB_PRE_BALANCE;     //   IB账号 期初权益
+){lua}
+
+enum_EXTRcLimitType : (
+    XT_RLT_SMALL;               // 限制不大于某值
+    XT_RLT_BIG;                 // 限制不大小某值
+){lua}
+
+enum_EXTRcLimitTypeEx : (
+    XT_RLT_EX_INVALID : -1;
+    XT_RLT_EX_BIGGER_THAN;      // >
+    XT_RLT_EX_SMALLER_THAN;     // <
+    XT_RLT_EX_BIGGER_EQUAL;     // ≥
+    XT_RLT_EX_SMALLER_EQUAL;    // ≤
+    XT_RLT_EX_NOT_EQUAL;        // !=
+){lua}
+
+enum_EXTAssetsRcType : (
+    XT_ASSETS_RC_TYPE_LAW;
+    XT_ASSETS_RC_TYPE_CONTRACT;
+    XT_ASSETS_RC_TYPE_OPERATION;
+){lua}
+
+enum_EXTRcIndexScope : (
+    XT_RIR_ALL; // 全部
+    XT_RIR_CODE; // 单只
+    XT_RIR_PRODUCT; // 单品种
+    XT_RIR_FACTORY; // 单一发行方
+){lua}
+
+enum_EXTTimeStatus : (
+    XT_TIME_STATUS_NORMAL;
+    XT_TIME_STATUS_SAVE;
+    XT_TIME_STATUS_INVALID;
+){lua}
+
+enum_EXtMarketTradeFlag : (
+    XT_MTF_DAY : 1;
+    XT_MTF_NIGHT : 2;
+){lua}
+
+enum_EQueryBizMod : (
+    QUERY_BIZ_MOD_ALL : 0;// 包含撤单、废单 对于委托来说，是所有委托
+    QUERY_BIZ_MOD_ONLY_BIZ : 1;//只有成交  对于委托来说，就是希望普通的委托查询，不包含撤单委托，如果柜台没有这种参数，那就是普通的查询委托
+    QUERY_BIZ_MOD_ONLY_CAN_CANCEL : 2;//查询可撤单委托
+){lua}
+
+enum_EXtBizFlag : (
+	XT_BIZ_FLAG_BUY : 1; // 证券卖出
+	XT_BIZ_FLAG_SELL : 2; // 证券买入
+    XT_BIZ_FLAG_CASH : 15; // 红股入帐
+    XT_BIZ_FLAG_STOCK : 18; // 股息入帐
+    XT_BIZ_FLAG_FUND_JJFC : 56; //基金分拆
+    XT_BIZ_FLAG_FUND_JJHB : 57; //基金合并
+    XT_BIZ_FLAG_FUND_KFJJSG : 73; //开放基金申购
+    XT_BIZ_FLAG_FUND_KFJJSH : 74; //开放基金赎回
+    XT_BIZ_FLAG_FUND_KFJJSHFK : 75; //开放基金赎回返款
+    XT_BIZ_FLAG_FUND_JSZJDJ : 81; //交收资金冻结
+    XT_BIZ_FLAG_FUND_JSZJDJQX : 82; //交收资金冻结取消
+    XT_BIZ_FLAG_FUND_JSZQDJ : 83; //交收证券冻结
+    XT_BIZ_FLAG_FUND_JSZQDJQX : 84; //交收证券冻结取消
+){lua}
+
+enum_EXtCategoryConditionFieldID : (
+    XT_CCF_CODE_BEGIN : 2001;
+    XT_CCF_CODE_FLOAT_VOLUME : XT_RCF_CODE_BEGIN;   // 代码 流通股本
+    XT_CCF_CODE_TOTAL_VOLUME;                       // 代码 总股本
+    XT_CCF_CODE_TODAY_DEAL_VOLUME;                  // 今日总成交量
+    XT_CCF_CODE_FLOAT_AMOUNT;                       // 代码 流通市值
+    XT_CCF_CODE_TOTAL_AMOUNT;                       // 代码 总市值
+    
+    XT_CCF_CODE_DAYFROM_IPO : 2901;                 // 代码 上市天数
+    XT_CCF_CODE_DAYBEFORE_EXPIRED;                  // 代码 距交割日天数
+    XT_CCF_CODE_WIND_REMAIN_YEAR;                   // 代码 万得-剩余期限
+    XT_CCF_CODE_WIND_MODIFIED_DUR;                  // 代码 万得-修正久期
+    XT_CCF_CODE_DAYTO_EXPIREDAY;                    // 债券回购 离到期日的天数
+    XT_CCF_CODE_BOND_ISSUER : 2908;                 // 代码 万得-债券发行方
+    XT_CCF_CODE_PUR_START_DATE : 2909;              // 代码 开放式基金申购起始日
+){lua}
+
+enum_EXtFieldType : (
+    XT_RFT_POSITION;    // 全局产品账号 - 计算指标需扫描持仓
+    XT_RFT_DEAL;        // 全局产品账号 - 计算指标需扫描成交
+    XT_RFT_CREDIT;      // 全局产品账号 - 计算指标需扫描信用数据
+    XT_RFT_QUOTE;       // 全局产品账号 - 计算指标需扫描行情
+    XT_RFT_PRODUCT;     // 产品 - 计算指标需扫描产品数据
+    XT_RFT_ACCOUNT;     // 账号 - 计算指标需扫描账号数据
+){lua}
+
+enum_EXtTradeLimitFlag : (
+    XT_TRADE_LIMIT_BUY : 1; // 买入
+    XT_TRADE_LIMIT_FIN_BUY : 2; // 融资买入
+    XT_TRADE_LIMIT_SLO_SELL : 4; // 融券卖出
+    XT_TRADE_LIMIT_SELL : 8; // 卖出
+    XT_TRADE_LIMIT_OPTION_BUY_OPEN : 16; // 买开
+    XT_TRADE_LIMIT_OPTION_SELL_OPEN : 32; // 卖开
+    XT_TRADE_LIMIT_OPTION_BUY_CLOSE : 64; // 买平
+    XT_TRADE_LIMIT_OPTION_SELL_CLOSE : 128; // 卖平
+    XT_TRADE_LIMIT_OPTION_COVERED_OPEN : 256; // 备兑开
+    XT_TRADE_LIMIT_OPTION_COVERED_CLOSE : 512; // 备兑平
+    XT_TRADE_LIMIT_OPTION_EXERCISE : 1024; // 行权
+    XT_TRADE_LIMIT_OPTION_SECU_LOCK : 2048; // 锁定
+    XT_TRADE_LIMIT_N3B_PRICE_BUY : 1; // 协议转让-定价买入
+    XT_TRADE_LIMIT_N3B_PRICE_SELL : 2; // 协议转让-定价卖出
+    XT_TRADE_LIMIT_N3B_LIMIT_PRICE_BUY : 4; // 做市转让-限价买入
+    XT_TRADE_LIMIT_N3B_LIMIT_PRICE_SELL : 8; // 做市转让-限价卖出
+){lua}
+
+enum_EXtStopLossCategory : (
+    XT_STOPLOSS_CATEGORY_BEGIN : 0; //止损种类开始，与XT_STOPLOSS_CATEGORY_COUNT仅用于遍历该enum中的元素
+    XT_NETVALUE_STOPLOSS : 1;       //产品净值止损
+    XT_NETVALUE_LOSS_STOPLOSS : 2;  //产品净值跌幅止损
+    XT_MAX_RETRACE_STOPLOSS : 3;    //日内最大回撤止损
+    XT_HISTORY_MAX_RETRACE_STOPLOSS : 4;    //历史最大回撤止损
+    XT_STOPLOSS_CATEGORY_COUNT;     //止损的种类个数
+){lua}
+
+enum_EXTDebugId : (
+    XT_NORMAL    : 0;
+    XT_STOCK_SUB : 130;
+)
+
+#资产范围
+enum_EXTAssetsIndexScope : (
+    XT_ASSETS_INDEX_SCOPE_NONE : -1;
+    XT_ASSETS_INDEX_SCOPE_ALL;               //全部
+    XT_ASSETS_INDEX_SCOPE_SINGLE_STOCK;      //单只
+    XT_ASSETS_INDEX_SCOPE_SINGLE_PRODUCT;    //单品种
+    XT_ASSETS_INDEX_SCOPE_SINGLE_ISSUER;     //单一发行方
+){lua}
+
+# 资产类型
+# 这是一个单纯为了设置界面知道在选择了“某个分类”和“某个维度”时可以选择哪些指标而定义的东西
+# 风控实际上用不到
+# 此部分enum可和EXtCategoryTradeType、EXTRcIndexScope对比理解：
+#
+# “持仓资产指标”：分类相关 - 和EXtCategoryTradeType的“持仓资产分类集”逻辑意义上对应，数值不一定对应（且非“单一发行方”）
+# “特殊属性指标”：分类相关 - 和EXtCategoryTradeType的“特殊”逻辑意义上对应（且非“单一发行方”，当然了，这类分类也不可能有“单一发行方”的维度）
+# “特殊维度指标”：维度相关 - 和EXTRcIndexScope的“单一发行方”对应
+#
+# 也就是说，if 维度=="单一发行方" 只能选择 XT_ASSETS_CATEGORY_TYPE_SINGLE_ISSUER 对应的指标
+#           else if category_id == 产品 or 期货账号，根据category_id，能选择 XT_ASSETS_CATEGORY_TYPE_PRODUCT 或 XT_ASSETS_CATEGORY_TYPE_FUTURE_ACCOUNT 对应的指标
+#           else 根据category_id对应的分类集，可以选择其它指标
+enum_EXTAssetsCategoryType : (
+    XT_ASSETS_CATEGORY_TYPE_NONE : -1;          // 无效
+    XT_ASSETS_CATEGORY_TYPE_STOCK : 0;          // 持仓资产指标：证券
+    XT_ASSETS_CATEGORY_TYPE_FUTURE : 1;         // 持仓资产指标：期货
+    XT_ASSETS_CATEGORY_TYPE_PRODUCT : 2;        // 特殊属性指标：产品
+    XT_ASSETS_CATEGORY_TYPE_SINGLE_ISSUER : 3;  // 特殊维度指标：单一发行方
+    XT_ASSETS_CATEGORY_TYPE_FUTURE_ACCOUNT : 4; // 特殊属性指标：期货账号
+    XT_ASSETS_CATEGORY_TYPE_NEW3BOARD : 5;      // 持仓资产指标：新三板
+    XT_ASSETS_CATEGORY_TYPE_STK_OPTION : 6;     // 持仓资产指标：个股期权
+    XT_ASSETS_CATEGORY_TYPE_HGT : 7;            // 持仓资产指标：沪港通
+    XT_ASSETS_CATEGORY_TYPE_SP : 9;          //外盘期货
+){lua}
+
+#onorder和ondeal的类型
+enum_EXTDataStatus : (
+   XT_DATA_STATUS_INITED : 0; //初始化完毕
+   XT_DATA_STATUS_REFRESHING : 1; //刷新中
+   XT_DATA_STATUS_INITING : 2; //初始化中
+)
+
+# 风控判断期货交易类型的标志,风控专用
+enum_EXTRCHedgeFlagType : (
+    XT_RC_CHECK_HEDGE_FLAG_SPECULATION : 1;
+    XT_RC_CHECK_HEDGE_FLAG_ARBITRAGE : 2;
+    XT_RC_CHECK_HEDGE_FLAG_HEDGE : 4;
+    XT_RC_CHECK_HEDGE_FLAG_ALL : 7;
+){lua}
+
+# 风控状态类型
+enum_EXTRCStatusType : (
+    XT_RC_ST_ASSETS_LAW;         // 法规
+    XT_RC_ST_ASSETS_CONTRACT;    // 合同
+    XT_RC_ST_ASSETS_OPERATION;   // 操作
+    XT_RC_ST_STOPLOSS;           // 净值止损
+    XT_RC_ST_TRADELIMIT;         // 交易限制
+    XT_RC_ST_PRICELIMIT;         // 价格限制
+    XT_RC_ST_FUTURE_SPECULATION; // 期货投机限制
+    XT_RC_ST_FUTURE_RULE;        // 期货合规
+    XT_RC_ST_FUTURE_PROFIT;      // 期货止盈止损
+    XT_RC_ST_BLACKWHITE;         // 证券黑白名单
+    XT_RC_ST_REVERSE;            // 反向对敲
+    XT_RC_ST_CMD_FROZEN;         // 指令冻结
+    XT_RC_ST_ASSETS;             // 资产比例
+    XT_RC_ST_CANCEL_RATIO;       // 撤单率
+    XT_RC_ST_FREQUENCY;          // 频率合规
+    XT_RC_ST_ORDER_NUM;          // 数量合规
+    XT_RC_ST_MONEY;              // 金额合规
+    XT_RC_ST_FTBLACKWHITE;       // 期货黑白名单
+){lua}
+
+# CRCTypeKey的条件类型
+enum_EXTRCConditionType : (
+    XT_CONDITION_TYPE_NONE; // 无风控条件
+    XT_CONDITION_TYPE_HAVE; // 有风控条件
+)
+
+# 风控范围类型
+enum_EXTRCScopeType : (
+    XT_RC_SCOPE_TYPE_INVALID:-1; // 非法值
+    XT_RC_SCOPE_TYPE_GLOBAL; // 全局
+    XT_RC_SCOPE_TYPE_ACCOUNTGROUP; // 账号组
+    XT_RC_SCOPE_TYPE_PRODUCT;      // 产品
+    XT_RC_SCOPE_TYPE_ACCOUNT;      // 账号
+    XT_RC_SCOPE_TYPE_PRODUCTGROUP; // 产品组
+){lua}
+
+# 资产比例类型
+enum_EXTAssetsType : (
+    XT_ASSETS_TYPE_PRODUCT_ASSETS : 1;    // 全部
+    XT_ASSETS_TYPE_PRODUCT_PROPERTY;      // 产品
+    XT_ASSETS_TYPE_SINGLE_STOCK;          // 单只
+    XT_ASSETS_TYPE_SINGLE_PRODUCT;        // 单品种
+    XT_ASSETS_TYPE_SINGLE_FACTORY;         // 单一发行方
+){lua}
+
+# 全局风控, 全局黑白名单，反向对敲对应brokertype
+XT_BROKER_TYPE_GLOBALRISK_INVALID(#S) : "0";          // 无效
+XT_BROKER_TYPE_GLOBALRISK_FUTURE(#S) : "1";          // 期货
+XT_BROKER_TYPE_GLOBALRISK_STOCK(#S) : "2";           // 股票
+XT_BROKER_TYPE_GLOBALRISK_GLOBAL(#S) : "3";         // 全局风控
+XT_BROKER_TYPE_GLOBALRISK_NEW3BOARD(#S) : "4";       // 新三板
+XT_BROKER_TYPE_GLOBALRISK_FUTUREOPTION(#S) : "5";   // 期货期权
+XT_BROKER_TYPE_GLOBALRISK_STOCKOPTION(#S) : "6";     // 个股期权
+XT_BROKER_TYPE_GLOBALRISK_HGT(#S) : "7";            // 沪港通
+XT_BROKER_TYPE_GLOBALRISK_OUTTERFUTURE(#S) : "9";       // 外盘期货
+XT_BROKER_TYPE_GLOBALRISK_IB_STOCK_FUTURE(#S) : "12";   // 外盘股票期货
+
+# 产品交易限制对应brokertype
+enum_EXTRCBrokerTypeTradeLimit : (
+    XT_BROKER_TYPE_TRADELIMIT_STOCK;                // 股票
+    XT_BROKER_TYPE_TRADELIMIT_FUTURE;               // 期货
+    XT_BROKER_TYPE_TRADELIMIT_STOCK_OPTION : 3;     // 个股期权
+    XT_BROKER_TYPE_TRADELIMIT_NEW3BOARD;            // 新三板
+    XT_BROKER_TYPE_TRADELIMIT_FUTURE_OPTION;        // 期货期权
+    XT_BROKER_TYPE_TRADELIMIT_HGT : 7;              // 沪港通
+    XT_BROKER_TYPE_TRADELIMIT_OUTERFUTURE: 9;       // 外盘期货
+    XT_BROKER_TYPE_TRADELIMIT_IB_STOCK_FUTURE : 12; // IB股票期货
+){lua}
+
+enum_EXtSysStatusType : (
+    SYS_STATUS_BASE;    // 基础服务状态
+    SYS_STATUS_BASE_TT; // 基础服务-核心服务
+    SYS_STATUS_BASE_TS; // 基础服务-交易服务
+    SYS_STATUS_BASE_RC; // 基础服务-风控服务
+    SYS_STATUS_BASE_TK; // 基础服务-任务服务
+    SYS_STATUS_BROKER;  // 交易插件状态
+    SYS_STATUS_QUOTER;  // 行情插件状态
+    SYS_STATUS_CPU;     // CPU状态
+    SYS_STATUS_MEM;     // 内存状态
+    SYS_STATUS_DISK;    // 磁盘状态
+    SYS_STATUS_NET;     // 网络状态
+){lua}
+
+# 风控审批类型，对应risk_control_approvalbsonrisk的type字段
+
+# 产品风控审批：写product_bsonrisk表content字段
+# 账号风控审批：写account_bsonrisk表content字段
+# 账号黑白名单审批：写risk_control_accountrisk表content字段
+# 全局风控审批：写risk_control_globalrisk表types=3的content字段
+# 全局黑白名单审批：写risk_control_globalrisk表types=(证券2,新三板4,沪港通7)的content字段的除了bucket、m_default以外的部分
+
+enum_EXTRCApprovalType : (
+
+    XT_RC_APPROVAL_TYPE_PRODUCT : 0;                        // 产品
+    
+    XT_RC_APPROVAL_TYPE_ACCOUNT_FUTURE : 1;                 // 期货账号
+    XT_RC_APPROVAL_TYPE_ACCOUNT_STOCK : 2;                  // 股票账号
+    XT_RC_APPROVAL_TYPE_ACCOUNT_CREDIT : 3;                 // 信用账号
+    XT_RC_APPROVAL_TYPE_ACCOUNT_NEW3BOARD : 10;             // 新三板账号
+    XT_RC_APPROVAL_TYPE_ACCOUNT_HGT : 12;                   // 沪港通账号
+    XT_RC_APPROVAL_TYPE_ACCOUNT_STOCK_OPTION : 21;          // 股票期权账号
+    
+    XT_RC_APPROVAL_TYPE_GLOBAL_RC : 4;                      // 全局风控
+    
+    XT_RC_APPROVAL_TYPE_BLACKWHITE_FUTURE : 19;             // 期货账号黑白名单
+    XT_RC_APPROVAL_TYPE_BLACKWHITE_STOCK : 5;               // 证券账号黑白名单
+    XT_RC_APPROVAL_TYPE_BLACKWHITE_CREDIT : 6;              // 信用账号黑白名单
+    XT_RC_APPROVAL_TYPE_BLACKWHITE_STOCKOPTION : 8;         // 股票期权账号黑白名单
+    XT_RC_APPROVAL_TYPE_BLACKWHITE_NEW3BOARD : 11;          // 新三板账号黑白名单
+    XT_RC_APPROVAL_TYPE_BLACKWHITE_HGT : 9;                 // 沪港通账号黑白名单
+    
+    XT_RC_APPROVAL_TYPE_BLACKWHITE_FUTURE_GLOBAL : 20;      // 期货全局黑白名单
+    XT_RC_APPROVAL_TYPE_BLACKWHITE_GLOBAL : 7;              // 证券全局黑白名单
+    XT_RC_APPROVAL_TYPE_BLACKWHITE_NEW3BOARD_GLOBAL : 16;   // 新三板全局黑白名单
+    XT_RC_APPROVAL_TYPE_BLACKWHITE_HGT_GLOBAL : 15;         // 沪港通全局黑白名单
+    XT_RC_APPROVAL_TYPE_BLACKWHITE_STOCKOPTION_GLOBAL : 17; // 股票期权全局黑白名单
+    XT_RC_APPROVAL_TYPE_BLACKWHITE_FUTUREOPTION_GLOBAL : 18;// 期货期权全局黑白名单
+){lua}
+
+# 风控审批状态
+enum_EXTRCApprovalStatus : (
+    XT_RC_APPROVAL_STATUS_COMMITED : 0;             // 已提交
+    XT_RC_APPROVAL_STATUS_CANCLED;                  // 撤回
+    XT_RC_APPROVAL_STATUS_APPROVING;                // 审核中
+    XT_RC_APPROVAL_STATUS_PASSED;                   // 通过
+    XT_RC_APPROVAL_STATUS_REJECTED;                 // 未通过
+){lua}
+
+# ITSM客户端运行模式
+enum_EXtItsmClientMode : (
+    XT_IMC_MODE_PRIMARY;    // 主经纪商
+    XT_IMC_MODE_SUB;        // 分经纪商
+){lua}
+
+# 管理人类型
+enum_EXtPbManagerType : (
+    XMT_FUTURES_BROKER; // 期货公司
+    XMT_STOCK_BROKER; // 证券公司
+    XMT_FUNDS_CORPORATION; // 基金公司
+    XMT_TRUST_CORPORATION; // 信托公司
+    XMT_PRIVATE_FUNDS; // 阳光私募
+    XMT_FUNDS_SUBSIDIARY; // 基金子公司
+    XMT_OTHERS; // 其他公司
+    _C_MANAGER_TYPE_NUM;
+){lua}
+
+# 全局风控类型，对应risk_control_globalrisk的types字段
+# 还是写在这儿吧，要不然回头又不知道啥是啥了
+# 有一些值待补充，目前这些只是扒risk_control/views.py的do_approve函数扒出来的结果
+enum_EXtGlobalRiskType : (
+    GRT_FUTURES_RC : 1; // 全局期货风控
+    GRT_STOCK_RC : 2; // 全局证券风控
+    GRT_ASSETS_RC : 3; // 全局资产比例风控
+    GRT_NEEQ_RC : 4; // 全局新三板风控
+    GRT_HGT_RC : 7; // 全局沪港通风控
+){lua}
+
+# 风控模板类型枚举定义，对应risk_control_template的type字段
+# content字段说明：
+# 资产比例：[CAssetsRC]
+# 交易限制：[COperationRC]
+# 交易量价限制：[COrderPriceLimitRule]
+# 止损限制：CSubFundRCConfig，注意只取其m_netValueStoploss m_netValueLossStopLoss m_retraceStopLoss m_historyRetraceStopLoss这几个字段
+# 期货账号合规：[CFtProductCompliance]
+# 非期货账号合规：CStkProductCompliance
+enum_EXtRcTemplateType : (
+    XT_RC_TEMPLATE_PRODUCT_ASSETS : 200;                // 产品资产比例模板
+    XT_RC_TEMPLATE_PRODUCT_TRADE_LIMIT : 201;           // 产品交易限制模板
+    XT_RC_TEMPLATE_PRODUCT_PRICE_LIMIT : 205;           // 产品交易量价限制模板
+    XT_RC_TEMPLATE_PRODUCT_STOPLOSS : 206;              // 产品止损模板
+    XT_RC_TEMPLATE_ACCOUNT_ASSETS_FUTURES : 202;        // 期货账号资产比例模板
+    XT_RC_TEMPLATE_ACCOUNT_ASSETS_STOCK : 203;          // 证券账号资产比例模板
+    XT_RC_TEMPLATE_ACCOUNT_ASSETS_CREDIT : 204;         // 信用账号资产比例模板
+    XT_RC_TEMPLATE_ACCOUNT_ASSETS_HGT : 210;            // 沪港通账号资产比例模板
+    XT_RC_TEMPLATE_ACCOUNT_COMPLIANCE_FUTURES : 207;    // 期货账号交易合规模板
+    XT_RC_TEMPLATE_ACCOUNT_COMPLIANCE_STOCK : 208;      // 证券账号交易合规模板
+    XT_RC_TEMPLATE_ACCOUNT_COMPLIANCE_CREDIT : 209;     // 信用账号交易合规模板
+    XT_RC_TEMPLATE_ACCOUNT_COMPLIANCE_HGT : 211;        // 沪港通账号交易合规模板
+){lua}
+
+# 保证金手续费模板类型
+enum_EXtMarginFeeTemplatesType : (
+    XT_TEMPLATE_FUTURE_FEE : 10;                // 期货 - 手续费率模板
+    XT_TEMPLATE_FUTUR_INSTRUMENTE : 20;         // 期货 - 合约保证金率模板
+    XT_TEMPLATE_STOCKE_FEE : 30;                // 证券 - 保证金费率模板
+    XT_TEMPLATE_CREDIT_FEE : 40;                // 信用 - 保证金费率模板
+    XT_TEMPLATE_HGT_FEE : 50;                   // 沪港通 - 保证金费率模板
+    XT_TEMPLATE_NEW_3_BOARD_FEE : 60;           // 新三板 - 手续费率模板
+    XT_TEMPLATE_FUTURE_OPTION_FEE : 70;         // 期货期权 - 手续费率模板
+    XT_TEMPLATE_FUTURE_OPTION_INSTRUMENT : 80;  // 期货期权 - 合约保证金率模板
+){lua}
+
+# 产品交易范围限制类型
+enum_EXtRcOperationLimitType : (
+    XT_RC_OPERATION_LIMIT_STOCKCREDIT: 0;               // 证券信用
+    XT_RC_OPERATION_LIMIT_FUTURE: 1;                    // 期货
+    XT_RC_OPERATION_LIMIT_STOCKOPTION: 3;               // 股票期权
+    XT_RC_OPERATION_LIMIT_NEW3BOARD: 4;                 // 新三板
+    XT_RC_OPERATION_LIMIT_HGT: 7;                       // 沪港通
+){lua}
+
+enum_EXtProductStatusType : (
+    XT_ITSM_PRODUCT_STATUS_NORMAL;                      // 产品正常
+    XT_ITSM_PRODUCT_STATUS_EXPIRE;                      // 产品过期
+){lua}
+
+# itsm权限
+enum_EXtITSMAuth : (
+    XT_ITSM_AUTH_LOGIN: 10001;                                                          // 登录
+    
+    XT_ITSM_AUTH_BASIC_MANAGEMENT: 10003;                                               // 基础管理
+        XT_ITSM_AUTH_ROLE_MANAGEMENT: 10027;                                            // 角色管理
+            XT_ITSM_AUTH_USERGROUP_CONFIG: 10155;                                       // 用户组权限-配置
+            XT_ITSM_AUTH_USERGROUP_SAVE: 10157;                                         // 用户组权限-保存
+            XT_ITSM_AUTH_USERGROUP_RENAME: 10455;                                       // 修改用户组名称
+        XT_ITSM_AUTH_USER_MANAGEMENT: 10033;                                            // 用户管理
+            XT_ITSM_AUTH_USER_QUERYLIST: 10161;                                         // 用户列表-查询
+            XT_ITSM_AUTH_USER_ENABLE: 10163;                                            // 启用用户
+            XT_ITSM_AUTH_USER_DISABLE: 10165;                                           // 停用用户
+            XT_ITSM_AUTH_USER_MODPASSWORD: 10167;                                       // 修改密码
+            XT_ITSM_AUTH_USER_CONFIG_QUERY: 10169;                                      // 用户设置-查询
+            XT_ITSM_AUTH_USER_CONFIG_SAVE: 10171;                                       // 用户设置-保存
+            XT_ITSM_AUTH_USER_PRODUCTS_QUERY: 10173;                                    // 用户参与产品-查询
+            XT_ITSM_AUTH_USER_ORDERSERVICE_QUERY: 10175;                                // 用户接口单-查询
+            XT_ITSM_AUTH_USER_ORDERSERVICE_SAVE: 10177;                                 // 用户接口单-保存
+            XT_ITSM_AUTH_USER_LOGININFO_QUERY: 11047;                                   // 登录信息查询
+            XT_ITSM_AUTH_USER_ADD: 10179;                                               // 添加用户
+            XT_ITSM_AUTH_USER_LOGOUT: 11291;                                            // 强制登出
+        XT_ITSM_AUTH_PRODUCT_MANAGEMENT: 10045;                                         // 产品管理
+            XT_ITSM_AUTH_PRODUCT_CONFIG: 10329;                                         // 设置
+            XT_ITSM_AUTH_PRODUCT_LIST: 10331;                                           // 列表详情
+            XT_ITSM_AUTH_PRODUCT_QUERY_NETVALUE: 10333;                                 // 查询净值
+            XT_ITSM_AUTH_PRODUCT_OVERVIEW: 10335;                                       // 总览
+            XT_ITSM_AUTH_PRODUCT_COMMAND: 10337;                                        // 指令
+            XT_ITSM_AUTH_PRODUCT_COMMAND_EXPORT: 10339;                                 // 指令导出
+            XT_ITSM_AUTH_PRODUCT_TASK: 10341;                                           // 任务
+            XT_ITSM_AUTH_PRODUCT_TASK_EXPORT: 10343;                                    // 任务导出
+            XT_ITSM_AUTH_PRODUCT_PREVIEW: 10473;                                        // 预览
+            XT_ITSM_AUTH_PRODUCT_TREND: 10475;                                          // 走势
+            XT_ITSM_AUTH_PRODUCT_FUTURE_POSITION: 10477;                                // 期货持仓查看/导出
+            XT_ITSM_AUTH_PRODUCT_STOCK_POSITION: 10481;                                 // 股票持仓查看/导出
+            XT_ITSM_AUTH_PRODUCT_OTHER_RIGHTS: 10483;                                   // 其他权益
+            XT_ITSM_AUTH_PRODUCT_VALUATION_IMPORT: 10485;                               // 估值导入
+            XT_ITSM_AUTH_PRODUCT_VALUATION_VIEW: 10487;                                 // 估值查看
+            XT_ITSM_AUTH_PRODUCT_RCCONFIG_DISABLE: 10489;                               // 禁用产品风控设置
+            XT_ITSM_AUTH_PRODUCT_RCCONFIG_ENABLE: 10491;                                // 启用产品风控设置
+            XT_ITSM_AUTH_PRODUCT_CREATE: 10507;                                         // 新建产品
+            XT_ITSM_AUTH_PRODUCT_EXTERNAL_PRODUCT: 10513;                               // 管理外部产品
+            XT_ITSM_AUTH_PRODUCT_RC_ENABLE: 10515;                                      // 启用所有风控
+            XT_ITSM_AUTH_PRODUCT_RC_DISABLE: 10517;                                     // 禁用所有风控
+            XT_ITSM_AUTH_PRODUCT_NET_VALUE_DEL: 11293;                                  // 删除净值
+            XT_ITSM_AUTH_PRODUCT_NET_VALUE_EDIT: 11295;                                 // 编辑净值
+            XT_ITSM_AUTH_PRODUCT_BASIC: 10113;                                          // 基本设置
+                XT_ITSM_AUTH_PRODUCT_BASIC_SAVE: 10345;                                 // 保存
+            XT_ITSM_AUTH_PRODUCT_GRADEDFUND: 10115;                                     // 分级基金设置
+                XT_ITSM_AUTH_PRODUCT_GRADEDFUND_SAVE: 10347;                            // 保存
+            XT_ITSM_AUTH_PRODUCT_ACCOUNT: 10117;                                        // 账号设置
+                XT_ITSM_AUTH_PRODUCT_ACCOUNT_SAVE: 10349;                               // 保存
+                XT_ITSM_AUTH_PRODUCT_ACCOUNT_ADD_STKOPT: 10723;                         // 添加股票期权账号
+            XT_ITSM_AUTH_PRODUCT_WORKFLOW: 10119;                                       // 工作流设置
+                XT_ITSM_AUTH_PRODUCT_WORKFLOW_LIST: 10351;                              // 列表详情
+                XT_ITSM_AUTH_PRODUCT_WORKFLOW_SAVE: 10353;                              // 工作流保存
+                XT_ITSM_AUTH_PRODUCT_WORKFLOW_QUERYER: 10355;                           // 关联查询员
+                XT_ITSM_AUTH_PRODUCT_WORKFLOW_RCER: 10357;                              // 关联风控员
+                XT_ITSM_AUTH_PRODUCT_WORKFLOW_CLOSER: 10359;                            // 关联平仓员
+                XT_ITSM_AUTH_PRODUCT_WORKFLOW_USER: 10361;                              // 关联用户
+                XT_ITSM_AUTH_PRODUCT_WORKFLOW_ACCOUNT: 10363;                           // 关联账号
+                XT_ITSM_AUTH_PRODUCT_WORKFLOW_DEL: 10365;                               // 删除
+                XT_ITSM_AUTH_PRODUCT_WORKFLOW_EDIT: 11289;                              // 编辑工作流
+            XT_ITSM_AUTH_PRODUCT_RC: 10121;                                             // 风控设置
+                XT_ITSM_AUTH_PRODUCT_RC_SAVE: 10367;                                    // 保存/提审
+            XT_ITSM_AUTH_PRODUCT_DATAPUSH: 10123;                                       // 数据推送设置
+                XT_ITSM_AUTH_PRODUCT_DATAPUSH_SAVE: 10369;                              // 保存
+            XT_ITSM_AUTH_PRODUCT_OTHERRIGHTS: 10125;                                    // 其他权益设置
+                XT_ITSM_AUTH_PRODUCT_OTHERRIGHTS_ADD: 10371;                            // 添加权益
+                XT_ITSM_AUTH_PRODUCT_OTHERRIGHTS_FEE: 10469;                            // 保存管理费明细
+                XT_ITSM_AUTH_PRODUCT_OTHERRIGHTS_DEL: 10505;                            // 删除
+        XT_ITSM_AUTH_BROKER_MANAGEMENT: 10051;                                          // 经纪公司
+            XT_ITSM_AUTH_BROKER_LIST: 10377;                                            // 列表详情
+            XT_ITSM_AUTH_BROKER_CONFIG: 10379;                                          // 设置
+            XT_ITSM_AUTH_BROKER_CONFIG_SAVE: 10381;                                     // 保存设置
+            XT_ITSM_AUTH_BROKER_DELETE: 10383;                                          // 删除
+            XT_ITSM_AUTH_BROKER_ADD_HGT: 10923;                                         // 添加沪港通公司
+            XT_ITSM_AUTH_BROKER_ADD_SP: 10925;                                          // 添加SP外盘公司
+            XT_ITSM_AUTH_BROKER_ADD_FUTUREOPTION: 10927;                                // 添加期货期权公司
+            XT_ITSM_AUTH_BROKER_ADD_FUTURE: 11325;                                      // 添加期货公司
+            XT_ITSM_AUTH_BROKER_ADD_STOCK: 11327;                                       // 添加证券公司
+            XT_ITSM_AUTH_BROKER_ADD_N3B: 11329;                                         // 添加新三板公司
+            XT_ITSM_AUTH_BROKER_ADD_STOCKOPTION: 11331;                                 // 添加股票期权公司
+            XT_ITSM_AUTH_BROKER_BASIC: 10133;                                           // 基本信息
+            XT_ITSM_AUTH_BROKER_TRADE_LINE: 10135;                                      // 交易线路
+            XT_ITSM_AUTH_BROKER_QUOTER_LINE: 10137;                                     // 行情线路
+            
+        XT_ITSM_AUTH_COMPANY_MANAGEMENT: 11061;                                         // 管理人管理
+            XT_ITSM_AUTH_COMPANY_MANAGEMENT_LIST: 11063;                                // 管理人列表
+            XT_ITSM_AUTH_COMPANY_MANAGEMENT_ADD: 11065;                                 // 添加管理人
+                XT_ITSM_AUTH_COMPANY_MANAGEMENT_CREATE_SAVE: 11085;                     // 保存并设置管理人
+            XT_ITSM_AUTH_COMPANY_MANAGEMENT_SETTING: 11067;                             // 设置
+                XT_ITSM_AUTH_COMPANY_MANAGEMENT_SETTING_BASE: 11069;                    // 基本设置
+                    XT_ITSM_AUTH_COMPANY_MANAGEMENT_SETTING_BASE_SAVE: 11071;           // 保存
+                XT_ITSM_AUTH_COMPANY_MANAGEMENT_SETTING_MANAGER: 11073;                 // 管理员设置
+                    XT_ITSM_AUTH_COMPANY_MANAGEMENT_SETTING_MANAGER_SAVE: 11075;        // 保存
+                XT_ITSM_AUTH_COMPANY_MANAGEMENT_SETTING_PERMISSION: 11077;              // 权限设置
+                    XT_ITSM_AUTH_COMPANY_MANAGEMENT_SETTING_PERMISSION_SAVE: 11079;     // 保存
+                XT_ITSM_AUTH_COMPANY_MANAGEMENT_SETTING_AUTHORIZATION: 11081;           // 授权设置
+                    XT_ITSM_AUTH_COMPANY_MANAGEMENT_SETTING_AUTHORIZATION_SAVE: 11083;  // 保存
+            
+    XT_ITSM_AUTH_ACCOUNT_MANAGEMENT: 10007;                                             // 账号管理
+        XT_ITSM_AUTH_ACCOUNT_FUTURE: 10037;                                             // 期货账号
+            XT_ITSM_AUTH_ACCOUNT_FUTURE_LIST: 10181;                                    // 列表详情
+            XT_ITSM_AUTH_ACCOUNT_FUTURE_RELOGIN: 10183;                                 // 重新登陆
+            XT_ITSM_AUTH_ACCOUNT_FUTURE_MODPASSWORD: 10185;                             // 修改柜台/本地密码
+            XT_ITSM_AUTH_ACCOUNT_FUTURE_SPLIT: 10187;                                   // 拆分账号
+            XT_ITSM_AUTH_ACCOUNT_FUTURE_MERGE: 10189;                                   // 合并账号
+            XT_ITSM_AUTH_ACCOUNT_FUTURE_ENABLE: 10191;                                  // 启用账号
+            XT_ITSM_AUTH_ACCOUNT_FUTURE_DISABLE: 10193;                                 // 停用账号
+            XT_ITSM_AUTH_ACCOUNT_FUTURE_CONFIG: 10195;                                  // 设置
+            XT_ITSM_AUTH_ACCOUNT_FUTURE_POSITION_QUERY: 10197;                          // 查询持仓
+            XT_ITSM_AUTH_ACCOUNT_FUTURE_POSITION_ADJUST: 10199;                         // 分/调仓
+            XT_ITSM_AUTH_ACCOUNT_FUTURE_POS_SPLIT_SEL: 10201;                           // 选中分仓
+            XT_ITSM_AUTH_ACCOUNT_FUTURE_POS_ADJUST_SEL: 10203;                          // 选中调仓
+            XT_ITSM_AUTH_ACCOUNT_FUTURE_POS_QUERY_IMPORT: 10205;                        // 主/子账号-查询持仓-导入分仓
+            XT_ITSM_AUTH_ACCOUNT_FUTURE_POS_EXPORT_SPLIT: 10207;                        // 导出数据-分仓
+            XT_ITSM_AUTH_ACCOUNT_FUTURE_ODR_QUERY: 10209;                               // 查询委托
+            XT_ITSM_AUTH_ACCOUNT_FUTURE_ODR_EXPORT: 10211;                              // 导出数据-委托
+            XT_ITSM_AUTH_ACCOUNT_FUTURE_DAL_QUERY: 10213;                               // 查询成交
+            XT_ITSM_AUTH_ACCOUNT_FUTURE_DAL_EXPORT: 10215;                              // 导出数据-成交
+            XT_ITSM_AUTH_ACCOUNT_FUTURE_STATEMENTS_QUERY: 10217;                        // 查询结算单
+            XT_ITSM_AUTH_ACCOUNT_FUTURE_ASSET_QUERY: 10219;                             // 查询资产
+            XT_ITSM_AUTH_ACCOUNT_FUTURE_POS_ADJUST_REC: 10543;                          // 调仓记录
+            XT_ITSM_AUTH_ACCOUNT_FUTURE_ODR_ADJUST_REC: 10797;                          // 调委托记录
+            XT_ITSM_AUTH_ACCOUNT_FUTURE_TRANSFER_REC: 10525;                            // 转账记录
+            XT_ITSM_AUTH_ACCOUNT_FUTURE_CREATE: 11049;                                  // 创建期货账号
+            XT_ITSM_AUTH_ACCOUNT_FUTURE_INFO: 10095;                                    // 账号信息
+                XT_ITSM_AUTH_ACCOUNT_FUTURE_INFO_SAVE: 10221;                           // 保存
+            XT_ITSM_AUTH_ACCOUNT_FUTURE_LIMIT: 10097;                                   // 交易限制
+                XT_ITSM_AUTH_ACCOUNT_FUTURE_LIMIT_SAVE: 10223;                          // 保存
+            XT_ITSM_AUTH_ACCOUNT_FUTURE_RC: 10099;                                      // 风控设置
+                XT_ITSM_AUTH_ACCOUNT_FUTURE_RC_SAVE: 10225;                             // 保存
+            XT_ITSM_AUTH_ACCOUNT_FUTURE_FEE: 10100;                                     // 保证金/手续费设置
+                XT_ITSM_AUTH_ACCOUNT_FUTURE_FEE_SAVE: 10533;                            // 保存
+                XT_ITSM_AUTH_ACCOUNT_FUTURE_FEE_APPLY: 10535;                           // 应用
+        XT_ITSM_AUTH_ACCOUNT_STOCK: 10041;                                              // 证券账号
+            XT_ITSM_AUTH_ACCOUNT_STOCK_LIST: 10229;                                     // 列表详情
+            XT_ITSM_AUTH_ACCOUNT_STOCK_RELOGIN: 10231;                                  // 重新登陆
+            XT_ITSM_AUTH_ACCOUNT_STOCK_MODPASSWORD: 10233;                              // 修改柜台/本地密码
+            XT_ITSM_AUTH_ACCOUNT_STOCK_SPLIT: 10235;                                    // 拆分账号
+            XT_ITSM_AUTH_ACCOUNT_STOCK_MERGE: 10237;                                    // 合并账号
+            XT_ITSM_AUTH_ACCOUNT_STOCK_ENABLE: 10239;                                   // 启用账号
+            XT_ITSM_AUTH_ACCOUNT_STOCK_DISABLE: 10241;                                  // 停用账号
+            XT_ITSM_AUTH_ACCOUNT_STOCK_CONFIG: 10243;                                   // 设置
+            XT_ITSM_AUTH_ACCOUNT_STOCK_POSITION_QUERY: 10245;                           // 查询持仓
+            XT_ITSM_AUTH_ACCOUNT_STOCK_POSITION_ADJUST: 10247;                          // 分/调仓
+            XT_ITSM_AUTH_ACCOUNT_STOCK_POS_SPLIT_SEL: 10249;                            // 选中分仓
+            XT_ITSM_AUTH_ACCOUNT_STOCK_POS_ADJUST_SEL: 10251;                           // 选中调仓
+            XT_ITSM_AUTH_ACCOUNT_STOCK_POS_QUERY_IMPORT: 10253;                         // 主/子账号-查询持仓-导入分仓
+            XT_ITSM_AUTH_ACCOUNT_STOCK_POS_EXPORT_SPLIT: 10255;                         // 导出数据-分仓
+            XT_ITSM_AUTH_ACCOUNT_STOCK_ODR_QUERY: 10257;                                // 查询委托
+            XT_ITSM_AUTH_ACCOUNT_STOCK_ODR_EXPORT: 10259;                               // 导出数据-委托
+            XT_ITSM_AUTH_ACCOUNT_STOCK_DAL_QUERY: 10261;                                // 查询成交
+            XT_ITSM_AUTH_ACCOUNT_STOCK_DAL_EXPORT: 10263;                               // 导出数据-成交
+            XT_ITSM_AUTH_ACCOUNT_STOCK_STATEMENTS_QUERY: 10265;                         // 查询结算单
+            XT_ITSM_AUTH_ACCOUNT_STOCK_ASSET_QUERY: 10267;                              // 查询资产
+            XT_ITSM_AUTH_ACCOUNT_STOCK_POS_ADJUST_REC: 10545;                           // 调仓记录
+            XT_ITSM_AUTH_ACCOUNT_STOCK_ODR_ADJUST_REC: 10799;                           // 调委托记录
+            XT_ITSM_AUTH_ACCOUNT_STOCK_SUBACC_CLEAR_REC: 10807;                         // 子账号清算记录
+            XT_ITSM_AUTH_ACCOUNT_STOCK_CREATE: 11051;                                   // 创建证券账号
+            XT_ITSM_AUTH_ACCOUNT_STOCK_INFO: 10101;                                     // 账号信息
+                XT_ITSM_AUTH_ACCOUNT_STOCK_INFO_SAVE: 10269;                            // 保存
+            XT_ITSM_AUTH_ACCOUNT_STOCK_LIMIT: 10105;                                    // 黑白名单
+                XT_ITSM_AUTH_ACCOUNT_STOCK_LIMIT_SAVE: 10273;                           // 保存
+            XT_ITSM_AUTH_ACCOUNT_STOCK_RC: 10107;                                       // 风控设置
+                XT_ITSM_AUTH_ACCOUNT_STOCK_RC_SAVE: 10275;                              // 保存
+            XT_ITSM_AUTH_ACCOUNT_STOCK_FEE: 10108;                                      // 手续费设置
+                XT_ITSM_AUTH_ACCOUNT_STOCK_FEE_SAVE: 10549;                             // 保存
+                XT_ITSM_AUTH_ACCOUNT_STOCK_FEE_APPLY: 10559;                            // 应用
+        XT_ITSM_AUTH_ACCOUNT_CREDIT: 10089;                                             // 信用账号
+            XT_ITSM_AUTH_ACCOUNT_CREDIT_LIST: 10279;                                    // 列表详情
+            XT_ITSM_AUTH_ACCOUNT_CREDIT_RELOGIN: 10281;                                 // 重新登陆
+            XT_ITSM_AUTH_ACCOUNT_CREDIT_MODPASSWORD: 10283;                             // 修改柜台/本地密码
+            XT_ITSM_AUTH_ACCOUNT_CREDIT_SPLIT: 10285;                                   // 拆分账号
+            XT_ITSM_AUTH_ACCOUNT_CREDIT_MERGE: 10287;                                   // 合并账号
+            XT_ITSM_AUTH_ACCOUNT_CREDIT_ENABLE: 10289;                                  // 启用账号
+            XT_ITSM_AUTH_ACCOUNT_CREDIT_DISABLE: 10291;                                 // 停用账号
+            XT_ITSM_AUTH_ACCOUNT_CREDIT_CONFIG: 10467;                                  // 设置
+            XT_ITSM_AUTH_ACCOUNT_CREDIT_POSITION_QUERY: 10293;                          // 查询持仓
+            XT_ITSM_AUTH_ACCOUNT_CREDIT_POSITION_ADJUST: 10295;                         // 分/调仓
+            XT_ITSM_AUTH_ACCOUNT_CREDIT_POS_SPLIT_SEL: 10297;                           // 选中分仓
+            XT_ITSM_AUTH_ACCOUNT_CREDIT_POS_ADJUST_SEL: 10299;                          // 选中调仓
+            XT_ITSM_AUTH_ACCOUNT_CREDIT_POS_QUERY_IMPORT: 10301;                        // 主/子账号-查询持仓-导入分仓
+            XT_ITSM_AUTH_ACCOUNT_CREDIT_POS_EXPORT_SPLIT: 10303;                        // 导出数据-分仓
+            XT_ITSM_AUTH_ACCOUNT_CREDIT_ODR_QUERY: 10305;                               // 查询委托
+            XT_ITSM_AUTH_ACCOUNT_CREDIT_ODR_EXPORT: 10307;                              // 导出数据-委托
+            XT_ITSM_AUTH_ACCOUNT_CREDIT_DAL_QUERY: 10309;                               // 查询成交
+            XT_ITSM_AUTH_ACCOUNT_CREDIT_DAL_EXPORT: 10311;                              // 导出数据-成交
+            XT_ITSM_AUTH_ACCOUNT_CREDIT_STATEMENTS_QUERY: 10313;                        // 查询结算单
+            XT_ITSM_AUTH_ACCOUNT_CREDIT_ASSET_QUERY: 10315;                             // 查询资产
+            XT_ITSM_AUTH_ACCOUNT_CREDIT_SUBJECT_QUERY: 10317;                           // 查询标的信息
+            XT_ITSM_AUTH_ACCOUNT_CREDIT_ASSET_DETAIL: 10319;                            // 查询信用资产明细
+            XT_ITSM_AUTH_ACCOUNT_CREDIT_LOAN_QUERY: 10813;                              // 查询负债合约
+            XT_ITSM_AUTH_ACCOUNT_CREDIT_POS_ADJUST_REC: 10553;                          // 调仓记录
+            XT_ITSM_AUTH_ACCOUNT_CREDIT_ODR_ADJUST_REC: 10801;                          // 调委托记录
+            XT_ITSM_AUTH_ACCOUNT_CREDIT_CREATE: 11053;                                  // 创建信用账号
+            XT_ITSM_AUTH_ACCOUNT_CREDIT_ASSET_DETAIL_1: 10811;                          // 查询信用资产明细
+            XT_ITSM_AUTH_ACCOUNT_CREDIT_LOAN_QUERY_1: 10321;                            // 查询负债合约
+            XT_ITSM_AUTH_ACCOUNT_CREDIT_INFO: 10109;                                    // 账号信息
+                XT_ITSM_AUTH_ACCOUNT_CREDIT_INFO_SAVE: 10323;                           // 保存
+            XT_ITSM_AUTH_ACCOUNT_CREDIT_LIMIT: 10110;                                   // 黑白名单
+                XT_ITSM_AUTH_ACCOUNT_CREDIT_LIMIT_SAVE: 10325;                          // 保存
+            XT_ITSM_AUTH_ACCOUNT_CREDIT_RC: 10106;                                      // 风控设置
+                XT_ITSM_AUTH_ACCOUNT_CREDIT_RC_SAVE: 10458;                             // 保存
+            XT_ITSM_AUTH_ACCOUNT_CREDIT_FEE: 10111;                                     // 手续费设置
+                XT_ITSM_AUTH_ACCOUNT_CREDIT_FEE_SAVE: 10557;                            // 保存
+                XT_ITSM_AUTH_ACCOUNT_CREDIT_FEE_APPLY: 10561;                           // 应用
+        XT_ITSM_AUTH_ACCOUNT_STKOP: 10657;                                              // 股票期权账号
+            XT_ITSM_AUTH_ACCOUNT_STKOP_LIST: 10655;                                     // 列表详情
+            XT_ITSM_AUTH_ACCOUNT_STKOP_RELOGIN: 10659;                                  // 重新登陆
+            XT_ITSM_AUTH_ACCOUNT_STKOP_MODPASSWORD: 10661;                              // 修改柜台/本地密码
+            XT_ITSM_AUTH_ACCOUNT_STKOP_SPLIT: 10663;                                    // 拆分账号
+            XT_ITSM_AUTH_ACCOUNT_STKOP_MERGE: 10665;                                    // 合并账号
+            XT_ITSM_AUTH_ACCOUNT_STKOP_ENABLE: 10667;                                   // 启用账号
+            XT_ITSM_AUTH_ACCOUNT_STKOP_DISABLE: 10669;                                  // 停用账号
+            XT_ITSM_AUTH_ACCOUNT_STKOP_CONFIG: 10671;                                   // 设置
+            XT_ITSM_AUTH_ACCOUNT_STKOP_POSITION_QUERY: 10673;                           // 查询持仓
+            XT_ITSM_AUTH_ACCOUNT_STKOP_POSITION_ADJUST: 10675;                          // 分/调仓
+            XT_ITSM_AUTH_ACCOUNT_STKOP_POS_SPLIT_SEL: 10677;                            // 选中分仓
+            XT_ITSM_AUTH_ACCOUNT_STKOP_POS_ADJUST_SEL: 10679;                           // 选中调仓
+            XT_ITSM_AUTH_ACCOUNT_STKOP_POS_QUERY_IMPORT: 10681;                         // 主/子账号-查询持仓-导入分仓
+            XT_ITSM_AUTH_ACCOUNT_STKOP_POS_EXPORT_SPLIT: 10683;                         // 导出数据-分仓
+            XT_ITSM_AUTH_ACCOUNT_STKOP_ODR_QUERY: 10685;                                // 查询委托
+            XT_ITSM_AUTH_ACCOUNT_STKOP_ODR_EXPORT: 10687;                               // 导出数据-委托
+            XT_ITSM_AUTH_ACCOUNT_STKOP_DAL_QUERY: 10689;                                // 查询成交
+            XT_ITSM_AUTH_ACCOUNT_STKOP_DAL_EXPORT: 10691;                               // 导出数据-成交
+            XT_ITSM_AUTH_ACCOUNT_STKOP_STATEMENTS_QUERY: 10693;                         // 查询结算单
+            XT_ITSM_AUTH_ACCOUNT_STKOP_ASSET_QUERY: 10695;                              // 查询资产
+            XT_ITSM_AUTH_ACCOUNT_STKOP_CREATE: 10697;                                   // 创建股票期权账号
+            XT_ITSM_AUTH_ACCOUNT_STKOP_SUBACC_CLEAR_REC: 10699;                         // 转账记录
+            XT_ITSM_AUTH_ACCOUNT_STKOP_POS_ADJUST_REC: 10701;                           // 调仓记录
+            XT_ITSM_AUTH_ACCOUNT_STKOP_ODR_ADJUST_REC: 10805;                           // 调委托记录
+            XT_ITSM_AUTH_ACCOUNT_STKOP_INFO: 10703;                                     // 账号信息
+                XT_ITSM_AUTH_ACCOUNT_STKOP_SAVE: 10705;                                 // 保存
+        XT_ITSM_AUTH_ACCOUNT_HGT: 10745;                                                // 沪港通账号
+            XT_ITSM_AUTH_ACCOUNT_HGT_LIST: 10747;                                       // 列表详情
+            XT_ITSM_AUTH_ACCOUNT_HGT_CREATE: 10749;                                     // 创建沪港通账号
+            XT_ITSM_AUTH_ACCOUNT_HGT_SPLIT: 10751;                                      // 拆分账号
+            XT_ITSM_AUTH_ACCOUNT_HGT_RELOGIN: 10755;                                    // 重新登陆
+            XT_ITSM_AUTH_ACCOUNT_HGT_MODPASSWORD: 10753;                                // 修改柜台/本地密码
+            XT_ITSM_AUTH_ACCOUNT_HGT_MERGE: 10757;                                      // 合并账号
+            XT_ITSM_AUTH_ACCOUNT_HGT_ENABLE: 10759;                                     // 启用账号
+            XT_ITSM_AUTH_ACCOUNT_HGT_DISABLE: 10761;                                    // 停用账号
+            XT_ITSM_AUTH_ACCOUNT_HGT_CONFIG: 10763;                                     // 设置
+            XT_ITSM_AUTH_ACCOUNT_HGT_POSITION_QUERY: 10765;                             // 查询持仓
+            XT_ITSM_AUTH_ACCOUNT_HGT_POSITION_ADJUST: 10767;                            // 分/调仓
+            XT_ITSM_AUTH_ACCOUNT_HGT_POS_SPLIT_SEL: 10769;                              // 选中分仓
+            XT_ITSM_AUTH_ACCOUNT_HGT_POS_ADJUST_SEL: 10771;                             // 选中调仓
+            XT_ITSM_AUTH_ACCOUNT_HGT_POS_EXPORT_SPLIT: 10775;                           // 导出数据-分仓
+            XT_ITSM_AUTH_ACCOUNT_HGT_ODR_QUERY: 10777;                                  // 查询委托
+            XT_ITSM_AUTH_ACCOUNT_HGT_ODR_EXPORT: 10779;                                 // 导出数据-委托
+            XT_ITSM_AUTH_ACCOUNT_HGT_DAL_QUERY: 10781;                                  // 查询成交
+            XT_ITSM_AUTH_ACCOUNT_HGT_DAL_EXPORT: 10783;                                 // 导出数据-成交
+            XT_ITSM_AUTH_ACCOUNT_HGT_STATEMENTS_QUERY: 10785;                           // 查询结算单
+            XT_ITSM_AUTH_ACCOUNT_HGT_ASSET_QUERY: 10787;                                // 查询资产
+            XT_ITSM_AUTH_ACCOUNT_HGT_POS_ADJUST_REC: 10789;                             // 调仓记录
+            XT_ITSM_AUTH_ACCOUNT_HGT_TRANSFER_REC: 10791;                               // 转账记录
+            XT_ITSM_AUTH_ACCOUNT_HGT_ODR_ADJUST_REC: 10803;                             // 调委托记录
+            XT_ITSM_AUTH_ACCOUNT_HGT_SUBACC_CLEAR_REC: 10943;                           // 子账号清算记录
+            XT_ITSM_AUTH_ACCOUNT_HGT_INFO: 10795;                                       // 账号信息
+                XT_ITSM_AUTH_ACCOUNT_HGT_SAVE: 10815;                                   // 提交保存
+            XT_ITSM_AUTH_ACCOUNT_HGT_LIMIT: 10939;                                      // 黑白名单
+                XT_ITSM_AUTH_ACCOUNT_HGT_LIMIT_SAVE: 10941;                             // 提交审核
+            XT_ITSM_AUTH_ACCOUNT_HGT_RC: 10945;                                         // 风控设置
+                XT_ITSM_AUTH_ACCOUNT_HGT_RC_SAVE: 10947;                                // 提交审核
+            XT_ITSM_AUTH_ACCOUNT_HGT_FEE: 10949;                                        // 手续费设置
+                XT_ITSM_AUTH_ACCOUNT_HGT_FEE_SAVE: 10951;                               // 保存
+        XT_ITSM_AUTH_ACCOUNT_FUTOP: 10871;                                              // 期货期权账号
+            XT_ITSM_AUTH_ACCOUNT_FUTOP_LIST: 10873;                                     // 列表详情
+            XT_ITSM_AUTH_ACCOUNT_FUTOP_SPLIT: 10877;                                    // 拆分账号
+            XT_ITSM_AUTH_ACCOUNT_FUTOP_MODPASSWORD: 10879;                              // 修改柜台/本地密码
+            XT_ITSM_AUTH_ACCOUNT_FUTOP_RELOGIN: 10881;                                  // 重新登陆
+            XT_ITSM_AUTH_ACCOUNT_FUTOP_MERGE: 10883;                                    // 合并账号
+            XT_ITSM_AUTH_ACCOUNT_FUTOP_ENABLE: 10885;                                   // 启用账号
+            XT_ITSM_AUTH_ACCOUNT_FUTOP_DISABLE: 10887;                                  // 停用账号
+            XT_ITSM_AUTH_ACCOUNT_FUTOP_CONFIG: 10889;                                   // 设置
+            XT_ITSM_AUTH_ACCOUNT_FUTOP_POSITION_QUERY: 10891;                           // 查询持仓
+            XT_ITSM_AUTH_ACCOUNT_FUTOP_POSITION_ADJUST: 10893;                          // 分/调仓
+            XT_ITSM_AUTH_ACCOUNT_FUTOP_POS_SPLIT_SEL: 10895;                            // 选中分仓
+            XT_ITSM_AUTH_ACCOUNT_FUTOP_POS_ADJUST_SEL: 10897;                           // 选中调仓
+            XT_ITSM_AUTH_ACCOUNT_FUTOP_POS_EXPORT_SPLIT: 10899;                         // 导出数据-分仓
+            XT_ITSM_AUTH_ACCOUNT_FUTOP_ODR_QUERY: 10901;                                // 查询委托
+            XT_ITSM_AUTH_ACCOUNT_FUTOP_ODR_EXPORT: 10903;                               // 导出数据-委托
+            XT_ITSM_AUTH_ACCOUNT_FUTOP_DAL_QUERY: 10905;                                // 查询成交
+            XT_ITSM_AUTH_ACCOUNT_FUTOP_DAL_EXPORT: 10907;                               // 导出数据-成交
+            XT_ITSM_AUTH_ACCOUNT_FUTOP_STATEMENTS_QUERY: 10909;                         // 查询结算单
+            XT_ITSM_AUTH_ACCOUNT_FUTOP_ASSET_QUERY: 10911;                              // 查询资产
+            XT_ITSM_AUTH_ACCOUNT_FUTOP_POS_ADJUST_REC: 10913;                           // 调仓记录
+            XT_ITSM_AUTH_ACCOUNT_FUTOP_SUBACC_CLEAR_REC: 10915;                         // 转账记录
+            XT_ITSM_AUTH_ACCOUNT_FUTOP_ODR_ADJUST_REC: 10917;                           // 调委托记录
+            XT_ITSM_AUTH_ACCOUNT_FUTOP_CREATE: 10875;                                   // 创建期货期权账号
+            XT_ITSM_AUTH_ACCOUNT_FUTOP_INFO: 10919;                                     // 账号信息
+                XT_ITSM_AUTH_ACCOUNT_FUTOP_SAVE: 10921;                                 // 提交保存
+        XT_ITSM_AUTH_ACCOUNT_SP: 10817;                                                 // SP外盘账号
+            XT_ITSM_AUTH_ACCOUNT_SP_LIST: 10819;                                        // 列表详情
+            XT_ITSM_AUTH_ACCOUNT_SP_RELOGIN: 10827;                                     // 重新登陆
+            XT_ITSM_AUTH_ACCOUNT_SP_MODPASSWORD: 10825;                                 // 修改柜台/本地密码
+            XT_ITSM_AUTH_ACCOUNT_SP_SPLIT: 10823;                                       // 拆分账号
+            XT_ITSM_AUTH_ACCOUNT_SP_MERGE: 10829;                                       // 合并账号
+            XT_ITSM_AUTH_ACCOUNT_SP_ENABLE: 10831;                                      // 启用账号
+            XT_ITSM_AUTH_ACCOUNT_SP_DISABLE: 10833;                                     // 停用账号
+            XT_ITSM_AUTH_ACCOUNT_SP_CONFIG: 10835;                                      // 设置
+            XT_ITSM_AUTH_ACCOUNT_SP_POSITION_QUERY: 10837;                              // 查询持仓
+            XT_ITSM_AUTH_ACCOUNT_SP_POSITION_ADJUST: 10839;                             // 分/调仓
+            XT_ITSM_AUTH_ACCOUNT_SP_POS_SPLIT_SEL: 10841;                               // 选中分仓
+            XT_ITSM_AUTH_ACCOUNT_SP_POS_ADJUST_SEL: 10843;                              // 选中调仓
+            XT_ITSM_AUTH_ACCOUNT_SP_POS_EXPORT_SPLIT: 10845;                            // 导出数据-分仓
+            XT_ITSM_AUTH_ACCOUNT_SP_ODR_QUERY: 10847;                                   // 查询委托
+            XT_ITSM_AUTH_ACCOUNT_SP_ODR_EXPORT: 10849;                                  // 导出数据-委托
+            XT_ITSM_AUTH_ACCOUNT_SP_DAL_QUERY: 10851;                                   // 查询成交
+            XT_ITSM_AUTH_ACCOUNT_SP_DAL_EXPORT: 10853;                                  // 导出数据-成交
+            XT_ITSM_AUTH_ACCOUNT_SP_STATEMENTS_QUERY: 10855;                            // 查询结算单
+            XT_ITSM_AUTH_ACCOUNT_SP_ASSET_QUERY: 10857;                                 // 查询资产
+            XT_ITSM_AUTH_ACCOUNT_SP_POS_ADJUST_REC: 10859;                              // 调仓记录
+            XT_ITSM_AUTH_ACCOUNT_SP_ODR_ADJUST_REC: 10863;                              // 调委托记录
+            XT_ITSM_AUTH_ACCOUNT_SP_TRANSFER_REC: 10861;                                // 转账记录
+            XT_ITSM_AUTH_ACCOUNT_SP_CREATE: 10821;                                      // 创建SP外盘账号
+            XT_ITSM_AUTH_ACCOUNT_SP_INFO: 10865;                                        // 账号信息
+                XT_ITSM_AUTH_ACCOUNT_SP_SAVE: 10869;                                    // 提交保存
+        XT_ITSM_AUTH_ACCOUNT_N3B: 10953;                                                // 新三板账号
+            XT_ITSM_AUTH_ACCOUNT_N3B_LIST: 10955;                                       // 列表详情
+            XT_ITSM_AUTH_ACCOUNT_N3B_RELOGIN: 10963;                                    // 重新登陆
+            XT_ITSM_AUTH_ACCOUNT_N3B_MODPASSWORD: 10961;                                // 修改柜台/本地密码
+            XT_ITSM_AUTH_ACCOUNT_N3B_SPLIT: 10959;                                      // 拆分账号
+            XT_ITSM_AUTH_ACCOUNT_N3B_MERGE: 10965;                                      // 合并账号
+            XT_ITSM_AUTH_ACCOUNT_N3B_ENABLE: 10967;                                     // 启用账号
+            XT_ITSM_AUTH_ACCOUNT_N3B_DISABLE: 10969;                                    // 停用账号
+            XT_ITSM_AUTH_ACCOUNT_N3B_CONFIG: 10971;                                     // 设置
+            XT_ITSM_AUTH_ACCOUNT_N3B_POSITION_QUERY: 10973;                             // 查询持仓
+            XT_ITSM_AUTH_ACCOUNT_N3B_POSITION_ADJUST: 10975;                            // 分/调仓
+            XT_ITSM_AUTH_ACCOUNT_N3B_POS_SPLIT_SEL: 10977;                              // 选中分仓
+            XT_ITSM_AUTH_ACCOUNT_N3B_POS_ADJUST_SEL: 10979;                             // 选中调仓
+            XT_ITSM_AUTH_ACCOUNT_N3B_POS_EXPORT_SPLIT: 10981;                           // 导出数据-分仓
+            XT_ITSM_AUTH_ACCOUNT_N3B_ODR_QUERY: 10983;                                  // 查询委托
+            XT_ITSM_AUTH_ACCOUNT_N3B_ODR_EXPORT: 10985;                                 // 导出数据-委托
+            XT_ITSM_AUTH_ACCOUNT_N3B_DAL_QUERY: 10987;                                  // 查询成交
+            XT_ITSM_AUTH_ACCOUNT_N3B_DAL_EXPORT: 10989;                                 // 导出数据-成交
+            XT_ITSM_AUTH_ACCOUNT_N3B_STATEMENTS_QUERY: 10991;                           // 查询结算单
+            XT_ITSM_AUTH_ACCOUNT_N3B_ASSET_QUERY: 10993;                                // 查询资产
+            XT_ITSM_AUTH_ACCOUNT_N3B_CREATE: 10957;                                     // 创建股票期权账号
+            XT_ITSM_AUTH_ACCOUNT_N3B_SUBACC_CLEAR_REC: 10997;                           // 转账记录
+            XT_ITSM_AUTH_ACCOUNT_N3B_POS_ADJUST_REC: 10995;                             // 调仓记录
+            XT_ITSM_AUTH_ACCOUNT_N3B_ODR_ADJUST_REC: 10999;                             // 调委托记录
+            XT_ITSM_AUTH_ACCOUNT_N3B_INFO: 11001;                                       // 账号信息
+                XT_ITSM_AUTH_ACCOUNT_N3B_SAVE: 11003;                                   // 提交保存
+            XT_ITSM_AUTH_ACCOUNT_N3B_LIMIT: 11005;                                      // 黑白名单
+                XT_ITSM_AUTH_ACCOUNT_N3B_LIMIT_SAVE: 11007;                             // 提交审核
+            XT_ITSM_AUTH_ACCOUNT_N3B_RC: 11009;                                         // 风控设置
+                XT_ITSM_AUTH_ACCOUNT_N3B_RC_SAVE: 11011;                                // 提交审核
+            XT_ITSM_AUTH_ACCOUNT_N3B_FEE: 11013;                                        // 手续费设置
+                XT_ITSM_AUTH_ACCOUNT_N3B_FEE_SAVE: 11025;                               // 保存
+        XT_ITSM_AUTH_ACCOUNT_GOLD: -1;                                                  // 贵金属账号 已从数据库删除
+            
+    XT_ITSM_AUTH_QUOTER_MANAGEMENT: 10013;                                              // 行情源管理
+        XT_ITSM_AUTH_QUOTER_FUTURE: 10053;                                              // 期货行情源
+            XT_ITSM_AUTH_QUOTER_FUTURE_ADD: 10385;                                      // 添加
+            XT_ITSM_AUTH_QUOTER_FUTURE_DEL: 10387;                                      // 删除
+        XT_ITSM_AUTH_QUOTER_STOCK: 10055;                                               // 证券行情源
+            XT_ITSM_AUTH_QUOTER_STOCK_ADD: 10937;                                       // 添加
+            XT_ITSM_AUTH_QUOTER_STOCK_EDIT: 10389;                                      // 编辑
+            XT_ITSM_AUTH_QUOTER_STOCK_DEL: 10563;                                       // 删除
+        XT_ITSM_AUTH_QUOTER_STOCKOPTION: 10707;                                         // 股票期权行情源
+            XT_ITSM_AUTH_QUOTER_STOCKOPTION_ADD: 10709;                                 // 添加
+            XT_ITSM_AUTH_QUOTER_STOCKOPTION_EDIT: 10711;                                // 编辑
+            XT_ITSM_AUTH_QUOTER_STOCKOPTION_DEL: 10713;                                 // 删除
+        XT_ITSM_AUTH_QUOTER_HGT: 11027;                                                 // 沪港通行情源
+            XT_ITSM_AUTH_QUOTER_HGT_ADD: 11029;                                         // 添加
+            XT_ITSM_AUTH_QUOTER_HGT_EDIT: 11031;                                        // 编辑
+            XT_ITSM_AUTH_QUOTER_HGT_DEL: 11033;                                         // 删除
+        XT_ITSM_AUTH_QUOTER_NEW3BOARD: 11017;
+            XT_ITSM_AUTH_QUOTER_NEW3BOARD_ADD: 11019;                                   // 添加
+            XT_ITSM_AUTH_QUOTER_NEW3BOARD_EDIT: 11021;                                  // 编辑
+            XT_ITSM_AUTH_QUOTER_NEW3BOARD_DEL: 11023;                                   // 删除
+            
+    XT_ITSM_AUTH_GLOABLRC_MANAGEMENT: 10017;                                            // 全局风控管理
+        XT_ITSM_AUTH_RISK_APPROVAL: 10065;                                              // 风控审批
+            XT_ITSM_AUTH_RISK_APPROVAL_LIST: 10403;                                     // 列表详情
+            XT_ITSM_AUTH_RISK_APPROVAL_OP: 10405;                                       // 通过/驳回审核
+            XT_ITSM_AUTH_RISK_APPROVAL_PRODUCT: 11091;                                  // 产品风控审批详情
+            XT_ITSM_AUTH_RISK_APPROVAL_FUTURE_ACC: 11093;                               // 期货账号风控审批详情
+            XT_ITSM_AUTH_RISK_APPROVAL_STOCK_ACC: 11095;                                // 股票账号风控审批详情
+            XT_ITSM_AUTH_RISK_APPROVAL_CREDIT_ACC: 11097;                               // 信用账号风控审批详情
+            XT_ITSM_AUTH_RISK_APPROVAL_GLOBAL: 11099;                                   // 全局风控审批详情
+            XT_ITSM_AUTH_RISK_APPROVAL_STOCK_BW: 11101;                                 // 证券账号黑白名单审批详情
+            XT_ITSM_AUTH_RISK_APPROVAL_CREDIT_BW: 11103;                                // 信用账号黑白名单审批详情
+            XT_ITSM_AUTH_RISK_APPROVAL_GLOBAL_BW: 11105;                                // 全局证券黑白名单审批详情
+            XT_ITSM_AUTH_RISK_APPROVAL_STOCKOPTION_BW: 11107;                           // 股票期权账号黑白审批详情
+            XT_ITSM_AUTH_RISK_APPROVAL_HGT_BW: 11109;                                   // 沪港通账号黑白名单审批详情
+            XT_ITSM_AUTH_RISK_APPROVAL_HGT_ACC: 11111;                                  // 沪港通账号风控审批详情
+            XT_ITSM_AUTH_RISK_APPROVAL_HGT_GLOBAL_BW: 11113;                            // 沪港通全局黑白名单审批详情
+            XT_ITSM_AUTH_RISK_APPROVAL_FUTUREOPTION: 11115;                             // 期货期权账号风控审批详情
+            XT_ITSM_AUTH_RISK_APPROVAL_N3B: 11117;                                      // 新三板账号风控审批详情
+            XT_ITSM_AUTH_RISK_APPROVAL_N3B_BW: 11119;                                   // 新三板账号黑白名单审批详情
+            XT_ITSM_AUTH_RISK_APPROVAL_N3B_GLOBAL_BW: 11121;                            // 新三板全局黑白名单审批详情
+            XT_ITSM_AUTH_RISK_APPROVAL_FUTURE_GLOBAL_BW: 11351;                         // 期货全局黑白名单审批详情
+            XT_ITSM_AUTH_RISK_APPROVAL_STOCKOPTION_GLOBAL_BW: 11353;                    // 股票期权全局黑白名单审批详情
+        XT_ITSM_AUTH_GLOBAL_RC: 10462;                                                  // 全局风控
+            XT_ITSM_GLOBAL_RC_SAVE: 10456;                                              // 保存
+            XT_ITSM_GLOBAL_RC_FUTURE_TRADE: 10139;                                      // 期货风控-默认交易止损
+                XT_ITSM_GLOBAL_RC_FUTURE_TRADE_SAVE: 10391;                             // 保存
+            XT_ITSM_GLOBAL_RC_FUTURE_BLACKWHITE: 11347;                                 // 期货风控-黑白名单
+                XT_ITSM_GLOBAL_RC_FUTURE_BLACKWHITE_SAVE: 11349;                        // 保存
+            XT_ITSM_GLOBAL_RC_FUTURE_REVERSE: 10141;                                    // 期货风控-对敲/反向单控制
+                XT_ITSM_GLOBAL_RC_FUTURE_REVERSE_SAVE: 10393;                           // 保存
+            XT_ITSM_GLOBAL_RC_STOCK_TRADE:10143;                                        // 证券风控-默认交易止损
+                XT_ITSM_GLOBAL_RC_STOCK_TRADE_SAVE: 10395;                              // 保存
+            XT_ITSM_GLOBAL_RC_STOCK_BLACKWHITE: 10145;                                  // 证券风控-黑白名单
+                XT_ITSM_GLOBAL_RC_STOCK_BLACKWHITE_SAVE: 10397;                         // 保存
+            XT_ITSM_GLOBAL_RC_STOCK_REVERSE: 10147;                                     // 证券风控-反向/对敲单控制
+                XT_ITSM_GLOBAL_RC_STOCK_REVERSE_SAVE: 10399;                            // 保存
+            XT_ITSM_GLOBAL_RC_N3B_TRADE:11297;                                          // 新三板风控-默认交易止损
+                XT_ITSM_GLOBAL_RC_N3B_TRADE_SAVE: 11299;                                // 保存
+            XT_ITSM_GLOBAL_RC_N3B_BLACKWHITE: 11301;                                    // 新三板风控-黑白名单
+                XT_ITSM_GLOBAL_RC_N3B_BLACKWHITE_SAVE: 11303;                           // 保存
+            XT_ITSM_GLOBAL_RC_N3B_REVERSE: 11305;                                       // 新三板风控-反向/对敲单控制
+                XT_ITSM_GLOBAL_RC_N3B_REVERSE_SAVE: 11307;                              // 保存
+            XT_ITSM_GLOBAL_RC_HGT_TRADE:11309;                                          // 沪港通风控-默认交易止损
+                XT_ITSM_GLOBAL_RC_HGT_TRADE_SAVE: 11311;                                // 保存
+            XT_ITSM_GLOBAL_RC_HGT_BLACKWHITE: 11313;                                    // 沪港通风控-黑白名单
+                XT_ITSM_GLOBAL_RC_HGT_BLACKWHITE_SAVE: 11315;                           // 保存
+            XT_ITSM_GLOBAL_RC_HGT_REVERSE: 11317;                                       // 沪港通风控-反向/对敲单控制
+                XT_ITSM_GLOBAL_RC_HGT_REVERSE_SAVE: 11319;                              // 保存  
+            XT_ITSM_GLOBAL_RC_STOCKOPTION_TRADE:11333;                                  // 股票期权风控-默认交易止损
+                XT_ITSM_GLOBAL_RC_STOCKOPTION_TRADE_SAVE: 11335;                        // 保存
+            XT_ITSM_GLOBAL_RC_STOCKOPTION_BLACKWHITE: 11337;                            // 股票期权风控-黑白名单
+                XT_ITSM_GLOBAL_RC_STOCKOPTION_BLACKWHITE_SAVE: 11339;                   // 保存
+            XT_ITSM_GLOBAL_RC_STOCKOPTION_REVERSE: 11341;                               // 股票期权风控-反向/对敲单控制
+                XT_ITSM_GLOBAL_RC_STOCKOPTION_REVERSE_SAVE: 11343;                      // 保存
+            XT_ITSM_GLOBAL_RC_GLOBAL_TAB: 11037;                                        // 全局风控Tab
+            XT_ITSM_GLOBAL_RC_FUTURE_TAB: 11039;                                        // 期货风控Tab
+            XT_ITSM_GLOBAL_RC_STOCK_TAB: 11041;                                         // 证券风控Tab
+            XT_ITSM_GLOBAL_RC_N3B_TAB: 11321;                                           // 新三板风控Tab
+            XT_ITSM_GLOBAL_RC_HGT_TAB: 11323;                                           // 沪港通风控Tab
+            XT_ITSM_GLOBAL_RC_STOCKOPTION_TAB: 11345;                                   // 股票期权风控Tab
+        XT_ITSM_AUTH_ACCOUNT_GROUP_RC: 10715;                                           // 帐号组风控
+            XT_ITSM_AUTH_ACCOUNT_GROUP_RC_ADDEDIT: 10717;                               // 添加/编辑帐号组
+            XT_ITSM_AUTH_ACCOUNT_GROUP_RC_CONFIG: 10719;                                // 风控设置
+            XT_ITSM_AUTH_ACCOUNT_GROUP_RC_DEL: 10721;                                   // 删除
+        XT_ITSM_AUTH_PRODUCT_GROUP_RC: 11042;                                           // 产品组风控
+            XT_ITSM_AUTH_PRODUCT_GROUP_RC_ADD_EDIT: 11043;                              // 添加/编辑产品组
+            XT_ITSM_AUTH_PRODUCT_GROUP_RC_CONFIG: 11044;                                // 风控设置
+            XT_ITSM_AUTH_PRODUCT_GROUP_RC_DEL: 11045;                                   // 删除
+    
+    XT_ITSM_AUTH_DATA_MANAGEMENT: 10021;                                                // 数据管理
+        XT_ITSM_AUTH_DATA_CREDIT: 10079;                                                // 融资融券
+            XT_ITSM_AUTH_DATA_CREDIT_LIST: 10409;                                       // 查询列表详情
+            XT_ITSM_AUTH_DATA_CREDIT_BROKER: 10411;                                     // 查询券商详情
+            XT_ITSM_AUTH_DATA_CREDIT_UPLOAD: 10413;                                     // 上传文件
+        XT_ITSM_AUTH_DATA_CATEGORY: 10091;                                              // 证券分类
+            XT_ITSM_AUTH_DATA_CATEGORY_QUERY: 10415;                                    // 分类查询
+            XT_ITSM_AUTH_DATA_CATEGORY_CUSTOM: 10565;                                   // 添加自定义/组合分类
+            XT_ITSM_AUTH_DATA_CATEGORY_DYNAMIC: 10567;                                  // 添加动态维度分类
+            XT_ITSM_AUTH_DATA_CATEGORY_EXPORT: 10569;                                   // 导出所有分类
+            XT_ITSM_AUTH_DATA_CATEGORY_IMPORT: 10649;                                   // 导入第三方财务分类
+            XT_ITSM_AUTH_DATA_CATEGORY_DELETE: 11283;                                   // 分类删除
+            XT_ITSM_AUTH_DATA_CATEGORY_CUSTOM_EDIT: 11285;                              // 自定义分类编辑
+            XT_ITSM_AUTH_DATA_CATEGORY_COMBINATION_EDIT: 11287;                         // 组合分类编辑
+            
+        XT_ITSM_AUTH_DATA_MARGIN_FEE_TEMPLATE: 10092;			                        // 保证金/手续费模板
+            XT_ITSM_AUTH_DATA_MARGIN_FEE_TEMPLATE_ADD: 10617;                           // 新建/编辑模板
+            XT_ITSM_AUTH_DATA_MARGIN_FEE_TEMPLATE_DEL: 10619;                           // 删除
+        XT_ITSM_AUTH_DATA_RCTEMPLATE: 10093;                                            // 风控模板
+            XT_ITSM_AUTH_DATA_RCTEMPLATE_LIST: 10417;                                   // 列表详情
+            XT_ITSM_AUTH_DATA_RCTEMPLATE_CREATE: 10419;                                 // 新建模板
+            XT_ITSM_AUTH_DATA_RCTEMPLATE_CREATE_SAVE: 10421;                            // 新建模板保存
+            XT_ITSM_AUTH_DATA_RCTEMPLATE_UPDATE: 10423;                                 // 更新模板
+            XT_ITSM_AUTH_DATA_RCTEMPLATE_UPDATE_SAVE: 10425;                            // 更新模板保存
+            XT_ITSM_AUTH_DATA_RCTEMPLATE_DEL: 10427;                                    // 删除模板
+            XT_ITSM_AUTH_DATA_RCTEMPLATE_APPLY_PRODUCT: 10454;                          // 应用产品
+            XT_ITSM_AUTH_DATA_RCTEMPLATE_SAVE_PRODUCT: 10463;                           // 保存模板关联产品
+        XT_ITSM_AUTH_DATA_REPURCHASE: 10609;                                            // 正回购
+            XT_ITSM_AUTH_DATA_REPURCHASE_VIEW: 10627;                                   // 查看
+            XT_ITSM_AUTH_DATA_REPURCHASE_DEL: 10629;                                    // 删除
+            XT_ITSM_AUTH_DATA_REPURCHASE_EXCHANGERATE: 10621;                           // 上传折算率
+            XT_ITSM_AUTH_DATA_REPURCHASE_CONNECTRULE: 10623;                            // 上传代码关联规则
+        XT_ITSM_AUTH_DATA_GRADEDFUND: 10631;                                            // 分级基金
+            XT_ITSM_AUTH_DATA_GRADEDFUND_UPLOAD: 10633;                                 // 上传文件
+            XT_ITSM_AUTH_DATA_GRADEDFUND_ADDEDIT: 10635;                                // 添加/编辑分级基金
+            XT_ITSM_AUTH_DATA_GRADEDFUND_DEL: 10637;                                    // 删除
+        XT_ITSM_AUTH_DATA_STATISTICS: 11035;                                            // 数据统计
+        XT_ITSM_AUTH_DATA_CUSTOM_PRODUCTS: 10929;                                       // 自定义品种
+            XT_ITSM_AUTH_DATA_CUSTOM_PRODUCTS_LIST: 10931;                              // 列表详情
+            XT_ITSM_AUTH_DATA_CUSTOM_PRODUCTS_ADD: 10933;                               // 添加/编辑自定义品种
+            XT_ITSM_AUTH_DATA_CUSTOM_PRODUCTS_DEL: 10935;                               // 删除
+    
+    XT_ITSM_AUTH_MONITOR: 10025;                                                        // 系统监控
+        XT_ITSM_AUTH_MONITOR_STATUS: 10081;                                             // 系统运行状态
+            XT_ITSM_AUTH_MONITOR_STATUS_LIST: 10439;                                    // 查询详情
+            XT_ITSM_AUTH_MONITOR_STATUS_CHANGEVAL: 10441;                               // 更改阈值
+        XT_ITSM_AUTH_MONITOR_LOG: 10083;                                                // 系统日志查询
+            XT_ITSM_AUTH_MONITOR_LOG_SQL: 10727;                                        // 数据库操作
+                XT_ITSM_AUTH_MONITOR_LOG_SQL_LIST: 10739;                               // 列表详情
+            XT_ITSM_AUTH_MONITOR_LOG_PORTAL: 10731;                                     // 门户登录
+                XT_ITSM_AUTH_MONITOR_LOG_PORTAL_LIST: 10741;                            // 列表详情
+            XT_ITSM_AUTH_MONITOR_LOG_TERMINAL: 10733;                                   // 终端登录
+                XT_ITSM_AUTH_MONITOR_LOG_TERMINAL_LIST: 10743;                          // 列表详情
+            XT_ITSM_AUTH_MONITOR_LOG_HISTORY: 10725;                                    // 历史运行状态
+                XT_ITSM_AUTH_MONITOR_LOG_HISTORY_LIST: 10737;                           // 列表详情
+        XT_ITSM_AUTH_MONITOR_SYSTEM: 10085;                                             // 系统设置
+            XT_ITSM_AUTH_MONITOR_SYSTEM_SMTP: 10151;                                    // SMTP服务器设置
+                XT_ITSM_AUTH_MONITOR_SYSTEM_SMTP_TEST: 10445;                           // 测试SMTP服务
+                XT_ITSM_AUTH_MONITOR_SYSTEM_SMTP_SAVE: 10447;                           // 保存设置
+            XT_ITSM_AUTH_MONITOR_SYSTEM_EXCEPTION: 10153;                               // 异常监控邮件收件人设置
+                XT_ITSM_AUTH_MONITOR_SYSTEM_EXCEPTION_SAVE: 10449;                      // 保存设置
+            XT_ITSM_AUTH_MONITOR_SYSTEM_CLIENT: 10450;                                  // 客户端安装包管理
+                XT_ITSM_AUTH_MONITOR_SYSTEM_CLIENT_DEL: 10451;                          // 删除文件
+                XT_ITSM_AUTH_MONITOR_SYSTEM_CLIENT_UP: 10453;                           // 上传文件
+                XT_ITSM_AUTH_MONITOR_SYSTEM_CLIENT_DOWN: 10452;                         // 下载文件
+            XT_ITSM_AUTH_MONITOR_SYSTEM_TRADINGDAY: 10605;                              // 交易日设置
+                XT_ITSM_AUTH_MONITOR_SYSTEM_TRADINGDAY_SAVE: 10615;                     // 保存
+)
+
+enum_EXtOtherRightType : (
+    XT_PRODUCT_OTHERRIGHT_MGR_FEE_NETV  : 1;            // 按净值计算的管理费
+    XT_PRODUCT_OTHERRIGHT_MGR_FEE_SHARE : 2;            // 按份额计算的管理费
+    XT_PRODUCT_OTHERRIGHT_VALUATION_ADJUST : 20001;     // 估值修正
+    XT_PRODUCT_OTHERRIGHT_OTHER : 10001;                // 其他
+){lua}
+
+enum_EXtOtherRightFileType : (
+    XT_PRODUCT_OTHERRIGHT_FILE_HS  : 0;                         // 恒生
+    XT_PRODUCT_OTHERRIGHT_FILE_GOLD_FINGER : 1;                 // 金手指
+    XT_PRODUCT_OTHERRIGHT_FILE_OTHER : 10000;                   // 其他
+){lua}
+
+enum_EXt3rdPartyCategoryType : (
+    XT_3RDPARTY_JUYUAN : 0;                             // 聚源分类
+    XT_3RDPARTY_CAIHUI;                                 // 财汇分类
+    XT_3RDPARTY_WIND_FOND;                              // 万得基金
+    XT_3RDPARTY_WIND_STOK;                              // 万得股票
+    XT_3RDPARTY_WIND_BOND;                              // 万德债券
+)
+
+enum_EXtGradeFundType : (
+    XT_GRADEFUND_PARENT  : 0;                           // 母基金
+    XT_GRADEFUND_A;                                     // A基金
+    XT_GRADEFUND_B;                                     // B基金
+){lua}
+
+enum_EXtMobileType : (
+    XT_MOBILE_ANDROID  : 0;                             // android
+    XT_MOBILE_IOS;                                      // ios
+    XT_MOBILE_OTHER;                                    // 其他
+){lua}
+
+enum_EXtFileUploadType : (
+    XT_FILE_UPLOAD_TYPE_PLEDGE_RATE : 0;                // 正回购折算率
+){lua}
+
+enum_EXtTradeStatisticsType : (     //交易统计类型
+    XT_STATISTICS_TOTAL :                     0;    // 合计统计
+    XT_STATISTICS_FUTURE :                    1;    // 期货交易交易统计
+    XT_STATISTICS_STOCK :                     2;    // 股票统计
+    XT_STATISTICS_CREDIT :                    3;    // 信用交易统计
+    XT_STATISTICS_GOLD :                      4;    // 贵金属交易统计
+    XT_STATISTICS_FUTURE_OPTION:              5;    // 期货期权交易统计
+    XT_STATISTICS_STOCK_OPTION:               6;    // 股票期权交易统计
+    XT_STATISTICS_HUGANGTONG:                 7;    // 沪港通交易统计
+    XT_STATISTICS_NEW3BOARD:                  10;   // 新三板交易统计
+)
+
+enum_EXtLockVerboseType : (     //用户信息 - 锁定详情信息类型
+    XT_LOCKVERBOSE_USER :                     0;    // 用户锁定信息
+    XT_LOCKVERBOSE_IP :                       1;    // ip锁定信息
+){lua}
+
+enum_EXtAccountCategoryIndexType : (     //分类指标 - 账号风控分母用
+    XT_ACI_FUTURE :                     1;    // 期货
+    XT_ACI_STOCK :                      2;    // 股票
+    XT_ACI_CREDIT :                     3;    // 信用
+    XT_ACI_NEW3BOARD :                  5;    // 新三板
+    XT_ACI_STOCK_OPTION :               6;    // 个股期权
+    XT_ACI_HGT :                        7;    // 沪港通
+    XT_ACI_OUTER_FUTURE :               9;    // 外盘期货
+    XT_ACI_FUTURE_OPTION :              11;    // 期货期权
+){lua}
+

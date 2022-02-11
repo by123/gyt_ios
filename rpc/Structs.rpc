@@ -1,0 +1,751 @@
+Namespace = ttservice
+ServiceName = Structs
+ExportMacro = DLL_EXPORT_TRADERBASE
+
+Includes = (
+    idata/IData.h,
+    idata/IDataBson.h,
+    traderBase/traderBaseCommon.h,
+    Protocol/rpc_Enums.h,
+    Protocol/rpc_ExtraEnums.h,
+    luawrapper/Int64Wrapper.h,
+)
+
+CppIncludes = (
+    idata/IDataCreator.h,
+    boost/assign/list_of.hpp,
+)
+
+LuaIncludes = (
+    lua/lua.hpp,
+    traderBase/traderBaseCommon.h,
+)
+
+KEY_SPLITTER(#S) : "____";
+
+#账号基本信息
+CAccountBaseInfo:(
+    m_strAccountID: #s ||name= 账号代码| isKey = | precision = | flag =  | visible=  | property= | func= ;      // 用户代码
+    m_strAccountName: #s || name= 姓名| isKey = | precision = | flag =  | visible=  | property= | func= ;   // 用户名称
+    m_nIDType: #i || name= 证件类型 | isKey = | precision = | flag =  | visible=  | property= | func= ;
+    m_strIDCode: #s || name= 证件号码 | isKey = | precision = | flag =  | visible=  | property= | func= ;
+    m_strIDIssAgcy: #s || name= 发证机关 | isKey = | precision = | flag =  | visible=  | property= | func= ;
+    m_strIDValidDate: #s || name= 证件有效期 | isKey = | precision = | flag =  | visible=  | property= | func= ;
+    m_strBankAccount: #s || name= 银行账号 | isKey = | precision = | flag =  | visible=  | property= | func= ;
+    m_strBankName : #s || name= 开户行名称 | isKey = | precision = | flag =  | visible=  | property= | func= ;
+    m_strTelphone: #s || name= 联系电话 | isKey = | precision = | flag =  | visible=  | property= | func= ;
+    m_strMobileTel:#s || name= 移动电话 | isKey = | precision = | flag =  | visible=  | property= | func= ; 
+    m_strEMail:#s || name= 电子邮箱 | isKey = | precision = | flag =  | visible=  | property= | func= ;
+    m_strAddr: #s || name= 联系地址 | isKey = | precision = | flag =  | visible=  | property= | func= ;
+    m_strQQ: #s || name= QQ号 | isKey = | precision = | flag =  | visible=  | property= | func= ;
+    m_strMemo: #s || name= 备注信息 | isKey = | precision = | flag =  | visible=  | property= | func= ;
+    m_strBranchBankName: #s || name=开户行分行| isKey = | precision = | flag =  | visible=  | property= | func= ;
+){ptr}
+
+
+#用户登录参数
+CLoginParam:(
+    m_strUserName:#s| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                              // 用户名
+    m_strPassword:#s| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                              // 用户密码
+    m_strIpAddress:#s| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                             // IP地址
+    m_strMAC:#s| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                                   // MAC地址
+    m_clientID:#i| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                                 // 终端类型
+){ptr}
+
+#交易账号登录参数
+CTradeLoginParam:(
+    m_accountInfo: CAccountInfoPtr | |name= | isKey = 1 | precision = | flag =  | visible=  | property= | func= ;              // 账号信息
+    m_strIpAddress:#s| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                             // IP地址
+    m_strMAC:#s| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                                   // MAC地址
+    m_clientID:#i| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                                 // 终端类型
+){ptr}
+
+#登录应答
+CLoginResponse:(
+    m_nUserType: EUserType| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                        // 角色类型
+    m_nProxyLevel:#i| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                             visible // 代理级别
+){ptr}
+
+#用户信息
+CUserInfo:(
+    m_strUserID:#s| |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;                               // 柜员ID
+    m_strUserName:#s| |name= | isKey = | precision = | flag =  | visible=  | p+roperty= | func= ;                              // 姓名
+    m_strPassword:#s| |name= | isKey = | precision = | flag =  | visible= 1:0 | property= | func= ;                              // 用户密码
+    m_nStatus:EUserStatusType=UserStatusType_Normal| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ; // 用户状态
+    m_nProxyLevel:#i| |name= | isKey = | precision = | flag =  | visible= 1:0 | property= | func= ;                              // 代理级别
+    m_nBranchUser: #i  | |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                           // 分柜台权限,分柜台可以开设多少柜台
+    m_nBranchAccount:#i| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                           // 分账户权限,可开设多少分账户权限
+    m_nUserType: EUserType| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                        // 角色类型
+    m_strIDType: #s | |name= | isKey = | precision = | flag =  | visible= 1:0 | property= | func= ;                              // 证件类型
+    m_strIDCode:#s | |name= | isKey = | precision = | flag =  | visible= 1:0 | property= | func= ;                               // 证件号码
+    m_strIDISSAuth:#s | |name= | isKey = | precision = | flag =  | visible= 1:0 | property= | func= ;                            // 发证机关
+    m_strSettleAccount: #s| |name= | isKey = | precision = | flag =  | visible= 1:0 | property= | func= ;                        // 结算账户名称,默认是柜员自己 
+    m_strBankCardNo:#s| |name= | isKey = | precision = | flag =  | visible= 1:0 | property= | func= ;                            // 银行卡号
+    m_strBankName:#s| |name= | isKey = | precision = | flag =  | visible= 1:0 | property= | func= ;                              // 开户行名称
+    m_strBranchBankName: #s | |name= | isKey = | precision = | flag =  | visible= 1:0 | property= | func= ;                      // 开户行分行
+    m_strTelephone:#s| |name= | isKey = | precision = | flag =  | visible= 1:0  | property= | func= ;                             // 手机
+    m_strEmail:#s| |name= | isKey = | precision = | flag =  | visible= 1:0 | property= | func= ;                                 // 邮箱
+    m_strQQ:#s| |name= | isKey = | precision = | flag =  | visible=1:0  | property= | func= ;                                    // QQ号
+    m_strAddr:#s| |name= | isKey = | precision = | flag =  | visible= 1:0 | property= | func= ;                                  // 联系地址
+    m_nExpireDate:#i | |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                             // 到期日  
+    m_strRemark:#s| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                                // 备注
+    m_superProxyID:#s| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                             // 管理域
+){ptr}
+
+#账号信息
+CAccountInfo :(
+    m_strAccountID:#s| |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;                            // 账号Id
+    m_nAccountType:EXTAccountType| |name= | isKey = 1| precision = | flag =  | visible= 1:0  | property= | func= ;                // 账号类型
+    m_strPassword:#s| |name= | isKey = | precision = | flag =  | visible= 1:0  | property= | func= ;                              // 账号密码
+    m_nStatus:EAccountStatus = AccountStatus_Normal| |name= | isKey = | precision = | flag =  | visible=1:0  | property= | func= ; // 账户状态
+    m_bAllowTrade: #b= true| |name= | isKey = | precision = | flag =  | visible=1:0  | property= | func= ;                      // 是否可交易
+    m_bSubAccount:#b= false| |name= | isKey = 1| precision = | flag =  | visible=1:0  | property= | func= ;                      // 是否分账号
+    m_bSimAccount:#b= false| |name= | isKey = | precision = | flag =  | visible=1:0  | property= | func= ;                       // 是否模拟账号
+    m_strName:#s| |name= | isKey = | precision = | flag =  | visible=1:0  | property= | func= ;                                  // 账号姓名
+    m_strUserID:#s| |name= | isKey = | precision = | flag =  | visible=1:0  | property= | func= ;                                // 对应代理的名称
+    m_nPlatformID : #i = 0|  | name=平台号 | isKey=|precision=| flag= | visible= | property= | func= ; // 目前主要用于区别不同的行情, 根据此来选择对应行情
+    m_strBrokerID: #s | |name= | isKey = | precision = | flag =  | visible=1:0  | property= | func= ;                            // 经纪公司ID
+    m_openDate: #i | |name= | isKey = | precision = | flag =  | visible=1:0  | property= | func= ;                               //开户日期
+){ptr}
+
+#出入金信息
+CCashInfo :(
+    m_strAccountID: #s| |name= | isKey =  | precision = | flag =  | visible=  | property= | func= ;       //账号ID
+    m_strName:#s| |name= | isKey = | precision = | flag =  | visible=1:0  | property= | func= ;            // 账号姓名
+    m_strUserID: #s| |name= | isKey = | precision = | flag =  | visible= | property= | func= ;            //  操作者
+    m_nCashType: ECashType| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;     // 出入金类型
+    m_dCashValue:#d| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                               // 金额
+    m_date:#i | |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                                    // 日期
+    m_time:#i| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                                     // 时间
+    m_nMoneyType: EMoneyType = MoneyType_RMB| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;      // 币种
+    m_strSerialNo: #s| |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;                             // 流水号
+){ptr}
+
+
+#出入金申请信息
+CCashApplyInfo :(
+    m_strTargetId: #s| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                          // 出入金对象ID
+    m_nTargetType: ECashInOutTargetType=CashInOutTargetType_Account| |name= | isKey = | precision = | flag =  | visible=1:0  | property= | func= ;                        // 出入金对象类型
+    m_strTargetName: #s| |name= | isKey =  | precision = | flag =  | visible=  | property= | func= ;                         // 出入金对象名
+    m_nCashType: ECashType| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                        // 出入金类型
+    m_nMoneyType: EMoneyType = MoneyType_RMB| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;      // 币种
+    m_dCashValue:#d| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                               // 金额
+    m_strSerialNo: #s| |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;                             // 流水号
+    m_nPayType: EPayType = PayType_OFF_LINE| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;       // 支付方式
+    m_nStatus:ECashApplicationStatus = CashApplicationStatus_Submit| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ; // 申请状态
+    m_strReceiver: #s| |name= | isKey =  | precision = | flag =  | visible=  | property= | func= ;                             // 收款人
+    m_strReceiverBankName: #s| |name= | isKey =  | precision = | flag =  | visible=1:0  | property= | func= ;                     // 收款人银行名称
+    m_strReceiverBranchBankName: #s| |name= | isKey =  | precision = | flag =  | visible=1:0  | property= | func= ;               // 收款人分行名称
+    m_strReceiverBankNO: #s| |name= | isKey =  | precision = | flag =  | visible=1:0  | property= | func= ;                       // 收款人银行卡号
+    m_strSubmitter: #s| |name= | isKey =  | precision = | flag =  | visible=  | property= | func= ;                            // 申请提交人
+    m_applyDate:#i | |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                                // 申请日期
+    m_applyTime:#i| |name= | isKey = | precision = | flag =  | visible=1:0  | property= | func= ;                                 // 申请时间
+    m_strApplyMemo: #s| |name= | isKey =  | precision = | flag =  | visible=1:0  | property= | func= ;                            // 备注
+    m_strChecker: #s| |name= | isKey =  | precision = | flag =  | visible=  | property= | func= ;                              // 审核人
+    m_checkDate:#i | |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                                // 审核日期
+    m_checkTime:#i| |name= | isKey = | precision = | flag =  | visible=1:0  | property= | func= ;                                 // 审核时间
+    m_strCheckMemo:#s| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                              // 审核备注
+){ptr}
+
+#合约基本信息
+CInstrumentDetail:(
+    m_strAccountID:#s| |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;                             // 账号Id
+    m_strExchangeID:#s| |name= | isKey = 1 | precision = | flag =  | visible=  | property= | func= ;                            // 交易所ID
+    m_strExchangeName:#s| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                            // 交易所名称
+    m_strProductID:#s| |name= | isKey = 1 | precision = | flag =  | visible=  | property= | func= ;                             // 品种ID
+    m_strProductName:#s| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                             // 品种名称代码
+    m_strInstrumentID:#s| |name= | isKey = 1 | precision = | flag =  | visible=  | property= | func= ;                          // 合约ID
+    m_strInstrumentName:#s| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                          // 合约名称
+    m_strExpireDate:#s| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                              // 到期日
+    m_bAllowTrade: #b| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                               // 是否可交易
+    m_volumeMultiple:#i=1| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                         //合约乘数 股票为1
+    m_preClose:#d| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                                 // 前收盘价
+    m_moneyType: EMoneyType| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                       //币种
+    m_dLastSettlementPrice: #d| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;            //前结算价
+    m_dUpStopPrice:#d| |name= | isKey = | precision =3 | flag =  | visible=  | property= | func= ;//涨停价
+    m_dDownStopPrice:#d| |name= | isKey = | precision =3 | flag =  | visible=  | property= | func= ;//跌停价
+    m_nIsMain:#i| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;//是否主力合约
+    m_lDealVolum:#l| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;//成交量
+    m_dPriceTick: #d| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;//最小波动
+){ptr}
+
+# 合约保证金率
+CInstrumentMarginRate:(
+    m_strAccountID:#s| |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;                             // 账号Id
+    m_strExchangeID:#s| |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;  //市场
+    m_strProductID:#s| |name= | isKey = 1 | precision = | flag =  | visible=  | property= | func= ;                             // 品种ID
+    m_strInstrument:#s| |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;  //合约
+    m_dLongMarginRatioByMoney:#d=0.0| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;  // 开多按资金
+    m_dLongMarginRatioByVolume:#d=0.0| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;  // 开多按量
+    m_dShortMarginRatioByMoney:#d=0.0| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ; // 开空按资金
+    m_dShortMarginRatioByVolume:#d=0.0| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ; // 开空按量
+) {ptr}
+
+# 合约手续费率
+CInstrumentCommissionRate:(
+    m_strAccountID:#s| |name= | isKey = 1 | precision = | flag =  | visible=  | property= | func= ;                             // 账号Id
+    m_strExchangeID:#s| |name= | isKey = 1 | precision = | flag =  | visible=  | property= | func= ;  //市场
+    m_strProductID:#s| |name= | isKey = 1 | precision = | flag =  | visible=  | property= | func= ;                             // 品种ID
+    m_strInstrumentID:#s| |name= | isKey = 1 | precision = | flag =  | visible=  | property= | func= ;  //合约
+    m_dOpenByMoney:#d = 0.0| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;  //开按资金
+    m_dOpenByVolume:#d = 0.0| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;  //开按手
+    m_dCloseByMoney:#d = 0.0 | |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;  //合约
+    m_dCloseByVolume:#d = 0.0| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;  //合约
+    m_dCloseTodayByMoney:#d = 0.0| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;  //合约
+    m_dCloseTodayByVolume:#d = 0.0| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;  //合约    	
+){ptr}                                                                                                      
+
+# 账号合约, 用于计算
+CInstrumentFee : (
+    m_baseInfo:CInstrumentDetailPtr| |name= | isKey =isKey | precision = | flag =  | visible=  | property= | func= ;
+    m_marginInfo:CInstrumentMarginRatePtr| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;
+    m_commissionInfo:CInstrumentCommissionRatePtr| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;
+) {ptr}
+
+#查询账号请求参数
+CQueryDataReq: (
+    metaType:#i| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                                     // 类型ID
+    m_accountInfo:CAccountInfoPtr| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                         // 账号信息
+){ptr}
+
+#查询账号历史数据请求参数
+CQueryHistoryDataReq: (
+    metaType:#i| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                                     // 类型ID
+    startDate:#s| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                                    // 开始日期
+    endDate:#s| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                                      // 结束日期
+    account:CAccountInfoPtr| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                         // 账号信息
+){ptr}
+
+#账号资金信息
+CAccountDetail:(
+    m_accountInfo:CAccountInfoPtr| |name= | isKey = 1 | precision = | flag =  | visible=  | property= | func= ;                 // 账号信息
+    m_dBalance:#d = 0.0| |name=动态权益 | isKey = | precision = | flag =  | visible=  | property= | func= ;                             // 动态权益
+    m_dPreBalance:#d = 0.0| |name=静态权益 | isKey = | precision = | flag =  | visible=  | property= | func= ;                          // 静态权益
+    m_strStatus:#s| |name=登录状态 | isKey = | precision = | flag =  | visible=  | property= | func= ;                                  // 账号状态
+    m_toalProfit:#d = 0.0| |name=盈亏 | isKey = | precision = | flag =  | visible=  | property= | func= ;                                 // 盈亏情况
+    m_dPositionProfit:#d = 0.0| |name=持仓盈亏 | isKey = | precision = | flag =  | visible=  | property= | func= ;                      // 持仓盈亏
+    m_dCloseProfit:#d = 0.0| |name=平仓盈亏 | isKey = | precision = | flag =  | visible=  | property= | func= ;                         // 平仓盈亏
+    m_dRisk:#d =| |name=风险度 | isKey = | precision = | flag =  | visible=  | property= | func= ;                                    // 风险度
+    m_dAvailable:#d =0.0| |name=可用资金 | isKey = | precision = | flag =  | visible=  | property= | func= ;                            // 可用资金
+    m_dFetchBalance:#d = 0.0| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                        // 可取资金
+    m_dCommission:#d =0.0| |name=手续费 | isKey = | precision = | flag =  | visible=  | property= | func= ;                           // 手续费
+    m_dStopTradeValue:#d =0.0| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                       // 交易的起始金额 低于禁止交易
+    m_cashStatus:#s | |name=入金状态 | isKey = | precision = | flag =  | visible=  | property= | func= ;                                // 入金状态
+    m_dFrozenMargin:#d = 0.0 | |name=冻结保证金 | isKey = | precision = | flag =  | visible=  | property= | func= ;                        // 冻结保证金
+    m_dFrozenCommission:#d =0.0 | |name=冻结手续费 | isKey = | precision = | flag =  | visible=  | property= | func= ;                    // 冻结手续费
+    m_dFrozenCash:#d = 0.0 | |name=冻结资金 | isKey = | precision = | flag =  | visible=  | property= | func= ;                         // 冻结资金
+    m_dCurrMargin:#d = 0.0 | |name=占用保证金 | isKey = | precision = | flag =  | visible=  | property= | func= ;                         // 当前保证金
+    m_moneyType: EMoneyType = MoneyType_USD| |name=币种 | isKey = | precision = | flag =  | visible= | property=  | func= ;                                  // 币种
+    m_dInstrumentValue:#d=0.0||name=合约价值|isKey=| precision = | flag =| visible=  | property=| func= ;                             // 合约价值
+    m_dDeposit: #d=0.0||name=入金|isKey=| precision = | flag =| visible=  | property=| func= ;                                   // 入金
+    m_dWithdraw: #d=0.0||name=出金|isKey=| precision = | flag =| visible=  | property=| func= ;                                  // 出金
+    m_dMMargin: #d = 0.0 | |name=维持保证金 | isKey = | precision =2 | flag =  | visible=  | property= | func= ;				   // 维持保证金
+    m_dCaptialMoney: #d =0.0 | |name=优先资金 | isKey = | precision =2 | flag =  | visible=  | property= | func= ;			   // 优先资金
+    m_dInterest: #d = 0.0 | |name=利息 | isKey = | precision =2 | flag =  | visible=  | property= | func= ;                    // 利息
+    m_strTradingDate: #s | |name=交易日 | isKey = | precision =2 | flag =  | visible=  | property= | func= ;                   // 交易日
+    m_dAssureAsset:#d = 0.0| |name=净资产 | isKey = | precision =2 | flag =  | visible= | property= | func= ;
+    m_dTotalDebit:#d=0.0 | |name=总负债 | isKey = | precision =2 | flag =  | visible=  | property= | func= ;
+    m_dMaxMarginRate:#d = 0.0||name=保证金比例|isKey= | precision =2 | flag = | visible= | property= | func=;    // 保证金比率 股票的保证金率等于1 股票不需要
+    m_dNav:#d = 0.0||name=单位净值|isKey= | precision =2 | flag = | visible= | property= | func= ;    // 单位净值
+    m_dInitBalance:#d = 0.0||name=初始权益|isKey= | precision =2 | flag = | visible=  | property= | func= ; // 初始权益
+    m_dLongValue:#d=0.0||name=多单总市值|isKey= | precision =2 | flag = | visible=| property= | func= ; //多单总市值，现货没有
+    m_dShortValue:#d=0.0||name=空单总市值|isKey= | precision =2 | flag = | visible= | property= | func= ; //空单总市值，现货没有
+    m_dNetValue:#d=0.0||name=净持仓总市值|isKey= | precision =2 | flag = | visible= | property= | func= ; //净持仓总市值，净持仓市值=多-空
+    m_dPreMortgage:#d=0.0| |name=上次质押金额 | isKey = | precision = | flag =  | visible= | property= | func= ; //上次质押 股票不需要
+    m_dPreCredit:#d=0.0||name=上次信用额度|isKey=| precision = | flag = | visible= | property= | func= ; //上次信用额度 股票不需要
+    m_dMortgage:#d=0.0| |name=质押金额 | isKey = | precision = | flag = | visible= | property= | func= ; //质押 股票不需要
+    m_dCredit:#d=0.0| |name=信用金额 | isKey = | precision = | flag = | visible= | property= | func= ; // 信用额度 股票不需要
+    m_dCashIn:#d = 0.0||name=出入金净值|isKey= | precision = | flag =FNF_NONE  | visible= | property= | func= ; //出入金净值
+    m_dCurBalance: #d = 0.0||name=当前权益|isKey= | precision = | flag =FNF_NONE  | visible= | property= | func= ; //当前权益
+    m_dYesterdayBalance: #d = 0.0||name=昨日权益|isKey= | precision = | flag =FNF_NONE  | visible= | property= | func= ; //昨日权益
+    m_nLoginStatus: ELoginStatus = LOGINSTATUS_OFFLINE| |name= | isKey = | precision = | flag =  | visible=1:0  | property= | func= ;      // 登录状态
+    m_strOpenDate:#s| |name=起始日期| isKey = | precision = | flag =  | visible=1:0 | property= | func= ; 股票不需要
+    m_dInitCloseMoney:#d=0.0||name=期初平仓盈亏|isKey=| precision = | flag = | visible= | property= | func= ; //初始平仓盈亏
+){ptr}
+
+#资金流水
+CFundFlow:(
+    m_accountInfo:CAccountInfoPtr| |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;              // 账号信息
+    m_strDate:#s| |name= | isKey = 1 | precision = | flag =  | visible=  | property= | func= ;                                    // 日期
+    m_strTime:#s| |name= | isKey =  1| precision = | flag =  | visible=  | property= | func= ;                                    // 时间
+    m_strExecID: #s| |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;                                 // 流水号
+    m_strInstrumentID:#s| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                            // 代码
+    m_strInstrumentName:#s| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                          // 名称
+    m_nVolume:#d| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                                    // 数量
+    m_dPrice:#d| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                                     // 价格
+    m_dMoneyChanged:#d = 0.0| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                        // 发生金额
+    m_dMoneyLeft: #d = 0.0| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                          // 资金余额
+    m_strRemark: EMoneyChangeType| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                   // 资金变化的类型   
+){ptr}
+
+#委托明细
+COrderDetail : (
+    m_accountInfo:CAccountInfoPtr| |name= | isKey = 1 | precision = | flag =  | visible=  | property= | func= ;// 账号信息
+    m_strExchangeID:#S| |name=| isKey = | precision = | flag =  | visible=1:0 | property= | func= | ignore = | updateIgnore=1;//交易所代码
+    m_strExchangeName:#S| |name=交易市场| isKey = | precision = | flag =  | visible= | property= | func= | ignore = | updateIgnore=1;//市场名字
+    m_strProductID:#S| |name=品种代码| isKey= | precision = | flag =  | visible=1:0 | property= | func= | ignore = | updateIgnore=1;//品种代码
+    m_strProductName:#S| |name=品种名称| isKey= | precision = | flag =  | visible=1:0 | property= | func= | ignore = | updateIgnore=1;//品种名称
+    m_strInstrumentID:#S| |name=| isKey = | precision = | flag =  | visible=  | property= | func= ; //合约
+    m_strInstrumentName:#S| |name=| isKey = | precision = | flag =  | visible=  | property= | func= ; //合约名称
+    m_nSessionID:#i| |name= | isKey = 1 | precision = | flag =  | visible=1:0 | property= | func= | isLog=1 | ignore = | updateIgnore=1; //sessionod
+    m_nFrontID:#i| |name= | isKey = 1| precision = | flag =  | visible=1:0 | property= | func= | isLog=1 | ignore = | updateIgnore=1; //前端id
+    m_strOrderRef:#S| |name=内部委托号 | isKey =1 | precision = | flag =  | visible=1:0 | property= | func= | isLog=1 | ignore = | updateIgnore=1; //内部委托号
+    m_dLimitPrice:#d| |name=委托价格 | isKey = | precision =3 | flag =FNF_NONE  | visible=  | property= | func= | isLog=1 | ignore = | updateIgnore=1; //限价单的限价，就是报价
+    m_nVolumeTotalOriginal:#i| |name=委托量| isKey = | precision = | flag =  | visible=  | property=[SUMSTAT,STOCK_VOLUME] | func= | isLog=1 | ignore = | updateIgnore=1; //最初委托量
+    m_strOrderSysID:#S| |name=合同编号| isKey = | precision = | flag =  | visible=  | property= | func= | isLog=1 ; //委托号
+    m_nOrderStatus:EEntrustStatus=ENTRUST_STATUS_UNKNOWN| |name=委托状态 | isKey = | precision = | flag =  | visible= | property= | func= | isLog=1 ; //委托状态
+    m_nDirection:EEntrustBS| |name= | isKey = | precision = | flag =  | visible= | property= | func= ;    //买卖方向
+    m_nOrderPriceType:EBrokerPriceType| |name=报价类型 | isKey = | precision = | flag =  | visible=1:0 | property= | func= ; //类型，例如市价单 限价单
+    m_strOptName:#S| |name=委托属性 | isKey = | precision = | flag =  | visible=1:0 |property= | func= ; //展示委托属性的中文
+    m_nVolumeTraded:#i| |name=成交数量 | isKey = | precision = | flag =  | visible=  | property= | func= | isLog=1 ;//已成交量 
+    m_nVolumeLeft:#i| |name=剩余委托量 | isKey = | precision = | flag =  | visible= | property= | func= ; //剩余委托量
+    m_nVolumeTotal:#i| |name=总委托量 | isKey = | precision = | flag =  | visible= | property= | func= ; //当前总委托量
+    m_nErrorID:#i| |name= | isKey = | precision = | flag =  | visible=1:0 | property= | func= ;
+    m_strErrorMsg:#S| |name=状态信息 | isKey = | precision = | flag =  | visible= | property= | func= ;    
+    m_dFrozenMargin:#d=0.0| |name=冻结保证金 | isKey = | precision =2 | flag = | visible=1:0  | property= | func= ; // 冻结保证金
+    m_dFrozenCommission:#d=0.0| |name=冻结手续费 | isKey = | precision =2 | flag =  | visible=1:0  | property= | func= | isLog=1; // 冻结手续费
+    m_nInsertDate:#i| |name=委托日期 | isKey = | precision = | flag =  | visible=  | property= | func= | isLog=1 | ignore = | updateIgnore=1; //日期
+    m_nInsertTime:#i| |name=委托时间 | isKey = | precision = | flag =  | visible= |property= | func= | isLog=1; //时间
+    m_dTradedPrice:#d| |name=成交均价 | isKey = | precision =3 | flag =  | visible= | property= | func= | isLog=1 ;//成交均价
+    m_dCancelAmount:#i=0| |name=已撤数量 | isKey = | precision =0 | flag =  | visible=1:0  | property=| func= ;
+    m_dTradeAmount:#d=0.0| |name=成交金额 | isKey = | precision =2 | flag =FNF_NONE  | visible=1:0 | property=[SUMSTAT,FLASH_CHANGE] | func= ; // 成交额 期货=均价*量*合约乘数
+    m_nOffsetFlag:EOffset_Flag_Type| |name=开平 | isKey = | precision = | flag =  | visible= | property= | func=;//期货开平，股票买卖其实就是开平
+    m_nHedgeFlag:EHedge_Flag_Type| |name=投保 | isKey = | precision = | flag =  | visible=1:0 | property= | func= ; //投保
+    m_nOrderSubmitStatus:EEntrustSubmitStatus| |name=报单状态 | isKey = | precision = | flag =  | visible= | property= | func= ; //提交状态，股票回头想想怎么填 股票里面不需要报单状态
+    m_strInsertDate:#S| |name=委托日期 | isKey = | precision = | flag =  | invisible=  | property= | func= | isLog=1 | ignore = | updateIgnore=1; //日期
+    m_strInsertTime:#S| |name=委托时间 | isKey = | precision = | flag =  | invisible= |property= | func= | isLog=1; //时间
+){ptr}
+
+#成交明细
+CDealDetail:(
+    m_accountInfo:CAccountInfoPtr| |name= | isKey = 1 | precision = | flag =  | visible=  | property= | func= ;              // 账号信息
+    m_strTradeID:#s |name= | isKey = 1 | precision = | flag =  | visible=1:0  | property= | func= ;                             // 交易ID
+    m_strExchangeID:#s |name= | isKey = 1 | precision = | flag =  | visible=1:0  | property= | func= ;                          // 交易所ID
+    m_strExchangeName:#s |name= | isKey = 1 | precision = | flag =  | visible=  | property= | func= ;                          // 交易所名称
+    m_strProductID:#s| |name=品种代码| isKey | precision = | flag =  | visible=1:0 | property= | func= ;
+    m_strProductName:#s| |name=品种名称| isKey | precision = | flag =  | visible=1:0 | property= | func= ;
+    m_strInstrumentID:#s| |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;                            // 合约ID
+    m_strInstrumentName:#s| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                          // 合约名称
+    m_strOrderRef:#S| |name=内部委托号 | isKey =1 | precision = | flag =  | visible=1:0 | property= | func= | isLog=1; //下单引用
+    m_strOrderSysID:#S| |name=合同编号| isKey =1 | precision = | flag =  | visible=  | property= | func=  | isLog=1 ; //合同编号
+    m_nDirection:EEntrustBS| |name=| isKey =1 | precision = | flag =  | visible= | property= | func= | isLog=1; //买卖
+    m_strTradeDate:#s| |name= | isKey = 1 | precision = | flag =  | visible=  | property= | func= ;                               // 成交日期
+    m_strTradeTime:#s| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                               // 成交时间
+    m_nOffsetFlag:#i| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                                // 开平标志
+    m_dPrice:#d| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                                     // 成交均价
+    m_dTradeAmount:#d| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                               // 成交金额
+    m_nVolume:#i| |name=成交数量 | isKey = | precision = | flag =  | visible=  | property= | func= | isLog=1; //成交量
+    m_dComssion:#d=0.0| |name=手续费 | isKey = | precision =2 | flag = | visible=  | property= | func= ;    // 手续费
+    m_nOrderPriceType:EBrokerPriceType| |name=报价类型 | isKey = | precision = | flag =  | visible=1:0 | property= | func= ; //类型，例如市价单 限价单
+    m_strOptName:#S| |name=委托属性 | isKey = | precision = | flag =  | visible=1:0 |property= | func= ; //展示委托属性的中文
+    m_dCloseProfit:#d=0.0| |name=平仓盈亏 | isKey = | precision =2 | flag =  | visible=| property= | func= ; //平仓盈亏
+    m_nHedgeFlag: EHedge_Flag_Type| |name=投保 | isKey = | precision = | flag =  | visible=1:0 | property= | func= ; //投保
+    m_eFutureTradeType:EFutureTradeType=FUTRUE_TRADE_TYPE_COMMON | |name=成交类型 | isKey = | precision = | flag =  | visible= | property= | func= ;//成交类型   
+    m_nRealOffsetFlag:EOffset_Flag_Type=EOFF_THOST_FTDC_OF_INVALID| |name=操作 | isKey = | precision = | flag =  | visible= | property= | func= ; //实际开平,主要是区分平今和平昨
+    m_nCloseTodayVolume:#i=0| |name=平今量| isKey = | precision = | flag =  | visible= | property= | func= ; //平今量
+){ptr}
+
+#持仓明细
+CPositionDetail:(
+    m_accountInfo:CAccountInfoPtr| |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;                  // 账号信息
+    m_strTradeID:#S| |name=成交号 | isKey = 1 | precision = | flag =  | visible=1:0| property= | func= | ignore = | updateIgnore=1;//最初开仓位的成交
+    m_strExchangeID:#s |name= | isKey = 1 | precision = | flag =  | visible=1:0  | property= | func= ;                         // 交易所ID
+    m_strExchangeName:#S| |name=交易所名称| isKey = | precision = | flag =  | visible= | property= | func= | ignore = | updateIgnore=1;//交易所名称
+    m_strProductID:#S| |name=品种代码| isKey | precision = | flag =  | visible=1:0 | property= | func= | ignore = | updateIgnore=1;//品种代码
+    m_strProductName:#S| |name=品种名称| isKey | precision = | flag =  | visible=1:0 | property= | func= | ignore = | updateIgnore=1;//品种名称
+    m_strInstrumentID:#s| |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;                           // 合约ID
+    m_strInstrumentName:#s| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                         // 合约名称
+    m_nYesterdayVolume:#i=0| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                          // 上日持仓
+    m_nVolume: #i=0| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                                  // 持仓量
+    m_nDirection:EEntrustBS| |name=买卖 | isKey =1 | precision = | flag =  | visible= | property= | func= | isLog=1 | ignore = | updateIgnore=1; //买卖方向
+    m_dMargin:#d| |name=占用保证金 | isKey = | precision =2 | flag =  | visible=1:0 | property= | func= ; //使用的保证金 历史的直接用ctp的，新的自己用成本价*存量*系数算
+    m_dLastPrice:#d| |name=最新价| isKey = | precision =3 | flag = | visible=  | property=[FLASH_CHANGE] | func= | isLog=1 ; //最新价
+    m_dSettlementPrice:#d| |name=结算价| isKey = | precision =3 | flag = | visible=1:0 | property= | func= ; //结算价
+    m_dLastSettlementPrice:#d=0.0| |name=昨结算 | isKey = | precision =3 | flag = | visible=1:0 | property= | func= ;//昨结算
+    m_dInstrumentValue:#d=0.0| |name=市值,合约价值 | isKey = | precision =2 | flag = | visible=1:0 | property= | func= | isLog=1 ;//合约价值
+    m_dOpenCost: #d| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                                // 开仓成本
+    m_dOpenPrice:#d| |name= | isKey = | precision = | flag =  | visible=1:0  | property= | func= ;                                // 开仓价格
+    m_dPositionCost:#d| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                             // 持仓成本
+    m_bIsToday:#b| |name= | isKey = | precision = | flag =  | visible=1:0  | property= | func= ;                                  // 是否今仓
+    m_nHedgeFlag:EHedge_Flag_Type| |name= | isKey = 1| precision = | flag =  | visible=1:0  | property= | func= ;                                // 投保标记
+    m_strOpenDate:#s| |name= | isKey = 1| precision = | flag =  | visible=1:0  | property= | func= ;                               // 开仓日期 
+    m_dPositionProfit:#d = 0.0| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                           // 持仓盈亏 
+    m_dFloatProfit: #d = 0.0| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                          // 浮动盈亏
+    m_dCloseProfit:#d = 0.0| |name=平仓盈亏 | isKey = | precision =2 | flag =FNF_NONE  | visible= | property= | func= ;             //平仓盈亏 平仓额 - 开仓价*平仓量*合约乘数（股票为1） 股票不需要
+    m_dProfitRate: #d = 0.0| |name= | isKey = | precision =2 | flag =  | visible=1:0 | property= | func= ;                            //盈亏比例
+    m_strTradingDay: #s| |name= | isKey = | precision =2 | flag =  | visible=1:0 | property= | func= ;                          //交易日
+    m_dCloseAmount:#d = 0.0| |name=平仓额 | isKey = | precision = | flag =  | visible= 1:0 | property= | func= ; //平仓额 等于股票每次卖出的量*卖出价*合约乘数（股票为1）的累加 股票不需要
+    m_nCloseVolume:#i = 0| |name=平仓量 | isKey = | precision = | flag =  | visible= 1:0 | property= | func=; //平仓量 等于股票已经卖掉的 股票不需要
+    m_eFutureTradeType:EFutureTradeType=FUTRUE_TRADE_TYPE_COMMON | |name=成交类型 | isKey = | precision = | flag =  | invisible=  | property= | func= ;//成交类型
+    m_dMarketValue:#d=0| |name=市值 | isKey = | precision = | flag = | visible= 1:0 | property= | func= ;//市值 合约价值
+){ptr}
+
+#持仓统计
+CPositionStatics:(
+    m_accountInfo:CAccountInfoPtr| |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;                 // 账号信息
+    m_strExchangeID:#s |name= | isKey = 1 | precision = | flag =  | visible=1:0  | property= | func= ;                            // 交易所ID
+    m_strExchangeName:#S| |name=市场名称| isKey = | precision = | flag =  | visible= | property= | func= | ignore = | updateIgnore=1;//市场名字
+    m_strProductID:#S| |name=品种代码| isKey | precision = | flag =  | visible=1:0 | property= | func= | ignore = | updateIgnore=1;//品种代码
+    m_strInstrumentID:#s| |name= | isKey = 1 | precision = | flag =  | visible=  | property= | func= ;                         // 合约ID
+    m_nDirection:#i| |name= | isKey = 1 | precision = | flag =  | visible=  | property= | func= ;                                // 买卖
+    m_strInstrumentName:#s| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                         // 合约名称
+    m_nYesterdayVolume:#i=0| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                          // 上日持仓
+    m_nPosition: #i=0| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                                  // 持仓量
+    m_dOpenCost: #d| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                                // 开仓成本
+    m_dOpenPrice:#d| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                                // 开仓均价
+    m_bIsToday:#b| |name= | isKey = 1| precision = | flag =  | visible=1:0  | property= | func= ;                                  // 是否今仓
+    m_nHedgeFlag:EHedge_Flag_Type | |name= | isKey = 1| precision = | flag =  | visible=1:0  | property= | func= ;                                // 投保标记
+    m_nOpenVolume: #i| |name= | isKey = | precision = | flag =  | visible=1:0  | property= | func= ;                              // 总开仓量
+    m_nCloseVolume: #i=0| |name= | isKey = | precision = | flag =  | visible=1:0  | property= | func= ;                             // 总平仓量
+    m_dPositionCost:#d| |name= | isKey = | precision = | flag =  | visible=1:0  | property= | func= ;                             // 持仓成本
+    m_dPositionProfit:#d| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                           // 持仓盈亏
+    m_dAvgPrice: #d| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                                // 持仓均价
+    m_dFloatProfit: #d| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                             // 浮动盈亏
+    m_dProfitRate:#d||name=盈亏比例 |isKey= | precision =2 | flag =  | visible=1:0 | property= | func= ; //持仓盈亏比例
+    m_dUsedMargin:#d=0.0| |name=保证金 | isKey = | precision =2 | flag =FNF_NONE  | visible=1:0 | property= | func= ;//占用保证金
+    m_dUsedCommission:#d=0.0| |name=手续费 | isKey = | precision =2 | flag = | visible=1:0 | property= | func= ;//已使用的手续费
+    m_dFrozenMargin:#d=0.0| |name=冻结保证金 | isKey = | precision =2 | flag =FNF_NONE  | visible=1:0 | property= | func= ;//冻结保证金
+    m_dFrozenCommission:#d=0.0| |name=冻结手续费 | isKey = | precision =2 | flag =FNF_NONE  | visible=1:0 | property= | func= ;//冻结手续费
+    m_nFrozenVolume:#i=0| |name=冻结数量 | isKey = | precision = | flag =  | visible=1:0| property= ;        // 冻结数量
+    m_nCanCloseVol:#i| |name=可平量| isKey = | precision = | flag =  | visible= | property= | func= ;//可平    
+    m_dInstrumentValue:#d=0.0| |name=市值 | isKey = | precision =2 | flag =  | visible=1:0  | property= | func= ;//合约价值    
+    m_dLastPrice:#d| |name=最新价 | isKey = | precision =3 | flag = | visible=1:0 | property= | func= ; //最新价
+    m_dSettlementPrice:#d| |name=结算价 | isKey = | precision =3 | flag = | visible=1:0| property= | func= ; //结算价
+    m_strExpireDate:#S| |name=到期日 | isKey = | precision = | flag =  | visible=1:0| property= | func= ;     // 到期日
+    m_dExchangeRate:#d=1.0| |name=汇率 | isKey = | precision = | flag =  | visible=1:0| property= | func= ;     // 汇率
+    m_nMoneyType:EMoneyType| |name=币种 | isKey = | precision = | flag =  | visible=1:0| property= | func= ;     // 币种
+    m_nYestoday:#i=0| |name=昨仓 | isKey = | precision = | flag =  | visible=1:0  | property=| func= ;
+    m_nTodayLong:#i=0| |name=今长 | isKey = | precision = | flag =  | visible=1:0  | property=| func= ;
+    m_nTodayShort:#i=0| |name=今短 | isKey = | precision = | flag =  | visible=1:0 | property=| func= ; 
+    m_dPriceTick: #d| |name= | isKey = | precision = | flag =  | visible=1:0 | property= | func= ;   //行情最小波动   
+){ptr}
+
+#登录登出记录表
+CLoginInfoLog:(
+   m_strUserID:#s| |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;                                  // 用户ID
+   m_strLogDate:#s| |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;                                 // 登录登出日期
+   m_strLogTime:#s| |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;                                 // 登录登出时间
+   m_strIPAddress:#s| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                                // IP地址
+   m_strMACAddress:#s| |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;                              // MAC地址
+   clientID: EClientID | |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                             // 终端类型
+   action: #i | |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;                                     // 登录登出行为
+   version: #s | |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                                     // 版本
+){ptr}
+
+#品种信息 
+CProductInfo:(
+    m_strAccountID:#s| |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;                             // 账号Id
+    m_strExchangeID:#s| |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;                              // 交易所ID                        
+    m_strExchangeName:#s| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                            // 交易所名称                  
+    m_strProductID:#s| |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;                               // 品种ID                      
+    m_strProductName:#s| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                             // 品种名称
+    m_bTrade: #s| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                                    // 是否允许交易
+){ptr}
+
+# 交易时间
+CTradeTimePair:(
+     m_nStartTime:#i = 0| |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;  //起始时间
+     m_nEndTime: #i = 0| |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;  //截止时间
+){ptr}
+
+#合约结算信息
+CInstrumentSettlementInfo:(
+    m_strExchangeID:#s| |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;                              // 交易所ID                        
+    m_strExchangeName:#s| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                            // 交易所名称                  
+    m_strInstrumentID:#s| |name= | isKey = 1 | precision = | flag =  | visible=  | property= | func= ;                            // 合约ID                      
+    m_strInstrumentName:#s| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                            // 合约名称
+    m_dLastSettlementPrice: #d| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                      // 合约结算价格
+    m_dUpLimitPercent: #d = 0.08| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                    // 涨停百分比值
+    m_dDownLimitPercent: #d = 0.08| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                    // 跌停百分比值   
+){ptr}
+
+#查询保证金信息
+CQueryMarginInfo:(
+    m_strUserID: #s| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                                 // 用户ID
+    m_strExchangeID: #s| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                             // 交易所ID
+    m_strQueryID: #s| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                                // 根据查键决定ID是什么
+    m_nQueryKey: EMarginSetType| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                     // 查询键
+){ptr}
+
+#查询手续费信息
+CQueryFeeInfo:(
+    m_strAccountID: #s | |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                             // 账户ID
+    m_strExchangeID: #s | |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                            // 交易所ID
+    m_strQueryID: #s |  |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                              // 根据查键决定ID是什么
+    m_nQueryKey:EMarginSetType | |name= | isKey = | precision = | flag =  | visible=  | property= | func= ; 
+){ptr}
+
+# 委托附加信息
+COrderTag : (
+    m_strUser:#s| |name= | isKey = | precision = | flag =  | visible=1:0  | property= | func= ; // 用户
+    m_nOrderDate:#i| |name= | isKey = | precision = | flag =  | visible=1:0  | property= | func= ; // 日期;
+    m_strSessionTag:#s| |name= | isKey = 1| precision = | flag =  | visible=1:0  | property= | func= ; // 会话号
+    m_strRequestId:#s | |name= | isKey = 1| precision = | flag =  | visible=1:0  | property= | func= ; // 请求号
+    m_nOrderTime : #i | |name= | isKey = | precision =3 | flag = | visible=1:0   | property= | func= ; // 下单时间
+    m_strLocalInfo: #s | |name=报单来源 | isKey = | precision = | flag =  | visible=  | property=[LOCAL_INFO] | func= ; // 报单来源,现在只有IP MAC,以后可能有别的东西
+    m_realAccount:CAccountInfoPtr| |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;  // 实盘账号
+	m_strRealTag:#s| |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;  // 实盘标记
+	m_strOrderSysId:#s| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;  // 实盘委托号
+    m_nfrontId:#i=| |name=FrontId | isKey = | precision = | flag =  | visible=  | property= | func= ;
+    m_nsessionId:#i=| |name=SessionId | isKey = | precision = | flag =  | visible=  | property= | func= ;
+    m_nrequestId:#i=| |name=RequestId | isKey = | precision = | flag =  | visible=  | property= | func= ;
+){ptr}
+
+#委托
+COrderInfo:(
+    m_accountInfo:CAccountInfoPtr| |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;                  // 账号信息
+    m_strExchangeID: #s | |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                    // 交易所ID
+    m_strProductID: #s | |name=品种代码 | isKey = | precision = | flag =  | visible=  | property= | func= ;              //品种代码
+    m_strInstrumentID: #s | |name=合约代码| isKey = | precision = | flag =  | visible=  | property= | func= ;           //合约代码
+    m_dOrderTime:#d|下单时间 |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;
+    m_dCancelTime:#d| |name=撤单时间 | isKey = | precision = | flag =  | visible=  | property= | func= ;
+    m_dCompleteTime:#d | |name=完成时间 | isKey = | precision = | flag =  | visible=  | property= | func= ;                   //完成时间
+    m_dOrderPrice:#d| |name=价格 | isKey = | precision = | flag =  | visible=  | property= | func= ;                 //委托价格
+	m_nOrderNum: #i | |name=委托数量 | isKey = | precision = | flag =  | visible=  | property=| func= ;
+    m_nBusinessNum:#i| |name=已成数量 | isKey = | precision = | flag =  | visible=1:0  | property=| func= ;
+    m_dDealMoney:#d = 0.0| |name=成交金额 | isKey = | precision = | flag =  | visible=  | property=| func= ; // 成交金额
+    m_nDirection:EEntrustBS| |name=买卖 | isKey = | precision = | flag =  | visible=  | property= | func= ;
+    m_nOffsetFlag:EOffset_Flag_Type| |name=开平 | isKey = | precision = | flag =  | visible=1:0  | property= | func= ;
+	m_eBrokerPriceType:#EBrokerPriceType= BROKER_PRICE_LIMIT| |name=委托属性 | isKey = | precision = | flag =  | visible=  | property= | func= ; // 委托属性, 市价还是限价
+    m_nHedgeFlag:EHedge_Flag_Type| |name=投机 | isKey = | precision = | flag =  | visible=  | property= | func= ;
+	m_dFrozenMargin:#d = 0.0| |name=预冻结保证金 | isKey = | precision = | flag =  | visible=1:0  | property= | func= ; //orderinfo预冻结的保证金 默认是非法值，如果使用的时候遇到，可以做计算，如果是0，说明委托已经拿到detail了，这样就有冻结而不是预冻结
+    m_tag:COrderTagPtr| |name= | isKey = 1 | precision = | flag =  | visible=  | property= | func= ;
+){ptr}
+
+#下单委托应答
+COrderResponse:(
+    m_accountInfo:CAccountInfoPtr| |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;                  // 账号信息
+    m_strExchangeID: #s | |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                            // 交易所ID
+    m_strContractNum: #s | |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                           // 系统合同序号
+    m_strInstrumentID: #s| |name=合约代码| isKey = | precision = | flag =  | visible=  | property= | func= ;
+    m_nDirection:EEntrustBS| |name=买卖 | isKey = | precision = | flag =  | visible=  | property= | func= ;
+    m_nOffsetFlag:EOffset_Flag_Type| |name=开平 | isKey = | precision = | flag =  | visible=1:0  | property= | func= ;
+    m_nOrderNum: #i| |name=委托数量 | isKey = | precision = | flag =  | visible=  | property=| func= ;
+    m_dOrderPrice:#d| |name=价格 | isKey = | precision = | flag =  | visible=  | property= | func= ;
+    m_tag:COrderTagPtr| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                        
+){ptr}
+
+#经纪公司
+CBrokerInfo:(
+    m_strBrokerID: #s | |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;                           // 经纪公司ID
+    m_strBrokerName: #s | |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                          // 经纪公司名称
+    m_nBrokerType: #i  | |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                           // 经纪公司类型
+    m_traderServerLine: [#s] | |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                     // 交易地址
+    m_quoterServerLine: [#s] | |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                     // 行情地址
+){ptr}
+
+#查询配置合集的请求包
+CQueryBaseSettingReq:(
+    m_strTemplateID:#s | |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;                          // 模板ID
+    m_strExchangeID:#s = "$"| |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;                     // 交易所ID
+    m_strProductID:#s = "$"| |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;                      // 品种ID
+    m_strInstrumentID:#s = "$"| |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;                   // 合约ID
+    m_strUserID: #s = "$"| |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;                      // 用户ID
+    m_strAccountID: #s = "$"| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                      // 账号ID
+){ptr} 
+
+CPriceData : (
+    m_strTradingDay : #S| |name= | isKey = | precision = | flag =  | visible=1:0  | property= | func= ;             //交易日
+    m_strExchangeID : #S| |name=市场 | isKey =1 | precision = | flag =  | visible=  | property= | func= ;             //交易所代码
+    m_strInstrumentID : #S| |name=代码 | isKey =1 | precision = | flag =  | visible=  | property= | func= ;           //合约代码    
+    m_strInstrumentName : #S| |name=名称 | isKey = | precision = | flag =  | visible=  | property= | func= ;           //合约名称
+    m_strExchangeInstID : #S| |name= | isKey = | precision = | flag =  | visible=1:0  | property= | func= ;         //合约在交易所的代码
+    m_dLastPrice : #d| |name=最新价 | isKey = | precision =3 | flag =  | visible=  | property=| func= ;               //最新价
+    m_dUpDown : #d| |name=涨跌 | isKey = | precision =3 | flag =  | visible=  | property= | func= ;                //涨跌
+    m_dUpDownRate : #d| |name=涨幅 | isKey = | precision =2 | flag =  | visible=  | property= | func= ;                //涨跌幅
+    m_dAveragePrice : #d| |name=均价 | isKey = | precision =3 | flag =  | visible=| property= | func=;            //当日均价
+    m_nVolume : #i| |name=总量 | isKey = | precision =1 | flag =  | visible=  | property= | func= ;                  //数量
+    m_dTurnover : #d| |name=总额 | isKey = | precision =3 | flag =  | visible=  | property= | func= ;                //成交金额
+    m_dPreClosePrice : #d| |name=前收 | isKey = | precision =3 | flag =  | visible=  | property= | func= ;           //昨收盘
+    m_dPreSettlementPrice : #d| |name=前结 | isKey = | precision =3 | flag =  | visible=  | property= | func= ;      //上次结算价
+    m_dPreOpenInterest : #d| |name=前持 | isKey = | precision =0 | flag =  | visible=  | property= | func= ;         //昨持仓量
+    m_dOpenInterest : #d| |name=今持 | isKey = | precision =0 | flag =  | visible= | property= | func= ;            //持仓量
+    m_dSettlementPrice : #d| |name=今结 | isKey = | precision =3 | flag =  | visible= | property= | func=;         //本次结算价
+    m_dOpenPrice : #d| |name=今开 | isKey = | precision =3 | flag =  | visible=  | property=| func= ;               //今开盘
+    m_dHighestPrice : #d| |name=最高 | isKey = | precision =3 | flag =  | visible=  | property= | func=;            //最高价
+    m_dLowestPrice : #d| |name=最低 | isKey = | precision =3 | flag =  | visible=  | property= | func=;             //最低价
+    m_dClosePrice : #d| |name= | isKey = | precision =3 | flag =  | visible=  | property= | func= ;              //今收盘
+    m_dUpperLimitPrice : #d| |name=涨停 | isKey = | precision =3 | flag =  | visible=  | property=| func=;         //涨停板价
+    m_dLowerLimitPrice : #d| |name=跌停 | isKey = | precision =3 | flag =  | visible=  | property=| func=;         //跌停板价
+    m_dPreDelta : #d| |name= | isKey = | precision =3 | flag =  | visible=  | property=| func=;         //
+    m_dCurrDelta : #d| |name= | isKey = | precision =3 | flag =  | visible=  | property=| func=;         //
+    m_nPlatformId : #i| |name= | isKey = | precision =3 | flag =  | visible=  | property=| func=;         //
+    m_strUpdateTime : #S| |name=更新时间 | isKey = | precision = | flag =  | visible=  | property= | func= ;             //最后修改时间
+    m_nUpdateMillisec : #i| |name= | isKey = | precision = | flag =  | visible=1:0  | property= | func= ;          //最后修改毫秒
+    m_dBidPrice1 : #d| |name=买①价 | isKey = | precision =3 | flag =  | visible=  | property=| func= ;               //申买价一
+    m_nBidVolume1 : #i| |name=买①量 | isKey = | precision = | flag =  | visible=  | property=| func= ;              //申买量一
+    m_dAskPrice1 : #d| |name=卖①价 | isKey = | precision =3 | flag =  | visible=  | property=| func= ;               //申卖价一
+    m_nAskVolume1 : #i| |name=卖①量 | isKey = | precision = | flag =  | visible=  | property=| func= ;              //申卖量一
+    m_dBidPrice2 : #d| |name=买②价 | isKey = | precision =3 | flag =  | visible=  | property=| func= ;               //申买价二
+    m_nBidVolume2 : #i| |name=买②量 | isKey = | precision = | flag =  | visible=  | property=| func= ;              //申买量二
+    m_dAskPrice2 : #d| |name=卖②价 | isKey = | precision =3 | flag =  | visible=  | property=| func= ;               //申卖价二
+    m_nAskVolume2 : #i| |name=卖②量 | isKey = | precision = | flag =  | visible=  | property=| func= ;              //申卖量二
+    m_dBidPrice3 : #d| |name=买③价 | isKey = | precision =3 | flag =  | visible=  | property=| func= ;               //申买价三
+    m_nBidVolume3 : #i| |name=买③量 | isKey = | precision = | flag =  | visible=  | property=| func= ;              //申买量三
+    m_dAskPrice3 : #d| |name=卖③价 | isKey = | precision =3 | flag =  | visible=  | property=| func= ;               //申卖价三
+    m_nAskVolume3 : #i| |name=卖③量 | isKey = | precision = | flag =  | visible=  | property=| func= ;              //申卖量三
+    m_dBidPrice4 : #d| |name=买④价 | isKey = | precision =3 | flag =  | visible=  | property=| func= ;               //申买价四
+    m_nBidVolume4 : #i| |name=买④量 | isKey = | precision = | flag =  | visible=  | property=| func= ;              //申买量四
+    m_dAskPrice4 : #d| |name=卖④价 | isKey = | precision =3 | flag =  | visible=  | property=| func= ;               //申卖价四
+    m_nAskVolume4 : #i| |name=卖④量 | isKey = | precision = | flag =  | visible=  | property=| func= ;              //申卖量四
+    m_dBidPrice5 : #d| |name=买⑤价 | isKey = | precision =3 | flag =  | visible=  | property=| func= ;               //申买价五
+    m_nBidVolume5 : #i| |name=买⑤量 | isKey = | precision = | flag =  | visible=  | property=| func= ;              //申买量五
+    m_dAskPrice5 : #d| |name=卖⑤价 | isKey = | precision = 3| flag =  | visible=  | property=| func= ;               //申卖价五
+    m_nAskVolume5 : #i| |name=卖⑤量 | isKey = | precision = | flag =  | visible=  | property=| func= ;              //申卖量五
+    m_dPrePrice : #d| |name= | isKey = | precision = | flag =  | visible=1:0  | property= | func= ;                //前一次的价格
+){ptr}
+
+
+#代理分成
+CProxyProfit:(
+    m_strUserID:#s | |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;                          // 代理ID
+    m_dProfit:#d = 0.0| |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;                     // 代理当天分成
+    m_tradeDate: #i  | |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;                      // 当天日期
+){ptr} 
+
+#配资信息（配资比例、配资利率）
+CWithCapitalInfo:(
+    m_strAccountID: #s| |name= | isKey = 1 | precision = | flag =  | visible=  | property= | func= ;                // 账号ID
+    m_withCapitalRatio:#d = 10| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;          // 配资比例
+    m_interestMode: EWithCapitalMode = WithCapitalMode_ByDay| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;      // 配资利息缴费方式
+    m_interest:#d = 0.0| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;                 // 配资利率
+    m_iniInferiorCapital:#d = 0.0| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;       // 初始劣后资金
+    m_forcedCoverRatio:#d = 0.0| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;         // 强平比例
+){ptr}
+
+#手机登录应答
+CMobileLoginResponse:(   
+ sessionId: #s | |name= | isKey = | precision = | flag = | visible=  | property= | func= ;    
+ success: #b = | |name= | isKey = | precision = | flag = | visible=  | property= | func= ; 
+){ptr}
+
+CDealStatics:(
+    m_accountInfo:CAccountInfoPtr| |name= | isKey =1 | precision = | flag =  | visible=  | property= | func= ;
+    m_strTagKey:#S| |name= | isKey = | precision = | flag =  | visible=1:0 | property= | func= ;
+    m_strExchangeID:#S| |name=证券市场,交易所代码,证券市场,证券市场| isKey =1 | precision = | flag =  | visible=1:0 | property= | func= ;
+    m_strExchangeName:#S| |name=交易市场,交易所名称,交易市场,交易市场| isKey = | precision = | flag =  | visible=1:0 | property= | func= ;//市场名字
+    m_strInstrumentID:#S| |name=证券代码,合约代码,证券代码,证券代码| isKey =1 | precision = | flag =  | visible=  | property= | func= ;
+    m_strInstrumentName:#S| |name=证券名称,合约名称,证券名称,证券名称| isKey = | precision = | flag =  | visible= | property= | func= ;
+    m_nDirection:#EEntrustBS| |name=操作,多空,操作,操作,操作,买卖| isKey =1 | precision = | flag =  | visible= | property=[FLASH_CHANGE] | func= ;//股票不需要
+    m_nOffsetFlag:EOffset_Flag_Type| |name=操作,开平,操作,操作,开平,操作,操作 | isKey =1 | precision = | flag =  | visible= | property=[FLASH_CHANGE] | func= ; 
+    m_nHedgeFlag:EHedge_Flag_Type| |name=投保 | isKey =1 | precision = | flag =  | visible= | property=[FLASH_CHANGE] | func= ; //股票不需要
+    m_dPrice:#d| |name=成交价格,成交均价,成交价格,成交价格| isKey = | precision =3 | flag =FNF_NONE  | visible=  | property=[FLASH_CHANGE] | func= ;
+    m_nVolume:#i| |name=成交数量,成交总量,成交数量,成交数量| isKey = | precision =2 | flag =FNF_NONE  | visible=  | property=[SUMSTAT,FLASH_CHANGE,STOCK_VOLUME] | func= ;
+    m_dComssion:#d| |name=手续费 | isKey = | precision =2 | flag =FNF_NONE  | visible= | property=[SUMSTAT,FLASH_CHANGE] | func= ; //手续费
+    m_dTradeAmount:#d=0.0| |name=成交金额 | isKey = | precision =2 | flag =FNF_NONE  | visible=  | property=[SUMSTAT,FLASH_CHANGE] | func= ; // 成交额 不包括手续费
+    m_nTimes:#i| |name=成交次数 | isKey = | precision = | flag =  | visible= | property=[SUMSTAT,FLASH_CHANGE] | func= ;//成交次数 有多少个成交  股票不需要
+    m_nCloseTodayVolume:#i=0| |name=成交数量,成交总量,成交数量,成交数量| isKey = | precision =2 | flag =FNF_NONE  | visible= | property=[FLASH_CHANGE] | func= ;//平今量期货中非上期合约需要
+){ptr}
+
+#设置模板信息
+CSettingTemplateInfo:(
+   m_strTemplateID:#s | |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;                         // 模板ID
+   m_strTemplateName:#s | |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;                       // 模板名称
+   m_strUserID: #s | |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;                            // 用户ID
+   m_strAccountID: #s | |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;                         // 账号ID
+   m_isInitial: #b | |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;                            // 是否初始化模板
+){ptr}
+
+TransferResp : (
+    success:#b| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;
+    value:[IDataPtr]| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;
+){ptr}
+
+CancelResp : (
+    success:#b| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;
+    value:[IDataPtr]| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;
+){ptr}
+
+QueryAccountResp : (
+    success:#b| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;
+    value:[IDataPtr]| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;
+){ptr}
+
+QueryInvestorResp : (
+    success:#b| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;
+    value:[IDataPtr]| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;
+){ptr}
+
+QueryBankAmountResp : (
+    success:#b| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;
+    value:[IDataPtr]| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;
+){ptr}
+
+QueryExchangeResp : (
+    success:#b| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;
+    value:[IDataPtr]| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;
+){ptr}
+
+QueryInstrumentResp : (
+    success:#b| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;
+    value:[IDataPtr]| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;
+){ptr}
+
+QueryOrderResp : (
+    success:#b| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;
+    value:[IDataPtr]| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;
+){ptr}
+
+QueryInstrumentMarginRateResp : (
+    success:#b| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;
+    value:[IDataPtr]| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;
+){ptr}
+
+QuerySettlementInfoResp : (
+    success:#b| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;
+    value:#s|name= | isKey = | precision = | flag =  | visible=  | property= | func= ;
+){ptr}
+
+QueryBusinessResp : (
+    success:#b| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;
+    value:[IDataPtr]| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;
+){ptr}
+
+QueryInstrumentCommissionRateResp : (
+    success:#b| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;
+    value:[IDataPtr]| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;
+){ptr}
+
+QueryPositionResp : (
+    success:#b| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;
+    value:[IDataPtr]| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;
+){ptr}
+
+QueryBankResp : (
+    success:#b| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;
+    value:[IDataPtr]| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;
+){ptr}
+
+# 下单错误
+COrderError : (
+    m_accountInfo:CAccountInfoPtr| |name= | isKey = 1| precision = | flag =  | visible=  | property= | func= ;
+    ErrorID:#i| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;
+    ErrorMsg:#s| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;
+    SessionID:#i| |name= | isKey =1 | precision = | flag =  | visible=  | property= | func= ;
+    FrontID:#i| |name= | isKey =1 | precision = | flag =  | visible=  | property= | func= ;
+    OrderRef:#s| |name= | isKey =1 | precision = | flag =  | visible=  | property= | func= ;
+    RequestID:#i| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;
+    m_strTagKey:#s| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;
+    m_Tag:COrderTagPtr| |name= | isKey = | precision = | flag =  | visible=1:0  | property= | func= ; // 迅投标签
+) {ptr}
+
+# 撤单错误
+CCancelError : (
+    m_accountInfo:CAccountInfoPtr| |name= | isKey =1 | precision = | flag =  | visible=  | property= | func= ;
+    ErrorID:#i| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;
+    ErrorMsg:#s| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;
+    SessionID:#i| |name= | isKey =1 | precision = | flag =  | visible=  | property= | func= ;
+    FrontID:#i| |name= | isKey =1 | precision = | flag =  | visible=  | property= | func= ;
+    OrderRef:#s| |name= | isKey =1 | precision = | flag =  | visible=  | property= | func= ;
+    RequestID:#i| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;
+    m_strTagKey:#s| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;
+    m_Tag:COrderTagPtr| |name= | isKey = | precision = | flag =  | visible=1:0  | property= | func= ; // 迅投标签
+) {ptr}
+
+#结算单信息
+CSettlementInfo:(
+    m_nSettlementDate:#i| |name= | isKey =1 | precision = | flag =  | visible=  | property= | func= ;     //结算日期
+    m_textSettlementInfo:#s| |name= | isKey = | precision = | flag =  | visible=  | property= | func= ;   //结算日期
+){ptr}
+
+
